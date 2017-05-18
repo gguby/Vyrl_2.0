@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="4u5-ag-yKy">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--My-->
+        <scene sceneID="TCh-at-0qK">
+            <objects>
+                <viewController storyboardIdentifier="My" id="4u5-ag-yKy" customClass="MyViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="e12-1C-bqm"/>
+                        <viewControllerLayoutGuide type="bottom" id="V3c-MC-whQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="csL-78-uB6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Phl-fl-MZS">
+                                <rect key="frame" x="161" y="230" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="42" id="TVt-lR-Uvb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Phl-fl-MZS" firstAttribute="top" secondItem="e12-1C-bqm" secondAttribute="bottom" constant="210" id="59d-Q2-EdQ"/>
+                            <constraint firstItem="Phl-fl-MZS" firstAttribute="leading" secondItem="csL-78-uB6" secondAttribute="leading" constant="161" id="PoU-Mm-OKL"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="My" id="QoV-Tz-38a"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="McP-2q-cYc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="212" y="-211"/>
+        </scene>
+    </scenes>
+</document>

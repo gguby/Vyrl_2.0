@@ -1,0 +1,682 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		01ABE511A001A1DEE7D8BEAB /* Pods_Vyrl2_0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D78881F4958F20C20F036FD5 /* Pods_Vyrl2_0.framework */; };
+		464236AEF8E7E3A2C7AACD7F /* libPods-Vyrl2.0UITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D548CE0C473DEA6C46EC7CA7 /* libPods-Vyrl2.0UITests.a */; };
+		CE08981C1ECD704F000D6D6C /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08981B1ECD704F000D6D6C /* SearchViewController.swift */; };
+		CE08981E1ECD706A000D6D6C /* FanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08981D1ECD706A000D6D6C /* FanViewController.swift */; };
+		CE0898201ECD7079000D6D6C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08981F1ECD7079000D6D6C /* LoginViewController.swift */; };
+		CE0898221ECD7098000D6D6C /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0898211ECD7098000D6D6C /* MyViewController.swift */; };
+		CE0898251ECD70C7000D6D6C /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0898241ECD70C7000D6D6C /* FeedViewController.swift */; };
+		CE29B19E1ECD5FEE003F4D2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE29B19D1ECD5FEE003F4D2E /* AppDelegate.swift */; };
+		CE29B1A01ECD5FEE003F4D2E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE29B19F1ECD5FEE003F4D2E /* ViewController.swift */; };
+		CE29B1A51ECD5FEE003F4D2E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE29B1A31ECD5FEE003F4D2E /* Main.storyboard */; };
+		CE29B1A71ECD5FEE003F4D2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE29B1A61ECD5FEE003F4D2E /* Assets.xcassets */; };
+		CE29B1AA1ECD5FEE003F4D2E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE29B1A81ECD5FEE003F4D2E /* LaunchScreen.storyboard */; };
+		CE29B1B51ECD5FEE003F4D2E /* Vyrl2_0UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE29B1B41ECD5FEE003F4D2E /* Vyrl2_0UITests.swift */; };
+		CE29B1CC1ECD6161003F4D2E /* Fan.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE29B1C01ECD6161003F4D2E /* Fan.storyboard */; };
+		CE29B1CD1ECD6161003F4D2E /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE29B1C11ECD6161003F4D2E /* Feed.storyboard */; };
+		CE29B1CE1ECD6161003F4D2E /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE29B1C31ECD6161003F4D2E /* Login.storyboard */; };
+		CE29B1CF1ECD6161003F4D2E /* My.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE29B1C51ECD6161003F4D2E /* My.storyboard */; };
+		CE29B1D01ECD6161003F4D2E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE29B1C71ECD6161003F4D2E /* GoogleService-Info.plist */; };
+		CE29B1D11ECD6161003F4D2E /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE29B1C91ECD6161003F4D2E /* Search.storyboard */; };
+		CE29B1D41ECD6515003F4D2E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE29B1D31ECD6515003F4D2E /* Constants.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CE29B1B11ECD5FEE003F4D2E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE29B1921ECD5FEE003F4D2E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE29B1991ECD5FEE003F4D2E;
+			remoteInfo = Vyrl2.0;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		306CFD39EC6DFCA775E15FBB /* Pods-Vyrl2.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vyrl2.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vyrl2.0/Pods-Vyrl2.0.debug.xcconfig"; sourceTree = "<group>"; };
+		31A96CB7DB320E92C13C5B03 /* Pods-Vyrl2.0UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vyrl2.0UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vyrl2.0UITests/Pods-Vyrl2.0UITests.debug.xcconfig"; sourceTree = "<group>"; };
+		4A3627D46412B7803C3B2BA7 /* Pods-Vyrl2.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vyrl2.0.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vyrl2.0/Pods-Vyrl2.0.release.xcconfig"; sourceTree = "<group>"; };
+		C2AE70CA913C7D61FE18140C /* Pods-Vyrl2.0UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vyrl2.0UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vyrl2.0UITests/Pods-Vyrl2.0UITests.release.xcconfig"; sourceTree = "<group>"; };
+		CE08981B1ECD704F000D6D6C /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = Vyrl2.0/SEARCH/SearchViewController.swift; sourceTree = SOURCE_ROOT; };
+		CE08981D1ECD706A000D6D6C /* FanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanViewController.swift; sourceTree = "<group>"; };
+		CE08981F1ECD7079000D6D6C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		CE0898211ECD7098000D6D6C /* MyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
+		CE0898241ECD70C7000D6D6C /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		CE29B19A1ECD5FEE003F4D2E /* Vyrl2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vyrl2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE29B19D1ECD5FEE003F4D2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CE29B19F1ECD5FEE003F4D2E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CE29B1A41ECD5FEE003F4D2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CE29B1A61ECD5FEE003F4D2E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CE29B1A91ECD5FEE003F4D2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CE29B1AB1ECD5FEE003F4D2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE29B1B01ECD5FEE003F4D2E /* Vyrl2.0UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Vyrl2.0UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE29B1B41ECD5FEE003F4D2E /* Vyrl2_0UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vyrl2_0UITests.swift; sourceTree = "<group>"; };
+		CE29B1B61ECD5FEE003F4D2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE29B1C01ECD6161003F4D2E /* Fan.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Fan.storyboard; sourceTree = "<group>"; };
+		CE29B1C11ECD6161003F4D2E /* Feed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
+		CE29B1C31ECD6161003F4D2E /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		CE29B1C51ECD6161003F4D2E /* My.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = My.storyboard; sourceTree = "<group>"; };
+		CE29B1C71ECD6161003F4D2E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CE29B1C91ECD6161003F4D2E /* Search.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
+		CE29B1D31ECD6515003F4D2E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		CE29B1DD1ECD6A4E003F4D2E /* Vyrl2.0-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Vyrl2.0-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		D548CE0C473DEA6C46EC7CA7 /* libPods-Vyrl2.0UITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vyrl2.0UITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D78881F4958F20C20F036FD5 /* Pods_Vyrl2_0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vyrl2_0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CE29B1971ECD5FEE003F4D2E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01ABE511A001A1DEE7D8BEAB /* Pods_Vyrl2_0.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE29B1AD1ECD5FEE003F4D2E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				464236AEF8E7E3A2C7AACD7F /* libPods-Vyrl2.0UITests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		404DD6B42190CF533F7110C8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				306CFD39EC6DFCA775E15FBB /* Pods-Vyrl2.0.debug.xcconfig */,
+				4A3627D46412B7803C3B2BA7 /* Pods-Vyrl2.0.release.xcconfig */,
+				31A96CB7DB320E92C13C5B03 /* Pods-Vyrl2.0UITests.debug.xcconfig */,
+				C2AE70CA913C7D61FE18140C /* Pods-Vyrl2.0UITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		CE0898231ECD70B9000D6D6C /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				CE0898241ECD70C7000D6D6C /* FeedViewController.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		CE29B1911ECD5FEE003F4D2E = {
+			isa = PBXGroup;
+			children = (
+				CE29B19C1ECD5FEE003F4D2E /* Vyrl2.0 */,
+				CE29B1B31ECD5FEE003F4D2E /* Vyrl2.0UITests */,
+				CE29B19B1ECD5FEE003F4D2E /* Products */,
+				404DD6B42190CF533F7110C8 /* Pods */,
+				FB2090B49B563161B460E59B /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		CE29B19B1ECD5FEE003F4D2E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CE29B19A1ECD5FEE003F4D2E /* Vyrl2.0.app */,
+				CE29B1B01ECD5FEE003F4D2E /* Vyrl2.0UITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CE29B19C1ECD5FEE003F4D2E /* Vyrl2.0 */ = {
+			isa = PBXGroup;
+			children = (
+				CE0898231ECD70B9000D6D6C /* Feed */,
+				CE29B1BF1ECD6161003F4D2E /* FAN */,
+				CE29B1C21ECD6161003F4D2E /* Login */,
+				CE29B1C41ECD6161003F4D2E /* MY */,
+				CE29B1C81ECD6161003F4D2E /* SEARCH */,
+				CE29B1CA1ECD6161003F4D2E /* Setting */,
+				CE29B1CB1ECD6161003F4D2E /* Write */,
+				CE29B1C61ECD6161003F4D2E /* Other */,
+				CE29B1C01ECD6161003F4D2E /* Fan.storyboard */,
+				CE29B1C11ECD6161003F4D2E /* Feed.storyboard */,
+				CE29B1C31ECD6161003F4D2E /* Login.storyboard */,
+				CE29B1C51ECD6161003F4D2E /* My.storyboard */,
+				CE29B1C91ECD6161003F4D2E /* Search.storyboard */,
+				CE29B1A31ECD5FEE003F4D2E /* Main.storyboard */,
+				CE29B19D1ECD5FEE003F4D2E /* AppDelegate.swift */,
+				CE29B19F1ECD5FEE003F4D2E /* ViewController.swift */,
+				CE29B1A61ECD5FEE003F4D2E /* Assets.xcassets */,
+				CE29B1DD1ECD6A4E003F4D2E /* Vyrl2.0-Bridging-Header.h */,
+				CE29B1A81ECD5FEE003F4D2E /* LaunchScreen.storyboard */,
+				CE29B1AB1ECD5FEE003F4D2E /* Info.plist */,
+			);
+			path = Vyrl2.0;
+			sourceTree = "<group>";
+		};
+		CE29B1B31ECD5FEE003F4D2E /* Vyrl2.0UITests */ = {
+			isa = PBXGroup;
+			children = (
+				CE29B1B41ECD5FEE003F4D2E /* Vyrl2_0UITests.swift */,
+				CE29B1B61ECD5FEE003F4D2E /* Info.plist */,
+			);
+			path = Vyrl2.0UITests;
+			sourceTree = "<group>";
+		};
+		CE29B1BF1ECD6161003F4D2E /* FAN */ = {
+			isa = PBXGroup;
+			children = (
+				CE08981D1ECD706A000D6D6C /* FanViewController.swift */,
+			);
+			path = FAN;
+			sourceTree = "<group>";
+		};
+		CE29B1C21ECD6161003F4D2E /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				CE08981F1ECD7079000D6D6C /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		CE29B1C41ECD6161003F4D2E /* MY */ = {
+			isa = PBXGroup;
+			children = (
+				CE0898211ECD7098000D6D6C /* MyViewController.swift */,
+			);
+			path = MY;
+			sourceTree = "<group>";
+		};
+		CE29B1C61ECD6161003F4D2E /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				CE29B1C71ECD6161003F4D2E /* GoogleService-Info.plist */,
+				CE29B1D31ECD6515003F4D2E /* Constants.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		CE29B1C81ECD6161003F4D2E /* SEARCH */ = {
+			isa = PBXGroup;
+			children = (
+				CE08981B1ECD704F000D6D6C /* SearchViewController.swift */,
+			);
+			path = SEARCH;
+			sourceTree = "<group>";
+		};
+		CE29B1CA1ECD6161003F4D2E /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		CE29B1CB1ECD6161003F4D2E /* Write */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Write;
+			sourceTree = "<group>";
+		};
+		FB2090B49B563161B460E59B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D78881F4958F20C20F036FD5 /* Pods_Vyrl2_0.framework */,
+				D548CE0C473DEA6C46EC7CA7 /* libPods-Vyrl2.0UITests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CE29B1991ECD5FEE003F4D2E /* Vyrl2.0 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE29B1B91ECD5FEE003F4D2E /* Build configuration list for PBXNativeTarget "Vyrl2.0" */;
+			buildPhases = (
+				0DAA68C345D6EF659FE2FCEB /* [CP] Check Pods Manifest.lock */,
+				CE29B1961ECD5FEE003F4D2E /* Sources */,
+				CE29B1971ECD5FEE003F4D2E /* Frameworks */,
+				CE29B1981ECD5FEE003F4D2E /* Resources */,
+				0FF5A7A855361A9A83EFF8F0 /* [CP] Embed Pods Frameworks */,
+				BED5395041B00C2683B987EC /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Vyrl2.0;
+			productName = Vyrl2.0;
+			productReference = CE29B19A1ECD5FEE003F4D2E /* Vyrl2.0.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CE29B1AF1ECD5FEE003F4D2E /* Vyrl2.0UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE29B1BC1ECD5FEE003F4D2E /* Build configuration list for PBXNativeTarget "Vyrl2.0UITests" */;
+			buildPhases = (
+				3CCDD1048CA77938C325B10D /* [CP] Check Pods Manifest.lock */,
+				CE29B1AC1ECD5FEE003F4D2E /* Sources */,
+				CE29B1AD1ECD5FEE003F4D2E /* Frameworks */,
+				CE29B1AE1ECD5FEE003F4D2E /* Resources */,
+				A7D6CD287B72A0CA496A9667 /* [CP] Embed Pods Frameworks */,
+				2CD7B58D507141754B6AAD2C /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CE29B1B21ECD5FEE003F4D2E /* PBXTargetDependency */,
+			);
+			name = Vyrl2.0UITests;
+			productName = Vyrl2.0UITests;
+			productReference = CE29B1B01ECD5FEE003F4D2E /* Vyrl2.0UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CE29B1921ECD5FEE003F4D2E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = smt;
+				TargetAttributes = {
+					CE29B1991ECD5FEE003F4D2E = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = CH83NSNY9P;
+						LastSwiftMigration = 0830;
+						ProvisioningStyle = Automatic;
+					};
+					CE29B1AF1ECD5FEE003F4D2E = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = CH83NSNY9P;
+						ProvisioningStyle = Automatic;
+						TestTargetID = CE29B1991ECD5FEE003F4D2E;
+					};
+				};
+			};
+			buildConfigurationList = CE29B1951ECD5FEE003F4D2E /* Build configuration list for PBXProject "Vyrl2.0" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CE29B1911ECD5FEE003F4D2E;
+			productRefGroup = CE29B19B1ECD5FEE003F4D2E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CE29B1991ECD5FEE003F4D2E /* Vyrl2.0 */,
+				CE29B1AF1ECD5FEE003F4D2E /* Vyrl2.0UITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CE29B1981ECD5FEE003F4D2E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE29B1CD1ECD6161003F4D2E /* Feed.storyboard in Resources */,
+				CE29B1D01ECD6161003F4D2E /* GoogleService-Info.plist in Resources */,
+				CE29B1AA1ECD5FEE003F4D2E /* LaunchScreen.storyboard in Resources */,
+				CE29B1CE1ECD6161003F4D2E /* Login.storyboard in Resources */,
+				CE29B1D11ECD6161003F4D2E /* Search.storyboard in Resources */,
+				CE29B1A71ECD5FEE003F4D2E /* Assets.xcassets in Resources */,
+				CE29B1CC1ECD6161003F4D2E /* Fan.storyboard in Resources */,
+				CE29B1A51ECD5FEE003F4D2E /* Main.storyboard in Resources */,
+				CE29B1CF1ECD6161003F4D2E /* My.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE29B1AE1ECD5FEE003F4D2E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0DAA68C345D6EF659FE2FCEB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		0FF5A7A855361A9A83EFF8F0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vyrl2.0/Pods-Vyrl2.0-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2CD7B58D507141754B6AAD2C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vyrl2.0UITests/Pods-Vyrl2.0UITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3CCDD1048CA77938C325B10D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A7D6CD287B72A0CA496A9667 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vyrl2.0UITests/Pods-Vyrl2.0UITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BED5395041B00C2683B987EC /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vyrl2.0/Pods-Vyrl2.0-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CE29B1961ECD5FEE003F4D2E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE0898201ECD7079000D6D6C /* LoginViewController.swift in Sources */,
+				CE29B19E1ECD5FEE003F4D2E /* AppDelegate.swift in Sources */,
+				CE29B1A01ECD5FEE003F4D2E /* ViewController.swift in Sources */,
+				CE0898221ECD7098000D6D6C /* MyViewController.swift in Sources */,
+				CE08981E1ECD706A000D6D6C /* FanViewController.swift in Sources */,
+				CE08981C1ECD704F000D6D6C /* SearchViewController.swift in Sources */,
+				CE0898251ECD70C7000D6D6C /* FeedViewController.swift in Sources */,
+				CE29B1D41ECD6515003F4D2E /* Constants.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE29B1AC1ECD5FEE003F4D2E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE29B1B51ECD5FEE003F4D2E /* Vyrl2_0UITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CE29B1B21ECD5FEE003F4D2E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE29B1991ECD5FEE003F4D2E /* Vyrl2.0 */;
+			targetProxy = CE29B1B11ECD5FEE003F4D2E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CE29B1A31ECD5FEE003F4D2E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE29B1A41ECD5FEE003F4D2E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		CE29B1A81ECD5FEE003F4D2E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE29B1A91ECD5FEE003F4D2E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CE29B1B71ECD5FEE003F4D2E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CE29B1B81ECD5FEE003F4D2E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CE29B1BA1ECD5FEE003F4D2E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 306CFD39EC6DFCA775E15FBB /* Pods-Vyrl2.0.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = CH83NSNY9P;
+				INFOPLIST_FILE = Vyrl2.0/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.smt.Vyrl;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Vyrl2.0-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		CE29B1BB1ECD5FEE003F4D2E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4A3627D46412B7803C3B2BA7 /* Pods-Vyrl2.0.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = CH83NSNY9P;
+				INFOPLIST_FILE = Vyrl2.0/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.smt.Vyrl;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Vyrl2.0-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		CE29B1BD1ECD5FEE003F4D2E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 31A96CB7DB320E92C13C5B03 /* Pods-Vyrl2.0UITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = CH83NSNY9P;
+				INFOPLIST_FILE = Vyrl2.0UITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.smt.Vyrl2-0UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = Vyrl2.0;
+			};
+			name = Debug;
+		};
+		CE29B1BE1ECD5FEE003F4D2E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C2AE70CA913C7D61FE18140C /* Pods-Vyrl2.0UITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = CH83NSNY9P;
+				INFOPLIST_FILE = Vyrl2.0UITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.smt.Vyrl2-0UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = Vyrl2.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CE29B1951ECD5FEE003F4D2E /* Build configuration list for PBXProject "Vyrl2.0" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE29B1B71ECD5FEE003F4D2E /* Debug */,
+				CE29B1B81ECD5FEE003F4D2E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE29B1B91ECD5FEE003F4D2E /* Build configuration list for PBXNativeTarget "Vyrl2.0" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE29B1BA1ECD5FEE003F4D2E /* Debug */,
+				CE29B1BB1ECD5FEE003F4D2E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE29B1BC1ECD5FEE003F4D2E /* Build configuration list for PBXNativeTarget "Vyrl2.0UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE29B1BD1ECD5FEE003F4D2E /* Debug */,
+				CE29B1BE1ECD5FEE003F4D2E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CE29B1921ECD5FEE003F4D2E /* Project object */;
+}
