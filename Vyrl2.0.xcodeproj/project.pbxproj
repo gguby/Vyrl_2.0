@@ -49,6 +49,7 @@
 		CE08981F1ECD7079000D6D6C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CE0898211ECD7098000D6D6C /* MyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
 		CE0898241ECD70C7000D6D6C /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		CE0898261ECD982D000D6D6C /* Vyrl2.0.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Vyrl2.0.entitlements; sourceTree = "<group>"; };
 		CE29B19A1ECD5FEE003F4D2E /* Vyrl2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vyrl2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE29B19D1ECD5FEE003F4D2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE29B19F1ECD5FEE003F4D2E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +134,7 @@
 		CE29B19C1ECD5FEE003F4D2E /* Vyrl2.0 */ = {
 			isa = PBXGroup;
 			children = (
+				CE0898261ECD982D000D6D6C /* Vyrl2.0.entitlements */,
 				CE0898231ECD70B9000D6D6C /* Feed */,
 				CE29B1BF1ECD6161003F4D2E /* FAN */,
 				CE29B1C21ECD6161003F4D2E /* Login */,
@@ -289,6 +291,11 @@
 						DevelopmentTeam = CH83NSNY9P;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					CE29B1AF1ECD5FEE003F4D2E = {
 						CreatedOnToolsVersion = 8.3.2;
@@ -589,11 +596,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Vyrl2.0/Vyrl2.0.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = CH83NSNY9P;
 				INFOPLIST_FILE = Vyrl2.0/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.smt.Vyrl;
+				PRODUCT_BUNDLE_IDENTIFIER = com.smt.vyrl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Vyrl2.0-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -606,11 +617,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Vyrl2.0/Vyrl2.0.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = CH83NSNY9P;
 				INFOPLIST_FILE = Vyrl2.0/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.smt.Vyrl;
+				PRODUCT_BUNDLE_IDENTIFIER = com.smt.vyrl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Vyrl2.0-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
