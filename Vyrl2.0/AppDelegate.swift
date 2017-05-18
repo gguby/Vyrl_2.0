@@ -39,6 +39,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         setupGAI()
         
+        LoginData.sharedInstance.isLogin = true;
+        
+        if !LoginData.sharedInstance.isLogin {
+            let storyboard = UIStoryboard(name: "Login", bundle: nil)
+            let loginController = storyboard.instantiateInitialViewController()!
+            window?.rootViewController = loginController
+        }
+        
+        
+        
         return true
     }
 
