@@ -12,6 +12,9 @@ target 'Vyrl2.0' do
     pod 'Crashlytics'
     pod "GKActionSheetPicker"
     pod 'Google/SignIn'
+    pod 'FacebookCore'
+    pod 'FacebookLogin'
+    pod 'FacebookShare'
 
 end
 
