@@ -9,12 +9,17 @@
 import UIKit
 import Google
 import FirebaseCore
+import Firebase
+import GoogleSignIn
 
 extension AppDelegate
 {
     func setupGAI()
     {
         FIRApp.configure()
+        
+        GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
+        GIDSignIn.sharedInstance().delegate = self
         
         guard let gai = GAI.sharedInstance() else {
             assert(false, "Google Analytics not configured correctly")
@@ -30,7 +35,7 @@ extension AppDelegate
 }
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     var window: UIWindow?   
 
@@ -39,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         setupGAI()
         
-        LoginData.sharedInstance.isLogin = true;
+        LoginData.sharedInstance.isLogin = false;
         
         if !LoginData.sharedInstance.isLogin {
             let storyboard = UIStoryboard(name: "Login", bundle: nil)
@@ -47,10 +52,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = loginController
         }
         
-        
-        
         return true
     }
+    
+    func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
+        -> Bool {
+            return GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String, annotation: nil)
+    }
+
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -74,6 +83,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
+//        if let error = error {
+//            // ...
+//            return
+//        }
+//        
+//        guard let authentication = user.authentication else { return }
+//        let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken,
+//                                                          accessToken: authentication.accessToken)
+//        // ...
+    }
 
 }
 

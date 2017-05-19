@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -26,17 +27,28 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J0p-AP-m1h" customClass="GIDSignInButton">
+                                <rect key="frame" x="102" y="380" width="170" height="54"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="J0p-AP-m1h" firstAttribute="centerX" secondItem="oMd-O5-jkW" secondAttribute="centerX" id="4fH-Nl-kCi"/>
+                            <constraint firstItem="J0p-AP-m1h" firstAttribute="top" secondItem="fOe-37-p9H" secondAttribute="top" constant="380" id="Epz-EB-mtF"/>
+                            <constraint firstItem="J0p-AP-m1h" firstAttribute="leading" secondItem="fOe-37-p9H" secondAttribute="leadingMargin" constant="86" id="Vnc-SS-Xgv"/>
+                            <constraint firstItem="HyA-b6-BYd" firstAttribute="top" secondItem="J0p-AP-m1h" secondAttribute="bottom" constant="233" id="auD-yR-SqO"/>
                             <constraint firstItem="oMd-O5-jkW" firstAttribute="centerX" secondItem="fOe-37-p9H" secondAttribute="centerX" id="dcR-b6-1fy"/>
                             <constraint firstItem="oMd-O5-jkW" firstAttribute="top" secondItem="t7N-Tt-Dwm" secondAttribute="bottom" constant="210" id="vJ9-dN-VPl"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="signInButton" destination="J0p-AP-m1h" id="YBm-4J-D2g"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F3H-dK-cCg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="502" y="-379"/>
+            <point key="canvasLocation" x="501.60000000000002" y="-379.16041979010498"/>
         </scene>
     </scenes>
 </document>
