@@ -54,8 +54,6 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
     
     @IBAction func didTapSignIn(sender: AnyObject)
     {
-        print(sender.tag)
-        
         switch sender.tag {
        
         case 4 :
