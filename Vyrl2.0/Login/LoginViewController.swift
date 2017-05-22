@@ -14,17 +14,26 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
     
     @IBOutlet weak var signInButton : GIDSignInButton!
     
+    @IBOutlet weak var signOutBtn : UIButton!    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance().delegate = self;
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }   
+    }
+    
+    @IBAction func didTapSignOut(sender: AnyObject)
+    {
+        GIDSignIn.sharedInstance().signOut()
+    }
+
 }
 
 extension LoginViewController

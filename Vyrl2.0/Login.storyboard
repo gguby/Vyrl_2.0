@@ -31,12 +31,24 @@
                                 <rect key="frame" x="102" y="380" width="170" height="54"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RZl-CS-9WQ">
+                                <rect key="frame" x="164" y="485" width="46" height="72"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="5K7-Nc-Iww"/>
+                                </constraints>
+                                <state key="normal" title="SignOut"/>
+                                <connections>
+                                    <action selector="didTapSignOutWithSender:" destination="bYS-Q1-v3j" eventType="touchUpInside" id="lL5-AO-bPe"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="RZl-CS-9WQ" firstAttribute="top" secondItem="J0p-AP-m1h" secondAttribute="bottom" constant="51" id="1TG-Qs-LAe"/>
                             <constraint firstItem="J0p-AP-m1h" firstAttribute="centerX" secondItem="oMd-O5-jkW" secondAttribute="centerX" id="4fH-Nl-kCi"/>
                             <constraint firstItem="J0p-AP-m1h" firstAttribute="top" secondItem="fOe-37-p9H" secondAttribute="top" constant="380" id="Epz-EB-mtF"/>
                             <constraint firstItem="J0p-AP-m1h" firstAttribute="leading" secondItem="fOe-37-p9H" secondAttribute="leadingMargin" constant="86" id="Vnc-SS-Xgv"/>
+                            <constraint firstItem="RZl-CS-9WQ" firstAttribute="centerX" secondItem="J0p-AP-m1h" secondAttribute="centerX" id="WF4-2P-ajI"/>
                             <constraint firstItem="HyA-b6-BYd" firstAttribute="top" secondItem="J0p-AP-m1h" secondAttribute="bottom" constant="233" id="auD-yR-SqO"/>
                             <constraint firstItem="oMd-O5-jkW" firstAttribute="centerX" secondItem="fOe-37-p9H" secondAttribute="centerX" id="dcR-b6-1fy"/>
                             <constraint firstItem="oMd-O5-jkW" firstAttribute="top" secondItem="t7N-Tt-Dwm" secondAttribute="bottom" constant="210" id="vJ9-dN-VPl"/>
@@ -44,6 +56,7 @@
                     </view>
                     <connections>
                         <outlet property="signInButton" destination="J0p-AP-m1h" id="YBm-4J-D2g"/>
+                        <outlet property="signOutBtn" destination="RZl-CS-9WQ" id="FIH-qP-ZdL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F3H-dK-cCg" userLabel="First Responder" sceneMemberID="firstResponder"/>
