@@ -6,7 +6,7 @@
 //  Copyright © 2017년 smt. All rights reserved.
 //
 
-import UIKit
+
 import Firebase
 import GoogleSignIn
 
@@ -20,9 +20,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
     
     func initView()
     {
-        firstLabel.font = UIFont.ivTextStyle2Font()
-        
-        for  v in self.view.subviews {
+       for  v in self.view.subviews {
             if ( v.tag == 1 )
             {
                 v.layer.borderWidth = 1
@@ -85,11 +83,5 @@ extension LoginViewController
         self.dismiss(animated: true, completion: nil)
     }
 
-}
-
-extension UIFont {
-    class func ivTextStyle2Font() -> UIFont? {
-        return UIFont(name: "AppleSDGothicNeo-UltraLight", size: 22.0)
-    }
 }
 
