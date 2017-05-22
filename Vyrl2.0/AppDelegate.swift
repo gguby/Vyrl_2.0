@@ -11,6 +11,7 @@ import Google
 import FirebaseCore
 import Firebase
 import GoogleSignIn
+import FBSDKCoreKit
 
 extension AppDelegate
 {
@@ -52,12 +53,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             window?.rootViewController = loginController
         }
         
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions);
+        
         return true
     }
     
     func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
         -> Bool {
-            return GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String, annotation: nil)
+            if (url.scheme?.hasPrefix("fb"))! {
+                return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+            } else {
+                return GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String, annotation: nil)
+            }
     }
 
 
