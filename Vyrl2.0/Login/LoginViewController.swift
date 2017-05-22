@@ -16,12 +16,30 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
     
     @IBOutlet weak var signOutBtn : UIButton!    
     
+    @IBOutlet weak var firstLabel: UILabel!
+    
+    func initView()
+    {
+        firstLabel.font = UIFont.ivTextStyle2Font()
+        
+        for  v in self.view.subviews {
+            if ( v.tag == 1 )
+            {
+                v.layer.borderWidth = 1
+                v.layer.borderColor = UIColor(red: 62.0 / 255.0, green: 58.0 / 255.0, blue: 57.0 / 255.0, alpha: 1.0).cgColor
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self;
+        
+        initView()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -32,6 +50,21 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
     @IBAction func didTapSignOut(sender: AnyObject)
     {
         GIDSignIn.sharedInstance().signOut()
+    }
+    
+    @IBAction func didTapSignIn(sender: AnyObject)
+    {
+        print(sender.tag)
+        
+        switch sender.tag {
+       
+        case 4 :
+            GIDSignIn.sharedInstance().signIn()
+        
+        default:
+            print(sender.tag)
+
+        }
     }
 
 }
@@ -54,5 +87,11 @@ extension LoginViewController
         self.dismiss(animated: true, completion: nil)
     }
 
+}
+
+extension UIFont {
+    class func ivTextStyle2Font() -> UIFont? {
+        return UIFont(name: "AppleSDGothicNeo-UltraLight", size: 22.0)
+    }
 }
 
