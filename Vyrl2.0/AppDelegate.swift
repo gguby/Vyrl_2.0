@@ -12,6 +12,7 @@ import FirebaseCore
 import Firebase
 import GoogleSignIn
 import FBSDKCoreKit
+import FBSDKLoginKit
 import Fabric
 import TwitterKit
 
