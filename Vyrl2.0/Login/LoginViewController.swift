@@ -12,7 +12,6 @@ import GoogleSignIn
 import FBSDKCoreKit
 import FBSDKLoginKit
 import TwitterKit
-import Fabric
 
 class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
     
@@ -48,6 +47,25 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func loginByFireBase(credential:  FIRAuthCredential) {
+        // Perform login by calling Firebase APIs
+        FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
+            if let error = error {
+                print("Login error: \(error.localizedDescription)")
+                let alertController = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)
+                let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alertController.addAction(okayAction)
+                self.present(alertController, animated: true, completion: nil)
+                
+                return
+            }
+            
+            // Present the main view
+            
+        })
+    }
+    
     @IBAction func facebookLoginButtonClicked(_ sender: UIButton)
     {
         let fbLoginManager = FBSDKLoginManager()
@@ -64,22 +82,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
             }
             
             let credential = FIRFacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
-            
-            // Perform login by calling Firebase APIs
-            FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
-                if let error = error {
-                    print("Login error: \(error.localizedDescription)")
-                    let alertController = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)
-                    let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                    alertController.addAction(okayAction)
-                    self.present(alertController, animated: true, completion: nil)
-                    
-                    return
-                }
-                
-                // Present the main view
-                                
-            })
+            self.loginByFireBase(credential: credential)
         }
     }
     
@@ -88,11 +91,33 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
             if((session) != nil) {
                 Twitter.sharedInstance().sessionStore.saveSession(withAuthToken: (session?.authToken)!, authTokenSecret: (session?.authTokenSecret)!, completion: { (session, error) in
                 })
-                print("Twitter authToken    :\(session?.authToken)")
-                print("Twitter userName     :\(session?.userName)")
+                
+                let client = TWTRAPIClient.withCurrentUser()
+                let request = client.urlRequest(withMethod: "GET",
+                                                url: "https://api.twitter.com/1.1/account/verify_credentials.json",
+                                                          parameters: ["include_email": "true", "skip_status": "true"],
+                                                          error: nil)
+                
+                client.sendTwitterRequest(request) { (response, data, connectionError) -> Void in
+                    if connectionError != nil {
+                        print("Error: \(connectionError)")
+                    }
+                    
+                    do {
+                        let json = try JSONSerialization.jsonObject(with: data!, options: [])
+                        print("json: \(json)")
+                    } catch let jsonError as NSError {
+                        print("json error: \(jsonError.localizedDescription)")
+                    }
+                }
+                
+                let credential = FIRTwitterAuthProvider.credential(withToken: (session?.authToken)!, secret: (session?.authTokenSecret)!)
+                self.loginByFireBase(credential: credential)
             }
             else {
-                print("Twitter login failed")
+                if error != nil {
+                    print(error)
+                }
             }
             
         }
