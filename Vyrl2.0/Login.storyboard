@@ -119,6 +119,7 @@
                                         </constraints>
                                         <connections>
                                             <action selector="didTapSignInSender:" destination="bYS-Q1-v3j" eventType="touchUpInside" id="iUF-Xu-OwK"/>
+                                            <action selector="twitterLoginButtonClicked:" destination="bYS-Q1-v3j" eventType="touchUpInside" id="03a-oF-hnv"/>
                                         </connections>
                                     </button>
                                 </subviews>

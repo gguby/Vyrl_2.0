@@ -11,6 +11,8 @@ import Firebase
 import GoogleSignIn
 import FacebookCore
 import FacebookLogin
+import TwitterKit
+import Fabric
 
 class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
     
@@ -54,11 +56,26 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
             case .failed(let error):
                 print(error)
             case .cancelled:
-                print("User cancelled login.")
+                print("Facebook User cancelled login.")
             case .success(let grantedPermissions, let declinedPermissions, let accessToken):
-                print("Logged in!")
+                print("Facebook Logged in!")
             }
         
+        }
+    }
+    
+    @IBAction func twitterLoginButtonClicked(_ sender: UIButton) {
+        Twitter.sharedInstance().logIn(withMethods: .webBased) { (session, error) in
+            if((session) != nil) {
+                Twitter.sharedInstance().sessionStore.saveSession(withAuthToken: (session?.authToken)!, authTokenSecret: (session?.authTokenSecret)!, completion: { (session, error) in
+                })
+                print("Twitter authToken    :\(session?.authToken)")
+                print("Twitter userName     :\(session?.userName)")
+            }
+            else {
+                print("Twitter login failed")
+            }
+            
         }
     }
     
