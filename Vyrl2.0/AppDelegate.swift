@@ -12,6 +12,8 @@ import FirebaseCore
 import Firebase
 import GoogleSignIn
 import FBSDKCoreKit
+import Fabric
+import TwitterKit
 
 extension AppDelegate
 {
@@ -54,6 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         }
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions);
+        Fabric.with([Twitter.self])
         
         return true
     }
