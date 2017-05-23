@@ -48,7 +48,8 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    @IBAction func facebookLoginButtonClicked(_ sender: UIButton)
+    
+    func faceBookLogin()
     {
         let fbLoginManager = FBSDKLoginManager()
         fbLoginManager .logOut()
@@ -78,12 +79,13 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
                 }
                 
                 // Present the main view
-                                
+                
             })
         }
     }
     
-    @IBAction func twitterLoginButtonClicked(_ sender: UIButton) {
+    func twitterLogin()
+    {
         Twitter.sharedInstance().logIn(withMethods: .webBased) { (session, error) in
             if((session) != nil) {
                 Twitter.sharedInstance().sessionStore.saveSession(withAuthToken: (session?.authToken)!, authTokenSecret: (session?.authTokenSecret)!, completion: { (session, error) in
@@ -94,7 +96,6 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
             else {
                 print("Twitter login failed")
             }
-            
         }
     }
     
@@ -106,8 +107,12 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
     @IBAction func didTapSignIn(sender: AnyObject)
     {
         switch sender.tag {
-       
-        case 4 :
+            
+        case 1:
+            faceBookLogin()
+        case 2:
+            twitterLogin()
+        case 4:
             GIDSignIn.sharedInstance().signIn()
         
         default:
@@ -136,5 +141,12 @@ extension LoginViewController
         self.dismiss(animated: true, completion: nil)
     }
 
+}
+
+
+class LoginCustomButton : UIButton {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
 }
 

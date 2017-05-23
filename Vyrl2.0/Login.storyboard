@@ -42,7 +42,7 @@
                                 </constraints>
                             </imageView>
                             <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zb0-iP-Jtx" userLabel="FB view">
-                                <rect key="frame" x="71" y="324" width="265" height="45"/>
+                                <rect key="frame" x="55" y="324" width="265" height="45"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_fb_01" translatesAutoresizingMaskIntoConstraints="NO" id="XCg-bg-yog">
                                         <rect key="frame" x="32.5" y="0.0" width="43" height="43"/>
@@ -62,7 +62,7 @@
                                         <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N1c-mx-fl3">
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N1c-mx-fl3">
                                         <rect key="frame" x="0.0" y="0.0" width="265" height="45"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -71,7 +71,6 @@
                                         </constraints>
                                         <connections>
                                             <action selector="didTapSignInSender:" destination="bYS-Q1-v3j" eventType="touchUpInside" id="Vx7-Yw-bgq"/>
-                                            <action selector="facebookLoginButtonClicked:" destination="bYS-Q1-v3j" eventType="touchUpInside" id="qwI-3D-uLe"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -91,7 +90,7 @@
                                 </connections>
                             </view>
                             <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U9F-V9-w8E" userLabel="TW view">
-                                <rect key="frame" x="71" y="377" width="265" height="45"/>
+                                <rect key="frame" x="55" y="377" width="265" height="45"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_tw_01" translatesAutoresizingMaskIntoConstraints="NO" id="I17-Rn-Mbn">
                                         <rect key="frame" x="32.5" y="0.0" width="43" height="43"/>
@@ -110,7 +109,7 @@
                                         <color key="textColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="178-iw-G9y">
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="178-iw-G9y">
                                         <rect key="frame" x="0.0" y="0.0" width="265" height="45"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -119,7 +118,6 @@
                                         </constraints>
                                         <connections>
                                             <action selector="didTapSignInSender:" destination="bYS-Q1-v3j" eventType="touchUpInside" id="iUF-Xu-OwK"/>
-                                            <action selector="twitterLoginButtonClicked:" destination="bYS-Q1-v3j" eventType="touchUpInside" id="03a-oF-hnv"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -139,7 +137,7 @@
                                 </connections>
                             </view>
                             <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vHe-Xo-2QI" userLabel="SM View">
-                                <rect key="frame" x="71" y="429" width="265" height="45"/>
+                                <rect key="frame" x="55" y="429" width="265" height="45"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_sm_01" translatesAutoresizingMaskIntoConstraints="NO" id="mX7-BN-sHV">
                                         <rect key="frame" x="32.5" y="0.0" width="43" height="43"/>
@@ -187,7 +185,7 @@
                                 </connections>
                             </view>
                             <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dmi-i1-6UQ" userLabel="Google View">
-                                <rect key="frame" x="71" y="481" width="265" height="45"/>
+                                <rect key="frame" x="55" y="481" width="265" height="45"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_gg_01" translatesAutoresizingMaskIntoConstraints="NO" id="FND-jp-CkQ">
                                         <rect key="frame" x="32.5" y="0.0" width="43" height="43"/>
@@ -243,9 +241,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="HSx-an-R7M" secondAttribute="trailing" constant="-16" id="2NY-zp-VPW"/>
-                            <constraint firstItem="vHe-Xo-2QI" firstAttribute="leading" secondItem="fOe-37-p9H" secondAttribute="leadingMargin" constant="55" id="7XX-YR-XJ3"/>
                             <constraint firstItem="HyA-b6-BYd" firstAttribute="top" secondItem="HSx-an-R7M" secondAttribute="bottom" id="8WH-jU-nCT"/>
-                            <constraint firstItem="Zb0-iP-Jtx" firstAttribute="leading" secondItem="fOe-37-p9H" secondAttribute="leadingMargin" constant="55" id="Fid-J5-Fai"/>
+                            <constraint firstItem="vHe-Xo-2QI" firstAttribute="centerX" secondItem="fOe-37-p9H" secondAttribute="centerX" id="Caf-Jv-cEn"/>
+                            <constraint firstItem="Zb0-iP-Jtx" firstAttribute="centerX" secondItem="fOe-37-p9H" secondAttribute="centerX" id="FPH-ov-e42"/>
                             <constraint firstItem="Xgl-wa-qy8" firstAttribute="top" secondItem="1Ek-kD-dSD" secondAttribute="bottom" constant="12.5" id="GJx-fn-kG0"/>
                             <constraint firstItem="0dy-Im-Q6c" firstAttribute="leading" secondItem="fOe-37-p9H" secondAttribute="leadingMargin" constant="55" id="GgB-gX-buB"/>
                             <constraint firstItem="dmi-i1-6UQ" firstAttribute="top" secondItem="vHe-Xo-2QI" secondAttribute="bottom" constant="7" id="KWw-bY-me7"/>
@@ -253,8 +251,8 @@
                             <constraint firstItem="vHe-Xo-2QI" firstAttribute="top" secondItem="U9F-V9-w8E" secondAttribute="bottom" constant="7" id="auK-LZ-YcF"/>
                             <constraint firstItem="Xgl-wa-qy8" firstAttribute="leading" secondItem="fOe-37-p9H" secondAttribute="leadingMargin" constant="59" id="cCH-vw-jWT"/>
                             <constraint firstItem="Zb0-iP-Jtx" firstAttribute="top" secondItem="Xgl-wa-qy8" secondAttribute="bottom" constant="40" id="hig-XF-kQO"/>
-                            <constraint firstItem="dmi-i1-6UQ" firstAttribute="leading" secondItem="fOe-37-p9H" secondAttribute="leadingMargin" constant="55" id="hpF-MF-Spl"/>
-                            <constraint firstItem="U9F-V9-w8E" firstAttribute="leading" secondItem="fOe-37-p9H" secondAttribute="leadingMargin" constant="55" id="hrU-I1-FGJ"/>
+                            <constraint firstItem="dmi-i1-6UQ" firstAttribute="centerX" secondItem="fOe-37-p9H" secondAttribute="centerX" id="jdR-tL-YwJ"/>
+                            <constraint firstItem="U9F-V9-w8E" firstAttribute="centerX" secondItem="fOe-37-p9H" secondAttribute="centerX" id="jlF-GG-7gi"/>
                             <constraint firstItem="U9F-V9-w8E" firstAttribute="top" secondItem="Zb0-iP-Jtx" secondAttribute="bottom" constant="8" id="lBZ-Bn-Fr1"/>
                             <constraint firstItem="1Ek-kD-dSD" firstAttribute="leading" secondItem="fOe-37-p9H" secondAttribute="leadingMargin" constant="59" id="ou6-0v-7BL"/>
                             <constraint firstItem="0dy-Im-Q6c" firstAttribute="top" secondItem="t7N-Tt-Dwm" secondAttribute="bottom" constant="86" id="pkY-sM-guL"/>
@@ -485,11 +483,11 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="150" id="om8-iW-u7J"/>
                                         </constraints>
-                                        <mutableString key="text">1조 (목적)
+                                        <string key="text">1조 (목적)
 회사는 회원가입, 상담, 서비스 신청 등등을 위해 아래와 같은 개인정보를 수집하고 있습니다.
 ①수집항목 : 이름 , 생년월일 , 성별 , 로그인ID , 비밀번호 , 비밀번호 질문과 답변 , 자택 전화번호 , 자택 주 소 , 휴대전화번호 , 이메일 , 서비스 이용기록 , 접속 로그 , 쿠키 , 접속 IP 정보 , 결제기록 , 선호 아티스트, 아이핀번호 , 법정대
 2조 (목적)
-회사는 회원가입, 상담, 서비스 신청 등등을 위해 아래와 같은 개인정보를 수집하고 있습니다.</mutableString>
+회사는 회원가입, 상담, 서비스 신청 등등을 위해 아래와 같은 개인정보를 수집하고 있습니다.</string>
                                         <color key="textColor" red="0.32549019607843138" green="0.30980392156862746" blue="0.30588235294117649" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="11"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -512,12 +510,12 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="150" id="uUu-5H-Xo8"/>
                                         </constraints>
-                                        <mutableString key="text">1조 (목적)
+                                        <string key="text">1조 (목적)
 회사는 회원가입, 상담, 서비스 신청 등등을 위해 아래와 같은 개인정보를  수집하고 있습니다.
 ①수집항목 : 이름 , 생년월일 , 성별 , 로그인ID , 비밀번호 , 비밀번호 질문과 답변 , 자택 전화번호 , 자택 주 소 , 휴대전화번호 , 이메일 , 서비스 이용기록 , 접속 로그 , 쿠키 , 접속 IP 정보 , 결제기록 , 선호 아티스트, 아이핀 번호 , 법정대
 ①수집항목 : 이름 , 생년월일 , 성별 , 로그인ID , 비밀번호 , 비밀번호 질문과 답변 , 자택 전화번호 , 자택 주 소 , 휴대전화번호 , 이메일 , 서비스 이용기록 , 접
 2조 (목적)
-회사는 회원가입, 상담, 서비스 신청 등등을 위해 아래와 같은 개인정보를 수집하고 있습니다.</mutableString>
+회사는 회원가입, 상담, 서비스 신청 등등을 위해 아래와 같은 개인정보를 수집하고 있습니다.</string>
                                         <color key="textColor" red="0.32549019610000002" green="0.30980392159999998" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="11"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
