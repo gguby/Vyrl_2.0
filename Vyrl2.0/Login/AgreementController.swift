@@ -26,17 +26,15 @@ class AgreeMentController : UIViewController, checkBoxDelegate {
         
         serviceCheckBox.label = agreeLabel01
         persnalCheckBox.label = agreeLabel02        
-        
-        serviceTextView.textContainer.lineFragmentPadding = 0
-        serviceTextView.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0)
-        
-        persnalTextView.textContainer.lineFragmentPadding = 0
-        persnalTextView.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0)
-        
+    
         persnalCheckBox.delegate = self
         serviceCheckBox.delegate = self
         
         btnClose.backgroundColor = UIColor.ivGreyish
+        
+        let bottomOffset = CGPoint.init(x: 0, y: persnalTextView.contentSize.height - persnalTextView.bounds.size.height)
+        persnalTextView.setContentOffset(bottomOffset, animated: true)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -485,16 +485,11 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="150" id="om8-iW-u7J"/>
                                         </constraints>
-                                        <string key="text">1조 (목적)
-회사는 회원가입, 상담, 서비스 신청 등등을 위해 아래와 같은 개인정보를
-수집하고 있습니다.
-①수집항목 : 이름 , 생년월일 , 성별 , 로그인ID , 비밀번호 , 비밀번호 질문
-과 답변 , 자택 전화번호 , 자택 주 소 , 휴대전화번호 , 이메일 , 서비스 이용
-기록 , 접속 로그 , 쿠키 , 접속 IP 정보 , 결제기록 , 선호 아티스트, 아이핀
-번호 , 법정대
+                                        <mutableString key="text">1조 (목적)
+회사는 회원가입, 상담, 서비스 신청 등등을 위해 아래와 같은 개인정보를 수집하고 있습니다.
+①수집항목 : 이름 , 생년월일 , 성별 , 로그인ID , 비밀번호 , 비밀번호 질문과 답변 , 자택 전화번호 , 자택 주 소 , 휴대전화번호 , 이메일 , 서비스 이용기록 , 접속 로그 , 쿠키 , 접속 IP 정보 , 결제기록 , 선호 아티스트, 아이핀번호 , 법정대
 2조 (목적)
-회사는 회원가입, 상담, 서비스 신청 등등을 위해 아래와 같은 개인정보를
-수집하고 있습니다.</string>
+회사는 회원가입, 상담, 서비스 신청 등등을 위해 아래와 같은 개인정보를 수집하고 있습니다.</mutableString>
                                         <color key="textColor" red="0.32549019607843138" green="0.30980392156862746" blue="0.30588235294117649" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="11"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -517,7 +512,12 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="150" id="uUu-5H-Xo8"/>
                                         </constraints>
-                                        <mutableString key="text">1조 (목적)회사는 회원가입, 상담, 서비스 신청 등등을 위해 아래와 같은 개인정보를수집하고 있습니다.①수집항목 : 이름 , 생년월일 , 성별 , 로그인ID , 비밀번호 , 비밀번호 질문과 답변 , 자택 전화번호 , 자택 주 소 , 휴대전화번호 , 이메일 , 서비스 이용기록 , 접속 로그 , 쿠키 , 접속 IP 정보 , 결제기록 , 선호 아티스트, 아이핀번호 , 법정대①수집항목 : 이름 , 생년월일 , 성별 , 로그인ID , 비밀번호 , 비밀번호 질문과 답변 , 자택 전화번호 , 자택 주 소 , 휴대전화번호 , 이메일 , 서비스 이용기록 , 접2조 (목적)회사는 회원가입, 상담, 서비스 신청 등등을 위해 아래와 같은 개인정보를수집하고 있습니다.</mutableString>
+                                        <mutableString key="text">1조 (목적)
+회사는 회원가입, 상담, 서비스 신청 등등을 위해 아래와 같은 개인정보를  수집하고 있습니다.
+①수집항목 : 이름 , 생년월일 , 성별 , 로그인ID , 비밀번호 , 비밀번호 질문과 답변 , 자택 전화번호 , 자택 주 소 , 휴대전화번호 , 이메일 , 서비스 이용기록 , 접속 로그 , 쿠키 , 접속 IP 정보 , 결제기록 , 선호 아티스트, 아이핀 번호 , 법정대
+①수집항목 : 이름 , 생년월일 , 성별 , 로그인ID , 비밀번호 , 비밀번호 질문과 답변 , 자택 전화번호 , 자택 주 소 , 휴대전화번호 , 이메일 , 서비스 이용기록 , 접
+2조 (목적)
+회사는 회원가입, 상담, 서비스 신청 등등을 위해 아래와 같은 개인정보를 수집하고 있습니다.</mutableString>
                                         <color key="textColor" red="0.32549019610000002" green="0.30980392159999998" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="11"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
