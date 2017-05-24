@@ -735,10 +735,10 @@
             </objects>
             <point key="canvasLocation" x="1214" y="287"/>
         </scene>
-        <!--View Controller-->
+        <!--Start Cover View Controller-->
         <scene sceneID="j9a-PK-Mep">
             <objects>
-                <viewController id="vrs-Ci-hrq" sceneMemberID="viewController">
+                <viewController id="vrs-Ci-hrq" customClass="StartCoverViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="m1e-aj-q1B"/>
                         <viewControllerLayoutGuide type="bottom" id="Nhw-0r-42R"/>
@@ -750,7 +750,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qZg-6R-Snr">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 짝짝짝, Vyrl에 가입하신 것을 환영합니다!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cqY-Wm-Ib3">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="짝짝짝, Vyrl에 가입하신 것을 환영합니다!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cqY-Wm-Ib3">
                                 <rect key="frame" x="44.5" y="318.5" width="286.5" height="53"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-UltraLight" family="Apple SD Gothic Neo" pointSize="22"/>
                                 <nil key="textColor"/>
@@ -781,6 +781,9 @@
                                     <constraint firstAttribute="width" constant="87" id="z4s-lo-Q5Q"/>
                                 </constraints>
                                 <state key="normal" image="btn_start_app_01"/>
+                                <connections>
+                                    <action selector="showSearchViewController:" destination="vrs-Ci-hrq" eventType="touchUpInside" id="ah4-ZH-iw8"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -803,10 +806,13 @@
                             <constraint firstItem="bLD-gQ-ox9" firstAttribute="leading" secondItem="kPJ-Hp-iOZ" secondAttribute="leadingMargin" constant="128" id="wjP-Fx-r1g"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="coverImageView" destination="qZg-6R-Snr" id="9XF-ST-Flb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hhi-QM-6lP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1898.4000000000001" y="270.31484257871068"/>
+            <point key="canvasLocation" x="1847" y="301"/>
         </scene>
     </scenes>
     <resources>
