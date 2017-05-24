@@ -85,22 +85,6 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
             
             let credential = FIRFacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
 
-            
-            // Perform login by calling Firebase APIs
-            FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
-                if let error = error {
-                    print("Login error: \(error.localizedDescription)")
-                    let alertController = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)
-                    let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                    alertController.addAction(okayAction)
-                    self.present(alertController, animated: true, completion: nil)
-                    
-                    return
-                }
-                
-                // Present the main view
-                
-            })
             self.loginByFireBase(credential: credential)
         }
     }
