@@ -735,8 +735,82 @@
             </objects>
             <point key="canvasLocation" x="1214" y="287"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="j9a-PK-Mep">
+            <objects>
+                <viewController id="vrs-Ci-hrq" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="m1e-aj-q1B"/>
+                        <viewControllerLayoutGuide type="bottom" id="Nhw-0r-42R"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kPJ-Hp-iOZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qZg-6R-Snr">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 짝짝짝, Vyrl에 가입하신 것을 환영합니다!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cqY-Wm-Ib3">
+                                <rect key="frame" x="44.5" y="318.5" width="286.5" height="53"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-UltraLight" family="Apple SD Gothic Neo" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="나의 아티스트를 좋아하는 친구를 만나세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IBW-xV-e73">
+                                <rect key="frame" x="45" y="402.5" width="219" height="16"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-UltraLight" family="Apple SD Gothic Neo" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="공식 팬클럽에 쉽게 가입하세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="raL-hx-87t">
+                                <rect key="frame" x="45" y="422.5" width="159.5" height="16"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-UltraLight" family="Apple SD Gothic Neo" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SM 아티스트의 미디어를 가장 빠르게 받으세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eSa-xQ-yvG">
+                                <rect key="frame" x="45" y="443.5" width="239" height="16"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-UltraLight" family="Apple SD Gothic Neo" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bLD-gQ-ox9">
+                                <rect key="frame" x="144" y="528" width="87" height="87"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="87" id="A5R-aj-5Uh"/>
+                                    <constraint firstAttribute="width" constant="87" id="z4s-lo-Q5Q"/>
+                                </constraints>
+                                <state key="normal" image="btn_start_app_01"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="cqY-Wm-Ib3" firstAttribute="leading" secondItem="kPJ-Hp-iOZ" secondAttribute="leadingMargin" constant="29" id="64j-jA-hPC"/>
+                            <constraint firstItem="Nhw-0r-42R" firstAttribute="top" secondItem="qZg-6R-Snr" secondAttribute="bottom" id="6db-6n-RtX"/>
+                            <constraint firstItem="qZg-6R-Snr" firstAttribute="leading" secondItem="kPJ-Hp-iOZ" secondAttribute="leading" id="8BZ-xd-oC9"/>
+                            <constraint firstItem="cqY-Wm-Ib3" firstAttribute="top" secondItem="m1e-aj-q1B" secondAttribute="bottom" constant="298.5" id="8aj-WB-eq7"/>
+                            <constraint firstItem="IBW-xV-e73" firstAttribute="leading" secondItem="kPJ-Hp-iOZ" secondAttribute="leadingMargin" constant="29" id="9bm-Rc-TDE"/>
+                            <constraint firstItem="raL-hx-87t" firstAttribute="leading" secondItem="kPJ-Hp-iOZ" secondAttribute="leadingMargin" constant="29" id="Dd8-7Z-mDC"/>
+                            <constraint firstItem="IBW-xV-e73" firstAttribute="top" secondItem="cqY-Wm-Ib3" secondAttribute="bottom" constant="31" id="Geu-HW-wXb"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bLD-gQ-ox9" secondAttribute="trailing" constant="128" id="JS7-Gt-6ee"/>
+                            <constraint firstAttribute="trailing" secondItem="qZg-6R-Snr" secondAttribute="trailing" id="PwX-dW-got"/>
+                            <constraint firstItem="eSa-xQ-yvG" firstAttribute="top" secondItem="raL-hx-87t" secondAttribute="bottom" constant="4.5" id="SHP-K9-muT"/>
+                            <constraint firstItem="qZg-6R-Snr" firstAttribute="top" secondItem="kPJ-Hp-iOZ" secondAttribute="top" id="a8D-vi-u4f"/>
+                            <constraint firstItem="eSa-xQ-yvG" firstAttribute="leading" secondItem="kPJ-Hp-iOZ" secondAttribute="leadingMargin" constant="29" id="o4h-vR-gD6"/>
+                            <constraint firstItem="bLD-gQ-ox9" firstAttribute="top" secondItem="eSa-xQ-yvG" secondAttribute="bottom" constant="68.5" id="oHQ-sS-NCd"/>
+                            <constraint firstItem="Nhw-0r-42R" firstAttribute="top" secondItem="bLD-gQ-ox9" secondAttribute="bottom" constant="52" id="wEJ-qj-QfU"/>
+                            <constraint firstItem="raL-hx-87t" firstAttribute="top" secondItem="IBW-xV-e73" secondAttribute="bottom" constant="4" id="wRu-ng-vLb"/>
+                            <constraint firstItem="bLD-gQ-ox9" firstAttribute="leading" secondItem="kPJ-Hp-iOZ" secondAttribute="leadingMargin" constant="128" id="wjP-Fx-r1g"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hhi-QM-6lP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1898.4000000000001" y="270.31484257871068"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="btn_start_app_01" width="87" height="87"/>
         <image name="icon_cancel_02" width="20" height="20"/>
         <image name="icon_check_02_on" width="20" height="20"/>
         <image name="img_number1_01_on" width="20" height="20"/>
