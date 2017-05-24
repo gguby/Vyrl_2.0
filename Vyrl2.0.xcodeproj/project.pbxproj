@@ -32,6 +32,7 @@
 		CE33F0041ED2D2900050C21D /* AgreeMentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33F0031ED2D2900050C21D /* AgreeMentController.swift */; };
 		CE33F0061ED2DF320050C21D /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33F0051ED2DF320050C21D /* ProfileController.swift */; };
 		CE36D4A01ED3C96B00ABC7FE /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE36D49F1ED3C96B00ABC7FE /* CheckBox.swift */; };
+		CEF5267E1ED5756600A7B224 /* LoginCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF5267D1ED5756600A7B224 /* LoginCompleteViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 		CE33F0031ED2D2900050C21D /* AgreeMentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgreeMentController.swift; sourceTree = "<group>"; };
 		CE33F0051ED2DF320050C21D /* ProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		CE36D49F1ED3C96B00ABC7FE /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
+		CEF5267D1ED5756600A7B224 /* LoginCompleteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginCompleteViewController.swift; sourceTree = "<group>"; };
 		D548CE0C473DEA6C46EC7CA7 /* libPods-Vyrl2.0UITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vyrl2.0UITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D78881F4958F20C20F036FD5 /* Pods_Vyrl2_0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vyrl2_0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -194,6 +196,7 @@
 				CE33F0011ED2BB690050C21D /* SMLoginViewController.swift */,
 				CE33F0031ED2D2900050C21D /* AgreeMentController.swift */,
 				CE33F0051ED2DF320050C21D /* ProfileController.swift */,
+				CEF5267D1ED5756600A7B224 /* LoginCompleteViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -471,6 +474,7 @@
 				CE08981E1ECD706A000D6D6C /* FanViewController.swift in Sources */,
 				CE08981C1ECD704F000D6D6C /* SearchViewController.swift in Sources */,
 				CE33F0021ED2BB690050C21D /* SMLoginViewController.swift in Sources */,
+				CEF5267E1ED5756600A7B224 /* LoginCompleteViewController.swift in Sources */,
 				CE0898251ECD70C7000D6D6C /* FeedViewController.swift in Sources */,
 				CE33F0041ED2D2900050C21D /* AgreeMentController.swift in Sources */,
 				CE29B1D41ECD6515003F4D2E /* Constants.swift in Sources */,

@@ -31,6 +31,7 @@ class AgreeMentController : UIViewController, checkBoxDelegate {
         serviceCheckBox.delegate = self
         
         btnClose.backgroundColor = UIColor.ivGreyish
+        btnClose.isEnabled = false;
         
         let bottomOffset = CGPoint.init(x: 0, y: persnalTextView.contentSize.height - persnalTextView.bounds.size.height)
         persnalTextView.setContentOffset(bottomOffset, animated: true)
@@ -50,10 +51,12 @@ class AgreeMentController : UIViewController, checkBoxDelegate {
         if ( persnalCheckBox.isChecked && serviceCheckBox.isChecked )
         {
             btnClose.backgroundColor = UIColor.hexStringToUIColor(hex: "#8052F5")
+            btnClose.isEnabled = true
         }
         else
         {
             btnClose.backgroundColor = UIColor.ivGreyish
+            btnClose.isEnabled = false
         }
     }
 }

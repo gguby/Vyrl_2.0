@@ -1,20 +1,15 @@
 //
-//   SMLoginViewController.swift
+//  LoginComplete.swift
 //  Vyrl2.0
 //
-//  Created by wsjung on 2017. 5. 22..
+//  Created by user on 2017. 5. 24..
 //  Copyright © 2017년 smt. All rights reserved.
 //
 
 import UIKit
 
-class SMLoginViewController : UIViewController {
+class LoginCompleteViewController : UIViewController {
     
-    @IBOutlet weak var WebView: UIWebView!
-    
-    @IBOutlet weak var btnClose: UIButton!
-    
-    @IBOutlet weak var SMLoginLabel: UILabel!
     
     override func viewDidLoad() {
         
@@ -28,4 +23,5 @@ class SMLoginViewController : UIViewController {
     {
         self.dismiss(animated: true, completion: nil);
     }
+
 }
