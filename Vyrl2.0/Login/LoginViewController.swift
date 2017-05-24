@@ -15,22 +15,7 @@ import TwitterKit
 
 class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
     
-    @IBOutlet weak var signInButton : GIDSignInButton!
-    
-    @IBOutlet weak var signOutBtn : UIButton!    
-    
-    @IBOutlet weak var firstLabel: UILabel!
-    
-    func initView()
-    {
-       for  v in self.view.subviews {
-            if ( v.tag == 1 )
-            {
-                v.layer.borderWidth = 1
-                v.layer.borderColor = UIColor(red: 62.0 / 255.0, green: 58.0 / 255.0, blue: 57.0 / 255.0, alpha: 1.0).cgColor
-            }
-        }
-    }
+    @IBOutlet weak var signOutBtn : UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,8 +23,6 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
         
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self;
-        
-        initView()
         
     }
     
@@ -144,7 +127,6 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
         
         default:
             print(sender.tag)
-
         }
     }
 
@@ -170,10 +152,29 @@ extension LoginViewController
 
 }
 
-
 class LoginCustomButton : UIButton {
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        
+        self.layer.borderWidth = 1.0
+        self.layer.borderColor = UIColor(red: 62.0 / 255.0, green: 58.0 / 255.0, blue: 57.0 / 255.0, alpha: 1.0).cgColor
+    }
+    
+    override var isHighlighted: Bool {
+        didSet {
+            if isHighlighted
+            {
+                self.backgroundColor = UIColor(red: 62.0 / 255.0, green: 58.0 / 255.0, blue: 57.0 / 255.0, alpha: 0.3)
+            } else
+            {
+                self.backgroundColor = UIColor.clear
+            }
+        }
     }
 }
 

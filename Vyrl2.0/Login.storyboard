@@ -62,7 +62,7 @@
                                         <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N1c-mx-fl3">
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N1c-mx-fl3" customClass="LoginCustomButton" customModule="Vyrl2_0" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="265" height="45"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -74,7 +74,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="265" id="2xV-Du-w3h"/>
                                     <constraint firstItem="LA6-qI-LlO" firstAttribute="top" secondItem="Zb0-iP-Jtx" secondAttribute="top" constant="16" id="5cv-TU-pAz"/>
@@ -109,7 +109,7 @@
                                         <color key="textColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="178-iw-G9y">
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="178-iw-G9y" customClass="LoginCustomButton" customModule="Vyrl2_0" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="265" height="45"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -121,7 +121,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="265" id="7uP-HE-92l"/>
                                     <constraint firstItem="ERq-ZC-jsy" firstAttribute="top" secondItem="U9F-V9-w8E" secondAttribute="top" constant="16" id="AgQ-w9-RDf"/>
@@ -156,7 +156,7 @@
                                         <color key="textColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kvu-6r-jPt">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kvu-6r-jPt" customClass="LoginCustomButton" customModule="Vyrl2_0" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="265" height="45"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -204,7 +204,7 @@
                                         <color key="textColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AsO-fM-Di4">
+                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AsO-fM-Di4" customClass="LoginCustomButton" customModule="Vyrl2_0" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="265" height="45"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -216,7 +216,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="AsO-fM-Di4" firstAttribute="leading" secondItem="dmi-i1-6UQ" secondAttribute="leading" id="ACL-Yg-BfD"/>
                                     <constraint firstItem="MdA-YY-74B" firstAttribute="top" secondItem="dmi-i1-6UQ" secondAttribute="top" constant="16" id="AFm-Od-NCm"/>
@@ -259,9 +259,6 @@
                             <constraint firstItem="1Ek-kD-dSD" firstAttribute="top" secondItem="0dy-Im-Q6c" secondAttribute="bottom" constant="17" id="tpp-eM-Ti0"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="firstLabel" destination="1Ek-kD-dSD" id="Kum-eK-lYK"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F3H-dK-cCg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
