@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SMLoginViewController : UIViewController {
+class SMLoginViewController : UIViewController, UIWebViewDelegate {
     
     @IBOutlet weak var WebView: UIWebView!
     
@@ -18,14 +18,38 @@ class SMLoginViewController : UIViewController {
     
     override func viewDidLoad() {
         
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidLoad()
+        
+        WebView.delegate = self;
+        
+        if let url = URL(string: "http://api.vyrl.com:8082/ko/auth/social/smtown/ios"){
+            let request = URLRequest(url: url)
+            WebView.loadRequest(request)
+        }
         
     }
     
-    @IBAction func dismiss(sender :AnyObject )
-    {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+    @IBAction func dismiss(sender :AnyObject ) {
         self.dismiss(animated: true, completion: nil);
+    }
+    
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        return true
+    }
+    
+    func webViewDidStartLoad(_ webView: UIWebView) {
+        
+    }
+    
+    func webViewDidFinishLoad(_ webView: UIWebView){
+        
+    }
+    
+    func webView(_ webView: UIWebView, didFailLoadWithError error: Error){
+        
     }
 }

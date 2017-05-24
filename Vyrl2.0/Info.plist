@@ -43,25 +43,25 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-    <key>Fabric</key>
-    <dict>
-        <key>APIKey</key>
-        <string>858cd1814aa5ffb66ffce5708a03e4e40d6df453</string>
-        <key>Kits</key>
-        <array>
-            <dict>
-                <key>KitInfo</key>
-                <dict>
-                    <key>consumerKey</key>
-                    <string>WS99F0AbSI3OevRrtJfQRDJba</string>
-                    <key>consumerSecret</key>
-                    <string>cKapF1TpM8uMNU040HdvavMcphKUuf0Iu76ijBQ9lYwBA5ffH9</string>
-                </dict>
-                <key>KitName</key>
-                <string>Twitter</string>
-            </dict>
-        </array>
-    </dict>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>858cd1814aa5ffb66ffce5708a03e4e40d6df453</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict>
+					<key>consumerKey</key>
+					<string>WS99F0AbSI3OevRrtJfQRDJba</string>
+					<key>consumerSecret</key>
+					<string>cKapF1TpM8uMNU040HdvavMcphKUuf0Iu76ijBQ9lYwBA5ffH9</string>
+				</dict>
+				<key>KitName</key>
+				<string>Twitter</string>
+			</dict>
+		</array>
+	</dict>
 	<key>FacebookAppID</key>
 	<string>954659227913623</string>
 	<key>FacebookDisplayName</key>
@@ -97,5 +97,10 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+    </dict>
 </dict>
 </plist>
