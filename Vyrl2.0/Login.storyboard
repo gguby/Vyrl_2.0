@@ -42,7 +42,7 @@
                                 </constraints>
                             </imageView>
                             <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zb0-iP-Jtx" userLabel="FB view">
-                                <rect key="frame" x="55" y="324" width="265" height="45"/>
+                                <rect key="frame" x="55" y="398" width="265" height="45"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_fb_01" translatesAutoresizingMaskIntoConstraints="NO" id="XCg-bg-yog">
                                         <rect key="frame" x="32.5" y="0.0" width="43" height="43"/>
@@ -85,12 +85,9 @@
                                     <constraint firstAttribute="height" constant="45" id="feu-7U-A80"/>
                                     <constraint firstItem="N1c-mx-fl3" firstAttribute="top" secondItem="Zb0-iP-Jtx" secondAttribute="top" id="gMY-um-9Mn"/>
                                 </constraints>
-                                <connections>
-                                    <action selector="didTapSignInSender:" destination="bYS-Q1-v3j" eventType="touchUpInside" id="CdD-uV-VmF"/>
-                                </connections>
                             </view>
                             <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U9F-V9-w8E" userLabel="TW view">
-                                <rect key="frame" x="55" y="377" width="265" height="45"/>
+                                <rect key="frame" x="55" y="451" width="265" height="45"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_tw_01" translatesAutoresizingMaskIntoConstraints="NO" id="I17-Rn-Mbn">
                                         <rect key="frame" x="32.5" y="0.0" width="43" height="43"/>
@@ -132,12 +129,9 @@
                                     <constraint firstItem="178-iw-G9y" firstAttribute="top" secondItem="U9F-V9-w8E" secondAttribute="top" id="l0H-hX-vsc"/>
                                     <constraint firstItem="I17-Rn-Mbn" firstAttribute="leading" secondItem="U9F-V9-w8E" secondAttribute="leading" constant="32.5" id="l2r-Og-Dnj"/>
                                 </constraints>
-                                <connections>
-                                    <action selector="didTapSignInSender:" destination="bYS-Q1-v3j" eventType="touchUpInside" id="RIF-Xe-oHm"/>
-                                </connections>
                             </view>
                             <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vHe-Xo-2QI" userLabel="SM View">
-                                <rect key="frame" x="55" y="429" width="265" height="45"/>
+                                <rect key="frame" x="55" y="503" width="265" height="45"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_sm_01" translatesAutoresizingMaskIntoConstraints="NO" id="mX7-BN-sHV">
                                         <rect key="frame" x="32.5" y="0.0" width="43" height="43"/>
@@ -180,12 +174,9 @@
                                     <constraint firstItem="mX7-BN-sHV" firstAttribute="top" secondItem="vHe-Xo-2QI" secondAttribute="top" id="pA8-Gf-sv7"/>
                                     <constraint firstItem="Kvu-6r-jPt" firstAttribute="top" secondItem="vHe-Xo-2QI" secondAttribute="top" id="vG5-1P-ZPn"/>
                                 </constraints>
-                                <connections>
-                                    <action selector="didTapSignInSender:" destination="bYS-Q1-v3j" eventType="touchUpInside" id="eEc-eO-mp9"/>
-                                </connections>
                             </view>
                             <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dmi-i1-6UQ" userLabel="Google View">
-                                <rect key="frame" x="55" y="481" width="265" height="45"/>
+                                <rect key="frame" x="55" y="555" width="265" height="45"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_gg_01" translatesAutoresizingMaskIntoConstraints="NO" id="FND-jp-CkQ">
                                         <rect key="frame" x="32.5" y="0.0" width="43" height="43"/>
@@ -227,9 +218,6 @@
                                     <constraint firstItem="FND-jp-CkQ" firstAttribute="leading" secondItem="dmi-i1-6UQ" secondAttribute="leading" constant="32.5" id="c97-Q9-ECY"/>
                                     <constraint firstAttribute="width" constant="265" id="y3o-hF-Pjw"/>
                                 </constraints>
-                                <connections>
-                                    <action selector="didTapSignInSender:" destination="bYS-Q1-v3j" eventType="touchUpInside" id="3Xj-Or-erP"/>
-                                </connections>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line_bottom_grd_01" translatesAutoresizingMaskIntoConstraints="NO" id="HSx-an-R7M">
                                 <rect key="frame" x="0.0" y="664" width="375" height="3"/>
@@ -250,7 +238,7 @@
                             <constraint firstItem="HSx-an-R7M" firstAttribute="width" secondItem="fOe-37-p9H" secondAttribute="width" id="Ysi-Ne-kvy"/>
                             <constraint firstItem="vHe-Xo-2QI" firstAttribute="top" secondItem="U9F-V9-w8E" secondAttribute="bottom" constant="7" id="auK-LZ-YcF"/>
                             <constraint firstItem="Xgl-wa-qy8" firstAttribute="leading" secondItem="fOe-37-p9H" secondAttribute="leadingMargin" constant="59" id="cCH-vw-jWT"/>
-                            <constraint firstItem="Zb0-iP-Jtx" firstAttribute="top" secondItem="Xgl-wa-qy8" secondAttribute="bottom" constant="40" id="hig-XF-kQO"/>
+                            <constraint firstItem="Zb0-iP-Jtx" firstAttribute="top" secondItem="Xgl-wa-qy8" secondAttribute="bottom" constant="114" id="hig-XF-kQO"/>
                             <constraint firstItem="dmi-i1-6UQ" firstAttribute="centerX" secondItem="fOe-37-p9H" secondAttribute="centerX" id="jdR-tL-YwJ"/>
                             <constraint firstItem="U9F-V9-w8E" firstAttribute="centerX" secondItem="fOe-37-p9H" secondAttribute="centerX" id="jlF-GG-7gi"/>
                             <constraint firstItem="U9F-V9-w8E" firstAttribute="top" secondItem="Zb0-iP-Jtx" secondAttribute="bottom" constant="8" id="lBZ-Bn-Fr1"/>
