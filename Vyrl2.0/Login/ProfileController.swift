@@ -47,7 +47,7 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
         photoView.layer.borderColor = UIColor.black.cgColor
         photoView.layer.borderWidth = 1.0
         
-        self.dismiss(animated:true, completion: nil) //5
+        self.dismiss(animated:true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
