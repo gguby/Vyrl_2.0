@@ -63,7 +63,7 @@ public extension UIColor {
         context.setFillColor(self.cgColor)
         context.fill(rect)
         
-        var image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         return image
     }

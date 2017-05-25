@@ -31,6 +31,14 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
         // Dispose of any resources that can be recreated.
     }
     
+    func logoutByFireBase() {
+        let firebaseAuth = FIRAuth.auth()
+        do{
+            try firebaseAuth?.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out : %@", signOutError)
+        }
+    }
     
     func loginByFireBase(credential:  FIRAuthCredential) {
         // Perform login by calling Firebase APIs
@@ -135,7 +143,14 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
 extension LoginViewController
 {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if let e = error {
+            print(e.localizedDescription)
+            return
+        }
         
+        guard let authentication = user.authentication else { return }
+        let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
+        self.loginByFireBase(credential: credential)
     }
     
     func sign(inWillDispatch signIn: GIDSignIn!, error: Error!) {
