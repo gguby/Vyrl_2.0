@@ -10,6 +10,7 @@
 		01ABE511A001A1DEE7D8BEAB /* Pods_Vyrl2_0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D78881F4958F20C20F036FD5 /* Pods_Vyrl2_0.framework */; };
 		464236AEF8E7E3A2C7AACD7F /* libPods-Vyrl2.0UITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D548CE0C473DEA6C46EC7CA7 /* libPods-Vyrl2.0UITests.a */; };
 		8F48CA6C1ED560CD0037A35B /* StartCoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F48CA6B1ED560CD0037A35B /* StartCoverViewController.swift */; };
+		8F5165D11ED6A8A900EC468B /* ProfilePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5165D01ED6A8A900EC468B /* ProfilePhotoViewController.swift */; };
 		CE08981C1ECD704F000D6D6C /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08981B1ECD704F000D6D6C /* SearchViewController.swift */; };
 		CE08981E1ECD706A000D6D6C /* FanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08981D1ECD706A000D6D6C /* FanViewController.swift */; };
 		CE0898201ECD7079000D6D6C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08981F1ECD7079000D6D6C /* LoginViewController.swift */; };
@@ -50,6 +51,7 @@
 		31A96CB7DB320E92C13C5B03 /* Pods-Vyrl2.0UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vyrl2.0UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vyrl2.0UITests/Pods-Vyrl2.0UITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4A3627D46412B7803C3B2BA7 /* Pods-Vyrl2.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vyrl2.0.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vyrl2.0/Pods-Vyrl2.0.release.xcconfig"; sourceTree = "<group>"; };
 		8F48CA6B1ED560CD0037A35B /* StartCoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartCoverViewController.swift; sourceTree = "<group>"; };
+		8F5165D01ED6A8A900EC468B /* ProfilePhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePhotoViewController.swift; sourceTree = "<group>"; };
 		C2AE70CA913C7D61FE18140C /* Pods-Vyrl2.0UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vyrl2.0UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vyrl2.0UITests/Pods-Vyrl2.0UITests.release.xcconfig"; sourceTree = "<group>"; };
 		CE08981B1ECD704F000D6D6C /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = Vyrl2.0/SEARCH/SearchViewController.swift; sourceTree = SOURCE_ROOT; };
 		CE08981D1ECD706A000D6D6C /* FanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanViewController.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				CE33F0031ED2D2900050C21D /* AgreeMentController.swift */,
 				CE33F0051ED2DF320050C21D /* ProfileController.swift */,
 				8F48CA6B1ED560CD0037A35B /* StartCoverViewController.swift */,
+				8F5165D01ED6A8A900EC468B /* ProfilePhotoViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -466,6 +469,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F5165D11ED6A8A900EC468B /* ProfilePhotoViewController.swift in Sources */,
 				CE0898201ECD7079000D6D6C /* LoginViewController.swift in Sources */,
 				CE29B19E1ECD5FEE003F4D2E /* AppDelegate.swift in Sources */,
 				CE0898281ECD9AB9000D6D6C /* LoginData.swift in Sources */,

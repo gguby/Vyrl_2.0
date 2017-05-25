@@ -968,8 +968,8 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="짝짝짝, Vyrl에 가입하신 것을 환영합니다!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cqY-Wm-Ib3">
-                                <rect key="frame" x="45" y="316" width="287" height="55"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="짝짝짝,  Vyrl에 가입하신 것을 환영합니다!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cqY-Wm-Ib3">
+                                <rect key="frame" x="44.5" y="316" width="286.5" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="GOd-Wt-AwL"/>
                                 </constraints>
@@ -977,20 +977,20 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="공식 팬클럽에 쉽게 가입하세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="raL-hx-87t">
-                                <rect key="frame" x="44" y="403" width="286" height="16"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="나의 아티스트를 좋아하는 친구를 만나세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="raL-hx-87t">
+                                <rect key="frame" x="44.5" y="403" width="285" height="16"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-UltraLight" family="Apple SD Gothic Neo" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="나의 아티스트를 좋아하는 친구를 만나세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IBW-xV-e73">
-                                <rect key="frame" x="45" y="424" width="286" height="16"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="공식 팬클럽에 쉽게 가입하세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IBW-xV-e73">
+                                <rect key="frame" x="44" y="424" width="287.5" height="16"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-UltraLight" family="Apple SD Gothic Neo" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SM 아티스트의 미디어를 가장 빠르게 받으세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eSa-xQ-yvG">
-                                <rect key="frame" x="45" y="445" width="286" height="16"/>
+                                <rect key="frame" x="44.5" y="445" width="287.5" height="16"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-UltraLight" family="Apple SD Gothic Neo" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -1006,13 +1006,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="IBW-xV-e73" firstAttribute="leading" secondItem="eSa-xQ-yvG" secondAttribute="leading" id="1E5-uS-S5n"/>
+                            <constraint firstItem="raL-hx-87t" firstAttribute="leading" secondItem="cqY-Wm-Ib3" secondAttribute="leading" id="9oG-vo-oWk"/>
                             <constraint firstItem="raL-hx-87t" firstAttribute="top" secondItem="cqY-Wm-Ib3" secondAttribute="bottom" constant="32" id="ANa-nF-Xkt"/>
                             <constraint firstItem="qZg-6R-Snr" firstAttribute="top" secondItem="kPJ-Hp-iOZ" secondAttribute="top" id="DBu-B2-A2G"/>
                             <constraint firstItem="eSa-xQ-yvG" firstAttribute="centerX" secondItem="bLD-gQ-ox9" secondAttribute="centerX" id="NjN-at-oz5"/>
                             <constraint firstItem="qZg-6R-Snr" firstAttribute="leading" secondItem="YKp-GJ-cCX" secondAttribute="leading" id="Omi-MN-SXZ"/>
                             <constraint firstItem="cqY-Wm-Ib3" firstAttribute="centerX" secondItem="IBW-xV-e73" secondAttribute="centerX" id="PnZ-vz-bSg"/>
                             <constraint firstItem="IBW-xV-e73" firstAttribute="top" secondItem="raL-hx-87t" secondAttribute="bottom" constant="5" id="VBo-9p-ZVG"/>
-                            <constraint firstItem="raL-hx-87t" firstAttribute="leading" secondItem="kPJ-Hp-iOZ" secondAttribute="leadingMargin" constant="28" id="YBU-PX-V7d"/>
                             <constraint firstItem="YKp-GJ-cCX" firstAttribute="top" secondItem="m1e-aj-q1B" secondAttribute="bottom" id="YVi-gE-8P0"/>
                             <constraint firstAttribute="trailing" secondItem="qZg-6R-Snr" secondAttribute="trailing" id="bum-UI-bmu"/>
                             <constraint firstItem="qZg-6R-Snr" firstAttribute="bottom" secondItem="Nhw-0r-42R" secondAttribute="top" id="gvS-44-AEB"/>
@@ -1026,7 +1026,6 @@
                             <constraint firstItem="raL-hx-87t" firstAttribute="centerX" secondItem="bLD-gQ-ox9" secondAttribute="centerX" id="uSg-k2-X0A"/>
                             <constraint firstAttribute="bottomMargin" secondItem="YKp-GJ-cCX" secondAttribute="bottom" constant="-20" id="xMK-Qh-X6R"/>
                             <constraint firstItem="qZg-6R-Snr" firstAttribute="trailing" secondItem="YKp-GJ-cCX" secondAttribute="trailing" id="xQU-GO-7w3"/>
-                            <constraint firstItem="cqY-Wm-Ib3" firstAttribute="leading" secondItem="kPJ-Hp-iOZ" secondAttribute="leadingMargin" constant="29" id="yro-3j-8HG"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1037,11 +1036,66 @@
             </objects>
             <point key="canvasLocation" x="2032.8" y="268.51574212893553"/>
         </scene>
+        <!--Profile Photo View Controller-->
+        <scene sceneID="3lQ-o2-fdI">
+            <objects>
+                <viewController id="Fwh-zy-ZrZ" customClass="ProfilePhotoViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UEV-Xj-AFu"/>
+                        <viewControllerLayoutGuide type="bottom" id="slc-JK-O1k"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="71s-sC-1aX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d4e-b1-Bom">
+                                <rect key="frame" x="15" y="10" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="7EE-ex-gQC"/>
+                                    <constraint firstAttribute="height" constant="20" id="yDj-l9-xVZ"/>
+                                </constraints>
+                                <state key="normal" image="icon_cancel_03"/>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0wD-ps-B7J">
+                                <rect key="frame" x="0.0" y="85" width="375" height="497"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="251kb" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qgt-aU-asX">
+                                <rect key="frame" x="306" y="632" width="54" height="19"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="19" id="cIV-Lg-S4F"/>
+                                    <constraint firstAttribute="width" constant="54" id="qrJ-OQ-KKk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="0wD-ps-B7J" firstAttribute="leading" secondItem="71s-sC-1aX" secondAttribute="leading" id="33z-0q-H82"/>
+                            <constraint firstAttribute="trailing" secondItem="0wD-ps-B7J" secondAttribute="trailing" id="HoY-iE-hTd"/>
+                            <constraint firstItem="0wD-ps-B7J" firstAttribute="centerY" secondItem="71s-sC-1aX" secondAttribute="centerY" id="N6E-A5-qfP"/>
+                            <constraint firstItem="slc-JK-O1k" firstAttribute="top" secondItem="Qgt-aU-asX" secondAttribute="bottom" constant="16" id="SGz-ej-Ufz"/>
+                            <constraint firstItem="d4e-b1-Bom" firstAttribute="top" secondItem="71s-sC-1aX" secondAttribute="top" constant="10" id="WqH-5o-Ei5"/>
+                            <constraint firstItem="0wD-ps-B7J" firstAttribute="top" secondItem="d4e-b1-Bom" secondAttribute="bottom" constant="55" id="jbl-hz-39Q"/>
+                            <constraint firstAttribute="trailing" secondItem="Qgt-aU-asX" secondAttribute="trailing" constant="15" id="ngy-WR-dRT"/>
+                            <constraint firstItem="d4e-b1-Bom" firstAttribute="leading" secondItem="71s-sC-1aX" secondAttribute="leading" constant="15" id="xf4-Ax-yQq"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="fileSizeLabel" destination="Qgt-aU-asX" id="3lW-gA-t5A"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="juh-yW-UNu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1213" y="955"/>
+        </scene>
     </scenes>
     <resources>
         <image name="border_circle_01" width="87" height="87"/>
         <image name="btn_start_app_01" width="87" height="87"/>
         <image name="icon_cancel_02" width="20" height="20"/>
+        <image name="icon_cancel_03" width="15" height="15"/>
         <image name="icon_check_02_on" width="20" height="20"/>
         <image name="icon_dot_01" width="3" height="3"/>
         <image name="img_number1_01_on" width="20" height="20"/>
