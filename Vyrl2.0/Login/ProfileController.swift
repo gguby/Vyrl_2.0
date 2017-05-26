@@ -24,6 +24,38 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
     
     @IBAction func selectPhoto(_ sender: Any) {
         
+        self.showAlert()
+        
+    }
+    
+    func showAlert() {
+        let alertController = UIAlertController (title:"", message:"",preferredStyle:.alert)
+        
+        let showProfileAction = UIAlertAction(title: "Show Profile", style: .default,handler: { (action) -> Void in
+            self.showProfileViewController()
+        })
+        let changeProfileAction = UIAlertAction(title: "Change Profile", style: .default, handler: { (action) -> Void in
+           self.changeProfile()
+        })
+        let defaultProfileAction = UIAlertAction(title: "Default Profile", style: .default, handler: nil)
+        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
+        
+        alertController.addAction(showProfileAction)
+        alertController.addAction(changeProfileAction)
+        alertController.addAction(defaultProfileAction)
+        alertController.addAction(cancel)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func showProfileViewController() {
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ProfilePhotoViewController") as! ProfilePhotoViewController
+    
+        present(vc, animated: true, completion: nil)
+    }
+    
+    func changeProfile() {
         if ( UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) == false ){
                 return
         }
@@ -53,6 +85,7 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
         imagePicker.allowsEditing = true
         
         self.present(imagePicker, animated: true, completion: nil)
+
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]){

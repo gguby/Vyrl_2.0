@@ -1047,7 +1047,7 @@
         <!--Profile Photo View Controller-->
         <scene sceneID="3lQ-o2-fdI">
             <objects>
-                <viewController id="Fwh-zy-ZrZ" customClass="ProfilePhotoViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfilePhotoViewController" id="Fwh-zy-ZrZ" customClass="ProfilePhotoViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UEV-Xj-AFu"/>
                         <viewControllerLayoutGuide type="bottom" id="slc-JK-O1k"/>
@@ -1063,6 +1063,9 @@
                                     <constraint firstAttribute="height" constant="20" id="yDj-l9-xVZ"/>
                                 </constraints>
                                 <state key="normal" image="icon_cancel_03"/>
+                                <connections>
+                                    <action selector="dismissView:" destination="Fwh-zy-ZrZ" eventType="touchUpInside" id="lUo-wQ-pGE"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0wD-ps-B7J">
                                 <rect key="frame" x="0.0" y="85" width="375" height="497"/>

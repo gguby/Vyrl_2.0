@@ -26,8 +26,10 @@ class ProfilePhotoViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
+    @IBAction func dismissView(_ sender: Any) {
+        
+    }
     /*
     // MARK: - Navigation
 
