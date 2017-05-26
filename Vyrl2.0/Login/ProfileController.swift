@@ -25,14 +25,32 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
     @IBAction func selectPhoto(_ sender: Any) {
         
         if ( UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) == false ){
-            return
+                return
         }
         
         let imagePicker = UIImagePickerController()
         
         imagePicker.delegate = self
-        imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
-        imagePicker.allowsEditing = false
+        imagePicker.sourceType = UIImagePickerControllerSourceType.savedPhotosAlbum
+        
+        imagePicker.allowsEditing = true
+        
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+
+    
+    @IBAction func ss(_ sender: Any) {
+        
+//        if ( UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) == false ){
+//            return
+//        }
+        
+        let imagePicker = UIImagePickerController()
+        
+        imagePicker.delegate = self
+        imagePicker.sourceType = UIImagePickerControllerSourceType.camera
+
+        imagePicker.allowsEditing = true
         
         self.present(imagePicker, animated: true, completion: nil)
     }

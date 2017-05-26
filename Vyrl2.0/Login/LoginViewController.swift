@@ -8,6 +8,7 @@
 
 
 import Firebase
+import FirebaseAuth
 import GoogleSignIn
 import FBSDKCoreKit
 import FBSDKLoginKit
@@ -53,8 +54,9 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
                 return
             }
             
-            // Present the main view
-            
+            let storyboard = UIStoryboard(name: "Login", bundle: nil)
+            let controller = storyboard.instantiateViewController(withIdentifier: "agreement")
+            self.present(controller, animated: true, completion: nil)
         })
     }
 
@@ -137,11 +139,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
             print(sender.tag)
         }
     }
-
-}
-
-extension LoginViewController
-{
+    
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if let e = error {
             print(e.localizedDescription)
@@ -165,6 +163,12 @@ extension LoginViewController
         self.dismiss(animated: true, completion: nil)
     }
 
+
+}
+
+extension LoginViewController
+{
+   
 }
 
 class LoginCustomButton : UIButton {

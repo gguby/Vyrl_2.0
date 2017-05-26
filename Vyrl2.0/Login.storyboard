@@ -393,7 +393,7 @@
         <!--Agree Ment Controller-->
         <scene sceneID="281-IO-rSh">
             <objects>
-                <viewController storyboardIdentifier="aggrement" id="CQq-u0-25T" customClass="AgreeMentController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="agreement" id="CQq-u0-25T" customClass="AgreeMentController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qMa-ud-8zW"/>
                         <viewControllerLayoutGuide type="bottom" id="DRk-zM-hPh"/>
@@ -900,6 +900,14 @@
                                 <state key="normal" title="이제 다 되었습니다!"/>
                                 <connections>
                                     <segue destination="vrs-Ci-hrq" kind="show" id="h7h-Ii-lmM"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ad-Gf-XFf">
+                                <rect key="frame" x="185" y="555" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="ss:" destination="iTF-ef-OnS" eventType="touchUpInside" id="h9U-pZ-mqN"/>
                                 </connections>
                             </button>
                         </subviews>
