@@ -12,7 +12,7 @@
         <!--Login View Controller-->
         <scene sceneID="QqG-Tx-hkU">
             <objects>
-                <viewController id="bYS-Q1-v3j" customClass="LoginViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Login" id="bYS-Q1-v3j" customClass="LoginViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="t7N-Tt-Dwm"/>
                         <viewControllerLayoutGuide type="bottom" id="HyA-b6-BYd"/>
@@ -150,7 +150,7 @@
                                         <color key="textColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kvu-6r-jPt" customClass="LoginCustomButton" customModule="Vyrl2_0" customModuleProvider="target">
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kvu-6r-jPt" customClass="LoginCustomButton" customModule="Vyrl2_0" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="265" height="45"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -159,7 +159,6 @@
                                         </constraints>
                                         <connections>
                                             <action selector="didTapSignInSender:" destination="bYS-Q1-v3j" eventType="touchUpInside" id="xz4-Ta-N8O"/>
-                                            <segue destination="OGG-O9-FNK" kind="show" id="jCG-1U-F7x"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -255,7 +254,7 @@
         <!--Login View Controller-->
         <scene sceneID="hmL-Zr-eze">
             <objects>
-                <viewController id="OGG-O9-FNK" customClass="SMLoginViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SMLogin" id="OGG-O9-FNK" customClass="SMLoginViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nV7-fM-J7E"/>
                         <viewControllerLayoutGuide type="bottom" id="KVr-76-22D"/>
@@ -352,14 +351,6 @@
                                     <constraint firstAttribute="height" constant="1" id="iAr-7A-SRc"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lsN-z6-D8j">
-                                <rect key="frame" x="203" y="284" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <segue destination="CQq-u0-25T" kind="show" id="SeN-mP-al1"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -602,7 +593,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="iTF-ef-OnS" kind="show" id="sxp-Nk-pwP"/>
+                                    <action selector="pushViewWithSender:" destination="CQq-u0-25T" eventType="touchUpInside" id="O4a-Wj-Y55"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -899,7 +890,7 @@
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
                                 <state key="normal" title="이제 다 되었습니다!"/>
                                 <connections>
-                                    <segue destination="vrs-Ci-hrq" kind="show" id="h7h-Ii-lmM"/>
+                                    <action selector="pushViewWithSender:" destination="iTF-ef-OnS" eventType="touchUpInside" id="Kfr-dP-mo3"/>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ad-Gf-XFf">
@@ -960,7 +951,7 @@
         <!--Start Cover View Controller-->
         <scene sceneID="j9a-PK-Mep">
             <objects>
-                <viewController id="vrs-Ci-hrq" customClass="StartCoverViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="logincomplete" id="vrs-Ci-hrq" customClass="StartCoverViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="m1e-aj-q1B"/>
                         <viewControllerLayoutGuide type="bottom" id="Nhw-0r-42R"/>

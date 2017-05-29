@@ -40,27 +40,42 @@ extension AppDelegate
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: UIWindow?   
+    var window: UIWindow?
+    
+    var naviController : UINavigationController?
+    
+    func popController()
+    {
+        naviController!.popViewController(animated: true)
+    }
+    
+    func pushViewController(viewController : UIViewController )
+    {
+        naviController!.pushViewController(viewController, animated: true)
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         setupGAI()
         
-//        GIDSignIn.sharedInstance()?.signOut()
-//        
-//        let firebaseAuth = FIRAuth.auth()
-//        do{
-//            try firebaseAuth?.signOut()
-//        } catch let signOutError as NSError {
-//            print ("Error signing out : %@", signOutError)
-//        }
+        GIDSignIn.sharedInstance()?.signOut()
+        
+        let firebaseAuth = FIRAuth.auth()
+        do{
+            try firebaseAuth?.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out : %@", signOutError)
+        }
         
         FIRAuth.auth()?.addStateDidChangeListener(){ (auth , user) in
             if user == nil {
                 let storyboard = UIStoryboard(name: "Login", bundle: nil)
                 let loginController = storyboard.instantiateInitialViewController()!
-                self.window?.rootViewController = loginController
+                self.naviController = UINavigationController(rootViewController: loginController)
+                self.naviController?.isNavigationBarHidden = true
+                self.window?.rootViewController = self.naviController
+                self.window?.makeKeyAndVisible()
             }
         }
         

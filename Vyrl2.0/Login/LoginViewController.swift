@@ -14,9 +14,11 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import TwitterKit
 
-class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
+class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate , SMLoginDelegate{
     
     @IBOutlet weak var signOutBtn : UIButton!
+    
+    var naviController:UINavigationController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +27,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self;
         
+        naviController = (UIApplication.shared.delegate as! AppDelegate).naviController
     }
     
     override func didReceiveMemoryWarning() {
@@ -41,6 +44,12 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
         }
     }
     
+    func goAgreement(){
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "agreement")
+        naviController!.pushViewController(controller, animated: true)
+    }
+    
     func loginByFireBase(credential:  FIRAuthCredential) {
         // Perform login by calling Firebase APIs
         FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
@@ -54,9 +63,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
                 return
             }
             
-            let storyboard = UIStoryboard(name: "Login", bundle: nil)
-            let controller = storyboard.instantiateViewController(withIdentifier: "agreement")
-            self.present(controller, animated: true, completion: nil)
+            self.goAgreement()
         })
     }
 
@@ -132,6 +139,8 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
             faceBookLogin()
         case 2:
             twitterLogin()
+        case 3:
+            smLogin()
         case 4:
             GIDSignIn.sharedInstance().signIn()
         
@@ -140,6 +149,26 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
         }
     }
     
+    func smLogin()
+    {
+        if ( !LoginData.sharedInstance.isLogin ){
+            let storyboard = UIStoryboard(name: "Login", bundle: nil)
+            let controller :SMLoginViewController=storyboard.instantiateViewController(withIdentifier: "SMLogin") as! SMLoginViewController
+            controller.loginDelegate = self
+            naviController!.pushViewController(controller, animated: true)
+        }
+        else {
+            goAgreement()
+        }
+    }
+    
+    func loginCallback() {
+        goAgreement()
+    }
+}
+
+extension LoginViewController
+{
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if let e = error {
             print(e.localizedDescription)
@@ -162,13 +191,6 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
     func sign(_ signIn: GIDSignIn!, dismiss viewController: UIViewController!) {
         self.dismiss(animated: true, completion: nil)
     }
-
-
-}
-
-extension LoginViewController
-{
-   
 }
 
 class LoginCustomButton : UIButton {

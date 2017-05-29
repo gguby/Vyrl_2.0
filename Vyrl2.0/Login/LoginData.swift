@@ -23,5 +23,4 @@ class LoginData{
             _login = login
         }
     }
-    
 }

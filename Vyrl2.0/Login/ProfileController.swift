@@ -19,7 +19,7 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
     
     @IBAction func dismiss(sender :AnyObject )
     {
-        self.dismiss(animated: true, completion: nil);
+       (UIApplication.shared.delegate as!AppDelegate).popController()
     }
     
     @IBAction func selectPhoto(_ sender: Any) {
@@ -27,6 +27,14 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
         self.showAlert()
         
     }
+    
+    @IBAction func pushView(sender :AnyObject )
+    {
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "logincomplete")
+        (UIApplication.shared.delegate! as! AppDelegate).pushViewController(viewController: controller)
+    }
+    
     
     func showAlert() {
         let alertController = UIAlertController (title:"", message:"",preferredStyle:.alert)
