@@ -42,18 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    var naviController : UINavigationController?
-    
-    func popController()
-    {
-        naviController!.popViewController(animated: true)
-    }
-    
-    func pushViewController(viewController : UIViewController )
-    {
-        naviController!.pushViewController(viewController, animated: true)
-    }
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
@@ -72,9 +60,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if user == nil {
                 let storyboard = UIStoryboard(name: "Login", bundle: nil)
                 let loginController = storyboard.instantiateInitialViewController()!
-                self.naviController = UINavigationController(rootViewController: loginController)
-                self.naviController?.isNavigationBarHidden = true
-                self.window?.rootViewController = self.naviController
+                let naviController = UINavigationController(rootViewController: loginController)
+                naviController.isNavigationBarHidden = true
+                self.window?.rootViewController = naviController
                 self.window?.makeKeyAndVisible()
             }
         }

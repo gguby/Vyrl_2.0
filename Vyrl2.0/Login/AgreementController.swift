@@ -46,12 +46,12 @@ class AgreeMentController : UIViewController, checkBoxDelegate {
     {
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "profile")
-        (UIApplication.shared.delegate! as! AppDelegate).pushViewController(viewController: controller)
+       self.navigationController?.pushViewController(controller, animated: true)
     }
     
     @IBAction func dismiss(sender :AnyObject )
     {
-        (UIApplication.shared.delegate as!AppDelegate).popController()
+        self.navigationController?.popViewController(animated: true)
     }
     
     func respondCheckBox(checkBox: CheckBox) {

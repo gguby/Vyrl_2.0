@@ -18,8 +18,6 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
     
     @IBOutlet weak var signOutBtn : UIButton!
     
-    var naviController:UINavigationController?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -27,7 +25,6 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self;
         
-        naviController = (UIApplication.shared.delegate as! AppDelegate).naviController
     }
     
     override func didReceiveMemoryWarning() {
@@ -47,7 +44,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
     func goAgreement(){
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "agreement")
-        naviController!.pushViewController(controller, animated: true)
+        self.navigationController!.pushViewController(controller, animated: true)
     }
     
     func loginByFireBase(credential:  FIRAuthCredential) {
@@ -155,7 +152,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
             let storyboard = UIStoryboard(name: "Login", bundle: nil)
             let controller :SMLoginViewController=storyboard.instantiateViewController(withIdentifier: "SMLogin") as! SMLoginViewController
             controller.loginDelegate = self
-            naviController!.pushViewController(controller, animated: true)
+            self.navigationController!.pushViewController(controller, animated: true)
         }
         else {
             goAgreement()

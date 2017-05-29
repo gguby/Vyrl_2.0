@@ -19,7 +19,7 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
     
     @IBAction func dismiss(sender :AnyObject )
     {
-       (UIApplication.shared.delegate as!AppDelegate).popController()
+       self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func selectPhoto(_ sender: Any) {
@@ -32,7 +32,7 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
     {
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "logincomplete")
-        (UIApplication.shared.delegate! as! AppDelegate).pushViewController(viewController: controller)
+        self.navigationController?.pushViewController(controller, animated: true)
     }
     
     

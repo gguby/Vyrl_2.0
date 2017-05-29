@@ -46,7 +46,7 @@ class SMLoginViewController : UIViewController, UIWebViewDelegate {
     }
     
     @IBAction func dismiss(sender :AnyObject ) {
-        (UIApplication.shared.delegate as!AppDelegate).popController()
+        self.navigationController?.popViewController(animated: true)
     }
     
     var isLogin :Bool = false
@@ -76,7 +76,7 @@ class SMLoginViewController : UIViewController, UIWebViewDelegate {
                 let json = try JSONSerialization.jsonObject(with: jsonData!, options: .mutableContainers)
                 print(json)
                 
-                (UIApplication.shared.delegate as!AppDelegate).popController()
+                self.navigationController?.popViewController(animated: true)
                 
                 self.loginDelegate?.loginCallback()
                 
