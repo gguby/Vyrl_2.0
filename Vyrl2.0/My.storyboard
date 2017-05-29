@@ -287,10 +287,10 @@
             </objects>
             <point key="canvasLocation" x="210" y="384"/>
         </scene>
-        <!--View Controller-->
+        <!--Setting View Controller-->
         <scene sceneID="Q7q-z8-JQu">
             <objects>
-                <viewController id="Y22-tQ-Dlr" sceneMemberID="viewController">
+                <viewController id="Y22-tQ-Dlr" customClass="SettingViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FUg-40-UrT"/>
                         <viewControllerLayoutGuide type="bottom" id="Kr6-hj-tcO"/>
@@ -1087,7 +1087,6 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="884" id="5Xy-34-zl1"/>
                                     <constraint firstItem="pVv-Wi-U4i" firstAttribute="leading" secondItem="aHx-TJ-TTP" secondAttribute="leading" id="9c7-hj-7cX"/>
                                     <constraint firstAttribute="trailing" secondItem="pVv-Wi-U4i" secondAttribute="trailing" id="CVm-93-XTf"/>
                                     <constraint firstAttribute="bottom" secondItem="pVv-Wi-U4i" secondAttribute="bottom" id="Sjm-P1-k7W"/>
@@ -1114,10 +1113,13 @@
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="950"/>
+                    <connections>
+                        <outlet property="scrollView" destination="aHx-TJ-TTP" id="TrX-kZ-7D3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VZq-XJ-F8r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="930.39999999999998" y="793.40329835082468"/>
+            <point key="canvasLocation" x="854" y="687"/>
         </scene>
         <!--Profile Controller-->
         <scene sceneID="BSG-XV-zrL">
@@ -1299,6 +1301,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
                                 <state key="normal" title="이렇게 수정합니다!"/>
+                                <connections>
+                                    <segue destination="M7Z-dH-NP7" kind="show" id="77R-VL-1i0"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="마이페이지" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DMl-ij-WYF">
                                 <rect key="frame" x="152.5" y="35" width="70" height="15"/>
@@ -1361,6 +1366,92 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tWw-hH-iVk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="881" y="-228"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="yfK-Kb-BLR">
+            <objects>
+                <viewController id="M7Z-dH-NP7" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Iyg-Om-QPW"/>
+                        <viewControllerLayoutGuide type="bottom" id="b6Z-tU-gQl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Chu-Sh-bik">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="최소" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v0j-RC-xis">
+                                <rect key="frame" x="15" y="36" width="24.5" height="12.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="12.5" id="PES-C2-diY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
+                                <color key="textColor" red="0.32549019607843138" green="0.30980392156862746" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="계정 탈퇴" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="deA-r7-M2f">
+                                <rect key="frame" x="157.5" y="35" width="60" height="14.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="14.67" id="A9L-Oe-6vC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
+                                <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O7V-Tb-pfw">
+                                <rect key="frame" x="0.0" y="65" width="375" height="1"/>
+                                <color key="backgroundColor" red="0.9137254901960784" green="0.90980392156862744" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="KYd-3H-YiY"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="탈퇴하기 전에 먼저 읽어주세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="whZ-9M-QwX">
+                                <rect key="frame" x="15" y="105" width="160.5" height="15.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15.5" id="67r-Cz-d20"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="13"/>
+                                <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="toP-pw-TRa">
+                                <rect key="frame" x="15" y="130.5" width="345" height="179"/>
+                                <color key="backgroundColor" red="0.96862745098039216" green="0.96470588235294119" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="179" id="KUN-Oy-3VH"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.9137254901960784" green="0.90980392156862744" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="toP-pw-TRa" firstAttribute="leading" secondItem="Chu-Sh-bik" secondAttribute="leading" constant="15" id="2qP-em-6nE"/>
+                            <constraint firstItem="O7V-Tb-pfw" firstAttribute="top" secondItem="deA-r7-M2f" secondAttribute="bottom" constant="15.5" id="83H-59-ZXr"/>
+                            <constraint firstItem="v0j-RC-xis" firstAttribute="leading" secondItem="Chu-Sh-bik" secondAttribute="leading" constant="15" id="9Ws-0W-lu5"/>
+                            <constraint firstItem="toP-pw-TRa" firstAttribute="top" secondItem="whZ-9M-QwX" secondAttribute="bottom" constant="10" id="D9j-2I-cXq"/>
+                            <constraint firstItem="v0j-RC-xis" firstAttribute="top" secondItem="Iyg-Om-QPW" secondAttribute="bottom" constant="16" id="J8o-ay-w26"/>
+                            <constraint firstItem="deA-r7-M2f" firstAttribute="centerX" secondItem="Chu-Sh-bik" secondAttribute="centerX" id="Sgp-KM-Ocq"/>
+                            <constraint firstAttribute="trailing" secondItem="O7V-Tb-pfw" secondAttribute="trailing" id="WhB-8x-GDL"/>
+                            <constraint firstItem="whZ-9M-QwX" firstAttribute="leading" secondItem="Chu-Sh-bik" secondAttribute="leading" constant="15" id="XWy-29-47J"/>
+                            <constraint firstItem="O7V-Tb-pfw" firstAttribute="leading" secondItem="Chu-Sh-bik" secondAttribute="leading" id="c3d-3y-tJx"/>
+                            <constraint firstAttribute="trailing" secondItem="toP-pw-TRa" secondAttribute="trailing" constant="15" id="cUA-C6-xtU"/>
+                            <constraint firstItem="whZ-9M-QwX" firstAttribute="top" secondItem="O7V-Tb-pfw" secondAttribute="bottom" constant="39" id="mPg-t3-a9f"/>
+                            <constraint firstItem="deA-r7-M2f" firstAttribute="centerY" secondItem="v0j-RC-xis" secondAttribute="centerY" id="rIe-o8-feh"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aTd-cS-A1J" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1754" y="-162"/>
         </scene>
     </scenes>
     <resources>
