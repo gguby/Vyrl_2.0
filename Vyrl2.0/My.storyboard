@@ -290,7 +290,7 @@
         <!--Setting View Controller-->
         <scene sceneID="Q7q-z8-JQu">
             <objects>
-                <viewController id="Y22-tQ-Dlr" customClass="SettingViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="setting" id="Y22-tQ-Dlr" customClass="SettingViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FUg-40-UrT"/>
                         <viewControllerLayoutGuide type="bottom" id="Kr6-hj-tcO"/>
@@ -1616,7 +1616,7 @@ Cw
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aTd-cS-A1J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2036" y="492"/>
+            <point key="canvasLocation" x="1873" y="560"/>
         </scene>
     </scenes>
     <resources>
