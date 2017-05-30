@@ -585,6 +585,12 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LZ1-4E-cNv" userLabel="공지 사항 View">
                                                 <rect key="frame" x="0.0" y="328" width="375" height="47"/>
                                                 <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XXx-2t-XCU">
+                                                        <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
+                                                        <connections>
+                                                            <action selector="showNoticeView" destination="Y22-tQ-Dlr" eventType="touchUpInside" id="96C-Px-ZHh"/>
+                                                        </connections>
+                                                    </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="공지사항" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jcZ-Gd-ko5">
                                                         <rect key="frame" x="15" y="17.5" width="48.5" height="12.5"/>
                                                         <constraints>
@@ -611,13 +617,17 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
+                                                    <constraint firstItem="XXx-2t-XCU" firstAttribute="height" secondItem="LZ1-4E-cNv" secondAttribute="height" constant="-17" id="7S9-XO-tz1"/>
                                                     <constraint firstItem="Ekf-0o-79P" firstAttribute="centerY" secondItem="LZ1-4E-cNv" secondAttribute="centerY" id="8e9-OE-qPV"/>
                                                     <constraint firstAttribute="trailing" secondItem="Ekf-0o-79P" secondAttribute="trailing" constant="15" id="HmW-RP-9aX"/>
                                                     <constraint firstItem="bnW-y1-pgl" firstAttribute="leading" secondItem="jcZ-Gd-ko5" secondAttribute="trailing" constant="6" id="QI5-ft-6sf"/>
+                                                    <constraint firstItem="XXx-2t-XCU" firstAttribute="leading" secondItem="LZ1-4E-cNv" secondAttribute="leading" id="TN8-vQ-MJI"/>
                                                     <constraint firstItem="jcZ-Gd-ko5" firstAttribute="leading" secondItem="LZ1-4E-cNv" secondAttribute="leading" constant="15" id="VAp-Yq-hUG"/>
                                                     <constraint firstItem="jcZ-Gd-ko5" firstAttribute="centerY" secondItem="LZ1-4E-cNv" secondAttribute="centerY" id="Z6y-tt-ZhL"/>
+                                                    <constraint firstItem="XXx-2t-XCU" firstAttribute="top" secondItem="LZ1-4E-cNv" secondAttribute="top" id="pOU-Bi-gPE"/>
                                                     <constraint firstItem="bnW-y1-pgl" firstAttribute="top" secondItem="LZ1-4E-cNv" secondAttribute="top" constant="17" id="pOh-9P-34J"/>
                                                     <constraint firstAttribute="height" constant="47" id="wlS-Ef-5Ta"/>
+                                                    <constraint firstItem="XXx-2t-XCU" firstAttribute="width" secondItem="LZ1-4E-cNv" secondAttribute="width" constant="-329" id="yak-WJ-Nlg"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zSR-EM-0qP" userLabel="border">

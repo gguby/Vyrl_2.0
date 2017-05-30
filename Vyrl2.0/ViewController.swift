@@ -22,6 +22,13 @@ extension UIViewController
     @IBAction func back(){
         self.navigationController?.popViewController(animated: true)
     }
+    
+    func pushView(storyboardName : String, controllerName : String ){
+        let storyboard = UIStoryboard(name:storyboardName, bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: controllerName)
+        controller.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
 }
 
 class ViewController: UIViewController {

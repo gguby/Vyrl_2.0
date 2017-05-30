@@ -12,7 +12,13 @@ protocol SMLoginDelegate {
     func loginCallback()
 }
 
+
+
 class SMLoginViewController : UIViewController, UIWebViewDelegate {
+    
+    var clientId = "8ecafcf23f6d42cf94806ab807bd2023"
+    
+    var clientSecret = "2a045e5b07f1fc6c76895daeb8c9099881b9cb0588129c819f0ef71bf70c86d1"
     
     var loginDelegate : SMLoginDelegate? = nil
     
@@ -32,6 +38,8 @@ class SMLoginViewController : UIViewController, UIWebViewDelegate {
         
         if let url = URL(string: "http://api.vyrl.com:8082/ko/auth/social/smtown/ios"){
             let request = URLRequest(url: url)
+//            request.addValue(clientId, forHTTPHeaderField: "Client_id")
+//            request.addValue(clientSecret, forHTTPHeaderField: "Client_secret")
             WebView.loadRequest(request)
         }
         

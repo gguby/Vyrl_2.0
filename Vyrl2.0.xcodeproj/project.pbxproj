@@ -19,6 +19,8 @@
 		CE0898221ECD7098000D6D6C /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0898211ECD7098000D6D6C /* MyViewController.swift */; };
 		CE0898251ECD70C7000D6D6C /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0898241ECD70C7000D6D6C /* FeedViewController.swift */; };
 		CE0898281ECD9AB9000D6D6C /* LoginData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0898271ECD9AB9000D6D6C /* LoginData.swift */; };
+		CE1340A41EDD3C6D00EA330F /* Notice.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE1340A31EDD3C6C00EA330F /* Notice.storyboard */; };
+		CE1340A61EDD3CD500EA330F /* NoticeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1340A51EDD3CD500EA330F /* NoticeController.swift */; };
 		CE29B19E1ECD5FEE003F4D2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE29B19D1ECD5FEE003F4D2E /* AppDelegate.swift */; };
 		CE29B1A01ECD5FEE003F4D2E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE29B19F1ECD5FEE003F4D2E /* ViewController.swift */; };
 		CE29B1A51ECD5FEE003F4D2E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE29B1A31ECD5FEE003F4D2E /* Main.storyboard */; };
@@ -64,6 +66,8 @@
 		CE0898241ECD70C7000D6D6C /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		CE0898261ECD982D000D6D6C /* Vyrl2.0.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Vyrl2.0.entitlements; sourceTree = "<group>"; };
 		CE0898271ECD9AB9000D6D6C /* LoginData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginData.swift; sourceTree = "<group>"; };
+		CE1340A31EDD3C6C00EA330F /* Notice.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Notice.storyboard; sourceTree = "<group>"; };
+		CE1340A51EDD3CD500EA330F /* NoticeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticeController.swift; sourceTree = "<group>"; };
 		CE29B19A1ECD5FEE003F4D2E /* Vyrl2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vyrl2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE29B19D1ECD5FEE003F4D2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE29B19F1ECD5FEE003F4D2E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -212,6 +216,8 @@
 			children = (
 				CE0898211ECD7098000D6D6C /* MyViewController.swift */,
 				8F916A891EDC17D900E3EC8B /* SettingViewController.swift */,
+				CE1340A51EDD3CD500EA330F /* NoticeController.swift */,
+				CE1340A31EDD3C6C00EA330F /* Notice.storyboard */,
 			);
 			name = "My & Setting";
 			path = MY;
@@ -354,6 +360,7 @@
 			files = (
 				CE29B1CD1ECD6161003F4D2E /* Feed.storyboard in Resources */,
 				CE29B1D01ECD6161003F4D2E /* GoogleService-Info.plist in Resources */,
+				CE1340A41EDD3C6D00EA330F /* Notice.storyboard in Resources */,
 				CE29B1AA1ECD5FEE003F4D2E /* LaunchScreen.storyboard in Resources */,
 				CE29B1CE1ECD6161003F4D2E /* Login.storyboard in Resources */,
 				CE29B1D11ECD6161003F4D2E /* Search.storyboard in Resources */,
@@ -488,6 +495,7 @@
 				CE29B1D41ECD6515003F4D2E /* Constants.swift in Sources */,
 				CE36D4A01ED3C96B00ABC7FE /* CheckBox.swift in Sources */,
 				CE33F0061ED2DF320050C21D /* ProfileController.swift in Sources */,
+				CE1340A61EDD3CD500EA330F /* NoticeController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

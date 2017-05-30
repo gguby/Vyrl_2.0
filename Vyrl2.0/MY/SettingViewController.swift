@@ -29,6 +29,11 @@ class SettingViewController: UIViewController, UIScrollViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    @IBAction func showNoticeView()
+    {
+        self.pushView(storyboardName: "Notice", controllerName: "notice")
+    }
 
     /*
     // MARK: - Navigation
