@@ -18,6 +18,10 @@ extension UIViewController
         guard let builder = GAIDictionaryBuilder.createScreenView() else { return }
         tracker.send(builder.build() as [NSObject : AnyObject])
     }
+    
+    @IBAction func back(){
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 
 class ViewController: UIViewController {

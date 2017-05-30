@@ -44,5 +44,15 @@ class MyViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func showSetting(){
+        
+        let storyboard = UIStoryboard(name: "My", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "setting")
+        
+        controller.navigationController?.isNavigationBarHidden = true
+        
+        self.navigationController?.pushViewController(controller, animated: true)        
+    }
 
 }

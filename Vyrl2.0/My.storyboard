@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="4u5-ag-yKy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="mt9-uJ-YIA">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--My-->
+        <!--My View Controller-->
         <scene sceneID="TCh-at-0qK">
             <objects>
                 <viewController storyboardIdentifier="My" id="4u5-ag-yKy" customClass="MyViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
@@ -73,7 +73,7 @@
                                 <rect key="frame" x="340" y="85" width="20" height="22"/>
                                 <state key="normal" image="icon_setting_01"/>
                                 <connections>
-                                    <segue destination="Y22-tQ-Dlr" kind="show" id="2e6-2a-cy7"/>
+                                    <action selector="showSetting" destination="4u5-ag-yKy" eventType="touchUpInside" id="Ejh-3w-bsL"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아이린, 레드벨벳 좋아해요~!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yvs-wH-VVu">
@@ -262,12 +262,12 @@
                             <constraint firstItem="RD6-l8-eHA" firstAttribute="leading" secondItem="hTW-EB-jBN" secondAttribute="trailing" id="ze6-Vm-kMB"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="My" id="QoV-Tz-38a"/>
+                    <navigationItem key="navigationItem" id="OPH-DH-XUC"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="McP-2q-cYc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="210.40000000000001" y="-212.74362818590706"/>
+            <point key="canvasLocation" x="1149.5999999999999" y="-212.74362818590706"/>
         </scene>
         <!--Feed View Controller-->
         <scene sceneID="gUp-8C-Fz6">
@@ -287,10 +287,10 @@
             </objects>
             <point key="canvasLocation" x="210" y="384"/>
         </scene>
-        <!--View Controller-->
+        <!--Setting View Conroller-->
         <scene sceneID="Q7q-z8-JQu">
             <objects>
-                <viewController id="Y22-tQ-Dlr" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="setting" id="Y22-tQ-Dlr" customClass="SettingViewConroller" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FUg-40-UrT"/>
                         <viewControllerLayoutGuide type="bottom" id="Kr6-hj-tcO"/>
@@ -309,6 +309,9 @@
                                             <constraint firstAttribute="height" constant="20" id="hYT-gN-oc1"/>
                                         </constraints>
                                         <state key="normal" image="icon_back_01"/>
+                                        <connections>
+                                            <action selector="back" destination="Y22-tQ-Dlr" eventType="touchUpInside" id="8Fv-pm-HBk"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="설정" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vbF-yb-Eva">
                                         <rect key="frame" x="174" y="13" width="28" height="20"/>
@@ -1099,6 +1102,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Kr6-hj-tcO" firstAttribute="top" secondItem="aHx-TJ-TTP" secondAttribute="bottom" id="4ZL-Ak-0GU"/>
                             <constraint firstItem="aHx-TJ-TTP" firstAttribute="leading" secondItem="8TG-gm-raw" secondAttribute="leading" id="7uT-b1-ROg"/>
                             <constraint firstAttribute="bottom" secondItem="aHx-TJ-TTP" secondAttribute="bottom" id="Qtw-dB-Zev"/>
                             <constraint firstAttribute="trailing" secondItem="GSA-8m-kye" secondAttribute="trailing" id="YhU-eo-39D"/>
@@ -1117,7 +1121,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VZq-XJ-F8r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="930.39999999999998" y="793.40329835082468"/>
+            <point key="canvasLocation" x="1042" y="687"/>
         </scene>
         <!--Profile Controller-->
         <scene sceneID="BSG-XV-zrL">
@@ -1360,22 +1364,41 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tWw-hH-iVk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="881" y="-228"/>
+            <point key="canvasLocation" x="1820" y="-228.03598200899552"/>
+        </scene>
+        <!--My-->
+        <scene sceneID="3Ra-Ju-erh">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="mt9-uJ-YIA" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="My" id="QoV-Tz-38a"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="FmG-e5-cQh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="4u5-ag-yKy" kind="relationship" relationship="rootViewController" id="Ydz-CY-Tau"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OvJ-1u-72B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="210.40000000000001" y="-212.74362818590706"/>
         </scene>
     </scenes>
     <resources>
         <image name="border_circle_01" width="87" height="87"/>
         <image name="btn_edit_01" width="30" height="15"/>
         <image name="icon_alarm_01" width="20" height="20"/>
-        <image name="icon_alert_01" width="16" height="16"/>
+        <image name="icon_alert_01" width="13" height="13"/>
         <image name="icon_back_01" width="20" height="20"/>
         <image name="icon_dot_01" width="3" height="3"/>
         <image name="icon_dot_02" width="3" height="3"/>
-        <image name="icon_headset_01" width="16" height="16"/>
-        <image name="icon_id_01" width="16" height="16"/>
-        <image name="icon_note_01" width="16" height="16"/>
+        <image name="icon_headset_01" width="13" height="13"/>
+        <image name="icon_id_01" width="13" height="13"/>
+        <image name="icon_note_01" width="13" height="13"/>
         <image name="icon_setting_01" width="20" height="20"/>
-        <image name="icon_setting_02" width="16" height="16"/>
+        <image name="icon_setting_02" width="13" height="13"/>
         <image name="icon_store_01" width="20" height="20"/>
     </resources>
 </document>

@@ -57,7 +57,30 @@ class SMLoginViewController : UIViewController, UIWebViewDelegate {
         
         print (command )
         
+        let component = URLComponents(string: command)
+        
         command = command.replacingOccurrences(of: "http://api.vyrl.com:8082/ko/auth/social/smtown/", with: "")
+        
+        if ( command.hasPrefix("ios?"))
+        {
+            var dict = [String:String]()
+            if let queryItems = component?.queryItems {
+                for item in queryItems {
+                    dict[item.name] = item.value!
+                }
+            }
+            
+            let alert = UIAlertController(title: "token", message: dict["code"], preferredStyle: UIAlertControllerStyle.alert)
+            
+            let defaultAction = UIAlertAction(title: "ok", style: .default, handler: nil )
+            alert.addAction(defaultAction)
+            
+            self.present(alert, animated: true, completion: nil)
+            
+            print(dict["code"]!)
+            
+            return false
+        }
         
         if ( command.hasPrefix("vyrl_smtown:"))
         {
