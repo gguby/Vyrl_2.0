@@ -287,10 +287,6 @@
             </objects>
             <point key="canvasLocation" x="210" y="384"/>
         </scene>
-        <!--Setting View Conroller-->
-        <scene sceneID="Q7q-z8-JQu">
-            <objects>
-                <viewController storyboardIdentifier="setting" id="Y22-tQ-Dlr" customClass="SettingViewConroller" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
         <!--Setting View Controller-->
         <scene sceneID="Q7q-z8-JQu">
             <objects>
@@ -1128,12 +1124,10 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VZq-XJ-F8r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1042" y="687"/>
-            <point key="canvasLocation" x="854" y="687"/>
         </scene>
         <!--Profile Controller-->
         <scene sceneID="BSG-XV-zrL">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tWw-hH-iVk" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="profile" id="OJr-pq-JrR" customClass="ProfileController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="S6V-qe-0GS"/>
@@ -1370,6 +1364,7 @@
                         <outlet property="photoView" destination="e9B-bT-qNu" id="Hb6-rY-6N0"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tWw-hH-iVk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1820" y="-228.03598200899552"/>
         </scene>
@@ -1551,7 +1546,8 @@ Cw
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15.5" id="ohb-LL-dTr"/>
                                 </constraints>
-                                <string key="text">Vyrl에서 탈퇴를 위해, 비밀번호를 다시 한번 입력 해주세요.</string>
+                                <string key="text">Vyrl에서 탈퇴를 위해, 비밀번호를 다시 한번 입력 해주세요.
+</string>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="13"/>
                                 <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.3411764705882353" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1579,7 +1575,7 @@ Cw
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yFw-Xg-JLu">
-                                <rect key="frame" x="0.0" y="573" width="375" height="45"/>
+                                <rect key="frame" x="0.0" y="622" width="375" height="45"/>
                                 <color key="backgroundColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="gf0-Sz-qAa"/>
@@ -1620,7 +1616,7 @@ Cw
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aTd-cS-A1J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1609" y="-228"/>
+            <point key="canvasLocation" x="2036" y="492"/>
         </scene>
     </scenes>
     <resources>
