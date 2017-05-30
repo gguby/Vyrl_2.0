@@ -11,13 +11,16 @@ import UIKit
 class SettingViewController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var contentHeight: NSLayoutConstraint!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         scrollView.delegate = self
-        scrollView.frame = CGRect(x: scrollView.contentOffset.x, y:scrollView.contentOffset.y, width:scrollView.frame.size.width, height: scrollView.frame.size.height)
+//        scrollView.frame = CGRect(x: scrollView.contentOffset.x, y:scrollView.contentOffset.y, width:scrollView.frame.size.width, height: scrollView.frame.size.height)
+        
+        self.contentHeight.constant = 220
         
     }
 
