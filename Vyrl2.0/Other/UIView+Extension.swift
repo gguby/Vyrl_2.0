@@ -42,6 +42,16 @@ extension UIView {
         }
     }
     
+    func gone() {
+        // set the width constraint to 0
+        let widthConstraint = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 0)
+        superview!.addConstraint(widthConstraint)
+        
+        // set the height constraint to 0
+        let heightConstraint = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 0)
+        superview!.addConstraint(heightConstraint)
+    }
+    
 }
 
 
