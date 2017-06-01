@@ -2,7 +2,7 @@
 //  ExpandableCell.swift
 //  Vyrl2.0
 //
-//  Created by user on 2017. 5. 30..
+//  Created by wsjung on 2017. 5. 30..
 //  Copyright © 2017년 smt. All rights reserved.
 //
 
@@ -18,6 +18,8 @@ class NoticeController: UIViewController , UITableViewDelegate, UITableViewDataS
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 47
+        tableView.tableFooterView = UIView(frame: .zero)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -30,7 +32,8 @@ class NoticeController: UIViewController , UITableViewDelegate, UITableViewDataS
     {
         let cell :NoticeCell = tableView.dequeueReusableCell(withIdentifier: "NoticeCell") as! NoticeCell
         
-        cell.isExpanded = true
+        cell.isExpanded = false
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
         
         return cell
     }
@@ -39,15 +42,13 @@ class NoticeController: UIViewController , UITableViewDelegate, UITableViewDataS
         guard let cell = tableView.cellForRow(at: indexPath) as? NoticeCell
             else { return }
         
-        cell.isExpanded = false
+//        cell.noticeTextView.text = "akdnlandkalsndlkansdlkansd"
+        cell.isExpanded = !cell.isExpanded
         
         tableView.beginUpdates()
         tableView.endUpdates()
     }
-    
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 47 + 271
-    }
+ 
 }
 
 class NoticeCell : UITableViewCell {
@@ -59,14 +60,21 @@ class NoticeCell : UITableViewCell {
     @IBOutlet weak var noticeTextHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var iconArrow: UIImageView!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        let padding = noticeTextView.textContainer.lineFragmentPadding
+        noticeTextView.textContainerInset = UIEdgeInsetsMake(0, -padding, 21 , -padding)
+    }
+    
     var isExpanded:Bool = false
     {
         didSet{
             if ( !isExpanded ){
-//                self.noticeTextHeightConstraint.constant = 0.0
+                self.noticeTextHeightConstraint.constant = 0.0
                 iconArrow.image = UIImage(named: "icon_arrow_01_close")
             }else {
-//                self.noticeTextHeightConstraint.constant = 271.5
+                self.noticeTextHeightConstraint.constant = noticeTextView.contentSize.height
                 iconArrow.image = UIImage(named: "icon_arrow_01_open")
             }
         }
