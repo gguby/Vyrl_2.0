@@ -90,6 +90,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
     {
         Twitter.sharedInstance().logIn(withMethods: .webBased) { (session, error) in
             if((session) != nil) {
+                
                 Twitter.sharedInstance().sessionStore.saveSession(withAuthToken: (session?.authToken)!, authTokenSecret: (session?.authTokenSecret)!, completion: { (session, error) in
                 })
                 
@@ -111,6 +112,9 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
                         print("json error: \(jsonError.localizedDescription)")
                     }
                 }
+                
+                print("Token : \(session?.authToken)")
+                print("Token : \(session?.authTokenSecret)")
                 
                 let credential = FIRTwitterAuthProvider.credential(withToken: (session?.authToken)!, secret: (session?.authTokenSecret)!)
                 self.loginByFireBase(credential: credential)
@@ -173,6 +177,10 @@ extension LoginViewController
         }
         
         guard let authentication = user.authentication else { return }
+    
+        print("Token : \(authentication.accessToken!)")
+        print("Token : \(authentication.idToken!)")
+
         let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
         self.loginByFireBase(credential: credential)
     }
