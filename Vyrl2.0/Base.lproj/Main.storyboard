@@ -8,21 +8,23 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Tab Bar Controller-->
+        <!--View Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
-                <tabBarController hidesBottomBarWhenPushed="YES" id="49e-Tb-3d3" sceneMemberID="viewController">
+                <tabBarController hidesBottomBarWhenPushed="YES" id="49e-Tb-3d3" customClass="ViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="9eZ-HO-lpo" kind="relationship" relationship="viewControllers" id="IdU-Sm-EIh"/>
-                        <segue destination="Eli-lW-VBi" kind="relationship" relationship="viewControllers" id="RRT-Dy-x0Y"/>
-                        <segue destination="Ecf-XJ-BoQ" kind="relationship" relationship="viewControllers" id="QND-NN-ccV"/>
-                        <segue destination="T6N-kN-HXz" kind="relationship" relationship="viewControllers" id="1ct-F7-48e"/>
+                        <segue destination="Eli-lW-VBi" kind="relationship" relationship="viewControllers" id="f67-o6-s4W"/>
+                        <segue destination="Ecf-XJ-BoQ" kind="relationship" relationship="viewControllers" id="zur-4C-OBh"/>
+                        <segue destination="USf-3u-bQ3" kind="relationship" relationship="viewControllers" id="dda-jm-qiA"/>
+                        <segue destination="9eZ-HO-lpo" kind="relationship" relationship="viewControllers" id="sTa-I3-Ywf"/>
+                        <segue destination="T6N-kN-HXz" kind="relationship" relationship="viewControllers" id="VYM-ZU-UYn"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
@@ -33,7 +35,7 @@
         <scene sceneID="xx1-C0-RVT">
             <objects>
                 <viewControllerPlaceholder storyboardName="Search" id="9eZ-HO-lpo" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="epY-pa-e0c"/>
+                    <tabBarItem key="tabBarItem" title="" image="icon_search_01_off" id="epY-pa-e0c"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T2M-ur-6W5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -43,7 +45,7 @@
         <scene sceneID="9g3-iN-5Q8">
             <objects>
                 <viewControllerPlaceholder storyboardName="Feed" id="Eli-lW-VBi" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="VmM-zt-nTx"/>
+                    <tabBarItem key="tabBarItem" title="" image="icon_home_01_off" id="VmM-zt-nTx"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Afg-Mr-cAb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -53,21 +55,38 @@
         <scene sceneID="CDk-fY-007">
             <objects>
                 <viewControllerPlaceholder storyboardName="Fan" id="Ecf-XJ-BoQ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="dqg-PI-LBW"/>
+                    <tabBarItem key="tabBarItem" title="" image="icon_fan_01_off" id="dqg-PI-LBW"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zff-B5-86g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="813" y="29"/>
+            <point key="canvasLocation" x="806" y="-50"/>
         </scene>
         <!--My-->
         <scene sceneID="jQs-TF-phc">
             <objects>
                 <viewControllerPlaceholder storyboardName="My" id="T6N-kN-HXz" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="7ob-Ev-jqH"/>
+                    <tabBarItem key="tabBarItem" title="" image="icon_user_01_on" id="7ob-Ev-jqH"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ai9-Lp-CHs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="735" y="268"/>
+            <point key="canvasLocation" x="814" y="45"/>
+        </scene>
+        <!--Write-->
+        <scene sceneID="yqH-NO-7HD">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Write" id="USf-3u-bQ3" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="icon_write_01" id="gif-B2-uzn"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PG4-By-tpk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="814" y="130"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon_fan_01_off" width="28" height="28"/>
+        <image name="icon_home_01_off" width="28" height="28"/>
+        <image name="icon_search_01_off" width="28" height="28"/>
+        <image name="icon_user_01_on" width="28" height="28"/>
+        <image name="icon_write_01" width="28" height="28"/>
+    </resources>
 </document>

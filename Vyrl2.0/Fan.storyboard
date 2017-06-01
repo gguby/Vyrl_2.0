@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="q5q-B6-XKb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="q5q-B6-XKb">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Fan-->
+        <!--Fan View Controller-->
         <scene sceneID="ak5-CU-Fv9">
             <objects>
                 <viewController storyboardIdentifier="Fan" id="q5q-B6-XKb" customClass="FanViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
@@ -37,7 +36,9 @@
                             <constraint firstItem="ekB-lV-fbW" firstAttribute="top" secondItem="bG7-fd-sgq" secondAttribute="bottom" constant="241" id="vcI-P2-CJQ"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Fan" id="uoP-Gv-xUf"/>
+                    <tabBarItem key="tabBarItem" title="" image="icon_fan_01_off" id="uoP-Gv-xUf">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0eg-UO-cHe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -45,4 +46,7 @@
             <point key="canvasLocation" x="-26" y="102"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon_fan_01_off" width="28" height="28"/>
+    </resources>
 </document>

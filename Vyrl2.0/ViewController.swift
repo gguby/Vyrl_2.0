@@ -29,10 +29,43 @@ extension UIViewController
         controller.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(controller, animated: true)
     }
+    
+    func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            switch swipeGesture.direction {
+            case UISwipeGestureRecognizerDirection.right:
+                //right view controller
+                tabBarController?.selectedIndex = (tabBarController?.selectedIndex)! + 1
+                break
+            case UISwipeGestureRecognizerDirection.left:
+                //left view controller
+                tabBarController?.selectedIndex = (tabBarController?.selectedIndex)! - 1
+            default:
+                break
+            }
+        }
+    }
+    
+    func registerSwipe(){
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeRight.direction = UISwipeGestureRecognizerDirection.right
+        
+        self.view.addGestureRecognizer(swipeRight)
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeLeft.direction = UISwipeGestureRecognizerDirection.left
+        self.view.addGestureRecognizer(swipeLeft)
+    }
 }
 
-class ViewController: UIViewController {
-
+class ViewController: UITabBarController {
+    
+    override func viewWillLayoutSubviews() {
+        var tabFrame = self.tabBar.frame
+        tabFrame.size.height = 45
+        tabFrame.origin.y = self.view.frame.size.height - 45
+        self.tabBar.frame = tabFrame
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.

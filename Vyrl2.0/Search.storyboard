@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ejR-ID-QeZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ejR-ID-QeZ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -34,7 +33,9 @@
                             <constraint firstItem="jvN-QT-WC2" firstAttribute="leading" secondItem="1nF-Gc-t5b" secondAttribute="leading" constant="149" id="eOY-Z8-jpN"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="search" id="VgN-cO-5Od"/>
+                    <tabBarItem key="tabBarItem" image="icon_search_01_off" id="VgN-cO-5Od">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EF4-DM-bhf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -42,4 +43,7 @@
             <point key="canvasLocation" x="340" y="-169"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon_search_01_off" width="28" height="28"/>
+    </resources>
 </document>

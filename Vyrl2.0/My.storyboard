@@ -1376,13 +1376,15 @@
             </objects>
             <point key="canvasLocation" x="1820" y="-228.03598200899552"/>
         </scene>
-        <!--My-->
+        <!--Navigation Controller-->
         <scene sceneID="3Ra-Ju-erh">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="mt9-uJ-YIA" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="My" id="QoV-Tz-38a"/>
+                    <tabBarItem key="tabBarItem" title="" image="icon_user_01_on" id="QoV-Tz-38a">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="FmG-e5-cQh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FmG-e5-cQh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1685,7 +1687,7 @@ Cw
                                         <rect key="frame" x="0.0" y="29" width="375" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="176-dK-gBu" id="epi-QD-pw4">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rPX-0a-gtx">
@@ -1782,5 +1784,6 @@ Cw
         <image name="icon_setting_01" width="20" height="20"/>
         <image name="icon_setting_02" width="13" height="13"/>
         <image name="icon_store_01" width="20" height="20"/>
+        <image name="icon_user_01_on" width="28" height="28"/>
     </resources>
 </document>

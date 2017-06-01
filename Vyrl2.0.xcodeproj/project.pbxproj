@@ -40,6 +40,8 @@
 		CE33F0041ED2D2900050C21D /* AgreeMentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33F0031ED2D2900050C21D /* AgreeMentController.swift */; };
 		CE33F0061ED2DF320050C21D /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33F0051ED2DF320050C21D /* ProfileController.swift */; };
 		CE36D4A01ED3C96B00ABC7FE /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE36D49F1ED3C96B00ABC7FE /* CheckBox.swift */; };
+		CEF77CB31EDFC08A00884F2C /* Write.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEF77CB21EDFC08A00884F2C /* Write.storyboard */; };
+		CEF77CB51EDFC24500884F2C /* WriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF77CB41EDFC24500884F2C /* WriteViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +96,8 @@
 		CE33F0031ED2D2900050C21D /* AgreeMentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgreeMentController.swift; sourceTree = "<group>"; };
 		CE33F0051ED2DF320050C21D /* ProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		CE36D49F1ED3C96B00ABC7FE /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
+		CEF77CB21EDFC08A00884F2C /* Write.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Write.storyboard; sourceTree = "<group>"; };
+		CEF77CB41EDFC24500884F2C /* WriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WriteViewController.swift; path = Vyrl2.0/WriteViewController.swift; sourceTree = SOURCE_ROOT; };
 		D548CE0C473DEA6C46EC7CA7 /* libPods-Vyrl2.0UITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vyrl2.0UITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D78881F4958F20C20F036FD5 /* Pods_Vyrl2_0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vyrl2_0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -162,10 +166,10 @@
 			children = (
 				CE0898261ECD982D000D6D6C /* Vyrl2.0.entitlements */,
 				CE0898231ECD70B9000D6D6C /* Feed */,
-				CE29B1BF1ECD6161003F4D2E /* FAN */,
+				CE29B1BF1ECD6161003F4D2E /* Fan */,
 				CE29B1C21ECD6161003F4D2E /* Login */,
 				CE29B1C41ECD6161003F4D2E /* My & Setting */,
-				CE29B1C81ECD6161003F4D2E /* SEARCH */,
+				CE29B1C81ECD6161003F4D2E /* Search */,
 				CE29B1CB1ECD6161003F4D2E /* Write */,
 				CE29B1C61ECD6161003F4D2E /* Other */,
 				CE29B1C01ECD6161003F4D2E /* Fan.storyboard */,
@@ -174,6 +178,7 @@
 				CE29B1C51ECD6161003F4D2E /* My.storyboard */,
 				CE29B1C91ECD6161003F4D2E /* Search.storyboard */,
 				CE29B1A31ECD5FEE003F4D2E /* Main.storyboard */,
+				CEF77CB21EDFC08A00884F2C /* Write.storyboard */,
 				CE29B19D1ECD5FEE003F4D2E /* AppDelegate.swift */,
 				CE29B19F1ECD5FEE003F4D2E /* ViewController.swift */,
 				CE29B1A61ECD5FEE003F4D2E /* Assets.xcassets */,
@@ -193,11 +198,12 @@
 			path = Vyrl2.0UITests;
 			sourceTree = "<group>";
 		};
-		CE29B1BF1ECD6161003F4D2E /* FAN */ = {
+		CE29B1BF1ECD6161003F4D2E /* Fan */ = {
 			isa = PBXGroup;
 			children = (
 				CE08981D1ECD706A000D6D6C /* FanViewController.swift */,
 			);
+			name = Fan;
 			path = FAN;
 			sourceTree = "<group>";
 		};
@@ -240,17 +246,19 @@
 			path = Other;
 			sourceTree = "<group>";
 		};
-		CE29B1C81ECD6161003F4D2E /* SEARCH */ = {
+		CE29B1C81ECD6161003F4D2E /* Search */ = {
 			isa = PBXGroup;
 			children = (
 				CE08981B1ECD704F000D6D6C /* SearchViewController.swift */,
 			);
+			name = Search;
 			path = SEARCH;
 			sourceTree = "<group>";
 		};
 		CE29B1CB1ECD6161003F4D2E /* Write */ = {
 			isa = PBXGroup;
 			children = (
+				CEF77CB41EDFC24500884F2C /* WriteViewController.swift */,
 			);
 			path = Write;
 			sourceTree = "<group>";
@@ -373,6 +381,7 @@
 				CE29B1A71ECD5FEE003F4D2E /* Assets.xcassets in Resources */,
 				CE29B1CC1ECD6161003F4D2E /* Fan.storyboard in Resources */,
 				CE29B1A51ECD5FEE003F4D2E /* Main.storyboard in Resources */,
+				CEF77CB31EDFC08A00884F2C /* Write.storyboard in Resources */,
 				CE29B1CF1ECD6161003F4D2E /* My.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -490,6 +499,7 @@
 				8F916A8A1EDC17D900E3EC8B /* SettingViewController.swift in Sources */,
 				CE0898281ECD9AB9000D6D6C /* LoginData.swift in Sources */,
 				8F48CA6C1ED560CD0037A35B /* StartCoverViewController.swift in Sources */,
+				CEF77CB51EDFC24500884F2C /* WriteViewController.swift in Sources */,
 				CE29B1A01ECD5FEE003F4D2E /* ViewController.swift in Sources */,
 				8F916A8E1EDC264900E3EC8B /* UIView+Extension.swift in Sources */,
 				CE0898221ECD7098000D6D6C /* MyViewController.swift in Sources */,
