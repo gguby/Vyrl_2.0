@@ -583,12 +583,6 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LZ1-4E-cNv" userLabel="공지 사항 View">
                                                 <rect key="frame" x="0.0" y="328" width="375" height="47"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XXx-2t-XCU">
-                                                        <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
-                                                        <connections>
-                                                            <action selector="showNoticeView" destination="Y22-tQ-Dlr" eventType="touchUpInside" id="96C-Px-ZHh"/>
-                                                        </connections>
-                                                    </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="공지사항" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jcZ-Gd-ko5">
                                                         <rect key="frame" x="15" y="18" width="49" height="12"/>
                                                         <constraints>
@@ -612,10 +606,21 @@
                                                             <constraint firstAttribute="height" constant="6.5" id="x5C-ur-Vqk"/>
                                                         </constraints>
                                                     </imageView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XXx-2t-XCU">
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                <real key="value" value="0.0"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="showNoticeView" destination="Y22-tQ-Dlr" eventType="touchUpInside" id="96C-Px-ZHh"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstItem="XXx-2t-XCU" firstAttribute="height" secondItem="LZ1-4E-cNv" secondAttribute="height" constant="-17" id="7S9-XO-tz1"/>
+                                                    <constraint firstAttribute="trailing" secondItem="XXx-2t-XCU" secondAttribute="trailing" id="2gO-pS-zBH"/>
                                                     <constraint firstItem="Ekf-0o-79P" firstAttribute="centerY" secondItem="LZ1-4E-cNv" secondAttribute="centerY" id="8e9-OE-qPV"/>
                                                     <constraint firstAttribute="trailing" secondItem="Ekf-0o-79P" secondAttribute="trailing" constant="15" id="HmW-RP-9aX"/>
                                                     <constraint firstItem="bnW-y1-pgl" firstAttribute="leading" secondItem="jcZ-Gd-ko5" secondAttribute="trailing" constant="6" id="QI5-ft-6sf"/>
@@ -624,8 +629,8 @@
                                                     <constraint firstItem="jcZ-Gd-ko5" firstAttribute="centerY" secondItem="LZ1-4E-cNv" secondAttribute="centerY" id="Z6y-tt-ZhL"/>
                                                     <constraint firstItem="XXx-2t-XCU" firstAttribute="top" secondItem="LZ1-4E-cNv" secondAttribute="top" id="pOU-Bi-gPE"/>
                                                     <constraint firstItem="bnW-y1-pgl" firstAttribute="top" secondItem="LZ1-4E-cNv" secondAttribute="top" constant="17" id="pOh-9P-34J"/>
+                                                    <constraint firstAttribute="bottom" secondItem="XXx-2t-XCU" secondAttribute="bottom" id="vNN-OO-zCQ"/>
                                                     <constraint firstAttribute="height" constant="47" id="wlS-Ef-5Ta"/>
-                                                    <constraint firstItem="XXx-2t-XCU" firstAttribute="width" secondItem="LZ1-4E-cNv" secondAttribute="width" constant="-329" id="yak-WJ-Nlg"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zSR-EM-0qP" userLabel="border">
@@ -1384,7 +1389,7 @@
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FmG-e5-cQh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="FmG-e5-cQh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1400,7 +1405,7 @@
         <!--View Controller-->
         <scene sceneID="yfK-Kb-BLR">
             <objects>
-                <viewController id="M7Z-dH-NP7" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="leaveaccount" id="M7Z-dH-NP7" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Iyg-Om-QPW"/>
                         <viewControllerLayoutGuide type="bottom" id="b6Z-tU-gQl"/>

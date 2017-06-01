@@ -32,7 +32,7 @@ class SettingViewController: UIViewController, UIScrollViewDelegate {
     
     @IBAction func showNoticeView()
     {
-        self.pushView(storyboardName: "Notice", controllerName: "notice")
+        self.pushView(storyboardName: "Setting", controllerName: "notice")
     }
 
     /*
