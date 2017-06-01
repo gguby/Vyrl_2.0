@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		01ABE511A001A1DEE7D8BEAB /* Pods_Vyrl2_0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D78881F4958F20C20F036FD5 /* Pods_Vyrl2_0.framework */; };
 		464236AEF8E7E3A2C7AACD7F /* libPods-Vyrl2.0UITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D548CE0C473DEA6C46EC7CA7 /* libPods-Vyrl2.0UITests.a */; };
+		8F3C90331EDFFAE80041B770 /* AccountManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3C90321EDFFAE80041B770 /* AccountManagementViewController.swift */; };
 		8F47B6C71EDEACA600A5DBAC /* BlockManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F47B6C61EDEACA600A5DBAC /* BlockManagementViewController.swift */; };
 		8F47B6C91EDEB02200A5DBAC /* BlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F47B6C81EDEB02200A5DBAC /* BlockTableViewCell.swift */; };
 		8F48CA6C1ED560CD0037A35B /* StartCoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F48CA6B1ED560CD0037A35B /* StartCoverViewController.swift */; };
@@ -58,6 +59,7 @@
 		306CFD39EC6DFCA775E15FBB /* Pods-Vyrl2.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vyrl2.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vyrl2.0/Pods-Vyrl2.0.debug.xcconfig"; sourceTree = "<group>"; };
 		31A96CB7DB320E92C13C5B03 /* Pods-Vyrl2.0UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vyrl2.0UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vyrl2.0UITests/Pods-Vyrl2.0UITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4A3627D46412B7803C3B2BA7 /* Pods-Vyrl2.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vyrl2.0.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vyrl2.0/Pods-Vyrl2.0.release.xcconfig"; sourceTree = "<group>"; };
+		8F3C90321EDFFAE80041B770 /* AccountManagementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountManagementViewController.swift; sourceTree = "<group>"; };
 		8F47B6C61EDEACA600A5DBAC /* BlockManagementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockManagementViewController.swift; sourceTree = "<group>"; };
 		8F47B6C81EDEB02200A5DBAC /* BlockTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockTableViewCell.swift; sourceTree = "<group>"; };
 		8F48CA6B1ED560CD0037A35B /* StartCoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartCoverViewController.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 				CE1340A31EDD3C6C00EA330F /* Notice.storyboard */,
 				8F47B6C61EDEACA600A5DBAC /* BlockManagementViewController.swift */,
 				8F47B6C81EDEB02200A5DBAC /* BlockTableViewCell.swift */,
+				8F3C90321EDFFAE80041B770 /* AccountManagementViewController.swift */,
 			);
 			name = "My & Setting";
 			path = MY;
@@ -502,6 +505,7 @@
 				CEF77CB51EDFC24500884F2C /* WriteViewController.swift in Sources */,
 				CE29B1A01ECD5FEE003F4D2E /* ViewController.swift in Sources */,
 				8F916A8E1EDC264900E3EC8B /* UIView+Extension.swift in Sources */,
+				8F3C90331EDFFAE80041B770 /* AccountManagementViewController.swift in Sources */,
 				CE0898221ECD7098000D6D6C /* MyViewController.swift in Sources */,
 				CE08981E1ECD706A000D6D6C /* FanViewController.swift in Sources */,
 				CE08981C1ECD704F000D6D6C /* SearchViewController.swift in Sources */,
