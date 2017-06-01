@@ -1,5 +1,5 @@
 //
-//  AccountManagementViewController.swift
+//  FanclubManagementViewController.swift
 //  Vyrl2.0
 //
 //  Created by  KoMyeongbu on 2017. 6. 1..
@@ -8,11 +8,9 @@
 
 import Foundation
 
-class AccountManagementViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
-    
+class FanclubManagementViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,27 +20,28 @@ class AccountManagementViewController: UIViewController, UITableViewDelegate, UI
         self.tableView.dataSource = self
         self.tableView.rowHeight = UITableViewAutomaticDimension
         tableView.tableFooterView = UIView(frame: .zero)
-        self.tableViewHeightConstraint.constant = self.tableView.contentSize.height
     }
 
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return 3
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 47
+        return 138
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell :AccountCell = tableView.dequeueReusableCell(withIdentifier: "AccountCell") as! AccountCell
-        
-        
+        let cell :FanclubCell = tableView.dequeueReusableCell(withIdentifier: "FanclubCell") as! FanclubCell
         return cell
     }
-    
- 
+
     /*
     // MARK: - Navigation
 
@@ -52,14 +51,13 @@ class AccountManagementViewController: UIViewController, UITableViewDelegate, UI
         // Pass the selected object to the new view controller.
     }
     */
-    
-    @IBAction func dimiss(_ sender: Any) {
+
+    @IBAction func dismiss(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
-
 }
 
-class AccountCell : UITableViewCell {
+class FanclubCell : UITableViewCell {
     
     
     
