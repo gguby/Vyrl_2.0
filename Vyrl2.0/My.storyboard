@@ -47,7 +47,7 @@
                                         <rect key="frame" x="340" y="12" width="20" height="22"/>
                                         <state key="normal" image="icon_alarm_01"/>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DfJ-S6-WXq">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DfJ-S6-WXq" customClass="SmallButton" customModule="Vyrl2_0" customModuleProvider="target">
                                         <rect key="frame" x="229" y="21" width="5" height="3"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="5" id="m4o-Lk-Ohc"/>
@@ -266,8 +266,8 @@
                                                         <constraint firstAttribute="height" constant="1" id="waL-wN-mYi"/>
                                                     </constraints>
                                                 </view>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0EK-lK-gh9">
-                                                    <rect key="frame" x="0.0" y="-7" width="375" height="44"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0EK-lK-gh9" customClass="CustomButton" customModule="Vyrl2_0" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -275,7 +275,7 @@
                                                 <constraint firstItem="Tvc-vV-e2f" firstAttribute="centerX" secondItem="wiN-bV-Wki" secondAttribute="centerX" id="Efi-9L-xHn"/>
                                                 <constraint firstAttribute="trailing" secondItem="ln9-EP-hUu" secondAttribute="trailing" id="K3c-d5-Wfa"/>
                                                 <constraint firstItem="ln9-EP-hUu" firstAttribute="top" secondItem="wiN-bV-Wki" secondAttribute="top" id="Nk3-Ni-5gz"/>
-                                                <constraint firstItem="0EK-lK-gh9" firstAttribute="top" secondItem="wiN-bV-Wki" secondAttribute="top" constant="-7" id="Qy8-6q-WEd"/>
+                                                <constraint firstItem="0EK-lK-gh9" firstAttribute="top" secondItem="wiN-bV-Wki" secondAttribute="top" id="Qy8-6q-WEd"/>
                                                 <constraint firstItem="Tvc-vV-e2f" firstAttribute="centerY" secondItem="wiN-bV-Wki" secondAttribute="centerY" id="TZC-eD-V5j"/>
                                                 <constraint firstItem="ln9-EP-hUu" firstAttribute="leading" secondItem="wiN-bV-Wki" secondAttribute="leading" id="Wva-fj-MI8"/>
                                                 <constraint firstItem="YCr-Ma-pyh" firstAttribute="centerY" secondItem="wiN-bV-Wki" secondAttribute="centerY" id="XPO-d0-mHc"/>
@@ -2600,8 +2600,8 @@ Cw
         <image name="btn_block_01" width="60" height="20"/>
         <image name="btn_edit_01" width="30" height="15"/>
         <image name="btn_select_down_02" width="5" height="3"/>
-        <image name="icon_add_02" width="14" height="14"/>
         <image name="btn_upgrade_01" width="60" height="14"/>
+        <image name="icon_add_02" width="14" height="14"/>
         <image name="icon_alarm_01" width="20" height="20"/>
         <image name="icon_alert_01" width="13" height="13"/>
         <image name="icon_back_01" width="20" height="20"/>
