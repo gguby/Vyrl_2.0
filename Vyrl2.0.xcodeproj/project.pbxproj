@@ -12,6 +12,7 @@
 		8F3C90331EDFFAE80041B770 /* AccountManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3C90321EDFFAE80041B770 /* AccountManagementViewController.swift */; };
 		8F3C90371EE010320041B770 /* FanclubManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3C90361EE010320041B770 /* FanclubManagementViewController.swift */; };
 		8F42E4971EE10F1E0010EB88 /* FanclubMembershipCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F42E4961EE10F1E0010EB88 /* FanclubMembershipCardViewController.swift */; };
+		8F42E4991EE144C70010EB88 /* OfficialFanClubTermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F42E4981EE144C70010EB88 /* OfficialFanClubTermsViewController.swift */; };
 		8F47B6C71EDEACA600A5DBAC /* BlockManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F47B6C61EDEACA600A5DBAC /* BlockManagementViewController.swift */; };
 		8F47B6C91EDEB02200A5DBAC /* BlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F47B6C81EDEB02200A5DBAC /* BlockTableViewCell.swift */; };
 		8F48CA6C1ED560CD0037A35B /* StartCoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F48CA6B1ED560CD0037A35B /* StartCoverViewController.swift */; };
@@ -64,6 +65,7 @@
 		8F3C90321EDFFAE80041B770 /* AccountManagementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountManagementViewController.swift; sourceTree = "<group>"; };
 		8F3C90361EE010320041B770 /* FanclubManagementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanclubManagementViewController.swift; sourceTree = "<group>"; };
 		8F42E4961EE10F1E0010EB88 /* FanclubMembershipCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanclubMembershipCardViewController.swift; sourceTree = "<group>"; };
+		8F42E4981EE144C70010EB88 /* OfficialFanClubTermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfficialFanClubTermsViewController.swift; sourceTree = "<group>"; };
 		8F47B6C61EDEACA600A5DBAC /* BlockManagementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockManagementViewController.swift; sourceTree = "<group>"; };
 		8F47B6C81EDEB02200A5DBAC /* BlockTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockTableViewCell.swift; sourceTree = "<group>"; };
 		8F48CA6B1ED560CD0037A35B /* StartCoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartCoverViewController.swift; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 				8F3C90321EDFFAE80041B770 /* AccountManagementViewController.swift */,
 				8F3C90361EE010320041B770 /* FanclubManagementViewController.swift */,
 				8F42E4961EE10F1E0010EB88 /* FanclubMembershipCardViewController.swift */,
+				8F42E4981EE144C70010EB88 /* OfficialFanClubTermsViewController.swift */,
 			);
 			name = "My & Setting";
 			path = MY;
@@ -508,6 +511,7 @@
 				8F916A8A1EDC17D900E3EC8B /* SettingViewController.swift in Sources */,
 				CE0898281ECD9AB9000D6D6C /* LoginData.swift in Sources */,
 				8F48CA6C1ED560CD0037A35B /* StartCoverViewController.swift in Sources */,
+				8F42E4991EE144C70010EB88 /* OfficialFanClubTermsViewController.swift in Sources */,
 				CEF77CB51EDFC24500884F2C /* WriteViewController.swift in Sources */,
 				CE29B1A01ECD5FEE003F4D2E /* ViewController.swift in Sources */,
 				8F916A8E1EDC264900E3EC8B /* UIView+Extension.swift in Sources */,
