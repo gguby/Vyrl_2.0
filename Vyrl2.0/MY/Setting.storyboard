@@ -163,7 +163,7 @@
         <!--View Controller-->
         <scene sceneID="MKN-En-qgp">
             <objects>
-                <viewController id="9Uu-JE-M5q" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NotificationManagement" id="9Uu-JE-M5q" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="he3-Cv-nIg"/>
                         <viewControllerLayoutGuide type="bottom" id="fuc-Bj-Md6"/>
@@ -642,7 +642,15 @@
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="3Np-c9-jbH">
                                         <rect key="frame" x="15" y="13.5" width="315" height="152.5"/>
-                                        <string key="text">1. 팬클럽에 같은 계정으로 7일 이내로 가입이 불가합니다.2. 프리미엄 팬클럽 가입 시, 환불 되지 않습니다3. 프리미엄 팬클럽 중 ‘정기결제’를 했을 경우에는 본인이 반드시어플리케이션 스토어에서 정기결제를 해지 해야 합니다.(자동 해지 불가) 4. 팬클럽에서 활동하신 내역은 삭제 되지 않습니다5. 팬클럽 가입시 수집된 내용은 탈퇴후 90일간 저장 됩니다.원하지 않을 경우 고객 센터로 문의 주세요.</string>
+                                        <string key="text">1. 팬클럽에 같은 계정으로 7일 이내로 가입이 불가합니다.
+2. 프리미엄 팬클럽 가입 시, 환불 되지 않습니다
+3. 프리미엄 팬클럽 중 ‘정기결제’를 했을 경우에는 본인이 반드시
+어플리케이션 스토어에서 정기결제를 해지 해야 합니다.
+(자동 해지 불가) 
+4. 팬클럽에서 활동하신 내역은 삭제 되지 않습니다
+5. 팬클럽 가입시 수집된 내용은 탈퇴후 90일간 저장 됩니다.
+원하지 않을 경우 고객 센터로 문의 주세요.
+</string>
                                         <color key="textColor" red="0.32549019607843138" green="0.30980392156862746" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -707,7 +715,7 @@
         <!--Official Fan Club Terms View Controller-->
         <scene sceneID="i8b-9V-bwv">
             <objects>
-                <viewController storyboardIdentifier="OfficialFanClubTermsViewController" id="EU6-iJ-tWD" customClass="OfficialFanClubTermsViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OfficialFanClubTerms" id="EU6-iJ-tWD" customClass="OfficialFanClubTermsViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="I8g-9V-05w"/>
                         <viewControllerLayoutGuide type="bottom" id="zFK-Eh-XUX"/>
@@ -811,7 +819,7 @@
         <!--Account Management View Controller-->
         <scene sceneID="OLb-4k-6Pa">
             <objects>
-                <viewController id="bDN-3G-6gL" customClass="AccountManagementViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AccountManagement" id="bDN-3G-6gL" customClass="AccountManagementViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Sal-M2-2jO"/>
                         <viewControllerLayoutGuide type="bottom" id="FpY-DT-pLg"/>
@@ -1176,7 +1184,7 @@
         <!--Fanclub Management View Controller-->
         <scene sceneID="2CM-5h-ynp">
             <objects>
-                <viewController id="bnA-Cw-j1O" customClass="FanclubManagementViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FanclubManagement" id="bnA-Cw-j1O" customClass="FanclubManagementViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="a57-Js-N3Y"/>
                         <viewControllerLayoutGuide type="bottom" id="CE3-k3-TKd"/>
@@ -1413,7 +1421,7 @@
         <!--Block Management View Controller-->
         <scene sceneID="KlQ-QY-6c7">
             <objects>
-                <viewController id="6kU-yO-a6R" customClass="BlockManagementViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BlockManagement" id="6kU-yO-a6R" customClass="BlockManagementViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jA2-uj-rpp"/>
                         <viewControllerLayoutGuide type="bottom" id="irH-Jh-UYF"/>
