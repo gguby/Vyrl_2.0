@@ -24,7 +24,7 @@
 		CE0898201ECD7079000D6D6C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08981F1ECD7079000D6D6C /* LoginViewController.swift */; };
 		CE0898221ECD7098000D6D6C /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0898211ECD7098000D6D6C /* MyViewController.swift */; };
 		CE0898251ECD70C7000D6D6C /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0898241ECD70C7000D6D6C /* FeedViewController.swift */; };
-		CE0898281ECD9AB9000D6D6C /* LoginData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0898271ECD9AB9000D6D6C /* LoginData.swift */; };
+		CE0898281ECD9AB9000D6D6C /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0898271ECD9AB9000D6D6C /* LoginManager.swift */; };
 		CE1340A41EDD3C6D00EA330F /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE1340A31EDD3C6C00EA330F /* Setting.storyboard */; };
 		CE1340A61EDD3CD500EA330F /* NoticeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1340A51EDD3CD500EA330F /* NoticeController.swift */; };
 		CE29B19E1ECD5FEE003F4D2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE29B19D1ECD5FEE003F4D2E /* AppDelegate.swift */; };
@@ -79,7 +79,7 @@
 		CE0898211ECD7098000D6D6C /* MyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
 		CE0898241ECD70C7000D6D6C /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		CE0898261ECD982D000D6D6C /* Vyrl2.0.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Vyrl2.0.entitlements; sourceTree = "<group>"; };
-		CE0898271ECD9AB9000D6D6C /* LoginData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginData.swift; sourceTree = "<group>"; };
+		CE0898271ECD9AB9000D6D6C /* LoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		CE1340A31EDD3C6C00EA330F /* Setting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
 		CE1340A51EDD3CD500EA330F /* NoticeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticeController.swift; sourceTree = "<group>"; };
 		CE29B19A1ECD5FEE003F4D2E /* Vyrl2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vyrl2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -218,7 +218,7 @@
 		CE29B1C21ECD6161003F4D2E /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				CE0898271ECD9AB9000D6D6C /* LoginData.swift */,
+				CE0898271ECD9AB9000D6D6C /* LoginManager.swift */,
 				CE08981F1ECD7079000D6D6C /* LoginViewController.swift */,
 				CE33F0011ED2BB690050C21D /* SMLoginViewController.swift */,
 				CE33F0031ED2D2900050C21D /* AgreeMentController.swift */,
@@ -509,7 +509,7 @@
 				CE0898201ECD7079000D6D6C /* LoginViewController.swift in Sources */,
 				CE29B19E1ECD5FEE003F4D2E /* AppDelegate.swift in Sources */,
 				8F916A8A1EDC17D900E3EC8B /* SettingViewController.swift in Sources */,
-				CE0898281ECD9AB9000D6D6C /* LoginData.swift in Sources */,
+				CE0898281ECD9AB9000D6D6C /* LoginManager.swift in Sources */,
 				8F48CA6C1ED560CD0037A35B /* StartCoverViewController.swift in Sources */,
 				8F42E4991EE144C70010EB88 /* OfficialFanClubTermsViewController.swift in Sources */,
 				CEF77CB51EDFC24500884F2C /* WriteViewController.swift in Sources */,

@@ -22,6 +22,8 @@ target 'Vyrl2.0' do
     
     pod 'TOCropViewController'
     pod 'Sharaku'
+    
+    pod 'Alamofire', '~> 4.4'
 
 end
 
