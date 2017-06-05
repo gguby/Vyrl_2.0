@@ -63,9 +63,7 @@ class SettingViewController: UIViewController, UIScrollViewDelegate {
     
     //terms of use
     @IBAction func showTermsofUseServiceView(_ sender: UIButton) {
-      let alert = UIAlertController(title: "Alert", message: "서비스 이용 약관", preferredStyle: UIAlertControllerStyle.alert)
-      alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
-      self.present(alert, animated: true, completion: nil)
+      self.pushView(storyboardName: "Setting", controllerName: "ServiceTerms")
     }
     @IBAction func showTermsofUseOfficialFanclubView(_ sender: UIButton) {
         self.pushView(storyboardName: "Setting", controllerName: "OfficialFanClubTerms")
