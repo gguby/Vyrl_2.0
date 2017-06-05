@@ -29,11 +29,57 @@ class SettingViewController: UIViewController, UIScrollViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    //account
+    @IBAction func showAccountManagementView(_ sender: Any) {
+        self.pushView(storyboardName: "Setting", controllerName: "AccountManagement")
+    }
+    @IBAction func showBlockManagementView(_ sender: Any) {
+        self.pushView(storyboardName: "Setting", controllerName: "BlockManagement")
+    }
     
+    //service management
+    @IBAction func showNotificationManagementView(_ sender: UIButton) {
+        self.pushView(storyboardName: "Setting", controllerName: "NotificationManagement")
+    }
+    @IBAction func showOfficialFanclubManagementView(_ sender: UIButton) {
+        self.pushView(storyboardName: "Setting", controllerName: "FanclubManagement")
+    }
+    
+    //customer support
     @IBAction func showNoticeView()
     {
         self.pushView(storyboardName: "Setting", controllerName: "notice")
     }
+    @IBAction func showFAQView(_ sender: UIButton) {
+      let alert = UIAlertController(title: "Alert", message: "자주 묻는 질문", preferredStyle: UIAlertControllerStyle.alert)
+      alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+      self.present(alert, animated: true, completion: nil)
+    }
+    @IBAction func showDataUsageView(_ sender: UIButton) {
+      let alert = UIAlertController(title: "Alert", message: "데이터 사용 여부", preferredStyle: UIAlertControllerStyle.alert)
+      alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+      self.present(alert, animated: true, completion: nil)
+    }
+    
+    //terms of use
+    @IBAction func showTermsofUseServiceView(_ sender: UIButton) {
+      let alert = UIAlertController(title: "Alert", message: "서비스 이용 약관", preferredStyle: UIAlertControllerStyle.alert)
+      alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+      self.present(alert, animated: true, completion: nil)
+    }
+    @IBAction func showTermsofUseOfficialFanclubView(_ sender: UIButton) {
+        self.pushView(storyboardName: "Setting", controllerName: "OfficialFanClubTerms")
+    }
+    @IBAction func showPrivacyPolicyView(_ sender: UIButton) {
+      let alert = UIAlertController(title: "Alert", message: "개인정보 처리방침", preferredStyle: UIAlertControllerStyle.alert)
+      alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+      self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    
+    
+    
 
     /*
     // MARK: - Navigation
