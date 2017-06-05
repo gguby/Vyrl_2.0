@@ -290,7 +290,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="375" height="50"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Wiy-yb-ybQ" id="pf2-HE-kVN">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GYW-es-Awy">
@@ -1648,7 +1648,7 @@
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="FmG-e5-cQh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FmG-e5-cQh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1951,7 +1951,7 @@ Cw
                                         <rect key="frame" x="0.0" y="29" width="375" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="176-dK-gBu" id="epi-QD-pw4">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="51"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rPX-0a-gtx">
@@ -2041,7 +2041,7 @@ Cw
                         <viewControllerLayoutGuide type="bottom" id="59P-r3-aCS"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="mFu-pL-9K6">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="950"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="snU-QP-1Hl" userLabel="Top View">
@@ -2204,7 +2204,7 @@ Cw
                                         <rect key="frame" x="0.0" y="28" width="375" height="62"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZoE-I0-HC3" id="aGv-7R-oex">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="62"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="61.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cGF-xK-UdT">
@@ -2323,10 +2323,10 @@ Cw
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BOX-tb-Ixx">
-                                <rect key="frame" x="0.0" y="499" width="375" height="451"/>
+                                <rect key="frame" x="0.0" y="499" width="375" height="168"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mC4-wk-ybI">
-                                        <rect key="frame" x="0.0" y="406" width="375" height="45"/>
+                                        <rect key="frame" x="0.0" y="123" width="375" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="44K-5T-wTJ"/>
                                         </constraints>
@@ -2405,7 +2405,7 @@ Cw
                         <viewControllerLayoutGuide type="bottom" id="6si-FT-aSZ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="0ai-Xi-kO2">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="950"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Doc-ai-NRJ" userLabel="Top View">
@@ -2672,22 +2672,27 @@ Cw
     </scenes>
     <resources>
         <image name="border_circle_01" width="87" height="87"/>
+        <image name="btn_block_01" width="60" height="20"/>
         <image name="btn_edit_01" width="30" height="15"/>
         <image name="btn_select_down_02" width="5" height="3"/>
+        <image name="btn_upgrade_01" width="60" height="14"/>
         <image name="icon_add_02" width="14" height="14"/>
         <image name="icon_alarm_01" width="20" height="20"/>
         <image name="icon_alert_01" width="13" height="13"/>
         <image name="icon_back_01" width="20" height="20"/>
         <image name="icon_bullet_01" width="4" height="6"/>
         <image name="icon_check_02_on" width="20" height="20"/>
+        <image name="icon_check_05_on" width="20" height="20"/>
         <image name="icon_dot_01" width="3" height="3"/>
         <image name="icon_dot_02" width="3" height="3"/>
         <image name="icon_headset_01" width="13" height="13"/>
         <image name="icon_id_01" width="13" height="13"/>
         <image name="icon_note_01" width="13" height="13"/>
+        <image name="icon_qrcode_01_premium" width="21" height="21"/>
         <image name="icon_setting_01" width="20" height="20"/>
         <image name="icon_setting_02" width="13" height="13"/>
         <image name="icon_store_01" width="20" height="20"/>
         <image name="icon_user_01_on" width="28" height="28"/>
+        <image name="logo_fb_02_on" width="14" height="14"/>
     </resources>
 </document>

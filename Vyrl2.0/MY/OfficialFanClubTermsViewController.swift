@@ -46,8 +46,8 @@ class OfficialFanClubTermsViewController: UIViewController, UITableViewDelegate,
         return 1
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath)
-    {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
         
     }
     
