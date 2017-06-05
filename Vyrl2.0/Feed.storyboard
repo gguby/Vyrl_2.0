@@ -98,7 +98,6 @@
                                     <constraint firstAttribute="trailing" secondItem="03H-b4-X8k" secondAttribute="trailing" constant="15" id="Dv0-D1-IMY"/>
                                     <constraint firstItem="lkS-GP-WKq" firstAttribute="top" secondItem="5JM-Jr-nv6" secondAttribute="bottom" constant="4.5" id="doL-NX-0E9"/>
                                     <constraint firstItem="5JM-Jr-nv6" firstAttribute="top" secondItem="03H-b4-X8k" secondAttribute="bottom" constant="4.5" id="k3A-Zp-t1R"/>
-                                    <constraint firstAttribute="trailing" secondItem="7rQ-Y6-IME" secondAttribute="trailing" constant="105" id="kKE-A9-BZI"/>
                                     <constraint firstItem="lkS-GP-WKq" firstAttribute="leading" secondItem="RIH-dH-w9m" secondAttribute="leading" constant="15" id="mMT-Ac-3o6"/>
                                     <constraint firstItem="7rQ-Y6-IME" firstAttribute="leading" secondItem="RIH-dH-w9m" secondAttribute="leading" constant="255.5" id="o5J-Zd-gdR"/>
                                     <constraint firstItem="03H-b4-X8k" firstAttribute="leading" secondItem="RIH-dH-w9m" secondAttribute="leading" constant="15" id="otK-Yr-p3E"/>
@@ -138,7 +137,7 @@
         <scene sceneID="zbW-6X-bXo">
             <objects>
                 <navigationController navigationBarHidden="YES" id="AqP-hB-Wsq" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="wxq-cz-Xzg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wxq-cz-Xzg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -154,7 +153,7 @@
     <resources>
         <image name="icon_alarm_01" width="20" height="20"/>
         <image name="icon_home_01_off" width="28" height="28"/>
-        <image name="img_arrow_01" width="16" height="16"/>
-        <image name="img_nofeed_01" width="16" height="16"/>
+        <image name="img_arrow_01" width="14" height="33"/>
+        <image name="img_nofeed_01" width="245" height="217"/>
     </resources>
 </document>
