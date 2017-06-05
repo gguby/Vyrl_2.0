@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import TOCropViewController
+import Sharaku
 
-class ProfileController : UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+class ProfileController : UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, TOCropViewControllerDelegate{
     
     @IBOutlet weak var btnClose: UIButton!
     @IBOutlet weak var photoView: UIButton!
@@ -73,34 +76,39 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.savedPhotosAlbum
         
-        imagePicker.allowsEditing = true
-        
         self.present(imagePicker, animated: true, completion: nil)
-    }
-
-    
-    @IBAction func ss(_ sender: Any) {
-        
-//        if ( UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) == false ){
-//            return
-//        }
-        
-        let imagePicker = UIImagePickerController()
-        
-        imagePicker.delegate = self
-        imagePicker.sourceType = UIImagePickerControllerSourceType.camera
-
-        imagePicker.allowsEditing = true
-        
-        self.present(imagePicker, animated: true, completion: nil)
-
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]){
+        
+        self.dismiss(animated:true, completion: nil)
 
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         
-        photoView.setImage(chosenImage, for: UIControlState.normal)
+        let cropViewController = TOCropViewController(image: chosenImage)
+        
+        cropViewController.delegate = self
+        
+        self.present(cropViewController, animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: nil);
+    }
+    
+    func cropViewController(_ cropViewController: TOCropViewController, didCropToImage image: UIImage, rect cropRect: CGRect, angle: Int) {
+        
+        let vc = SHViewController(image: image)
+        vc.delegate = self;
+        cropViewController.present(vc, animated: true, completion: nil)
+    }
+}
+
+extension ProfileController: SHViewControllerDelegate {
+    
+    func shViewControllerImageDidFilter(image: UIImage) {
+        // Filtered image will be returned here.
+        photoView.setImage(image, for: UIControlState.normal)
         photoView.layer.masksToBounds = true
         photoView.layer.cornerRadius = photoView.frame.width / 2
         photoView.layer.borderColor = UIColor.black.cgColor
@@ -109,8 +117,9 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
         self.dismiss(animated:true, completion: nil)
     }
     
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-            self.dismiss(animated: true, completion: nil);
+    func shViewControllerDidCancel() {
+        // This will be called when you cancel filtering the image.
     }
-
 }
+
+

@@ -47,14 +47,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         setupGAI()
         
-//        GIDSignIn.sharedInstance()?.signOut()
-//        
-//        let firebaseAuth = FIRAuth.auth()
-//        do{
-//            try firebaseAuth?.signOut()
-//        } catch let signOutError as NSError {
-//            print ("Error signing out : %@", signOutError)
-//        }
+        GIDSignIn.sharedInstance()?.signOut()
+        
+        let firebaseAuth = FIRAuth.auth()
+        do{
+            try firebaseAuth?.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out : %@", signOutError)
+        }
         
         FIRAuth.auth()?.addStateDidChangeListener(){ (auth , user) in
             if user == nil {
