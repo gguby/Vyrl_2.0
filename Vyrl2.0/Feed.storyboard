@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7te-ep-nSf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AqP-hB-Wsq">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -20,33 +20,141 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YIV-J8-Q4b">
-                                <rect key="frame" x="166" y="216" width="42" height="21"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YRP-qn-Z9Y">
+                                <rect key="frame" x="0.0" y="20" width="375" height="45"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWl-L9-qSB">
+                                        <rect key="frame" x="341" y="13.5" width="18.5" height="19"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="19" id="jyk-qG-QBZ"/>
+                                            <constraint firstAttribute="width" constant="18.5" id="z2T-Hg-DWc"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="icon_alarm_01"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="42" id="qTd-ST-df6"/>
+                                    <constraint firstAttribute="height" constant="45" id="Qwr-PR-DOs"/>
+                                    <constraint firstAttribute="trailing" secondItem="iWl-L9-qSB" secondAttribute="trailing" constant="15.5" id="uUL-Jq-S9s"/>
+                                    <constraint firstItem="iWl-L9-qSB" firstAttribute="centerY" secondItem="YRP-qn-Z9Y" secondAttribute="centerY" id="vje-8V-dCa"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kQx-bF-K19" userLabel="line">
+                                <rect key="frame" x="0.0" y="65" width="375" height="1"/>
+                                <color key="backgroundColor" red="0.91372549020000005" green="0.90980392160000001" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="kSl-2A-PzA"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RIH-dH-w9m" userLabel="NoDataView">
+                                <rect key="frame" x="0.0" y="66" width="375" height="552"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_nofeed_01" translatesAutoresizingMaskIntoConstraints="NO" id="dyC-t9-7ke">
+                                        <rect key="frame" x="65" y="95" width="245" height="217"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="245" id="WuC-lH-QVI"/>
+                                            <constraint firstAttribute="height" constant="217" id="fHm-67-XRY"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="앗, 아직 친구가 한명도 없군요." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="03H-b4-X8k">
+                                        <rect key="frame" x="15" y="357.5" width="345" height="15.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="15.5" id="QuR-T7-PKn"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
+                                        <color key="textColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="나와 같은 관심사를 가진 친구를 Search에서 찾아" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5JM-Jr-nv6">
+                                        <rect key="frame" x="15" y="377.5" width="345" height="15.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="15.5" id="g2q-X6-AHX"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
+                                        <color key="textColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.67450980390000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Follow 해보세요." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lkS-GP-WKq">
+                                        <rect key="frame" x="15" y="397.5" width="345" height="15.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="15.5" id="Bbh-SU-5eU"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
+                                        <color key="textColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.67450980390000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_arrow_01" translatesAutoresizingMaskIntoConstraints="NO" id="7rQ-Y6-IME">
+                                        <rect key="frame" x="255.5" y="512.5" width="14.5" height="33.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="33.5" id="A0c-NP-5mO"/>
+                                            <constraint firstAttribute="width" constant="14.5" id="RPR-Vg-1jT"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.93333333333333335" green="0.92941176470588238" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="03H-b4-X8k" firstAttribute="top" secondItem="dyC-t9-7ke" secondAttribute="bottom" constant="45.5" id="7As-hv-OEe"/>
+                                    <constraint firstItem="5JM-Jr-nv6" firstAttribute="leading" secondItem="RIH-dH-w9m" secondAttribute="leading" constant="15" id="DYj-z8-Vfm"/>
+                                    <constraint firstAttribute="trailing" secondItem="03H-b4-X8k" secondAttribute="trailing" constant="15" id="Dv0-D1-IMY"/>
+                                    <constraint firstItem="lkS-GP-WKq" firstAttribute="top" secondItem="5JM-Jr-nv6" secondAttribute="bottom" constant="4.5" id="doL-NX-0E9"/>
+                                    <constraint firstItem="5JM-Jr-nv6" firstAttribute="top" secondItem="03H-b4-X8k" secondAttribute="bottom" constant="4.5" id="k3A-Zp-t1R"/>
+                                    <constraint firstAttribute="trailing" secondItem="7rQ-Y6-IME" secondAttribute="trailing" constant="105" id="kKE-A9-BZI"/>
+                                    <constraint firstItem="lkS-GP-WKq" firstAttribute="leading" secondItem="RIH-dH-w9m" secondAttribute="leading" constant="15" id="mMT-Ac-3o6"/>
+                                    <constraint firstItem="7rQ-Y6-IME" firstAttribute="leading" secondItem="RIH-dH-w9m" secondAttribute="leading" constant="255.5" id="o5J-Zd-gdR"/>
+                                    <constraint firstItem="03H-b4-X8k" firstAttribute="leading" secondItem="RIH-dH-w9m" secondAttribute="leading" constant="15" id="otK-Yr-p3E"/>
+                                    <constraint firstItem="7rQ-Y6-IME" firstAttribute="top" secondItem="lkS-GP-WKq" secondAttribute="bottom" constant="99.5" id="pAR-lr-g6q"/>
+                                    <constraint firstItem="dyC-t9-7ke" firstAttribute="centerX" secondItem="RIH-dH-w9m" secondAttribute="centerX" id="uLB-De-ve0"/>
+                                    <constraint firstItem="dyC-t9-7ke" firstAttribute="top" secondItem="RIH-dH-w9m" secondAttribute="top" constant="95" id="vsT-8I-Qir"/>
+                                    <constraint firstAttribute="trailing" secondItem="lkS-GP-WKq" secondAttribute="trailing" constant="15" id="wpF-3M-5F7"/>
+                                    <constraint firstAttribute="trailing" secondItem="5JM-Jr-nv6" secondAttribute="trailing" constant="15" id="yGf-Ai-GaA"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="YIV-J8-Q4b" firstAttribute="top" secondItem="Tes-lH-Pt1" secondAttribute="bottom" constant="196" id="eDb-Ju-X6M"/>
-                            <constraint firstAttribute="trailing" secondItem="YIV-J8-Q4b" secondAttribute="trailing" constant="167" id="xl4-dX-jEU"/>
+                            <constraint firstItem="YRP-qn-Z9Y" firstAttribute="top" secondItem="Tes-lH-Pt1" secondAttribute="bottom" id="5Fz-lK-OkF"/>
+                            <constraint firstItem="RIH-dH-w9m" firstAttribute="top" secondItem="kQx-bF-K19" secondAttribute="bottom" id="ClT-Pa-LCm"/>
+                            <constraint firstItem="kQx-bF-K19" firstAttribute="leading" secondItem="25h-lX-nou" secondAttribute="leading" id="JrI-rA-afq"/>
+                            <constraint firstItem="kQx-bF-K19" firstAttribute="top" secondItem="YRP-qn-Z9Y" secondAttribute="bottom" id="Pi2-Ub-Byn"/>
+                            <constraint firstAttribute="trailing" secondItem="YRP-qn-Z9Y" secondAttribute="trailing" id="UZa-w2-ave"/>
+                            <constraint firstItem="RIH-dH-w9m" firstAttribute="leading" secondItem="25h-lX-nou" secondAttribute="leading" id="VbE-5M-Wtr"/>
+                            <constraint firstAttribute="trailing" secondItem="kQx-bF-K19" secondAttribute="trailing" id="dZo-ZR-otT"/>
+                            <constraint firstAttribute="trailing" secondItem="RIH-dH-w9m" secondAttribute="trailing" id="igo-8d-fO2"/>
+                            <constraint firstItem="Ocq-YV-XIX" firstAttribute="top" secondItem="RIH-dH-w9m" secondAttribute="bottom" id="qKC-Ni-ChP"/>
+                            <constraint firstItem="YRP-qn-Z9Y" firstAttribute="leading" secondItem="25h-lX-nou" secondAttribute="leading" id="vGV-Iv-qXq"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="icon_home_01_off" id="BK1-5J-TZQ">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
+                    <navigationItem key="navigationItem" id="fCh-ef-yzS"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lLd-qn-DHr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="34" y="-109"/>
+            <point key="canvasLocation" x="492" y="-116.49175412293854"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="zbW-6X-bXo">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="AqP-hB-Wsq" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="wxq-cz-Xzg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="7te-ep-nSf" kind="relationship" relationship="rootViewController" id="FPH-5L-wjk"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sc6-VH-mOM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-246" y="-115"/>
         </scene>
     </scenes>
     <resources>
+        <image name="icon_alarm_01" width="20" height="20"/>
         <image name="icon_home_01_off" width="28" height="28"/>
+        <image name="img_arrow_01" width="16" height="16"/>
+        <image name="img_nofeed_01" width="16" height="16"/>
     </resources>
 </document>
