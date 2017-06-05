@@ -213,6 +213,9 @@
                                             <constraint firstAttribute="height" constant="20" id="zrC-Kd-z2F"/>
                                         </constraints>
                                         <state key="normal" image="icon_back_01"/>
+                                        <connections>
+                                            <action selector="back" destination="9Uu-JE-M5q" eventType="touchUpInside" id="Opf-Fu-T2P"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="알림 설정" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2et-kd-COL">
                                         <rect key="frame" x="158" y="15" width="60" height="19.5"/>
@@ -758,14 +761,18 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="45"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eNP-1d-cv2">
-                                        <rect key="frame" x="15" y="14" width="10" height="18"/>
+                                        <rect key="frame" x="15" y="14" width="20" height="20"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="10" id="LnC-xP-1mf"/>
+                                            <constraint firstAttribute="width" constant="20" id="myp-W0-38K"/>
+                                            <constraint firstAttribute="height" constant="20" id="oSp-rI-TVs"/>
                                         </constraints>
                                         <state key="normal" image="icon_back_01"/>
+                                        <connections>
+                                            <action selector="back" destination="EU6-iJ-tWD" eventType="touchUpInside" id="UVG-QM-BGc"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="공식 팬클럽 서비스 이용 약관" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eiK-z0-1q7">
-                                        <rect key="frame" x="96.5" y="15" width="183" height="15"/>
+                                        <rect key="frame" x="96.5" y="15" width="183" height="17"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
                                         <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1470,6 +1477,9 @@
                                             <constraint firstAttribute="height" constant="20" id="LPY-1k-1hw"/>
                                         </constraints>
                                         <state key="normal" image="icon_back_01"/>
+                                        <connections>
+                                            <action selector="back" destination="6kU-yO-a6R" eventType="touchUpInside" id="ZL1-1W-wZ8"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="차단 관리" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OYK-n7-uu4">
                                         <rect key="frame" x="158" y="13" width="60" height="20"/>
