@@ -19,6 +19,11 @@ target 'Vyrl2.0' do
     pod 'Firebase/Auth'
     pod 'GoogleSignIn'
     pod 'TwitterKit'
+    
+    pod 'TOCropViewController'
+    pod 'Sharaku'
+    
+    pod 'Alamofire', '~> 4.4'
 
 end
 

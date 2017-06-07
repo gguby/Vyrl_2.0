@@ -111,7 +111,7 @@ class SMLoginViewController : UIViewController, UIWebViewDelegate {
                 
                 self.loginDelegate?.loginCallback()
                 
-                LoginData.sharedInstance.isLogin = true                
+                LoginManager.sharedInstance.isLogin = true
 
                 return false;
                 

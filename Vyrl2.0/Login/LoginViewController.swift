@@ -80,9 +80,11 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
                 return
             }
             
-            let credential = FIRFacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
-
-            self.loginByFireBase(credential: credential)
+            LoginManager.sharedInstance.login(accessToken: accessToken.tokenString, accessTokenSecret: "", service: ServiceType.FaceBook)
+            
+//            let credential = FIRFacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
+//
+//            self.loginByFireBase(credential: credential)
         }
     }
     
@@ -113,11 +115,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
                     }
                 }
                 
-                print("Token : \(session?.authToken)")
-                print("Token : \(session?.authTokenSecret)")
-                
-                let credential = FIRTwitterAuthProvider.credential(withToken: (session?.authToken)!, secret: (session?.authTokenSecret)!)
-                self.loginByFireBase(credential: credential)
+                LoginManager.sharedInstance.login(accessToken: (session?.authToken)!, accessTokenSecret: (session?.authTokenSecret)!, service: ServiceType.Twitter)
             }
             else {
                 if error != nil {
@@ -152,7 +150,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
     
     func smLogin()
     {
-        if ( !LoginData.sharedInstance.isLogin ){
+        if ( !LoginManager.sharedInstance.isLogin ){
             let storyboard = UIStoryboard(name: "Login", bundle: nil)
             let controller :SMLoginViewController=storyboard.instantiateViewController(withIdentifier: "SMLogin") as! SMLoginViewController
             controller.loginDelegate = self
@@ -177,12 +175,9 @@ extension LoginViewController
         }
         
         guard let authentication = user.authentication else { return }
-    
-        print("Token : \(authentication.accessToken!)")
-        print("Token : \(authentication.idToken!)")
+        
+        LoginManager.sharedInstance.login(accessToken: authentication.accessToken, accessTokenSecret: "", service: ServiceType.Google)
 
-        let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
-        self.loginByFireBase(credential: credential)
     }
     
     func sign(inWillDispatch signIn: GIDSignIn!, error: Error!) {
