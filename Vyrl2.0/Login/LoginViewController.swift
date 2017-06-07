@@ -42,9 +42,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
     }
     
     func goAgreement(){
-        let storyboard = UIStoryboard(name: "Login", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "agreement")
-        self.navigationController!.pushViewController(controller, animated: true)
+        self.pushView(storyboardName: "Login", controllerName: "agreement")
     }
     
     func loginByFireBase(credential:  FIRAuthCredential) {
@@ -60,7 +58,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
                 return
             }
             
-            self.goAgreement()
+            self.pushView(storyboardName: "Login", controllerName: "agreement")
         })
     }
 
@@ -80,11 +78,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
                 return
             }
             
-            LoginManager.sharedInstance.login(accessToken: accessToken.tokenString, accessTokenSecret: "", service: ServiceType.FaceBook)
-            
-//            let credential = FIRFacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
-//
-//            self.loginByFireBase(credential: credential)
+            LoginManager.sharedInstance.login(accessToken: accessToken.tokenString, accessTokenSecret: "", service: ServiceType.FaceBook , callBack: self)
         }
     }
     
@@ -115,7 +109,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
                     }
                 }
                 
-                LoginManager.sharedInstance.login(accessToken: (session?.authToken)!, accessTokenSecret: (session?.authTokenSecret)!, service: ServiceType.Twitter)
+                LoginManager.sharedInstance.login(accessToken: (session?.authToken)!, accessTokenSecret: (session?.authTokenSecret)!, service: ServiceType.Twitter, callBack: self)
             }
             else {
                 if error != nil {
@@ -157,12 +151,12 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
             self.navigationController!.pushViewController(controller, animated: true)
         }
         else {
-            goAgreement()
+           self.pushView(storyboardName: "Login", controllerName: "agreement")
         }
     }
     
     func loginCallback() {
-        goAgreement()
+        self.pushView(storyboardName: "Login", controllerName: "agreement")
     }
 }
 
@@ -176,7 +170,7 @@ extension LoginViewController
         
         guard let authentication = user.authentication else { return }
         
-        LoginManager.sharedInstance.login(accessToken: authentication.accessToken, accessTokenSecret: "", service: ServiceType.Google)
+        LoginManager.sharedInstance.login(accessToken: authentication.accessToken, accessTokenSecret: "", service: ServiceType.Google, callBack: self)
 
     }
     

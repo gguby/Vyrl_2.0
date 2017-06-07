@@ -814,31 +814,31 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="igN-sS-xc5">
                                         <rect key="frame" x="0.0" y="0.0" width="281" height="18"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="17.5" id="8vQ-KK-YnO"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="268" id="YYA-VR-ed6"/>
                                             <constraint firstAttribute="height" constant="17.5" id="bJL-Mn-0Ja"/>
                                             <constraint firstAttribute="width" constant="281" id="qrS-xW-xSG"/>
                                         </constraints>
                                         <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="15"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="iTF-ef-OnS" id="Qc8-qE-VaZ"/>
+                                        </connections>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mxC-uP-OLV" customClass="CheckBox" customModule="Vyrl2_0" customModuleProvider="target">
-                                        <rect key="frame" x="268" y="8" width="13" height="9"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_check_04_on" translatesAutoresizingMaskIntoConstraints="NO" id="uWb-1W-ywh">
+                                        <rect key="frame" x="268" y="4.5" width="13" height="9"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="9" id="7Ju-lO-mOI"/>
-                                            <constraint firstAttribute="width" constant="13" id="PUX-HT-Gdp"/>
+                                            <constraint firstAttribute="height" constant="9" id="8zB-1b-gm1"/>
+                                            <constraint firstAttribute="width" constant="13" id="vFt-7q-K3v"/>
                                         </constraints>
-                                        <state key="normal" title="Button"/>
-                                    </button>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="mxC-uP-OLV" firstAttribute="top" secondItem="Ohy-Rt-rjy" secondAttribute="top" constant="8" id="REb-Ry-VCf"/>
+                                    <constraint firstItem="uWb-1W-ywh" firstAttribute="centerY" secondItem="Ohy-Rt-rjy" secondAttribute="centerY" id="2lr-zM-5Vo"/>
+                                    <constraint firstAttribute="trailing" secondItem="uWb-1W-ywh" secondAttribute="trailing" id="PB9-hg-xOf"/>
                                     <constraint firstAttribute="width" constant="281" id="VYE-C1-emB"/>
                                     <constraint firstItem="igN-sS-xc5" firstAttribute="top" secondItem="Ohy-Rt-rjy" secondAttribute="top" id="XFi-G7-bUU"/>
                                     <constraint firstItem="igN-sS-xc5" firstAttribute="leading" secondItem="Ohy-Rt-rjy" secondAttribute="leading" id="aMw-M5-8K6"/>
-                                    <constraint firstItem="mxC-uP-OLV" firstAttribute="leading" secondItem="Ohy-Rt-rjy" secondAttribute="leading" constant="268" id="qaw-rc-e4I"/>
                                     <constraint firstAttribute="height" constant="17.5" id="zqf-2x-gdK"/>
                                 </constraints>
                             </view>
@@ -881,7 +881,7 @@
                                     <constraint firstAttribute="width" constant="281" id="wJh-x8-w24"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dj0-Bf-9aY">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dj0-Bf-9aY">
                                 <rect key="frame" x="0.0" y="622" width="374.5" height="45"/>
                                 <color key="backgroundColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -941,7 +941,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="checkView" destination="uWb-1W-ywh" id="2UF-eL-nlp"/>
+                        <outlet property="overlabLabel" destination="R1w-YL-0N1" id="mEt-jI-z6K"/>
                         <outlet property="photoView" destination="ras-kJ-SP7" id="Giq-Md-wX8"/>
+                        <outlet property="signUp" destination="dj0-Bf-9aY" id="oE2-tz-VZu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P9r-Gf-vAC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1099,6 +1102,7 @@
         <image name="icon_cancel_02" width="20" height="20"/>
         <image name="icon_cancel_03" width="15" height="15"/>
         <image name="icon_check_02_on" width="20" height="20"/>
+        <image name="icon_check_04_on" width="13" height="9"/>
         <image name="icon_dot_01" width="3" height="3"/>
         <image name="img_number1_01_on" width="20" height="20"/>
         <image name="img_number2_01_off" width="20" height="20"/>

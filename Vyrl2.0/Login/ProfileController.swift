@@ -15,9 +15,16 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
     
     @IBOutlet weak var btnClose: UIButton!
     @IBOutlet weak var photoView: UIButton!
+    @IBOutlet weak var overlabLabel: UILabel!
+    
+    @IBOutlet weak var checkView: UIImageView!
+    
+    @IBOutlet weak var signUp: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        overlabLabel.isHidden = true
     }
     
     @IBAction func dismiss(sender :AnyObject )
@@ -26,16 +33,12 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     @IBAction func selectPhoto(_ sender: Any) {
-        
         self.showAlert()
-        
     }
     
     @IBAction func pushView(sender :AnyObject )
     {
-        let storyboard = UIStoryboard(name: "Login", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "logincomplete")
-        self.navigationController?.pushViewController(controller, animated: true)
+        self.pushView(storyboardName: "Login", controllerName: "logincomplete")
     }
     
     
@@ -120,6 +123,30 @@ extension ProfileController: SHViewControllerDelegate {
     func shViewControllerDidCancel() {
         // This will be called when you cancel filtering the image.
     }
+}
+
+extension ProfileController : UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if ( (textField.text?.characters.count)! == 1 && string.characters.count == 0){
+            signUp.isEnabled = false
+            signUp.backgroundColor = UIColor.hexStringToUIColor(hex: "#ACACAC")
+            return true
+        }
+        
+        if ( (textField.text?.characters.count)! > 0 || string.characters.count > 0 ){
+            signUp.isEnabled = true
+            signUp.backgroundColor = UIColor.ivLighterPurple
+        }
+        else {
+            signUp.isEnabled = false
+            signUp.backgroundColor = UIColor.hexStringToUIColor(hex: "#ACACAC")
+        }
+        return true
+
+    }
+    
 }
 
 

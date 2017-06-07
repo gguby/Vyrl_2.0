@@ -39,7 +39,7 @@ class LoginManager{
         return headers
     }
     
-    func login(accessToken : String , accessTokenSecret :String, service : ServiceType)
+    func login(accessToken : String , accessTokenSecret :String, service : ServiceType, callBack : LoginViewController )
     {
         let parameters : Parameters = [
             "accessToken": accessToken,
@@ -52,6 +52,17 @@ class LoginManager{
         Alamofire.request(uri, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: getHeader()).responseString(completionHandler: {
             response in switch response.result {
             case .success(let json):
+                
+                if let code : HTTPCode = HTTPCode.init(rawValue: (response.response?.statusCode)!) {
+                    switch code {
+                    case .USERNOTEXIST :
+                        callBack.goAgreement()
+                        break
+                    case .UNAUTORIZED :
+                        break                        
+                    }
+                }
+                
                 print((response.response?.statusCode)!)
                 print(json)
             case .failure(let error):
@@ -133,4 +144,9 @@ enum ServiceType {
             return "SM"
         }
     }
+}
+
+enum HTTPCode: Int{
+    case UNAUTORIZED = 401
+    case USERNOTEXIST = 901
 }
