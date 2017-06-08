@@ -66,11 +66,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            print ("Error signing out : %@", signOutError)
 //        }
         
-        FIRAuth.auth()?.addStateDidChangeListener(){ (auth , user) in
-            if user == nil {
-                self.goLogin()
-            }
-        }
+//        FIRAuth.auth()?.addStateDidChangeListener(){ (auth , user) in
+//            if user == nil {
+//                self.goLogin()
+//            }
+//        }
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions);
         Fabric.with([Twitter.self])

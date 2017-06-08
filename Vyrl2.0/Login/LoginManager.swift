@@ -13,9 +13,11 @@ class LoginManager{
     
     static let sharedInstance = LoginManager()
     
-    let baseURL = "http://api.dev2nd.vyrl.com:8080/"
-    let APPVersion = "1.0.0"
-    let AppDevice = "ios"
+    private let baseURL = "http://api.dev2nd.vyrl.com:8080/"
+    private let APPVersion = "1.0.0"
+    private let AppDevice = "ios"
+    
+    private var cookie : String?
     
     private var _login:Bool = false
     
@@ -54,26 +56,30 @@ class LoginManager{
         let uri = baseURL + "accounts/signin"
         
         Alamofire.request(uri, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: getHeader()).responseString(completionHandler: {
-            response in switch response.result {
-            case .success(let json):
-                
-                if let code : HTTPCode = HTTPCode.init(rawValue: (response.response?.statusCode)!) {
-                    switch code {
+            response in
+            
+            switch response.result {
+                case .success(let json):
                     
-                    case .SUCCESS :
-                        callBack.goSearchView()
-                    case .USERNOTEXIST :
-                        callBack.goAgreement()
+                    self.cookie = response.response?.allHeaderFields["Set-Cookie"] as? String
+                
+                    if let code : HTTPCode = HTTPCode.init(rawValue: (response.response?.statusCode)!) {
+                        switch code {
+                    
+                        case .SUCCESS :
+                            callBack.goSearchView()
+                        case .USERNOTEXIST :
+                            callBack.goAgreement()
                         
-                        self.needSignUpToken = accessToken
-                        self.needSignUpSecret = accessTokenSecret
-                        self.needSignUpService = service
+                            self.needSignUpToken = accessToken
+                            self.needSignUpSecret = accessTokenSecret
+                            self.needSignUpService = service
                         
-                        break
-                    case .UNAUTORIZED :
-                        break                        
+                            break
+                        case .UNAUTORIZED :
+                            break
+                        }
                     }
-                }
                 
                 print((response.response?.statusCode)!)
                 print(json)
