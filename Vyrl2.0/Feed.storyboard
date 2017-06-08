@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AqP-hB-Wsq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AqP-hB-Wsq">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -46,7 +46,13 @@
                                     <constraint firstAttribute="height" constant="1" id="kSl-2A-PzA"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RIH-dH-w9m" userLabel="NoDataView">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AEJ-wP-T1Q">
+                                <rect key="frame" x="0.0" y="66" width="375" height="552"/>
+                                <connections>
+                                    <segue destination="BRh-da-hhC" kind="embed" id="x44-um-aIO"/>
+                                </connections>
+                            </containerView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RIH-dH-w9m" userLabel="NoDataView">
                                 <rect key="frame" x="0.0" y="66" width="375" height="552"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_nofeed_01" translatesAutoresizingMaskIntoConstraints="NO" id="dyC-t9-7ke">
@@ -116,8 +122,12 @@
                             <constraint firstItem="kQx-bF-K19" firstAttribute="leading" secondItem="25h-lX-nou" secondAttribute="leading" id="JrI-rA-afq"/>
                             <constraint firstItem="kQx-bF-K19" firstAttribute="top" secondItem="YRP-qn-Z9Y" secondAttribute="bottom" id="Pi2-Ub-Byn"/>
                             <constraint firstAttribute="trailing" secondItem="YRP-qn-Z9Y" secondAttribute="trailing" id="UZa-w2-ave"/>
+                            <constraint firstItem="AEJ-wP-T1Q" firstAttribute="leading" secondItem="25h-lX-nou" secondAttribute="leading" id="UZb-3i-E3W"/>
                             <constraint firstItem="RIH-dH-w9m" firstAttribute="leading" secondItem="25h-lX-nou" secondAttribute="leading" id="VbE-5M-Wtr"/>
+                            <constraint firstItem="AEJ-wP-T1Q" firstAttribute="top" secondItem="kQx-bF-K19" secondAttribute="bottom" id="a4W-y8-OWW"/>
                             <constraint firstAttribute="trailing" secondItem="kQx-bF-K19" secondAttribute="trailing" id="dZo-ZR-otT"/>
+                            <constraint firstAttribute="trailing" secondItem="AEJ-wP-T1Q" secondAttribute="trailing" id="dha-Wb-Xzf"/>
+                            <constraint firstItem="Ocq-YV-XIX" firstAttribute="top" secondItem="AEJ-wP-T1Q" secondAttribute="bottom" id="fKH-kq-yam"/>
                             <constraint firstAttribute="trailing" secondItem="RIH-dH-w9m" secondAttribute="trailing" id="igo-8d-fO2"/>
                             <constraint firstItem="Ocq-YV-XIX" firstAttribute="top" secondItem="RIH-dH-w9m" secondAttribute="bottom" id="qKC-Ni-ChP"/>
                             <constraint firstItem="YRP-qn-Z9Y" firstAttribute="leading" secondItem="25h-lX-nou" secondAttribute="leading" id="vGV-Iv-qXq"/>
@@ -137,7 +147,7 @@
         <scene sceneID="zbW-6X-bXo">
             <objects>
                 <navigationController navigationBarHidden="YES" id="AqP-hB-Wsq" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wxq-cz-Xzg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="wxq-cz-Xzg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -148,6 +158,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sc6-VH-mOM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-246" y="-115"/>
+        </scene>
+        <!--FeedTableViewController-->
+        <scene sceneID="gm4-FY-rDZ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="FeedStyle" referencedIdentifier="FeedTableViewController" id="BRh-da-hhC" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZIe-wd-Tai" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1086" y="40"/>
         </scene>
     </scenes>
     <resources>
