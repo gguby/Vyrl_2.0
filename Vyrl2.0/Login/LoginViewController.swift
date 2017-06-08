@@ -45,6 +45,14 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
         self.pushView(storyboardName: "Login", controllerName: "agreement")
     }
     
+    func goSearchView(){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let mainController = storyboard.instantiateInitialViewController()!
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = mainController
+    }
+    
     func loginByFireBase(credential:  FIRAuthCredential) {
         // Perform login by calling Firebase APIs
         FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in

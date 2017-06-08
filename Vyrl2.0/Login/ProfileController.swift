@@ -21,6 +21,10 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
     
     @IBOutlet weak var signUp: UIButton!
     
+    @IBOutlet weak var nickNameField: UITextField!    
+    @IBOutlet weak var introField: UITextField!
+    @IBOutlet weak var webURLField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,7 +42,18 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
     
     @IBAction func pushView(sender :AnyObject )
     {
-        self.pushView(storyboardName: "Login", controllerName: "logincomplete")
+        LoginManager.sharedInstance.signUp(homePageURL: webURLField.text!, nickName: nickNameField.text!, selfIntro: introField.text!, completionHandler:  {
+            response in switch response.result {
+            case .success(let json):
+                print((response.response?.statusCode)!)
+                print(json)
+                
+                self.pushView(storyboardName: "Login", controllerName: "logincomplete")
+                
+            case .failure(let error):
+                print(error)
+            }
+        })
     }
     
     

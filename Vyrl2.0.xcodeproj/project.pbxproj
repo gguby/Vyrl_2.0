@@ -46,6 +46,7 @@
 		CE33F0041ED2D2900050C21D /* AgreeMentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33F0031ED2D2900050C21D /* AgreeMentController.swift */; };
 		CE33F0061ED2DF320050C21D /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33F0051ED2DF320050C21D /* ProfileController.swift */; };
 		CE36D4A01ED3C96B00ABC7FE /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE36D49F1ED3C96B00ABC7FE /* CheckBox.swift */; };
+		CE5636FC1EE7FE8600894016 /* WithDrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5636FB1EE7FE8600894016 /* WithDrawViewController.swift */; };
 		CEF77CB31EDFC08A00884F2C /* Write.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEF77CB21EDFC08A00884F2C /* Write.storyboard */; };
 		CEF77CB51EDFC24500884F2C /* WriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF77CB41EDFC24500884F2C /* WriteViewController.swift */; };
 /* End PBXBuildFile section */
@@ -108,6 +109,7 @@
 		CE33F0031ED2D2900050C21D /* AgreeMentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgreeMentController.swift; sourceTree = "<group>"; };
 		CE33F0051ED2DF320050C21D /* ProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		CE36D49F1ED3C96B00ABC7FE /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
+		CE5636FB1EE7FE8600894016 /* WithDrawViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WithDrawViewController.swift; sourceTree = "<group>"; };
 		CEF77CB21EDFC08A00884F2C /* Write.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Write.storyboard; sourceTree = "<group>"; };
 		CEF77CB41EDFC24500884F2C /* WriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WriteViewController.swift; path = Vyrl2.0/WriteViewController.swift; sourceTree = SOURCE_ROOT; };
 		D548CE0C473DEA6C46EC7CA7 /* libPods-Vyrl2.0UITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vyrl2.0UITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -248,6 +250,7 @@
 				8F3C90361EE010320041B770 /* FanclubManagementViewController.swift */,
 				8F42E4961EE10F1E0010EB88 /* FanclubMembershipCardViewController.swift */,
 				8F42E4981EE144C70010EB88 /* OfficialFanClubTermsViewController.swift */,
+				CE5636FB1EE7FE8600894016 /* WithDrawViewController.swift */,
 			);
 			name = "My & Setting";
 			path = MY;
@@ -524,6 +527,7 @@
 				8F916A8E1EDC264900E3EC8B /* UIView+Extension.swift in Sources */,
 				8F3C90331EDFFAE80041B770 /* AccountManagementViewController.swift in Sources */,
 				CE0898221ECD7098000D6D6C /* MyViewController.swift in Sources */,
+				CE5636FC1EE7FE8600894016 /* WithDrawViewController.swift in Sources */,
 				CE08981E1ECD706A000D6D6C /* FanViewController.swift in Sources */,
 				CE08981C1ECD704F000D6D6C /* SearchViewController.swift in Sources */,
 				CE33F0021ED2BB690050C21D /* SMLoginViewController.swift in Sources */,

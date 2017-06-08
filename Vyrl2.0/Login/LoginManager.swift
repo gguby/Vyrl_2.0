@@ -39,6 +39,10 @@ class LoginManager{
         return headers
     }
     
+    var needSignUpToken:String?
+    var needSignUpSecret:String?
+    var needSignUpService:ServiceType?
+    
     func login(accessToken : String , accessTokenSecret :String, service : ServiceType, callBack : LoginViewController )
     {
         let parameters : Parameters = [
@@ -55,8 +59,16 @@ class LoginManager{
                 
                 if let code : HTTPCode = HTTPCode.init(rawValue: (response.response?.statusCode)!) {
                     switch code {
+                    
+                    case .SUCCESS :
+                        callBack.goSearchView()
                     case .USERNOTEXIST :
                         callBack.goAgreement()
+                        
+                        self.needSignUpToken = accessToken
+                        self.needSignUpSecret = accessTokenSecret
+                        self.needSignUpService = service
+                        
                         break
                     case .UNAUTORIZED :
                         break                        
@@ -71,28 +83,19 @@ class LoginManager{
         })
     }
     
-    func signout()
+    func signout(completionHandler : @escaping (DataResponse<String>) -> Void)
     {
         let uri = baseURL + "accounts/signout"
         
-        Alamofire.request(uri, method: .delete, parameters: nil, encoding: JSONEncoding.default, headers: getHeader()).responseString(completionHandler: {
-            response in
-            switch response.result {
-            case .success(let json):
-                print((response.response?.statusCode)!)
-                print(json)
-            case .failure(let error):
-                print(error)
-            }
-        })
+        Alamofire.request(uri, method: .delete, parameters: nil, encoding: JSONEncoding.default, headers: getHeader()).responseString(completionHandler: completionHandler)
     }
     
-    func signUp(accessToken : String , accessTokenSecret :String, service : ServiceType, homePageURL : String , nickName : String, selfIntro:String)
+    func signUp(homePageURL : String , nickName : String, selfIntro:String, completionHandler : @escaping (DataResponse<String>) -> Void)
     {
         let parameters : Parameters = [
-            "accessToken": accessToken,
-            "accessTokenSecret" : accessTokenSecret,
-            "socialType" : service.name(),
+            "accessToken": self.needSignUpToken!,
+            "accessTokenSecret" : self.needSignUpSecret!,
+            "socialType" : self.needSignUpService!.name(),
             "homePageUrl": homePageURL,
             "nickName": nickName,
             "selfIntro": selfIntro,
@@ -100,15 +103,7 @@ class LoginManager{
         
         let uri = baseURL + "accounts/signup"
         
-        Alamofire.request(uri, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: getHeader()).responseString(completionHandler: {
-            response in switch response.result {
-            case .success(let json):
-                print((response.response?.statusCode)!)
-                print(json)
-            case .failure(let error):
-                print(error)
-            }
-        })
+        Alamofire.request(uri, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: getHeader()).responseString(completionHandler : completionHandler)
     }
     
     func withDraw()
@@ -147,6 +142,7 @@ enum ServiceType {
 }
 
 enum HTTPCode: Int{
+    case SUCCESS     = 200
     case UNAUTORIZED = 401
     case USERNOTEXIST = 901
 }

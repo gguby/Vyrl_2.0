@@ -52,11 +52,31 @@ class AccountManagementViewController: UIViewController, UITableViewDelegate, UI
         // Pass the selected object to the new view controller.
     }
     */
-    
-    @IBAction func dimiss(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+    @IBAction func withDraw(_ sender: Any) {
+        print("withDraw")
     }
-
+    
+    @IBAction func logout(_ sender: Any)
+    {
+        print("logout")
+        
+        LoginManager.sharedInstance.signout(completionHandler: {
+            response in
+            switch response.result {
+            case .success(let json):
+                
+                
+                
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.goLogin()
+                
+                print((response.response?.statusCode)!)
+                print(json)
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
 }
 
 class AccountCell : UITableViewCell {

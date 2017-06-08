@@ -942,9 +942,12 @@
                     </view>
                     <connections>
                         <outlet property="checkView" destination="uWb-1W-ywh" id="2UF-eL-nlp"/>
+                        <outlet property="introField" destination="eMQ-e1-Uam" id="3vs-AY-Bn3"/>
+                        <outlet property="nickNameField" destination="igN-sS-xc5" id="Rdi-wb-0ga"/>
                         <outlet property="overlabLabel" destination="R1w-YL-0N1" id="mEt-jI-z6K"/>
                         <outlet property="photoView" destination="ras-kJ-SP7" id="Giq-Md-wX8"/>
                         <outlet property="signUp" destination="dj0-Bf-9aY" id="oE2-tz-VZu"/>
+                        <outlet property="webURLField" destination="EmI-81-KTG" id="NRx-Pf-PfX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P9r-Gf-vAC" userLabel="First Responder" sceneMemberID="firstResponder"/>
