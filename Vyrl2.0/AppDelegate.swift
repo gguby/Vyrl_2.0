@@ -57,24 +57,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         setupGAI()
         
-//        GIDSignIn.sharedInstance()?.signOut()
-//        
-//        let firebaseAuth = FIRAuth.auth()
-//        do{
-//            try firebaseAuth?.signOut()
-//        } catch let signOutError as NSError {
-//            print ("Error signing out : %@", signOutError)
-//        }
-        
-//        FIRAuth.auth()?.addStateDidChangeListener(){ (auth , user) in
-//            if user == nil {
-//                self.goLogin()
-//            }
-//        }
-        
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions);
         Fabric.with([Twitter.self])
         
+        if (!LoginManager.sharedInstance.loadCookies()){
+            self.goLogin()
+        }
+        
+        LoginManager.sharedInstance.loadAccountList()
         return true
     }
     

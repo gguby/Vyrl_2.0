@@ -17,7 +17,9 @@ class LoginManager{
     private let APPVersion = "1.0.0"
     private let AppDevice = "ios"
     
-    private var cookie : String?
+    var cookie : String?
+    
+    var accountList :Array<Account> = []
     
     private var _login:Bool = false
     
@@ -61,8 +63,16 @@ class LoginManager{
             switch response.result {
                 case .success(let json):
                     
-                    self.cookie = response.response?.allHeaderFields["Set-Cookie"] as? String
-                
+                    self.saveCookies(response: response);
+                    
+                    let account = Account.init(properties: [
+                        "email" : service.name(),
+                        "accessToken" : accessToken,
+                        "sessionToken" : self.cookie!
+                    ])
+                    
+                    self.addAccount(account: account)
+                    
                     if let code : HTTPCode = HTTPCode.init(rawValue: (response.response?.statusCode)!) {
                         switch code {
                     
@@ -127,7 +137,7 @@ class LoginManager{
         })
     }
     
-    
+   
 }
 
 enum ServiceType {
@@ -152,3 +162,110 @@ enum HTTPCode: Int{
     case UNAUTORIZED = 401
     case USERNOTEXIST = 901
 }
+
+
+
+extension LoginManager {
+    
+    func saveCookies(response: DataResponse<String>) {
+        let headerFields = response.response?.allHeaderFields as! [String: String]
+        let url = response.response?.url
+        let cookies = HTTPCookie.cookies(withResponseHeaderFields: headerFields, for: url!)
+        var cookieArray = [[HTTPCookiePropertyKey: Any]]()
+        for cookie in cookies {
+            self.cookie = cookie.value
+            print("Save Cookie: \(cookie.value)")
+            cookieArray.append(cookie.properties!)
+        }
+        UserDefaults.standard.set(cookieArray, forKey: "savedCookies")
+        UserDefaults.standard.synchronize()
+    }
+    
+    func clearCookies(){
+        if let cookies = HTTPCookieStorage.shared.cookies {
+            for cookie in cookies {
+                HTTPCookieStorage.shared.deleteCookie(cookie)
+            }
+        }
+        
+        UserDefaults.standard.removeObject(forKey: "savedCookies" )
+        UserDefaults.standard.synchronize()
+    }
+    
+    func loadCookies() -> Bool {
+        guard let cookieArray = UserDefaults.standard.array(forKey: "savedCookies") as? [[HTTPCookiePropertyKey: Any]] else { return false }
+        for cookieProperties in cookieArray {
+            if let cookie = HTTPCookie(properties: cookieProperties) {
+                
+                self.cookie = cookie.value
+                print("Load Cookie: \(cookie.value)")
+                HTTPCookieStorage.shared.setCookie(cookie)
+            }
+        }
+        
+        return true
+    }
+    
+    func getCookieHeader() -> [String :String]? {
+
+        if let cookies = HTTPCookieStorage.shared.cookies {
+            for cookie in cookies {
+                return HTTPCookie.requestHeaderFields(with: [cookie])
+            }
+        }
+        
+        return nil
+    }
+
+}
+
+class Account {
+    
+    var email : String?
+    var accessToken : String?
+    var sessionToken : String?
+    
+    public init(properties : [String : Any]){
+        self.email = properties["email"] as? String;
+        self.accessToken = properties["accessToken"] as? String;
+        self.sessionToken = properties["sessionToken"] as? String;
+    }
+    
+    open var properties : [String : String] {
+        get {
+             return [
+                "email" : self.email!,
+                "accessToken" : self.accessToken!,
+                "sessionToken" : self.sessionToken!
+            ]
+        }
+    }
+}
+
+extension LoginManager {
+    
+    open func loadAccountList() {
+        guard let accountArray = UserDefaults.standard.array(forKey: "accountList") as? [[String: Any]] else { return }
+        
+        for account in accountArray {
+            let account : Account = Account.init(properties: account)
+            self.accountList.append(account)
+        }
+    }
+    
+    func addAccount(account : Account){
+        
+        self.accountList.append(account)
+        
+        var accountArray = [[String: Any]]()
+        for account in self.accountList
+        {
+            accountArray.append(account.properties)
+        }
+        
+        UserDefaults.standard.set(accountArray, forKey: "accountList")
+        UserDefaults.standard.synchronize()
+    }
+}
+
+

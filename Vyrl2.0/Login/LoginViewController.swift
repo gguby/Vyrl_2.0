@@ -178,6 +178,8 @@ extension LoginViewController
         
         guard let authentication = user.authentication else { return }
         
+        print(authentication.accessToken)
+        
         LoginManager.sharedInstance.login(accessToken: authentication.accessToken, accessTokenSecret: "", service: ServiceType.Google, callBack: self)
 
     }

@@ -62,10 +62,11 @@ class AccountManagementViewController: UIViewController, UITableViewDelegate, UI
         
         LoginManager.sharedInstance.signout(completionHandler: {
             response in
+            
+            LoginManager.sharedInstance.clearCookies()
+            
             switch response.result {
             case .success(let json):
-                
-                
                 
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 appDelegate.goLogin()
