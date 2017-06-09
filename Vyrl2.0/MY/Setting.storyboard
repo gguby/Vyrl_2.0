@@ -1774,6 +1774,9 @@ Cw
                                 <state key="normal" title="계정 탈퇴">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="JyE-u2-9B0" kind="show" id="d3W-Nr-yH8"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1915,6 +1918,226 @@ Cw
             </objects>
             <point key="canvasLocation" x="1314.4000000000001" y="333.28335832083962"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="lDA-xz-W6T">
+            <objects>
+                <viewController id="JyE-u2-9B0" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hwT-nR-DfB"/>
+                        <viewControllerLayoutGuide type="bottom" id="q3S-x5-MnM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Gq7-CS-K9s">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="계정을 탈퇴하셨습니다!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QxF-Tf-I8O">
+                                <rect key="frame" x="15" y="87" width="202" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="202" id="QgB-De-Fah"/>
+                                    <constraint firstAttribute="height" constant="26" id="eyH-gz-tYW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-UltraLight" family="Apple SD Gothic Neo" pointSize="22"/>
+                                <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="더 나은 서비스를 위해 탈퇴 사유를 선택해 주세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mf0-bM-tyc">
+                                <rect key="frame" x="15" y="145" width="272" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="272" id="1FH-s9-gkL"/>
+                                    <constraint firstAttribute="height" constant="17" id="ind-Of-vzn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HCT-lq-KOK">
+                                <rect key="frame" x="15" y="172" width="329" height="223"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMM-eV-3JE">
+                                        <rect key="frame" x="20" y="18" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="N8I-bo-ZN4"/>
+                                            <constraint firstAttribute="height" constant="20" id="p17-UT-6m9"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="icon_check_02_on"/>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이용이 불편하고 컨텐츠에 불만이 있어요" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mLj-3H-ybx">
+                                        <rect key="frame" x="50" y="21.5" width="263.5" height="15.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="16" id="vAR-eQ-Ybo"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
+                                        <color key="textColor" red="0.32549019607843138" green="0.30980392156862746" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VrW-bH-J7C">
+                                        <rect key="frame" x="20" y="56" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="DX4-9M-CBf"/>
+                                            <constraint firstAttribute="height" constant="20" id="U7N-0x-0p4"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="icon_check_02_off"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nRQ-fy-mOb">
+                                        <rect key="frame" x="20" y="94" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="Mfp-Qd-BZD"/>
+                                            <constraint firstAttribute="width" constant="20" id="yci-jq-joL"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="icon_check_02_off"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aP3-Ls-i1r">
+                                        <rect key="frame" x="20" y="134" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="Kcm-R1-GbA"/>
+                                            <constraint firstAttribute="width" constant="20" id="uzg-kK-Vu2"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="icon_check_02_off"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AQ5-nV-LTv">
+                                        <rect key="frame" x="20" y="174" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="FKW-1m-YeU"/>
+                                            <constraint firstAttribute="height" constant="20" id="Gdp-Wu-e4v"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="icon_check_02_off"/>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="서비스 이용 컨텐츠에 불만이 있어요" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7E8-yS-4bf">
+                                        <rect key="frame" x="50" y="60" width="182.5" height="15.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="16" id="Uxk-s3-c0C"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
+                                        <color key="textColor" red="0.32549019610000002" green="0.30980392159999998" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사용빈도가 낮아요" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e5B-b5-UJO">
+                                        <rect key="frame" x="50" y="98.5" width="93.5" height="15.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="16" id="ZEF-cu-trm"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
+                                        <color key="textColor" red="0.32549019610000002" green="0.30980392159999998" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="앱 용량과 데이터 사용 용량이 커요" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vmK-aH-aSp">
+                                        <rect key="frame" x="50" y="137" width="175" height="15.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="16" id="eTW-N4-3QF"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
+                                        <color key="textColor" red="0.32549019610000002" green="0.30980392159999998" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="기타 의견을 입력해 주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ytY-UG-w17">
+                                        <rect key="frame" x="50" y="175.5" width="264" height="15.5"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="15.5" id="QJV-5s-T1g"/>
+                                        </constraints>
+                                        <color key="textColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="syA-Jr-D8N">
+                                        <rect key="frame" x="50" y="201" width="259" height="1"/>
+                                        <color key="backgroundColor" red="0.9137254901960784" green="0.90980392156862744" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="yyz-mf-nVr"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.96862745098039216" green="0.96470588235294119" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="mLj-3H-ybx" firstAttribute="leading" secondItem="dMM-eV-3JE" secondAttribute="trailing" constant="10" id="0be-ib-UZY"/>
+                                    <constraint firstItem="7E8-yS-4bf" firstAttribute="leading" secondItem="VrW-bH-J7C" secondAttribute="trailing" constant="10" id="3mK-1m-Eoc"/>
+                                    <constraint firstItem="dMM-eV-3JE" firstAttribute="leading" secondItem="HCT-lq-KOK" secondAttribute="leading" constant="20" id="3sv-Xl-207"/>
+                                    <constraint firstItem="nRQ-fy-mOb" firstAttribute="leading" secondItem="VrW-bH-J7C" secondAttribute="leading" id="8g4-Vy-UD4"/>
+                                    <constraint firstItem="mLj-3H-ybx" firstAttribute="top" secondItem="HCT-lq-KOK" secondAttribute="top" constant="21.5" id="8oM-mI-JZs"/>
+                                    <constraint firstItem="aP3-Ls-i1r" firstAttribute="top" secondItem="nRQ-fy-mOb" secondAttribute="bottom" constant="20" id="980-2I-sTg"/>
+                                    <constraint firstItem="7E8-yS-4bf" firstAttribute="leading" secondItem="mLj-3H-ybx" secondAttribute="leading" id="AJA-5T-Hft"/>
+                                    <constraint firstItem="VrW-bH-J7C" firstAttribute="leading" secondItem="dMM-eV-3JE" secondAttribute="leading" id="Aoz-ph-cU8"/>
+                                    <constraint firstItem="e5B-b5-UJO" firstAttribute="top" secondItem="7E8-yS-4bf" secondAttribute="bottom" constant="23" id="BV2-5O-vos"/>
+                                    <constraint firstItem="aP3-Ls-i1r" firstAttribute="leading" secondItem="nRQ-fy-mOb" secondAttribute="leading" id="FGo-Fv-vlm"/>
+                                    <constraint firstItem="dMM-eV-3JE" firstAttribute="top" secondItem="HCT-lq-KOK" secondAttribute="top" constant="18" id="FNj-VV-mBh"/>
+                                    <constraint firstItem="syA-Jr-D8N" firstAttribute="leading" secondItem="HCT-lq-KOK" secondAttribute="leading" constant="50" id="IYy-IE-yUR"/>
+                                    <constraint firstAttribute="height" constant="223" id="JwF-5n-50M"/>
+                                    <constraint firstAttribute="trailing" secondItem="syA-Jr-D8N" secondAttribute="trailing" constant="20" id="LOt-nn-bHq"/>
+                                    <constraint firstItem="AQ5-nV-LTv" firstAttribute="leading" secondItem="aP3-Ls-i1r" secondAttribute="leading" id="Me2-0f-Wkr"/>
+                                    <constraint firstItem="7E8-yS-4bf" firstAttribute="top" secondItem="mLj-3H-ybx" secondAttribute="bottom" constant="23" id="PwR-BF-tai"/>
+                                    <constraint firstAttribute="trailing" secondItem="ytY-UG-w17" secondAttribute="trailing" constant="15" id="SnH-Om-NT2"/>
+                                    <constraint firstItem="ytY-UG-w17" firstAttribute="leading" secondItem="AQ5-nV-LTv" secondAttribute="trailing" constant="10" id="aWE-1o-Tre"/>
+                                    <constraint firstItem="vmK-aH-aSp" firstAttribute="top" secondItem="e5B-b5-UJO" secondAttribute="bottom" constant="23" id="d5s-VF-BRU"/>
+                                    <constraint firstItem="syA-Jr-D8N" firstAttribute="top" secondItem="AQ5-nV-LTv" secondAttribute="bottom" constant="7" id="e9Y-pm-ZJq"/>
+                                    <constraint firstItem="vmK-aH-aSp" firstAttribute="leading" secondItem="e5B-b5-UJO" secondAttribute="leading" id="glZ-m5-o0D"/>
+                                    <constraint firstItem="e5B-b5-UJO" firstAttribute="leading" secondItem="7E8-yS-4bf" secondAttribute="leading" id="hua-44-dZb"/>
+                                    <constraint firstItem="ytY-UG-w17" firstAttribute="top" secondItem="vmK-aH-aSp" secondAttribute="bottom" constant="23" id="i4Q-hB-gRi"/>
+                                    <constraint firstAttribute="trailing" secondItem="mLj-3H-ybx" secondAttribute="trailing" constant="15.5" id="mQd-ps-ZGy"/>
+                                    <constraint firstItem="AQ5-nV-LTv" firstAttribute="top" secondItem="aP3-Ls-i1r" secondAttribute="bottom" constant="20" id="mXb-O2-3XE"/>
+                                    <constraint firstItem="nRQ-fy-mOb" firstAttribute="top" secondItem="VrW-bH-J7C" secondAttribute="bottom" constant="18" id="pSj-Ke-9Q7"/>
+                                    <constraint firstItem="VrW-bH-J7C" firstAttribute="top" secondItem="dMM-eV-3JE" secondAttribute="bottom" constant="18" id="qm4-I3-Znv"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.9137254901960784" green="0.90980392156862744" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="acs-T0-ykC">
+                                <rect key="frame" x="285" y="423" width="45" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15.5" id="SNM-jg-ypd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
+                                <state key="normal" title="넘어가기">
+                                    <color key="titleColor" red="0.32549019607843138" green="0.30980392156862746" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_bullet_02" translatesAutoresizingMaskIntoConstraints="NO" id="9Rb-Wb-QK1">
+                                <rect key="frame" x="340" y="427" width="4" height="7"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="4" id="RVa-P9-xL0"/>
+                                    <constraint firstAttribute="height" constant="6.5" id="r7m-gx-v10"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oue-oK-AEi">
+                                <rect key="frame" x="0.0" y="622" width="375" height="45"/>
+                                <color key="backgroundColor" red="0.50196078430000002" green="0.32156862749999998" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="bHk-YV-gIC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
+                                <state key="normal" title="탈퇴 사유 보내기">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="oue-oK-AEi" secondAttribute="trailing" id="2J0-P4-KhC"/>
+                            <constraint firstItem="9Rb-Wb-QK1" firstAttribute="leading" secondItem="acs-T0-ykC" secondAttribute="trailing" constant="10" id="4mw-jw-bCn"/>
+                            <constraint firstItem="oue-oK-AEi" firstAttribute="leading" secondItem="Gq7-CS-K9s" secondAttribute="leading" id="5bI-Dm-hwn"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="acs-T0-ykC" secondAttribute="trailing" constant="29" id="7mG-U4-SzI"/>
+                            <constraint firstItem="QxF-Tf-I8O" firstAttribute="top" secondItem="hwT-nR-DfB" secondAttribute="bottom" constant="67" id="8xy-kE-yOA"/>
+                            <constraint firstItem="mf0-bM-tyc" firstAttribute="top" secondItem="QxF-Tf-I8O" secondAttribute="bottom" constant="32" id="Ftn-g1-Xfy"/>
+                            <constraint firstItem="HCT-lq-KOK" firstAttribute="leading" secondItem="mf0-bM-tyc" secondAttribute="leading" id="N0t-5I-ZY1"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="HCT-lq-KOK" secondAttribute="trailing" constant="15" id="NKT-rS-K8f"/>
+                            <constraint firstItem="oue-oK-AEi" firstAttribute="bottom" secondItem="q3S-x5-MnM" secondAttribute="top" id="R8j-kJ-OZo"/>
+                            <constraint firstItem="HCT-lq-KOK" firstAttribute="top" secondItem="mf0-bM-tyc" secondAttribute="bottom" constant="10" id="Srf-6d-ws1"/>
+                            <constraint firstItem="QxF-Tf-I8O" firstAttribute="leading" secondItem="Gq7-CS-K9s" secondAttribute="leadingMargin" constant="-1" id="aHr-XK-rkP"/>
+                            <constraint firstItem="9Rb-Wb-QK1" firstAttribute="top" secondItem="HCT-lq-KOK" secondAttribute="bottom" constant="32" id="fpN-DK-qqn"/>
+                            <constraint firstItem="mf0-bM-tyc" firstAttribute="leading" secondItem="QxF-Tf-I8O" secondAttribute="leading" id="hva-gg-s2J"/>
+                            <constraint firstItem="acs-T0-ykC" firstAttribute="top" secondItem="HCT-lq-KOK" secondAttribute="bottom" constant="28" id="iFi-Rj-Gpa"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DYs-TM-VE5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2036" y="332.38380809595208"/>
+        </scene>
     </scenes>
     <resources>
         <image name="badge_premium_01" width="62" height="62"/>
@@ -1925,6 +2148,9 @@ Cw
         <image name="icon_arrow_02_right" width="28" height="35"/>
         <image name="icon_arrow_03_close" width="30" height="30"/>
         <image name="icon_back_01" width="20" height="20"/>
+        <image name="icon_bullet_02" width="16" height="16"/>
+        <image name="icon_check_02_off" width="16" height="16"/>
+        <image name="icon_check_02_on" width="20" height="20"/>
         <image name="icon_check_05_on" width="20" height="20"/>
         <image name="icon_dot_02" width="3" height="3"/>
         <image name="icon_qrcode_01_premium" width="21" height="21"/>
