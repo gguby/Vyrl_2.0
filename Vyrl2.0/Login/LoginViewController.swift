@@ -24,7 +24,6 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
         
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self;
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -50,7 +49,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
         let mainController = storyboard.instantiateInitialViewController()!
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.window?.rootViewController = mainController
+        appDelegate.window?.rootViewController = mainController       
     }
     
     func loginByFireBase(credential:  FIRAuthCredential) {

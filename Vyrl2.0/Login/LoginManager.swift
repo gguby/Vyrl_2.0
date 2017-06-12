@@ -63,20 +63,21 @@ class LoginManager{
             switch response.result {
                 case .success(let json):
                     
-                    self.saveCookies(response: response);
-                    
-                    let account = Account.init(properties: [
-                        "email" : service.name(),
-                        "accessToken" : accessToken,
-                        "sessionToken" : self.cookie!
-                    ])
-                    
-                    self.addAccount(account: account)
-                    
                     if let code : HTTPCode = HTTPCode.init(rawValue: (response.response?.statusCode)!) {
                         switch code {
                     
                         case .SUCCESS :
+                            
+                            self.saveCookies(response: response);
+                            
+                            let account = Account.init(properties: [
+                                "email" : service.name(),
+                                "accessToken" : accessToken,
+                                "sessionToken" : self.cookie!
+                                ])
+                            
+                            self.addAccount(account: account)
+                            
                             callBack.goSearchView()
                         case .USERNOTEXIST :
                             callBack.goAgreement()
@@ -163,6 +164,30 @@ enum HTTPCode: Int{
     case USERNOTEXIST = 901
 }
 
+extension LoginManager {
+    
+    func checkPush(viewConroller : UIViewController){
+        
+        let isCheckPush : Bool = UserDefaults.standard.bool(forKey: "pushNotification")
+        
+        let msg = "이벤트 및 프로모션 알림을 받으시겠습니까?"
+        if ( isCheckPush == false ){
+            let alert = UIAlertController(title: "", message: msg, preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "동의", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction!) in
+            
+                UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil))
+                UIApplication.shared.registerForRemoteNotifications()
+                
+                UserDefaults.standard.set(true, forKey: "pushNotification")
+            }))
+            
+            alert.addAction(UIAlertAction(title: "동의 안함", style: UIAlertActionStyle.cancel, handler: nil))
+            viewConroller.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+}
+
 
 
 extension LoginManager {
@@ -171,6 +196,11 @@ extension LoginManager {
         let headerFields = response.response?.allHeaderFields as! [String: String]
         let url = response.response?.url
         let cookies = HTTPCookie.cookies(withResponseHeaderFields: headerFields, for: url!)
+        
+        if ( cookies.count == 0 ) {
+            return
+        }
+        
         var cookieArray = [[HTTPCookiePropertyKey: Any]]()
         for cookie in cookies {
             self.cookie = cookie.value
@@ -247,6 +277,8 @@ extension LoginManager {
     open func loadAccountList() {
         guard let accountArray = UserDefaults.standard.array(forKey: "accountList") as? [[String: Any]] else { return }
         
+        self.accountList.removeAll()
+        
         for account in accountArray {
             let account : Account = Account.init(properties: account)
             self.accountList.append(account)
@@ -265,6 +297,15 @@ extension LoginManager {
         
         UserDefaults.standard.set(accountArray, forKey: "accountList")
         UserDefaults.standard.synchronize()
+    }
+    
+    func getCurrentAccount() -> Account?{
+        for account in self.accountList {
+            if ( self.cookie == account.sessionToken ){
+                return account
+            }
+        }
+        return nil
     }
 }
 

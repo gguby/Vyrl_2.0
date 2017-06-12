@@ -16,6 +16,8 @@ class FeedViewController: UIViewController {
        
         registerSwipe()
         print("Feed");
+        
+        LoginManager.sharedInstance.checkPush(viewConroller: self)
     }
     
     override func didReceiveMemoryWarning() {

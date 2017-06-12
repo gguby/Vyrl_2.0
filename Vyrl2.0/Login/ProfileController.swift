@@ -58,15 +58,15 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
     
     
     func showAlert() {
-        let alertController = UIAlertController (title:"", message:"",preferredStyle:.alert)
+        let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.alert)
         
-        let showProfileAction = UIAlertAction(title: "Show Profile", style: .default,handler: { (action) -> Void in
+        let showProfileAction = UIAlertAction(title: "사진 크게 보기", style: .default,handler: { (action) -> Void in
             self.showProfileViewController()
         })
-        let changeProfileAction = UIAlertAction(title: "Change Profile", style: .default, handler: { (action) -> Void in
+        let changeProfileAction = UIAlertAction(title: "프로필 사진 변경", style: .default, handler: { (action) -> Void in
            self.changeProfile()
         })
-        let defaultProfileAction = UIAlertAction(title: "Default Profile", style: .default, handler: nil)
+        let defaultProfileAction = UIAlertAction(title: "기본 이미지로 변경", style: .default, handler: nil)
         let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
         
         alertController.addAction(showProfileAction)
