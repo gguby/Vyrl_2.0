@@ -56,6 +56,11 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
         })
     }
     
+    @IBAction func checkNicname(_ sender: UIButton) {
+        LoginManager.sharedInstance.editNickname(nickname: nickNameField.text!) { (response) in
+            print(response)
+        }
+    }
     
     func showAlert() {
         let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.alert)
