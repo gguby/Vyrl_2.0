@@ -30,6 +30,14 @@ extension UIViewController
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
+    func pushViewControllrer(storyboardName : String, controllerName : String) -> UIViewController {
+        let storyboard = UIStoryboard(name:storyboardName, bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: controllerName)
+        controller.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(controller, animated: true)
+        return controller
+    }
+    
     func respondToSwipeGesture(gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {

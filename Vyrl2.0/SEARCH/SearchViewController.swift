@@ -47,6 +47,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     {
         searchBar.setImage(UIImage.init(named: "icon_search_02_off"), for: UISearchBarIcon.search, state: UIControlState.normal)
         searchBar.placeholder = "검색"
+        searchBar.backgroundImage = UIImage()
         
         let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
         textFieldInsideSearchBar?.backgroundColor = UIColor.clear

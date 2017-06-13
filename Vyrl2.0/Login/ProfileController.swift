@@ -25,10 +25,17 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
     @IBOutlet weak var introField: UITextField!
     @IBOutlet weak var webURLField: UITextField!
     
+    var type : ProfileViewType = .SignUp
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        overlabLabel.isHidden = true
+        switch self.type {
+        case .SignUp:
+            overlabLabel.isHidden = true
+        case .Modify:
+            print("modify")
+        }
     }
     
     @IBAction func dismiss(sender :AnyObject )
@@ -162,6 +169,15 @@ extension ProfileController : UITextFieldDelegate {
 
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+}
+
+enum ProfileViewType {
+    case SignUp, Modify
 }
 
 

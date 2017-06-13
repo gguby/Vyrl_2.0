@@ -43,6 +43,11 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         
     }
     
+    @IBAction func pushProfile(_ sender: Any) {
+        let view : ProfileController = self.pushViewControllrer(storyboardName: "My", controllerName: "profile") as! ProfileController
+        view.type = .Modify
+    }
+    
     @IBAction func showSetting(){
         self.pushView(storyboardName: "My", controllerName: "setting")
     }

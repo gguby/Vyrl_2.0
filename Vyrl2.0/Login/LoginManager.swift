@@ -170,8 +170,10 @@ extension LoginManager {
         
         let isCheckPush : Bool = UserDefaults.standard.bool(forKey: "pushNotification")
         
-        let msg = "이벤트 및 프로모션 알림을 받으시겠습니까?"
         if ( isCheckPush == false ){
+            
+            let msg = "이벤트 및 프로모션 알림을 받으시겠습니까?"
+            
             let alert = UIAlertController(title: "", message: msg, preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "동의", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction!) in
             
