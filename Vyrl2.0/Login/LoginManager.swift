@@ -138,6 +138,13 @@ class LoginManager{
         })
     }
     
+    func editNickname(nickname: String, completionHandler : @escaping(DataResponse<String>) -> Void) {
+        let uri = baseURL + "accounts/nickname"
+        
+        Alamofire.request(uri, method: .delete, parameters: nil, encoding: JSONEncoding.default, headers: getHeader()).responseString(completionHandler: completionHandler)
+
+    }
+    
    
 }
 
