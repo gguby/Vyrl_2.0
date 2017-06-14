@@ -24,6 +24,7 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
     @IBOutlet weak var nickNameField: UITextField!    
     @IBOutlet weak var introField: UITextField!
     @IBOutlet weak var webURLField: UITextField!
+    @IBOutlet weak var duplicationCheckButton: UIButton!
     
     var type : ProfileViewType = .SignUp
     
@@ -36,6 +37,12 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
         case .Modify:
             print("modify")
         }
+        
+        duplicationCheckButton.setTitleColor(UIColor.ivGreyish, for: .disabled)
+        duplicationCheckButton.setTitleColor(UIColor.ivLighterPurple, for: .normal)
+        
+        signUp.isEnabled = false
+        signUp.backgroundColor = UIColor.hexStringToUIColor(hex: "#ACACAC")
     }
     
     @IBAction func dismiss(sender :AnyObject )
@@ -64,8 +71,31 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     @IBAction func checkNicname(_ sender: UIButton) {
-        LoginManager.sharedInstance.editNickname(nickname: nickNameField.text!) { (response) in
-            print(response)
+        self.duplicationCheckButton.isEnabled = false;
+        LoginManager.sharedInstance.editNickname(nickname: nickNameField.text!) { (response)
+            in switch response.result {
+            case .success(let json):
+                print((response.response?.statusCode)!)
+                print(json)
+                
+                if((response.response?.statusCode)! == 900)
+                {
+                    self.overlabLabel.isHidden = false
+                } else if ((response.response?.statusCode)! == 200)
+                {
+                    self.checkView.isHidden = false
+                    self.duplicationCheckButton.isHidden = true
+                    
+                    self.signUp.isEnabled = true
+                    self.signUp.backgroundColor = UIColor.ivLighterPurple
+                }
+                
+            case .failure(let error):
+                print(error)
+            }
+            
+            
+            
         }
     }
     
@@ -155,21 +185,22 @@ extension ProfileController: SHViewControllerDelegate {
 extension ProfileController : UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        overlabLabel.isHidden = true
+        duplicationCheckButton.isEnabled = false;
         
-        if ( (textField.text?.characters.count)! == 1 && string.characters.count == 0){
-            signUp.isEnabled = false
-            signUp.backgroundColor = UIColor.hexStringToUIColor(hex: "#ACACAC")
-            return true
+        signUp.isEnabled = false
+        signUp.backgroundColor = UIColor.hexStringToUIColor(hex: "#ACACAC")
+        
+        self.checkView.isHidden = true
+        self.duplicationCheckButton.isHidden = false
+
+        
+        let newLength = textField.text!.characters.count + string.characters.count - range.length;
+        if(newLength > 3 && newLength < 20)
+        {
+            duplicationCheckButton.isEnabled = true;
         }
         
-        if ( (textField.text?.characters.count)! > 0 || string.characters.count > 0 ){
-            signUp.isEnabled = true
-            signUp.backgroundColor = UIColor.ivLighterPurple
-        }
-        else {
-            signUp.isEnabled = false
-            signUp.backgroundColor = UIColor.hexStringToUIColor(hex: "#ACACAC")
-        }
         return true
 
     }

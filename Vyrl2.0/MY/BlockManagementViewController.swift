@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class BlockManagementViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -18,6 +19,17 @@ class BlockManagementViewController: UIViewController, UITableViewDelegate, UITa
         // Do any additional setup after loading the view.
         tableView.dataSource = self
         tableView.delegate = self
+        
+        let uri = LoginManager.sharedInstance.baseURL + "my/blocedUser"
+        
+        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: LoginManager.sharedInstance.getHeader()).responseString(completionHandler: {
+            response in switch response.result {
+            case .success(let json):
+                print(json)
+            case .failure(let error):
+                print(error)
+            }
+        })
     }
 
     override func didReceiveMemoryWarning() {
