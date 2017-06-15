@@ -7,11 +7,19 @@
 //
 
 import UIKit
+import GrowingTextView
 
 class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableViewDataSource {
+   
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var commentTextView: UITextView!
+    
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var commentTextField: UITextField!
-    @IBOutlet weak var commentTextFieldBottomConstraint: NSLayoutConstraint!
+  
+    @IBOutlet weak var commentFieldView: UIView!
+    @IBOutlet weak var buttonView: UIView!
+    
+    
     var kbHeight: CGFloat!
 
     override func viewDidLoad() {
@@ -24,23 +32,26 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
         tableView.tableFooterView = UIView(frame: .zero)
         tableView.reloadData()
         
-        self.commentTextField.delegate = self
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureHandler))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @IBAction func commentButtonclick(_ sender: UIButton) {
+        self.commentFieldView.isHidden = false
+        self.commentTextView.becomeFirstResponder()
+        self.buttonView.isHidden = true
+    }
+    @IBAction func postButtonClick(_ sender: UIButton) {
+        self.commentFieldView.isHidden = true
+        self.commentTextView.text = ""
+        self.commentTextView.resignFirstResponder()
+        self.buttonView.isHidden = false
     }
     
     func keyboardShow(notification: NSNotification) {
-//        var userInfo = notification.userInfo!
-//        let keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
-//        let animationDurarion = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval
-//        let changeInHeight = (keyboardFrame.height) * 1
-//        UIView.animate(withDuration: animationDurarion, animations: { () -> Void in
-//            let index = IndexPath(row: 9, section: 0)
-//            self.tableView.scrollToRow(at: index, at: .bottom, animated: true)
-////            self.commentTextFieldBottomConstraint.constant += changeInHeight
-//             self.commentTextFieldBottomConstraint.constant += 200
-//        })
         if let userInfo = notification.userInfo {
             if let keyboardSize =  (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
                 kbHeight = keyboardSize.height
@@ -49,14 +60,12 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
                 self.tableView.scrollToRow(at: index, at: .bottom, animated: true)
             }
         }
+//        let endFrame = ((notification as NSNotification).userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+//        bottomConstraint.constant = UIScreen.main.bounds.height - endFrame.origin.y
+//        self.view.layoutIfNeeded()
     }
     
     func keyboardHide(notification: NSNotification) {
-//        var userInfo = notification.userInfo!
-//        let animationDurarion = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval
-//         UIView.animate(withDuration: animationDurarion, animations: { () -> Void in
-//            self.commentTextFieldBottomConstraint.constant = 0
-//        })
         self.animateTextField(up: false)
     }
     
@@ -66,6 +75,10 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
         UIView.animate(withDuration: 0.3, animations: {
             self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement!)
         })
+    }
+    
+    func tapGestureHandler() {
+        view.endEditing(true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -99,10 +112,11 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
 
 }
 
-extension FeedDetailViewController : UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+extension FeedDetailViewController : GrowingTextViewDelegate {
+    func textViewDidChangeHeight(_ textView: GrowingTextView, height: CGFloat) {
+        UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: [.curveLinear], animations: { () -> Void in
+            self.view.layoutIfNeeded()
+        }, completion: nil)
     }
 }
 

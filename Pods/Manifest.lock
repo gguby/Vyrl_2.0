@@ -68,6 +68,7 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.1.1)
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
+  - GrowingTextView (0.2.5)
   - GTMOAuth2 (1.1.4):
     - GTMSessionFetcher (~> 1.1)
   - GTMSessionFetcher (1.1.9):
@@ -94,6 +95,7 @@ DEPENDENCIES:
   - GKActionSheetPicker
   - Google/Analytics
   - GoogleSignIn
+  - GrowingTextView
   - Sharaku
   - TOCropViewController
   - TwitterKit
@@ -119,6 +121,7 @@ SPEC CHECKSUMS:
   GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
   GoogleSignIn: d7ad83f13480e1f30453471d00d19b5293ac46af
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
+  GrowingTextView: f41542d41128f4fe8dad9197e312a6a2a7add5db
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
   Sharaku: c18de569fc99f6e936f46ca812b571826cc658a7
@@ -126,6 +129,6 @@ SPEC CHECKSUMS:
   TwitterCore: e959987be23c767004d29eb7fab8d85d8585a2e5
   TwitterKit: 3b6044a7320340326a4098f3e37aa1dbaeb94942
 
-PODFILE CHECKSUM: 8f1c769d2202f40695a730e5e1489c2420841a40
+PODFILE CHECKSUM: 59380ab86db3c751ee8d8c53d7d8caa2ed03603c
 
 COCOAPODS: 1.2.1
