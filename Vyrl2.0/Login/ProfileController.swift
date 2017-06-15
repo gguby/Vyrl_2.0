@@ -56,16 +56,28 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
     
     @IBAction func pushView(sender :AnyObject )
     {
-        LoginManager.sharedInstance.signUp(homePageURL: webURLField.text!, nickName: nickNameField.text!, selfIntro: introField.text!, completionHandler:  {
-            response in switch response.result {
-            case .success(let json):
-                print((response.response?.statusCode)!)
-                print(json)
+        let photo = self.photoView.imageView?.image
+        
+        LoginManager.sharedInstance.signUp(homePageURL: webURLField.text!, nickName: nickNameField.text!, selfIntro: introField.text!, profile: photo!, completionHandler:  {
+            encodingResult in
+            switch encodingResult {
+            case .success(let upload, _, _):
                 
-                self.pushView(storyboardName: "Login", controllerName: "logincomplete")
+                upload.uploadProgress(closure: { (progress) in
+                    print(progress)
+                })
                 
-            case .failure(let error):
-                print(error)
+                upload.responseJSON { response in
+                    //print response.result
+                    print(response.result)
+                    print((response.response?.statusCode)!)
+                    print(response)
+//                    self.pushView(storyboardName: "Login", controllerName: "logincomplete")
+
+                }
+                
+            case .failure(let encodingError):
+                print(encodingError.localizedDescription)
             }
         })
     }

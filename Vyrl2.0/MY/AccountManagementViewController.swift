@@ -54,6 +54,8 @@ class AccountManagementViewController: UIViewController, UITableViewDelegate, UI
     */
     @IBAction func withDraw(_ sender: Any) {
         print("withDraw")
+        
+        LoginManager.sharedInstance.withDraw()
     }
     
     @IBAction func logout(_ sender: Any)
