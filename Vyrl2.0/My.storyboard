@@ -1456,7 +1456,7 @@
                                             <constraint firstAttribute="height" constant="3" id="ZVS-JU-b9B"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="중복된 닉네임입니다. 다시 설정해 주세요." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zPS-zU-7eP">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="중복된 닉네임입니다. 다시 설정해 주세요." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zPS-zU-7eP">
                                         <rect key="frame" x="44" y="0.0" width="179" height="13"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="13" id="Kjh-eD-uS1"/>
@@ -1513,24 +1513,41 @@
                                         <color key="textColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="15"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="OJr-pq-JrR" id="xJn-ct-RwQ"/>
+                                        </connections>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fx5-5C-5Se" customClass="CheckBox" customModule="Vyrl2_0" customModuleProvider="target">
-                                        <rect key="frame" x="268" y="8" width="13" height="9"/>
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_check_04_on" translatesAutoresizingMaskIntoConstraints="NO" id="bg2-mT-Pth">
+                                        <rect key="frame" x="268" y="4" width="13" height="9"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="9" id="oiB-Rt-AkW"/>
-                                            <constraint firstAttribute="width" constant="13" id="tVR-Rw-kWB"/>
+                                            <constraint firstAttribute="width" constant="13" id="CIQ-Rz-Nni"/>
+                                            <constraint firstAttribute="height" constant="9" id="Crm-E5-Dc6"/>
                                         </constraints>
-                                        <state key="normal" title="Button"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AVH-5x-kuL">
+                                        <rect key="frame" x="236" y="0.0" width="45" height="17.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="17.5" id="nzP-Qk-MHx"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
+                                        <state key="normal" title="중복확인">
+                                            <color key="titleColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.67450980390000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="checkNicname:" destination="OJr-pq-JrR" eventType="touchUpInside" id="elY-Dd-uWM"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="V9H-LC-aYa" firstAttribute="leading" secondItem="aE9-wA-9SS" secondAttribute="leading" id="BQx-Od-kUu"/>
                                     <constraint firstItem="V9H-LC-aYa" firstAttribute="top" secondItem="aE9-wA-9SS" secondAttribute="top" id="C6e-0Y-3Bs"/>
-                                    <constraint firstItem="fx5-5C-5Se" firstAttribute="top" secondItem="aE9-wA-9SS" secondAttribute="top" constant="8" id="EFI-P1-dg8"/>
+                                    <constraint firstItem="bg2-mT-Pth" firstAttribute="centerY" secondItem="aE9-wA-9SS" secondAttribute="centerY" id="LyN-Zi-oqk"/>
                                     <constraint firstAttribute="height" constant="17.5" id="OCN-yw-p1Z"/>
-                                    <constraint firstItem="fx5-5C-5Se" firstAttribute="leading" secondItem="aE9-wA-9SS" secondAttribute="leading" constant="268" id="sxL-fI-LLh"/>
+                                    <constraint firstItem="AVH-5x-kuL" firstAttribute="centerY" secondItem="aE9-wA-9SS" secondAttribute="centerY" id="gj9-Qu-7ZV"/>
+                                    <constraint firstAttribute="trailing" secondItem="bg2-mT-Pth" secondAttribute="trailing" id="hzA-CU-UeU"/>
                                     <constraint firstAttribute="width" constant="281" id="zbN-dF-Mrs"/>
+                                    <constraint firstAttribute="trailing" secondItem="AVH-5x-kuL" secondAttribute="trailing" id="zla-1n-J07"/>
                                 </constraints>
                             </view>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="yxe-sP-9p9">
@@ -1636,7 +1653,14 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="photoView" destination="e9B-bT-qNu" id="Hb6-rY-6N0"/>
+                        <outlet property="checkView" destination="bg2-mT-Pth" id="jci-Ra-xCF"/>
+                        <outlet property="duplicationCheckButton" destination="AVH-5x-kuL" id="EBs-Z6-JWa"/>
+                        <outlet property="introField" destination="yxe-sP-9p9" id="0wY-vG-gt4"/>
+                        <outlet property="nickNameField" destination="V9H-LC-aYa" id="8ZP-FH-ATq"/>
+                        <outlet property="overlabLabel" destination="zPS-zU-7eP" id="CoS-Zp-Afo"/>
+                        <outlet property="photoView" destination="e9B-bT-qNu" id="Hm1-mR-ybo"/>
+                        <outlet property="signUp" destination="hZU-XE-1IF" id="BdE-k3-Uk5"/>
+                        <outlet property="webURLField" destination="cKx-2Y-MwR" id="zcD-1A-edd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tWw-hH-iVk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2280,6 +2304,7 @@ Cw
         <image name="icon_back_01" width="20" height="20"/>
         <image name="icon_bullet_01" width="4" height="6"/>
         <image name="icon_check_02_on" width="20" height="20"/>
+        <image name="icon_check_04_on" width="13" height="9"/>
         <image name="icon_dot_01" width="3" height="3"/>
         <image name="icon_dot_02" width="3" height="3"/>
         <image name="icon_headset_01" width="13" height="13"/>
