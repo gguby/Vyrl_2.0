@@ -29,6 +29,11 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         // Dispose of any resources that can be recreated.
     }
     
+    
+    @IBAction func photoClick(_ sender: UIButton) {
+        self.pushView(storyboardName: "FeedStyle", controllerName: "FeedDetailViewController")
+    }
+   
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return 5

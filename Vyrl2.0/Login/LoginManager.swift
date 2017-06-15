@@ -13,9 +13,9 @@ class LoginManager{
     
     static let sharedInstance = LoginManager()
     
-    private let baseURL = "http://api.dev2nd.vyrl.com:8080/"
-    private let APPVersion = "1.0.0"
-    private let AppDevice = "ios"
+    let baseURL = "http://api.dev2nd.vyrl.com:8080/"
+    let APPVersion = "1.0.0"
+    let AppDevice = "ios"
     
     var cookie : String?
     
@@ -33,7 +33,7 @@ class LoginManager{
         }
     }
     
-    private func getHeader() -> HTTPHeaders {
+    func getHeader() -> HTTPHeaders {
         let headers: HTTPHeaders = [
             "X-APP-Version": APPVersion,
             "X-Device": AppDevice,
@@ -163,8 +163,11 @@ class LoginManager{
     
     func editNickname(nickname: String, completionHandler : @escaping(DataResponse<String>) -> Void) {
         let uri = baseURL + "accounts/nickname"
+        let parameters : Parameters = [
+            "nickName": nickname,
+            ]
         
-        Alamofire.request(uri, method: .delete, parameters: nil, encoding: JSONEncoding.default, headers: getHeader()).responseString(completionHandler: completionHandler)
+        Alamofire.request(uri, method: .get, parameters: parameters, encoding: URLEncoding.queryString, headers: getHeader()).responseString(completionHandler: completionHandler)
 
     }
     

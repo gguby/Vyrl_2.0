@@ -14,7 +14,7 @@ target 'Vyrl2.0' do
     pod 'FacebookCore'
     pod 'FacebookLogin'
     pod 'FacebookShare'
-    
+    pod 'GrowingTextView'
     pod 'Firebase/Core'
     pod 'Firebase/Auth'
     pod 'GoogleSignIn'
