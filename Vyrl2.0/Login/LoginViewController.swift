@@ -73,7 +73,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
     func faceBookLogin()
     {
         let fbLoginManager = FBSDKLoginManager()
-        fbLoginManager .logOut()
+//        fbLoginManager .logOut()
         fbLoginManager.logIn(withReadPermissions: ["public_profile", "email"], from: self) { (result, error) in
             if let error = error {
                 print("Failed to login: \(error.localizedDescription)")
@@ -84,7 +84,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
                 print("Failed to get access token")
                 return
             }
-            
+
             LoginManager.sharedInstance.login(accessToken: accessToken.tokenString, accessTokenSecret: "", service: ServiceType.FaceBook , callBack: self)
         }
     }

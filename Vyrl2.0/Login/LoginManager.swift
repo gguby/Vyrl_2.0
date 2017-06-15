@@ -49,6 +49,8 @@ class LoginManager{
     
     func login(accessToken : String , accessTokenSecret :String, service : ServiceType, callBack : LoginViewController )
     {
+        print(accessToken)
+        
         let parameters : Parameters = [
             "accessToken": accessToken,
             "accessTokenSecret" : accessTokenSecret,
@@ -56,8 +58,8 @@ class LoginManager{
         ]
         
         let uri = baseURL + "accounts/signin"
-        
-        Alamofire.request(uri, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: getHeader()).responseString(completionHandler: {
+
+        Alamofire.request(uri, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: getHeader()).responseJSON(completionHandler: {
             response in
             
             switch response.result {
@@ -70,11 +72,19 @@ class LoginManager{
                             
                             self.saveCookies(response: response);
                             
+                            let jsonData = json as! NSDictionary
+                            
+                            let idNum = jsonData["id"] as! NSNumber
+                            let idStr = idNum.stringValue
+                            
                             let account = Account.init(properties: [
-                                "email" : service.name(),
+                                "userId" : idStr,
+                                "email" : jsonData["email"] as! String,
                                 "accessToken" : accessToken,
-                                "sessionToken" : self.cookie!
-                                ])
+                                "sessionToken" : self.cookie!,
+                                "nickName" : jsonData["nickName"] as! String,
+                                "service" : service.name()
+                            ])
                             
                             self.addAccount(account: account)
                             
@@ -107,7 +117,7 @@ class LoginManager{
         Alamofire.request(uri, method: .delete, parameters: nil, encoding: JSONEncoding.default, headers: getHeader()).responseString(completionHandler: completionHandler)
     }
     
-    func signUp(homePageURL : String , nickName : String, selfIntro:String, completionHandler : @escaping (DataResponse<String>) -> Void)
+    func signUp(homePageURL : String , nickName : String, selfIntro:String, profile: UIImage, completionHandler : @escaping (SessionManager.MultipartFormDataEncodingResult) -> Void)
     {
         let parameters : Parameters = [
             "accessToken": self.needSignUpToken!,
@@ -119,9 +129,22 @@ class LoginManager{
         ]
         
         let uri = baseURL + "accounts/signup"
+        let fileName = "\(nickName).jpg"
         
-        Alamofire.request(uri, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: getHeader()).responseString(completionHandler : completionHandler)
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            if let imageData = UIImageJPEGRepresentation(profile, 1.0) {
+                multipartFormData.append(imageData, withName: "profile", fileName: fileName, mimeType: "image/jpg")
+            }
+            
+            for ( key, value ) in parameters {
+
+                let valueStr = value as! String
+                multipartFormData.append(valueStr.data(using: String.Encoding.utf8)!, withName: key)
+            }
+            
+        }, usingThreshold: UInt64.init(), to: uri, method: .post, headers: getHeader(), encodingCompletion: completionHandler)
     }
+    
     
     func withDraw()
     {
@@ -201,7 +224,7 @@ extension LoginManager {
 
 extension LoginManager {
     
-    func saveCookies(response: DataResponse<String>) {
+    func saveCookies(response: DataResponse<Any>) {
         let headerFields = response.response?.allHeaderFields as! [String: String]
         let url = response.response?.url
         let cookies = HTTPCookie.cookies(withResponseHeaderFields: headerFields, for: url!)
@@ -263,11 +286,17 @@ class Account {
     var email : String?
     var accessToken : String?
     var sessionToken : String?
+    var service : String?
+    var userId : String?
+    var nickName :String?
     
     public init(properties : [String : Any]){
         self.email = properties["email"] as? String;
         self.accessToken = properties["accessToken"] as? String;
         self.sessionToken = properties["sessionToken"] as? String;
+        self.service = properties["service"] as? String;
+        self.userId = properties["userId"] as? String;
+        self.nickName = properties["nickName"] as? String;
     }
     
     open var properties : [String : String] {
@@ -275,7 +304,10 @@ class Account {
              return [
                 "email" : self.email!,
                 "accessToken" : self.accessToken!,
-                "sessionToken" : self.sessionToken!
+                "sessionToken" : self.sessionToken!,
+                "service" : self.service!,
+                "userId" : self.userId!,
+                "nickName" :self.nickName!
             ]
         }
     }
@@ -294,10 +326,7 @@ extension LoginManager {
         }
     }
     
-    func addAccount(account : Account){
-        
-        self.accountList.append(account)
-        
+    func syncAccount(){
         var accountArray = [[String: Any]]()
         for account in self.accountList
         {
@@ -308,6 +337,13 @@ extension LoginManager {
         UserDefaults.standard.synchronize()
     }
     
+    func addAccount(account : Account){
+        
+        self.accountList.append(account)
+        
+        self.syncAccount()
+    }
+    
     func getCurrentAccount() -> Account?{
         for account in self.accountList {
             if ( self.cookie == account.sessionToken ){
@@ -315,6 +351,27 @@ extension LoginManager {
             }
         }
         return nil
+    }
+    
+    func clearAccountAll(){
+        UserDefaults.standard.removeObject(forKey: "accountList")
+        UserDefaults.standard.synchronize()
+    }
+    
+    func removeAccount(userId : String )
+    {
+        print(self.accountList)
+        
+        let filteredArray = self.accountList.filter{
+            (account) -> Bool in
+            userId == account.userId
+        }
+        
+        self.accountList = filteredArray
+        
+        print(self.accountList)
+        
+        self.syncAccount()
     }
 }
 
