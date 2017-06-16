@@ -16,6 +16,8 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     @IBOutlet weak var footer: UIView!
     
+    var accountList : Array<Account> = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -24,7 +26,9 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         self.accountTable.delegate = self
         self.accountTable.dataSource = self
-        self.accountTable.rowHeight = 50        
+        self.accountTable.rowHeight = 50
+        
+        accountList = LoginManager.sharedInstance.accountList
     }
     
     override func didReceiveMemoryWarning() {
@@ -54,13 +58,28 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return 3
+        return accountList.count
     }
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell :MyAccountCell = tableView.dequeueReusableCell(withIdentifier: "myaccountcell") as! MyAccountCell
+        
+        let account : Account = accountList[indexPath.row]
+        
+        cell.name.text = account.nickName
+        
+        let currentAccount : Account = LoginManager.sharedInstance.getCurrentAccount()!
+        
+        if ( account.userId == currentAccount.userId ){
+            cell.iconCheck.image = UIImage(named: "icon_check_05_on")
+            cell.iconDot.isHidden = true
+            cell.name.textColor = UIColor.ivLighterPurple
+        }
+        else {
+            cell.iconCheck.isHidden = true
+            cell.iconDot.isHidden = false
+        }
         
         return cell
     }
@@ -77,6 +96,9 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         return footer
     }
 
+    @IBAction func showAccountManagement(_ sender: Any) {
+        self.pushView(storyboardName: "Setting", controllerName: "AccountManagement")
+    }
 }
 
 class MyAccountCell : UITableViewCell{

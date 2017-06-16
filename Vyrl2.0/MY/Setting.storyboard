@@ -947,7 +947,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_check_05_on" translatesAutoresizingMaskIntoConstraints="NO" id="zbN-yC-VV9">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zbN-yC-VV9">
                                         <rect key="frame" x="340" y="6" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="2U5-Oc-bZ0"/>
@@ -1017,7 +1017,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="62" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="e0I-rX-mfe">
-                                <rect key="frame" x="0.0" y="283" width="375" height="100"/>
+                                <rect key="frame" x="0.0" y="298" width="375" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="n0V-RL-FCd"/>
@@ -1050,7 +1050,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="백현시우민_엑소" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDq-Qb-uAn">
-                                                            <rect key="frame" x="57" y="1" width="273" height="16"/>
+                                                            <rect key="frame" x="57" y="1" width="289" height="16"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="15.5" id="fn2-bH-WQU"/>
                                                             </constraints>
@@ -1059,7 +1059,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="vyrllove22@gmail.com 으로 연결된 계정" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tNn-bN-Q2t">
-                                                            <rect key="frame" x="57" y="18" width="273" height="13"/>
+                                                            <rect key="frame" x="57" y="18" width="289" height="13"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="13" id="Dpq-er-olo"/>
                                                             </constraints>
@@ -1067,11 +1067,11 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_check_05_on" translatesAutoresizingMaskIntoConstraints="NO" id="xaK-IZ-a5O">
-                                                            <rect key="frame" x="340" y="6" width="20" height="20"/>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_bullet_01" translatesAutoresizingMaskIntoConstraints="NO" id="xaK-IZ-a5O">
+                                                            <rect key="frame" x="356" y="13" width="4" height="6"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="20" id="6fJ-4j-Hjl"/>
-                                                                <constraint firstAttribute="width" constant="20" id="Ce1-AW-BLV"/>
+                                                                <constraint firstAttribute="height" constant="6" id="6fJ-4j-Hjl"/>
+                                                                <constraint firstAttribute="width" constant="4" id="Ce1-AW-BLV"/>
                                                             </constraints>
                                                         </imageView>
                                                     </subviews>
@@ -1100,11 +1100,17 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="57" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <connections>
+                                            <outlet property="emailLabel" destination="tNn-bN-Q2t" id="cxf-nV-Ypq"/>
+                                            <outlet property="logoImageView" destination="5mS-me-JPc" id="4xc-nf-I4E"/>
+                                            <outlet property="nickNameLabel" destination="NDq-Qb-uAn" id="rQp-r9-A9I"/>
+                                            <outlet property="profileImageView" destination="wVP-Hx-O1B" id="LLs-Ku-SgE"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OGF-on-djY">
-                                <rect key="frame" x="15" y="383" width="345" height="42"/>
+                                <rect key="frame" x="15" y="398" width="345" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="c2t-hv-PsQ"/>
                                 </constraints>
@@ -1122,12 +1128,12 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AJC-jP-RJI">
-                                <rect key="frame" x="15" y="432" width="345" height="42"/>
+                                <rect key="frame" x="15" y="447" width="345" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="BsT-Pn-mTH"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
-                                <state key="normal" title="모든 게정에서 로그아웃">
+                                <state key="normal" title="모든 계정에서 로그아웃">
                                     <color key="titleColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -1140,17 +1146,17 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kiY-vv-iqA">
-                                <rect key="frame" x="0.0" y="498" width="375" height="1"/>
+                                <rect key="frame" x="0.0" y="513" width="375" height="1"/>
                                 <color key="backgroundColor" red="0.87450980389999999" green="0.87058823529999996" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="oxg-ff-zOA"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VVe-iN-d06">
-                                <rect key="frame" x="0.0" y="499" width="375" height="168"/>
+                                <rect key="frame" x="0.0" y="514" width="375" height="153"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xml-WO-aWR">
-                                        <rect key="frame" x="0.0" y="123" width="375" height="45"/>
+                                        <rect key="frame" x="0.0" y="108" width="375" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="yUD-3p-bfg"/>
                                         </constraints>
@@ -1182,7 +1188,7 @@
                             <constraint firstAttribute="trailing" secondItem="VVe-iN-d06" secondAttribute="trailing" id="8OP-hp-5hQ"/>
                             <constraint firstItem="kiY-vv-iqA" firstAttribute="top" secondItem="AJC-jP-RJI" secondAttribute="bottom" constant="24" id="8Q8-me-4hO"/>
                             <constraint firstItem="Fji-QL-QTC" firstAttribute="top" secondItem="c82-6O-VAA" secondAttribute="bottom" constant="15" id="8wW-Sk-vWl"/>
-                            <constraint firstItem="e0I-rX-mfe" firstAttribute="top" secondItem="pIg-7a-IHU" secondAttribute="bottom" id="AXK-oO-4C6"/>
+                            <constraint firstItem="e0I-rX-mfe" firstAttribute="top" secondItem="pIg-7a-IHU" secondAttribute="bottom" constant="15" id="AXK-oO-4C6"/>
                             <constraint firstItem="i3W-mW-VNy" firstAttribute="top" secondItem="c82-6O-VAA" secondAttribute="bottom" constant="67" id="D6C-Fn-3Eu"/>
                             <constraint firstItem="kiY-vv-iqA" firstAttribute="leading" secondItem="K7H-tX-u6c" secondAttribute="leading" id="GtN-Fc-7sz"/>
                             <constraint firstItem="c19-sa-XWZ" firstAttribute="leading" secondItem="K7H-tX-u6c" secondAttribute="leading" id="KYX-Im-jz8"/>
@@ -1216,6 +1222,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="emailLabel" destination="zpl-yK-sdy" id="6Mp-Ad-0An"/>
+                        <outlet property="nickName" destination="i5Q-Mv-ygo" id="Bly-Kw-Lbq"/>
+                        <outlet property="profileView" destination="faO-0e-frx" id="3Id-Ul-I98"/>
+                        <outlet property="socialImage" destination="LBb-VB-nVp" id="fHa-mE-y7u"/>
                         <outlet property="tableView" destination="e0I-rX-mfe" id="nyh-Ez-p3O"/>
                         <outlet property="tableViewHeightConstraint" destination="n0V-RL-FCd" id="o2k-yY-XQF"/>
                     </connections>
@@ -2109,10 +2119,10 @@ Cw
         <image name="icon_arrow_02_right" width="28" height="35"/>
         <image name="icon_arrow_03_close" width="30" height="30"/>
         <image name="icon_back_01" width="20" height="20"/>
+        <image name="icon_bullet_01" width="4" height="6"/>
         <image name="icon_bullet_02" width="16" height="16"/>
         <image name="icon_check_02_off" width="16" height="16"/>
         <image name="icon_check_02_on" width="20" height="20"/>
-        <image name="icon_check_05_on" width="20" height="20"/>
         <image name="icon_dot_02" width="3" height="3"/>
         <image name="icon_qrcode_01_premium" width="21" height="21"/>
         <image name="logo_fb_02_on" width="14" height="14"/>

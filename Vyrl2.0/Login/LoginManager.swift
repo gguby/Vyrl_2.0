@@ -110,11 +110,25 @@ class LoginManager{
         })
     }
     
-    func signout(completionHandler : @escaping (DataResponse<String>) -> Void)
+    func signout(completionHandler : @escaping () -> Void)
     {
         let uri = baseURL + "accounts/signout"
         
-        Alamofire.request(uri, method: .delete, parameters: nil, encoding: JSONEncoding.default, headers: getHeader()).responseString(completionHandler: completionHandler)
+        Alamofire.request(uri, method: .delete, parameters: nil, encoding: JSONEncoding.default, headers: getHeader()).responseString(completionHandler: {
+            response in
+            
+            self.clearCookies()
+            
+            switch response.result {
+            case .success(let json):
+                
+                completionHandler()
+                print((response.response?.statusCode)!)
+                print(json)
+            case .failure(let error):
+                print(error)
+            }
+        })
     }
     
     func signUp(homePageURL : String , nickName : String, selfIntro:String, profile: UIImage, completionHandler : @escaping () -> Void)
@@ -215,8 +229,8 @@ class LoginManager{
     }
 }
 
-enum ServiceType {
-    case Google, Twitter, FaceBook , SM
+enum ServiceType : String {
+    case Google = "GOOGLE", Twitter = "TWITTER" , FaceBook = "FACEBOOK" , SM = "SMTOWN"
     
     func name() -> String {
         switch self {
@@ -354,6 +368,23 @@ class Account {
             ]
         }
     }
+    
+    open var logoImage : UIImage {
+        get {
+            let serviceType : ServiceType = ServiceType.init(rawValue: self.service!)!
+            
+            switch serviceType {
+            case .Google:
+                return  UIImage.init(named: "logo_gg_02")!
+            case .FaceBook:
+                return  UIImage.init(named: "logo_fb_02_on")!
+            case .Twitter:
+                return  UIImage.init(named: "logo_tw_02_on")!
+            case .SM :
+                return  UIImage.init(named: "logo_sm_02_on")!
+            }
+        }
+    }
 }
 
 extension LoginManager {
@@ -418,6 +449,15 @@ extension LoginManager {
         print(self.accountList)
         
         self.syncAccount()
+    }
+    
+    func includeNotCurrentUser() -> Array<Account> {
+        let accountList = LoginManager.sharedInstance.accountList.filter({
+            (account) -> Bool in
+            self.getCurrentAccount()?.userId != account.userId
+        })
+        
+        return accountList
     }
 }
 
