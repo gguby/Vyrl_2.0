@@ -1597,6 +1597,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
                                 <state key="normal" title="이렇게 수정합니다!"/>
+                                <connections>
+                                    <action selector="changeProfile:" destination="OJr-pq-JrR" eventType="touchUpInside" id="cJs-7K-qIx"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="마이페이지" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DMl-ij-WYF">
                                 <rect key="frame" x="152.5" y="35" width="70" height="15"/>

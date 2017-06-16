@@ -9,7 +9,7 @@
 import UIKit
 import TOCropViewController
 import Sharaku
-
+import Alamofire
 
 class ProfileController : UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, TOCropViewControllerDelegate{
     
@@ -36,6 +36,7 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
             overlabLabel.isHidden = true
         case .Modify:
             print("modify")
+            self.getProfileData()
         }
         
         duplicationCheckButton.setTitleColor(UIColor.ivGreyish, for: .disabled)
@@ -84,7 +85,7 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
     
     @IBAction func checkNicname(_ sender: UIButton) {
         self.duplicationCheckButton.isEnabled = false;
-        LoginManager.sharedInstance.editNickname(nickname: nickNameField.text!) { (response)
+        LoginManager.sharedInstance.checkNickname(nickname: nickNameField.text!) { (response)
             in switch response.result {
             case .success(let json):
                 print((response.response?.statusCode)!)
@@ -105,10 +106,71 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
             case .failure(let error):
                 print(error)
             }
-            
-            
-            
         }
+    }
+    
+    @IBAction func changeProfile(_ sender: UIButton) {
+        let profile = self.photoView.imageView?.image
+        
+        let parameters : Parameters = [
+            "homePageUrl": webURLField.text!,
+            "nickName": nickNameField.text!,
+            "selfIntro": introField.text!,
+            ]
+
+         let uri = LoginManager.sharedInstance.baseURL + "my/profile"
+         let fileName = "\(nickNameField.text!).jpg"
+        
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            if let imageData = UIImageJPEGRepresentation(profile!, 1.0) {
+                multipartFormData.append(imageData, withName: "profile", fileName: fileName, mimeType: "image/jpg")
+            }
+            
+            for ( key, value ) in parameters {
+                let valueStr = value as! String
+                multipartFormData.append(valueStr.data(using: String.Encoding.utf8)!, withName: key)
+            }
+            
+        }, usingThreshold: UInt64.init(), to: uri, method: .post, headers: LoginManager.sharedInstance.getHeader(), encodingCompletion:
+            {
+                encodingResult in
+                switch encodingResult {
+                case .success(let upload, _, _):
+                    
+                    upload.uploadProgress(closure: { (progress) in
+                        print(progress)
+                    })
+                    
+                    upload.responseString { response in
+                        print(response.result)
+                        print((response.response?.statusCode)!)
+                        print(response)
+                        
+                        if ((response.response?.statusCode)! == 200){
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    }
+                case .failure(let encodingError):
+                    print(encodingError.localizedDescription)
+                }
+        })
+    }
+    
+    func getProfileData() {
+        let uri = LoginManager.sharedInstance.baseURL + "my/profile"
+//        let destination = DownloadRequest.suggestedDownloadDestination(for: .documentDirectory)
+//        
+//        Alamofire.download(
+//            uri,
+//            method: .get,
+//            parameters: nil,
+//            encoding: JSONEncoding.default,
+//            headers: nil,
+//            to: destination).downloadProgress(closure: { (progress) in
+//                print(progress)
+//            }).response(completionHandler: { (DefaultDownloadResponse) in
+//                print(DefaultDownloadResponse)
+//            })
     }
     
     func showAlert() {
