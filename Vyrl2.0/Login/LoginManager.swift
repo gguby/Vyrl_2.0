@@ -205,7 +205,7 @@ class LoginManager{
         })
     }
     
-    func editNickname(nickname: String, completionHandler : @escaping(DataResponse<String>) -> Void) {
+    func checkNickname(nickname: String, completionHandler : @escaping(DataResponse<String>) -> Void) {
         let uri = baseURL + "accounts/nickname"
         let parameters : Parameters = [
             "nickName": nickname,
