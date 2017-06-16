@@ -60,12 +60,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions);
         Fabric.with([Twitter.self])
         
+        LoginManager.sharedInstance.loadAccountList()
     
         if (!LoginManager.sharedInstance.loadCookies()){
             self.goLogin()
-        }
-    
-        LoginManager.sharedInstance.loadAccountList()
+        }    
+
         return true
     }
     

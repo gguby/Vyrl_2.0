@@ -33,11 +33,12 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
         
         switch self.type {
         case .SignUp:
-            overlabLabel.isHidden = true
+            print("SignUp")
         case .Modify:
             print("modify")
         }
         
+        overlabLabel.isHidden = true
         duplicationCheckButton.setTitleColor(UIColor.ivGreyish, for: .disabled)
         duplicationCheckButton.setTitleColor(UIColor.ivLighterPurple, for: .normal)
         
@@ -59,26 +60,7 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
         let photo = self.photoView.imageView?.image
         
         LoginManager.sharedInstance.signUp(homePageURL: webURLField.text!, nickName: nickNameField.text!, selfIntro: introField.text!, profile: photo!, completionHandler:  {
-            encodingResult in
-            switch encodingResult {
-            case .success(let upload, _, _):
-                
-                upload.uploadProgress(closure: { (progress) in
-                    print(progress)
-                })
-                
-                upload.responseJSON { response in
-                    //print response.result
-                    print(response.result)
-                    print((response.response?.statusCode)!)
-                    print(response)
-//                    self.pushView(storyboardName: "Login", controllerName: "logincomplete")
-
-                }
-                
-            case .failure(let encodingError):
-                print(encodingError.localizedDescription)
-            }
+            self.pushView(storyboardName: "Login", controllerName: "logincomplete")
         })
     }
     
@@ -105,9 +87,6 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
             case .failure(let error):
                 print(error)
             }
-            
-            
-            
         }
     }
     
@@ -120,15 +99,25 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
         let changeProfileAction = UIAlertAction(title: "프로필 사진 변경", style: .default, handler: { (action) -> Void in
            self.changeProfile()
         })
-        let defaultProfileAction = UIAlertAction(title: "기본 이미지로 변경", style: .default, handler: nil)
-        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
+        let defaultProfileAction = UIAlertAction(title: "기본 이미지로 변경", style: .default, handler: { (action) -> Void in
+            self.dismiss(animated: true, completion: {
+                
+            })
+        })
         
         alertController.addAction(showProfileAction)
         alertController.addAction(changeProfileAction)
         alertController.addAction(defaultProfileAction)
-        alertController.addAction(cancel)
         
-        present(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: {
+            alertController.view.superview?.isUserInteractionEnabled = true
+            alertController.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.alertControllerBackgroundTapped)))
+        })
+    }
+    
+    func alertControllerBackgroundTapped()
+    {
+        self.dismiss(animated: true, completion: nil)
     }
     
     func showProfileViewController() {
@@ -180,6 +169,7 @@ extension ProfileController: SHViewControllerDelegate {
     
     func shViewControllerImageDidFilter(image: UIImage) {
         // Filtered image will be returned here.
+        
         photoView.setImage(image, for: UIControlState.normal)
         photoView.layer.masksToBounds = true
         photoView.layer.cornerRadius = photoView.frame.width / 2

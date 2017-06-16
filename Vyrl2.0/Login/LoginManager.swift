@@ -117,7 +117,7 @@ class LoginManager{
         Alamofire.request(uri, method: .delete, parameters: nil, encoding: JSONEncoding.default, headers: getHeader()).responseString(completionHandler: completionHandler)
     }
     
-    func signUp(homePageURL : String , nickName : String, selfIntro:String, profile: UIImage, completionHandler : @escaping (SessionManager.MultipartFormDataEncodingResult) -> Void)
+    func signUp(homePageURL : String , nickName : String, selfIntro:String, profile: UIImage, completionHandler : @escaping () -> Void)
     {
         let parameters : Parameters = [
             "accessToken": self.needSignUpToken!,
@@ -130,19 +130,63 @@ class LoginManager{
         
         let uri = baseURL + "accounts/signup"
         let fileName = "\(nickName).jpg"
-        
-        Alamofire.upload(multipartFormData: { (multipartFormData) in
-            if let imageData = UIImageJPEGRepresentation(profile, 1.0) {
-                multipartFormData.append(imageData, withName: "profile", fileName: fileName, mimeType: "image/jpg")
-            }
-            
-            for ( key, value ) in parameters {
 
-                let valueStr = value as! String
-                multipartFormData.append(valueStr.data(using: String.Encoding.utf8)!, withName: key)
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            
+            if let imageData = UIImageJPEGRepresentation(profile, 0.25) {
+                multipartFormData.append(imageData, withName: "file", fileName: fileName, mimeType: "image/jpeg")
             }
             
-        }, usingThreshold: UInt64.init(), to: uri, method: .post, headers: getHeader(), encodingCompletion: completionHandler)
+            for (key, value) in parameters {
+                let vauleStr = value as! String
+                multipartFormData.append(vauleStr.data(using: .utf8)!, withName: key)
+            }
+            
+        }, usingThreshold: UInt64.init(), to: uri, method: .post, headers: getHeader(), encodingCompletion: {
+            encodingResult in
+            switch encodingResult {
+            case .success(let upload, _, _):
+                
+                upload.uploadProgress(closure: { (progress) in
+                    print(progress)
+                })
+                
+                upload.responseJSON { response in
+                    //print response.result
+                    print(response.result)
+                    print((response.response?.statusCode)!)
+                    print(response)
+                    
+                    switch response.result {
+                    case .success(let json):
+                            self.saveCookies(response: response);
+                            
+                            let jsonData = json as! NSDictionary
+                            
+                            let idNum = jsonData["id"] as! NSNumber
+                            let idStr = idNum.stringValue
+                            
+                            let account = Account.init(properties: [
+                                "userId" : idStr,
+                                "email" : jsonData["email"] as! String,
+                                "accessToken" : self.needSignUpToken!,
+                                "sessionToken" : self.cookie!,
+                                "nickName" : jsonData["nickName"] as! String,
+                                "service" : jsonData["socialType"] as! String
+                                ])
+                            
+                            self.addAccount(account: account)
+                        
+                            completionHandler()
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+                
+            case .failure(let encodingError):
+                print(encodingError.localizedDescription)
+            }
+        })
     }
     
     
@@ -168,10 +212,7 @@ class LoginManager{
             ]
         
         Alamofire.request(uri, method: .get, parameters: parameters, encoding: URLEncoding.queryString, headers: getHeader()).responseString(completionHandler: completionHandler)
-
     }
-    
-   
 }
 
 enum ServiceType {
@@ -186,7 +227,7 @@ enum ServiceType {
         case .FaceBook:
             return "FACEBOOK"
         case .SM:
-            return "SM"
+            return "SMTOWN"
         }
     }
 }
@@ -220,7 +261,6 @@ extension LoginManager {
             viewConroller.present(alert, animated: true, completion: nil)
         }
     }
-    
 }
 
 
@@ -321,6 +361,8 @@ extension LoginManager {
     open func loadAccountList() {
         guard let accountArray = UserDefaults.standard.array(forKey: "accountList") as? [[String: Any]] else { return }
         
+        print(accountArray)
+        
         self.accountList.removeAll()
         
         for account in accountArray {
@@ -357,6 +399,7 @@ extension LoginManager {
     }
     
     func clearAccountAll(){
+        self.accountList.removeAll()
         UserDefaults.standard.removeObject(forKey: "accountList")
         UserDefaults.standard.synchronize()
     }

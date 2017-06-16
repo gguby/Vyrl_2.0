@@ -62,23 +62,38 @@ class AccountManagementViewController: UIViewController, UITableViewDelegate, UI
     {
         print("logout")
         
-        LoginManager.sharedInstance.signout(completionHandler: {
-            response in
-            
-            LoginManager.sharedInstance.clearCookies()
-            
-            switch response.result {
-            case .success(let json):
+        let alertController = UIAlertController (title:nil, message:"로그아웃 하시겠습니까?",preferredStyle:.alert)
+        
+        let okAction = UIAlertAction(title: "Ok", style: .default,handler: { (action) -> Void in
+            LoginManager.sharedInstance.signout(completionHandler: {
+                response in
                 
-                let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                appDelegate.goLogin()
+                LoginManager.sharedInstance.clearCookies()
                 
-                print((response.response?.statusCode)!)
-                print(json)
-            case .failure(let error):
-                print(error)
-            }
+                switch response.result {
+                case .success(let json):
+                    
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    appDelegate.goLogin()
+                    
+                    print((response.response?.statusCode)!)
+                    print(json)
+                case .failure(let error):
+                    print(error)
+                }
+            })
+
         })
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in
+        })
+        
+        alertController.addAction(okAction)
+        alertController.addAction(cancel)
+        
+        
+        present(alertController, animated: true, completion: nil)
+        
     }
 }
 
