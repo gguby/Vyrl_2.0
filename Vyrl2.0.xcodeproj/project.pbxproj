@@ -18,6 +18,7 @@
 		8F48CA6C1ED560CD0037A35B /* StartCoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F48CA6B1ED560CD0037A35B /* StartCoverViewController.swift */; };
 		8F4C09291EE528840026D49F /* FeedStyle.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F4C09281EE528840026D49F /* FeedStyle.storyboard */; };
 		8F5165D11ED6A8A900EC468B /* ProfilePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5165D01ED6A8A900EC468B /* ProfilePhotoViewController.swift */; };
+		8F829E7C1EFB6648001D418F /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F829E7B1EFB6648001D418F /* MyProfileViewController.swift */; };
 		8F90911D1EEFC57D0095A335 /* FeedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F90911C1EEFC57D0095A335 /* FeedDetailViewController.swift */; };
 		8F916A8A1EDC17D900E3EC8B /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F916A891EDC17D900E3EC8B /* SettingViewController.swift */; };
 		8F916A8E1EDC264900E3EC8B /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F916A8D1EDC264900E3EC8B /* UIView+Extension.swift */; };
@@ -75,6 +76,7 @@
 		8F48CA6B1ED560CD0037A35B /* StartCoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartCoverViewController.swift; sourceTree = "<group>"; };
 		8F4C09281EE528840026D49F /* FeedStyle.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FeedStyle.storyboard; sourceTree = "<group>"; };
 		8F5165D01ED6A8A900EC468B /* ProfilePhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePhotoViewController.swift; sourceTree = "<group>"; };
+		8F829E7B1EFB6648001D418F /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		8F90911C1EEFC57D0095A335 /* FeedDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedDetailViewController.swift; sourceTree = "<group>"; };
 		8F916A891EDC17D900E3EC8B /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		8F916A8D1EDC264900E3EC8B /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 				8F42E4961EE10F1E0010EB88 /* FanclubMembershipCardViewController.swift */,
 				8F42E4981EE144C70010EB88 /* OfficialFanClubTermsViewController.swift */,
 				CE5636FB1EE7FE8600894016 /* WithDrawViewController.swift */,
+				8F829E7B1EFB6648001D418F /* MyProfileViewController.swift */,
 			);
 			name = "My & Setting";
 			path = MY;
@@ -533,6 +536,7 @@
 				CE5636FC1EE7FE8600894016 /* WithDrawViewController.swift in Sources */,
 				CE08981E1ECD706A000D6D6C /* FanViewController.swift in Sources */,
 				CE08981C1ECD704F000D6D6C /* SearchViewController.swift in Sources */,
+				8F829E7C1EFB6648001D418F /* MyProfileViewController.swift in Sources */,
 				CE33F0021ED2BB690050C21D /* SMLoginViewController.swift in Sources */,
 				8F9AF9911EE800E700DE069E /* FeedTableViewController.swift in Sources */,
 				CE0898251ECD70C7000D6D6C /* FeedViewController.swift in Sources */,

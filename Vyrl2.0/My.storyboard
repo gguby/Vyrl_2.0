@@ -296,7 +296,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="375" height="50"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Wiy-yb-ybQ" id="pf2-HE-kVN">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GYW-es-Awy">
@@ -1400,10 +1400,10 @@
             </objects>
             <point key="canvasLocation" x="909.60000000000002" y="648.57571214392806"/>
         </scene>
-        <!--Profile Controller-->
+        <!--My Profile View Controller-->
         <scene sceneID="BSG-XV-zrL">
             <objects>
-                <viewController storyboardIdentifier="profile" id="OJr-pq-JrR" customClass="ProfileController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="profile" id="OJr-pq-JrR" customClass="MyProfileViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="S6V-qe-0GS"/>
                         <viewControllerLayoutGuide type="bottom" id="SHp-mV-7RU"/>
@@ -1657,12 +1657,12 @@
                     </view>
                     <connections>
                         <outlet property="checkView" destination="bg2-mT-Pth" id="jci-Ra-xCF"/>
+                        <outlet property="confirm" destination="hZU-XE-1IF" id="UF7-57-G5z"/>
                         <outlet property="duplicationCheckButton" destination="AVH-5x-kuL" id="EBs-Z6-JWa"/>
                         <outlet property="introField" destination="yxe-sP-9p9" id="0wY-vG-gt4"/>
                         <outlet property="nickNameField" destination="V9H-LC-aYa" id="8ZP-FH-ATq"/>
                         <outlet property="overlabLabel" destination="zPS-zU-7eP" id="CoS-Zp-Afo"/>
                         <outlet property="photoView" destination="e9B-bT-qNu" id="Hm1-mR-ybo"/>
-                        <outlet property="signUp" destination="hZU-XE-1IF" id="BdE-k3-Uk5"/>
                         <outlet property="webURLField" destination="cKx-2Y-MwR" id="zcD-1A-edd"/>
                     </connections>
                 </viewController>
@@ -1940,7 +1940,7 @@ Cw
                                         <rect key="frame" x="0.0" y="29" width="375" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="176-dK-gBu" id="epi-QD-pw4">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="51"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rPX-0a-gtx">
@@ -2081,7 +2081,7 @@ Cw
                                         <rect key="frame" x="0.0" y="28" width="375" height="138"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dfo-ba-gYH" id="JHl-sS-8tK">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="138"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="137.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6OI-ao-bpr">

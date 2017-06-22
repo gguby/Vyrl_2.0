@@ -24,6 +24,7 @@ target 'Vyrl2.0' do
     pod 'Sharaku'
     
     pod 'Alamofire', '~> 4.4'
+    pod 'AlamofireImage'
 
 end
 

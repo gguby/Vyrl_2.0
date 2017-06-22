@@ -1,8 +1,8 @@
 //
-//  ProfileController.swift
+//  MyProfileViewController.swift
 //  Vyrl2.0
 //
-//  Created by wsjung on 2017. 5. 22..
+//  Created by  KoMyeongbu on 2017. 6. 22..
 //  Copyright © 2017년 smt. All rights reserved.
 //
 
@@ -10,59 +10,47 @@ import UIKit
 import TOCropViewController
 import Sharaku
 import Alamofire
+import AlamofireImage
 
-class ProfileController : UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, TOCropViewControllerDelegate{
+class MyProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, TOCropViewControllerDelegate {
     
-    @IBOutlet weak var btnClose: UIButton!
     @IBOutlet weak var photoView: UIButton!
     @IBOutlet weak var overlabLabel: UILabel!
     
     @IBOutlet weak var checkView: UIImageView!
     
-    @IBOutlet weak var signUp: UIButton!
+    @IBOutlet weak var confirm: UIButton!
     
-    @IBOutlet weak var nickNameField: UITextField!    
+    @IBOutlet weak var nickNameField: UITextField!
     @IBOutlet weak var introField: UITextField!
     @IBOutlet weak var webURLField: UITextField!
     @IBOutlet weak var duplicationCheckButton: UIButton!
-    
-    var type : ProfileViewType = .SignUp
-    
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        switch self.type {
-        case .SignUp:
-            print("SignUp")
-        case .Modify:
-            print("modify")
-        }
+        self.getProfileData()
         
         overlabLabel.isHidden = true
         duplicationCheckButton.setTitleColor(UIColor.ivGreyish, for: .disabled)
         duplicationCheckButton.setTitleColor(UIColor.ivLighterPurple, for: .normal)
-        
-        signUp.isEnabled = false
-        signUp.backgroundColor = UIColor.hexStringToUIColor(hex: "#ACACAC")
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func dismiss(sender :AnyObject )
     {
-       self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func selectPhoto(_ sender: Any) {
         self.showAlert()
     }
     
-    @IBAction func pushView(sender :AnyObject )
-    {
-        let photo = self.photoView.imageView?.image
-        
-        LoginManager.sharedInstance.signUp(homePageURL: webURLField.text!, nickName: nickNameField.text!, selfIntro: introField.text!, profile: photo!, completionHandler:  {
-            self.pushView(storyboardName: "Login", controllerName: "logincomplete")
-        })
-    }
     
     @IBAction func checkNicname(_ sender: UIButton) {
         self.duplicationCheckButton.isEnabled = false;
@@ -80,8 +68,6 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
                     self.checkView.isHidden = false
                     self.duplicationCheckButton.isHidden = true
                     
-                    self.signUp.isEnabled = true
-                    self.signUp.backgroundColor = UIColor.ivLighterPurple
                 }
                 
             case .failure(let error):
@@ -90,6 +76,87 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
         }
     }
     
+    @IBAction func changeProfile(_ sender: UIButton) {
+        let profile = self.photoView.imageView?.image
+        
+        let parameters : Parameters = [
+            "homePageUrl": webURLField.text!,
+            "nickName": nickNameField.text!,
+            "selfIntro": introField.text!,
+            ]
+        
+        let uri = LoginManager.sharedInstance.baseURL + "my/profile"
+        let fileName = "\(nickNameField.text!).jpg"
+        
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            if let imageData = UIImageJPEGRepresentation(profile!, 1.0) {
+                multipartFormData.append(imageData, withName: "profile", fileName: fileName, mimeType: "image/jpg")
+            }
+            
+            for ( key, value ) in parameters {
+                let valueStr = value as! String
+                multipartFormData.append(valueStr.data(using: String.Encoding.utf8)!, withName: key)
+            }
+            
+        }, usingThreshold: UInt64.init(), to: uri, method: .post, headers: LoginManager.sharedInstance.getHeader(), encodingCompletion:
+            {
+                encodingResult in
+                switch encodingResult {
+                case .success(let upload, _, _):
+                    
+                    upload.uploadProgress(closure: { (progress) in
+                        print(progress)
+                    })
+                    
+                    upload.responseString { response in
+                        print(response.result)
+                        print((response.response?.statusCode)!)
+                        print(response)
+                        
+                        if ((response.response?.statusCode)! == 200){
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    }
+                case .failure(let encodingError):
+                    print(encodingError.localizedDescription)
+                }
+        })
+    }
+    
+    func getProfileData() {
+        let uri = LoginManager.sharedInstance.baseURL + "my/profile"
+        //        let destination = DownloadRequest.suggestedDownloadDestination(for: .documentDirectory)
+        //
+        //        Alamofire.download(
+        //            uri,
+        //            method: .get,
+        //            parameters: nil,
+        //            encoding: JSONEncoding.default,
+        //            headers: nil,
+        //            to: destination).downloadProgress(closure: { (progress) in
+        //                print(progress)
+        //            }).response(completionHandler: { (DefaultDownloadResponse) in
+        //                print(DefaultDownloadResponse)
+        //            })
+        Alamofire.request(uri, method: .get, parameters:nil, encoding: JSONEncoding.default, headers: LoginManager.sharedInstance.getHeader()).responseJSON { (response) in
+            switch response.result {
+            case .success(let json):
+                
+                let jsonData = json as! NSDictionary
+                
+                self.nickNameField.text = jsonData["nickName"] as? String
+                self.introField.text = jsonData["selfIntro"] as? String
+                self.webURLField.text = jsonData["homepageUrl"] as? String
+                
+                let url = NSURL(string: jsonData["imagePath"] as! String)
+                self.photoView.af_setImage(for: UIControlState.normal, url: url! as URL)
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+     }
+    
     func showAlert() {
         let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.alert)
         
@@ -97,7 +164,7 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
             self.showProfileViewController()
         })
         let changeProfileAction = UIAlertAction(title: "프로필 사진 변경", style: .default, handler: { (action) -> Void in
-           self.changeProfile()
+            self.changeProfile()
         })
         let defaultProfileAction = UIAlertAction(title: "기본 이미지로 변경", style: .default, handler: { (action) -> Void in
             self.dismiss(animated: true, completion: {
@@ -123,13 +190,13 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
     func showProfileViewController() {
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ProfilePhotoViewController") as! ProfilePhotoViewController
-    
+        
         present(vc, animated: true, completion: nil)
     }
     
     func changeProfile() {
         if ( UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) == false ){
-                return
+            return
         }
         
         let imagePicker = UIImagePickerController()
@@ -143,7 +210,7 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]){
         
         self.dismiss(animated:true, completion: nil)
-
+        
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         
         let cropViewController = TOCropViewController(image: chosenImage)
@@ -165,7 +232,7 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
     }
 }
 
-extension ProfileController: SHViewControllerDelegate {
+extension MyProfileViewController: SHViewControllerDelegate {
     
     func shViewControllerImageDidFilter(image: UIImage) {
         // Filtered image will be returned here.
@@ -184,18 +251,15 @@ extension ProfileController: SHViewControllerDelegate {
     }
 }
 
-extension ProfileController : UITextFieldDelegate {
+extension MyProfileViewController : UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         overlabLabel.isHidden = true
         duplicationCheckButton.isEnabled = false;
         
-        signUp.isEnabled = false
-        signUp.backgroundColor = UIColor.hexStringToUIColor(hex: "#ACACAC")
-        
         self.checkView.isHidden = true
         self.duplicationCheckButton.isHidden = false
-
+        
         
         let newLength = textField.text!.characters.count + string.characters.count - range.length;
         if(newLength > 3 && newLength < 20)
@@ -204,7 +268,7 @@ extension ProfileController : UITextFieldDelegate {
         }
         
         return true
-
+        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -213,9 +277,3 @@ extension ProfileController : UITextFieldDelegate {
     }
     
 }
-
-enum ProfileViewType {
-    case SignUp, Modify
-}
-
-
