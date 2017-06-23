@@ -35,6 +35,14 @@ class MyProfileViewController: UIViewController, UIImagePickerControllerDelegate
         overlabLabel.isHidden = true
         duplicationCheckButton.setTitleColor(UIColor.ivGreyish, for: .disabled)
         duplicationCheckButton.setTitleColor(UIColor.ivLighterPurple, for: .normal)
+        
+        confirm.backgroundColor = UIColor.ivLighterPurple
+        
+        photoView.layer.masksToBounds = true
+        photoView.layer.cornerRadius = photoView.frame.width / 2
+        photoView.layer.borderColor = UIColor.black.cgColor
+        photoView.layer.borderWidth = 1.0
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -125,20 +133,7 @@ class MyProfileViewController: UIViewController, UIImagePickerControllerDelegate
     
     func getProfileData() {
         let uri = LoginManager.sharedInstance.baseURL + "my/profile"
-        //        let destination = DownloadRequest.suggestedDownloadDestination(for: .documentDirectory)
-        //
-        //        Alamofire.download(
-        //            uri,
-        //            method: .get,
-        //            parameters: nil,
-        //            encoding: JSONEncoding.default,
-        //            headers: nil,
-        //            to: destination).downloadProgress(closure: { (progress) in
-        //                print(progress)
-        //            }).response(completionHandler: { (DefaultDownloadResponse) in
-        //                print(DefaultDownloadResponse)
-        //            })
-        Alamofire.request(uri, method: .get, parameters:nil, encoding: JSONEncoding.default, headers: LoginManager.sharedInstance.getHeader()).responseJSON { (response) in
+         Alamofire.request(uri, method: .get, parameters:nil, encoding: JSONEncoding.default, headers: LoginManager.sharedInstance.getHeader()).responseJSON { (response) in
             switch response.result {
             case .success(let json):
                 
@@ -238,10 +233,6 @@ extension MyProfileViewController: SHViewControllerDelegate {
         // Filtered image will be returned here.
         
         photoView.setImage(image, for: UIControlState.normal)
-        photoView.layer.masksToBounds = true
-        photoView.layer.cornerRadius = photoView.frame.width / 2
-        photoView.layer.borderColor = UIColor.black.cgColor
-        photoView.layer.borderWidth = 1.0
         
         self.dismiss(animated:true, completion: nil)
     }
