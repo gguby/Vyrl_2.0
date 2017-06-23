@@ -21,8 +21,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아이린_넘나이쁘니" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Phl-fl-MZS">
-                                <rect key="frame" x="129" y="193" width="117" height="19"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Phl-fl-MZS">
+                                <rect key="frame" x="187.5" y="193" width="0.0" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="19" id="ecx-mw-UMv"/>
                                 </constraints>
@@ -89,7 +89,7 @@
                                     <action selector="showSetting" destination="4u5-ag-yKy" eventType="touchUpInside" id="Ejh-3w-bsL"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아이린, 레드벨벳 좋아해요~!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yvs-wH-VVu">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yvs-wH-VVu">
                                 <rect key="frame" x="30" y="221" width="315" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="14.5" id="sZU-Ln-2PY"/>
@@ -98,7 +98,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="http://irene_love.com/" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eBG-x8-47V">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eBG-x8-47V">
                                 <rect key="frame" x="30" y="238" width="315" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="14.5" id="vF0-DM-ZaL"/>
@@ -218,7 +218,7 @@
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6bb-Fr-EX0">
-                                <rect key="frame" x="252" y="195" width="30" height="15"/>
+                                <rect key="frame" x="193.5" y="195" width="30" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="9Kf-kv-v3L"/>
                                     <constraint firstAttribute="height" constant="15" id="kia-1b-M2H"/>
@@ -296,7 +296,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="375" height="50"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Wiy-yb-ybQ" id="pf2-HE-kVN">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GYW-es-Awy">
@@ -431,6 +431,10 @@
                         <outlet property="accountTable" destination="eU2-dQ-BzI" id="Ug3-Zh-ZBT"/>
                         <outlet property="dropTableView" destination="Te8-Bb-1Vz" id="laH-C8-GCf"/>
                         <outlet property="footer" destination="wiN-bV-Wki" id="Nhb-Sg-Cl9"/>
+                        <outlet property="homepageLabel" destination="eBG-x8-47V" id="ihD-w6-dyk"/>
+                        <outlet property="introLabel" destination="Yvs-wH-VVu" id="kg6-HJ-kFe"/>
+                        <outlet property="nickNameLabel" destination="Phl-fl-MZS" id="0tp-yK-dqj"/>
+                        <outlet property="profileImage" destination="Bc5-mj-HO2" id="OXI-pf-Qcf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="McP-2q-cYc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1940,7 +1944,7 @@ Cw
                                         <rect key="frame" x="0.0" y="29" width="375" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="176-dK-gBu" id="epi-QD-pw4">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="51"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rPX-0a-gtx">
@@ -2081,7 +2085,7 @@ Cw
                                         <rect key="frame" x="0.0" y="28" width="375" height="138"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dfo-ba-gYH" id="JHl-sS-8tK">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="138"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="137.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6OI-ao-bpr">

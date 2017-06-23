@@ -16,4 +16,10 @@ struct Constants {
     struct CrashlyticsConstants {
         static let userType = "User Type";
     }
+    
+    struct VyrlAPIConstants{
+        static let baseURL = "http://api.dev2nd.vyrl.com:8080/"
+        static let APPVersion = "1.0.0"
+        static let AppDevice = "ios"
+    }
 }

@@ -100,7 +100,7 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
             "selfIntro": introField.text!,
             ]
 
-         let uri = LoginManager.sharedInstance.baseURL + "my/profile"
+         let uri = Constants.VyrlAPIConstants.baseURL + "my/profile"
          let fileName = "\(nickNameField.text!).jpg"
         
         Alamofire.upload(multipartFormData: { (multipartFormData) in
@@ -139,7 +139,7 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     func getProfileData() {
-        let uri = LoginManager.sharedInstance.baseURL + "my/profile"
+//        let uri = LoginManager.sharedInstance.baseURL + "my/profile"
 //        let destination = DownloadRequest.suggestedDownloadDestination(for: .documentDirectory)
 //        
 //        Alamofire.download(

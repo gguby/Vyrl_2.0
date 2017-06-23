@@ -13,9 +13,7 @@ class LoginManager{
     
     static let sharedInstance = LoginManager()
     
-    let baseURL = "http://api.dev2nd.vyrl.com:8080/"
-    let APPVersion = "1.0.0"
-    let AppDevice = "ios"
+    let baseURL = Constants.VyrlAPIConstants.baseURL
     
     var cookie : String?
     
@@ -35,8 +33,8 @@ class LoginManager{
     
     func getHeader() -> HTTPHeaders {
         let headers: HTTPHeaders = [
-            "X-APP-Version": APPVersion,
-            "X-Device": AppDevice,
+            "X-APP-Version": Constants.VyrlAPIConstants.APPVersion,
+            "X-Device": Constants.VyrlAPIConstants.AppDevice,
             "Accept-Language" : "ko-kr"
         ]
         

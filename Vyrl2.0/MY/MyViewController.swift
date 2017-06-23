@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+
 
 class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
@@ -18,17 +20,57 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     var accountList : Array<Account> = []
     
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var nickNameLabel: UILabel!
+    @IBOutlet weak var introLabel: UILabel!
+    @IBOutlet weak var homepageLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         registerSwipe()
         print("My");
         
+        self.loadMyProfile()
+
+    }
+    
+    func loadMyProfile(){
+        
         self.accountTable.delegate = self
         self.accountTable.dataSource = self
         self.accountTable.rowHeight = 50
         
-        accountList = LoginManager.sharedInstance.accountList
+        accountList.append(LoginManager.sharedInstance.getCurrentAccount()!)
+        
+        for account in LoginManager.sharedInstance.includeNotCurrentUser(){
+            accountList.append(account)
+        }
+        
+        let uri = Constants.VyrlAPIConstants.baseURL + "my/profile"
+        
+        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: LoginManager.sharedInstance.getHeader()).responseJSON(completionHandler: {
+            response in
+            
+            switch response.result {
+            case .success(let json):
+                
+                if let code = response.response?.statusCode {
+                    if code == 200 {
+                        let jsonData = json as! NSDictionary
+                        
+                        self.nickNameLabel.text = jsonData["nickName"] as? String
+                        self.introLabel.text = jsonData["selfIntro"] as? String
+                        self.homepageLabel.text = jsonData["homepageUrl"] as? String
+                    }
+                }
+                
+                print((response.response?.statusCode)!)
+                print(json)
+            case .failure(let error):
+                print(error)
+            }
+        })
     }
     
     override func didReceiveMemoryWarning() {
