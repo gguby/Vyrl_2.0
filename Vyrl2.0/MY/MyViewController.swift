@@ -90,8 +90,7 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     @IBAction func pushProfile(_ sender: Any) {
-        let view : ProfileController = self.pushViewControllrer(storyboardName: "My", controllerName: "profile") as! ProfileController
-        view.type = .Modify
+        let view : MyProfileViewController = self.pushViewControllrer(storyboardName: "My", controllerName: "profile") as! MyProfileViewController
     }
     
     @IBAction func showSetting(){
