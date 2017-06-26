@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import AlamofireImage
 
 
 class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
@@ -31,8 +32,16 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         registerSwipe()
         print("My");
         
+        profileImage.layer.masksToBounds = true
+        profileImage.layer.cornerRadius = profileImage.frame.width / 2
+        profileImage.layer.borderColor = UIColor.black.cgColor
+        profileImage.layer.borderWidth = 1.0
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         self.loadMyProfile()
-
     }
     
     func loadMyProfile(){
@@ -62,6 +71,9 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                         self.nickNameLabel.text = jsonData["nickName"] as? String
                         self.introLabel.text = jsonData["selfIntro"] as? String
                         self.homepageLabel.text = jsonData["homepageUrl"] as? String
+                        
+                        let url = URL.init(string: jsonData["imagePath"] as! String)
+                        self.profileImage.af_setImage(withURL: url!)
                     }
                 }
                 
@@ -90,7 +102,7 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     @IBAction func pushProfile(_ sender: Any) {
-        let view : MyProfileViewController = self.pushViewControllrer(storyboardName: "My", controllerName: "profile") as! MyProfileViewController
+        self.pushView(storyboardName: "My", controllerName: "profile")
     }
     
     @IBAction func showSetting(){

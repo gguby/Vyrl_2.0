@@ -56,9 +56,8 @@ class SettingViewController: UIViewController, UIScrollViewDelegate {
     }
     
     @IBAction func showFAQView(_ sender: UIButton) {
-      let alert = UIAlertController(title: "Alert", message: "자주 묻는 질문", preferredStyle: UIAlertControllerStyle.alert)
-      alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
-      self.present(alert, animated: true, completion: nil)
+        let vc : NoticeController = self.pushViewControllrer(storyboardName: "Setting", controllerName: "notice") as! NoticeController
+        vc.isNoticeType = false;
     }
     
     @IBAction func showDataUsageView(_ sender: UIButton) {

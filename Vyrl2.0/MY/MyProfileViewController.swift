@@ -42,7 +42,6 @@ class MyProfileViewController: UIViewController, UIImagePickerControllerDelegate
         photoView.layer.cornerRadius = photoView.frame.width / 2
         photoView.layer.borderColor = UIColor.black.cgColor
         photoView.layer.borderWidth = 1.0
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -122,7 +121,7 @@ class MyProfileViewController: UIViewController, UIImagePickerControllerDelegate
                         print(response)
                         
                         if ((response.response?.statusCode)! == 200){
-                            self.navigationController?.popViewController(animated: true)
+                            self.navigationController?.popViewController(animated: true)                            
                         }
                     }
                 case .failure(let encodingError):

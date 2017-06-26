@@ -7,31 +7,116 @@
 //
 
 import Foundation
+import Alamofire
 
 class NoticeController: UIViewController , UITableViewDelegate, UITableViewDataSource{
     
     @IBOutlet weak var tableView: UITableView!
     
-    private func getData() -> [Notice?] {
-        
-        let notice_01 = Notice(title: "공지사항 01", date: "2017.04.10", content: "alsdmakldmaklsdmkalsdnalskdnaklsdnasdlkansdlaskndalsdnasdknalsndlasndlansdklansklansdlkasnd", isNewNotice: true)
-        let notice_02 = Notice(title: "공지사항 02", date: "2017.04.11", content: "안녕하세요, 바이럴 팀입니다~\n 항상 바이럴을 이용해 주시는 분들 감사합니다.~ \n 오늘은 팬패에지 관련 공지가 있습니다.! \n\n 팬페이지를 개설하는 방법은 FAQ를 참고해 주세요.\n 팬페이지는 여러개 개설 할 수 있습니다.\n 팬페이지에 참여하여 더욱 즐거운 바이럴을 이용하세요.\n 여러분의 바이럴입니다. \n\n 날씨가 많이 더워졌지만 \n 언제나 열일하는 바이럴 팀이었습니다! \n 좋은 소식으로 또 만나요~~~" , isNewNotice: true)
-        let notice_03 = Notice(title: "공지사항 03", date: "2017.04.12", content: "안녕하세요, 바이럴 팀입니다~\n항상 바이럴을 이용해 주시는 분들 감사합니다.~ \n오늘은 팬패에지 관련 공지가 있습니다.! \n\n 팬페이지를 개설하는 방법은 FAQ를 참고해 주세요.\n 팬페이지는 여러개 개설 할 수 있습니다.\n팬페이지에 참여하여 더욱 즐거운 바이럴을 이용하세요.\n 여러분의 바이럴입니다. \n\n 날씨가 많이 더워졌지만 \n 언제나 열일하는 바이럴 팀이었습니다! \n 좋은 소식으로 또 만나요~~~" , isNewNotice: false)
-        
-        return [notice_01 ,notice_02 , notice_03]
-    }
-    
+    @IBOutlet weak var titleLabel: UILabel!
     var noticeData :[Notice?]?
+    
+    var isNoticeType = true
     
     override func viewDidLoad(){
         super.viewDidLoad()
         
-        noticeData = getData()
+        noticeData = Array()
+        
+        if ( isNoticeType == true ){
+            getNoticeData()
+            titleLabel.text = "공지사항"
+        }
+        else  {
+            getFAQData()
+            titleLabel.text = "자주묻는 질문"
+        }
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
 
         tableView.tableFooterView = UIView(frame: .zero)
+    }
+    
+    func getFAQData(){
+        
+        let uri = Constants.VyrlAPIConstants.baseURL + "notices/faq"
+        
+        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: LoginManager.sharedInstance.getHeader()).responseJSON(completionHandler: {
+            response in
+            
+            switch response.result {
+            case .success(let json):
+                
+                if let code = response.response?.statusCode {
+                    if code == 200 {
+                        let jsonDataArray = json as! NSArray
+                        
+                        for json in jsonDataArray {
+                            
+                            let jsonData = json as! NSDictionary
+                            
+                            let title = jsonData["title"] as? String
+                            let content = jsonData["content"] as? String
+                            let noticeId = jsonData["id"] as? NSNumber
+                            let date = jsonData["createdAt"] as? String
+                            
+                            let notice : Notice = Notice.init(id: noticeId!.stringValue, title: title!, date: (date?.convertDateString())!, content: content!, isNewNotice: true)
+                            
+                            self.noticeData?.append(notice)
+                        }
+                        
+                        self.tableView.reloadData()
+                    }
+                }
+                
+                print((response.response?.statusCode)!)
+                print(json)
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+
+    
+    func getNoticeData(){
+        
+        let uri = Constants.VyrlAPIConstants.baseURL + "notices/update"
+        
+        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: LoginManager.sharedInstance.getHeader()).responseJSON(completionHandler: {
+            response in
+            
+            switch response.result {
+            case .success(let json):
+                
+                if let code = response.response?.statusCode {
+                    if code == 200 {
+                        let jsonDataArray = json as! NSArray
+                        
+                        for json in jsonDataArray {
+                            
+                            let jsonData = json as! NSDictionary
+                            
+                            let title = jsonData["title"] as? String
+                            let content = jsonData["content"] as? String
+                            let noticeId = jsonData["id"] as? NSNumber
+                            let date = jsonData["createdAt"] as? String
+                            
+                            let notice : Notice = Notice.init(id: noticeId!.stringValue, title: title!, date: (date?.convertDateString())!, content: content!, isNewNotice: true)
+                            
+                            self.noticeData?.append(notice)
+                        }
+                        
+                        self.tableView.reloadData()
+                    }
+                }
+                
+                print((response.response?.statusCode)!)
+                print(json)
+            case .failure(let error):
+                print(error)
+            }
+        })
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -179,13 +264,30 @@ struct Notice {
     var date  : String
     var content : String
     var isNewNotice = false
+    var id : String
     
     
-    init(title :String , date :String, content :String, isNewNotice:Bool)
+    init(id : String, title :String , date :String, content :String, isNewNotice:Bool)
     {
-        self.title = title;
+        self.id = id
+        self.title = title
         self.date  = date
         self.content = content
         self.isNewNotice = isNewNotice
+    }
+}
+
+extension String{
+    func convertDateString () -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        
+        let dateObj = dateFormatter.date(from: self)
+        
+        dateFormatter.dateFormat = "yyy.MM.dd"
+        
+        let dateStr = dateFormatter.string(from: dateObj!)
+        
+        return dateStr
     }
 }
