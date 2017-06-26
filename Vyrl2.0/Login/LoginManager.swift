@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import GoogleSignIn
 
 class LoginManager{
     
@@ -68,7 +69,9 @@ class LoginManager{
                     
                         case .SUCCESS :
                             
-                            self.saveCookies(response: response);
+                            if ( callBack.isAddAccount == false ){
+                                self.saveCookies(response: response)
+                            }
                             
                             let jsonData = json as! NSDictionary
                             
@@ -86,8 +89,10 @@ class LoginManager{
                             
                             self.addAccount(account: account)
                             
-                            callBack.goSearchView()
+                            callBack.loginSuccess()
+                            
                         case .USERNOTEXIST :
+                            
                             callBack.goAgreement()
                         
                             self.needSignUpToken = accessToken
@@ -108,6 +113,29 @@ class LoginManager{
         })
     }
     
+    func logoutAll(){
+        let uri = baseURL + "accounts/signout"
+        
+        Alamofire.request(uri, method: .delete, parameters: nil, encoding: JSONEncoding.default, headers: getHeader()).responseString(completionHandler: {
+            response in
+
+            switch response.result {
+            case .success(let json):
+
+                print("logout: \( json)")
+                GIDSignIn.sharedInstance().signOut()
+                
+                self.clearCookies()
+                self.clearAccountAll()
+                self.goLoginView()
+                
+            case .failure(let error):
+                print(error)
+            }
+        })
+
+    }
+    
     func signout(completionHandler : @escaping () -> Void)
     {
         let uri = baseURL + "accounts/signout"
@@ -119,6 +147,12 @@ class LoginManager{
             
             switch response.result {
             case .success(let json):
+                
+                let account = self.getCurrentAccount()
+                
+                if ( account?.service == "GOOGLE"){
+                    GIDSignIn.sharedInstance().signIn()
+                }
                 
                 completionHandler()
                 print((response.response?.statusCode)!)
@@ -247,7 +281,7 @@ enum ServiceType : String {
 enum HTTPCode: Int{
     case SUCCESS     = 200
     case UNAUTORIZED = 401
-    case USERNOTEXIST = 901
+    case USERNOTEXIST = 901    
 }
 
 extension LoginManager {
@@ -272,6 +306,11 @@ extension LoginManager {
             alert.addAction(UIAlertAction(title: "동의 안함", style: UIAlertActionStyle.cancel, handler: nil))
             viewConroller.present(alert, animated: true, completion: nil)
         }
+    }
+    
+    func goLoginView() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.goLogin()
     }
 }
 
@@ -412,6 +451,12 @@ extension LoginManager {
     }
     
     func addAccount(account : Account){
+        
+        for _account in self.accountList {
+            if ( account.userId == _account.userId){
+                return
+            }
+        }
         
         self.accountList.append(account)
         

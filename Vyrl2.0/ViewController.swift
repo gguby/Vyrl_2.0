@@ -19,8 +19,17 @@ extension UIViewController
         tracker.send(builder.build() as [NSObject : AnyObject])
     }
     
-    @IBAction func back(){
+    func pop()
+    {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func back(){
+        self.pop()
+    }
+    
+    func goSearch(){
+        tabBarController?.selectedIndex = 3
     }
     
     func pushView(storyboardName : String, controllerName : String ){

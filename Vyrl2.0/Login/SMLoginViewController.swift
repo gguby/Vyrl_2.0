@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SMLoginDelegate {
-    func loginCallback()
+    func signup()
 }
 
 
@@ -109,7 +109,7 @@ class SMLoginViewController : UIViewController, UIWebViewDelegate {
                 
                 self.navigationController?.popViewController(animated: true)
                 
-                self.loginDelegate?.loginCallback()
+                self.loginDelegate?.signup()
                 
                 LoginManager.sharedInstance.isLogin = true
 

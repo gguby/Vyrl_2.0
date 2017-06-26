@@ -22,4 +22,8 @@ struct Constants {
         static let APPVersion = "1.0.0"
         static let AppDevice = "ios"
     }
+    
+    enum VyrlResponseCode : Int {
+        case NickNameAleadyInUse = 909
+    }
 }

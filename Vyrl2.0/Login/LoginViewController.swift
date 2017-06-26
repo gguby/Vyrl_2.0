@@ -13,10 +13,15 @@ import GoogleSignIn
 import FBSDKCoreKit
 import FBSDKLoginKit
 import TwitterKit
+import Alamofire
 
 class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate , SMLoginDelegate{
     
     @IBOutlet weak var signOutBtn : UIButton!
+    
+    var accountVC : AccountManagementViewController?
+    
+    var isAddAccount : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,12 +49,46 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
         self.pushView(storyboardName: "Login", controllerName: "agreement")
     }
     
-    func goSearchView(){
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let mainController = storyboard.instantiateInitialViewController()!
+    func loginSucessOnAddAccout(){
+        self.pop()
+        accountVC?.refreshTable()
+    }
+    
+    func loginSuccess(){
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.window?.rootViewController = mainController       
+        if (isAddAccount)
+        {
+            self.loginSucessOnAddAccout()
+            return
+        }
+        
+        let uri = Constants.VyrlAPIConstants.baseURL + "/follow"
+        
+        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: LoginManager.sharedInstance.getHeader()).responseJSON(completionHandler: {
+            response in switch response.result {
+            case .success(let json):
+                
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let mainController = storyboard.instantiateInitialViewController()!
+                
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.window?.rootViewController = mainController
+                
+                print(json)
+                
+                let jsonData = json as! NSDictionary
+                
+                let isExistFollow = jsonData["exist"] as! Bool
+                
+                if ( isExistFollow == true ){
+                    self.goSearch()
+                }
+                
+            case .failure(let error):
+                print(error)
+            }
+        })
+        
     }
     
     func loginByFireBase(credential:  FIRAuthCredential) {
@@ -162,7 +201,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
         }
     }
     
-    func loginCallback() {
+    func signup() {
         self.pushView(storyboardName: "Login", controllerName: "agreement")
     }
 }

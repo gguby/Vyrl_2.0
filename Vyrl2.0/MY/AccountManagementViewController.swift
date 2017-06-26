@@ -79,13 +79,22 @@ class AccountManagementViewController: UIViewController, UITableViewDelegate, UI
         LoginManager.sharedInstance.withDraw()
     }
     
+    @IBAction func addAccount(_ sender: Any) {
+        let vc : LoginViewController = self.pushViewControllrer(storyboardName: "Login", controllerName: "Login") as! LoginViewController
+        vc.isAddAccount = true
+        vc.accountVC = self
+    }
+    
+    @IBAction func logoutALL(_ sender: Any) {
+        LoginManager.sharedInstance.logoutAll()        
+    }
+    
     @IBAction func logout(_ sender: Any)
     {
         let alertController = UIAlertController (title:nil, message:"로그아웃 하시겠습니까?",preferredStyle:.alert)
         
         let okAction = UIAlertAction(title: "Ok", style: .default,handler: { (action) -> Void in
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.goLogin()
+            LoginManager.sharedInstance.goLoginView()
         })
 
         let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in
@@ -96,6 +105,11 @@ class AccountManagementViewController: UIViewController, UITableViewDelegate, UI
         
         present(alertController, animated: true, completion: nil)
     }
+    
+    func refreshTable(){
+        self.accountList = LoginManager.sharedInstance.includeNotCurrentUser()
+        self.tableView.reloadData()
+        self.tableViewHeightConstraint.constant = self.tableView.contentSize.height + 20    }
 }
 
 class AccountCell : UITableViewCell {

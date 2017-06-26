@@ -72,7 +72,7 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
                 print((response.response?.statusCode)!)
                 print(json)
                 
-                if((response.response?.statusCode)! == 900)
+                if((response.response?.statusCode)! == Constants.VyrlResponseCode.NickNameAleadyInUse.rawValue)
                 {
                     self.overlabLabel.isHidden = false
                 } else if ((response.response?.statusCode)! == 200)
