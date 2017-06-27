@@ -1,3 +1,4 @@
+
 //
 //  SearchViewController.swift
 //  Vyrl2.0
@@ -16,6 +17,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var btnActivity: UIButton!
     @IBOutlet weak var searchTableView: UIView!
     
+    @IBOutlet weak var postCollectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,14 +30,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        self.tabBarController?.tabBar.isHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        self.tabBarController?.tabBar.isHidden = false
     }
     
     override func didReceiveMemoryWarning() {
@@ -75,6 +73,42 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         searchTableView.isHidden = true
         
         searchBar.resignFirstResponder()
+    }
+}
+
+extension SearchViewController : UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 55
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
+        let cell :FollowCell = tableView.dequeueReusableCell(withIdentifier: "FollowCell") as! FollowCell
+        return cell
+    }
+}
+
+extension SearchViewController : UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if(collectionView == self.postCollectionView)
+        {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as UICollectionViewCell
+            
+            return cell
+        } else {
+          let cell : OfficialCollectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: "OfficialCollectionCell", for: indexPath) as! OfficialCollectionCell
+          
+            return cell
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
     }
 }
 
@@ -119,3 +153,16 @@ extension UIColor {
         return UIColor(red: 242.0 / 255.0, green: 240.0 / 255.0, blue: 243.0 / 255.0, alpha: 1.0)
     }
 }
+
+class OfficialCollectionCell : UICollectionViewCell {
+    
+    
+    
+}
+
+class FollowCell : UITableViewCell {
+    
+    
+    
+}
+
