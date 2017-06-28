@@ -12,7 +12,6 @@
         <!--Search View Controller-->
         <scene sceneID="YCI-p7-d6U">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="EF4-DM-bhf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="Search" id="ejR-ID-QeZ" customClass="SearchViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="81e-7p-9B4"/>
@@ -398,8 +397,9 @@
                         <outlet property="searchTableView" destination="uaJ-gk-oVK" id="Gdm-05-9H5"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EF4-DM-bhf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1938" y="-170"/>
+            <point key="canvasLocation" x="1936.8" y="-170.46476761619192"/>
         </scene>
         <!--Item-->
         <scene sceneID="SMR-eG-GdH">
@@ -458,7 +458,7 @@
                                                     <color key="titleColor" red="0.32549019610000002" green="0.30980392159999998" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="hiddenAction:" destination="ejR-ID-QeZ" eventType="touchUpInside" id="jfP-af-8SD"/>
+                                                    <action selector="hiddenAction:" destination="jYD-0N-iVY" eventType="touchUpInside" id="qF1-wb-2vZ"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -868,7 +868,7 @@
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="qYc-rH-SsF">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qYc-rH-SsF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
