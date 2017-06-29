@@ -57,6 +57,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         setupGAI()
         
+        UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil))
+        UIApplication.shared.registerForRemoteNotifications()
+        
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions);
         Fabric.with([Twitter.self])
         
@@ -114,6 +117,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Print it to console
         print("APNs device token: \(deviceTokenString)")
         
+        LoginManager.sharedInstance.deviceToken = deviceTokenString
         // Persist it in your backend in case it's new
     }
     
