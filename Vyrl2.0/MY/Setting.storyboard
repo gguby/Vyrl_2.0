@@ -1532,12 +1532,12 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="SZ0-hr-ejd">
-                                    <rect key="frame" x="0.0" y="80" width="375" height="1"/>
+                                    <rect key="frame" x="0.0" y="131" width="375" height="1"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="51" id="42v-v3-Idi" customClass="BlockTableViewCell" customModule="Vyrl2_0" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OfficialCell" rowHeight="51" id="42v-v3-Idi" customClass="BlockTableViewCell" customModule="Vyrl2_0" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="29" width="375" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="42v-v3-Idi" id="bvB-D4-8Mc">
@@ -1552,19 +1552,15 @@
                                                         <constraint firstAttribute="height" constant="32" id="DFy-rQ-kxB"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xyn-KR-Rac">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tag_official_01" translatesAutoresizingMaskIntoConstraints="NO" id="xyn-KR-Rac">
                                                     <rect key="frame" x="57" y="19" width="41" height="13"/>
-                                                    <color key="backgroundColor" red="1" green="0.0" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="41" id="HAJ-4C-2ZS"/>
                                                         <constraint firstAttribute="height" constant="13" id="mUy-9A-RfY"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oAJ-r6-PcT">
-                                                    <rect key="frame" x="104" y="20" width="33" height="11"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="10.5" id="6j7-5X-6fI"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="104" y="17" width="33" height="17"/>
                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="14"/>
                                                     <color key="textColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1580,6 +1576,9 @@
                                                     <state key="normal" title="차단해제" backgroundImage="btn_block_01">
                                                         <color key="titleColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="unBlockUser:" destination="42v-v3-Idi" eventType="touchUpInside" id="by9-GZ-u52"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -1598,6 +1597,58 @@
                                             <outlet property="officialImageView" destination="xyn-KR-Rac" id="g3n-mJ-zVD"/>
                                             <outlet property="profileImageView" destination="Kyg-z7-jfg" id="LyV-dd-6yF"/>
                                             <outlet property="unBlockButton" destination="kYR-py-D54" id="tXS-SH-kOp"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="GeneralCell" rowHeight="51" id="kzL-dz-ye7" customClass="BlockTableViewCell" customModule="Vyrl2_0" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="80" width="375" height="51"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kzL-dz-ye7" id="Idp-8R-QcR">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fLg-id-yq1">
+                                                    <rect key="frame" x="15" y="9" width="32" height="32"/>
+                                                    <color key="backgroundColor" red="0.50196078430000002" green="0.0078431372550000003" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="32" id="K5m-wo-yBY"/>
+                                                        <constraint firstAttribute="height" constant="32" id="evY-Xh-Wwn"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mGw-dE-oov">
+                                                    <rect key="frame" x="57" y="17" width="33" height="17"/>
+                                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="14"/>
+                                                    <color key="textColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8vF-1p-o2B">
+                                                    <rect key="frame" x="300" y="15" width="60" height="20"/>
+                                                    <color key="backgroundColor" red="0.96862745100000003" green="0.96470588239999999" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="60" id="mch-La-rbu"/>
+                                                        <constraint firstAttribute="height" constant="20" id="sDG-GI-XnT"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="11"/>
+                                                    <state key="normal" title="차단해제" backgroundImage="btn_block_01">
+                                                        <color key="titleColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="unBlockUser:" destination="kzL-dz-ye7" eventType="touchUpInside" id="PTf-E0-pNg"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="mGw-dE-oov" firstAttribute="centerY" secondItem="fLg-id-yq1" secondAttribute="centerY" id="8hF-nk-yKj"/>
+                                                <constraint firstAttribute="trailing" secondItem="8vF-1p-o2B" secondAttribute="trailing" constant="15" id="BXI-HL-Qb8"/>
+                                                <constraint firstItem="8vF-1p-o2B" firstAttribute="centerY" secondItem="Idp-8R-QcR" secondAttribute="centerY" id="NXQ-mV-jXd"/>
+                                                <constraint firstItem="fLg-id-yq1" firstAttribute="leading" secondItem="Idp-8R-QcR" secondAttribute="leadingMargin" constant="7" id="Qe3-0F-3WY"/>
+                                                <constraint firstItem="fLg-id-yq1" firstAttribute="centerY" secondItem="Idp-8R-QcR" secondAttribute="centerY" id="Wfa-3U-DQe"/>
+                                                <constraint firstItem="mGw-dE-oov" firstAttribute="leading" secondItem="fLg-id-yq1" secondAttribute="trailing" constant="10" id="xSg-Ze-shW"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="nicNameLabel" destination="mGw-dE-oov" id="hrX-B6-XXO"/>
+                                            <outlet property="profileImageView" destination="fLg-id-yq1" id="dxU-h8-y14"/>
+                                            <outlet property="unBlockButton" destination="8vF-1p-o2B" id="i8Q-tr-3RB"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -2132,5 +2183,6 @@ Cw
         <image name="icon_qrcode_01_premium" width="21" height="21"/>
         <image name="logo_fb_02_on" width="14" height="14"/>
         <image name="sample_barcode" width="85" height="25"/>
+        <image name="tag_official_01" width="41" height="13"/>
     </resources>
 </document>

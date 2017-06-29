@@ -1868,13 +1868,13 @@
                                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YjI-XN-yBq" customClass="GrowingTextView">
                                                                     <rect key="frame" x="15" y="0.0" width="345" height="56.5"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <mutableString key="text">귀염둥이들 #내사랑 #샤이니 언제 나오지ㅠ 컴백 무대 넘나 기다리는
+                                                                    <string key="text">귀염둥이들 #내사랑 #샤이니 언제 나오지ㅠ 컴백 무대 넘나 기다리는
 중...!! 하ㅠㅠ 저 사탕은 저에게 주는 건가요?ㅠㅠㅠㅠ
 #shinee_s_back #shinee 귀염둥이들 #내사랑 #샤이니 언제 나오지ㅠ 컴백 무대 넘나 기다리는
 중...!! 하ㅠㅠ 저 사탕은 저에게 주는 건가요?ㅠㅠㅠㅠ
 #shinee_s_back #shinee 귀염둥이들 #내사랑 #샤이니 언제 나오지ㅠ 컴백 무대 넘나 기다리는
 중...!! 하ㅠㅠ 저 사탕은 저에게 주는 건가요?ㅠㅠㅠㅠ
-#shinee_s_back #shinee</mutableString>
+#shinee_s_back #shinee</string>
                                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
                                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                 </textView>
@@ -2118,6 +2118,9 @@
                                             <constraint firstAttribute="width" constant="20" id="SW3-UP-4Mj"/>
                                         </constraints>
                                         <state key="normal" image="icon_emoji_01"/>
+                                        <connections>
+                                            <action selector="openEmoticon:" destination="n3t-LG-PEh" eventType="touchUpInside" id="CEM-0u-U84"/>
+                                        </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text=" " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="E6u-eI-gIG" customClass="GrowingTextView">
                                         <rect key="frame" x="57" y="5" width="263" height="32"/>
@@ -2197,6 +2200,87 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RIA-9e-wCR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-253.59999999999999" y="-1136.1319340329835"/>
+        </scene>
+        <!--Emoticon View Controller-->
+        <scene sceneID="dEs-Wh-og8">
+            <objects>
+                <viewController storyboardIdentifier="Emoticon" id="iGM-Mv-yfi" customClass="EmoticonViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="67O-bI-Ehs"/>
+                        <viewControllerLayoutGuide type="bottom" id="F9t-VX-nsU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1zd-9D-UQ9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="254.5"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="wDK-an-FL1">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="37"/>
+                                <color key="pageIndicatorTintColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="currentPageIndicatorTintColor" red="0.50196078430000002" green="0.32156862749999998" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                            </pageControl>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="JmH-A2-RfO">
+                                <rect key="frame" x="0.0" y="37" width="375" height="125"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="125" id="fdA-kM-tgH"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ukv-MQ-nLw">
+                                    <size key="itemSize" width="40" height="40"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="jlI-q4-n2k" customClass="EmoticonCell" customModule="Vyrl2_0" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uCU-02-yyw">
+                                                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                </imageView>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="uCU-02-yyw" firstAttribute="leading" secondItem="jlI-q4-n2k" secondAttribute="leading" id="9jW-he-PPy"/>
+                                            <constraint firstAttribute="bottom" secondItem="uCU-02-yyw" secondAttribute="bottom" id="EzF-Jl-3A6"/>
+                                            <constraint firstAttribute="trailing" secondItem="uCU-02-yyw" secondAttribute="trailing" id="K5n-ww-0Q4"/>
+                                            <constraint firstItem="uCU-02-yyw" firstAttribute="top" secondItem="jlI-q4-n2k" secondAttribute="top" id="Qbe-Bh-CLg"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="emoticonImageView" destination="uCU-02-yyw" id="aSS-do-tvq"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="iGM-Mv-yfi" id="tJS-dP-Dsh"/>
+                                    <outlet property="delegate" destination="iGM-Mv-yfi" id="FCC-hN-hR9"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="JmH-A2-RfO" firstAttribute="top" secondItem="wDK-an-FL1" secondAttribute="bottom" id="1KJ-xy-nY9"/>
+                            <constraint firstItem="JmH-A2-RfO" firstAttribute="leading" secondItem="1zd-9D-UQ9" secondAttribute="leading" id="3Br-Dk-8Lh"/>
+                            <constraint firstAttribute="trailing" secondItem="JmH-A2-RfO" secondAttribute="trailing" id="4QQ-0M-SQd"/>
+                            <constraint firstItem="wDK-an-FL1" firstAttribute="top" secondItem="1zd-9D-UQ9" secondAttribute="top" id="ZZI-fQ-YF2"/>
+                            <constraint firstAttribute="trailing" secondItem="wDK-an-FL1" secondAttribute="trailing" id="pJ8-Ht-QTp"/>
+                            <constraint firstItem="JmH-A2-RfO" firstAttribute="top" secondItem="wDK-an-FL1" secondAttribute="bottom" id="tW2-3k-yfQ"/>
+                            <constraint firstItem="wDK-an-FL1" firstAttribute="leading" secondItem="1zd-9D-UQ9" secondAttribute="leading" id="yyJ-Po-UEO"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="254.5"/>
+                    <connections>
+                        <outlet property="collectionView" destination="JmH-A2-RfO" id="aiZ-HY-cZf"/>
+                        <outlet property="pageControl" destination="wDK-an-FL1" id="MUp-35-WuJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="La2-UP-eub" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="472.80000000000001" y="-1363.2683658170915"/>
         </scene>
     </scenes>
     <resources>

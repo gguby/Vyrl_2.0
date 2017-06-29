@@ -24,7 +24,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var btnUser: UIButton!
     @IBOutlet weak var btnFan: UIButton!
     
-    @IBOutlet weak var scrollview: UIScrollView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var searchTable: UITableView!
     
@@ -37,10 +37,27 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         initSearchBar()
         
         self.automaticallyAdjustsScrollViewInsets = false
+<<<<<<< HEAD
         self.scrollview.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         
         searchTable.dataSource = self
         searchTable.delegate = self
+=======
+        self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+>>>>>>> bc12366191464da3356ecb2977ef02e7c6216794
     }
     
     func initSearchBar()

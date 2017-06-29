@@ -14,10 +14,11 @@
 		8F42E4971EE10F1E0010EB88 /* FanclubMembershipCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F42E4961EE10F1E0010EB88 /* FanclubMembershipCardViewController.swift */; };
 		8F42E4991EE144C70010EB88 /* OfficialFanClubTermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F42E4981EE144C70010EB88 /* OfficialFanClubTermsViewController.swift */; };
 		8F47B6C71EDEACA600A5DBAC /* BlockManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F47B6C61EDEACA600A5DBAC /* BlockManagementViewController.swift */; };
-		8F47B6C91EDEB02200A5DBAC /* BlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F47B6C81EDEB02200A5DBAC /* BlockTableViewCell.swift */; };
 		8F48CA6C1ED560CD0037A35B /* StartCoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F48CA6B1ED560CD0037A35B /* StartCoverViewController.swift */; };
 		8F4C09291EE528840026D49F /* FeedStyle.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F4C09281EE528840026D49F /* FeedStyle.storyboard */; };
 		8F5165D11ED6A8A900EC468B /* ProfilePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5165D01ED6A8A900EC468B /* ProfilePhotoViewController.swift */; };
+		8F62CC131F00CD6D0069ACFE /* EmoticonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F62CC121F00CD6D0069ACFE /* EmoticonViewController.swift */; };
+		8F62CC151F00EC330069ACFE /* EmoticonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F62CC141F00EC330069ACFE /* EmoticonView.swift */; };
 		8F829E7C1EFB6648001D418F /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F829E7B1EFB6648001D418F /* MyProfileViewController.swift */; };
 		8F829E801EFB9CD4001D418F /* WriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F829E7F1EFB9CD4001D418F /* WriteViewController.swift */; };
 		8F90911D1EEFC57D0095A335 /* FeedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F90911C1EEFC57D0095A335 /* FeedDetailViewController.swift */; };
@@ -72,10 +73,11 @@
 		8F42E4961EE10F1E0010EB88 /* FanclubMembershipCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanclubMembershipCardViewController.swift; sourceTree = "<group>"; };
 		8F42E4981EE144C70010EB88 /* OfficialFanClubTermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfficialFanClubTermsViewController.swift; sourceTree = "<group>"; };
 		8F47B6C61EDEACA600A5DBAC /* BlockManagementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockManagementViewController.swift; sourceTree = "<group>"; };
-		8F47B6C81EDEB02200A5DBAC /* BlockTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockTableViewCell.swift; sourceTree = "<group>"; };
 		8F48CA6B1ED560CD0037A35B /* StartCoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartCoverViewController.swift; sourceTree = "<group>"; };
 		8F4C09281EE528840026D49F /* FeedStyle.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FeedStyle.storyboard; sourceTree = "<group>"; };
 		8F5165D01ED6A8A900EC468B /* ProfilePhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePhotoViewController.swift; sourceTree = "<group>"; };
+		8F62CC121F00CD6D0069ACFE /* EmoticonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonViewController.swift; sourceTree = "<group>"; };
+		8F62CC141F00EC330069ACFE /* EmoticonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonView.swift; sourceTree = "<group>"; };
 		8F829E7B1EFB6648001D418F /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		8F829E7F1EFB9CD4001D418F /* WriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteViewController.swift; sourceTree = "<group>"; };
 		8F90911C1EEFC57D0095A335 /* FeedDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedDetailViewController.swift; sourceTree = "<group>"; };
@@ -158,6 +160,8 @@
 				8F4C09281EE528840026D49F /* FeedStyle.storyboard */,
 				8F9AF9901EE800E700DE069E /* FeedTableViewController.swift */,
 				8F90911C1EEFC57D0095A335 /* FeedDetailViewController.swift */,
+				8F62CC121F00CD6D0069ACFE /* EmoticonViewController.swift */,
+				8F62CC141F00EC330069ACFE /* EmoticonView.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -250,7 +254,6 @@
 				CE1340A51EDD3CD500EA330F /* NoticeController.swift */,
 				CE1340A31EDD3C6C00EA330F /* Setting.storyboard */,
 				8F47B6C61EDEACA600A5DBAC /* BlockManagementViewController.swift */,
-				8F47B6C81EDEB02200A5DBAC /* BlockTableViewCell.swift */,
 				8F3C90321EDFFAE80041B770 /* AccountManagementViewController.swift */,
 				8F3C90361EE010320041B770 /* FanclubManagementViewController.swift */,
 				8F42E4961EE10F1E0010EB88 /* FanclubMembershipCardViewController.swift */,
@@ -529,8 +532,10 @@
 				8F48CA6C1ED560CD0037A35B /* StartCoverViewController.swift in Sources */,
 				8F42E4991EE144C70010EB88 /* OfficialFanClubTermsViewController.swift in Sources */,
 				CE29B1A01ECD5FEE003F4D2E /* ViewController.swift in Sources */,
+				8F62CC151F00EC330069ACFE /* EmoticonView.swift in Sources */,
 				8F916A8E1EDC264900E3EC8B /* UIView+Extension.swift in Sources */,
 				8F3C90331EDFFAE80041B770 /* AccountManagementViewController.swift in Sources */,
+				8F62CC131F00CD6D0069ACFE /* EmoticonViewController.swift in Sources */,
 				CE0898221ECD7098000D6D6C /* MyViewController.swift in Sources */,
 				CE5636FC1EE7FE8600894016 /* WithDrawViewController.swift in Sources */,
 				CE08981E1ECD706A000D6D6C /* FanViewController.swift in Sources */,
@@ -545,7 +550,6 @@
 				CE33F0041ED2D2900050C21D /* AgreeMentController.swift in Sources */,
 				CE29B1D41ECD6515003F4D2E /* Constants.swift in Sources */,
 				CE36D4A01ED3C96B00ABC7FE /* CheckBox.swift in Sources */,
-				8F47B6C91EDEB02200A5DBAC /* BlockTableViewCell.swift in Sources */,
 				8F42E4971EE10F1E0010EB88 /* FanclubMembershipCardViewController.swift in Sources */,
 				CE33F0061ED2DF320050C21D /* ProfileController.swift in Sources */,
 				CE1340A61EDD3CD500EA330F /* NoticeController.swift in Sources */,

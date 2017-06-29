@@ -44,6 +44,36 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
         self.commentTextView.becomeFirstResponder()
         self.buttonView.isHidden = true
     }
+    
+    @IBAction func openEmoticon(_ sender: UIButton) {
+        
+//        let tempWindow = UIApplication.shared.windows[1]
+//        let keyboard : UIView
+//        
+//        for(int i = 0; i < tempWindow.subviews.count; i++)
+//        {
+//            keyboard = tempWindow.subviews[i]
+//            
+//            if(keyboard.description.hasPrefix("UIKeyboard") == true)
+//            {
+//                keyboard.bringSubview(toFront: self.tableView)
+//            }
+//        }
+        
+        let customView = UIView(frame: CGRect(x: 0, y: self.view.frame.size.height-300, width: self.view.frame.size.width, height: 300))
+        customView.backgroundColor = UIColor.red
+        customView.layer.zPosition = CGFloat(MAXFLOAT)
+        customView.tag = 100
+        
+        let controller : EmoticonViewController = storyboard!.instantiateViewController(withIdentifier: "Emoticon") as! EmoticonViewController
+        customView.addSubview(controller.view)
+        
+        let windowCount = UIApplication.shared.windows.count
+        UIApplication.shared.windows[windowCount-1].addSubview(customView)
+        
+        
+    }
+ 
     @IBAction func postButtonClick(_ sender: UIButton) {
         self.commentFieldView.isHidden = true
         self.commentTextView.text = ""
@@ -79,6 +109,12 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
     
     func tapGestureHandler() {
         view.endEditing(true)
+        
+        if let viewWithTag = self.view.viewWithTag(100) {
+            viewWithTag.removeFromSuperview()
+        }else{
+            print("No!")
+        }
     }
     
     override func didReceiveMemoryWarning() {
