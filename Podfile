@@ -19,7 +19,7 @@ target 'Vyrl2.0' do
     pod 'Firebase/Auth'
     pod 'GoogleSignIn'
     pod 'TwitterKit'
-    
+    pod 'SwiftyJSON'
     pod 'TOCropViewController'
     pod 'Sharaku'
     

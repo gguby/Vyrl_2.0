@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1Vp-nc-zxL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1Vp-nc-zxL">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jvn-62-g5m">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jvn-62-g5m">
                                 <rect key="frame" x="0.0" y="20" width="375" height="598"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p8F-fK-YhB" userLabel="TopView">
@@ -71,12 +71,12 @@
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="Xtd-In-doz" secondAttribute="trailing" constant="12.5" id="0kR-RI-VYC"/>
                                             <constraint firstAttribute="height" constant="45" id="GR8-Qc-Amm"/>
+                                            <constraint firstItem="4dG-z1-zsq" firstAttribute="top" secondItem="p8F-fK-YhB" secondAttribute="top" constant="5" id="JKU-q4-3Ic"/>
                                             <constraint firstAttribute="trailing" secondItem="4dG-z1-zsq" secondAttribute="trailing" constant="55" id="SZW-Mc-dUy"/>
                                             <constraint firstItem="NGh-Wb-1CE" firstAttribute="centerY" secondItem="p8F-fK-YhB" secondAttribute="centerY" id="bz9-jl-XSo"/>
                                             <constraint firstItem="4dG-z1-zsq" firstAttribute="leading" secondItem="p8F-fK-YhB" secondAttribute="leading" constant="15" id="lUe-1L-i7h"/>
                                             <constraint firstItem="Xtd-In-doz" firstAttribute="centerY" secondItem="p8F-fK-YhB" secondAttribute="centerY" id="qMb-3o-t2u"/>
                                             <constraint firstAttribute="trailing" secondItem="NGh-Wb-1CE" secondAttribute="trailing" constant="15.5" id="qzQ-ta-hQ4"/>
-                                            <constraint firstItem="4dG-z1-zsq" firstAttribute="centerY" secondItem="p8F-fK-YhB" secondAttribute="centerY" id="zyZ-W0-u4o"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JgY-PG-T2w" userLabel="TopLine">
@@ -537,7 +537,7 @@
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="qYc-rH-SsF">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qYc-rH-SsF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
