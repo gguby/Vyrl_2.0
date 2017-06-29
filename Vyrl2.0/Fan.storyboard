@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6aX-4z-eQV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6aX-4z-eQV">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -200,7 +200,7 @@
             </objects>
             <point key="canvasLocation" x="479" y="-1"/>
         </scene>
-        <!--Item-->
+        <!--Fan View Controller-->
         <scene sceneID="P7L-IF-TDv">
             <objects>
                 <viewController id="6aX-4z-eQV" customClass="FanViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
@@ -693,7 +693,9 @@
                             <constraint firstAttribute="trailing" secondItem="cdk-PD-gzB" secondAttribute="trailing" id="eQ5-Mk-vog"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="e5v-4w-d2v"/>
+                    <tabBarItem key="tabBarItem" title="" image="icon_fan_01_off" id="e5v-4w-d2v">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1035"/>
