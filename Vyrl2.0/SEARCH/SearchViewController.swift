@@ -23,6 +23,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var btnUser: UIButton!
     @IBOutlet weak var btnFan: UIButton!
     
+    @IBOutlet weak var scrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         print("Search");
         
         initSearchBar()
+        
+        self.automaticallyAdjustsScrollViewInsets = false
+        self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
     }
     
     override func viewWillAppear(_ animated: Bool) {
