@@ -17,6 +17,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var btnActivity: UIButton!
     @IBOutlet weak var searchTableView: UIView!
     
+    @IBOutlet weak var placeHolder: UILabel!
     @IBOutlet weak var postCollectionView: UICollectionView!
     
     @IBOutlet weak var btnTag: UIButton!
@@ -24,6 +25,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var btnFan: UIButton!
     
     @IBOutlet weak var scrollview: UIScrollView!
+    
+    @IBOutlet weak var searchTable: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,19 +38,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         
         self.automaticallyAdjustsScrollViewInsets = false
         self.scrollview.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        searchTable.dataSource = self
+        searchTable.delegate = self
     }
     
     func initSearchBar()
@@ -65,15 +58,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         searchBar.delegate = self
     }
     
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        searchTableView.isHidden = false
-        
-        btnCancel.isHidden = false
-        btnActivity.isHidden = true
-        
-        
-        return true
-    }
     
     @IBAction func hiddenAction(_ sender: Any) {
         btnCancel.isHidden = true
@@ -81,12 +65,16 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         
         searchTableView.isHidden = true
         
+        self.placeHolder.isHidden = false
+        
         searchBar.resignFirstResponder()
     }
     
     @IBOutlet weak var selectedLine1: UIView!
     @IBOutlet weak var selectedLine2: UIView!
     @IBOutlet weak var selectedLine3: UIView!
+    
+    var selectedIdx = 0.0
     
     @IBAction func tagAction(_ sender: UIButton) {
         sender.setTitleColor(UIColor.ivLighterPurple, for: .normal)
@@ -97,6 +85,12 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         selectedLine1.isHidden = false
         selectedLine2.isHidden = true
         selectedLine3.isHidden = true
+        
+        selectedIdx  = 1
+        
+        searchTable.reloadData()
+        
+        placeHolder.isHidden = true
     }
     
     @IBAction func userAction(_ sender: UIButton) {
@@ -108,6 +102,12 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         selectedLine1.isHidden = true
         selectedLine2.isHidden = false
         selectedLine3.isHidden = true
+        
+        selectedIdx  = 2
+        
+        searchTable.reloadData()
+        
+        placeHolder.isHidden = true
     }
     
     @IBAction func fanAction(_ sender: UIButton) {
@@ -119,22 +119,64 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         selectedLine1.isHidden = true
         selectedLine2.isHidden = true
         selectedLine3.isHidden = false
-    }    
+        
+        selectedIdx  = 3
+        
+        searchTable.reloadData()
+        
+        placeHolder.isHidden = true
+    }
 }
 
 extension SearchViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
+        if tableView == self.searchTable {
+            
+            return 4
+        }
         return 3
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if tableView == self.searchTable {
+            
+            var ret : CGFloat = 47
+            switch selectedIdx {
+            case 1:
+                ret = 47
+            case 2:
+                ret = 50
+            case 3:
+                ret = 72
+            default:
+                ret = 55
+            }
+            
+            return ret
+        }
         return 55
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell :FollowCell = tableView.dequeueReusableCell(withIdentifier: "FollowCell") as! FollowCell
+        var cell : UITableViewCell = UITableViewCell()
+        if tableView == self.searchTable {
+            switch selectedIdx {
+            case 1:
+                cell = tableView.dequeueReusableCell(withIdentifier: "tagcell") as! TagCell
+            case 2:
+                cell = tableView.dequeueReusableCell(withIdentifier: "usercell") as! UserCell
+            case 3:
+                cell = tableView.dequeueReusableCell(withIdentifier: "fancell") as! FanCell
+            default:
+                print("defaultCell")
+            }
+        }
+        else {
+            cell = tableView.dequeueReusableCell(withIdentifier: "FollowCell") as! FollowCell
+        }
+        
         return cell
     }
 }
@@ -156,6 +198,45 @@ extension SearchViewController : UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
     }
+}
+
+extension SearchViewController {
+    
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        
+        searchTableView.isHidden = false
+        
+        btnCancel.isHidden = false
+        btnActivity.isHidden = true
+        
+        placeHolder.isHidden = false
+
+        selectedIdx = 1
+        
+        return true
+    }
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        
+    }
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+        
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        self.searchTable.reloadData()
+        return true
+    }
+
 }
 
 class LeftAlignedSearchBar: UISearchBar, UISearchBarDelegate {
@@ -210,5 +291,26 @@ class FollowCell : UITableViewCell {
     
     
     
+}
+
+class TagCell : UITableViewCell {
+    
+    @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var contents: UILabel!
+}
+
+class UserCell : UITableViewCell {
+    
+    @IBOutlet weak var profile: UIImageView!
+    @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var followers: UILabel!
+}
+
+class FanCell : UITableViewCell {
+    @IBOutlet weak var profile: UIImageView!
+    @IBOutlet weak var title: UILabel!
+    
+    @IBOutlet weak var members: UILabel!
+    @IBOutlet weak var intro: UILabel!
 }
 
