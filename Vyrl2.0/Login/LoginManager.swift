@@ -46,6 +46,8 @@ class LoginManager{
     var needSignUpSecret:String?
     var needSignUpService:ServiceType?
     
+    var deviceToken:String?
+    
     func login(accessToken : String , accessTokenSecret :String, service : ServiceType, callBack : LoginViewController )
     {
         print(accessToken)
@@ -172,6 +174,8 @@ class LoginManager{
             "homePageUrl": homePageURL,
             "nickName": nickName,
             "selfIntro": selfIntro,
+            "type" : Constants.VyrlAPIConstants.AppDevice.uppercased(),
+            "pushToken" : self.deviceToken!
         ]
         
         let uri = baseURL + "accounts/signup"

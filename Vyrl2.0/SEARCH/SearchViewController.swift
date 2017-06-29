@@ -19,6 +19,11 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     
     @IBOutlet weak var postCollectionView: UICollectionView!
     
+    @IBOutlet weak var btnTag: UIButton!
+    @IBOutlet weak var btnUser: UIButton!
+    @IBOutlet weak var btnFan: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -74,6 +79,43 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         
         searchBar.resignFirstResponder()
     }
+    
+    @IBOutlet weak var selectedLine1: UIView!
+    @IBOutlet weak var selectedLine2: UIView!
+    @IBOutlet weak var selectedLine3: UIView!
+    
+    @IBAction func tagAction(_ sender: UIButton) {
+        sender.setTitleColor(UIColor.ivLighterPurple, for: .normal)
+        
+        btnFan.setTitleColor(UIColor.black, for: .normal)
+        btnUser.setTitleColor(UIColor.black, for: .normal)
+        
+        selectedLine1.isHidden = false
+        selectedLine2.isHidden = true
+        selectedLine3.isHidden = true
+    }
+    
+    @IBAction func userAction(_ sender: UIButton) {
+        sender.setTitleColor(UIColor.ivLighterPurple, for: .normal)
+        
+        btnTag.setTitleColor(UIColor.black, for: .normal)
+        btnFan.setTitleColor(UIColor.black, for: .normal)
+        
+        selectedLine1.isHidden = true
+        selectedLine2.isHidden = false
+        selectedLine3.isHidden = true
+    }
+    
+    @IBAction func fanAction(_ sender: UIButton) {
+        sender.setTitleColor(UIColor.ivLighterPurple, for: .normal)
+        
+        btnTag.setTitleColor(UIColor.black, for: .normal)
+        btnUser.setTitleColor(UIColor.black, for: .normal)
+        
+        selectedLine1.isHidden = true
+        selectedLine2.isHidden = true
+        selectedLine3.isHidden = false
+    }    
 }
 
 extension SearchViewController : UITableViewDelegate, UITableViewDataSource {
