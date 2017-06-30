@@ -15,7 +15,13 @@ class FanViewController: UIViewController {
     
     @IBOutlet weak var recommandFanpageTableView: UITableView!
     
-    @IBOutlet weak var scrollViewHeightConstant: NSLayoutConstraint!
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var searchTable: UITableView!
+    @IBOutlet weak var cancelButton: UIButton!
+    
+    @IBOutlet weak var searchTableView: UIView!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,11 +29,29 @@ class FanViewController: UIViewController {
         registerSwipe()
         
         print("Fan");
+        initSearchBar()
+        self.automaticallyAdjustsScrollViewInsets = false
+        
+        self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func initSearchBar()
+    {
+        searchBar.setImage(UIImage.init(named: "icon_search_02_off"), for: UISearchBarIcon.search, state: UIControlState.normal)
+        searchBar.placeholder = "검색"
+        searchBar.backgroundImage = UIImage()
+        
+        let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.backgroundColor = UIColor.clear
+        
+        let textFieldInsideSearchBarLabel = textFieldInsideSearchBar!.value(forKey: "placeholderLabel") as? UILabel
+        textFieldInsideSearchBarLabel?.font = UIFont.ivTextStyleFont()
+        
+    }
+    @IBAction func hiddenAction(_ sender: Any) {
+        searchTableView.isHidden = true;
+        searchBar.resignFirstResponder()
     }
 
 }
@@ -61,8 +85,21 @@ extension FanViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "RecommandFanpageCell", for: indexPath) as UITableViewCell
+        var cell : UITableViewCell = UITableViewCell()
+        if(tableView == self.searchTable)
+        {
+            cell = tableView.dequeueReusableCell(withIdentifier: "OfficialBannerCell", for: indexPath) as UITableViewCell
+        } else if(tableView == self.recommandFanpageTableView) {
+            cell = tableView.dequeueReusableCell(withIdentifier: "RecommandFanpageCell", for: indexPath) as UITableViewCell
+        }
         return cell
     }
 
+}
+
+extension FanViewController : UISearchBarDelegate {
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        searchTableView.isHidden = false
+        return true
+    }
 }

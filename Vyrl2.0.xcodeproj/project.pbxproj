@@ -360,7 +360,7 @@
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = CH83NSNY9P;
 						LastSwiftMigration = 0830;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 0;
@@ -696,7 +696,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Vyrl2.0/Vyrl2.0.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = CH83NSNY9P;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Vyrl2.0/Other",
@@ -706,8 +706,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.smt.vyrl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "18467855-4f11-42b9-988a-062df000af2a";
+				PROVISIONING_PROFILE_SPECIFIER = vyrl_dev;
 				SWIFT_OBJC_BRIDGING_HEADER = "Vyrl2.0-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -722,7 +722,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Vyrl2.0/Vyrl2.0.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = CH83NSNY9P;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Vyrl2.0/Other",
@@ -732,8 +732,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.smt.vyrl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "18467855-4f11-42b9-988a-062df000af2a";
+				PROVISIONING_PROFILE_SPECIFIER = vyrl_dev;
 				SWIFT_OBJC_BRIDGING_HEADER = "Vyrl2.0-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
