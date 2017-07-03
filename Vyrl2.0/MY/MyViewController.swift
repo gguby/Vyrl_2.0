@@ -36,27 +36,49 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         profileImage.layer.cornerRadius = profileImage.frame.width / 2
         profileImage.layer.borderColor = UIColor.black.cgColor
         profileImage.layer.borderWidth = 1.0
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.accountTable.delegate = self
+        self.accountTable.dataSource = self
+        self.accountTable.rowHeight = 50
         
         self.loadMyProfile()
     }
     
     func loadMyProfile(){
         
-        self.accountTable.delegate = self
-        self.accountTable.dataSource = self
-        self.accountTable.rowHeight = 50
+        self.accountList.removeAll()
         
-        accountList.append(LoginManager.sharedInstance.getCurrentAccount()!)
+        self.accountList.append(LoginManager.sharedInstance.getCurrentAccount()!)
         
         for account in LoginManager.sharedInstance.includeNotCurrentUser(){
-            accountList.append(account)
+            self.accountList.append(account)
         }
         
-        let uri = Constants.VyrlAPIConstants.baseURL + "my/profile"
+        self.accountTable.reloadData()
+        
+        let currentAccount = LoginManager.sharedInstance.getCurrentAccount()
+        
+        if let image = UserDefaults.standard.image(forKey: (currentAccount?.userId)!){
+            self.profileImage.image = image;
+        }else{
+            if let imagePath = currentAccount?.imagePath {
+                
+                Alamofire.request(imagePath).responseImage { response in
+                    if let responseImg = response.result.value {
+                        
+                        self.profileImage.image = responseImg;
+                        UserDefaults.standard.set(image: responseImg, forKey: (currentAccount?.userId)!)
+                    }
+                }            
+            }
+        }
+        
+        let uri = Constants.VyrlAPIConstants.MYPROFILE
         
         Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: LoginManager.sharedInstance.getHeader()).responseJSON(completionHandler: {
             response in
@@ -72,8 +94,27 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                         self.introLabel.text = jsonData["selfIntro"] as? String
                         self.homepageLabel.text = jsonData["homepageUrl"] as? String
                         
-                        let url = URL.init(string: jsonData["imagePath"] as! String)
-                        self.profileImage.af_setImage(withURL: url!)
+                        let account = LoginManager.sharedInstance.getCurrentAccount()
+                        
+                        account?.nickName = jsonData["nickName"] as? String
+                        account?.imagePath = jsonData["imagePath"] as? String
+                        
+                        LoginManager.sharedInstance.replaceAccount(account: account!)
+                        
+                        let index = self.accountList.index(where :{ $0.userId == account?.userId })
+                        if let index = index {
+                            self.accountList[index] = account!
+                        }
+                        
+                        guard let image = UserDefaults.standard.image(forKey: (currentAccount?.userId)!) else {
+                            
+                            let url = URL.init(string: (account?.imagePath)!)
+                            self.profileImage.af_setImage(withURL: url!)
+                            
+                            return
+                        }
+                        
+                        self.profileImage.image = image
                     }
                 }
                 
@@ -99,6 +140,7 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             
         }, completion: nil)
         
+        self.accountTable.reloadData()
     }
     
     @IBAction func pushProfile(_ sender: Any) {
@@ -122,6 +164,17 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         cell.name.text = account.nickName
         
+        if ( UserDefaults.standard.image(forKey: account.userId!) == nil ){
+            if let imagePath = account.imagePath {
+                let url = URL.init(string: imagePath)
+                cell.profileView.af_setImage(withURL: url!)
+            }
+        }else {
+            if let image = UserDefaults.standard.image(forKey: account.userId!){
+                cell.profileView.image = image
+            }
+        }
+        
         let currentAccount : Account = LoginManager.sharedInstance.getCurrentAccount()!
         
         if ( account.userId == currentAccount.userId ){
@@ -138,7 +191,15 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let account : Account = accountList[indexPath.row]
         
+        let currentAccount : Account = LoginManager.sharedInstance.getCurrentAccount()!
+        
+        if ( account.userId == currentAccount.userId ){
+            return
+        }else {
+            LoginManager.sharedInstance.changeCookie(account: account)
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

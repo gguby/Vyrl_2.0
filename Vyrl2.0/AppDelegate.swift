@@ -64,8 +64,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Fabric.with([Twitter.self])
         
         LoginManager.sharedInstance.loadAccountList()
+        LoginManager.sharedInstance.loadCookies()
     
-        if (!LoginManager.sharedInstance.loadCookies()){
+        if (!LoginManager.sharedInstance.isExistCookie()){
             self.goLogin()
         }    
 
@@ -125,6 +126,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         // Print the error to console (you should alert the user that registration failed)
         print("APNs registration failed: \(error)")
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+        var temp : Dictionary = userInfo
+        
     }
 }
 

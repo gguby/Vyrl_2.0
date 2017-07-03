@@ -21,6 +21,7 @@ struct Constants {
         static let baseURL = "http://api.dev2nd.vyrl.com:8080/"
         static let APPVersion = "1.0.0"
         static let AppDevice = "ios"
+        static let MYPROFILE = baseURL + "users/profile/me"
     }
     
     enum VyrlResponseCode : Int {

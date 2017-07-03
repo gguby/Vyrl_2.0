@@ -109,7 +109,8 @@ class AccountManagementViewController: UIViewController, UITableViewDelegate, UI
     func refreshTable(){
         self.accountList = LoginManager.sharedInstance.includeNotCurrentUser()
         self.tableView.reloadData()
-        self.tableViewHeightConstraint.constant = self.tableView.contentSize.height + 20    }
+        self.tableViewHeightConstraint.constant = self.tableView.contentSize.height + 20
+    }
 }
 
 class AccountCell : UITableViewCell {

@@ -71,8 +71,14 @@ class LoginManager{
                     
                         case .SUCCESS :
                             
+                            var cookie : String?
+                            
                             if ( callBack.isAddAccount == false ){
-                                self.saveCookies(response: response)
+                                cookie = self.saveCookies(response: response)
+                                self.cookie = cookie
+                            }else {
+                                cookie = self.addCookie(response: response)
+                                self.loadCookies()
                             }
                             
                             let jsonData = json as! NSDictionary
@@ -84,7 +90,7 @@ class LoginManager{
                                 "userId" : idStr,
                                 "email" : jsonData["email"] as! String,
                                 "accessToken" : accessToken,
-                                "sessionToken" : self.cookie!,
+                                "sessionToken" : cookie!,
                                 "nickName" : jsonData["nickName"] as! String,
                                 "service" : service.name()
                             ])
@@ -167,6 +173,10 @@ class LoginManager{
     
     func signUp(homePageURL : String , nickName : String, selfIntro:String, profile: UIImage, completionHandler : @escaping () -> Void)
     {
+        guard let token = self.deviceToken else {
+            return
+        }
+        
         let parameters : Parameters = [
             "accessToken": self.needSignUpToken!,
             "accessTokenSecret" : self.needSignUpSecret!,
@@ -175,7 +185,7 @@ class LoginManager{
             "nickName": nickName,
             "selfIntro": selfIntro,
             "type" : Constants.VyrlAPIConstants.AppDevice.uppercased(),
-            "pushToken" : self.deviceToken!
+            "pushToken" : token
         ]
         
         let uri = baseURL + "accounts/signup"
@@ -207,8 +217,11 @@ class LoginManager{
                     print((response.response?.statusCode)!)
                     print(response)
                     
+                    if ( (response.response?.statusCode) != 200 ) { return }
+                    
                     switch response.result {
                     case .success(let json):
+                        
                             self.saveCookies(response: response);
                             
                             let jsonData = json as! NSDictionary
@@ -319,26 +332,59 @@ extension LoginManager {
 }
 
 
-
 extension LoginManager {
     
-    func saveCookies(response: DataResponse<Any>) {
+    func changeCookie(account : Account){
+        
+        let properties = account.cookieProperties
+        if let cookie = HTTPCookie(properties: properties as! [HTTPCookiePropertyKey : Any]) {            
+            self.cookie = cookie.value
+            print("Change Cookie: \(cookie.value)")
+            HTTPCookieStorage.shared.setCookie(cookie)
+            
+            var cookieArray = [[HTTPCookiePropertyKey: Any]]()
+
+            cookieArray.append(properties as! [HTTPCookiePropertyKey : Any])
+            
+            UserDefaults.standard.set(cookieArray, forKey: "savedCookies")
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    func addCookie(response :DataResponse<Any>) -> String?{
         let headerFields = response.response?.allHeaderFields as! [String: String]
         let url = response.response?.url
         let cookies = HTTPCookie.cookies(withResponseHeaderFields: headerFields, for: url!)
         
+        var cookiesString : String? = nil
+        
         if ( cookies.count == 0 ) {
-            return
+            return cookiesString
         }
         
-        var cookieArray = [[HTTPCookiePropertyKey: Any]]()
         for cookie in cookies {
-            self.cookie = cookie.value
-            print("Save Cookie: \(cookie.value)")
-            cookieArray.append(cookie.properties!)
+            cookiesString = cookie.value
+            print("Add Cookie: \(cookie.value)")
+            
+            UserDefaults.standard.set(cookie.properties!, forKey: cookiesString! )
         }
+        
+        return cookiesString
+    }
+    
+    func saveCookies(response: DataResponse<Any>) -> String? {
+        var cookieArray = [[HTTPCookiePropertyKey: Any]]()
+        
+        let cookiesString : String? = self.addCookie(response: response)
+        
+        let cookieProperty  = UserDefaults.standard.object(forKey: cookiesString!)
+        
+        cookieArray.append(cookieProperty as! [HTTPCookiePropertyKey : Any])
+        
         UserDefaults.standard.set(cookieArray, forKey: "savedCookies")
         UserDefaults.standard.synchronize()
+        
+        return cookiesString
     }
     
     func clearCookies(){
@@ -352,8 +398,17 @@ extension LoginManager {
         UserDefaults.standard.synchronize()
     }
     
-    func loadCookies() -> Bool {
-        guard let cookieArray = UserDefaults.standard.array(forKey: "savedCookies") as? [[HTTPCookiePropertyKey: Any]] else { return false }
+    func isExistCookie() -> Bool {
+        if (self.cookie == nil )
+        {
+            return false
+        }
+        
+        return true
+    }
+    
+    func loadCookies() {
+        guard let cookieArray = UserDefaults.standard.array(forKey: "savedCookies") as? [[HTTPCookiePropertyKey: Any]] else { return  }
         for cookieProperties in cookieArray {
             if let cookie = HTTPCookie(properties: cookieProperties) {
                 
@@ -362,8 +417,6 @@ extension LoginManager {
                 HTTPCookieStorage.shared.setCookie(cookie)
             }
         }
-        
-        return true
     }
     
     func getCookieHeader() -> [String :String]? {
@@ -388,6 +441,8 @@ class Account {
     var userId : String?
     var nickName :String?
     
+    var imagePath : String?
+    
     public init(properties : [String : Any]){
         self.email = properties["email"] as? String;
         self.accessToken = properties["accessToken"] as? String;
@@ -397,15 +452,34 @@ class Account {
         self.nickName = properties["nickName"] as? String;
     }
     
+    func removeProfile(){
+        UserDefaults.standard.removeObject(forKey: self.userId!)
+    }
+    
+    open var cookieProperties : Any? {
+        get {
+            return UserDefaults.standard.object(forKey: self.sessionToken!)
+        }
+    }
+    
     open var properties : [String : String] {
         get {
+            var imagePath = ""
+            
+            if self.imagePath != nil {
+                imagePath = self.imagePath!
+            }else {
+                imagePath = ""
+            }
+            
              return [
                 "email" : self.email!,
                 "accessToken" : self.accessToken!,
                 "sessionToken" : self.sessionToken!,
                 "service" : self.service!,
                 "userId" : self.userId!,
-                "nickName" :self.nickName!
+                "nickName" :self.nickName!,
+                "imagePath" : imagePath
             ]
         }
     }
@@ -428,6 +502,21 @@ class Account {
     }
 }
 
+extension UserDefaults {
+    func set(image: UIImage?, forKey key: String) {
+        guard let image = image else {
+            set(nil, forKey: key)
+            return
+        }
+        set(UIImageJPEGRepresentation(image, 1.0), forKey: key)
+    }
+    func image(forKey key:String) -> UIImage? {
+        guard let data = data(forKey: key), let image = UIImage(data: data )
+            else  { return nil }
+        return image
+    }
+}
+
 extension LoginManager {
     
     open func loadAccountList() {
@@ -443,10 +532,25 @@ extension LoginManager {
         }
     }
     
+    func saveProfileImage(image:UIImage ,userId : String )
+    {
+        let imgData = UIImageJPEGRepresentation(image, 1)
+        UserDefaults.standard.set(imgData, forKey: userId)
+    }
+    
+    func loadProfile(userId:String){
+       
+    }
+    
     func syncAccount(){
         var accountArray = [[String: Any]]()
         for account in self.accountList
         {
+            print("Sync Account :-----------------------")
+            print("Sync Account :" + account.nickName!)
+            print("Sync Account :" + account.userId!)
+            print("Sync Account :" + account.sessionToken!)
+            print("Sync Account :-----------------------")
             accountArray.append(account.properties)
         }
         
@@ -454,15 +558,23 @@ extension LoginManager {
         UserDefaults.standard.synchronize()
     }
     
+    func replaceAccount(account : Account){
+        
+        let index = self.accountList.index(where :{ $0.userId == account.userId })
+        if let index = index {
+            self.accountList[index] = account
+            self.syncAccount()
+        }
+    }
+    
     func addAccount(account : Account){
         
-        for _account in self.accountList {
-            if ( account.userId == _account.userId){
-                return
-            }
+        let index = self.accountList.index(where :{ $0.userId == account.userId })
+        if let index = index {
+            self.accountList[index] = account
+        }else {
+            self.accountList.append(account)
         }
-        
-        self.accountList.append(account)
         
         self.syncAccount()
     }
@@ -477,6 +589,12 @@ extension LoginManager {
     }
     
     func clearAccountAll(){
+        
+        for account in self.accountList {
+            UserDefaults.standard.removeObject(forKey: account.userId!)
+            UserDefaults.standard.removeObject(forKey: account.sessionToken!)
+        }
+        
         self.accountList.removeAll()
         UserDefaults.standard.removeObject(forKey: "accountList")
         UserDefaults.standard.synchronize()
