@@ -171,7 +171,7 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource {
             case 3:
                 cell = tableView.dequeueReusableCell(withIdentifier: "fancell") as! FanCell
             default:
-                print("defaultCell")
+                break
             }
         }
         else {

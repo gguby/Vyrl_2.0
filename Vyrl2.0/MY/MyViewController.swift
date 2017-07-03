@@ -78,9 +78,9 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             }
         }
         
-        let uri = Constants.VyrlAPIConstants.MYPROFILE
+        let uri = Constants.VyrlAPIURL.MYPROFILE
         
-        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: LoginManager.sharedInstance.getHeader()).responseJSON(completionHandler: {
+        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON(completionHandler: {
             response in
             
             switch response.result {
@@ -185,6 +185,7 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         else {
             cell.iconCheck.isHidden = true
             cell.iconDot.isHidden = false
+            cell.name.textColor = UIColor.ivGreyishBrownTwo
         }
         
         return cell
@@ -199,6 +200,11 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             return
         }else {
             LoginManager.sharedInstance.changeCookie(account: account)
+            
+            self.dropTableView.isHidden  = true
+            self.tabBarController?.tabBar.isHidden = !self.dropTableView.isHidden
+            
+            self.loadMyProfile()
         }
     }
     

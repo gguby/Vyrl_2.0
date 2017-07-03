@@ -91,7 +91,7 @@ class MyProfileViewController: UIViewController, UIImagePickerControllerDelegate
             "selfIntro": introField.text!,
             ]
         
-        let uri = Constants.VyrlAPIConstants.MYPROFILE
+        let uri = Constants.VyrlAPIURL.MYPROFILE
         let fileName = "\(nickNameField.text!).jpg"
         
         Alamofire.upload(multipartFormData: { (multipartFormData) in
@@ -104,7 +104,7 @@ class MyProfileViewController: UIViewController, UIImagePickerControllerDelegate
                 multipartFormData.append(valueStr.data(using: String.Encoding.utf8)!, withName: key)
             }
             
-        }, usingThreshold: UInt64.init(), to: uri, method: .post, headers: LoginManager.sharedInstance.getHeader(), encodingCompletion:
+        }, usingThreshold: UInt64.init(), to: uri, method: .post, headers: Constants.VyrlAPIConstants.getHeader(), encodingCompletion:
             {
                 encodingResult in
                 switch encodingResult {
@@ -130,8 +130,8 @@ class MyProfileViewController: UIViewController, UIImagePickerControllerDelegate
     }
     
     func getProfileData() {
-        let uri = Constants.VyrlAPIConstants.MYPROFILE
-         Alamofire.request(uri, method: .get, parameters:nil, encoding: JSONEncoding.default, headers: LoginManager.sharedInstance.getHeader()).responseJSON { (response) in
+        let uri = Constants.VyrlAPIURL.MYPROFILE
+        Alamofire.request(uri, method: .get, parameters:nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON { (response) in
             switch response.result {
             case .success(let json):
                 

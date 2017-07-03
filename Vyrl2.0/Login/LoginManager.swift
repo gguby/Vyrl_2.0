@@ -33,13 +33,7 @@ class LoginManager{
     }
     
     func getHeader() -> HTTPHeaders {
-        let headers: HTTPHeaders = [
-            "X-APP-Version": Constants.VyrlAPIConstants.APPVersion,
-            "X-Device": Constants.VyrlAPIConstants.AppDevice,
-            "Accept-Language" : "ko-kr"
-        ]
-        
-        return headers
+        return Constants.VyrlAPIConstants.getHeader()
     }
     
     var needSignUpToken:String?
@@ -222,7 +216,7 @@ class LoginManager{
                     switch response.result {
                     case .success(let json):
                         
-                            self.saveCookies(response: response);
+                            self.cookie = self.saveCookies(response: response);
                             
                             let jsonData = json as! NSDictionary
                             
@@ -346,7 +340,7 @@ extension LoginManager {
 
             cookieArray.append(properties as! [HTTPCookiePropertyKey : Any])
             
-            UserDefaults.standard.set(cookieArray, forKey: "savedCookies")
+            UserDefaults.standard.set(cookieArray, forKey: "currentCookie")
             UserDefaults.standard.synchronize()
         }
     }
@@ -381,7 +375,7 @@ extension LoginManager {
         
         cookieArray.append(cookieProperty as! [HTTPCookiePropertyKey : Any])
         
-        UserDefaults.standard.set(cookieArray, forKey: "savedCookies")
+        UserDefaults.standard.set(cookieArray, forKey: "currentCookie")
         UserDefaults.standard.synchronize()
         
         return cookiesString
@@ -394,7 +388,7 @@ extension LoginManager {
             }
         }
         
-        UserDefaults.standard.removeObject(forKey: "savedCookies" )
+        UserDefaults.standard.removeObject(forKey: "currentCookie" )
         UserDefaults.standard.synchronize()
     }
     
@@ -408,7 +402,7 @@ extension LoginManager {
     }
     
     func loadCookies() {
-        guard let cookieArray = UserDefaults.standard.array(forKey: "savedCookies") as? [[HTTPCookiePropertyKey: Any]] else { return  }
+        guard let cookieArray = UserDefaults.standard.array(forKey: "currentCookie") as? [[HTTPCookiePropertyKey: Any]] else { return  }
         for cookieProperties in cookieArray {
             if let cookie = HTTPCookie(properties: cookieProperties) {
                 
@@ -546,11 +540,11 @@ extension LoginManager {
         var accountArray = [[String: Any]]()
         for account in self.accountList
         {
-            print("Sync Account :-----------------------")
-            print("Sync Account :" + account.nickName!)
-            print("Sync Account :" + account.userId!)
-            print("Sync Account :" + account.sessionToken!)
-            print("Sync Account :-----------------------")
+            print("Sync Account :-----------------------------------------------------")
+            print("Sync Account NickName:" + account.nickName!)
+            print("Sync Account UserId:" + account.userId!)
+            print("Sync Account Session Token :" + account.sessionToken!)
+            print("Sync Account :-----------------------------------------------------")
             accountArray.append(account.properties)
         }
         

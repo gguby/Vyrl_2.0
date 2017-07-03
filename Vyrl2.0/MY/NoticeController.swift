@@ -42,7 +42,7 @@ class NoticeController: UIViewController , UITableViewDelegate, UITableViewDataS
         
         let uri = Constants.VyrlAPIConstants.baseURL + "notices/faq"
         
-        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: LoginManager.sharedInstance.getHeader()).responseJSON(completionHandler: {
+        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON(completionHandler: {
             response in
             
             switch response.result {
@@ -83,7 +83,7 @@ class NoticeController: UIViewController , UITableViewDelegate, UITableViewDataS
         
         let uri = Constants.VyrlAPIConstants.baseURL + "notices/update"
         
-        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: LoginManager.sharedInstance.getHeader()).responseJSON(completionHandler: {
+        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON(completionHandler: {
             response in
             
             switch response.result {
