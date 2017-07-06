@@ -21,6 +21,8 @@ struct Constants {
     struct VyrlAPIURL{
         static let baseURL = "http://api.dev2nd.vyrl.com:8080/"
         static let MYPROFILE = baseURL + "users/profile/me"
+        static let notices = baseURL + "notices"
+        static let faqs = baseURL + "faqs"
     }
     
     struct VyrlAPIConstants{

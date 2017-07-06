@@ -47,6 +47,13 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: .UIKeyboardWillHide, object: nil)
+        
+        let tapGestureReconizer = UITapGestureRecognizer(target: self, action: #selector(self.tap(sender:)))
+        view.addGestureRecognizer(tapGestureReconizer)
+    }
+    
+    func tap(sender: UITapGestureRecognizer) {
+        view.endEditing(true)
     }
     
     func keyboardWillShow(notification : NSNotification){

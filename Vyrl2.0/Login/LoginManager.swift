@@ -145,18 +145,23 @@ class LoginManager{
         Alamofire.request(uri, method: .delete, parameters: nil, encoding: JSONEncoding.default, headers: getHeader()).responseString(completionHandler: {
             response in
             
-            self.clearCookies()
-            
             switch response.result {
             case .success(let json):
                 
                 let account = self.getCurrentAccount()
                 
                 if ( account?.service == "GOOGLE"){
-                    GIDSignIn.sharedInstance().signIn()
+                    GIDSignIn.sharedInstance().signOut()
                 }
                 
-                completionHandler()
+                UserDefaults.standard.removeObject(forKey: self.cookie!)
+                
+                self.clearCookies()
+                
+                self.removeAccount(userId: (account?.userId)!)                
+                
+                self.goLoginView()
+                
                 print((response.response?.statusCode)!)
                 print(json)
             case .failure(let error):
@@ -600,13 +605,10 @@ extension LoginManager {
         
         let filteredArray = self.accountList.filter{
             (account) -> Bool in
-            userId == account.userId
+            userId != account.userId
         }
         
         self.accountList = filteredArray
-        
-        print(self.accountList)
-        
         self.syncAccount()
     }
     

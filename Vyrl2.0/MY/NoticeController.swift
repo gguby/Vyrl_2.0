@@ -40,7 +40,7 @@ class NoticeController: UIViewController , UITableViewDelegate, UITableViewDataS
     
     func getFAQData(){
         
-        let uri = Constants.VyrlAPIConstants.baseURL + "notices/faq"
+        let uri = Constants.VyrlAPIURL.faqs
         
         Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON(completionHandler: {
             response in
@@ -81,7 +81,7 @@ class NoticeController: UIViewController , UITableViewDelegate, UITableViewDataS
     
     func getNoticeData(){
         
-        let uri = Constants.VyrlAPIConstants.baseURL + "notices/update"
+        let uri = Constants.VyrlAPIURL.notices
         
         Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON(completionHandler: {
             response in

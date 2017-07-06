@@ -29,6 +29,9 @@ class AccountManagementViewController: UIViewController, UITableViewDelegate, UI
         
         self.currentAccount = LoginManager.sharedInstance.getCurrentAccount()!
         
+        if let image = UserDefaults.standard.image(forKey: (self.currentAccount?.userId!)!){
+            profileView.image = image
+        }
         socialImage.image = currentAccount?.logoImage
         nickName.text = currentAccount?.nickName
         emailLabel.text = (currentAccount?.email)! + "으로 연결된 계정"
@@ -57,6 +60,9 @@ class AccountManagementViewController: UIViewController, UITableViewDelegate, UI
         let account = self.accountList[indexPath.row]
         
         cell.emailLabel.text = (account.email)! + "으로 연결된 계정"
+        if let image = UserDefaults.standard.image(forKey: account.userId!){
+            cell.profileImageView.image = image
+        }
         cell.logoImageView.image = account.logoImage
         cell.nickNameLabel.text = account.nickName
         
@@ -94,7 +100,9 @@ class AccountManagementViewController: UIViewController, UITableViewDelegate, UI
         let alertController = UIAlertController (title:nil, message:"로그아웃 하시겠습니까?",preferredStyle:.alert)
         
         let okAction = UIAlertAction(title: "Ok", style: .default,handler: { (action) -> Void in
-            LoginManager.sharedInstance.goLoginView()
+            LoginManager.sharedInstance.signout {
+                
+            }            
         })
 
         let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in
