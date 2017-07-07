@@ -39,7 +39,11 @@ class BlockManagementViewController: UIViewController, UITableViewDelegate, UITa
             case .success:
                 if let statusesArray = try? JSONSerialization.jsonObject(with: response.data!, options: .allowFragments) as? [[String: Any]] {
                     // Finally we got the username
-                    self.blockUserArray = statusesArray!
+                    if(statusesArray == nil) {
+                        self.blockUserArray.removeAll()
+                    } else {
+                        self.blockUserArray = statusesArray!
+                    }
                     self.tableView.reloadData()
                 }
                 
