@@ -2138,6 +2138,13 @@
                                             <outlet property="delegate" destination="n3t-LG-PEh" id="qHU-1a-eCy"/>
                                         </connections>
                                     </textView>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VLZ-is-Rqe">
+                                        <rect key="frame" x="57" y="5" width="263" height="32"/>
+                                        <state key="normal" title="이모티콘 닫기"/>
+                                        <connections>
+                                            <action selector="closeEmoticon:" destination="n3t-LG-PEh" eventType="touchUpInside" id="P1j-bV-kSS"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UCR-JP-rK8">
                                         <rect key="frame" x="330" y="11.5" width="30" height="15.5"/>
                                         <constraints>
@@ -2157,19 +2164,23 @@
                                 <constraints>
                                     <constraint firstItem="gN7-bU-VMj" firstAttribute="leading" secondItem="LYe-d8-wXC" secondAttribute="leading" constant="21" id="8kc-eB-SEQ"/>
                                     <constraint firstItem="E6u-eI-gIG" firstAttribute="leading" secondItem="gN7-bU-VMj" secondAttribute="trailing" constant="16" id="EqN-r9-iK5"/>
+                                    <constraint firstItem="VLZ-is-Rqe" firstAttribute="bottom" secondItem="E6u-eI-gIG" secondAttribute="bottom" id="K6B-Yw-AM4"/>
                                     <constraint firstAttribute="bottom" secondItem="gN7-bU-VMj" secondAttribute="bottom" constant="12.5" id="Kf0-xE-Xw5"/>
                                     <constraint firstAttribute="trailing" secondItem="UCR-JP-rK8" secondAttribute="trailing" constant="15" id="LhY-ds-yKX"/>
+                                    <constraint firstItem="VLZ-is-Rqe" firstAttribute="trailing" secondItem="E6u-eI-gIG" secondAttribute="trailing" id="Ndq-nn-gXn"/>
+                                    <constraint firstItem="VLZ-is-Rqe" firstAttribute="top" secondItem="E6u-eI-gIG" secondAttribute="top" id="Q29-lS-JDz"/>
                                     <constraint firstAttribute="bottom" secondItem="E6u-eI-gIG" secondAttribute="bottom" constant="5" id="Rr3-cU-JVo"/>
                                     <constraint firstItem="UCR-JP-rK8" firstAttribute="leading" secondItem="E6u-eI-gIG" secondAttribute="trailing" constant="10" id="TQB-Ym-O17"/>
                                     <constraint firstAttribute="bottom" secondItem="UCR-JP-rK8" secondAttribute="bottom" constant="15" id="adP-Gh-Q31"/>
                                     <constraint firstItem="E6u-eI-gIG" firstAttribute="top" secondItem="LYe-d8-wXC" secondAttribute="top" constant="5" id="oTf-8z-P3G"/>
+                                    <constraint firstItem="VLZ-is-Rqe" firstAttribute="leading" secondItem="E6u-eI-gIG" secondAttribute="leading" id="zVM-Th-eUb"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                         <color key="value" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="10"/>
+                                        <real key="value" value="2"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
@@ -2200,6 +2211,7 @@
                     <connections>
                         <outlet property="bottomConstraint" destination="TFc-sa-7gF" id="D4h-9F-sD2"/>
                         <outlet property="buttonView" destination="u4S-AA-lYV" id="YH4-Zv-Rga"/>
+                        <outlet property="closeEmoticonButton" destination="VLZ-is-Rqe" id="9qF-Lu-USU"/>
                         <outlet property="commentFieldView" destination="LYe-d8-wXC" id="OyE-Oy-WaP"/>
                         <outlet property="commentTextView" destination="E6u-eI-gIG" id="pVe-0u-wwa"/>
                         <outlet property="tableView" destination="6OT-TR-Fg8" id="0wV-TK-XeY"/>
@@ -2299,7 +2311,7 @@
         <image name="icon_back_01" width="20" height="20"/>
         <image name="icon_bookmark_01" width="20" height="20"/>
         <image name="icon_bullet_01" width="4" height="6"/>
-        <image name="icon_bullet_03" width="16" height="16"/>
+        <image name="icon_bullet_03" width="4" height="6"/>
         <image name="icon_dot_03" width="2" height="2"/>
         <image name="icon_emoji_01" width="22" height="22"/>
         <image name="icon_heart_01" width="14" height="20"/>

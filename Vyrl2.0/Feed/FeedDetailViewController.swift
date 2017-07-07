@@ -18,7 +18,9 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
   
     @IBOutlet weak var commentFieldView: UIView!
     @IBOutlet weak var buttonView: UIView!
+    @IBOutlet weak var closeEmoticonButton: UIButton!
     
+    var emoticonView : EmoticonView!
     var kbHeight: CGFloat!
 
     override func viewDidLoad() {
@@ -60,10 +62,19 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
 //        }
         
         let keyboard = UIApplication.shared.windows[1]
+        emoticonView.frame = CGRect.init(x: 0, y: keyboard.frame.size.height - kbHeight, width: keyboard.frame.size.width, height: kbHeight)
+        keyboard.bringSubview(toFront: emoticonView)
         
-        
-        
+        closeEmoticonButton.isHidden = false
+        self.commentTextView.bringSubview(toFront: closeEmoticonButton)
     }
+    
+    @IBAction func closeEmoticon(_ sender: UIButton) {
+        let keyboard : UIWindow = UIApplication.shared.windows[1]
+        emoticonView.frame = CGRect.init(x: 0, y: keyboard.frame.size.height, width: keyboard.frame.size.width, height:0)
+        closeEmoticonButton.isHidden = true
+    }
+
  
     @IBAction func postButtonClick(_ sender: UIButton) {
         self.commentFieldView.isHidden = true
@@ -92,8 +103,11 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
                                      y: self.view.frame.origin.y,
                                      width: self.view.frame.width,
                                      height: window.origin.y + window.height - keyboardSize.height)
-            
-            
+           
+            kbHeight = keyboardSize.height
+            emoticonView = EmoticonView.init(frame: CGRect.init(x: 0, y: keyboardSize.origin.y + keyboardSize.height, width: keyboardSize.width, height: keyboardSize.height))
+            emoticonView.backgroundColor = UIColor.white
+            UIApplication.shared.windows[UIApplication.shared.windows.count-1].addSubview(emoticonView)
         } else {
             debugPrint("We're showing the keyboard and either the keyboard size or window is nil: panic widely.")
         }
