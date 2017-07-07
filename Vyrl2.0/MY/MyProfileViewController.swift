@@ -119,7 +119,7 @@ class MyProfileViewController: UIViewController, UIImagePickerControllerDelegate
             "selfIntro": introField.text!,
             ]
         
-        let uri = Constants.VyrlAPIURL.MYPROFILE
+        let uri = Constants.VyrlAPIURL.changeProfile
         let fileName = "\(nickNameField.text!).jpg"
         
         Alamofire.upload(multipartFormData: { (multipartFormData) in
@@ -132,7 +132,7 @@ class MyProfileViewController: UIViewController, UIImagePickerControllerDelegate
                 multipartFormData.append(valueStr.data(using: String.Encoding.utf8)!, withName: key)
             }
             
-        }, usingThreshold: UInt64.init(), to: uri, method: .post, headers: Constants.VyrlAPIConstants.getHeader(), encodingCompletion:
+        }, usingThreshold: UInt64.init(), to: uri, method: .patch, headers: Constants.VyrlAPIConstants.getHeader(), encodingCompletion:
             {
                 encodingResult in
                 switch encodingResult {
