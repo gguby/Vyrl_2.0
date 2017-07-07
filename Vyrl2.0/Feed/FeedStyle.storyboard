@@ -2164,6 +2164,14 @@
                                     <constraint firstAttribute="bottom" secondItem="UCR-JP-rK8" secondAttribute="bottom" constant="15" id="adP-Gh-Q31"/>
                                     <constraint firstItem="E6u-eI-gIG" firstAttribute="top" secondItem="LYe-d8-wXC" secondAttribute="top" constant="5" id="oTf-8z-P3G"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
