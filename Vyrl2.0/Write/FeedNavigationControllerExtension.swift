@@ -24,8 +24,6 @@ public extension UINavigationController {
             toViewController.endAppearanceTransition()
             toViewController.didMove(toParentViewController: strongself)
         }
-        
-        
     }
     
     func si_dismissModalView(toViewController:UIViewController, completion: (() -> Void)?){
@@ -39,13 +37,13 @@ public extension UINavigationController {
             
     }
     
-    func si_dissmissOnBottom(toViewController:UIViewController,completion: (() -> Void)?){
+    func si_dissmissOnBottom(toViewController:UIViewController, kbSize : CGSize , completion: (() -> Void)?){
         
         
         ModalAnimatorPhoto.dismissOnBottom(toViewController.view, fromView: parentTargetView, completion: {
             
             _ in completion?()
-        
+            
         })
     }
     

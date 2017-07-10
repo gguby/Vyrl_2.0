@@ -9,6 +9,16 @@
 import Foundation
 import Photos
 
+protocol WriteMdeiaDelegate : class {
+    func openCameraView()
+    func openPhotoView()
+    func openLocationView()
+    func openPhotoOrVideo(_ mediaType: AVAsset.MediaType?, assetIdentifier: String?)
+    func closeKeyboard()
+    func focusTextView()
+    func showMedia()
+}
+
 class WriteMediaViewConroller : UIViewController {
 
     @IBOutlet weak var titleView: UIView!
@@ -16,6 +26,8 @@ class WriteMediaViewConroller : UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     var avAssetIdentifiers = [String]()
+    
+    weak var delegate : WriteMdeiaDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +57,21 @@ class WriteMediaViewConroller : UIViewController {
             })
             
         }
+    }
+    @IBAction func openMap(_ sender: UIButton) {
+        delegate?.openLocationView()
+    }
+    
+    @IBAction func showMedia(_ sender: UIButton) {
+        delegate?.showMedia()
+    }
+    
+    @IBAction func focusKeyboard(_ sender : UIButton ){
+        delegate?.focusTextView()
+    }
+    
+    @IBAction func closeKeyboard(_ sender: UIButton) {
+        delegate?.closeKeyboard()
     }
     
     func getPhotosAndVideos(_ subType: PHAssetCollectionSubtype){
@@ -83,11 +110,30 @@ class WriteMediaViewConroller : UIViewController {
         })
         
     }
-
-    
 }
 
 extension WriteMediaViewConroller : UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if ( indexPath.row < 2 )
+        {
+            let cell = collectionView.cellForItem(at: indexPath) as! MediaButtonCell
+            
+            if ( cell.tag == 0)
+            {
+                delegate?.openPhotoView()
+            } else {
+                delegate?.openCameraView()
+            }
+            
+        }else {
+            let cell = collectionView.cellForItem(at: indexPath) as! MediaPhotoCell
+            cell.isChecked = !cell.isChecked
+            
+            delegate?.openPhotoOrVideo(cell.asset?.type, assetIdentifier: cell.asset?.identifier)
+        }
+        
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if ( indexPath.row < 2 ){
@@ -100,6 +146,8 @@ extension WriteMediaViewConroller : UICollectionViewDataSource, UICollectionView
                 cell.btnImg.image = UIImage(named: "icon_video_01")
                 cell.label.text = "동영상 촬영"
             }
+            
+            cell.tag = (indexPath as NSIndexPath).row
             
             return cell
         }
@@ -154,10 +202,23 @@ class MediaButtonCell : UICollectionViewCell {
     @IBOutlet weak var label: UILabel!
 }
 
+
 class MediaPhotoCell : UICollectionViewCell {
     
     @IBOutlet weak var photo: UIImageView!
     var asset: AVAsset?
+    
+    let checkedImage = UIImage(named: "icon_check_06_on")! as UIImage
+    
+    @IBOutlet weak var checkView: UIImageView!
+    @IBOutlet weak var unCheckView: UIView!
+    
+    var isChecked: Bool = false {
+        didSet{
+            checkView.isHidden = !isChecked
+            unCheckView.isHidden = isChecked
+        }
+    }
     
     var assetID: String? {
         

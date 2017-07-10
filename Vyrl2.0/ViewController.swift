@@ -74,7 +74,7 @@ extension UIViewController
     }
 }
 
-class ViewController: UITabBarController {
+class ViewController: UITabBarController , UITabBarControllerDelegate {
     
     override func viewWillLayoutSubviews() {
         var tabFrame = self.tabBar.frame
@@ -87,7 +87,7 @@ class ViewController: UITabBarController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        
+        self.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -95,6 +95,15 @@ class ViewController: UITabBarController {
         // Dispose of any resources that can be recreated.
     }
 
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        if viewController.title == "WriteNavi" {
+            let storyboard = UIStoryboard(name: "Write", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "writenavi") as? UINavigationController
+            present(vc!, animated: true, completion: nil)
+            return false
+        }
+        return true
+    }
 
 }
 

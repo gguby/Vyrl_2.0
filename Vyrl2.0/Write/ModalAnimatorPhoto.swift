@@ -24,10 +24,17 @@ public func PhotoAutorizationStatusCheck() -> Bool {
 
 public class ModalAnimatorPhoto {
     
+    static var isKeyboardMode : Bool = false
+    static var keyboardSize : CGSize = CGSize(width: 0, height: 0)
 
     public class func present(_ toView: UIView, fromView: UIView, completion: @escaping () -> Void) {
+        
+        var y : CGFloat = 221.0
+        if ( isKeyboardMode ){
+            y = fromView.bounds.size.height - keyboardSize.height - 44
+        }
     
-        var toViewFrame = fromView.bounds.offsetBy(dx: 0, dy: 221)
+        var toViewFrame = fromView.bounds.offsetBy(dx: 0, dy: y)
         toViewFrame.size.height = toViewFrame.size.height
         toView.frame = toViewFrame
         
@@ -39,7 +46,7 @@ public class ModalAnimatorPhoto {
             withDuration: 0.2,
             animations: { () -> Void in
 
-                let toViewFrame = fromView.bounds.offsetBy(dx: 0, dy: 221)
+                let toViewFrame = fromView.bounds.offsetBy(dx: 0, dy: y)
                 toView.frame = toViewFrame
                 
                 toView.alpha = 1.0
@@ -54,13 +61,17 @@ public class ModalAnimatorPhoto {
     
     public class func dismiss(_ toView: UIView, fromView: UIView, completion: @escaping () -> Void) {
         
+        var y : CGFloat = 221.0
+        if ( isKeyboardMode ){
+            y = fromView.bounds.size.height
+        }
+
         //Checking PhotoAutorizationStatus
         if PhotoAutorizationStatusCheck() {
             
             UIView.animate(withDuration: 0.2, animations: { () -> Void in
                 
-//                let statusBarHeight = UIApplication.shared.statusBarFrame.height
-                let toViewFrame = fromView.bounds.offsetBy(dx: 0, dy: 221)
+                let toViewFrame = fromView.bounds.offsetBy(dx: 0, dy: y)
             
                 toView.frame = toViewFrame
                 
@@ -73,7 +84,7 @@ public class ModalAnimatorPhoto {
             
             UIView.animate(withDuration: 0.2, animations: { () -> Void in
                 
-                let toViewFrame = fromView.bounds.offsetBy(dx: 0, dy: fromView.bounds.size.height - 44)
+                let toViewFrame = fromView.bounds.offsetBy(dx: 0, dy: y)
                
                 toView.frame = toViewFrame
                 
@@ -81,19 +92,14 @@ public class ModalAnimatorPhoto {
                 
                 completion()
             }
-
-          
         }
-        
-        
     }
     
     public class func dismissOnBottom(_ toView: UIView, fromView: UIView, completion: @escaping () -> Void) {
         
-        
         UIView.animate(withDuration: 0.2, animations: { () -> Void in
             
-            let toViewFrame = fromView.bounds.offsetBy(dx: 0, dy: fromView.bounds.size.height - 44)
+            let toViewFrame = fromView.bounds.offsetBy(dx: 0, dy: fromView.bounds.size.height - keyboardSize.height - 44)
             toView.frame = toViewFrame
             
         }) { (result) -> Void in

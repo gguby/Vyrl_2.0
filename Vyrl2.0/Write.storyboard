@@ -30,6 +30,9 @@
                                         <state key="normal" title="취소">
                                             <color key="titleColor" red="0.32549019607843138" green="0.30980392156862746" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="dimissPop" destination="pmO-Cv-AaH" eventType="touchUpInside" id="0Ec-al-TWY"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jaX-uA-xsT">
                                         <rect key="frame" x="330" y="7.5" width="30" height="29"/>
@@ -71,10 +74,10 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="552"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="글을 입력해 주세요" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="2Dl-XR-Rdf">
-                                                <rect key="frame" x="15" y="19" width="345" height="22"/>
+                                                <rect key="frame" x="15" y="19" width="345" height="100"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="22" id="TS6-jE-hwK"/>
+                                                    <constraint firstAttribute="height" constant="100" id="TS6-jE-hwK"/>
                                                 </constraints>
                                                 <color key="textColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
@@ -116,6 +119,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="ekX-0k-d02"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="postBtn" destination="jaX-uA-xsT" id="yiT-fE-D7o"/>
+                        <outlet property="scrollView" destination="jfM-K4-9gs" id="eJp-cj-GbQ"/>
+                        <outlet property="textView" destination="2Dl-XR-Rdf" id="lwL-jm-kow"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fAc-Hq-BBZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -150,6 +158,9 @@
                                             <constraint firstAttribute="height" constant="21" id="rxq-sb-Q9o"/>
                                         </constraints>
                                         <state key="normal" image="icon_txt_01_off"/>
+                                        <connections>
+                                            <action selector="focusKeyboard:" destination="f99-qz-saJ" eventType="touchUpInside" id="U5m-fw-Jgi"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QKw-5K-DGx">
                                         <rect key="frame" x="119.5" y="14" width="21" height="21"/>
@@ -158,6 +169,9 @@
                                             <constraint firstAttribute="width" constant="21" id="eSL-Rb-aYi"/>
                                         </constraints>
                                         <state key="normal" image="icon_camera_03"/>
+                                        <connections>
+                                            <action selector="showMedia:" destination="f99-qz-saJ" eventType="touchUpInside" id="6Mz-Io-rXI"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IB1-SV-tmG">
                                         <rect key="frame" x="69.5" y="14" width="21" height="21"/>
@@ -166,14 +180,20 @@
                                             <constraint firstAttribute="height" constant="21" id="wPK-JU-yz4"/>
                                         </constraints>
                                         <state key="normal" image="icon_map_01_off"/>
+                                        <connections>
+                                            <action selector="openMap:" destination="f99-qz-saJ" eventType="touchUpInside" id="pjM-Lk-Dar"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lym-uu-ieX">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lym-uu-ieX" customClass="SmallButton" customModule="Vyrl2_0" customModuleProvider="target">
                                         <rect key="frame" x="349" y="19" width="11" height="10"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="10" id="OnW-uP-RUA"/>
                                             <constraint firstAttribute="width" constant="11" id="ZlF-w7-2OG"/>
                                         </constraints>
                                         <state key="normal" title="Button" image="icon_arrow_06_close"/>
+                                        <connections>
+                                            <action selector="closeKeyboard:" destination="f99-qz-saJ" eventType="touchUpInside" id="IO4-nW-4WN"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -315,17 +335,38 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dBN-a3-SIZ">
                                                     <rect key="frame" x="0.0" y="0.0" width="124" height="124"/>
                                                 </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nuh-WJ-TrZ" userLabel="uncheckView">
+                                                    <rect key="frame" x="90" y="14" width="20" height="20"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="9xq-YC-vy6"/>
+                                                        <constraint firstAttribute="height" constant="20" id="PG9-Cz-efY"/>
+                                                    </constraints>
+                                                </view>
+                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_check_06_on" translatesAutoresizingMaskIntoConstraints="NO" id="y3G-P2-Tof">
+                                                    <rect key="frame" x="90" y="14" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="WMi-di-EDv"/>
+                                                        <constraint firstAttribute="width" constant="20" id="fFv-GP-rzr"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstItem="y3G-P2-Tof" firstAttribute="top" secondItem="gNb-zw-rfL" secondAttribute="topMargin" constant="6" id="6PU-LY-ZFi"/>
                                             <constraint firstAttribute="trailing" secondItem="dBN-a3-SIZ" secondAttribute="trailing" id="7jr-fz-Lf8"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="y3G-P2-Tof" secondAttribute="trailing" constant="6" id="AOp-Rp-eOo"/>
                                             <constraint firstAttribute="bottom" secondItem="dBN-a3-SIZ" secondAttribute="bottom" id="YPc-WY-03c"/>
                                             <constraint firstItem="dBN-a3-SIZ" firstAttribute="top" secondItem="gNb-zw-rfL" secondAttribute="top" id="cWx-m4-DGL"/>
                                             <constraint firstItem="dBN-a3-SIZ" firstAttribute="leading" secondItem="gNb-zw-rfL" secondAttribute="leading" id="jbH-bV-dJU"/>
+                                            <constraint firstItem="nuh-WJ-TrZ" firstAttribute="top" secondItem="gNb-zw-rfL" secondAttribute="topMargin" constant="6" id="nS7-B4-H7s"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="nuh-WJ-TrZ" secondAttribute="trailing" constant="6" id="zC7-TO-Ymj"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="checkView" destination="y3G-P2-Tof" id="zO5-aD-ea1"/>
                                             <outlet property="photo" destination="dBN-a3-SIZ" id="1DP-Z0-nSP"/>
+                                            <outlet property="unCheckView" destination="nuh-WJ-TrZ" id="Wc2-jA-1X0"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -359,21 +400,21 @@
             </objects>
             <point key="canvasLocation" x="1896.8" y="-352.17391304347831"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--WriteNavi-->
         <scene sceneID="24g-py-vDY">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="vaU-cB-7TB" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="writenavi" title="WriteNavi" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="vaU-cB-7TB" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="icon_write_01" id="OmI-jM-89g">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LBn-BY-fGh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="LBn-BY-fGh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="pmO-Cv-AaH" kind="relationship" relationship="rootViewController" id="2OB-tq-Tum"/>
+                        <segue destination="pmO-Cv-AaH" kind="relationship" relationship="rootViewController" id="egD-de-jDS"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5g2-PJ-kvR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -386,6 +427,7 @@
         <image name="icon_arrow_06_close" width="11" height="10"/>
         <image name="icon_camera_01" width="39" height="31"/>
         <image name="icon_camera_03" width="21" height="21"/>
+        <image name="icon_check_06_on" width="20" height="20"/>
         <image name="icon_map_01_off" width="21" height="21"/>
         <image name="icon_txt_01_off" width="21" height="21"/>
         <image name="icon_write_01" width="28" height="28"/>
