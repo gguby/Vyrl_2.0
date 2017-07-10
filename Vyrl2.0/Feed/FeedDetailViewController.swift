@@ -12,7 +12,7 @@ import GrowingTextView
 class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableViewDataSource {
    
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var commentTextView: UITextView!
+    @IBOutlet weak var commentTextView: GrowingTextView!
     
     @IBOutlet weak var tableView: UITableView!
   

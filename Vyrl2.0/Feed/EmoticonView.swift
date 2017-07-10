@@ -10,7 +10,7 @@ import UIKit
 
 class EmoticonView: UIView {
     var emoticonCount = [Int]()
-    var emoticonButtonArray = [UIButton]()
+    var emoticonButtonArray = [EmoticonButton]()
     
     var scrollView : UIScrollView!
     var selectorView : UIScrollView!
@@ -42,19 +42,9 @@ class EmoticonView: UIView {
             emoticonCount.append(20)
             emoticonCount.append(10)
             emoticonCount.append(20)
-
-//        emoticonCount[3]=8;
-//        emoticonCount[4]=8;
-//        emoticonCount[5]=8;
-//        emoticonCount[6]=82;
-//        emoticonCount[7]=16;
-//        emoticonCount[8]=8;
-//        emoticonCount[9]=8;
-//        emoticonCount[10]=8;
-//        emoticonCount[11]=14;
-//        emoticonCount[12]=16;
-//        emoticonCount[13]=16;
-
+            emoticonCount.append(10)
+            emoticonCount.append(20)
+     
             emoticonButtonArray.removeAll()
             
             var scrollRect : CGRect = rect
@@ -81,6 +71,8 @@ class EmoticonView: UIView {
         
             if(selectorView == nil) {
                 selectorView = UIScrollView.init(frame: selectorRect)
+                selectorView.tag = 100
+                 
                 selectorView.isPagingEnabled = true
                 selectorView.showsHorizontalScrollIndicator = false
                 selectorView.showsVerticalScrollIndicator = false
@@ -92,15 +84,17 @@ class EmoticonView: UIView {
                 var selectorButtonRect : CGRect = CGRect.init(x: 0, y: 0, width: scrollRect.size.width/6, height: selectorRect.size.height)
                 
                 
-                
                 for i in 0..<(emoticonCount.count) {
                     let btn : UIButton = UIButton.init(frame: selectorButtonRect)
-                    btn.backgroundColor = UIColor.brown
+                    if(i == 0) {
+                        btn.setImage(UIImage.init(named: "feed_textfield_icon_emo_recent_1"), for: .normal)
+                    } else {
+                        btn.setImage(UIImage.init(named: "feed_textfield_icon_emo_0\(i)"), for: .normal)
+                    }
                     btn.addTarget(self, action: #selector(emoticonChangeGroup(sender:)), for: UIControlEvents.touchUpInside)
-                    
                     btn.tag = i
                     self.selectorView.addSubview(btn)
-                    
+                    self.selectorView.contentSize = CGSize.init(width: btn.frame.origin.x + btn.frame.size.width, height: selectorRect.size.height)
                     selectorButtonRect.origin.x += selectorButtonRect.size.width
                 }
             }
@@ -125,15 +119,16 @@ class EmoticonView: UIView {
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
         
-        var itemSelector = sender
+        let itemSelector = sender
        
         var btnRect: CGRect = itemRect
         
-        var userDefaults = UserDefaults.standard
+        let userDefaults = UserDefaults.standard
         var recentEmoticon: String = "\(userDefaults.object(forKey: "recentEmoticon"))"
         print("recent : \(recentEmoticon)")
         
-        var recentEmoticonArray: [Any] = recentEmoticon.components(separatedBy: "|")
+        let recentEmoticonArray: [Any] = recentEmoticon.components(separatedBy: "|")
+        
         var count = emoticonCount[itemSelector.tag]
         if count <= 8 {
             pageControl.isHidden = true
@@ -150,11 +145,21 @@ class EmoticonView: UIView {
         var lineCnt: Int = 0
         
         for i in 1...count {
-            var btn: UIButton?
-            btn?.contentHorizontalAlignment = .center
-            btn = UIButton(frame: CGRect(x: CGFloat(btnRect.origin.x), y: CGFloat(btnRect.origin.y), width: CGFloat(btnRect.size.width), height: CGFloat(btnRect.size.height)))
-            btn?.imageView?.contentMode = .scaleAspectFit
-            btn?.setImage(UIImage(named: "icon_home_01_on.png"), for: .normal)
+            
+            let button: EmoticonButton = EmoticonButton(frame: CGRect(x: CGFloat(btnRect.origin.x), y: CGFloat(btnRect.origin.y), width: CGFloat(btnRect.size.width), height: CGFloat(btnRect.size.height)))
+            button.contentHorizontalAlignment = .center
+            button.imageView?.contentMode = .scaleAspectFit
+            button.addTarget(self, action: #selector(setEmoticonId(sender:)), for: .touchUpInside)
+           
+            if(itemSelector.tag == 0){
+                
+            } else {
+                button.setImage(UIImage.init(named:NSString(format:"emoticon_thumb_%02d_%02d.png", itemSelector.tag, i) as String), for: .normal)
+                if(emoticonSet).boolValue {
+                    button.alpha = 0.5
+                }
+                button.emoticonID = NSString(format:"emoticon_thumb_%02d_%02d.png", itemSelector.tag, i) as String
+            }
             
             if(emCnt == 3) { // 2번째 줄
                 btnRect.origin.y += btnRect.size.height
@@ -174,8 +179,8 @@ class EmoticonView: UIView {
                 emCnt += 1
             }
             //emoticonCount
-            scrollView.addSubview(btn!)
-            emoticonButtonArray.append(btn!)
+            scrollView.addSubview(button)
+            emoticonButtonArray.append(button)
         }
         
         let wsize = (Int((emoticonCount[itemSelector.tag] - 1) / 8)) + 1
@@ -185,6 +190,19 @@ class EmoticonView: UIView {
 
     }
 
+    func setEmoticonId(sender : EmoticonButton) {
+        emoticonSet = true;
+        
+        for case let inBtn in emoticonButtonArray {
+            if(inBtn.emoticonID == sender.emoticonID) {
+                inBtn.alpha = 1
+            } else {
+                inBtn.alpha = 0.5
+            }
+        }
+        
+    }
+    
 }
 
 
@@ -206,4 +224,8 @@ extension EmoticonView : UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         pageControl.currentPage = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
     }
+}
+
+class EmoticonButton : UIButton {
+    var emoticonID : String = ""
 }
