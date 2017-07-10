@@ -7,11 +7,15 @@
 //
 
 import Foundation
+import Photos
 
 class WriteMediaViewConroller : UIViewController {
 
     @IBOutlet weak var titleView: UIView!
     @IBOutlet weak var topView: UIView!
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    var avAssetIdentifiers = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +31,8 @@ class WriteMediaViewConroller : UIViewController {
             nc.isNavigationBarHidden = true
             
         }
+        
+        self.getPhotosAndVideos(.smartAlbumUserLibrary)
     }
     
     @IBAction func closeView(_ sender: UIButton) {
@@ -41,16 +47,56 @@ class WriteMediaViewConroller : UIViewController {
         }
     }
     
+    func getPhotosAndVideos(_ subType: PHAssetCollectionSubtype){
+        
+        self.avAssetIdentifiers.removeAll()
+        
+        let fetchOptions = PHFetchOptions()
+        
+        let fetchResult = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: subType, options: fetchOptions)
+        
+        fetchResult.enumerateObjects({ (collection, start, stop) in
+            
+            let fetchOptions = PHFetchOptions()
+            fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+            
+            let assets = PHAsset.fetchAssets(in: collection, options: fetchOptions)
+            assets.enumerateObjects({ (object, count, stop) in
+                
+                
+                self.avAssetIdentifiers.append(object.localIdentifier)
+                
+                DispatchQueue.main.async {
+                    //reload collectionView
+                    self.collectionView.reloadData()
+                    
+                    if self.avAssetIdentifiers.count == 0 {
+                      
+                    }
+                    
+                }
+            })
+            
+            if self.avAssetIdentifiers.count == 0 {
+                
+            }
+        })
+        
+    }
+
+    
 }
 
 extension WriteMediaViewConroller : UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        
         if ( indexPath.row < 2 ){
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! MediaButtonCell
             
-            if (indexPath.row == 1){
+            if (indexPath.row == 0){
+                cell.btnImg.image = UIImage(named: "icon_camera_01")
+                cell.label.text = "사진 촬영"
+            } else {
                 cell.btnImg.image = UIImage(named: "icon_video_01")
                 cell.label.text = "동영상 촬영"
             }
@@ -60,12 +106,14 @@ extension WriteMediaViewConroller : UICollectionViewDataSource, UICollectionView
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photocell", for: indexPath) as! MediaPhotoCell
         
+        cell.assetID = self.avAssetIdentifiers[indexPath.row - 2]
+        cell.tag = (indexPath as NSIndexPath).row
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return avAssetIdentifiers.count + 2
     }
     
 }
@@ -108,4 +156,88 @@ class MediaButtonCell : UICollectionViewCell {
 
 class MediaPhotoCell : UICollectionViewCell {
     
+    @IBOutlet weak var photo: UIImageView!
+    var asset: AVAsset?
+    
+    var assetID: String? {
+        
+        didSet {
+            
+            let manager = PHImageManager()
+            
+            let fetchOptions = PHFetchOptions()
+            fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+            
+            let requestOptions = PHImageRequestOptions()
+            requestOptions.isSynchronous = true
+            requestOptions.deliveryMode = .highQualityFormat
+            
+            if let id = assetID {
+                
+                let fetchResult = PHAsset.fetchAssets(withLocalIdentifiers: [id], options: fetchOptions)
+                
+                guard let asset = fetchResult.firstObject
+                    else { return  }
+                
+                if asset.mediaType == .image {
+                    
+                    self.asset = AVAsset(type: .photo, identifier: id)
+                    
+                    manager.requestImage(for: asset, targetSize: CGSize(width: 100, height: 100), contentMode: .aspectFill, options: requestOptions, resultHandler: {
+                        
+                        image,error  in
+                        
+                        self.photo.image = image
+                        
+                        if error != nil {
+                            
+                            
+                        }
+                    })
+                }
+                
+                if asset.mediaType == .video {
+                    
+                    var duration: TimeInterval!
+                    
+                    duration = asset.duration
+                    
+                    self.asset = AVAsset(type: .video, identifier: id)
+                    self.asset?.duration = duration
+        
+                    
+                    manager.requestImage(for: asset, targetSize: CGSize(width: 120, height: 120), contentMode: .aspectFill, options: requestOptions, resultHandler: {
+                        
+                        image,error  in
+                        
+                        if error != nil {
+                            
+                            self.photo.image = image
+             
+                        }
+                    })
+                }
+            }
+        }
+    }
+    
 }
+
+class AVAsset {
+    
+    enum MediaType: Int {
+        case video
+        case photo
+    }
+    
+    var type: MediaType?
+    var identifier: String?
+    var duration :TimeInterval!
+    
+    init(type: MediaType?, identifier: String?) {
+        self.type = type
+        self.identifier = identifier
+    }
+}
+
+
