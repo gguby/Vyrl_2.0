@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		01ABE511A001A1DEE7D8BEAB /* Pods_Vyrl2_0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D78881F4958F20C20F036FD5 /* Pods_Vyrl2_0.framework */; };
 		464236AEF8E7E3A2C7AACD7F /* libPods-Vyrl2.0UITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D548CE0C473DEA6C46EC7CA7 /* libPods-Vyrl2.0UITests.a */; };
+		8F3B36F61F147A2400B91672 /* TermsOfUseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3B36F51F147A2400B91672 /* TermsOfUseViewController.swift */; };
 		8F3C90331EDFFAE80041B770 /* AccountManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3C90321EDFFAE80041B770 /* AccountManagementViewController.swift */; };
 		8F3C90371EE010320041B770 /* FanclubManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3C90361EE010320041B770 /* FanclubManagementViewController.swift */; };
 		8F42E4971EE10F1E0010EB88 /* FanclubMembershipCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F42E4961EE10F1E0010EB88 /* FanclubMembershipCardViewController.swift */; };
@@ -71,6 +72,7 @@
 		306CFD39EC6DFCA775E15FBB /* Pods-Vyrl2.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vyrl2.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vyrl2.0/Pods-Vyrl2.0.debug.xcconfig"; sourceTree = "<group>"; };
 		31A96CB7DB320E92C13C5B03 /* Pods-Vyrl2.0UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vyrl2.0UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vyrl2.0UITests/Pods-Vyrl2.0UITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4A3627D46412B7803C3B2BA7 /* Pods-Vyrl2.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vyrl2.0.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vyrl2.0/Pods-Vyrl2.0.release.xcconfig"; sourceTree = "<group>"; };
+		8F3B36F51F147A2400B91672 /* TermsOfUseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsOfUseViewController.swift; sourceTree = "<group>"; };
 		8F3C90321EDFFAE80041B770 /* AccountManagementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountManagementViewController.swift; sourceTree = "<group>"; };
 		8F3C90361EE010320041B770 /* FanclubManagementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanclubManagementViewController.swift; sourceTree = "<group>"; };
 		8F42E4961EE10F1E0010EB88 /* FanclubMembershipCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanclubMembershipCardViewController.swift; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 				8F42E4981EE144C70010EB88 /* OfficialFanClubTermsViewController.swift */,
 				CE5636FB1EE7FE8600894016 /* WithDrawViewController.swift */,
 				8F829E7B1EFB6648001D418F /* MyProfileViewController.swift */,
+				8F3B36F51F147A2400B91672 /* TermsOfUseViewController.swift */,
 			);
 			name = "My & Setting";
 			path = MY;
@@ -548,6 +551,7 @@
 				CE0898221ECD7098000D6D6C /* MyViewController.swift in Sources */,
 				CE5636FC1EE7FE8600894016 /* WithDrawViewController.swift in Sources */,
 				CE08981E1ECD706A000D6D6C /* FanViewController.swift in Sources */,
+				8F3B36F61F147A2400B91672 /* TermsOfUseViewController.swift in Sources */,
 				CE08981C1ECD704F000D6D6C /* SearchViewController.swift in Sources */,
 				8F829E7C1EFB6648001D418F /* MyProfileViewController.swift in Sources */,
 				A650368B1F0E30BA00AD540A /* ModalAnimatorPhoto.swift in Sources */,
