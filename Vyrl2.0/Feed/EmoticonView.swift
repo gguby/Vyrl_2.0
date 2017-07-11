@@ -8,7 +8,14 @@
 
 import UIKit
 
+protocol EmoticonViewDelegate {
+    func setEmoticonID(emoticonID : String)
+    func unsetEmoticonID()
+}
+
 class EmoticonView: UIView {
+    var emoticonViewDelegate: EmoticonViewDelegate
+    
     var emoticonCount = [Int]()
     var emoticonButtonArray = [EmoticonButton]()
     
@@ -19,7 +26,8 @@ class EmoticonView: UIView {
     var itemRect : CGRect = CGRect.zero
     var emoticonSet : ObjCBool = false
     
-    override init(frame: CGRect) {
+    init(frame: CGRect, delegate:EmoticonViewDelegate) {
+        self.emoticonViewDelegate = delegate
         super.init(frame: frame)
     }
     
@@ -31,6 +39,8 @@ class EmoticonView: UIView {
         // Drawing code
         
         if(scrollView == nil){
+            drawTopLine(rect: rect)
+            
             let userDefault = UserDefaults.standard
             var recentEmoticon = userDefault.object(forKey: "@recentEmoticon") as? String
             var emoticonArray = recentEmoticon?.components(separatedBy: "|")
@@ -50,7 +60,7 @@ class EmoticonView: UIView {
             var scrollRect : CGRect = rect
             scrollRect.size.height = rect.size.height - 40.0
             
-            scrollRect.origin.y = 0.0
+            scrollRect.origin.y = 1.0
             var selectorRect : CGRect = scrollRect
             selectorRect.size.height = 40.0;
             selectorRect.origin.y = rect.size.height - 40.0
@@ -62,7 +72,7 @@ class EmoticonView: UIView {
             scrollView.showsHorizontalScrollIndicator = false
             scrollView.showsVerticalScrollIndicator = false
             
-            pageControl = UIPageControl.init(frame: CGRect.init(x: self.frame.size.width/2 - 50, y: 0, width: 100, height: 37))
+            pageControl = UIPageControl.init(frame: CGRect.init(x: self.frame.size.width/2 - 50, y: 10, width: 100, height: 37))
             pageControl.center = CGPoint.init(x: self.frame.width/2, y: 10)
             pageControl.currentPageIndicatorTintColor = UIColor.black
             pageControl.pageIndicatorTintColor = UIColor.ivGreyish
@@ -140,9 +150,9 @@ class EmoticonView: UIView {
         {
             count = recentEmoticonArray.count
         }
-        var emCnt: Int = 0
-        var pgCnt: Int = 0
-        var lineCnt: Int = 0
+        var emoticonIndex: Int = 0
+        var pageCount: Int = 0
+        var lineCount: Int = 0
         
         for i in 1...count {
             
@@ -161,22 +171,22 @@ class EmoticonView: UIView {
                 button.emoticonID = NSString(format:"emoticon_thumb_%02d_%02d.png", itemSelector.tag, i) as String
             }
             
-            if(emCnt == 3) { // 2번째 줄
+            if(emoticonIndex == 3) { // 2번째 줄
                 btnRect.origin.y += btnRect.size.height
-                emCnt = 0
-                if (lineCnt != 0) {
-                    lineCnt = 0
-                    pgCnt += 1 // 다음 페이지
+                emoticonIndex = 0
+                if (lineCount != 0) {
+                    lineCount = 0
+                    pageCount += 1 // 다음 페이지
                     btnRect.origin.y = 10
                 }
                 else {
-                    lineCnt += 1
+                    lineCount += 1
                 }
-                btnRect.origin.x = 0 + (CGFloat(pgCnt) * (btnRect.size.width * 4))
+                btnRect.origin.x = 0 + (CGFloat(pageCount) * (btnRect.size.width * 4))
             }
             else {
                 btnRect.origin.x += btnRect.size.width
-                emCnt += 1
+                emoticonIndex += 1
             }
             //emoticonCount
             scrollView.addSubview(button)
@@ -201,8 +211,20 @@ class EmoticonView: UIView {
             }
         }
         
+        emoticonViewDelegate.setEmoticonID(emoticonID: sender.emoticonID)
+        
     }
     
+    func drawTopLine(rect : CGRect) {
+        let aPath = UIBezierPath()
+        aPath.move(to: CGPoint.init(x: 0, y: 0))
+        aPath.addLine(to: CGPoint.init(x: rect.size.width, y: 1))
+        aPath.close()
+        
+        UIColor.ivLighterGreyish.set()
+        aPath.stroke()
+        aPath.fill()
+    }
 }
 
 

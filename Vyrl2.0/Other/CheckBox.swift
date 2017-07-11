@@ -78,6 +78,10 @@ extension UIColor {
         return UIColor(white: 172.0 / 255.0, alpha: 1.0)
     }
     
+    class var ivLighterGreyish: UIColor {
+        return UIColor(red: 233.0 / 255.0, green: 232.0 / 255.0, blue: 236.0 / 255.0, alpha: 1.0)
+    }
+    
     class var ivLighterPurple: UIColor {
         return UIColor(red: 128.0 / 255.0, green: 82.0 / 255.0, blue: 245.0 / 255.0, alpha: 1.0)
     }

@@ -11,7 +11,6 @@ import GrowingTextView
 
 class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableViewDataSource {
    
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var commentTextView: GrowingTextView!
     
     @IBOutlet weak var tableView: UITableView!
@@ -19,6 +18,8 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
     @IBOutlet weak var commentFieldView: UIView!
     @IBOutlet weak var buttonView: UIView!
     @IBOutlet weak var closeEmoticonButton: UIButton!
+    @IBOutlet weak var emoticonImageView: UIImageView!
+    @IBOutlet weak var showEmoticonButton: UIButton!
     
     var emoticonView : EmoticonView!
     var kbHeight: CGFloat!
@@ -38,49 +39,68 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureHandler))
         view.addGestureRecognizer(tapGesture)
+        
+        self.commentTextView.textContainerInset = UIEdgeInsetsMake(12, 0, 12, 0)
+        
+        showButtonView()
+        
+    }
+    
+    func showButtonView() {
+        commentFieldView.isHidden = true
+        buttonView.isHidden = false
+    }
+    
+    func showCommentFieldView() {
+        commentFieldView.isHidden = false
+        buttonView.isHidden = true
+    }
+    
+    func showEmoticonImageView() {
+        commentTextView.isHidden = true
+        emoticonImageView.isHidden = false
+        closeEmoticonButton.isHidden = false
+        showEmoticonButton.setImage(UIImage.init(named: "icon_emoji_01_on"), for: .normal)
+    }
+    
+    func showCommentTextView() {
+        commentTextView.isHidden = false
+        emoticonImageView.isHidden = true
+        closeEmoticonButton.isHidden = true
+        showEmoticonButton.setImage(UIImage.init(named: "icon_emoji_01_off"), for: .normal)
     }
     
     @IBAction func commentButtonclick(_ sender: UIButton) {
-        self.commentFieldView.isHidden = false
         self.commentTextView.becomeFirstResponder()
-        self.buttonView.isHidden = true
+        
+        showCommentFieldView()
+        showCommentTextView()
     }
     
     @IBAction func openEmoticon(_ sender: UIButton) {
-        
-//        let tempWindow = UIApplication.shared.windows[1]
-//        let keyboard : UIView
-//        
-//        for(int i = 0; i < tempWindow.subviews.count; i++)
-//        {
-//            keyboard = tempWindow.subviews[i]
-//            
-//            if(keyboard.description.hasPrefix("UIKeyboard") == true)
-//            {
-//                keyboard.bringSubview(toFront: self.tableView)
-//            }
-//        }
         
         let keyboard = UIApplication.shared.windows[1]
         emoticonView.frame = CGRect.init(x: 0, y: keyboard.frame.size.height - kbHeight, width: keyboard.frame.size.width, height: kbHeight)
         keyboard.bringSubview(toFront: emoticonView)
         
-        closeEmoticonButton.isHidden = false
+        
         self.commentTextView.bringSubview(toFront: closeEmoticonButton)
+        
+        showEmoticonImageView()
     }
     
     @IBAction func closeEmoticon(_ sender: UIButton) {
         let keyboard : UIWindow = UIApplication.shared.windows[1]
         emoticonView.frame = CGRect.init(x: 0, y: keyboard.frame.size.height, width: keyboard.frame.size.width, height:0)
-        closeEmoticonButton.isHidden = true
+        
+        showCommentTextView()
     }
 
  
     @IBAction func postButtonClick(_ sender: UIButton) {
-        self.commentFieldView.isHidden = true
-        self.commentTextView.text = ""
         self.commentTextView.resignFirstResponder()
-        self.buttonView.isHidden = false
+        
+        showButtonView()
     }
     
     func keyboardShow(notification: NSNotification) {
@@ -105,13 +125,12 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
                                      height: window.origin.y + window.height - keyboardSize.height)
            
             kbHeight = keyboardSize.height
-            emoticonView = EmoticonView.init(frame: CGRect.init(x: 0, y: keyboardSize.origin.y + keyboardSize.height, width: keyboardSize.width, height: keyboardSize.height))
+            emoticonView = EmoticonView.init(frame: CGRect.init(x: 0, y: keyboardSize.origin.y + keyboardSize.height, width: keyboardSize.width, height: keyboardSize.height), delegate: self as! EmoticonViewDelegate)
             emoticonView.backgroundColor = UIColor.white
             UIApplication.shared.windows[UIApplication.shared.windows.count-1].addSubview(emoticonView)
         } else {
             debugPrint("We're showing the keyboard and either the keyboard size or window is nil: panic widely.")
         }
-
     }
     
     func keyboardHide(notification: NSNotification) {
@@ -128,9 +147,7 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
     
     func tapGestureHandler() {
         view.endEditing(true)
-        self.commentFieldView.isHidden = true
-        self.buttonView.isHidden = false
-        
+        showButtonView()
     }
     
     override func didReceiveMemoryWarning() {
@@ -161,7 +178,6 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
         return cell
     }
 
-
 }
 
 extension FeedDetailViewController : GrowingTextViewDelegate {
@@ -169,6 +185,20 @@ extension FeedDetailViewController : GrowingTextViewDelegate {
         UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: [.curveLinear], animations: { () -> Void in
             self.view.layoutIfNeeded()
         }, completion: nil)
+    }
+}
+
+extension FeedDetailViewController : EmoticonViewDelegate {
+    func setEmoticonID(emoticonID: String) {
+        emoticonImageView.isHidden = false
+        commentTextView.isHidden = true
+        
+        emoticonImageView.image = UIImage.init(named: "\(emoticonID)")
+    }
+    
+    func unsetEmoticonID() {
+        emoticonImageView.isHidden = true
+        commentTextView.isHidden = false
     }
 }
 
