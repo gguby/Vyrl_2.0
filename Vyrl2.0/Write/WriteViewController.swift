@@ -7,8 +7,11 @@
 //
 
 import Foundation
+import MobileCoreServices
+import TOCropViewController
+import Sharaku
 
-class WriteViewController : UIViewController {
+class WriteViewController : UIViewController , TOCropViewControllerDelegate{
     
     var modalNavigationController = FeedNavigationController()
     
@@ -35,7 +38,6 @@ class WriteViewController : UIViewController {
         DispatchQueue.main.async {
             self.setupNavigation()
         }
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -82,36 +84,23 @@ class WriteViewController : UIViewController {
             
             self.modalNavigationController.si_delegate?.navigationControllerDidClosed?(navigationController: self.modalNavigationController)
         })
-        
     }
-    
     
     func handleKeyboardWillHide(_ notification: Notification){
         
         self.navigationController?.si_dismissModalView(toViewController: modalNavigationController, completion:  {
             
-            self.modalNavigationController.si_delegate?.navigationControllerDidClosed?(navigationController: self.modalNavigationController)
+//            self.modalNavigationController.si_delegate?.navigationControllerDidClosed?(navigationController: self.modalNavigationController)
         })
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        
-        if(segue.identifier == "Write") {
-            let vc = segue.destination as! WriteViewController
-            present(vc, animated: true, completion: nil)
-        }
     }
     
     func setupMediaView(hidden :Bool){
         isSelectedMedia = hidden
         ModalAnimatorPhoto.isKeyboardMode = hidden
     }
-    
 }
 
-extension WriteViewController : WriteMdeiaDelegate {
+extension WriteViewController : WriteMdeiaDelegate, UIImagePickerControllerDelegate , UINavigationControllerDelegate{
     
     func showMedia(){
         textView.resignFirstResponder()
@@ -136,11 +125,32 @@ extension WriteViewController : WriteMdeiaDelegate {
     }
     
     func openCameraView(){
-        print("open Camera")
+        if ( UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) == false ){
+            return
+        }
+        
+        let imagePicker = UIImagePickerController()
+        
+        imagePicker.delegate = self
+        imagePicker.sourceType = UIImagePickerControllerSourceType.camera
+        imagePicker.mediaTypes = [(kUTTypeMovie as NSString) as String]
+        
+        self.present(imagePicker, animated: true, completion: nil)
     }
     
     func openPhotoView(){
-        print("open Photo")
+        
+        if ( UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) == false ){
+            return
+        }
+        
+        let imagePicker = UIImagePickerController()
+        
+        imagePicker.delegate = self 
+        imagePicker.sourceType = UIImagePickerControllerSourceType.camera
+        imagePicker.allowsEditing = true
+        
+        self.present(imagePicker, animated: true, completion: nil)
     }
     
     func openLocationView(){
@@ -148,9 +158,55 @@ extension WriteViewController : WriteMdeiaDelegate {
     }
     
     func openPhotoOrVideo(_ mediaType: AVAsset.MediaType?, assetIdentifier: String?){
+        self.navigationController?.si_showFullScreen(toViewController: modalNavigationController, completion: {
+            self.modalNavigationController.si_delegate?.navigationControllerDidSpreadToEntire?(navigationController: self.modalNavigationController)
+        })
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]){
+        self.dismiss(animated:true, completion: nil)
         
+        if let mediaType = info[UIImagePickerControllerMediaType] as? String {
+            if mediaType == "public.image"{
+                let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+                
+                let cropViewController = TOCropViewController(image: chosenImage)
+                
+                cropViewController.delegate = self
+                self.present(cropViewController, animated: true, completion: nil)
+                return
+            }
+            if mediaType == "public.movie"{
+                print("movie")
+            }
+        }
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: nil);
+    }
+    
+    func cropViewController(_ cropViewController: TOCropViewController, didCropToImage image: UIImage, rect cropRect: CGRect, angle: Int) {
+        
+        let vc = SHViewController(image: image)
+        vc.delegate = self;
+        cropViewController.present(vc, animated: true, completion: nil)
     }
 }
+
+extension WriteViewController: SHViewControllerDelegate {
+    
+    func shViewControllerImageDidFilter(image: UIImage) {
+        // Filtered image will be returned here.
+        
+        self.dismiss(animated:true, completion: nil)
+    }
+    
+    func shViewControllerDidCancel() {
+        // This will be called when you cancel filtering the image.
+    }
+}
+
 
 extension WriteViewController : UITextViewDelegate {
     

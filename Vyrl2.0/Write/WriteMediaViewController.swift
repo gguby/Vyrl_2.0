@@ -24,8 +24,15 @@ class WriteMediaViewConroller : UIViewController {
     @IBOutlet weak var titleView: UIView!
     @IBOutlet weak var topView: UIView!
     
+    @IBOutlet weak var mediaTable: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var addBtn: UIButton!
+    @IBOutlet weak var upDownToggle: SmallButton!
+    @IBOutlet weak var mediaTitle: UILabel!
+    
     var avAssetIdentifiers = [String]()
+    var mediaArray = [PHAssetCollection]()
+    var checkArray : Set = Set<IndexPath>()
     
     weak var delegate : WriteMdeiaDelegate?
     
@@ -39,25 +46,39 @@ class WriteMediaViewConroller : UIViewController {
         if let nc = self.navigationController as? FeedNavigationController {
             nc.si_delegate = self
             nc.fullScreenSwipeUp = true
-            
             nc.isNavigationBarHidden = true
-            
         }
         
-        self.getPhotosAndVideos(.smartAlbumUserLibrary)
+        self.getAllAlbum()
+        
+        self.enabledAddBtn(enabled: false)
+    }
+    
+    func enabledAddBtn(enabled : Bool){
+        self.addBtn.isEnabled = enabled
+        
+        if enabled {
+            self.addBtn.setTitleColor(UIColor.ivLighterPurple, for: .normal)
+        }else {
+            self.addBtn.setTitleColor(UIColor.ivGreyish, for: .normal)
+        }
     }
     
     @IBAction func closeView(_ sender: UIButton) {
+        
         DispatchQueue.main.async {
             self.parent?.navigationController?.si_dismissModalView(toViewController: self.parent!, completion: {
-                
                 if let nc = self.navigationController as? FeedNavigationController {
                     nc.si_delegate?.navigationControllerDidClosed?(navigationController: nc)
                 }
+                
+                if self.mediaTable.isHidden == false {
+                    self.toggle()
+                }
             })
-            
         }
     }
+    
     @IBAction func openMap(_ sender: UIButton) {
         delegate?.openLocationView()
     }
@@ -74,9 +95,58 @@ class WriteMediaViewConroller : UIViewController {
         delegate?.closeKeyboard()
     }
     
+    func toggle(){
+        self.mediaTable.isHidden = !self.mediaTable.isHidden
+        
+        if self.mediaTable.isHidden {
+            upDownToggle.setImage(UIImage.init(named: "btn_select_down_02"), for: .normal)
+        }else {
+            upDownToggle.setImage(UIImage.init(named: "btn_select_up_01"), for: .normal)
+        }
+    }
+    
+    @IBAction func showUpPhotoTable(_ sender: SmallButton) {
+        self.toggle()
+    }
+    
+    func getAllAlbum(){
+        
+        mediaArray.removeAll()
+        
+        let fetchOptions = PHFetchOptions()
+        
+        let fetchResult = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: fetchOptions)
+        
+        var min = 99
+
+        fetchResult.enumerateObjects({ (collection, start, stop) in
+            
+            if collection.estimatedAssetCount != 0 {
+                let count : Int = collection.photosCount
+                
+                let videoCount : Int = collection.videoCount
+   
+                if (count > 0 || videoCount > 0){
+                    if start < min {
+                        min = start
+                    }
+                    self.mediaArray.append(collection)
+                }
+            }
+        })
+
+        let result : PHAssetCollection = fetchResult.object(at: min)
+        let title = result.localizedTitle
+        self.mediaTitle.text = title
+        
+        self.getPhotosAndVideos(result.assetCollectionSubtype)
+        mediaTable.tableFooterView = UIView(frame: .zero)
+    }
+    
     func getPhotosAndVideos(_ subType: PHAssetCollectionSubtype){
         
         self.avAssetIdentifiers.removeAll()
+        self.checkArray.removeAll()
         
         let fetchOptions = PHFetchOptions()
         
@@ -90,7 +160,6 @@ class WriteMediaViewConroller : UIViewController {
             let assets = PHAsset.fetchAssets(in: collection, options: fetchOptions)
             assets.enumerateObjects({ (object, count, stop) in
                 
-                
                 self.avAssetIdentifiers.append(object.localIdentifier)
                 
                 DispatchQueue.main.async {
@@ -100,7 +169,6 @@ class WriteMediaViewConroller : UIViewController {
                     if self.avAssetIdentifiers.count == 0 {
                       
                     }
-                    
                 }
             })
             
@@ -108,11 +176,11 @@ class WriteMediaViewConroller : UIViewController {
                 
             }
         })
-        
     }
 }
 
 extension WriteMediaViewConroller : UICollectionViewDataSource, UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if ( indexPath.row < 2 )
         {
@@ -127,11 +195,19 @@ extension WriteMediaViewConroller : UICollectionViewDataSource, UICollectionView
             
         }else {
             let cell = collectionView.cellForItem(at: indexPath) as! MediaPhotoCell
+            
             cell.isChecked = !cell.isChecked
+
+            if cell.isChecked {
+                checkArray.insert(indexPath)
+            }else {
+                checkArray.remove(indexPath)
+            }
+            
+            self.enabledAddBtn(enabled: checkArray.isEmpty == false )
             
             delegate?.openPhotoOrVideo(cell.asset?.type, assetIdentifier: cell.asset?.identifier)
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -192,7 +268,6 @@ extension WriteMediaViewConroller: FeedNavigationControllerDelegate {
                         self.titleView.alpha = 0
                         
         }, completion: nil)
-      
     }
    
 }
@@ -265,7 +340,6 @@ class MediaPhotoCell : UICollectionViewCell {
                     
                     self.asset = AVAsset(type: .video, identifier: id)
                     self.asset?.duration = duration
-        
                     
                     manager.requestImage(for: asset, targetSize: CGSize(width: 120, height: 120), contentMode: .aspectFill, options: requestOptions, resultHandler: {
                         
@@ -281,7 +355,6 @@ class MediaPhotoCell : UICollectionViewCell {
             }
         }
     }
-    
 }
 
 class AVAsset {
@@ -301,4 +374,120 @@ class AVAsset {
     }
 }
 
+extension PHAssetCollection {
+    
+    var assetID : String? {
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        
+        let assets = PHAsset.fetchAssets(in: self, options: fetchOptions)
+        return assets.firstObject?.localIdentifier
+    }
+    var photosCount: Int {
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.predicate = NSPredicate(format: "mediaType == %d", PHAssetMediaType.image.rawValue)
+        let result = PHAsset.fetchAssets(in: self, options: fetchOptions)
+        return result.count
+    }
+    
+    var videoCount: Int {
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.predicate = NSPredicate(format: "mediaType == %d", PHAssetMediaType.video.rawValue)
+        let result = PHAsset.fetchAssets(in: self, options: fetchOptions)
+        return result.count
+    }
+}
+
+extension WriteMediaViewConroller : UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return self.mediaArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
+        let cell :AlbumCell = tableView.dequeueReusableCell(withIdentifier: "AlbumCell") as! AlbumCell
+        
+        let asset : PHAssetCollection = mediaArray[indexPath.row]
+        
+        cell.assetID = asset.assetID
+        cell.title.text = asset.localizedTitle
+        cell.count.text = "\(asset.photosCount)"
+        cell.assetCollectionSubtype = asset.assetCollectionSubtype
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell :AlbumCell = tableView.cellForRow(at: indexPath) as! AlbumCell
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        self.mediaTitle.text = cell.title.text
+        self.toggle()
+        self.getPhotosAndVideos(cell.assetCollectionSubtype)
+    }
+}
+
+class AlbumCell : UITableViewCell {
+    
+    @IBOutlet weak var photo: UIImageView!
+    @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var count: UILabel!
+    
+    var assetCollectionSubtype: PHAssetCollectionSubtype!
+    
+    var assetID: String? {
+        
+        didSet {
+            
+            let manager = PHImageManager()
+            
+            let fetchOptions = PHFetchOptions()
+            fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+            
+            let requestOptions = PHImageRequestOptions()
+            requestOptions.isSynchronous = true
+            requestOptions.deliveryMode = .highQualityFormat
+            
+            if let id = assetID {
+                
+                let fetchResult = PHAsset.fetchAssets(withLocalIdentifiers: [id], options: fetchOptions)
+                
+                guard let asset = fetchResult.firstObject
+                    else { return  }
+                
+                if asset.mediaType == .image {
+                    
+                    manager.requestImage(for: asset, targetSize: CGSize(width: 52, height: 52), contentMode: .aspectFill, options: requestOptions, resultHandler: {
+                        
+                        image,error  in
+                        
+                        self.photo.image = image
+                        
+                        if error != nil {
+                            
+                        }
+                    })
+                }
+                
+                if asset.mediaType == .video {
+   
+                    manager.requestImage(for: asset, targetSize: CGSize(width: 52, height: 52), contentMode: .aspectFill, options: requestOptions, resultHandler: {
+                        
+                        image,error  in
+                        
+                        if error != nil {
+                            
+                            self.photo.image = image
+                            
+                        }
+                    })
+                }
+            }
+        }
+    }
+
+}
 
