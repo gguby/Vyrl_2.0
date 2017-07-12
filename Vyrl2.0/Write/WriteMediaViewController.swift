@@ -13,10 +13,11 @@ protocol WriteMdeiaDelegate : class {
     func openCameraView()
     func openPhotoView()
     func openLocationView()
-    func openPhotoOrVideo(_ mediaType: AVAsset.MediaType?, assetIdentifier: String?)
     func closeKeyboard()
     func focusTextView()
-    func showMedia()
+    func showFullScreen()
+    func completeAddMedia(array : [AVAsset])
+    func getSeletedArray() -> [AVAsset]
 }
 
 class WriteMediaViewConroller : UIViewController {
@@ -32,7 +33,8 @@ class WriteMediaViewConroller : UIViewController {
     
     var avAssetIdentifiers = [String]()
     var mediaArray = [PHAssetCollection]()
-    var checkArray : Set = Set<IndexPath>()
+
+    var selectedAssetArray = [AVAsset]()
     
     weak var delegate : WriteMdeiaDelegate?
     
@@ -66,6 +68,8 @@ class WriteMediaViewConroller : UIViewController {
     
     @IBAction func closeView(_ sender: UIButton) {
         
+        selectedAssetArray.removeAll()
+        
         DispatchQueue.main.async {
             self.parent?.navigationController?.si_dismissModalView(toViewController: self.parent!, completion: {
                 if let nc = self.navigationController as? FeedNavigationController {
@@ -75,6 +79,8 @@ class WriteMediaViewConroller : UIViewController {
                 if self.mediaTable.isHidden == false {
                     self.toggle()
                 }
+                
+                self.collectionView.reloadData()
             })
         }
     }
@@ -84,7 +90,18 @@ class WriteMediaViewConroller : UIViewController {
     }
     
     @IBAction func showMedia(_ sender: UIButton) {
-        delegate?.showMedia()
+        
+        selectedAssetArray.removeAll()
+        
+        let selectedArray = delegate?.getSeletedArray()
+        
+        for asset in selectedArray! {
+            selectedAssetArray.append(asset)
+        }
+        
+        collectionView.reloadData()
+        
+        delegate?.showFullScreen()
     }
     
     @IBAction func focusKeyboard(_ sender : UIButton ){
@@ -95,13 +112,24 @@ class WriteMediaViewConroller : UIViewController {
         delegate?.closeKeyboard()
     }
     
+    @IBAction func addMedia(_ sender: SmallButton) {
+        
+        delegate?.completeAddMedia(array: selectedAssetArray)
+        
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
+    
     func toggle(){
         self.mediaTable.isHidden = !self.mediaTable.isHidden
         
         if self.mediaTable.isHidden {
             upDownToggle.setImage(UIImage.init(named: "btn_select_down_02"), for: .normal)
+            self.enabledAddBtn(enabled: selectedAssetArray.count > 0)
         }else {
             upDownToggle.setImage(UIImage.init(named: "btn_select_up_01"), for: .normal)
+            self.enabledAddBtn(enabled: false)
         }
     }
     
@@ -146,7 +174,7 @@ class WriteMediaViewConroller : UIViewController {
     func getPhotosAndVideos(_ subType: PHAssetCollectionSubtype){
         
         self.avAssetIdentifiers.removeAll()
-        self.checkArray.removeAll()
+        self.selectedAssetArray.removeAll()
         
         let fetchOptions = PHFetchOptions()
         
@@ -184,6 +212,13 @@ extension WriteMediaViewConroller : UICollectionViewDataSource, UICollectionView
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if ( indexPath.row < 2 )
         {
+            if ModalAnimatorPhoto.isShowFullScreen == false {
+                
+                delegate?.showFullScreen()
+
+                return
+            }
+            
             let cell = collectionView.cellForItem(at: indexPath) as! MediaButtonCell
             
             if ( cell.tag == 0)
@@ -199,14 +234,18 @@ extension WriteMediaViewConroller : UICollectionViewDataSource, UICollectionView
             cell.isChecked = !cell.isChecked
 
             if cell.isChecked {
-                checkArray.insert(indexPath)
+                if selectedAssetArray.contains(where: { $0.identifier == cell.assetID}) == false {
+                    selectedAssetArray.append(cell.asset!)
+                }
             }else {
-                checkArray.remove(indexPath)
+                if let index = selectedAssetArray.index(where: { $0.identifier == cell.assetID}){
+                    selectedAssetArray.remove(at: index)
+                }
             }
             
-            self.enabledAddBtn(enabled: checkArray.isEmpty == false )
+            self.enabledAddBtn(enabled: !selectedAssetArray.isEmpty )
             
-            delegate?.openPhotoOrVideo(cell.asset?.type, assetIdentifier: cell.asset?.identifier)
+            delegate?.showFullScreen()
         }
     }
     
@@ -233,13 +272,18 @@ extension WriteMediaViewConroller : UICollectionViewDataSource, UICollectionView
         cell.assetID = self.avAssetIdentifiers[indexPath.row - 2]
         cell.tag = (indexPath as NSIndexPath).row
         
+        if selectedAssetArray.contains(where: { $0.identifier == cell.assetID}){
+            cell.isChecked = true
+        }else {
+            cell.isChecked = false
+        }
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return avAssetIdentifiers.count + 2
     }
-    
 }
 
 extension WriteMediaViewConroller: FeedNavigationControllerDelegate {
@@ -286,7 +330,7 @@ class MediaPhotoCell : UICollectionViewCell {
     let checkedImage = UIImage(named: "icon_check_06_on")! as UIImage
     
     @IBOutlet weak var checkView: UIImageView!
-    @IBOutlet weak var unCheckView: UIView!
+    @IBOutlet weak var unCheckView: UIView!   
     
     var isChecked: Bool = false {
         didSet{
@@ -307,6 +351,7 @@ class MediaPhotoCell : UICollectionViewCell {
             let requestOptions = PHImageRequestOptions()
             requestOptions.isSynchronous = true
             requestOptions.deliveryMode = .highQualityFormat
+            requestOptions.resizeMode = .exact
             
             if let id = assetID {
                 
@@ -319,7 +364,7 @@ class MediaPhotoCell : UICollectionViewCell {
                     
                     self.asset = AVAsset(type: .photo, identifier: id)
                     
-                    manager.requestImage(for: asset, targetSize: CGSize(width: 100, height: 100), contentMode: .aspectFill, options: requestOptions, resultHandler: {
+                    manager.requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFill, options: requestOptions, resultHandler: {
                         
                         image,error  in
                         
@@ -341,7 +386,7 @@ class MediaPhotoCell : UICollectionViewCell {
                     self.asset = AVAsset(type: .video, identifier: id)
                     self.asset?.duration = duration
                     
-                    manager.requestImage(for: asset, targetSize: CGSize(width: 120, height: 120), contentMode: .aspectFill, options: requestOptions, resultHandler: {
+                    manager.requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFill, options: requestOptions, resultHandler: {
                         
                         image,error  in
                         
@@ -371,6 +416,14 @@ class AVAsset {
     init(type: MediaType?, identifier: String?) {
         self.type = type
         self.identifier = identifier
+    }
+    
+    func getDurationStr()->String {
+        let interval = Int(duration)
+        let seconds = interval % 60
+        let minutes = (interval / 60) % 60
+        let hours = (interval / 3600)
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
 }
 
@@ -413,7 +466,13 @@ extension WriteMediaViewConroller : UITableViewDelegate, UITableViewDataSource {
         
         cell.assetID = asset.assetID
         cell.title.text = asset.localizedTitle
-        cell.count.text = "\(asset.photosCount)"
+        
+        if cell.mediaType == .image {
+            cell.count.text = "\(asset.photosCount)"
+        }else {
+            cell.count.text = "\(asset.videoCount)"
+        }
+
         cell.assetCollectionSubtype = asset.assetCollectionSubtype
         
         return cell
@@ -437,12 +496,13 @@ class AlbumCell : UITableViewCell {
     @IBOutlet weak var count: UILabel!
     
     var assetCollectionSubtype: PHAssetCollectionSubtype!
+    var mediaType : PHAssetMediaType!
     
     var assetID: String? {
         
         didSet {
             
-            let manager = PHImageManager()
+            let manager = PHCachingImageManager()
             
             let fetchOptions = PHFetchOptions()
             fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
@@ -465,6 +525,7 @@ class AlbumCell : UITableViewCell {
                         image,error  in
                         
                         self.photo.image = image
+                        self.mediaType = .image
                         
                         if error != nil {
                             
@@ -479,9 +540,8 @@ class AlbumCell : UITableViewCell {
                         image,error  in
                         
                         if error != nil {
-                            
                             self.photo.image = image
-                            
+                            self.mediaType = .video
                         }
                     })
                 }

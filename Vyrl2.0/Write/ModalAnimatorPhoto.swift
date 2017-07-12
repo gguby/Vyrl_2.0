@@ -26,6 +26,7 @@ public class ModalAnimatorPhoto {
     
     static var isKeyboardMode : Bool = false
     static var keyboardSize : CGSize = CGSize(width: 0, height: 0)
+    static var isShowFullScreen :Bool = false
 
     public class func present(_ toView: UIView, fromView: UIView, completion: @escaping () -> Void) {
         
@@ -51,6 +52,8 @@ public class ModalAnimatorPhoto {
                 
                 toView.alpha = 1.0
                 
+                isShowFullScreen = false
+                
         }) { (result) -> Void in
             
             completion()
@@ -74,6 +77,8 @@ public class ModalAnimatorPhoto {
                 let toViewFrame = fromView.bounds.offsetBy(dx: 0, dy: y)
             
                 toView.frame = toViewFrame
+                
+                isShowFullScreen = false
                 
             }) { (result) -> Void in
                 
@@ -102,6 +107,8 @@ public class ModalAnimatorPhoto {
             let toViewFrame = fromView.bounds.offsetBy(dx: 0, dy: fromView.bounds.size.height - keyboardSize.height - 44)
             toView.frame = toViewFrame
             
+            isShowFullScreen = false
+            
         }) { (result) -> Void in
             
             completion()
@@ -111,13 +118,14 @@ public class ModalAnimatorPhoto {
 
     public class func showOnfullScreen(_ toView: UIView, fromView: UIView, completion: @escaping () -> Void) {
         
-        
         UIView.animate(withDuration: 0.2, animations: { () -> Void in
             
             let statusBarHeight = UIApplication.shared.statusBarFrame.height
             
             let toViewFrame = fromView.bounds.offsetBy(dx: 0, dy: statusBarHeight)
             toView.frame = toViewFrame
+            
+            isShowFullScreen = true
             
         }) { (result) -> Void in
             

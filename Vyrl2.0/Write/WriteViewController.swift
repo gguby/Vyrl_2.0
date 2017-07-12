@@ -10,6 +10,11 @@ import Foundation
 import MobileCoreServices
 import TOCropViewController
 import Sharaku
+import Photos
+
+protocol UploadMediaCellDelegate {
+    func remove(id : String)
+}
 
 class WriteViewController : UIViewController , TOCropViewControllerDelegate{
     
@@ -19,7 +24,11 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
     @IBOutlet weak var postBtn: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
     
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
+    
     var isSelectedMedia : Bool = false
+    var selectedAssetArray = [AVAsset]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +47,8 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
         DispatchQueue.main.async {
             self.setupNavigation()
         }
+        
+        self.collectionViewHeight.constant = 0.0
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -89,8 +100,6 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
     func handleKeyboardWillHide(_ notification: Notification){
         
         self.navigationController?.si_dismissModalView(toViewController: modalNavigationController, completion:  {
-            
-//            self.modalNavigationController.si_delegate?.navigationControllerDidClosed?(navigationController: self.modalNavigationController)
         })
     }
     
@@ -102,7 +111,12 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
 
 extension WriteViewController : WriteMdeiaDelegate, UIImagePickerControllerDelegate , UINavigationControllerDelegate{
     
-    func showMedia(){
+    func getSeletedArray() -> [AVAsset] {
+        
+        return selectedAssetArray        
+    }
+    
+    func showFullScreen() {
         textView.resignFirstResponder()
         self.navigationController?.si_showFullScreen(toViewController: modalNavigationController, completion: {
             self.modalNavigationController.si_delegate?.navigationControllerDidSpreadToEntire?(navigationController: self.modalNavigationController)
@@ -157,9 +171,27 @@ extension WriteViewController : WriteMdeiaDelegate, UIImagePickerControllerDeleg
         print("open Location")
     }
     
-    func openPhotoOrVideo(_ mediaType: AVAsset.MediaType?, assetIdentifier: String?){
-        self.navigationController?.si_showFullScreen(toViewController: modalNavigationController, completion: {
-            self.modalNavigationController.si_delegate?.navigationControllerDidSpreadToEntire?(navigationController: self.modalNavigationController)
+    func completeAddMedia(array : [AVAsset]) {
+        
+        self.setupMediaView(hidden: true)
+        
+        selectedAssetArray.removeAll()
+        
+        for asset in array {
+            selectedAssetArray.append(asset)
+        }
+        
+        self.navigationController?.si_dismissModalView(toViewController: modalNavigationController, completion:  {
+            
+            self.modalNavigationController.si_delegate?.navigationControllerDidClosed?(navigationController: self.modalNavigationController)
+            
+            self.collectionView.reloadData()
+            
+            if self.selectedAssetArray.isEmpty {
+                self.collectionViewHeight.constant = 0
+            } else {
+                self.collectionViewHeight.constant = 146
+            }
         })
     }
     
@@ -249,5 +281,170 @@ extension WriteViewController : UITextViewDelegate {
         enabledPostBtn(enabled: textLength > 0)
 
         return true
+    }
+}
+
+extension WriteViewController : UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+      
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let asset : AVAsset = selectedAssetArray[indexPath.row]
+        
+        if asset.type == .photo {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UploadMediaPhotoCell", for: indexPath) as! UploadMediaPhotoCell
+            cell.delegte = self
+            cell.assetID = asset.identifier
+            return cell
+        }else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UploadMediaVideoCell", for: indexPath) as! UploadMediaVideoCell
+            
+            cell.delegte = self
+            cell.assetID = asset.identifier
+            cell.duration.text = asset.getDurationStr()
+            return cell
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return selectedAssetArray.count
+    }
+}
+
+extension WriteViewController : UploadMediaCellDelegate {
+    
+    func remove(id: String) {
+        let index = selectedAssetArray.index(where: { $0.identifier == id})
+        selectedAssetArray.remove(at: index!)
+        
+        collectionView.reloadData()
+        if selectedAssetArray.isEmpty {
+            self.collectionViewHeight.constant = 0
+        }
+    }
+}
+
+class UploadMediaPhotoCell : UICollectionViewCell {
+    
+    @IBOutlet weak var image: UIImageView!
+    
+    var delegte : UploadMediaCellDelegate!
+    
+    var assetID: String? {
+        
+        didSet {
+            
+            let manager = PHCachingImageManager()
+            
+            let fetchOptions = PHFetchOptions()
+            fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+            
+            let requestOptions = PHImageRequestOptions()
+            requestOptions.isSynchronous = true
+            requestOptions.deliveryMode = .highQualityFormat
+            requestOptions.resizeMode = .exact
+            
+            if let id = assetID {
+                
+                let fetchResult = PHAsset.fetchAssets(withLocalIdentifiers: [id], options: fetchOptions)
+                
+                guard let asset = fetchResult.firstObject
+                    else { return  }
+                
+                if asset.mediaType == .image {
+                    
+                    manager.requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFill, options: requestOptions, resultHandler: {
+                        
+                        image,error  in
+                        
+                        self.image.image = image
+                        
+                        if error != nil {
+                            
+                        }
+                    })
+                }
+            }
+        }
+    }
+    
+    @IBAction func remove(_ sender: SmallButton) {
+        delegte.remove(id: self.assetID!)
+    }
+    
+    @IBAction func editPhoto(_ sender: SmallButton) {
+        print("editPhoto")
+    }
+}
+
+class UploadMediaVideoCell : UICollectionViewCell {
+    @IBOutlet weak var photo: UIImageView!
+    
+    @IBOutlet weak var mute: SmallButton!
+    @IBOutlet weak var duration: UILabel!
+    
+    var delegte : UploadMediaCellDelegate!
+    
+    var assetID: String? {
+        
+        didSet {
+            
+            let manager = PHCachingImageManager()
+            
+            let fetchOptions = PHFetchOptions()
+            fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+            
+            let requestOptions = PHImageRequestOptions()
+            requestOptions.isSynchronous = true
+            requestOptions.deliveryMode = .highQualityFormat
+            requestOptions.resizeMode = .exact
+            
+            if let id = assetID {
+                
+                let fetchResult = PHAsset.fetchAssets(withLocalIdentifiers: [id], options: fetchOptions)
+                
+                guard let asset = fetchResult.firstObject
+                    else { return  }
+                
+                if asset.mediaType == .video {
+                    
+                    manager.requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFill, options: requestOptions, resultHandler: {
+                        
+                        image,error  in
+                        
+                        self.photo.image = image
+                        
+                        if error != nil {
+                            
+                        }
+                    })
+                    
+                    manager.requestAVAsset(forVideo: asset, options: PHVideoRequestOptions(), resultHandler: {(avAsset, audioMix, info) -> Void in
+                        if let asset = avAsset as? AVURLAsset {
+                            //let videoData = NSData(contentsOf: asset.url)
+                            let duration : CMTime = asset.duration
+                            let durationInSecond = CMTimeGetSeconds(duration)
+                            print(durationInSecond)
+                            
+                            if  let audioMix = audioMix {
+                                audioMix.inputParameters
+                            }
+                            
+                        }
+                        
+                    })
+                }
+            }
+        }
+    }
+    
+    @IBAction func remove(_ sender: SmallButton) {
+        delegte.remove(id: self.assetID!)
+    }
+
+    @IBAction func mute(_ sender: SmallButton) {
+        
     }
 }
