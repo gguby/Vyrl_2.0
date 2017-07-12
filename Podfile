@@ -22,7 +22,7 @@ target 'Vyrl2.0' do
     pod 'SwiftyJSON'
     pod 'TOCropViewController'
     pod 'Sharaku'
-    
+    pod 'AlamofireNetworkActivityLogger'
     pod 'Alamofire', '~> 4.4'
     pod 'AlamofireImage'
 

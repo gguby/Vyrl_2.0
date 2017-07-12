@@ -2,6 +2,8 @@ PODS:
   - Alamofire (4.4.0)
   - AlamofireImage (3.2.0):
     - Alamofire (~> 4.1)
+  - AlamofireNetworkActivityLogger (2.2.0):
+    - Alamofire (~> 4.0)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
@@ -89,6 +91,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.4)
   - AlamofireImage
+  - AlamofireNetworkActivityLogger
   - Crashlytics
   - Fabric
   - FacebookCore
@@ -108,6 +111,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
+  AlamofireNetworkActivityLogger: a7ae1842988b3f6248a49213268375bd27b515f0
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
@@ -136,6 +140,6 @@ SPEC CHECKSUMS:
   TwitterCore: e959987be23c767004d29eb7fab8d85d8585a2e5
   TwitterKit: 3b6044a7320340326a4098f3e37aa1dbaeb94942
 
-PODFILE CHECKSUM: 9f236a99991fbad1c089cd8873f84bb8d2b28f9a
+PODFILE CHECKSUM: 2bce49eeac4dc525c4408b08ba9554b21358d9ec
 
 COCOAPODS: 1.2.1
