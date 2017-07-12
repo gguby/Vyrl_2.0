@@ -111,5 +111,7 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>사용목적을 여기에 작성</string>
 </dict>
 </plist>
