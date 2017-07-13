@@ -114,12 +114,11 @@ class MyProfileViewController: UIViewController, UIImagePickerControllerDelegate
         let profile = self.photoView.imageView?.image
         
         let parameters : Parameters = [
-            "homePageUrl": webURLField.text!,
             "nickName": nickNameField.text!,
+            "homePageUrl": webURLField.text!,
             "selfIntro": introField.text!,
             ]
         
-        let uri = Constants.VyrlAPIURL.changeProfile
         let fileName = "\(nickNameField.text!).jpg"
         
         Alamofire.upload(multipartFormData: { (multipartFormData) in
@@ -127,19 +126,14 @@ class MyProfileViewController: UIViewController, UIImagePickerControllerDelegate
                 multipartFormData.append(imageData, withName: "profile", fileName: fileName, mimeType: "image/jpg")
             }
             
-            for ( key, value ) in parameters {
-                let valueStr = value as! String
-                multipartFormData.append(valueStr.data(using: String.Encoding.utf8)!, withName: key)
-            }
-            
-        }, usingThreshold: UInt64.init(), to: uri, method: .patch, headers: Constants.VyrlAPIConstants.getHeader(), encodingCompletion:
+        }, usingThreshold: UInt64.init(), to: URL(string: Constants.VyrlAPIURL.changeProfile, parameters: parameters as! [String : String])!, method: .patch, headers: Constants.VyrlAPIConstants.getHeader(), encodingCompletion:
             {
                 encodingResult in
                 switch encodingResult {
                 case .success(let upload, _, _):
                     
                     upload.uploadProgress(closure: { (progress) in
-                        print(progress)
+                        
                     })
                     
                     upload.responseString { response in
@@ -293,4 +287,20 @@ extension MyProfileViewController : UITextFieldDelegate {
         return true
     }
     
+}
+
+extension URL
+{
+    /// Creates an NSURL with url-encoded parameters.
+    init?(string : String, parameters : [String : String])
+    {
+        guard var components = URLComponents(string: string) else { return nil }
+        
+        components.queryItems = parameters.map { return URLQueryItem(name: $0, value: $1) }
+        
+        guard let url = components.url else { return nil }
+        
+        // Kinda redundant, but we need to call init.
+        self.init(string: url.absoluteString)
+    }
 }

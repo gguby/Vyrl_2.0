@@ -35,7 +35,7 @@ struct Constants {
             let headers: HTTPHeaders = [
                 "X-APP-Version": Constants.VyrlAPIConstants.APPVersion,
                 "X-Device": Constants.VyrlAPIConstants.AppDevice,
-                "Accept-Language" : "ko-kr"
+                "Accept-Language" : "ko-kr",
             ]
             
             return headers

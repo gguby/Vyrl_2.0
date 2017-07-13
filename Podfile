@@ -23,7 +23,7 @@ target 'Vyrl2.0' do
     pod 'TOCropViewController'
     pod 'Sharaku'
     pod 'AlamofireNetworkActivityLogger'
-    pod 'Alamofire', '~> 4.4'
+    pod 'Alamofire', '~> 4.5'
     pod 'AlamofireImage'
 
 end

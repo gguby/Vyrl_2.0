@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (4.4.0)
+  - Alamofire (4.5.0)
   - AlamofireImage (3.2.0):
     - Alamofire (~> 4.1)
   - AlamofireNetworkActivityLogger (2.2.0):
@@ -89,7 +89,7 @@ PODS:
     - TwitterCore (>= 2.8)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.4)
+  - Alamofire (~> 4.5)
   - AlamofireImage
   - AlamofireNetworkActivityLogger
   - Crashlytics
@@ -109,7 +109,7 @@ DEPENDENCIES:
   - TwitterKit
 
 SPEC CHECKSUMS:
-  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
   AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
   AlamofireNetworkActivityLogger: a7ae1842988b3f6248a49213268375bd27b515f0
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
@@ -140,6 +140,6 @@ SPEC CHECKSUMS:
   TwitterCore: e959987be23c767004d29eb7fab8d85d8585a2e5
   TwitterKit: 3b6044a7320340326a4098f3e37aa1dbaeb94942
 
-PODFILE CHECKSUM: 2bce49eeac4dc525c4408b08ba9554b21358d9ec
+PODFILE CHECKSUM: 5fbfe8e62a8e6f7eedd2394e947eadcaadd68640
 
 COCOAPODS: 1.2.1
