@@ -40,6 +40,9 @@
                                         <state key="normal" title="게시">
                                             <color key="titleColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="post:" destination="pmO-Cv-AaH" eventType="touchUpInside" id="dtm-e2-qeL"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="게시글 작성" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xms-zG-Vpc">
                                         <rect key="frame" x="150.5" y="12.5" width="73.5" height="20"/>

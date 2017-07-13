@@ -36,7 +36,7 @@ class SMLoginViewController : UIViewController, UIWebViewDelegate {
         
         WebView.delegate = self;
         
-        if let url = URL(string: "http://api.vyrl.com:8082/ko/auth/social/smtown/ios"){
+        if let url = URL(string: "https://api.smtown.com/Account/SignIn"){
             let request = URLRequest(url: url)
 //            request.addValue(clientId, forHTTPHeaderField: "Client_id")
 //            request.addValue(clientSecret, forHTTPHeaderField: "Client_secret")

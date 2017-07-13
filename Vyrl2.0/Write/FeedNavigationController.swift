@@ -11,6 +11,7 @@ import UIKit
 @objc public protocol FeedNavigationControllerDelegate {
     @objc optional func navigationControllerDidSpreadToEntire(navigationController: UINavigationController)
     @objc optional func navigationControllerDidClosed(navigationController: UINavigationController)
+    @objc optional func reloadAsset()
 }
 
 

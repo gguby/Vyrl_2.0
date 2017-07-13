@@ -11,9 +11,10 @@ import MobileCoreServices
 import TOCropViewController
 import Sharaku
 import Photos
+import Alamofire
 
 protocol UploadMediaCellDelegate {
-    func remove(id : String)
+    func remove(asset : AVAsset)
 }
 
 class WriteViewController : UIViewController , TOCropViewControllerDelegate{
@@ -29,6 +30,7 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
     
     var isSelectedMedia : Bool = false
     var selectedAssetArray = [AVAsset]()
+    var albumTitle : String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +58,56 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
         
         self.setupMediaView(hidden: false)
     }
+    
+    @IBAction func post(_ sender: UIButton) {
+        
+        let parameters :[String:String] = [
+            "title": "test",
+            "content": textView.text
+        ]
+        
+        let uri = Constants.VyrlAPIURL.feedWrite
+        let fileName = "1.jpg"
+        
+        let queryUrl = URL.init(string: uri, parameters: parameters)
+        
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            
+            for asset in self.selectedAssetArray {
+                if asset.type == .photo {
+                    if let imageData = asset.mediaData {
+                        multipartFormData.append(imageData, withName: "image", fileName: fileName, mimeType: "image/jpg")
+                    }
+                } else {
+                    if let imageData = asset.mediaData {
+                        multipartFormData.append(imageData, withName: "video", fileName: fileName, mimeType: "image/jpg")
+                    }
+                }
+            }
+            
+        }, usingThreshold: UInt64.init(), to: queryUrl!, method: .patch, headers: Constants.VyrlAPIConstants.getHeader(), encodingCompletion:
+            {
+                encodingResult in
+                switch encodingResult {
+                case .success(let upload, _, _):
+                    
+                    upload.uploadProgress(closure: { (progress) in
+                        print(progress)
+                    })
+                    
+                    upload.responseString { response in
+                        print(response.result)
+                        print((response.response?.statusCode)!)
+                        print(response)
+                        
+                    }
+                case .failure(let encodingError):
+                    print(encodingError.localizedDescription)
+                }
+        })
+    }
+
+    
     
     @IBAction func dimissPop() {
         self.dismiss(animated: true, completion: nil)
@@ -111,8 +163,11 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
 
 extension WriteViewController : WriteMdeiaDelegate, UIImagePickerControllerDelegate , UINavigationControllerDelegate{
     
+    func albumName(title: String) {
+        self.albumTitle = title
+    }
+    
     func getSeletedArray() -> [AVAsset] {
-        
         return selectedAssetArray        
     }
     
@@ -226,11 +281,23 @@ extension WriteViewController : WriteMdeiaDelegate, UIImagePickerControllerDeleg
     }
 }
 
+
 extension WriteViewController: SHViewControllerDelegate {
+    
+    func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            print(error)
+        } else {
+            DispatchQueue.main.async {
+                self.modalNavigationController.si_delegate?.reloadAsset!()
+            }
+        }
+    }
     
     func shViewControllerImageDidFilter(image: UIImage) {
         // Filtered image will be returned here.
         
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
         self.dismiss(animated:true, completion: nil)
     }
     
@@ -245,11 +312,9 @@ extension WriteViewController : UITextViewDelegate {
     func enabledPostBtn (enabled :Bool) {
         postBtn.isEnabled = enabled
         
-        if (enabled){
-            postBtn.titleLabel?.textColor = UIColor.ivLighterPurple
-        }else {
-            postBtn.titleLabel?.textColor = UIColor.ivGreyish
-        }
+        let titleColor = enabled ? UIColor.ivLighterPurple : UIColor.ivGreyish
+        
+        postBtn.setTitleColor(titleColor, for: .normal)
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -296,14 +361,16 @@ extension WriteViewController : UICollectionViewDataSource, UICollectionViewDele
         if asset.type == .photo {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UploadMediaPhotoCell", for: indexPath) as! UploadMediaPhotoCell
             cell.delegte = self
-            cell.assetID = asset.identifier
+            cell.asset = asset
+            cell.image.image = asset.photo
             return cell
         }else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UploadMediaVideoCell", for: indexPath) as! UploadMediaVideoCell
             
             cell.delegte = self
-            cell.assetID = asset.identifier
+            cell.asset = asset
             cell.duration.text = asset.getDurationStr()
+            cell.photo.image = asset.photo
             return cell
         }
     }
@@ -315,8 +382,8 @@ extension WriteViewController : UICollectionViewDataSource, UICollectionViewDele
 
 extension WriteViewController : UploadMediaCellDelegate {
     
-    func remove(id: String) {
-        let index = selectedAssetArray.index(where: { $0.identifier == id})
+    func remove(asset: AVAsset) {
+        let index = selectedAssetArray.index(where: { $0.identifier == asset.identifier})
         selectedAssetArray.remove(at: index!)
         
         collectionView.reloadData()
@@ -332,46 +399,10 @@ class UploadMediaPhotoCell : UICollectionViewCell {
     
     var delegte : UploadMediaCellDelegate!
     
-    var assetID: String? {
-        
-        didSet {
-            
-            let manager = PHCachingImageManager()
-            
-            let fetchOptions = PHFetchOptions()
-            fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-            
-            let requestOptions = PHImageRequestOptions()
-            requestOptions.isSynchronous = true
-            requestOptions.deliveryMode = .highQualityFormat
-            requestOptions.resizeMode = .exact
-            
-            if let id = assetID {
-                
-                let fetchResult = PHAsset.fetchAssets(withLocalIdentifiers: [id], options: fetchOptions)
-                
-                guard let asset = fetchResult.firstObject
-                    else { return  }
-                
-                if asset.mediaType == .image {
-                    
-                    manager.requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFill, options: requestOptions, resultHandler: {
-                        
-                        image,error  in
-                        
-                        self.image.image = image
-                        
-                        if error != nil {
-                            
-                        }
-                    })
-                }
-            }
-        }
-    }
+    var asset : AVAsset?
     
     @IBAction func remove(_ sender: SmallButton) {
-        delegte.remove(id: self.assetID!)
+        delegte.remove(asset: self.asset!)
     }
     
     @IBAction func editPhoto(_ sender: SmallButton) {
@@ -387,64 +418,13 @@ class UploadMediaVideoCell : UICollectionViewCell {
     
     var delegte : UploadMediaCellDelegate!
     
-    var assetID: String? {
-        
-        didSet {
-            
-            let manager = PHCachingImageManager()
-            
-            let fetchOptions = PHFetchOptions()
-            fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-            
-            let requestOptions = PHImageRequestOptions()
-            requestOptions.isSynchronous = true
-            requestOptions.deliveryMode = .highQualityFormat
-            requestOptions.resizeMode = .exact
-            
-            if let id = assetID {
-                
-                let fetchResult = PHAsset.fetchAssets(withLocalIdentifiers: [id], options: fetchOptions)
-                
-                guard let asset = fetchResult.firstObject
-                    else { return  }
-                
-                if asset.mediaType == .video {
-                    
-                    manager.requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFill, options: requestOptions, resultHandler: {
-                        
-                        image,error  in
-                        
-                        self.photo.image = image
-                        
-                        if error != nil {
-                            
-                        }
-                    })
-                    
-                    manager.requestAVAsset(forVideo: asset, options: PHVideoRequestOptions(), resultHandler: {(avAsset, audioMix, info) -> Void in
-                        if let asset = avAsset as? AVURLAsset {
-                            //let videoData = NSData(contentsOf: asset.url)
-                            let duration : CMTime = asset.duration
-                            let durationInSecond = CMTimeGetSeconds(duration)
-                            print(durationInSecond)
-                            
-                            if  let audioMix = audioMix {
-                                audioMix.inputParameters
-                            }
-                            
-                        }
-                        
-                    })
-                }
-            }
-        }
-    }
+    var asset: AVAsset?
     
     @IBAction func remove(_ sender: SmallButton) {
-        delegte.remove(id: self.assetID!)
+        delegte.remove(asset: self.asset!)
     }
 
     @IBAction func mute(_ sender: SmallButton) {
-        
+        self.asset!.removeAudioFromVideo()
     }
 }

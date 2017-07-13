@@ -24,6 +24,7 @@ struct Constants {
         static let changeProfile = baseURL + "users/profile"
         static let notices = baseURL + "notices"
         static let faqs = baseURL + "faqs"
+        static let feedWrite = baseURL + "feeds/testarticles"
     }
     
     struct VyrlAPIConstants{

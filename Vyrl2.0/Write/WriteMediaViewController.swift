@@ -18,6 +18,7 @@ protocol WriteMdeiaDelegate : class {
     func showFullScreen()
     func completeAddMedia(array : [AVAsset])
     func getSeletedArray() -> [AVAsset]
+    func albumName(title:String)
 }
 
 class WriteMediaViewConroller : UIViewController {
@@ -38,6 +39,8 @@ class WriteMediaViewConroller : UIViewController {
     
     weak var delegate : WriteMdeiaDelegate?
     
+    var currentSubType : PHAssetCollectionSubtype!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,6 +57,12 @@ class WriteMediaViewConroller : UIViewController {
         self.getAllAlbum()
         
         self.enabledAddBtn(enabled: false)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.getPhotosAndVideos(self.currentSubType)
     }
     
     func enabledAddBtn(enabled : Bool){
@@ -79,8 +88,6 @@ class WriteMediaViewConroller : UIViewController {
                 if self.mediaTable.isHidden == false {
                     self.toggle()
                 }
-                
-                self.collectionView.reloadData()
             })
         }
     }
@@ -158,6 +165,7 @@ class WriteMediaViewConroller : UIViewController {
                     if start < min {
                         min = start
                     }
+                    
                     self.mediaArray.append(collection)
                 }
             }
@@ -166,12 +174,15 @@ class WriteMediaViewConroller : UIViewController {
         let result : PHAssetCollection = fetchResult.object(at: min)
         let title = result.localizedTitle
         self.mediaTitle.text = title
+        delegate?.albumName(title: title!)
         
         self.getPhotosAndVideos(result.assetCollectionSubtype)
         mediaTable.tableFooterView = UIView(frame: .zero)
     }
     
     func getPhotosAndVideos(_ subType: PHAssetCollectionSubtype){
+        
+        self.currentSubType = subType
         
         self.avAssetIdentifiers.removeAll()
         self.selectedAssetArray.removeAll()
@@ -286,11 +297,10 @@ extension WriteMediaViewConroller : UICollectionViewDataSource, UICollectionView
     }
 }
 
-extension WriteMediaViewConroller: FeedNavigationControllerDelegate {
+extension WriteMediaViewConroller: FeedNavigationControllerDelegate , UIImagePickerControllerDelegate , UINavigationControllerDelegate {
     
     // MARK: - FeedNavigationControllerDelegate
     func navigationControllerDidSpreadToEntire(navigationController: UINavigationController) {
-        print("spread to the entire")
         
         UIView.animate(withDuration: 0.2,
                        delay: 0.0,
@@ -303,7 +313,7 @@ extension WriteMediaViewConroller: FeedNavigationControllerDelegate {
     }
     
     func navigationControllerDidClosed(navigationController: UINavigationController) {
-        print("decreased on the view")  
+
         UIView.animate(withDuration: 0.2,
                        delay: 0.0,
                        options: .curveEaseIn,
@@ -313,14 +323,16 @@ extension WriteMediaViewConroller: FeedNavigationControllerDelegate {
                         
         }, completion: nil)
     }
-   
+    
+    func reloadAsset() {
+        self.getPhotosAndVideos(self.currentSubType)
+    }
 }
 
 class MediaButtonCell : UICollectionViewCell {
     @IBOutlet weak var btnImg: UIImageView!
     @IBOutlet weak var label: UILabel!
 }
-
 
 class MediaPhotoCell : UICollectionViewCell {
     
@@ -369,10 +381,9 @@ class MediaPhotoCell : UICollectionViewCell {
                         image,error  in
                         
                         self.photo.image = image
+                        self.asset?.photo = image
                         
                         if error != nil {
-                            
-                            
                         }
                     })
                 }
@@ -393,9 +404,17 @@ class MediaPhotoCell : UICollectionViewCell {
                         if error != nil {
                             
                             self.photo.image = image
-             
+                            self.asset?.photo = image
                         }
                     })
+                    
+                    manager.requestAVAsset(forVideo: asset, options: PHVideoRequestOptions(), resultHandler: {(avAsset, audioMix, info) -> Void in
+                        if let asset = avAsset as? AVURLAsset {
+      
+                            self.asset?.urlAsset = asset
+                        }
+                    })
+
                 }
             }
         }
@@ -412,6 +431,72 @@ class AVAsset {
     var type: MediaType?
     var identifier: String?
     var duration :TimeInterval!
+    
+    var isMute : Bool = false
+    
+    var photo : UIImage?
+    
+    var mediaData : Data? {
+        get {
+            guard type == .photo else {
+                if let asset = urlAsset {
+                    do {
+                        let data : Data!
+                        
+                        if isMute {
+                            data = try Data(contentsOf: self.savedMuteFileURL)
+                        }
+                        else {
+                            data = try Data(contentsOf: asset.url)
+                        }
+                       
+                        return data
+                    } catch {
+                        
+                    }
+                    
+                }
+                return nil
+            }
+            
+            if let image = photo {
+                return UIImageJPEGRepresentation(image, 1.0)!
+            }
+            
+            return nil
+        }
+    }
+    
+    func removeAudioFromVideo(){
+        
+        let composition = AVMutableComposition()
+        let sourceAsset = self.urlAsset!
+        let compositionVideoTrack: AVMutableCompositionTrack? = composition.addMutableTrack(withMediaType: AVMediaTypeVideo, preferredTrackID: kCMPersistentTrackID_Invalid)
+        let sourceVideoTrack: AVAssetTrack? = sourceAsset.tracks(withMediaType: AVMediaTypeVideo)[0]
+        let x: CMTimeRange = CMTimeRangeMake(kCMTimeZero, sourceAsset.duration)
+        _ = try? compositionVideoTrack!.insertTimeRange(x, of: sourceVideoTrack!, at: kCMTimeZero)
+        
+        if FileManager.default.fileExists(atPath: self.savedMuteFileURL.path) {
+            return
+        }
+        
+        let url = urlAsset!.url
+        
+        let urlStr =  ( url.absoluteString as NSString ).lastPathComponent
+        let fileURL = try! FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent(urlStr)
+        
+        let exporter = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetHighestQuality)
+        exporter?.outputURL = fileURL
+        exporter?.outputFileType = "com.apple.quicktime-movie"
+        exporter?.exportAsynchronously(completionHandler: {() -> Void in
+            self.savedMuteFileURL = fileURL
+            self.isMute = true
+        })
+    }
+    
+    var urlAsset : AVURLAsset?
+    
+    var savedMuteFileURL : URL!
     
     init(type: MediaType?, identifier: String?) {
         self.type = type
@@ -484,6 +569,7 @@ extension WriteMediaViewConroller : UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         
         self.mediaTitle.text = cell.title.text
+        delegate?.albumName(title: cell.title.text!)
         self.toggle()
         self.getPhotosAndVideos(cell.assetCollectionSubtype)
     }

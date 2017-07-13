@@ -32,7 +32,7 @@ public class ModalAnimatorPhoto {
         
         var y : CGFloat = 221.0
         if ( isKeyboardMode ){
-            y = fromView.bounds.size.height - keyboardSize.height - 44
+            y = fromView.bounds.size.height - keyboardSize.height - 45
         }
     
         var toViewFrame = fromView.bounds.offsetBy(dx: 0, dy: y)
@@ -66,7 +66,7 @@ public class ModalAnimatorPhoto {
         
         var y : CGFloat = 221.0
         if ( isKeyboardMode ){
-            y = fromView.bounds.size.height
+            y = fromView.bounds.size.height - 45
         }
 
         //Checking PhotoAutorizationStatus
@@ -104,7 +104,7 @@ public class ModalAnimatorPhoto {
         
         UIView.animate(withDuration: 0.2, animations: { () -> Void in
             
-            let toViewFrame = fromView.bounds.offsetBy(dx: 0, dy: fromView.bounds.size.height - keyboardSize.height - 44)
+            let toViewFrame = fromView.bounds.offsetBy(dx: 0, dy: fromView.bounds.size.height - keyboardSize.height - 45)
             toView.frame = toViewFrame
             
             isShowFullScreen = false
