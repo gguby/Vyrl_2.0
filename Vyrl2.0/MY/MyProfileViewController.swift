@@ -163,8 +163,10 @@ class MyProfileViewController: UIViewController, UIImagePickerControllerDelegate
                 self.introField.text = jsonData["selfIntro"] as? String
                 self.webURLField.text = jsonData["homepageUrl"] as? String
                 
-                let url = NSURL(string: jsonData["imagePath"] as! String)
-                self.photoView.af_setImage(for: UIControlState.normal, url: url! as URL)
+                if(jsonData["imagePata"] != nil) {
+                    let url = NSURL(string: jsonData["imagePath"] as! String)
+                    self.photoView.af_setImage(for: UIControlState.normal, url: url! as URL)
+                }
                 
             case .failure(let error):
                 print(error)

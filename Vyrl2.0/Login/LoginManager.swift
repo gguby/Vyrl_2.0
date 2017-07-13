@@ -177,12 +177,12 @@ class LoginManager{
         }
         
         let parameters : Parameters = [
+            "nickName": nickName,
+            "socialType" : self.needSignUpService!.name(),
             "accessToken": self.needSignUpToken!,
             "accessTokenSecret" : self.needSignUpSecret!,
-            "socialType" : self.needSignUpService!.name(),
-            "homePageUrl": homePageURL,
-            "nickName": nickName,
             "selfIntro": selfIntro,
+            "homePageUrl": homePageURL,
             "type" : Constants.VyrlAPIConstants.AppDevice.uppercased(),
             "pushToken" : token
         ]
@@ -191,31 +191,20 @@ class LoginManager{
         let fileName = "\(nickName).jpg"
 
         Alamofire.upload(multipartFormData: { (multipartFormData) in
-            
             if let imageData = UIImageJPEGRepresentation(profile, 0.25) {
                 multipartFormData.append(imageData, withName: "file", fileName: fileName, mimeType: "image/jpeg")
             }
-            
-            for (key, value) in parameters {
-                let vauleStr = value as! String
-                multipartFormData.append(vauleStr.data(using: .utf8)!, withName: key)
-            }
-            
-        }, usingThreshold: UInt64.init(), to: uri, method: .post, headers: getHeader(), encodingCompletion: {
+        }, usingThreshold: UInt64.init(), to: URL(string: uri, parameters: parameters as! [String : String])!, method: .post, headers: getHeader(), encodingCompletion: {
             encodingResult in
             switch encodingResult {
             case .success(let upload, _, _):
                 
                 upload.uploadProgress(closure: { (progress) in
-                    print(progress)
+                    
                 })
                 
                 upload.responseJSON { response in
                     //print response.result
-                    print(response.result)
-                    print((response.response?.statusCode)!)
-                    print(response)
-                    
                     if ( (response.response?.statusCode) != 200 ) { return }
                     
                     switch response.result {

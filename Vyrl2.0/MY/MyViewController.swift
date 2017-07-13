@@ -107,10 +107,10 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                         }
                         
                         guard let image = UserDefaults.standard.image(forKey: (currentAccount?.userId)!) else {
-                            
-                            let url = URL.init(string: (account?.imagePath)!)
-                            self.profileImage.af_setImage(withURL: url!)
-                            
+                            if(account?.imagePath != nil) {
+                                let url = URL.init(string: (account?.imagePath)!)
+                                self.profileImage.af_setImage(withURL: url!)
+                            }
                             return
                         }
                         
