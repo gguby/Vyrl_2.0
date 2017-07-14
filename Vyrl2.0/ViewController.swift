@@ -110,6 +110,8 @@ class ViewController: UITabBarController , UITabBarControllerDelegate {
             toastView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
             toastView.heightAnchor.constraint(equalToConstant: 45).isActive = true
             
+            self.toastView.frame.origin.y = self.view.frame.size.height
+            
             if !toastLabel.isDescendant(of: toastView){
                 toastView.addSubview(toastLabel)
                 toastLabel.centerXAnchor.constraint(equalTo: toastView.centerXAnchor).isActive = true
@@ -123,12 +125,12 @@ class ViewController: UITabBarController , UITabBarControllerDelegate {
         self.toastLabel.text = string
         
         UIView.animate(withDuration: 1.0, animations: {
-            self.toastView.frame.origin.y = self.view.frame.height - 45
-        })
-        
-        UIView.animate(withDuration: 1.0, animations: {
-            self.toastView.frame.origin.y = self.view.frame.height
-        })    
+            self.toastView.frame.origin.y = self.view.frame.size.height - 45
+        }) { (true) in
+            UIView.animate(withDuration: 1.0, animations: {
+                self.toastView.frame.origin.y = self.view.frame.size.height
+            })
+        }
     }
     
     override func viewDidLoad() {
