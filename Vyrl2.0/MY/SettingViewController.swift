@@ -68,7 +68,8 @@ class SettingViewController: UIViewController, UIScrollViewDelegate {
     
     //terms of use
     @IBAction func showTermsofUseServiceView(_ sender: UIButton) {
-      self.pushView(storyboardName: "Setting", controllerName: "ServiceTerms")
+      let view : TermsOfUseViewController = self.pushViewControllrer(storyboardName: "Setting", controllerName: "ServiceTerms") as! TermsOfUseViewController
+        view.type = .Use
     }
     
     @IBAction func showTermsofUseOfficialFanclubView(_ sender: UIButton) {
@@ -76,9 +77,8 @@ class SettingViewController: UIViewController, UIScrollViewDelegate {
     }
     
     @IBAction func showPrivacyPolicyView(_ sender: UIButton) {
-      let alert = UIAlertController(title: "Alert", message: "개인정보 처리방침", preferredStyle: UIAlertControllerStyle.alert)
-      alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
-      self.present(alert, animated: true, completion: nil)
+    let view : TermsOfUseViewController = self.pushViewControllrer(storyboardName: "Setting", controllerName: "ServiceTerms") as! TermsOfUseViewController
+        view.type = .Privacy
     } 
     
     

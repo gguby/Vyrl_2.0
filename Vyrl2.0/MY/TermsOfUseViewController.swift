@@ -13,6 +13,8 @@ import SwiftyJSON
 class TermsOfUseViewController: UIViewController {
     @IBOutlet weak var termsTextView: UITextView!
 
+    var type : TermsType = .Use
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,21 +32,16 @@ class TermsOfUseViewController: UIViewController {
     }
     
     func getTermsOfUse() {
-        let uri = "https://api.vyrl.com:8443/ko/service/terms"
+        let uri = Constants.VyrlAPIURL.baseURL + "/terms/USE/KO"
         
-        let parameters : Parameters = [
-            "language": "ko",
-        ]
-
-        
-        Alamofire.request(uri, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON(completionHandler: {
+        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON(completionHandler: {
             response in
             
             switch response.result {
             case .success(let data):
                 print(data)
                 let json = JSON(data)
-                let result = json["result_set"]["terms"].string
+                let result = json["content"].string
                 self.termsTextView.attributedText = self.stringFromHtml(string: result!)
             case .failure(let error):
                 print(error)
@@ -78,3 +75,8 @@ class TermsOfUseViewController: UIViewController {
     }
 
 }
+
+enum TermsType {
+    case Privacy, Use, Operation
+}
+
