@@ -31,7 +31,7 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
     
     @IBAction func photoClick(_ sender: UIButton) {
-        self.pushView(storyboardName: "FeedStyle", controllerName: "FeedDetailViewController")
+        self.pushView(storyboardName: "Feed", controllerName: "FeedFullScreenViewController")
     }
    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int

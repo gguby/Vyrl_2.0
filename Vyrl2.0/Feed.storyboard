@@ -148,7 +148,7 @@
         <scene sceneID="zbW-6X-bXo">
             <objects>
                 <navigationController navigationBarHidden="YES" id="AqP-hB-Wsq" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wxq-cz-Xzg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="wxq-cz-Xzg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -160,10 +160,10 @@
             </objects>
             <point key="canvasLocation" x="-246" y="-115"/>
         </scene>
-        <!--View Controller-->
+        <!--Feed Full Screen View Controller-->
         <scene sceneID="JBX-tq-07F">
             <objects>
-                <viewController id="yXq-xH-jGk" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FeedFullScreenViewController" id="yXq-xH-jGk" customClass="FeedFullScreenViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Rzi-iB-OMa"/>
                         <viewControllerLayoutGuide type="bottom" id="K2P-64-HXQ"/>
@@ -172,10 +172,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="49i-km-NRk">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
-                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jId-fV-qHA">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <connections>
+                                    <outlet property="delegate" destination="yXq-xH-jGk" id="hhj-8G-2QG"/>
+                                </connections>
+                            </scrollView>
                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WRr-F5-dSP" userLabel="top View">
                                 <rect key="frame" x="0.0" y="20" width="375" height="40"/>
                                 <subviews>
@@ -186,6 +188,9 @@
                                             <constraint firstAttribute="width" constant="20" id="gsQ-lO-QqH"/>
                                         </constraints>
                                         <state key="normal" image="icon_cancel_03"/>
+                                        <connections>
+                                            <action selector="dismiss:" destination="yXq-xH-jGk" eventType="touchUpInside" id="UqR-j7-kO8"/>
+                                        </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_arrow_03_left" translatesAutoresizingMaskIntoConstraints="NO" id="6W5-63-2FB">
                                         <rect key="frame" x="152" y="14.5" width="6" height="9.5"/>
@@ -260,30 +265,26 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="49i-km-NRk" secondAttribute="trailing" id="2J8-9F-xaf"/>
+                            <constraint firstItem="K2P-64-HXQ" firstAttribute="top" secondItem="jId-fV-qHA" secondAttribute="bottom" id="4hW-Gz-GF8"/>
                             <constraint firstItem="uUj-iA-brH" firstAttribute="leading" secondItem="LXy-cD-Otz" secondAttribute="leading" id="7cE-hn-TiS"/>
-                            <constraint firstItem="49i-km-NRk" firstAttribute="top" secondItem="Rzi-iB-OMa" secondAttribute="bottom" id="9m8-OZ-X0s"/>
                             <constraint firstItem="K2P-64-HXQ" firstAttribute="top" secondItem="uUj-iA-brH" secondAttribute="bottom" id="C7r-x0-jat"/>
                             <constraint firstAttribute="trailing" secondItem="WRr-F5-dSP" secondAttribute="trailing" id="Dst-4P-Nkb"/>
                             <constraint firstItem="WRr-F5-dSP" firstAttribute="top" secondItem="Rzi-iB-OMa" secondAttribute="bottom" id="E31-ca-uoz"/>
                             <constraint firstAttribute="trailing" secondItem="uUj-iA-brH" secondAttribute="trailing" id="Lo1-Dg-ghV"/>
-                            <constraint firstItem="K2P-64-HXQ" firstAttribute="top" secondItem="49i-km-NRk" secondAttribute="bottom" id="lkm-Zj-uAk"/>
                             <constraint firstItem="WRr-F5-dSP" firstAttribute="leading" secondItem="LXy-cD-Otz" secondAttribute="leading" id="lrl-7o-8g2"/>
-                            <constraint firstItem="49i-km-NRk" firstAttribute="leading" secondItem="LXy-cD-Otz" secondAttribute="leading" id="pqg-Zv-cso"/>
+                            <constraint firstItem="jId-fV-qHA" firstAttribute="top" secondItem="LXy-cD-Otz" secondAttribute="top" id="msf-j5-0Bj"/>
+                            <constraint firstAttribute="trailing" secondItem="jId-fV-qHA" secondAttribute="trailing" id="plB-vU-Fm9"/>
+                            <constraint firstItem="jId-fV-qHA" firstAttribute="leading" secondItem="LXy-cD-Otz" secondAttribute="leading" id="uKP-e8-wiu"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="pageNumberLabel" destination="GE5-7W-BNp" id="pFp-Sj-jyh"/>
+                        <outlet property="scrollView" destination="jId-fV-qHA" id="rVL-Zf-l9h"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RD4-1O-p4t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1161" y="-116"/>
-        </scene>
-        <!--AV Player View Controller-->
-        <scene sceneID="AIy-X5-PIF">
-            <objects>
-                <avPlayerViewController videoGravity="AVLayerVideoGravityResizeAspect" id="NgY-XF-xuB" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uOP-2t-Lm4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1943" y="-111"/>
+            <point key="canvasLocation" x="1160.8" y="-116.49175412293854"/>
         </scene>
         <!--FeedTableViewController-->
         <scene sceneID="gm4-FY-rDZ">
@@ -384,7 +385,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ljs-0q-Tgl">
-                                                    <rect key="frame" x="632" y="15" width="20" height="20"/>
+                                                    <rect key="frame" x="340" y="15" width="20" height="20"/>
                                                     <color key="backgroundColor" red="0.96862745100000003" green="0.96470588239999999" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="N7T-6c-DIV"/>
