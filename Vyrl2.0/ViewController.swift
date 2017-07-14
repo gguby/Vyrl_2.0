@@ -76,6 +76,22 @@ extension UIViewController
 
 class ViewController: UITabBarController , UITabBarControllerDelegate {
     
+    lazy var toastView : UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.85)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    lazy var toastLabel : UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 14.0)
+        label.textColor = UIColor.white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    
     override func viewWillLayoutSubviews() {
         var tabFrame = self.tabBar.frame
         tabFrame.size.height = 45
@@ -83,11 +99,47 @@ class ViewController: UITabBarController , UITabBarControllerDelegate {
         self.tabBar.frame = tabFrame
     }
     
+    func setupToasView(){
+        if !toastView.isDescendant(of: self.view) {
+            
+            self.view.addSubview(toastView)
+            
+            toastView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+            toastView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+            toastView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
+            toastView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+            toastView.heightAnchor.constraint(equalToConstant: 45).isActive = true
+            
+            if !toastLabel.isDescendant(of: toastView){
+                toastView.addSubview(toastLabel)
+                toastLabel.centerXAnchor.constraint(equalTo: toastView.centerXAnchor).isActive = true
+                toastLabel.centerYAnchor.constraint(equalTo: toastView.centerYAnchor).isActive = true
+            }
+        }
+    }
+    
+    func showToast(string : String){
+        
+        self.toastLabel.text = string
+        
+        UIView.animate(withDuration: 1.0, animations: {
+            self.toastView.frame.origin.y = self.view.frame.height - 45
+        })
+        
+        UIView.animate(withDuration: 1.0, animations: {
+            self.toastView.frame.origin.y = self.view.frame.height
+        })    
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        self.setupToasView()
+        
         self.delegate = self
+        
+        self.showToast(string: "저장되었습니다!")
     }
 
     override func didReceiveMemoryWarning() {

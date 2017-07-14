@@ -15,6 +15,8 @@ import Alamofire
 
 protocol UploadMediaCellDelegate {
     func remove(asset : AVAsset)
+    func openCropView(vc : UIViewController)
+    func replaceData(identifier : String , photo : UIImage)
 }
 
 class WriteViewController : UIViewController , TOCropViewControllerDelegate{
@@ -62,30 +64,38 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
     @IBAction func post(_ sender: UIButton) {
         
         let parameters :[String:String] = [
-            "title": "test",
             "content": textView.text
         ]
         
         let uri = Constants.VyrlAPIURL.feedWrite
-        let fileName = "1.jpg"
+        var fileName : String!
         
         let queryUrl = URL.init(string: uri, parameters: parameters)
         
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             
+            var count = 1
+            
             for asset in self.selectedAssetArray {
+                
                 if asset.type == .photo {
+                    fileName = "\(count)" + ".jpg"
+                    
                     if let imageData = asset.mediaData {
                         multipartFormData.append(imageData, withName: "image", fileName: fileName, mimeType: "image/jpg")
                     }
                 } else {
+                    fileName = "\(count)" + ".mpeg"
+                    
                     if let imageData = asset.mediaData {
-                        multipartFormData.append(imageData, withName: "video", fileName: fileName, mimeType: "image/jpg")
+                        multipartFormData.append(imageData, withName: "video", fileName: fileName, mimeType: "video/mpeg")
                     }
                 }
+                
+                count = count + 1
             }
             
-        }, usingThreshold: UInt64.init(), to: queryUrl!, method: .patch, headers: Constants.VyrlAPIConstants.getHeader(), encodingCompletion:
+        }, usingThreshold: UInt64.init(), to: queryUrl!, method: .post, headers: Constants.VyrlAPIConstants.getHeader(), encodingCompletion:
             {
                 encodingResult in
                 switch encodingResult {
@@ -100,14 +110,16 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
                         print((response.response?.statusCode)!)
                         print(response)
                         
+                        if ((response.response?.statusCode)! == 200){
+                            self.dismiss(animated: true, completion: nil)
+                        }
+                        
                     }
                 case .failure(let encodingError):
                     print(encodingError.localizedDescription)
                 }
         })
     }
-
-    
     
     @IBAction func dimissPop() {
         self.dismiss(animated: true, completion: nil)
@@ -144,13 +156,11 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
         ModalAnimatorPhoto.keyboardSize = kbSize
         
         self.navigationController?.si_dissmissOnBottom(toViewController: modalNavigationController, kbSize: kbSize, completion:  {
-            
             self.modalNavigationController.si_delegate?.navigationControllerDidClosed?(navigationController: self.modalNavigationController)
         })
     }
     
     func handleKeyboardWillHide(_ notification: Notification){
-        
         self.navigationController?.si_dismissModalView(toViewController: modalNavigationController, completion:  {
         })
     }
@@ -180,7 +190,6 @@ extension WriteViewController : WriteMdeiaDelegate, UIImagePickerControllerDeleg
     
     func focusTextView() {
         textView.becomeFirstResponder()
-        self.setupMediaView(hidden: true)
     }
     
     func closeKeyboard() {
@@ -230,24 +239,37 @@ extension WriteViewController : WriteMdeiaDelegate, UIImagePickerControllerDeleg
         
         self.setupMediaView(hidden: true)
         
-        selectedAssetArray.removeAll()
-        
-        for asset in array {
-            selectedAssetArray.append(asset)
-        }
-        
         self.navigationController?.si_dismissModalView(toViewController: modalNavigationController, completion:  {
             
             self.modalNavigationController.si_delegate?.navigationControllerDidClosed?(navigationController: self.modalNavigationController)
             
-            self.collectionView.reloadData()
+            self.selectedAssetArray.removeAll()
+            
+            for asset in array {
+                self.selectedAssetArray.append(asset)
+            }
             
             if self.selectedAssetArray.isEmpty {
                 self.collectionViewHeight.constant = 0
             } else {
                 self.collectionViewHeight.constant = 146
             }
+            
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
         })
+    }
+    
+    func video(videoPath: NSString, didFinishSavingWithError error: NSError?, contextInfo info: AnyObject)
+    {
+        if let _ = error {
+            print("Error,Video failed to save")
+        }else{
+            DispatchQueue.main.async {
+                self.modalNavigationController.si_delegate?.reloadAsset!()
+            }
+        }
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]){
@@ -264,7 +286,13 @@ extension WriteViewController : WriteMdeiaDelegate, UIImagePickerControllerDeleg
                 return
             }
             if mediaType == "public.movie"{
-                print("movie")
+                
+                let theVideoURL: URL? = (info[UIImagePickerControllerMediaURL] as? URL)
+                
+                if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum((theVideoURL?.path)!))
+                {
+                    UISaveVideoAtPathToSavedPhotosAlbum((theVideoURL?.path)!, self, #selector(self.video(videoPath:didFinishSavingWithError:contextInfo:)), nil)
+                }
             }
         }
     }
@@ -350,9 +378,6 @@ extension WriteViewController : UITextViewDelegate {
 }
 
 extension WriteViewController : UICollectionViewDataSource, UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-      
-    }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
@@ -391,9 +416,23 @@ extension WriteViewController : UploadMediaCellDelegate {
             self.collectionViewHeight.constant = 0
         }
     }
+    
+    func openCropView(vc : UIViewController) {
+       self.present(vc, animated: true, completion: nil)
+    }
+    
+    func replaceData(identifier: String, photo: UIImage) {
+        let index = selectedAssetArray.index(where: { $0.identifier == identifier})
+        let asset : AVAsset = selectedAssetArray[index!]
+        asset.editedData = UIImageJPEGRepresentation(photo, 1.0)!
+        asset.photo = photo
+        selectedAssetArray[index!] = asset
+        
+        self.dismiss(animated:true, completion: nil)
+    }
 }
 
-class UploadMediaPhotoCell : UICollectionViewCell {
+class UploadMediaPhotoCell : UICollectionViewCell , TOCropViewControllerDelegate, SHViewControllerDelegate {
     
     @IBOutlet weak var image: UIImageView!
     
@@ -406,9 +445,31 @@ class UploadMediaPhotoCell : UICollectionViewCell {
     }
     
     @IBAction func editPhoto(_ sender: SmallButton) {
-        print("editPhoto")
+        
+        let cropViewController = TOCropViewController(image: self.image.image!)
+        cropViewController.delegate = self
+        
+        delegte.openCropView(vc: cropViewController)
+    }
+    
+    func cropViewController(_ cropViewController: TOCropViewController, didCropToImage image: UIImage, rect cropRect: CGRect, angle: Int) {
+        
+        let vc = SHViewController(image: image)
+        vc.delegate = self;
+        cropViewController.present(vc, animated: true, completion: nil)
+    }
+    
+    func shViewControllerImageDidFilter(image: UIImage){
+        
+        self.image.image = image
+        delegte.replaceData(identifier: (self.asset?.identifier)!, photo: image)
+    }
+    
+    func shViewControllerDidCancel(){
     }
 }
+
+
 
 class UploadMediaVideoCell : UICollectionViewCell {
     @IBOutlet weak var photo: UIImageView!

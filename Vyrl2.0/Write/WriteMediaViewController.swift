@@ -106,6 +106,8 @@ class WriteMediaViewConroller : UIViewController {
             selectedAssetArray.append(asset)
         }
         
+        self.enabledAddBtn(enabled: !selectedAssetArray.isEmpty)
+        
         collectionView.reloadData()
         
         delegate?.showFullScreen()
@@ -124,6 +126,7 @@ class WriteMediaViewConroller : UIViewController {
         delegate?.completeAddMedia(array: selectedAssetArray)
         
         DispatchQueue.main.async {
+            self.selectedAssetArray.removeAll()
             self.collectionView.reloadData()
         }
     }
@@ -436,7 +439,10 @@ class AVAsset {
     
     var photo : UIImage?
     
+    var editedData : Data?
+    
     var mediaData : Data? {
+
         get {
             guard type == .photo else {
                 if let asset = urlAsset {
@@ -457,6 +463,10 @@ class AVAsset {
                     
                 }
                 return nil
+            }
+            
+            if let data = self.editedData {
+                return data
             }
             
             if let image = photo {

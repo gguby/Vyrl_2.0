@@ -132,7 +132,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
-        var temp : Dictionary = userInfo
+        let temp : Dictionary = userInfo
+        
+        print( "Push" )
+        print(temp)
         
     }
 }

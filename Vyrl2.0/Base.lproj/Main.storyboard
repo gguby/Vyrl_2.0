@@ -74,10 +74,10 @@
         <!--Write-->
         <scene sceneID="yqH-NO-7HD">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PG4-By-tpk" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewControllerPlaceholder storyboardName="Write" id="USf-3u-bQ3" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="tabBarItem:gif-B2-uzn:image" id="gif-B2-uzn"/>
                 </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PG4-By-tpk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="814" y="130"/>
         </scene>
