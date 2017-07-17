@@ -112,6 +112,8 @@ class ViewController: UITabBarController , UITabBarControllerDelegate {
             
             self.toastView.frame.origin.y = self.view.frame.size.height
             
+            self.toastView.alpha = 0
+            
             if !toastLabel.isDescendant(of: toastView){
                 toastView.addSubview(toastLabel)
                 toastLabel.centerXAnchor.constraint(equalTo: toastView.centerXAnchor).isActive = true
@@ -125,10 +127,12 @@ class ViewController: UITabBarController , UITabBarControllerDelegate {
         self.toastLabel.text = string
         
         UIView.animate(withDuration: 1.0, animations: {
+            self.toastView.alpha = 1
             self.toastView.frame.origin.y = self.view.frame.size.height - 45
         }) { (true) in
             UIView.animate(withDuration: 1.0, animations: {
                 self.toastView.frame.origin.y = self.view.frame.size.height
+                self.toastView.alpha = 0
             })
         }
     }
@@ -139,9 +143,9 @@ class ViewController: UITabBarController , UITabBarControllerDelegate {
         
         self.setupToasView()
         
-        self.delegate = self
+//        self.showToast(string: "!")
         
-        self.showToast(string: "저장되었습니다!")
+        self.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
