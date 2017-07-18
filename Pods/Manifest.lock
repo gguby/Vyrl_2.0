@@ -4,6 +4,9 @@ PODS:
     - Alamofire (~> 4.1)
   - AlamofireNetworkActivityLogger (2.2.0):
     - Alamofire (~> 4.0)
+  - AlamofireObjectMapper (4.1.0):
+    - Alamofire (~> 4.1)
+    - ObjectMapper (~> 2.0)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
@@ -80,6 +83,13 @@ PODS:
   - GTMSessionFetcher/Core (1.1.9)
   - GTMSessionFetcher/Full (1.1.9):
     - GTMSessionFetcher/Core (= 1.1.9)
+  - ObjectMapper (2.2.7)
+  - RxAlamofire (3.0.3):
+    - RxAlamofire/Core (= 3.0.3)
+  - RxAlamofire/Core (3.0.3):
+    - Alamofire (~> 4.0)
+    - RxSwift (~> 3.0)
+  - RxSwift (3.5.0)
   - Sharaku (1.0.2)
   - SwiftyJSON (3.1.4)
   - TOCropViewController (2.0.12)
@@ -92,6 +102,7 @@ DEPENDENCIES:
   - Alamofire (~> 4.5)
   - AlamofireImage
   - AlamofireNetworkActivityLogger
+  - AlamofireObjectMapper (~> 4.0)
   - Crashlytics
   - Fabric
   - FacebookCore
@@ -103,6 +114,7 @@ DEPENDENCIES:
   - Google/Analytics
   - GoogleSignIn
   - GrowingTextView
+  - RxAlamofire
   - Sharaku
   - SwiftyJSON
   - TOCropViewController
@@ -112,6 +124,7 @@ SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
   AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
   AlamofireNetworkActivityLogger: a7ae1842988b3f6248a49213268375bd27b515f0
+  AlamofireObjectMapper: 435adc82f5b367679bd9e71c4974a54efd0b2521
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
@@ -134,12 +147,15 @@ SPEC CHECKSUMS:
   GrowingTextView: f41542d41128f4fe8dad9197e312a6a2a7add5db
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
+  ObjectMapper: 65abcfd9a61cf7396cbd14a4fb22fddfcc46577e
+  RxAlamofire: 5eb39188c4917ad98127c0ecb4878a61b7517003
+  RxSwift: 18ee9d78b45edb3b0b7e79916b47a116e6dbc842
   Sharaku: c18de569fc99f6e936f46ca812b571826cc658a7
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   TOCropViewController: e6e31b38d785a901e5651a1e7fff71bcda6c5214
   TwitterCore: e959987be23c767004d29eb7fab8d85d8585a2e5
   TwitterKit: 3b6044a7320340326a4098f3e37aa1dbaeb94942
 
-PODFILE CHECKSUM: 5fbfe8e62a8e6f7eedd2394e947eadcaadd68640
+PODFILE CHECKSUM: 241716ac9a7e6a7fa315922f521153a02f14e8f6
 
 COCOAPODS: 1.2.1

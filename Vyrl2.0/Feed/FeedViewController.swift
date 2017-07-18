@@ -7,6 +7,11 @@
 //
 
 import UIKit
+import RxSwift
+
+import ObjectMapper
+import Alamofire
+import AlamofireObjectMapper
 
 class FeedViewController: UIViewController {
     
@@ -18,6 +23,8 @@ class FeedViewController: UIViewController {
         print("Feed");
         
         LoginManager.sharedInstance.checkPush(viewConroller: self)
+        
+        self.getAllFeed()
     }
     
     override func didReceiveMemoryWarning() {
@@ -31,5 +38,38 @@ class FeedViewController: UIViewController {
             let secondViewController = segue.destination as! FeedTableViewController
         }
     }
+    
+    func getAllFeed(){
+        
+        let url = URL.init(string: Constants.VyrlAPIURL.feedWrite)
+        
+        Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Article]>) in
+            let array = response.result.value ?? []
+            
+            for article in array {
+                print(article.id)
+            }
+        }
+    }
+}
 
+
+struct Article : Mappable {
+    
+    var id : Int!
+    var content : String!
+    
+    var images : [String]!
+    var videos : [String]!
+    
+    init?(map: Map) {
+        
+    }
+    
+    mutating func mapping(map: Map){
+        id <- map["id"]
+        content <- map["content"]
+        images <- map["images"]
+        videos <- map["videos"]
+    }
 }

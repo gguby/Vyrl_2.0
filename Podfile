@@ -25,6 +25,8 @@ target 'Vyrl2.0' do
     pod 'AlamofireNetworkActivityLogger'
     pod 'Alamofire', '~> 4.5'
     pod 'AlamofireImage'
+    pod 'RxAlamofire'
+    pod 'AlamofireObjectMapper', '~> 4.0'
 
 end
 
