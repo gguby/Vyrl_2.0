@@ -183,7 +183,7 @@ class LoginManager{
             "accessTokenSecret" : self.needSignUpSecret!,
             "selfIntro": selfIntro,
             "homePageUrl": homePageURL,
-            "type" : Constants.VyrlAPIConstants.AppDevice.uppercased(),
+            "deviceType" : Constants.VyrlAPIConstants.AppDevice.uppercased(),
             "pushToken" : token
         ]
         
