@@ -72,6 +72,8 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
         
         let queryUrl = URL.init(string: uri, parameters: parameters)
         
+        self.view.isUserInteractionEnabled = false
+        
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             
             var count = 1
@@ -101,6 +103,8 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
                 switch encodingResult {
                 case .success(let upload, _, _):
                     
+                    self.view.isUserInteractionEnabled = true
+                    
                     upload.uploadProgress(closure: { (progress) in
                         print(progress)
                     })
@@ -116,6 +120,7 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
                         
                     }
                 case .failure(let encodingError):
+                    self.view.isUserInteractionEnabled = true
                     print(encodingError.localizedDescription)
                 }
         })
@@ -168,6 +173,67 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
     func setupMediaView(hidden :Bool){
         isSelectedMedia = hidden
         ModalAnimatorPhoto.isKeyboardMode = hidden
+    }
+    
+    func loadFirstAsset(type : PHAssetMediaType) -> AVAsset {
+        
+        var resultAsset : AVAsset!
+        
+        let manager = PHImageManager()
+        
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+        
+        let requestOptions = PHImageRequestOptions()
+        requestOptions.isSynchronous = true
+        requestOptions.deliveryMode = .highQualityFormat
+        requestOptions.resizeMode = .exact
+        
+        let fetchResult = PHAsset.fetchAssets(with: type, options: fetchOptions)
+   
+        if (fetchResult.firstObject != nil ){
+            let lastAsset : PHAsset = fetchResult.lastObject!
+            
+            if lastAsset.mediaType == .image {
+                resultAsset = AVAsset(type: .photo, identifier: lastAsset.localIdentifier)
+                
+                manager.requestImage(for: lastAsset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFill, options: requestOptions, resultHandler: {
+                    
+                    image,error  in
+                    
+                    resultAsset.photo = image
+                    
+                    if error != nil {
+                    }
+                })
+
+            }else {
+                var duration: TimeInterval!
+                
+                duration = lastAsset.duration
+                
+                resultAsset = AVAsset(type: .video, identifier: lastAsset.localIdentifier)
+                resultAsset.duration = duration
+                
+                manager.requestImage(for: lastAsset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFill, options: requestOptions, resultHandler: {
+                    
+                    image,error  in
+                    
+                    if error != nil {
+                        resultAsset.photo = image
+                    }
+                })
+                
+                manager.requestAVAsset(forVideo: lastAsset, options: PHVideoRequestOptions(), resultHandler: {(avAsset, audioMix, info) -> Void in
+                    if let asset = avAsset as? AVURLAsset {
+                        resultAsset.urlAsset = asset
+                    }
+                })
+            }
+        }
+        
+        return resultAsset
+        
     }
 }
 
@@ -266,9 +332,12 @@ extension WriteViewController : WriteMdeiaDelegate, UIImagePickerControllerDeleg
         if let _ = error {
             print("Error,Video failed to save")
         }else{
-            DispatchQueue.main.async {
-                self.modalNavigationController.si_delegate?.reloadAsset!()
-            }
+            
+            let asset = self.loadFirstAsset(type: PHAssetMediaType.video)
+            
+            let array :[AVAsset] = [asset]
+            
+            self.completeAddMedia(array: array)
         }
     }
     
@@ -316,9 +385,11 @@ extension WriteViewController: SHViewControllerDelegate {
         if let error = error {
             print(error)
         } else {
-            DispatchQueue.main.async {
-                self.modalNavigationController.si_delegate?.reloadAsset!()
-            }
+            let asset = self.loadFirstAsset(type: PHAssetMediaType.image)
+            
+            let array :[AVAsset] = [asset]
+            
+            self.completeAddMedia(array: array)
         }
     }
     
