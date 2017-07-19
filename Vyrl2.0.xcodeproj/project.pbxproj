@@ -37,6 +37,7 @@
 		8F916A8A1EDC17D900E3EC8B /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F916A891EDC17D900E3EC8B /* SettingViewController.swift */; };
 		8F916A8E1EDC264900E3EC8B /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F916A8D1EDC264900E3EC8B /* UIView+Extension.swift */; };
 		8F9AF9911EE800E700DE069E /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9AF9901EE800E700DE069E /* FeedTableViewController.swift */; };
+		A62EF2EB1F1F5282000CD43A /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62EF2EA1F1F5282000CD43A /* LocationViewController.swift */; };
 		A650368B1F0E30BA00AD540A /* ModalAnimatorPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65036881F0E30BA00AD540A /* ModalAnimatorPhoto.swift */; };
 		A650368C1F0E30BA00AD540A /* FeedNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65036891F0E30BA00AD540A /* FeedNavigationController.swift */; };
 		A650368D1F0E30BA00AD540A /* FeedNavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A650368A1F0E30BA00AD540A /* FeedNavigationControllerExtension.swift */; };
@@ -112,6 +113,7 @@
 		8F916A891EDC17D900E3EC8B /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		8F916A8D1EDC264900E3EC8B /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		8F9AF9901EE800E700DE069E /* FeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
+		A62EF2EA1F1F5282000CD43A /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		A65036881F0E30BA00AD540A /* ModalAnimatorPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalAnimatorPhoto.swift; sourceTree = "<group>"; };
 		A65036891F0E30BA00AD540A /* FeedNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedNavigationController.swift; sourceTree = "<group>"; };
 		A650368A1F0E30BA00AD540A /* FeedNavigationControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedNavigationControllerExtension.swift; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 				A650368A1F0E30BA00AD540A /* FeedNavigationControllerExtension.swift */,
 				8F829E7F1EFB9CD4001D418F /* WriteViewController.swift */,
 				A650368E1F0E3F1A00AD540A /* WriteMediaViewController.swift */,
+				A62EF2EA1F1F5282000CD43A /* LocationViewController.swift */,
 			);
 			path = Write;
 			sourceTree = "<group>";
@@ -588,6 +591,7 @@
 				8F916A8A1EDC17D900E3EC8B /* SettingViewController.swift in Sources */,
 				CE0898281ECD9AB9000D6D6C /* LoginManager.swift in Sources */,
 				8F48CA6C1ED560CD0037A35B /* StartCoverViewController.swift in Sources */,
+				A62EF2EB1F1F5282000CD43A /* LocationViewController.swift in Sources */,
 				8F57B73F1F186E44009FD0EA /* FeedFullScreenViewController.swift in Sources */,
 				8F42E4991EE144C70010EB88 /* OfficialFanClubTermsViewController.swift in Sources */,
 				CE29B1A01ECD5FEE003F4D2E /* ViewController.swift in Sources */,

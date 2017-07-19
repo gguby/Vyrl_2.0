@@ -11,8 +11,11 @@ import Alamofire
 
 
 struct Constants {
+    
+    static var GoogleMapsAPIServerKey="AIzaSyAv8onWg1agUiUQU_n5HFMaMjnGtlrinSQ"
+    
     struct GoogleAnalysis {
-        static let kTrackingId = "UA-69299126-3"
+        static let kTrackingId = "UA-102838629-1"
     }
     struct CrashlyticsConstants {
         static let userType = "User Type";

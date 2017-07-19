@@ -53,17 +53,15 @@ class WriteMediaViewConroller : UIViewController {
             nc.fullScreenSwipeUp = true
             nc.isNavigationBarHidden = true
         }
-
         
         if PhotoAutorizationStatusCheck() {
             self.getAllAlbum()
         } else {
             PHPhotoLibrary.requestAuthorization({ (status) in
                 if ( status == PHAuthorizationStatus.authorized ){
-                    
                     DispatchQueue.main.async{
                         self.getAllAlbum()
-                    }                    
+                    }
                 }
             })
         }
