@@ -8,11 +8,15 @@
 
 import UIKit
 import AVFoundation
+import Alamofire
 
 class FeedFullScreenViewController: UIViewController {
 
     @IBOutlet weak var mainScrollView: UIScrollView!
-    var imageView : UIImageView!
+    var imageArray : [UIImage] = []
+    var imageViewArray : [UIImageView] = []
+    var textViewArray : [UITextView] = []
+    
     var currentImageView : UIImageView!
     var queue : [AVPlayerItem] = []
     
@@ -20,17 +24,13 @@ class FeedFullScreenViewController: UIViewController {
     var player: AVPlayer?
     
     var previousDeviceOrientation: UIDeviceOrientation = UIDevice.current.orientation
+    var index : Int = 0;
     
-    let samplePhotos = [UIImage(named: "github1"),
-                                UIImage(named: "github2"),
-                                UIImage(named: "github3"),
-                                UIImage(named: "github4"),
-                                UIImage(named: "github5"),
-                                UIImage(named: "github6"),
-                                UIImage(named: "github7"),
-                                UIImage(named: "github8"),
-                                UIImage(named: "github9")
-                                ]
+    let samplePhotos = ["https://cdn2.vyrl.com/vyrl/images/post/_temp/temp/4ec6d08055c4ebcc76494080bbcd4ee2.jpg",
+                        "https://cdn2.vyrl.com/vyrl/images/post/_temp/54841/cfc79b7201ff0caae5fb1f25ac7145a8.jpg",
+                        "https://cdn2.vyrl.com/vyrl/images/post/_temp/temp/ae47d8dd720a1f1b36c6aebe635663c7.jpg",
+                        "https://cdn2.vyrl.com/vyrl/images/post/_temp/temp/77ee0896da31740db3ee64fd2f30795a.jpg",
+                        "https://cdn2.vyrl.com/vyrl/images/post/_temp/temp/b0926fdcadf9b4ab2083efaee041cfc7.jpg"]
     var initialConstraints = [NSLayoutConstraint]()
     
     var imageIndex: NSInteger = 0
@@ -39,65 +39,7 @@ class FeedFullScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let url1 = NSURL(string: "http://techslides.com/demos/sample-videos/small.mp4")
-        playerItem = AVPlayerItem(url: url1! as URL)
-        player = AVPlayer(playerItem: playerItem!)
         
-        for i in 0..<(samplePhotos.count) {
-            imageView = UIImageView()
-            let contentScrollView = UIScrollView()
-            contentScrollView.frame = CGRect.init(x: 0, y: 0, width: self.mainScrollView.frame.width, height: self.mainScrollView.frame.height)
-            
-            if(i == 4){
-                let url = NSURL(string: "https://s3.amazonaws.com/vids4project/sample.mp4")
-                
-                
-//                let playerLayer = AVPlayerLayer(player: player!)
-//                let xPosition = self.view.frame.width * CGFloat(i)
-//                playerLayer.frame = CGRect(x: xPosition, y:0, width: self.scrollView.frame.width, height: self.scrollView.frame.height)
-//                
-//                imageView.frame = playerLayer.videoRect
-//                imageView.layer.addSublayer(playerLayer)
-//                
-//                scrollView.contentSize.width = scrollView.frame.width * CGFloat(i+1)
-//                scrollView.addSubview(imageView)
-
-                
-
-            } else {
-                imageView.image = samplePhotos[i]
-                imageView.contentMode = .scaleAspectFit
-                
-                let height = contentScrollView.frame.width * ((samplePhotos[i]?.size.height)! / (samplePhotos[i]?.size.width)!)
-                imageView.frame = CGRect(x: 0, y:0, width: contentScrollView.frame.width, height: height)
-                
-                self.mainScrollView.contentSize.width = contentScrollView.frame.width * CGFloat(i+1)
-                contentScrollView.addSubview(imageView)
-
-                let textView = UITextView()
-                textView.text = "반갑습니다."
-                textView.textColor = UIColor.white
-                textView.backgroundColor = UIColor.ivGreyish
-                let size = textView.sizeThatFits(CGSize.init(width: self.view.frame.width, height: 9999))
-                textView.frame = CGRect.init(x: 0, y: imageView.frame.size.height, width: self.view.frame.width, height: size.height)
-                textView.isScrollEnabled = false
-                
-                contentScrollView.addSubview(textView)
-                contentScrollView.contentSize = CGSize.init(width: self.mainScrollView.frame.width, height: imageView.frame.height + textView.frame.height)
-                
-                let xPosition = self.view.frame.width * CGFloat(i)
-                
-                if( imageView.frame.height + textView.frame.height < self.mainScrollView.frame.height){
-                    contentScrollView.frame = CGRect.init(x: xPosition, y: 0, width: self.mainScrollView.frame.width, height: imageView.frame.size.height + textView.frame.size.height)
-                    contentScrollView.center = CGPoint.init(x: contentScrollView.center.x, y: self.view.center.y)
-                } else {
-                    contentScrollView.frame = CGRect.init(x: xPosition, y: 0, width: self.mainScrollView.frame.width, height: self.mainScrollView.frame.height)
-                }
-                
-                self.mainScrollView.addSubview(contentScrollView)
-            }
-        }
-
     }
     
     @IBAction func dismiss(_ sender: UIButton) {
@@ -108,7 +50,90 @@ class FeedFullScreenViewController: UIViewController {
             subView.removeFromSuperview()
         }
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.pageNumberLabel.text =  "1 / \(self.samplePhotos.count)"
+        
+        self.updateImageVideo()
+    }
 
+    func updateImageVideo() {
+        let url1 = NSURL(string: "http://techslides.com/demos/sample-videos/small.mp4")
+        playerItem = AVPlayerItem(url: url1! as URL)
+        player = AVPlayer(playerItem: playerItem!)
+        
+//        for i in 0..<(samplePhotos.count) {
+//                            //                let playerLayer = AVPlayerLayer(player: player!)
+//                //                let xPosition = self.view.frame.width * CGFloat(i)
+//                //                playerLayer.frame = CGRect(x: xPosition, y:0, width: self.scrollView.frame.width, height: self.scrollView.frame.height)
+//                //
+//                //                imageView.frame = playerLayer.videoRect
+//                //                imageView.layer.addSublayer(playerLayer)
+//                //
+//                //                scrollView.contentSize.width = scrollView.frame.width * CGFloat(i+1)
+//                //                scrollView.addSubview(imageView)
+//            
+//            let concurrentQueue = DispatchQueue(label: "queuename", attributes: .concurrent)
+//            concurrentQueue.sync {
+//                let contentView = FeedFullScreenView.instanceFromNib()
+//                contentView.updateData(frame: self.view.frame, imageUrl: self.samplePhotos[i], text: "안녕하세요", index: i)
+//                
+//                self.mainScrollView.contentSize.width = contentView.frame.width * CGFloat(i+1)
+//                self.mainScrollView.addSubview(contentView)
+//            }
+//        }
+        
+        for i in 0..<(samplePhotos.count) {
+            let imageView = UIImageView()
+            self.imageViewArray.append(imageView)
+            let contentScrollView = UIScrollView()
+            contentScrollView.frame = CGRect.init(x: 0, y: 0, width: self.mainScrollView.frame.width, height: self.mainScrollView.frame.height)
+            
+            Alamofire.request(samplePhotos[i])
+                    .downloadProgress(closure: { (progress) in
+                        
+                    }).responseData { response in
+                        
+                        
+                    if let data = response.result.value {
+                        let image = UIImage(data: data)
+                        self.imageArray.append(image!)
+                        imageView.image = image
+                        
+                        imageView.contentMode = .scaleAspectFit
+                        
+                        let height = contentScrollView.frame.width * ((image?.size.height)! / (image?.size.width)!)
+                        imageView.frame = CGRect(x: 0, y:0, width: contentScrollView.frame.width, height: height)
+                        
+                        self.mainScrollView.contentSize.width = contentScrollView.frame.width * CGFloat(self.index+1)
+                        contentScrollView.addSubview(imageView)
+                        
+                        let textView = UITextView()
+                        textView.text = "반갑습니다."
+                        textView.textColor = UIColor.white
+                        textView.backgroundColor = UIColor.ivGreyish
+                        let size = textView.sizeThatFits(CGSize.init(width: self.view.frame.width, height: 9999))
+                        textView.frame = CGRect.init(x: 0, y: imageView.frame.size.height, width: self.view.frame.width, height: size.height)
+                        textView.isScrollEnabled = false
+                        
+                        contentScrollView.addSubview(textView)
+                        contentScrollView.contentSize = CGSize.init(width: self.mainScrollView.frame.width, height: imageView.frame.height + textView.frame.height)
+                        
+                        let xPosition = self.view.frame.width * CGFloat(i)
+                        
+                        if( imageView.frame.height + textView.frame.height < self.mainScrollView.frame.height){
+                            contentScrollView.frame = CGRect.init(x: xPosition, y: 0, width: self.mainScrollView.frame.width, height: imageView.frame.size.height + textView.frame.size.height)
+                            contentScrollView.center = CGPoint.init(x: contentScrollView.center.x, y: self.view.center.y)
+                        } else {
+                            contentScrollView.frame = CGRect.init(x: xPosition, y: 0, width: self.mainScrollView.frame.width, height: self.mainScrollView.frame.height)
+                        }
+                        
+                        self.mainScrollView.addSubview(contentScrollView)
+                        self.index += 1
+                    }
+                }
+            }
+        }
     
     func canRotate() -> Void {
     }
@@ -180,40 +205,9 @@ class FeedFullScreenViewController: UIViewController {
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-//        if size.height < size.width {
-//            // Landscape
-//            let subViews = self.scrollView.subviews
-//            var i = 0
-//            
-//            for subView in subViews {
-//                let xPosition = self.view.frame.width * CGFloat(i)
-//                i += 1
-//                subView.contentMode = .scaleAspectFit
-//                subView.frame = CGRect(x: xPosition, y:0, width: self.scrollView.frame.height, height: self.scrollView.frame.width)
-//                
-//               
-//                print("SubView ===========  \(subView) \(subView.frame)")
-//            }
-//
-//            print("Landscape")
-//        } else {
-//            // Portrait
-//            let subViews = self.scrollView.subviews
-//             var i = 0
-//            
-//            for subView in subViews {
-//                let xPosition = self.view.frame.width * CGFloat(i)
-//                i += 1
-//                
-//                subView.contentMode = .scaleAspectFit
-//                subView.frame = CGRect(x: xPosition, y:0, width: self.scrollView.frame.width, height: self.scrollView.frame.height)
-//                
-//                
-//                print("SubView ===========  \(subView) \(subView.frame)")
-//            }
-//            print("Portrait")
-//        }
-//
+        if size.height < size.width {
+                // Landscape
+        }
     }
 }
 

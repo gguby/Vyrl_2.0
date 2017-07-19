@@ -280,6 +280,7 @@
                             <constraint firstItem="jId-fV-qHA" firstAttribute="leading" secondItem="LXy-cD-Otz" secondAttribute="leading" id="uKP-e8-wiu"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
                         <outlet property="mainScrollView" destination="jId-fV-qHA" id="8kb-IA-MUx"/>
                         <outlet property="pageNumberLabel" destination="GE5-7W-BNp" id="pFp-Sj-jyh"/>
