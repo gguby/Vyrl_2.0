@@ -53,8 +53,20 @@ class WriteMediaViewConroller : UIViewController {
             nc.fullScreenSwipeUp = true
             nc.isNavigationBarHidden = true
         }
+
         
-        self.getAllAlbum()
+        if PhotoAutorizationStatusCheck() {
+            self.getAllAlbum()
+        } else {
+            PHPhotoLibrary.requestAuthorization({ (status) in
+                if ( status == PHAuthorizationStatus.authorized ){
+                    
+                    DispatchQueue.main.async{
+                        self.getAllAlbum()
+                    }                    
+                }
+            })
+        }
         
         self.enabledAddBtn(enabled: false)
     }
@@ -62,7 +74,9 @@ class WriteMediaViewConroller : UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.getPhotosAndVideos(self.currentSubType)
+        if PhotoAutorizationStatusCheck() {
+            self.getPhotosAndVideos(self.currentSubType)
+        }
     }
     
     func enabledAddBtn(enabled : Bool){
