@@ -7,36 +7,36 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>661533100505-v67mcd9o5u3ctgvpfq4rk7jm0t89271b.apps.googleusercontent.com</string>
+	<string>288006802344-79cb34bij6rc33sfa238ghfid2kqc240.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.661533100505-v67mcd9o5u3ctgvpfq4rk7jm0t89271b</string>
+	<string>com.googleusercontent.apps.288006802344-79cb34bij6rc33sfa238ghfid2kqc240</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDBEk1_kWipMamuwiPMzKPn56R9N-WDeAA</string>
-	<key>TRACKING_ID</key>
-	<string>UA-69299126-3</string>
+	<string>AIzaSyA3i--f1DF8LHGXJDnvwOblptE-SMHgOPM</string>
 	<key>GCM_SENDER_ID</key>
-	<string>661533100505</string>
+	<string>288006802344</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>vyrl.smt.com</string>
+	<string>com.smt.vyrl</string>
 	<key>PROJECT_ID</key>
-	<string>vyrl-project</string>
+	<string>vyrl-6be4c</string>
 	<key>STORAGE_BUCKET</key>
-	<string>vyrl-project.appspot.com</string>
+	<string>vyrl-6be4c.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
 	<true/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true/>
+	<false/>
 	<key>IS_GCM_ENABLED</key>
 	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:661533100505:ios:7493e7094d99da17</string>
+	<string>1:288006802344:ios:435b9f12d71757be</string>
 	<key>DATABASE_URL</key>
-	<string>https://vyrl-project.firebaseio.com</string>
+	<string>https://vyrl-6be4c.firebaseio.com</string>
+	<key>TRACKING_ID</key>
+	<string>UA-102838629-1</string>
 </dict>
 </plist>
