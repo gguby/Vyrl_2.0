@@ -163,8 +163,6 @@ class WriteMediaViewConroller : UIViewController {
                 let count : Int = collection.photosCount
                 
                 let videoCount : Int = collection.videoCount
-                
-                print(collection.localizedTitle!)
 
                 if collection.assetCollectionSubtype == .smartAlbumUserLibrary {
                     cameraRollAsset = collection
@@ -173,8 +171,6 @@ class WriteMediaViewConroller : UIViewController {
                 if (count > 0 || videoCount > 0){
                     if collection.assetCollectionSubtype.rawValue != 1000000201 {
                         self.mediaArray.append(collection)
-                        print(collection.photosCount)
-                        print(collection.videoCount)
                     }
                 }
             }
@@ -568,12 +564,10 @@ extension WriteMediaViewConroller : UITableViewDelegate, UITableViewDataSource {
         cell.assetID = asset.assetID
         cell.title.text = asset.localizedTitle
         
-        if cell.mediaType == .image {
-            cell.count.text = "\(asset.photosCount)"
-        }else {
-            cell.count.text = "\(asset.videoCount)"
-        }
-
+        let count = asset.photosCount + asset.videoCount
+        
+        cell.count.text = "\(count)"
+        
         cell.assetCollectionSubtype = asset.assetCollectionSubtype
         
         return cell

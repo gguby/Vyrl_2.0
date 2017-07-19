@@ -63,6 +63,8 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
     
     @IBAction func post(_ sender: UIButton) {
         
+        textView.resignFirstResponder()
+        
         let parameters :[String:String] = [
             "content": textView.text
         ]
