@@ -155,31 +155,37 @@ class WriteMediaViewConroller : UIViewController {
         
         let fetchResult = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: fetchOptions)
         
-        var min = 99
-
+        var cameraRollAsset : PHAssetCollection!
+        
         fetchResult.enumerateObjects({ (collection, start, stop) in
             
             if collection.estimatedAssetCount != 0 {
                 let count : Int = collection.photosCount
                 
                 let videoCount : Int = collection.videoCount
+                
+                print(collection.localizedTitle!)
+
+                if collection.assetCollectionSubtype == .smartAlbumUserLibrary {
+                    cameraRollAsset = collection
+                }
    
                 if (count > 0 || videoCount > 0){
-                    if start < min {
-                        min = start
+                    if collection.assetCollectionSubtype.rawValue != 1000000201 {
+                        self.mediaArray.append(collection)
+                        print(collection.photosCount)
+                        print(collection.videoCount)
                     }
-                    
-                    self.mediaArray.append(collection)
                 }
             }
         })
 
-        let result : PHAssetCollection = fetchResult.object(at: min)
-        let title = result.localizedTitle
+        let title = cameraRollAsset.localizedTitle
+
         self.mediaTitle.text = title
         delegate?.albumName(title: title!)
         
-        self.getPhotosAndVideos(result.assetCollectionSubtype)
+        self.getPhotosAndVideos(cameraRollAsset.assetCollectionSubtype)
         mediaTable.tableFooterView = UIView(frame: .zero)
     }
     
