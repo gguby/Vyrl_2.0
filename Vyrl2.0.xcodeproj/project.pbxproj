@@ -20,15 +20,6 @@
 		8F5165D11ED6A8A900EC468B /* ProfilePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5165D01ED6A8A900EC468B /* ProfilePhotoViewController.swift */; };
 		8F57B73F1F186E44009FD0EA /* FeedFullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F57B73E1F186E44009FD0EA /* FeedFullScreenViewController.swift */; };
 		8F57B7521F18A30B009FD0EA /* PagingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F57B7511F18A30B009FD0EA /* PagingScrollView.swift */; };
-		8F57B75C1F18A39B009FD0EA /* github1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F57B7531F18A39B009FD0EA /* github1.png */; };
-		8F57B75D1F18A39B009FD0EA /* github2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F57B7541F18A39B009FD0EA /* github2.png */; };
-		8F57B75E1F18A39B009FD0EA /* github3.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F57B7551F18A39B009FD0EA /* github3.png */; };
-		8F57B75F1F18A39B009FD0EA /* github4.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F57B7561F18A39B009FD0EA /* github4.png */; };
-		8F57B7601F18A39B009FD0EA /* github5.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F57B7571F18A39B009FD0EA /* github5.png */; };
-		8F57B7611F18A39B009FD0EA /* github6.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F57B7581F18A39B009FD0EA /* github6.png */; };
-		8F57B7621F18A39B009FD0EA /* github7.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F57B7591F18A39B009FD0EA /* github7.png */; };
-		8F57B7631F18A39B009FD0EA /* github8.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F57B75A1F18A39B009FD0EA /* github8.png */; };
-		8F57B7641F18A39B009FD0EA /* github9.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F57B75B1F18A39B009FD0EA /* github9.png */; };
 		8F57B7661F18A4D3009FD0EA /* ZoomingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F57B7651F18A4D3009FD0EA /* ZoomingScrollView.swift */; };
 		8F62CC151F00EC330069ACFE /* EmoticonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F62CC141F00EC330069ACFE /* EmoticonView.swift */; };
 		8F829E7C1EFB6648001D418F /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F829E7B1EFB6648001D418F /* MyProfileViewController.swift */; };
@@ -96,15 +87,6 @@
 		8F5165D01ED6A8A900EC468B /* ProfilePhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePhotoViewController.swift; sourceTree = "<group>"; };
 		8F57B73E1F186E44009FD0EA /* FeedFullScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedFullScreenViewController.swift; sourceTree = "<group>"; };
 		8F57B7511F18A30B009FD0EA /* PagingScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagingScrollView.swift; sourceTree = "<group>"; };
-		8F57B7531F18A39B009FD0EA /* github1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = github1.png; sourceTree = "<group>"; };
-		8F57B7541F18A39B009FD0EA /* github2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = github2.png; sourceTree = "<group>"; };
-		8F57B7551F18A39B009FD0EA /* github3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = github3.png; sourceTree = "<group>"; };
-		8F57B7561F18A39B009FD0EA /* github4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = github4.png; sourceTree = "<group>"; };
-		8F57B7571F18A39B009FD0EA /* github5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = github5.png; sourceTree = "<group>"; };
-		8F57B7581F18A39B009FD0EA /* github6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = github6.png; sourceTree = "<group>"; };
-		8F57B7591F18A39B009FD0EA /* github7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = github7.png; sourceTree = "<group>"; };
-		8F57B75A1F18A39B009FD0EA /* github8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = github8.png; sourceTree = "<group>"; };
-		8F57B75B1F18A39B009FD0EA /* github9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = github9.png; sourceTree = "<group>"; };
 		8F57B7651F18A4D3009FD0EA /* ZoomingScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomingScrollView.swift; sourceTree = "<group>"; };
 		8F62CC141F00EC330069ACFE /* EmoticonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonView.swift; sourceTree = "<group>"; };
 		8F829E7B1EFB6648001D418F /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
@@ -190,15 +172,6 @@
 		CE0898231ECD70B9000D6D6C /* Feed */ = {
 			isa = PBXGroup;
 			children = (
-				8F57B7531F18A39B009FD0EA /* github1.png */,
-				8F57B7541F18A39B009FD0EA /* github2.png */,
-				8F57B7551F18A39B009FD0EA /* github3.png */,
-				8F57B7561F18A39B009FD0EA /* github4.png */,
-				8F57B7571F18A39B009FD0EA /* github5.png */,
-				8F57B7581F18A39B009FD0EA /* github6.png */,
-				8F57B7591F18A39B009FD0EA /* github7.png */,
-				8F57B75A1F18A39B009FD0EA /* github8.png */,
-				8F57B75B1F18A39B009FD0EA /* github9.png */,
 				CE0898241ECD70C7000D6D6C /* FeedViewController.swift */,
 				8F4C09281EE528840026D49F /* FeedStyle.storyboard */,
 				8F9AF9901EE800E700DE069E /* FeedTableViewController.swift */,
@@ -454,25 +427,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE29B1CD1ECD6161003F4D2E /* Feed.storyboard in Resources */,
-				8F57B7631F18A39B009FD0EA /* github8.png in Resources */,
-				8F57B75E1F18A39B009FD0EA /* github3.png in Resources */,
-				8F57B7601F18A39B009FD0EA /* github5.png in Resources */,
 				CE29B1D01ECD6161003F4D2E /* GoogleService-Info.plist in Resources */,
-				8F57B75C1F18A39B009FD0EA /* github1.png in Resources */,
 				CE1340A41EDD3C6D00EA330F /* Setting.storyboard in Resources */,
-				8F57B7641F18A39B009FD0EA /* github9.png in Resources */,
-				8F57B75F1F18A39B009FD0EA /* github4.png in Resources */,
 				CE29B1AA1ECD5FEE003F4D2E /* LaunchScreen.storyboard in Resources */,
 				8F4C09291EE528840026D49F /* FeedStyle.storyboard in Resources */,
 				CE29B1CE1ECD6161003F4D2E /* Login.storyboard in Resources */,
-				8F57B75D1F18A39B009FD0EA /* github2.png in Resources */,
 				CE29B1D11ECD6161003F4D2E /* Search.storyboard in Resources */,
 				CE29B1A71ECD5FEE003F4D2E /* Assets.xcassets in Resources */,
-				8F57B7611F18A39B009FD0EA /* github6.png in Resources */,
 				CE29B1CC1ECD6161003F4D2E /* Fan.storyboard in Resources */,
 				CE29B1A51ECD5FEE003F4D2E /* Main.storyboard in Resources */,
 				CEF77CB31EDFC08A00884F2C /* Write.storyboard in Resources */,
-				8F57B7621F18A39B009FD0EA /* github7.png in Resources */,
 				CE29B1CF1ECD6161003F4D2E /* My.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

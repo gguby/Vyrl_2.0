@@ -44,11 +44,11 @@ class FeedViewController: UIViewController {
         let url = URL.init(string: Constants.VyrlAPIURL.feedWrite)
         
         Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Article]>) in
-            let array = response.result.value ?? []
-            
-            for article in array {
-                print(article.id)
-            }
+//            let array = response.result.value ?? []
+//            
+//            for article in array {
+//                print(article.id)
+//            }
         }
     }
 }
