@@ -26,13 +26,16 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var postBtn: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var location: UILabel!
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var textViewHeight: NSLayoutConstraint!
     
     var isSelectedMedia : Bool = false
     var selectedAssetArray = [AVAsset]()
     var albumTitle : String!
+    var currentPlace : Place!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -300,7 +303,12 @@ extension WriteViewController : WriteMdeiaDelegate, UIImagePickerControllerDeleg
     }
     
     func openLocationView(){
-        print("open Location")
+        let storyboard = UIStoryboard(name:"Write", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "Location") as! LocationViewController
+        controller.delegate = self
+        controller.currentPlace = self.currentPlace
+        
+        self.present(controller, animated: true, completion: nil)
     }
     
     func completeAddMedia(array : [AVAsset]) {
@@ -448,6 +456,14 @@ extension WriteViewController : UITextViewDelegate {
 
         return true
     }
+    
+    func textViewDidChange(_ textView: UITextView){
+        let h = ceil(textView.contentSize.height)
+        if h != textViewHeight.constant {
+            textViewHeight.constant = h
+            textView.setContentOffset(CGPoint.init(x: 0, y: 0), animated: true)
+        }
+    }
 }
 
 extension WriteViewController : UICollectionViewDataSource, UICollectionViewDelegate {
@@ -542,7 +558,12 @@ class UploadMediaPhotoCell : UICollectionViewCell , TOCropViewControllerDelegate
     }
 }
 
-
+extension WriteViewController : LocationDelegate {
+    func addLocationText(place : Place) {
+        self.currentPlace = place
+        self.location.attributedText = place.attributeString()
+    }
+}
 
 class UploadMediaVideoCell : UICollectionViewCell {
     @IBOutlet weak var photo: UIImageView!

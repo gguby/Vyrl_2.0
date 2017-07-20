@@ -235,22 +235,34 @@
                                                 </connections>
                                             </collectionView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="글을 입력해 주세요" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="2Dl-XR-Rdf">
-                                                <rect key="frame" x="15" y="194" width="345" height="140"/>
+                                                <rect key="frame" x="15" y="194" width="345" height="40"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="140" id="TS6-jE-hwK"/>
+                                                    <constraint firstAttribute="height" constant="40" id="TS6-jE-hwK"/>
                                                 </constraints>
                                                 <color key="textColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JiU-du-Qg9">
+                                                <rect key="frame" x="15" y="260" width="345" height="14.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="14.5" id="BI8-Ju-X1r"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="JiU-du-Qg9" secondAttribute="trailing" constant="15" id="4Lv-tc-QyN"/>
+                                            <constraint firstItem="JiU-du-Qg9" firstAttribute="leading" secondItem="9Xk-L8-o3j" secondAttribute="leading" constant="15" id="FEx-zL-Wi8"/>
                                             <constraint firstItem="zN6-gc-FbD" firstAttribute="top" secondItem="9Xk-L8-o3j" secondAttribute="top" constant="20" id="FdF-en-M57"/>
                                             <constraint firstItem="2Dl-XR-Rdf" firstAttribute="leading" secondItem="9Xk-L8-o3j" secondAttribute="leading" constant="15" id="IZV-9i-omZ"/>
                                             <constraint firstAttribute="trailing" secondItem="2Dl-XR-Rdf" secondAttribute="trailing" constant="15" id="Xus-rn-VO7"/>
                                             <constraint firstItem="zN6-gc-FbD" firstAttribute="leading" secondItem="9Xk-L8-o3j" secondAttribute="leading" constant="15" id="crt-ri-Gb4"/>
+                                            <constraint firstItem="JiU-du-Qg9" firstAttribute="top" secondItem="2Dl-XR-Rdf" secondAttribute="bottom" constant="26" id="kfw-os-PC2"/>
                                             <constraint firstAttribute="trailing" secondItem="zN6-gc-FbD" secondAttribute="trailing" id="lGq-ph-zfY"/>
                                             <constraint firstItem="2Dl-XR-Rdf" firstAttribute="top" secondItem="zN6-gc-FbD" secondAttribute="bottom" constant="28" id="s3G-sN-zzu"/>
                                         </constraints>
@@ -286,9 +298,11 @@
                     <connections>
                         <outlet property="collectionView" destination="zN6-gc-FbD" id="tKW-9v-3UU"/>
                         <outlet property="collectionViewHeight" destination="Fcc-Ov-6Fq" id="j5E-XD-y55"/>
+                        <outlet property="location" destination="JiU-du-Qg9" id="6Bx-Um-vNr"/>
                         <outlet property="postBtn" destination="jaX-uA-xsT" id="yiT-fE-D7o"/>
                         <outlet property="scrollView" destination="jfM-K4-9gs" id="eJp-cj-GbQ"/>
                         <outlet property="textView" destination="2Dl-XR-Rdf" id="lwL-jm-kow"/>
+                        <outlet property="textViewHeight" destination="TS6-jE-hwK" id="oMH-TA-B2R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fAc-Hq-BBZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -298,7 +312,7 @@
         <!--Location View Controller-->
         <scene sceneID="u6s-Or-RMJ">
             <objects>
-                <viewController id="Sw5-H8-65r" customClass="LocationViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Location" id="Sw5-H8-65r" customClass="LocationViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cOs-66-WXv"/>
                         <viewControllerLayoutGuide type="bottom" id="Kl2-vv-skn"/>
@@ -344,7 +358,7 @@
                                             <constraint firstAttribute="height" constant="45" id="CDz-ys-iVS"/>
                                         </constraints>
                                         <inset key="contentEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="Button" image="icon_gps_01_off"/>
+                                        <state key="normal" title="Button" image="sample_barcode"/>
                                         <connections>
                                             <action selector="refreshLocation:" destination="Sw5-H8-65r" eventType="touchUpInside" id="rTa-Nb-S8n"/>
                                         </connections>
@@ -368,7 +382,7 @@
                                 <rect key="frame" x="0.0" y="65" width="375" height="602"/>
                                 <color key="backgroundColor" red="0.87450980392156863" green="0.87058823529411766" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="SAW-iu-VD1" customClass="CurrentPlaceCell" customModule="Vyrl2_0" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CurrentPlaceCell" id="SAW-iu-VD1" customClass="CurrentPlaceCell" customModule="Vyrl2_0" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SAW-iu-VD1" id="FUM-7v-lHg">
@@ -428,7 +442,7 @@
                                             <outlet property="title" destination="GUo-TM-l3x" id="pTn-WJ-MCf"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="GfM-9u-cr8" customClass="PlaceCell" customModule="Vyrl2_0" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PlaceCell" id="GfM-9u-cr8" customClass="PlaceCell" customModule="Vyrl2_0" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="83" width="375" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GfM-9u-cr8" id="9w1-rA-Dnd">
@@ -547,7 +561,7 @@
                                         </constraints>
                                         <state key="normal" image="icon_map_01_off"/>
                                         <connections>
-                                            <segue destination="Sw5-H8-65r" kind="presentation" id="vJj-YE-opP"/>
+                                            <action selector="openMap:" destination="f99-qz-saJ" eventType="touchUpInside" id="2xs-3J-tLG"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lym-uu-ieX" customClass="SmallButton" customModule="Vyrl2_0" customModuleProvider="target">
@@ -867,12 +881,12 @@
         <image name="icon_cancel_05" width="17" height="17"/>
         <image name="icon_cancel_06" width="20" height="20"/>
         <image name="icon_check_06_on" width="20" height="20"/>
-        <image name="icon_gps_01_off" width="15" height="15"/>
         <image name="icon_map_01_off" width="21" height="21"/>
         <image name="icon_map_02_on" width="13" height="16"/>
         <image name="icon_mute_01_on" width="16" height="12"/>
         <image name="icon_play_03" width="5" height="8"/>
         <image name="icon_txt_01_off" width="21" height="21"/>
         <image name="icon_write_01" width="28" height="28"/>
+        <image name="sample_barcode" width="85" height="25"/>
     </resources>
 </document>
