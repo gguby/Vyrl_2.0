@@ -12,7 +12,7 @@
         <!--Feed Table View Controller-->
         <scene sceneID="AN8-KD-5tL">
             <objects>
-                <viewController storyboardIdentifier="FeedTableViewController" id="QWh-2p-Qye" customClass="FeedTableViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="feedTable" id="QWh-2p-Qye" customClass="FeedTableViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Qv9-mE-9rf"/>
                         <viewControllerLayoutGuide type="bottom" id="4Ae-rJ-M4v"/>

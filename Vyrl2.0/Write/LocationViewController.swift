@@ -78,7 +78,7 @@ extension LocationViewController : CLLocationManagerDelegate {
             self.locationManager.stopUpdatingLocation()
             self.currentCLLocation = location
             
-            self.fetchPlaces(location.coordinate.latitude, longitude: location.coordinate.longitude, radius: 500, key: Constants.GoogleMapsAPIServerKey)
+            self.fetchPlaces(location.coordinate.latitude, longitude: location.coordinate.longitude, radius: 150, key: Constants.GoogleMapsAPIServerKey)
         }
     }
     
@@ -167,8 +167,9 @@ extension LocationViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell : PlaceCell = tableView.cellForRow(at: indexPath) as! PlaceCell
-        var place : Place = cell.place
+        
+        var place = places[indexPath.row]
+        
         place.isSelectedCell = true
         
         self.delegate.addLocationText(place: place)
@@ -180,6 +181,7 @@ extension LocationViewController : UITableViewDelegate, UITableViewDataSource {
 extension LocationViewController : PlaceCellDelegate {
     func remove() {
         self.places.remove(at: 0)
+        self.currentPlace = nil
         self.tableView.reloadData()
     }
 }

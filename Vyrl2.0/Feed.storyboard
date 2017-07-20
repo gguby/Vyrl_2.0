@@ -47,13 +47,7 @@
                                     <constraint firstAttribute="height" constant="1" id="kSl-2A-PzA"/>
                                 </constraints>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AEJ-wP-T1Q">
-                                <rect key="frame" x="0.0" y="66" width="375" height="552"/>
-                                <connections>
-                                    <segue destination="BRh-da-hhC" kind="embed" id="x44-um-aIO"/>
-                                </connections>
-                            </containerView>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RIH-dH-w9m" userLabel="NoDataView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RIH-dH-w9m" userLabel="NoDataView">
                                 <rect key="frame" x="0.0" y="66" width="375" height="552"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_nofeed_01" translatesAutoresizingMaskIntoConstraints="NO" id="dyC-t9-7ke">
@@ -115,6 +109,9 @@
                                     <constraint firstAttribute="trailing" secondItem="5JM-Jr-nv6" secondAttribute="trailing" constant="15" id="yGf-Ai-GaA"/>
                                 </constraints>
                             </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AEJ-wP-T1Q">
+                                <rect key="frame" x="0.0" y="66" width="375" height="552"/>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -139,6 +136,9 @@
                     </tabBarItem>
                     <navigationItem key="navigationItem" id="fCh-ef-yzS"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="containerView" destination="AEJ-wP-T1Q" id="ijI-hK-NCY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lLd-qn-DHr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -148,7 +148,7 @@
         <scene sceneID="zbW-6X-bXo">
             <objects>
                 <navigationController navigationBarHidden="YES" id="AqP-hB-Wsq" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wxq-cz-Xzg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="wxq-cz-Xzg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

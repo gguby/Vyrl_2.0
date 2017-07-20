@@ -72,7 +72,7 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
             "content": textView.text
         ]
         
-        let uri = Constants.VyrlAPIURL.feedWrite
+        let uri = Constants.VyrlFeedURL.FEED
         var fileName : String!
         
         let queryUrl = URL.init(string: uri, parameters: parameters)
@@ -111,14 +111,12 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
                     self.view.isUserInteractionEnabled = true
                     
                     upload.uploadProgress(closure: { (progress) in
-                        print(progress)
+                        
                     })
                     
                     upload.responseString { response in
-                        print(response.result)
-                        print((response.response?.statusCode)!)
+
                         print(response)
-                        
                         if ((response.response?.statusCode)! == 200){
                             self.dismiss(animated: true, completion: nil)
                         }

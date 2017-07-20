@@ -28,10 +28,6 @@ extension UIViewController
         self.pop()
     }
     
-    func goSearch(){
-        tabBarController?.selectedIndex = 3
-    }
-    
     func pushView(storyboardName : String, controllerName : String ){
         let storyboard = UIStoryboard(name:storyboardName, bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: controllerName)
@@ -90,7 +86,6 @@ class ViewController: UITabBarController , UITabBarControllerDelegate {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
     
     override func viewWillLayoutSubviews() {
         var tabFrame = self.tabBar.frame

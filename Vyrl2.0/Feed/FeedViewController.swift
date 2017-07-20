@@ -15,41 +15,32 @@ import AlamofireObjectMapper
 
 class FeedViewController: UIViewController {
     
+    @IBOutlet weak var containerView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
        
         registerSwipe()
-        print("Feed");
         
-        LoginManager.sharedInstance.checkPush(viewConroller: self)
+        LoginManager.sharedInstance.checkPush(viewConroller: self)        
         
-        self.getAllFeed()
+        self.setupFeedTableView()
+    }
+    
+    func setupFeedTableView (){
+        if LoginManager.sharedInstance.isExistFollower == false {
+            let storyboard = UIStoryboard(name: "FeedStyle", bundle: nil)
+            let controller = storyboard.instantiateViewController(withIdentifier: "feedTable")
+            addChildViewController(controller)
+            containerView.addSubview(controller.view)
+            controller.didMove(toParentViewController: self)
+        }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if(segue.identifier == "Test") {
-            let secondViewController = segue.destination as! FeedTableViewController
-        }
-    }
-    
-    func getAllFeed(){
-        
-        let url = URL.init(string: Constants.VyrlAPIURL.feedWrite)
-        
-        Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Article]>) in
-//            let array = response.result.value ?? []
-//            
-//            for article in array {
-//                print(article.id)
-//            }
-        }
     }
 }
 

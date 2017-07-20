@@ -32,7 +32,7 @@ class TermsOfUseViewController: UIViewController {
     }
     
     func getTermsOfUse() {
-        let uri = Constants.VyrlAPIURL.baseURL + "/terms/USE/KO"
+        let uri = Constants.VyrlAPIConstants.baseURL + "/terms/USE/KO"
         
         Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON(completionHandler: {
             response in

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+
 
 class FeedTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -71,6 +73,19 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         return cell
     }
 
+    func getAllFeed(){
+        
+        let url = URL.init(string: Constants.VyrlFeedURL.FEED)
+        
+        Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Article]>) in
+            //            let array = response.result.value ?? []
+            //
+            //            for article in array {
+            //                print(article.id)
+            //            }
+        }
+    }
+
     
 
     /*
@@ -84,6 +99,7 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
     */
 
 }
+
 
 class FeedTableCell : UITableViewCell {
     

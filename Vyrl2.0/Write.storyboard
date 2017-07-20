@@ -565,10 +565,10 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lym-uu-ieX" customClass="SmallButton" customModule="Vyrl2_0" customModuleProvider="target">
-                                        <rect key="frame" x="349" y="19" width="11" height="10"/>
+                                        <rect key="frame" x="334" y="1" width="41" height="45"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="10" id="OnW-uP-RUA"/>
-                                            <constraint firstAttribute="width" constant="11" id="ZlF-w7-2OG"/>
+                                            <constraint firstAttribute="height" constant="45" id="OnW-uP-RUA"/>
+                                            <constraint firstAttribute="width" constant="41" id="ZlF-w7-2OG"/>
                                         </constraints>
                                         <state key="normal" title="Button" image="icon_arrow_06_close"/>
                                         <connections>
@@ -582,8 +582,8 @@
                                     <constraint firstItem="Rry-VY-1Cv" firstAttribute="top" secondItem="fyI-Eq-wzR" secondAttribute="bottom" id="9oI-dh-nX7"/>
                                     <constraint firstItem="fyI-Eq-wzR" firstAttribute="width" secondItem="sUu-ql-f22" secondAttribute="width" id="CjQ-hD-uCE"/>
                                     <constraint firstItem="fyI-Eq-wzR" firstAttribute="leading" secondItem="sUu-ql-f22" secondAttribute="leading" id="DAy-GQ-Cc5"/>
-                                    <constraint firstAttribute="trailing" secondItem="lym-uu-ieX" secondAttribute="trailing" constant="15" id="GJR-3u-eLv"/>
-                                    <constraint firstItem="lym-uu-ieX" firstAttribute="top" secondItem="fyI-Eq-wzR" secondAttribute="bottom" constant="18" id="IM1-JF-DtP"/>
+                                    <constraint firstAttribute="trailing" secondItem="lym-uu-ieX" secondAttribute="trailing" id="GJR-3u-eLv"/>
+                                    <constraint firstItem="lym-uu-ieX" firstAttribute="top" secondItem="fyI-Eq-wzR" secondAttribute="bottom" id="IM1-JF-DtP"/>
                                     <constraint firstItem="fyI-Eq-wzR" firstAttribute="top" secondItem="sUu-ql-f22" secondAttribute="top" id="QXI-rp-JMP"/>
                                     <constraint firstItem="QKw-5K-DGx" firstAttribute="top" secondItem="fyI-Eq-wzR" secondAttribute="bottom" id="RRu-71-1vE"/>
                                     <constraint firstItem="Rry-VY-1Cv" firstAttribute="leading" secondItem="sUu-ql-f22" secondAttribute="leading" constant="3" id="T77-92-RsS"/>

@@ -22,12 +22,30 @@ struct Constants {
     }
     
     struct VyrlAPIURL{
-        static let baseURL = "http://api.dev2nd.vyrl.com:8080/"
-        static let MYPROFILE = baseURL + "users/profile/me"
-        static let changeProfile = baseURL + "users/profile"
-        static let notices = baseURL + "notices"
-        static let faqs = baseURL + "faqs"
-        static let feedWrite = baseURL + "feeds/articles"
+        static let MYPROFILE = VyrlAPIConstants.baseURL + "users/profile/me"
+        static let changeProfile = VyrlAPIConstants.baseURL + "users/profile"
+        static let notices = VyrlAPIConstants.baseURL + "notices"
+        static let faqs = VyrlAPIConstants.baseURL + "faqs"
+    }
+    
+    struct VyrlFeedURL {
+        static let FEED = VyrlAPIConstants.baseURL + "feeds"
+        
+        static func deleteFeedLike(articleId :String)-> String{
+            return VyrlAPIConstants.baseURL + "feeds/likes/" + articleId
+        }
+        
+        static func usersFeedLike(articleId :String)-> String{
+            return VyrlAPIConstants.baseURL + "feeds/users/" + articleId + "/likes"
+        }
+        
+        static func feed(articleId :String)-> String{
+            return VyrlAPIConstants.baseURL + "feeds/" + articleId
+        }
+        
+        static func feedComment(articleId:String)-> String{
+            return VyrlAPIConstants.baseURL + "feeds/" + articleId + "/comments"
+        }
     }
     
     struct VyrlAPIConstants{

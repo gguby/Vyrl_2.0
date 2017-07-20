@@ -62,40 +62,35 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
             return
         }
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let mainController = storyboard.instantiateInitialViewController()!
+        let uri = Constants.VyrlAPIConstants.baseURL + "/follows/exists"
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.window?.rootViewController = mainController
-        
-        return
-        
-//        let uri = Constants.VyrlAPIConstants.baseURL + "/follow"
-//        
-//        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: LoginManager.sharedInstance.getHeader()).responseJSON(completionHandler: {
-//            response in switch response.result {
-//            case .success(let json):
-//                
-//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                let mainController = storyboard.instantiateInitialViewController()!
-//                
-//                let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//                appDelegate.window?.rootViewController = mainController
-//                
-//                print(json)
-//                
-//                let jsonData = json as! NSDictionary
-//                
-//                let isExistFollow = jsonData["exist"] as! Bool
-//                
-//                if ( isExistFollow == true ){
-//                    self.goSearch()
-//                }
-//                
-//            case .failure(let error):
-//                print(error)
-//            }
-//        })
+        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: LoginManager.sharedInstance.getHeader()).responseJSON(completionHandler: {
+            response in switch response.result {
+            case .success(let json):
+                
+                DispatchQueue.main.async {
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let mainController : ViewController = storyboard.instantiateInitialViewController()! as! ViewController
+                    
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    
+                    let jsonData = json as! NSDictionary
+                    
+                    let isExistFollow = jsonData["exist"] as! Bool
+                    
+                    LoginManager.sharedInstance.isExistFollower = isExistFollow
+                    
+                    if ( isExistFollow == true ){
+                        mainController.selectedIndex = 3
+                    }
+                    
+                     appDelegate.window?.rootViewController = mainController
+                }
+                
+            case .failure(let error):
+                print(error)
+            }
+        })
         
     }
     

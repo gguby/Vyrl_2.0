@@ -22,6 +22,8 @@ class LoginManager{
     
     private var _login:Bool = false
     
+    var isExistFollower = false
+    
     var isLogin: Bool {
         
         get {
