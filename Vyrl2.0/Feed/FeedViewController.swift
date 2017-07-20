@@ -7,11 +7,7 @@
 //
 
 import UIKit
-import RxSwift
 
-import ObjectMapper
-import Alamofire
-import AlamofireObjectMapper
 
 class FeedViewController: UIViewController {
     
@@ -44,23 +40,3 @@ class FeedViewController: UIViewController {
     }
 }
 
-
-struct Article : Mappable {
-    
-    var id : Int!
-    var content : String!
-    
-    var images : [String]!
-    var videos : [String]!
-    
-    init?(map: Map) {
-        
-    }
-    
-    mutating func mapping(map: Map){
-        id <- map["id"]
-        content <- map["content"]
-        images <- map["images"]
-        videos <- map["videos"]
-    }
-}

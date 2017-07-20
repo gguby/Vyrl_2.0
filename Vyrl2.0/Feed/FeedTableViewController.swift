@@ -8,6 +8,9 @@
 
 import UIKit
 import Alamofire
+import ObjectMapper
+import Alamofire
+import AlamofireObjectMapper
 
 
 class FeedTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -24,6 +27,8 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         self.tableView.estimatedRowHeight = 400
         tableView.tableFooterView = UIView(frame: .zero)
         tableView.reloadData()
+        
+        self.getAllFeed()
     }
 
     override func didReceiveMemoryWarning() {
@@ -78,14 +83,13 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         let url = URL.init(string: Constants.VyrlFeedURL.FEED)
         
         Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Article]>) in
-            //            let array = response.result.value ?? []
-            //
-            //            for article in array {
-            //                print(article.id)
-            //            }
+                let array = response.result.value ?? []
+            
+                for article in array {
+                    print(article.id)
+                }
         }
     }
-
     
 
     /*
@@ -100,6 +104,32 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
 
 }
 
+struct Article : Mappable {
+    
+    var id : Int!
+    var content : String!
+    
+    var images : [String]!
+    var videos : [String]!
+    
+    var comments : [String]!
+    var cntComment : Int!
+    var cntLike : Int!
+    
+    init?(map: Map) {
+        
+    }
+    
+    mutating func mapping(map: Map){
+        id <- map["id"]
+        content <- map["content"]
+        images <- map["images"]
+        videos <- map["videos"]
+        cntComment <- map["cntComment"]
+        cntLike <- map["cntLike"]
+        comments <- map["comments"]
+    }
+}
 
 class FeedTableCell : UITableViewCell {
     
