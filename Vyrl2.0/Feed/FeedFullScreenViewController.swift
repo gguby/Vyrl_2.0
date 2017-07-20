@@ -25,6 +25,7 @@ class FeedFullScreenViewController: UIViewController {
     
     var currentPage : Int = 0;
     var index : Int = 0;
+    var isRotate = false
     
     let samplePhotos = ["https://cdn2.vyrl.com/vyrl/images/post/_temp/temp/4ec6d08055c4ebcc76494080bbcd4ee2.jpg",
                         "https://cdn2.vyrl.com/vyrl/images/post/_temp/54841/cfc79b7201ff0caae5fb1f25ac7145a8.jpg",
@@ -32,6 +33,10 @@ class FeedFullScreenViewController: UIViewController {
                         "https://cdn2.vyrl.com/vyrl/images/post/_temp/temp/77ee0896da31740db3ee64fd2f30795a.jpg",
                         "https://cdn2.vyrl.com/vyrl/images/post/_temp/temp/b0926fdcadf9b4ab2083efaee041cfc7.jpg"
                         ]
+    let sampleVideo = ["http://jplayer.org/video/m4v/Big_Buck_Bunny_Trailer.m4v",
+                       "http://avikam.com/wp-content/uploads/2016/09/SpeechRecognitionTutorial.mp4"
+                       ]
+    
     var initialConstraints = [NSLayoutConstraint]()
     
     var imageIndex: NSInteger = 0
@@ -60,7 +65,7 @@ class FeedFullScreenViewController: UIViewController {
     }
 
     func initImageVideo() {
-        for i in 0..<(samplePhotos.count) {
+        for i in 0..<(samplePhotos.count) + (sampleVideo.count)  {
             let imageView = UIImageView()
             self.imageViewArray.append(imageView)
             let contentScrollView = UIScrollView()
@@ -70,49 +75,93 @@ class FeedFullScreenViewController: UIViewController {
             self.mainScrollView.contentSize.width = contentScrollView.frame.width * CGFloat(i+1)
             self.mainScrollView.addSubview(contentScrollView)
         }
-        
+    
         requestImageVideo()
     }
     
     func requestImageVideo() {
-        Alamofire.request(samplePhotos[index])
-            .downloadProgress(closure: { (progress) in
-                print(progress)
-            }).responseData { response in
-                if let data = response.result.value {
-                    print("finish")
-                    
-                    let image = UIImage(data: data)
-                    self.imageArray.append(image!)
-                    
-                    self.imageViewArray[self.index].image = image
-                    self.imageViewArray[self.index].contentMode = .scaleAspectFit
-                    
-                    let height = self.contentScrollViewArray[self.index].frame.width * ((image?.size.height)! / (image?.size.width)!)
-                    self.imageViewArray[self.index].frame = CGRect(x: 0, y:0, width: self.contentScrollViewArray[self.index].frame.width, height: height)
-                    
-                    self.contentScrollViewArray[self.index].addSubview(self.imageViewArray[self.index])
-                    
-                    let textView = UITextView()
-                    textView.text = "반갑습니다."
-                    textView.textColor = UIColor.white
-                    textView.backgroundColor = UIColor.ivGreyish
-                    let size = textView.sizeThatFits(CGSize.init(width: self.view.frame.width, height: 9999))
-                    textView.frame = CGRect.init(x: 0, y: self.imageViewArray[self.index].frame.size.height, width: self.view.frame.width, height: size.height)
-                    textView.isScrollEnabled = false
-                    
-                    self.contentScrollViewArray[self.index].addSubview(textView)
-                    self.contentScrollViewArray[self.index].contentSize = CGSize.init(width: self.mainScrollView.frame.width, height: self.imageViewArray[self.index].frame.height + textView.frame.height)
-                    
-                    let xPosition = self.view.frame.width * CGFloat(self.index)
-                    
-                    if( self.imageViewArray[self.index].frame.height + textView.frame.height < self.mainScrollView.frame.height){
-                        self.contentScrollViewArray[self.index].frame = CGRect.init(x: xPosition, y: 0, width: self.mainScrollView.frame.width, height: self.imageViewArray[self.index].frame.size.height + textView.frame.size.height)
-                        self.contentScrollViewArray[self.index].center = CGPoint.init(x: self.contentScrollViewArray[self.index].center.x, y: self.view.center.y)
-                    } else {
-                        self.contentScrollViewArray[self.index].frame = CGRect.init(x: xPosition, y: 0, width: self.mainScrollView.frame.width, height: self.mainScrollView.frame.height)
+        if(self.index > self.samplePhotos.count-1)
+        {
+            let asset = AVURLAsset.init(url: URL(string:sampleVideo[1])!)
+            let imgGenerator = AVAssetImageGenerator(asset: asset)
+            imgGenerator.appliesPreferredTrackTransform = true
+            let cgImage = try! imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+            let uiImage = UIImage.init(cgImage:  cgImage)
+            
+            self.imageArray.append(uiImage)
+            
+            self.imageViewArray[self.index].image = uiImage
+            self.imageViewArray[self.index].contentMode = .scaleAspectFit
+            
+            let height = self.contentScrollViewArray[self.index].frame.width * ((uiImage.size.height) / (uiImage.size.width))
+            self.imageViewArray[self.index].frame = CGRect(x: 0, y:0, width: self.contentScrollViewArray[self.index].frame.width, height: height)
+            
+            self.contentScrollViewArray[self.index].addSubview(self.imageViewArray[self.index])
+            
+            let textView = UITextView()
+            textView.text = "반갑습니다."
+            textView.textColor = UIColor.white
+            textView.backgroundColor = UIColor.ivGreyish
+            let size = textView.sizeThatFits(CGSize.init(width: self.view.frame.width, height: 9999))
+            textView.frame = CGRect.init(x: 0, y: self.imageViewArray[self.index].frame.size.height, width: self.view.frame.width, height: size.height)
+            textView.isScrollEnabled = false
+            
+            self.contentScrollViewArray[self.index].addSubview(textView)
+            self.contentScrollViewArray[self.index].contentSize = CGSize.init(width: self.mainScrollView.frame.width, height: self.imageViewArray[self.index].frame.height + textView.frame.height)
+            
+            let xPosition = self.view.frame.width * CGFloat(self.index)
+            
+            if( self.imageViewArray[self.index].frame.height + textView.frame.height < self.mainScrollView.frame.height){
+                self.contentScrollViewArray[self.index].frame = CGRect.init(x: xPosition, y: 0, width: self.mainScrollView.frame.width, height: self.imageViewArray[self.index].frame.size.height + textView.frame.size.height)
+                self.contentScrollViewArray[self.index].center = CGPoint.init(x: self.contentScrollViewArray[self.index].center.x, y: self.view.center.y)
+            } else {
+                self.contentScrollViewArray[self.index].frame = CGRect.init(x: xPosition, y: 0, width: self.mainScrollView.frame.width, height: self.mainScrollView.frame.height)
+            }
+            
+
+            
+        } else {
+            
+            
+            Alamofire.request(samplePhotos[index])
+                .downloadProgress(closure: { (progress) in
+                  
+                }).responseData { response in
+                    if let data = response.result.value {
+                        print("finish")
+                        
+                        let image = UIImage(data: data)
+                        self.imageArray.append(image!)
+                        
+                        self.imageViewArray[self.index].image = image
+                        self.imageViewArray[self.index].contentMode = .scaleAspectFit
+                        
+                        let height = self.contentScrollViewArray[self.index].frame.width * ((image?.size.height)! / (image?.size.width)!)
+                        self.imageViewArray[self.index].frame = CGRect(x: 0, y:0, width: self.contentScrollViewArray[self.index].frame.width, height: height)
+                        
+                        self.contentScrollViewArray[self.index].addSubview(self.imageViewArray[self.index])
+                        
+                        let textView = UITextView()
+                        textView.text = "반갑습니다."
+                        textView.textColor = UIColor.white
+                        textView.backgroundColor = UIColor.ivGreyish
+                        let size = textView.sizeThatFits(CGSize.init(width: self.view.frame.width, height: 9999))
+                        textView.frame = CGRect.init(x: 0, y: self.imageViewArray[self.index].frame.size.height, width: self.view.frame.width, height: size.height)
+                        textView.isScrollEnabled = false
+                        
+                        self.contentScrollViewArray[self.index].addSubview(textView)
+                        self.contentScrollViewArray[self.index].contentSize = CGSize.init(width: self.mainScrollView.frame.width, height: self.imageViewArray[self.index].frame.height + textView.frame.height)
+                        
+                        let xPosition = self.view.frame.width * CGFloat(self.index)
+                        
+                        if( self.imageViewArray[self.index].frame.height + textView.frame.height < self.mainScrollView.frame.height){
+                            self.contentScrollViewArray[self.index].frame = CGRect.init(x: xPosition, y: 0, width: self.mainScrollView.frame.width, height: self.imageViewArray[self.index].frame.size.height + textView.frame.size.height)
+                            self.contentScrollViewArray[self.index].center = CGPoint.init(x: self.contentScrollViewArray[self.index].center.x, y: self.view.center.y)
+                        } else {
+                            self.contentScrollViewArray[self.index].frame = CGRect.init(x: xPosition, y: 0, width: self.mainScrollView.frame.width, height: self.mainScrollView.frame.height)
+                        }
+                        
                     }
-                    
                 }
         }
     }
@@ -120,10 +169,63 @@ class FeedFullScreenViewController: UIViewController {
     func canRotate() -> Void {
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        if size.height < size.width {
-                // Landscape
-        }
+     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        self.isRotate = true
+        
+        coordinator.animate(alongsideTransition: { (UIViewControllerTransitionCoordinatorContext) -> Void in
+            self.mainScrollView.contentSize.width = size.width * CGFloat(self.samplePhotos.count)
+           
+            let orient = UIApplication.shared.statusBarOrientation
+            switch orient {
+            case .portrait:
+                for i in 0..<self.index+1 {
+                    self.contentScrollViewArray[i].frame = CGRect.init(x: 0, y: 0, width: size.width, height:size.height)
+                    
+                    let height = self.contentScrollViewArray[i].frame.width * (self.imageArray[i].size.height / self.imageArray[i].size.width)
+                    self.imageViewArray[i].frame = CGRect(x: 0, y:0, width: self.contentScrollViewArray[i].frame.width, height: height)
+                    
+                    self.contentScrollViewArray[i].contentSize = CGSize.init(width: self.mainScrollView.frame.width, height: self.imageViewArray[i].frame.height)
+                    
+                    let xPosition = self.view.frame.width * CGFloat(i)
+                    
+                    if( self.imageViewArray[i].frame.height < self.mainScrollView.frame.height){
+                        self.contentScrollViewArray[i].frame = CGRect.init(x: xPosition, y: 0, width: self.mainScrollView.frame.width, height: self.imageViewArray[i].frame.size.height)
+                        self.contentScrollViewArray[i].center = CGPoint.init(x: self.contentScrollViewArray[i].center.x, y: self.view.center.y)
+                    } else {
+                        self.contentScrollViewArray[i].frame = CGRect.init(x: xPosition, y: 0, width: self.mainScrollView.frame.width, height: self.mainScrollView.frame.height)
+                    }
+                }
+                self.mainScrollView.setContentOffset(CGPoint.init(x: size.width*CGFloat(self.currentPage), y: 0), animated: true)
+                
+                print("Portrait")
+            case .landscapeLeft,.landscapeRight :
+                for i in 0..<self.index+1 {
+                    self.contentScrollViewArray[i].frame = CGRect.init(x: 0, y: 0, width: size.width, height:size.height)
+                    
+                    self.imageViewArray[i].frame = CGRect(x: 0, y:0, width: size.width, height: size.height)
+                    self.contentScrollViewArray[i].contentSize = CGSize.init(width: size.width, height: size.height)
+                    
+                    let xPosition = self.view.frame.width * CGFloat(i)
+                    
+                   
+                    self.contentScrollViewArray[i].frame = CGRect.init(x: xPosition, y: 0, width: self.mainScrollView.frame.width, height: self.imageViewArray[i].frame.size.height)
+                    self.contentScrollViewArray[i].center = CGPoint.init(x: self.contentScrollViewArray[i].center.x, y: self.view.center.y)
+                   
+                }
+                self.mainScrollView.setContentOffset(CGPoint.init(x: size.width*CGFloat(self.currentPage), y: 0), animated: true)
+                
+                print("Landscape")
+                
+            default:
+                
+                print("Anything But Portrait")
+            }
+            
+        }, completion: { (UIViewControllerTransitionCoordinatorContext) -> Void in
+            
+            self.isRotate = false
+        })
+        super.viewWillTransition(to: size, with: coordinator)
     }
 }
 
@@ -131,10 +233,13 @@ extension FeedFullScreenViewController : UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let page = Int(round(Double(scrollView.contentOffset.x) / Double(scrollView.bounds.size.width)))
         self.pageNumberLabel.text =  "\(page+1) / \(self.samplePhotos.count)"
-        
-        if(page > self.index){
-            self.index = page
-            self.requestImageVideo()
+          if(self.isRotate == false){
+            self.currentPage = page
+            if(page > self.index) {
+                self.index = page
+                self.requestImageVideo()
+            }
         }
+
     }
 }
