@@ -18,10 +18,10 @@ class FeedFullScreenViewController: UIViewController {
     var textViewArray : [UITextView] = []
     var contentScrollViewArray : [UIScrollView] = []
     
-    var queue : [AVPlayerItem] = []
     
     var playerItem: AVPlayerItem?
     var player: AVPlayer?
+    var playerLayer : AVPlayerLayer?
     
     var currentPage : Int = 0;
     var index : Int = 0;
@@ -34,7 +34,7 @@ class FeedFullScreenViewController: UIViewController {
                         "https://cdn2.vyrl.com/vyrl/images/post/_temp/temp/b0926fdcadf9b4ab2083efaee041cfc7.jpg"
                         ]
     let sampleVideo = ["http://jplayer.org/video/m4v/Big_Buck_Bunny_Trailer.m4v",
-                       "http://avikam.com/wp-content/uploads/2016/09/SpeechRecognitionTutorial.mp4"
+                       "https://firebasestorage.googleapis.com/v0/b/shaberi-a249e.appspot.com/o/message-videos%2F8EDAC3FC-D754-4165-990A-97F6ECE120A6.mp4?alt=media&token=b3271370-a408-467d-abbc-7df2beef45c7"
                        ]
     
     var initialConstraints = [NSLayoutConstraint]()
@@ -173,7 +173,7 @@ class FeedFullScreenViewController: UIViewController {
         self.isRotate = true
         
         coordinator.animate(alongsideTransition: { (UIViewControllerTransitionCoordinatorContext) -> Void in
-            self.mainScrollView.contentSize.width = size.width * CGFloat(self.samplePhotos.count)
+            self.mainScrollView.contentSize.width = size.width * CGFloat(self.samplePhotos.count + self.sampleVideo.count)
            
             let orient = UIApplication.shared.statusBarOrientation
             switch orient {
@@ -183,7 +183,7 @@ class FeedFullScreenViewController: UIViewController {
                     
                     let height = self.contentScrollViewArray[i].frame.width * (self.imageArray[i].size.height / self.imageArray[i].size.width)
                     self.imageViewArray[i].frame = CGRect(x: 0, y:0, width: self.contentScrollViewArray[i].frame.width, height: height)
-                    
+                   
                     self.contentScrollViewArray[i].contentSize = CGSize.init(width: self.mainScrollView.frame.width, height: self.imageViewArray[i].frame.height)
                     
                     let xPosition = self.view.frame.width * CGFloat(i)
@@ -196,7 +196,10 @@ class FeedFullScreenViewController: UIViewController {
                     }
                 }
                 self.mainScrollView.setContentOffset(CGPoint.init(x: size.width*CGFloat(self.currentPage), y: 0), animated: true)
-                
+                if(self.currentPage > 4)
+                {
+                    self.playerLayer?.frame = self.imageViewArray[self.currentPage].frame
+                }
                 print("Portrait")
             case .landscapeLeft,.landscapeRight :
                 for i in 0..<self.index+1 {
@@ -213,7 +216,10 @@ class FeedFullScreenViewController: UIViewController {
                    
                 }
                 self.mainScrollView.setContentOffset(CGPoint.init(x: size.width*CGFloat(self.currentPage), y: 0), animated: true)
-                
+                if(self.currentPage > 4)
+                {
+                    self.playerLayer?.frame = self.imageViewArray[self.currentPage].frame
+                }
                 print("Landscape")
                 
             default:
@@ -240,6 +246,36 @@ extension FeedFullScreenViewController : UIScrollViewDelegate {
                 self.requestImageVideo()
             }
         }
+        
+         print("scrollViewDidScroll")
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let page = Int(round(Double(scrollView.contentOffset.x) / Double(scrollView.bounds.size.width)))
+        print("\(page) scrollViewDidEndDragging")
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let page = Int(round(Double(scrollView.contentOffset.x) / Double(scrollView.bounds.size.width)))
+        if(page > 4) {
+            self.player = AVPlayer.init(url: NSURL(string: sampleVideo[page-5]) as! URL)
+            
+            // Layer for display… Video plays at the full size of the iPad
+            self.playerLayer = AVPlayerLayer(player: player)
+            
+            if(self.imageViewArray[page].layer.sublayers == nil) {
+                self.imageViewArray[page].layer.addSublayer(self.playerLayer!)
+            }
+            self.playerLayer?.frame = self.imageViewArray[page].frame
+            self.player!.play()
+        } else {
+            if(self.player != nil) {
+                self.player!.pause()
+                self.playerLayer?.removeFromSuperlayer()
+            }
+    
+        }
+        print("\(page) scrollViewDidEndDecelerating")
 
     }
 }

@@ -137,7 +137,7 @@
                     <navigationItem key="navigationItem" id="fCh-ef-yzS"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="containerView" destination="AEJ-wP-T1Q" id="ijI-hK-NCY"/>
+                        <outlet property="containerView" destination="AEJ-wP-T1Q" id="duI-Zb-Op5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lLd-qn-DHr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -289,14 +289,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RD4-1O-p4t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1153" y="-116"/>
-        </scene>
-        <!--FeedTableViewController-->
-        <scene sceneID="gm4-FY-rDZ">
-            <objects>
-                <viewControllerPlaceholder storyboardName="FeedStyle" referencedIdentifier="FeedTableViewController" id="BRh-da-hhC" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZIe-wd-Tai" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="491" y="326"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="WS7-Sc-8M5">
