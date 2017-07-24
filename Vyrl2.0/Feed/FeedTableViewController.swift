@@ -11,16 +11,20 @@ import Alamofire
 import ObjectMapper
 import Alamofire
 import AlamofireObjectMapper
+import KRPullLoader
 
 
-class FeedTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FeedTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , KRPullLoadViewDelegate{
 
     @IBOutlet weak var tableView: UITableView!
+    
+    var refreshControl : UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.rowHeight = UITableViewAutomaticDimension
@@ -28,6 +32,24 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.tableFooterView = UIView(frame: .zero)
         tableView.reloadData()
         
+        let refreshView = KRPullLoadView()
+        refreshView.delegate = self
+        tableView.addPullLoadableView(refreshView, type: .refresh)       
+    }
+    
+    func pullLoadView(_ pullLoadView: KRPullLoadView, didChangeState state: KRPullLoaderState, viewType type: KRPullLoaderType){
+        switch state {
+        case let .loading(completionHandler):
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+1) {
+                completionHandler()
+                self.getAllFeed()
+            }
+        default:
+            break
+        }
+    }
+    
+    func reload(refreshControl: UIRefreshControl) {
         self.getAllFeed()
     }
 
@@ -45,12 +67,7 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
     {
         return 5
     }
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
-    {
-        return UITableViewAutomaticDimension
-    }
-    
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
@@ -83,6 +100,7 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         let url = URL.init(string: Constants.VyrlFeedURL.FEED)
         
         Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Article]>) in
+            
                 let array = response.result.value ?? []
             
                 for article in array {

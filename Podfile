@@ -27,6 +27,7 @@ target 'Vyrl2.0' do
     pod 'AlamofireImage'
     pod 'RxAlamofire'
     pod 'AlamofireObjectMapper', '~> 4.0'
+    pod 'KRPullLoader'
 
 end
 

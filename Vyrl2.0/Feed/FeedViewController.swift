@@ -54,7 +54,6 @@ class FeedViewController: UIViewController {
             alertController.dismiss(animated: true, completion: nil )
         })
         let myFeedAction = UIAlertAction(title: "My Feed", style: .default, handler: { (action) -> Void in
-            
             self.feedTtile.text = "내 피드"
             self.selectImageview.image = UIImage.init(named: "btn_select_down_02")
             alertController.dismiss(animated: true, completion: nil)
