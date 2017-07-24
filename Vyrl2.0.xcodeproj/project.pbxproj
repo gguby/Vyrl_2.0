@@ -31,6 +31,7 @@
 		A650368C1F0E30BA00AD540A /* FeedNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65036891F0E30BA00AD540A /* FeedNavigationController.swift */; };
 		A650368D1F0E30BA00AD540A /* FeedNavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A650368A1F0E30BA00AD540A /* FeedNavigationControllerExtension.swift */; };
 		A650368F1F0E3F1A00AD540A /* WriteMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A650368E1F0E3F1A00AD540A /* WriteMediaViewController.swift */; };
+		A6722C311F25F7D600CEBBD6 /* FeedTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6722C301F25F7D600CEBBD6 /* FeedTableCell.swift */; };
 		CE08981C1ECD704F000D6D6C /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08981B1ECD704F000D6D6C /* SearchViewController.swift */; };
 		CE08981E1ECD706A000D6D6C /* FanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08981D1ECD706A000D6D6C /* FanViewController.swift */; };
 		CE0898201ECD7079000D6D6C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08981F1ECD7079000D6D6C /* LoginViewController.swift */; };
@@ -96,6 +97,7 @@
 		A65036891F0E30BA00AD540A /* FeedNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedNavigationController.swift; sourceTree = "<group>"; };
 		A650368A1F0E30BA00AD540A /* FeedNavigationControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedNavigationControllerExtension.swift; sourceTree = "<group>"; };
 		A650368E1F0E3F1A00AD540A /* WriteMediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteMediaViewController.swift; sourceTree = "<group>"; };
+		A6722C301F25F7D600CEBBD6 /* FeedTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableCell.swift; sourceTree = "<group>"; };
 		C2AE70CA913C7D61FE18140C /* Pods-Vyrl2.0UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vyrl2.0UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vyrl2.0UITests/Pods-Vyrl2.0UITests.release.xcconfig"; sourceTree = "<group>"; };
 		CE08981B1ECD704F000D6D6C /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = Vyrl2.0/SEARCH/SearchViewController.swift; sourceTree = SOURCE_ROOT; };
 		CE08981D1ECD706A000D6D6C /* FanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanViewController.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				8F90911C1EEFC57D0095A335 /* FeedDetailViewController.swift */,
 				8F62CC141F00EC330069ACFE /* EmoticonView.swift */,
 				8F57B73E1F186E44009FD0EA /* FeedFullScreenViewController.swift */,
+				A6722C301F25F7D600CEBBD6 /* FeedTableCell.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -565,6 +568,7 @@
 				A650368B1F0E30BA00AD540A /* ModalAnimatorPhoto.swift in Sources */,
 				CE33F0021ED2BB690050C21D /* SMLoginViewController.swift in Sources */,
 				8F9AF9911EE800E700DE069E /* FeedTableViewController.swift in Sources */,
+				A6722C311F25F7D600CEBBD6 /* FeedTableCell.swift in Sources */,
 				A650368D1F0E30BA00AD540A /* FeedNavigationControllerExtension.swift in Sources */,
 				CE0898251ECD70C7000D6D6C /* FeedViewController.swift in Sources */,
 				8F829E801EFB9CD4001D418F /* WriteViewController.swift in Sources */,
