@@ -16,9 +16,12 @@ import AlamofireObjectMapper
 class FeedTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+    var articleArray = [Article]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.getAllFeed()
 
         // Do any additional setup after loading the view.
         self.tableView.delegate = self
@@ -26,9 +29,7 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 400
         tableView.tableFooterView = UIView(frame: .zero)
-        tableView.reloadData()
         
-        self.getAllFeed()
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,7 +44,7 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return 5
+        return self.articleArray.count
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
@@ -54,31 +55,41 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        var cell :FeedTableCell = tableView.dequeueReusableCell(withIdentifier: "oneFeed") as! FeedTableCell
+       
+        var cell  = tableView.dequeueReusableCell(withIdentifier: "oneFeed") as! FeedTableCell
         
-        switch indexPath.row {
-        case 0:
-            cell = tableView.dequeueReusableCell(withIdentifier: "oneFeed") as! FeedTableCell
-            break
-        case 1:
-            cell = tableView.dequeueReusableCell(withIdentifier: "advertisingFeed") as! FeedTableCell
-            break
-        case 2:
-            cell = tableView.dequeueReusableCell(withIdentifier: "textOnlyFeed") as! FeedTableCell
-            break
-        case 3:
-            cell = tableView.dequeueReusableCell(withIdentifier: "multiFeed") as! FeedTableCell
-            break
-        case 4:
-            cell = tableView.dequeueReusableCell(withIdentifier: "channelFeed") as! FeedTableCell
-            break
-        default: break
+//        switch indexPath.row {
+//        case 0:
+//            cell = tableView.dequeueReusableCell(withIdentifier: "oneFeed") as! FeedTableCell
+//            break
+//        case 1:
+//            cell = tableView.dequeueReusableCell(withIdentifier: "advertisingFeed") as! FeedTableCell
+//            break
+//        case 2:
+//            cell = tableView.dequeueReusableCell(withIdentifier: "textOnlyFeed") as! FeedTableCell
+//            break
+//        case 3:
+//            cell = tableView.dequeueReusableCell(withIdentifier: "multiFeed") as! FeedTableCell
+//            break
+//        case 4:
+//            cell = tableView.dequeueReusableCell(withIdentifier: "channelFeed") as! FeedTableCell
+//            break
+//        default: break
+//        }
+        
+        if(self.articleArray[indexPath.row].images.count + self.articleArray[indexPath.row].videos.count > 1)
+        {
+            cell = tableView.dequeueReusableCell(withIdentifier: "multiFeed", for: indexPath) as! FeedTableCell
+            cell.article = self.articleArray[indexPath.row]
+            cell.contentLabel.text = self.articleArray[indexPath.row].content
+            return cell
         }
         
         return cell
     }
 
     func getAllFeed(){
+        self.articleArray.removeAll()
         
         let url = URL.init(string: Constants.VyrlFeedURL.FEED)
         
@@ -87,21 +98,12 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
             
                 for article in array {
                     print(article.id)
+                    self.articleArray.append(article)
                 }
+            
+            self.tableView.reloadData()
         }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 struct Article : Mappable {
@@ -131,8 +133,5 @@ struct Article : Mappable {
     }
 }
 
-class FeedTableCell : UITableViewCell {
-    
-    
-    
-}
+
+
