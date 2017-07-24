@@ -218,7 +218,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ikA-Kl-UM3">
                                 <rect key="frame" x="0.0" y="343" width="375" height="275"/>
                                 <connections>
-                                    <segue destination="oPj-fE-1cc" kind="embed" id="3CS-YW-Q1G"/>
+                                    <segue destination="hjH-bP-hcx" kind="embed" id="VsT-T2-VIp"/>
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6bb-Fr-EX0">
@@ -444,24 +444,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="McP-2q-cYc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1149.5999999999999" y="-212.74362818590706"/>
-        </scene>
-        <!--Feed View Controller-->
-        <scene sceneID="gUp-8C-Fz6">
-            <objects>
-                <viewController id="oPj-fE-1cc" customClass="FeedViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="kLn-ck-RQh"/>
-                        <viewControllerLayoutGuide type="bottom" id="4tF-8D-TxE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="n84-JW-s6A">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="275"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PLF-cq-rDW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="210" y="384"/>
         </scene>
         <!--Setting View Controller-->
         <scene sceneID="Q7q-z8-JQu">
@@ -1685,7 +1667,7 @@
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FmG-e5-cQh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="FmG-e5-cQh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2267,39 +2249,13 @@ Cw
             </objects>
             <point key="canvasLocation" x="256.80000000000001" y="1441.529235382309"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="za4-jz-i3Q">
+        <!--Feed-->
+        <scene sceneID="8tX-ll-5GE">
             <objects>
-                <viewController id="TXy-UP-bCP" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="P1Q-8g-j9d"/>
-                        <viewControllerLayoutGuide type="bottom" id="1B8-2L-cwR"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="b54-xD-4ZL">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dp7-2l-ifz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardIdentifier="Feed" storyboardName="Feed" id="hjH-bP-hcx" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X9O-fY-RxU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="M62-4C-N4l">
-            <objects>
-                <viewController id="HMk-dA-dDE" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="h4z-MO-vr2"/>
-                        <viewControllerLayoutGuide type="bottom" id="HRI-5c-t0D"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="LVa-44-sLR">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wzj-mH-EUz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
+            <point key="canvasLocation" x="659" y="126"/>
         </scene>
     </scenes>
     <resources>
