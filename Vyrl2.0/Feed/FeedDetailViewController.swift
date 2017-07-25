@@ -8,9 +8,12 @@
 
 import UIKit
 import GrowingTextView
+import AVFoundation
+import Alamofire
 
 class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableViewDataSource {
    
+
     @IBOutlet weak var commentTextView: GrowingTextView!
     
     @IBOutlet weak var tableView: UITableView!
@@ -43,7 +46,10 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
         self.commentTextView.textContainerInset = UIEdgeInsetsMake(12, 0, 12, 0)
         
         showButtonView()
-        
+    }
+    
+    @IBAction func dismiss(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
     }
     
     func showButtonView() {
@@ -202,8 +208,90 @@ extension FeedDetailViewController : EmoticonViewDelegate {
     }
 }
 
+
+
 class FeedDetailTableCell : UITableViewCell {
+    let samplePhotos = ["https://cdn2.vyrl.com/vyrl/images/post/_temp/temp/4ec6d08055c4ebcc76494080bbcd4ee2.jpg",
+                        "https://cdn2.vyrl.com/vyrl/images/post/_temp/54841/cfc79b7201ff0caae5fb1f25ac7145a8.jpg",
+                        "https://cdn2.vyrl.com/vyrl/images/post/_temp/temp/ae47d8dd720a1f1b36c6aebe635663c7.jpg",
+                        "https://cdn2.vyrl.com/vyrl/images/post/_temp/temp/77ee0896da31740db3ee64fd2f30795a.jpg",
+                        "https://cdn2.vyrl.com/vyrl/images/post/_temp/temp/b0926fdcadf9b4ab2083efaee041cfc7.jpg"
+    ]
+    let sampleVideo = ["http://jplayer.org/video/m4v/Big_Buck_Bunny_Trailer.m4v",
+                       "https://firebasestorage.googleapis.com/v0/b/shaberi-a249e.appspot.com/o/message-videos%2F8EDAC3FC-D754-4165-990A-97F6ECE120A6.mp4?alt=media&token=b3271370-a408-467d-abbc-7df2beef45c7"
+    ]
+    var imageViewArray : [UIImageView] = []
+    var index : Int = 0;
+
+    @IBOutlet weak var imageScrollView: UIScrollView!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+        if(self.imageScrollView != nil) {
+            self.imageScrollView.delegate = self as UIScrollViewDelegate
+            self.index = 0
+            self.initImageVideo()
+        }
+    }
     
+    func initImageVideo() {
+        for i in 0..<(samplePhotos.count) + (sampleVideo.count)  {
+            let contentImageView = UIImageView()
+            contentImageView.frame = CGRect.init(x: 0, y: 0, width: self.imageScrollView.frame.width, height: self.imageScrollView.frame.height)
+            self.imageViewArray.append(contentImageView)
+            
+            self.imageScrollView.contentSize.width = contentImageView.frame.width * CGFloat(i+1)
+            self.imageScrollView.addSubview(contentImageView)
+        }
+        
+        requestImageVideo()
+    }
     
+    func requestImageVideo() {
+        if(self.index > self.samplePhotos.count-1)
+        {
+            let asset = AVURLAsset.init(url: URL(string:sampleVideo[1])!)
+            let imgGenerator = AVAssetImageGenerator(asset: asset)
+            imgGenerator.appliesPreferredTrackTransform = true
+            let cgImage = try! imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+            let uiImage = UIImage.init(cgImage:  cgImage)
+            
+            self.imageViewArray[self.index].image = uiImage
+            self.imageViewArray[self.index].contentMode = .scaleAspectFit
+            
+            let xPosition = self.imageScrollView.frame.width * CGFloat(self.index)
+            self.imageViewArray[self.index].frame = CGRect.init(x: xPosition, y: 0, width: self.imageScrollView.frame.width, height: self.imageScrollView.frame.height)
+            
+        } else {
+            Alamofire.request(samplePhotos[index])
+                .downloadProgress(closure: { (progress) in
+                    
+                }).responseData { response in
+                    if let data = response.result.value {
+                        print("finish")
+                        
+                        let image = UIImage(data: data)
+                        
+                        self.imageViewArray[self.index].image = image
+                        self.imageViewArray[self.index].contentMode = .scaleAspectFit
+                        
+                        let xPosition = self.imageScrollView.frame.width * CGFloat(self.index)
+                        self.imageViewArray[self.index].frame = CGRect.init(x: xPosition, y: 0, width: self.imageScrollView.frame.width, height: self.imageScrollView.frame.height)
+                    }
+            }
+        }
+    }
+}
+
+extension FeedDetailTableCell : UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let page = Int(round(Double(scrollView.contentOffset.x) / Double(scrollView.bounds.size.width)))
+        
+        if(page > self.index) {
+            self.index = page
+            self.requestImageVideo()
+        }
+        
+    }
 }
