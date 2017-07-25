@@ -10,6 +10,10 @@ import UIKit
 import Alamofire
 import AlamofireImage
 
+protocol YourCellDelegate: NSObjectProtocol{
+    func didPressCell(sender: Any)
+}
+
 class FeedTableCell: UITableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -17,6 +21,7 @@ class FeedTableCell: UITableViewCell {
     
     @IBOutlet weak var contentHeight: NSLayoutConstraint!
     
+    var delegate: YourCellDelegate!
     var article : Article? {
         didSet{
             
@@ -26,6 +31,9 @@ class FeedTableCell: UITableViewCell {
             
             contentHeight.constant = CGFloat(( self.article!.mediaCount / 3 ) * 124)
         }
+    }
+    @IBAction func commentButtonClick(_ sender: UIButton) {
+       delegate.didPressCell(sender: sender)
     }
 
     override func awakeFromNib() {

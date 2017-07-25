@@ -95,6 +95,7 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
 
         cell = tableView.dequeueReusableCell(withIdentifier: article.type.rawValue, for: indexPath) as! FeedTableCell
         cell.article = article
+        cell.delegate = self as! YourCellDelegate
         cell.contentLabel.text = article.content
         
         return cell
@@ -117,6 +118,13 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
 }
+
+extension FeedTableViewController : YourCellDelegate {
+    func didPressCell(sender: Any) {
+        self.pushView(storyboardName: "FeedStyle", controllerName: "FeedDetailViewController")
+    }
+}
+
 
 public enum ArticleType : String{
     case oneFeed   = "oneFeed"
