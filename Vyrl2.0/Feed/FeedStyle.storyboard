@@ -709,16 +709,12 @@
                                                                 <constraint firstAttribute="height" constant="1" id="sFx-9K-tvy"/>
                                                             </constraints>
                                                         </view>
-                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="최강창민......the love! 최강창민......the love! 최강창민......the love!" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="DwO-7S-gCg">
-                                                            <rect key="frame" x="15" y="114.5" width="345" height="165"/>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="165" id="cgM-oP-b4w"/>
-                                                            </constraints>
-                                                            <color key="textColor" red="0.32549019607843138" green="0.30980392156862746" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="최강창민......the love!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ix7-7i-6zp">
+                                                            <rect key="frame" x="15" y="114.5" width="344.5" height="162"/>
                                                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
-                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                        </textView>
+                                                            <color key="textColor" red="0.32549019607843138" green="0.30980392156862746" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2SY-Cu-VO0" userLabel="Time View">
                                                             <rect key="frame" x="0.0" y="287.5" width="375" height="15"/>
                                                             <subviews>
@@ -879,20 +875,20 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstItem="DwO-7S-gCg" firstAttribute="leading" secondItem="N2C-re-nAU" secondAttribute="leading" constant="15" id="49M-gp-TIP"/>
                                                         <constraint firstItem="lLE-QP-xY5" firstAttribute="leading" secondItem="N2C-re-nAU" secondAttribute="leading" id="8um-5A-9oW"/>
                                                         <constraint firstItem="u1q-Yk-6zu" firstAttribute="leading" secondItem="N2C-re-nAU" secondAttribute="leading" id="BcS-cQ-248"/>
                                                         <constraint firstItem="lLE-QP-xY5" firstAttribute="top" secondItem="WXZ-B2-pbI" secondAttribute="bottom" id="Cxk-T0-Ozt"/>
                                                         <constraint firstAttribute="trailing" secondItem="TNu-QM-GQl" secondAttribute="trailing" id="Eqa-kE-tFk"/>
                                                         <constraint firstAttribute="bottom" secondItem="lLE-QP-xY5" secondAttribute="bottom" constant="22" id="H1U-g7-5hf"/>
                                                         <constraint firstAttribute="trailing" secondItem="WXZ-B2-pbI" secondAttribute="trailing" id="Hgf-AM-AYJ"/>
-                                                        <constraint firstAttribute="trailing" secondItem="DwO-7S-gCg" secondAttribute="trailing" constant="15" id="KMo-43-pja"/>
                                                         <constraint firstItem="WXZ-B2-pbI" firstAttribute="leading" secondItem="N2C-re-nAU" secondAttribute="leading" id="OP0-dW-7oh"/>
                                                         <constraint firstAttribute="trailing" secondItem="2SY-Cu-VO0" secondAttribute="trailing" id="UKR-Ob-wuq"/>
+                                                        <constraint firstItem="ix7-7i-6zp" firstAttribute="top" secondItem="TNu-QM-GQl" secondAttribute="bottom" constant="12" id="YbG-UX-9DY"/>
                                                         <constraint firstItem="2SY-Cu-VO0" firstAttribute="leading" secondItem="N2C-re-nAU" secondAttribute="leading" id="dG8-Ba-dh2"/>
                                                         <constraint firstItem="Ghm-CG-up3" firstAttribute="top" secondItem="N2C-re-nAU" secondAttribute="top" id="fBk-ez-wJQ"/>
-                                                        <constraint firstItem="DwO-7S-gCg" firstAttribute="top" secondItem="TNu-QM-GQl" secondAttribute="bottom" constant="12" id="gVm-VL-wIj"/>
-                                                        <constraint firstItem="2SY-Cu-VO0" firstAttribute="top" secondItem="DwO-7S-gCg" secondAttribute="bottom" constant="7.5" id="hJ6-i0-wKG"/>
+                                                        <constraint firstItem="ix7-7i-6zp" firstAttribute="leading" secondItem="N2C-re-nAU" secondAttribute="leading" constant="15" id="fXd-2r-u3A"/>
+                                                        <constraint firstItem="2SY-Cu-VO0" firstAttribute="top" secondItem="ix7-7i-6zp" secondAttribute="bottom" constant="11" id="fsN-Me-Osy"/>
+                                                        <constraint firstAttribute="trailing" secondItem="ix7-7i-6zp" secondAttribute="trailing" constant="15.5" id="gPv-B5-0U7"/>
                                                         <constraint firstAttribute="trailing" secondItem="u1q-Yk-6zu" secondAttribute="trailing" id="iE2-YN-Bkk"/>
                                                         <constraint firstAttribute="trailing" secondItem="lLE-QP-xY5" secondAttribute="trailing" id="lev-Kv-dox"/>
                                                         <constraint firstItem="TNu-QM-GQl" firstAttribute="top" secondItem="u1q-Yk-6zu" secondAttribute="bottom" constant="10" id="mLJ-88-Auo"/>
@@ -911,6 +907,9 @@
                                                 <constraint firstItem="N2C-re-nAU" firstAttribute="leading" secondItem="k1m-T5-Ks1" secondAttribute="leading" id="dR3-oz-shV"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="contentLabel" destination="ix7-7i-6zp" id="wy9-1d-4FX"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="FeedTableCell4" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="multiFeed" rowHeight="605" id="hth-2A-IVu" customClass="FeedTableCell" customModule="Vyrl2_0" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1578" width="375" height="605"/>
@@ -1055,7 +1054,7 @@
                                                                 <constraint firstAttribute="height" constant="250" id="Csu-fB-ocz"/>
                                                             </constraints>
                                                             <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
-                                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="1.5" minimumInteritemSpacing="1.5" id="fQm-us-BvN">
+                                                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1.5" minimumInteritemSpacing="1.5" id="fQm-us-BvN">
                                                                 <size key="itemSize" width="124" height="124"/>
                                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -1293,6 +1292,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="collectionView" destination="qHS-am-MuT" id="uJE-ef-qZo"/>
+                                            <outlet property="contentHeight" destination="Csu-fB-ocz" id="u0w-FY-Tt4"/>
                                             <outlet property="contentLabel" destination="ldW-t4-vrG" id="WRj-hH-tCE"/>
                                         </connections>
                                     </tableViewCell>

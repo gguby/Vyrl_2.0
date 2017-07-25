@@ -91,13 +91,11 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
 //        default: break
 //        }
         
-        if(self.articleArray[indexPath.row].images.count + self.articleArray[indexPath.row].videos.count > 1)
-        {
-            cell = tableView.dequeueReusableCell(withIdentifier: "multiFeed", for: indexPath) as! FeedTableCell
-            cell.article = self.articleArray[indexPath.row]
-            cell.contentLabel.text = self.articleArray[indexPath.row].content
-            return cell
-        }
+        let article = self.articleArray[indexPath.row]
+
+        cell = tableView.dequeueReusableCell(withIdentifier: article.type.rawValue, for: indexPath) as! FeedTableCell
+        cell.article = article
+        cell.contentLabel.text = article.content
         
         return cell
     }
@@ -112,7 +110,6 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
                 let array = response.result.value ?? []
             
                 for article in array {
-                    print(article.id)
                     self.articleArray.append(article)
                 }
             
@@ -121,7 +118,14 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
     }
 }
 
+public enum ArticleType : String{
+    case oneFeed   = "oneFeed"
+    case multiFeed = "multiFeed"
+    case textOnlyFeed = "textOnlyFeed"
+}
+
 struct Article : Mappable {
+    var type : ArticleType!
     
     var id : Int!
     var content : String!
@@ -132,6 +136,8 @@ struct Article : Mappable {
     var comments : [String]!
     var cntComment : Int!
     var cntLike : Int!
+    
+    var mediaCount : Int!
     
     init?(map: Map) {
         
@@ -145,6 +151,20 @@ struct Article : Mappable {
         cntComment <- map["cntComment"]
         cntLike <- map["cntLike"]
         comments <- map["comments"]
+        
+        self.setUpType()
+    }
+    
+    mutating func setUpType(){
+        
+        self.mediaCount = images.count + videos.count
+        if ( self.mediaCount > 1){
+            type = ArticleType.multiFeed
+        }else if ( self.mediaCount == 1){
+            type = ArticleType.oneFeed
+        }else if ( self.mediaCount == 0){
+            type = ArticleType.textOnlyFeed
+        }
     }
 }
 

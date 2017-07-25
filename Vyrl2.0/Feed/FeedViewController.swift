@@ -64,9 +64,14 @@ class FeedViewController: UIViewController {
             alertController.dismiss(animated: true, completion: nil)
         })
         
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
+            alertController.dismiss(animated: true, completion: nil)
+        })
+        
         alertController.addAction(allFeedAction)
         alertController.addAction(myFeedAction)
         alertController.addAction(fanFeedAction)
+        alertController.addAction(cancel)
         
         present(alertController, animated: true, completion: {
             self.selectImageview.image = UIImage.init(named: "btn_select_up_01")

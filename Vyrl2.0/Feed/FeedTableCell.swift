@@ -8,14 +8,26 @@
 
 import UIKit
 import Alamofire
+import AlamofireImage
 
 class FeedTableCell: UITableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var contentLabel: UILabel!
     
-    var article : Article?
+    @IBOutlet weak var contentHeight: NSLayoutConstraint!
     
+    var article : Article? {
+        didSet{
+            
+            guard self.collectionView != nil else {
+                return
+            }
+            
+            contentHeight.constant = CGFloat(( self.article!.mediaCount / 3 ) * 124)
+        }
+    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -31,8 +43,6 @@ class FeedTableCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    
-
 }
 
 
@@ -43,14 +53,10 @@ extension FeedTableCell: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BoxCell", for: indexPath) as! BoxCell
-        Alamofire.request((article?.images[indexPath.row])!).responseImage { (response) in
-            if let image = response.result.value {
-                DispatchQueue.main.async {
-                    cell.imageView.image = image
-                
-                }
-            }
-        }
+        
+        let url : URL = URL.init(string: (article?.images[indexPath.row])!)!
+        
+        cell.imageView.af_setImage(withURL: url)
         
         return cell
     }
@@ -58,6 +64,8 @@ extension FeedTableCell: UICollectionViewDataSource, UICollectionViewDelegate {
 
 class BoxCell : UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
+    
+
     
 }
 
