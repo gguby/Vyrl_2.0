@@ -17,6 +17,10 @@ class FeedTableCell: UITableViewCell {
     
     @IBOutlet weak var contentHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var collectionViewLeading: NSLayoutConstraint!
+    
+    var cellWidth = 124
+    
     var article : Article? {
         didSet{
             
@@ -24,7 +28,13 @@ class FeedTableCell: UITableViewCell {
                 return
             }
             
-            contentHeight.constant = CGFloat(( self.article!.mediaCount / 3 ) * 124)
+            let count = (self.article!.mediaCount)!
+            
+            if ( count == 2 ){
+                cellWidth = 186
+            }
+            
+            contentHeight.constant = CGFloat(ceilf( Float(count) / 3) * Float(cellWidth))
         }
     }
 
@@ -34,6 +44,12 @@ class FeedTableCell: UITableViewCell {
         if(self.collectionView != nil) {
             self.collectionView.delegate = self as UICollectionViewDelegate
             self.collectionView.dataSource = self as UICollectionViewDataSource
+            
+            let size = UIScreen.main.bounds
+       
+            if (size.width > 375){
+                self.collectionViewLeading.constant = 20
+            }            
         }
     }
 
@@ -42,7 +58,16 @@ class FeedTableCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+}
+
+extension FeedTableCell : UICollectionViewDelegateFlowLayout {
     
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: cellWidth, height: cellWidth)
+    }
 }
 
 
@@ -64,8 +89,5 @@ extension FeedTableCell: UICollectionViewDataSource, UICollectionViewDelegate {
 
 class BoxCell : UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
-    
-
-    
 }
 

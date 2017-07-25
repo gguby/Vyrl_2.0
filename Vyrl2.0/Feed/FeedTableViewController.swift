@@ -12,7 +12,7 @@ import ObjectMapper
 import Alamofire
 import AlamofireObjectMapper
 import KRPullLoader
-
+import AVFoundation
 
 class FeedTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , KRPullLoadViewDelegate{
 
@@ -133,6 +133,8 @@ struct Article : Mappable {
     var images : [String]!
     var videos : [String]!
     
+    var medias : [String]!
+    
     var comments : [String]!
     var cntComment : Int!
     var cntLike : Int!
@@ -156,15 +158,15 @@ struct Article : Mappable {
     }
     
     mutating func setUpType(){
-        
-        self.mediaCount = images.count + videos.count
+        self.medias = self.images + self.videos
+        self.mediaCount = self.medias.count
         if ( self.mediaCount > 1){
             type = ArticleType.multiFeed
         }else if ( self.mediaCount == 1){
             type = ArticleType.oneFeed
         }else if ( self.mediaCount == 0){
             type = ArticleType.textOnlyFeed
-        }
+        }        
     }
 }
 
