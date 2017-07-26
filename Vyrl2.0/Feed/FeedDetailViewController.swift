@@ -10,6 +10,7 @@ import UIKit
 import GrowingTextView
 import AVFoundation
 import Alamofire
+import ObjectMapper
 
 class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableViewDataSource {
    
@@ -26,6 +27,8 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
     
     var emoticonView : EmoticonView!
     var kbHeight: CGFloat!
+    
+    var commentArray : [Comment] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +49,7 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
         self.commentTextView.textContainerInset = UIEdgeInsetsMake(12, 0, 12, 0)
         
         showButtonView()
+        requestComment()
     }
     
     @IBAction func dismiss(_ sender: UIButton) {
@@ -164,7 +168,7 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return 10
+        return self.commentArray.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
@@ -178,10 +182,53 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
        
         default:
             cell = tableView.dequeueReusableCell(withIdentifier: "Comment") as! FeedDetailTableCell
+            cell.commentNicknameLabel.text = self.commentArray[indexPath.row-1].nickName
+            cell.commentContextTextView.text = self.commentArray[indexPath.row-1].content
+            
+            
+            /*
+            // Create Url from string
+            let url = URL(string: self.commentArray[indexPath.row-1].profileImageURL)!
+            
+            // Download task:
+            // - sharedSession = global NSURLCache, NSHTTPCookieStorage and NSURLCredentialStorage objects.
+            let task = URLSession.shared.dataTask(with: url) { (responseData, responseUrl, error) -> Void in
+                // if responseData is not null...
+                if let data = responseData{
+                    // execute in UI thread
+                    DispatchQueue.main.async(execute: { () -> Void in
+                        cell.commentProfileButton.setImage( UIImage(data: data), for: .normal)
+                    })
+                }
+            }
+            
+            // Run task
+            task.resume()
+            */
+            
+ 
             break
         }
         
         return cell
+    }
+    
+    func requestComment() {
+        self.commentArray.removeAll()
+        let uri = Constants.VyrlAPIConstants.baseURL + "/feeds/17/comments"
+        
+        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Comment]>) in
+            
+            let array = response.result.value ?? []
+            
+            for comment in array {
+               
+                self.commentArray.append(comment)
+                
+            }
+            
+            self.tableView.reloadData()
+        }
     }
 
 }
@@ -208,6 +255,30 @@ extension FeedDetailViewController : EmoticonViewDelegate {
     }
 }
 
+struct Comment : Mappable {
+    var id : Int!
+    var content : String!
+    var nickName : String!
+    var profileImageURL : String!
+    var image : UIImage!
+    
+    init?(map: Map) {
+        
+    }
+    
+    mutating func mapping(map: Map){
+        id <- map["id"]
+        content <- map["content"]
+        nickName <- map["nickName"]
+        profileImageURL <- map["profile"]
+        
+        if let url = NSURL(string: profileImageURL) {
+            if let data = NSData(contentsOf: url as URL) {
+                image = UIImage(data: data as Data)
+            }
+        }
+    }
+}
 
 
 class FeedDetailTableCell : UITableViewCell {
@@ -222,7 +293,13 @@ class FeedDetailTableCell : UITableViewCell {
     ]
     var imageViewArray : [UIImageView] = []
     var index : Int = 0;
-
+    
+   
+    @IBOutlet weak var commentNicknameLabel: UILabel!
+    @IBOutlet weak var commentProfileButton: UIButton!
+    @IBOutlet weak var commentContextTextView: UITextView!
+    
+    
     @IBOutlet weak var imageScrollView: UIScrollView!
     
     override func awakeFromNib() {
@@ -232,6 +309,8 @@ class FeedDetailTableCell : UITableViewCell {
             self.imageScrollView.delegate = self as UIScrollViewDelegate
             self.index = 0
             self.initImageVideo()
+        } else if (commentNicknameLabel != nil) {
+            
         }
     }
     
@@ -282,6 +361,8 @@ class FeedDetailTableCell : UITableViewCell {
             }
         }
     }
+    
+   
 }
 
 extension FeedDetailTableCell : UIScrollViewDelegate {
