@@ -32,7 +32,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         registerSwipe()
-        print("Search");
         
         initSearchBar()
         
@@ -41,7 +40,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         searchTable.dataSource = self
         searchTable.delegate = self
 
-        self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)        
     }
     
     func initSearchBar()

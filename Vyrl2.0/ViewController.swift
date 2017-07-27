@@ -138,9 +138,32 @@ class ViewController: UITabBarController , UITabBarControllerDelegate {
         
         self.setupToasView()
         
-//        self.showToast(string: "!")
-        
+        self.setupTabbar()
+
         self.delegate = self
+    }
+    
+    func setupTabbar(){
+        
+        var tabBar = (self.tabBar.items?[0])! as UITabBarItem
+        tabBar.image = UIImage.init(named: "icon_home_01_off")
+        tabBar.selectedImage = UIImage.init(named: "icon_home_01_on")
+        
+        tabBar = (self.tabBar.items?[1])! as UITabBarItem
+        tabBar.image = UIImage.init(named: "icon_fan_01_off")
+        tabBar.selectedImage = UIImage.init(named: "icon_fan_01_on")
+        
+        tabBar = (self.tabBar.items?[2])! as UITabBarItem
+        tabBar.image = UIImage.init(named: "icon_write_01_off")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+        tabBar.selectedImage = UIImage.init(named: "icon_write_01_on")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+        
+        tabBar = (self.tabBar.items?[3])! as UITabBarItem
+        tabBar.image = UIImage.init(named: "icon_search_01_off")
+        tabBar.selectedImage = UIImage.init(named: "icon_search_01_on")
+        
+        tabBar = (self.tabBar.items?[4])! as UITabBarItem
+        tabBar.image = UIImage.init(named: "icon_user_01_off")
+        tabBar.selectedImage = UIImage.init(named: "icon_user_01_on")
     }
 
     override func didReceiveMemoryWarning() {

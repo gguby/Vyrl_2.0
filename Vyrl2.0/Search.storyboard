@@ -699,7 +699,7 @@
                             <constraint firstItem="vb4-48-b1s" firstAttribute="top" secondItem="9Wd-Jm-hOw" secondAttribute="bottom" constant="40" id="x50-Om-Uvx"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" image="icon_search_01_off" id="YS3-TC-U7t">
+                    <tabBarItem key="tabBarItem" title="Item" id="YS3-TC-U7t">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <navigationItem key="navigationItem" id="2qI-LA-0lh"/>

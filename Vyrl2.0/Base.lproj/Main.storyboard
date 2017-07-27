@@ -18,6 +18,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="selectedImageTintColor">
+                                <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
                         <segue destination="Eli-lW-VBi" kind="relationship" relationship="viewControllers" id="f67-o6-s4W"/>
@@ -35,7 +43,7 @@
         <scene sceneID="xx1-C0-RVT">
             <objects>
                 <viewControllerPlaceholder storyboardName="Search" id="9eZ-HO-lpo" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="icon_search_01_off" id="epY-pa-e0c"/>
+                    <tabBarItem key="tabBarItem" title="" id="epY-pa-e0c"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T2M-ur-6W5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -45,7 +53,7 @@
         <scene sceneID="9g3-iN-5Q8">
             <objects>
                 <viewControllerPlaceholder storyboardName="Feed" id="Eli-lW-VBi" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="icon_home_01_off" id="VmM-zt-nTx"/>
+                    <tabBarItem key="tabBarItem" title="" id="VmM-zt-nTx"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Afg-Mr-cAb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -55,7 +63,7 @@
         <scene sceneID="CDk-fY-007">
             <objects>
                 <viewControllerPlaceholder storyboardName="Fan" id="Ecf-XJ-BoQ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="icon_fan_01_off" id="dqg-PI-LBW"/>
+                    <tabBarItem key="tabBarItem" title="" id="dqg-PI-LBW"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zff-B5-86g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -65,7 +73,7 @@
         <scene sceneID="jQs-TF-phc">
             <objects>
                 <viewControllerPlaceholder storyboardName="My" id="T6N-kN-HXz" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="icon_user_01_on" id="7ob-Ev-jqH"/>
+                    <tabBarItem key="tabBarItem" title="" id="7ob-Ev-jqH"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ai9-Lp-CHs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -83,10 +91,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icon_fan_01_off" width="28" height="28"/>
-        <image name="icon_home_01_off" width="28" height="28"/>
-        <image name="icon_search_01_off" width="28" height="28"/>
-        <image name="icon_user_01_on" width="28" height="28"/>
         <image name="tabBarItem:gif-B2-uzn:image" width="28" height="28">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU

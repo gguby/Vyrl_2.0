@@ -958,7 +958,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Coc-rM-rB2">
-                                <rect key="frame" x="0.0" y="683.5" width="375" height="45"/>
+                                <rect key="frame" x="0.0" y="684" width="375" height="45"/>
                                 <color key="backgroundColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.67450980390000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="wI9-dp-EVb"/>
@@ -1454,7 +1454,9 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="87" id="trV-mF-04H"/>
                                 </constraints>
-                                <string key="text">팬페이지를 폐쇄하기 위해서는 모든 가입자들이 해당 팬페이지에서탈퇴해야 가능합니다. 모든 유저들에게 PUSH알림을 보내서 탈퇴를요청해 주세요.</string>
+                                <string key="text">팬페이지를 폐쇄하기 위해서는 모든 가입자들이 해당 팬페이지에서
+탈퇴해야 가능합니다. 모든 유저들에게 PUSH알림을 보내서 탈퇴를
+요청해 주세요.</string>
                                 <color key="textColor" red="0.32549019607843138" green="0.30980392156862746" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -1690,7 +1692,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2c9-pf-Xhn">
-                                <rect key="frame" x="0.0" y="683.5" width="375" height="45"/>
+                                <rect key="frame" x="0.0" y="684" width="375" height="45"/>
                                 <color key="backgroundColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.67450980390000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="C4v-N2-UJp"/>
@@ -1750,21 +1752,21 @@
     </scenes>
     <resources>
         <image name="icon_add_01" width="20" height="20"/>
-        <image name="icon_add_03" width="16" height="16"/>
+        <image name="icon_add_03" width="24" height="24"/>
         <image name="icon_arlert_02" width="16" height="16"/>
-        <image name="icon_arrow_01_open" width="6" height="4"/>
+        <image name="icon_arrow_01_open" width="6" height="3"/>
         <image name="icon_back_01" width="20" height="20"/>
-        <image name="icon_back_02" width="16" height="16"/>
-        <image name="icon_bullet_02" width="16" height="16"/>
-        <image name="icon_camera_02" width="16" height="16"/>
+        <image name="icon_back_02" width="20" height="20"/>
+        <image name="icon_bullet_02" width="4" height="6"/>
+        <image name="icon_camera_02" width="49" height="39"/>
         <image name="icon_cancel_04" width="20" height="20"/>
         <image name="icon_check_03_on" width="9" height="7"/>
         <image name="icon_check_04_on" width="13" height="9"/>
         <image name="icon_check_05_on" width="20" height="20"/>
         <image name="icon_dot_01" width="3" height="3"/>
         <image name="icon_fan_01_off" width="28" height="28"/>
-        <image name="icon_more_02" width="16" height="16"/>
-        <image name="tag_fanclub_01_premium" width="16" height="16"/>
+        <image name="icon_more_02" width="20" height="20"/>
+        <image name="tag_fanclub_01_premium" width="22" height="22"/>
         <image name="tag_official_02" width="78" height="13"/>
     </resources>
 </document>
