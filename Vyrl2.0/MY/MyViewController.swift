@@ -30,13 +30,10 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         registerSwipe()
-        print("My");
-        
         profileImage.layer.masksToBounds = true
         profileImage.layer.cornerRadius = profileImage.frame.width / 2
         profileImage.layer.borderColor = UIColor.black.cgColor
         profileImage.layer.borderWidth = 1.0
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

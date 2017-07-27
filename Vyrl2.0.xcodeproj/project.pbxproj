@@ -31,6 +31,7 @@
 		A650368C1F0E30BA00AD540A /* FeedNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65036891F0E30BA00AD540A /* FeedNavigationController.swift */; };
 		A650368D1F0E30BA00AD540A /* FeedNavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A650368A1F0E30BA00AD540A /* FeedNavigationControllerExtension.swift */; };
 		A650368F1F0E3F1A00AD540A /* WriteMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A650368E1F0E3F1A00AD540A /* WriteMediaViewController.swift */; };
+		A67143981F29B69000B79432 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A67143971F29B69000B79432 /* Image.xcassets */; };
 		A6722C311F25F7D600CEBBD6 /* FeedTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6722C301F25F7D600CEBBD6 /* FeedTableCell.swift */; };
 		CE08981C1ECD704F000D6D6C /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08981B1ECD704F000D6D6C /* SearchViewController.swift */; };
 		CE08981E1ECD706A000D6D6C /* FanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08981D1ECD706A000D6D6C /* FanViewController.swift */; };
@@ -43,7 +44,7 @@
 		CE29B19E1ECD5FEE003F4D2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE29B19D1ECD5FEE003F4D2E /* AppDelegate.swift */; };
 		CE29B1A01ECD5FEE003F4D2E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE29B19F1ECD5FEE003F4D2E /* ViewController.swift */; };
 		CE29B1A51ECD5FEE003F4D2E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE29B1A31ECD5FEE003F4D2E /* Main.storyboard */; };
-		CE29B1A71ECD5FEE003F4D2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE29B1A61ECD5FEE003F4D2E /* Assets.xcassets */; };
+		CE29B1A71ECD5FEE003F4D2E /* Emoticon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE29B1A61ECD5FEE003F4D2E /* Emoticon.xcassets */; };
 		CE29B1AA1ECD5FEE003F4D2E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE29B1A81ECD5FEE003F4D2E /* LaunchScreen.storyboard */; };
 		CE29B1B51ECD5FEE003F4D2E /* Vyrl2_0UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE29B1B41ECD5FEE003F4D2E /* Vyrl2_0UITests.swift */; };
 		CE29B1CC1ECD6161003F4D2E /* Fan.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE29B1C01ECD6161003F4D2E /* Fan.storyboard */; };
@@ -97,6 +98,7 @@
 		A65036891F0E30BA00AD540A /* FeedNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedNavigationController.swift; sourceTree = "<group>"; };
 		A650368A1F0E30BA00AD540A /* FeedNavigationControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedNavigationControllerExtension.swift; sourceTree = "<group>"; };
 		A650368E1F0E3F1A00AD540A /* WriteMediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteMediaViewController.swift; sourceTree = "<group>"; };
+		A67143971F29B69000B79432 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
 		A6722C301F25F7D600CEBBD6 /* FeedTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableCell.swift; sourceTree = "<group>"; };
 		C2AE70CA913C7D61FE18140C /* Pods-Vyrl2.0UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vyrl2.0UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vyrl2.0UITests/Pods-Vyrl2.0UITests.release.xcconfig"; sourceTree = "<group>"; };
 		CE08981B1ECD704F000D6D6C /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = Vyrl2.0/SEARCH/SearchViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -112,7 +114,7 @@
 		CE29B19D1ECD5FEE003F4D2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE29B19F1ECD5FEE003F4D2E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CE29B1A41ECD5FEE003F4D2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		CE29B1A61ECD5FEE003F4D2E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CE29B1A61ECD5FEE003F4D2E /* Emoticon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Emoticon.xcassets; sourceTree = "<group>"; };
 		CE29B1A91ECD5FEE003F4D2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE29B1AB1ECD5FEE003F4D2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE29B1B01ECD5FEE003F4D2E /* Vyrl2.0UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Vyrl2.0UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -221,7 +223,8 @@
 				CEF77CB21EDFC08A00884F2C /* Write.storyboard */,
 				CE29B19D1ECD5FEE003F4D2E /* AppDelegate.swift */,
 				CE29B19F1ECD5FEE003F4D2E /* ViewController.swift */,
-				CE29B1A61ECD5FEE003F4D2E /* Assets.xcassets */,
+				CE29B1A61ECD5FEE003F4D2E /* Emoticon.xcassets */,
+				A67143971F29B69000B79432 /* Image.xcassets */,
 				CE29B1DD1ECD6A4E003F4D2E /* Vyrl2.0-Bridging-Header.h */,
 				CE29B1A81ECD5FEE003F4D2E /* LaunchScreen.storyboard */,
 				CE29B1AB1ECD5FEE003F4D2E /* Info.plist */,
@@ -430,7 +433,8 @@
 				8F4C09291EE528840026D49F /* FeedStyle.storyboard in Resources */,
 				CE29B1CE1ECD6161003F4D2E /* Login.storyboard in Resources */,
 				CE29B1D11ECD6161003F4D2E /* Search.storyboard in Resources */,
-				CE29B1A71ECD5FEE003F4D2E /* Assets.xcassets in Resources */,
+				A67143981F29B69000B79432 /* Image.xcassets in Resources */,
+				CE29B1A71ECD5FEE003F4D2E /* Emoticon.xcassets in Resources */,
 				CE29B1CC1ECD6161003F4D2E /* Fan.storyboard in Resources */,
 				CE29B1A51ECD5FEE003F4D2E /* Main.storyboard in Resources */,
 				CEF77CB31EDFC08A00884F2C /* Write.storyboard in Resources */,
