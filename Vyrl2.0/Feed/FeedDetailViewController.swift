@@ -15,7 +15,7 @@ import ObjectMapper
 class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableViewDataSource {
    
 
-    @IBOutlet weak var commentTextView: GrowingTextView!
+    @IBOutlet weak var commentTextView: UITextView!
     
     @IBOutlet weak var tableView: UITableView!
   
@@ -29,24 +29,21 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
     var kbHeight: CGFloat!
     
     var commentArray : [Comment] = []
+    
+    var tapGesture : UITapGestureRecognizer!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 400
         tableView.tableFooterView = UIView(frame: .zero)
         tableView.reloadData()
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureHandler))
-        view.addGestureRecognizer(tapGesture)
+        tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureHandler))
         
-        self.commentTextView.textContainerInset = UIEdgeInsetsMake(12, 0, 12, 0)
+         self.commentTextView.textContainerInset = UIEdgeInsetsMake(12, 0, 12, 0)
         
         showButtonView()
         requestComment()
@@ -57,11 +54,14 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
     }
     
     func showButtonView() {
+        self.commentTextView.resignFirstResponder()
+        
         commentFieldView.isHidden = true
         buttonView.isHidden = false
     }
     
     func showCommentFieldView() {
+        view.addGestureRecognizer(tapGesture)
         commentFieldView.isHidden = false
         buttonView.isHidden = true
     }
@@ -108,9 +108,26 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
 
  
     @IBAction func postButtonClick(_ sender: UIButton) {
-        self.commentTextView.resignFirstResponder()
+        let uri = Constants.VyrlAPIConstants.baseURL + "feeds/17/comments"
+
         
-        showButtonView()
+        let parameters : Parameters = [
+            "content": self.commentTextView.text!,
+            ]
+
+        
+        Alamofire.request(uri, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON { (response) in
+            switch response.result {
+            case .success(let json):
+                print(json)
+                DispatchQueue.main.async(execute: { 
+                    self.requestComment()
+                    self.showButtonView()
+                })
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     func keyboardShow(notification: NSNotification) {
@@ -157,15 +174,20 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
     
     func tapGestureHandler() {
         view.endEditing(true)
+        view.removeGestureRecognizer(tapGesture)
         showButtonView()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
     
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("select \(indexPath.row)")
+        self.showAlert()
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return self.commentArray.count + 1
@@ -184,29 +206,6 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
             cell = tableView.dequeueReusableCell(withIdentifier: "Comment") as! FeedDetailTableCell
             cell.commentNicknameLabel.text = self.commentArray[indexPath.row-1].nickName
             cell.commentContextTextView.text = self.commentArray[indexPath.row-1].content
-            
-            
-            /*
-            // Create Url from string
-            let url = URL(string: self.commentArray[indexPath.row-1].profileImageURL)!
-            
-            // Download task:
-            // - sharedSession = global NSURLCache, NSHTTPCookieStorage and NSURLCredentialStorage objects.
-            let task = URLSession.shared.dataTask(with: url) { (responseData, responseUrl, error) -> Void in
-                // if responseData is not null...
-                if let data = responseData{
-                    // execute in UI thread
-                    DispatchQueue.main.async(execute: { () -> Void in
-                        cell.commentProfileButton.setImage( UIImage(data: data), for: .normal)
-                    })
-                }
-            }
-            
-            // Run task
-            task.resume()
-            */
-            
- 
             break
         }
         
@@ -214,21 +213,30 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
     }
     
     func requestComment() {
-        self.commentArray.removeAll()
+       
         let uri = Constants.VyrlAPIConstants.baseURL + "/feeds/17/comments"
         
         Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Comment]>) in
             
             let array = response.result.value ?? []
-            
+            self.commentArray.removeAll()
             for comment in array {
                
                 self.commentArray.append(comment)
                 
             }
-            
             self.tableView.reloadData()
         }
+    }
+    
+    func showAlert() {
+        let dialog = UIAlertController(title: "제목", message: "내용", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "확인", style: UIAlertActionStyle.default)
+        dialog.addAction(action)
+        
+        self.present(dialog, animated: true, completion: nil)
+
     }
 
 }
@@ -298,7 +306,6 @@ class FeedDetailTableCell : UITableViewCell {
     @IBOutlet weak var commentNicknameLabel: UILabel!
     @IBOutlet weak var commentProfileButton: UIButton!
     @IBOutlet weak var commentContextTextView: UITextView!
-    
     
     @IBOutlet weak var imageScrollView: UIScrollView!
     
