@@ -21,10 +21,14 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
     var refreshControl : UIRefreshControl!
     
+    @IBOutlet weak var tableViewContentHeight: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.getAllFeed()
+        
+        self.tableViewContentHeight.constant = UIScreen.main.bounds.height - 44 - 20 - 45
 
         // Do any additional setup after loading the view.
         
@@ -32,11 +36,10 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         self.tableView.dataSource = self
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 400
-        tableView.tableFooterView = UIView(frame: .zero)
         
         let refreshView = KRPullLoadView()
         refreshView.delegate = self
-        tableView.addPullLoadableView(refreshView, type: .refresh)       
+        tableView.addPullLoadableView(refreshView, type: .refresh)
     }
     
     func pullLoadView(_ pullLoadView: KRPullLoadView, didChangeState state: KRPullLoaderState, viewType type: KRPullLoaderType){
@@ -56,7 +59,6 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         // Dispose of any resources that can be recreated.
     }
     
-    
     @IBAction func photoClick(_ sender: UIButton) {
         self.pushView(storyboardName: "Feed", controllerName: "FeedFullScreenViewController")
     }
@@ -65,13 +67,10 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
     {
         return self.articleArray.count
     }
-
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
        
-        var cell  = tableView.dequeueReusableCell(withIdentifier: "oneFeed") as! FeedTableCell
-        
 //        switch indexPath.row {
 //        case 0:
 //            cell = tableView.dequeueReusableCell(withIdentifier: "oneFeed") as! FeedTableCell
@@ -93,9 +92,9 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         
         let article = self.articleArray[indexPath.row]
 
-        cell = tableView.dequeueReusableCell(withIdentifier: article.type.rawValue, for: indexPath) as! FeedTableCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: article.type.rawValue, for: indexPath) as! FeedTableCell
         cell.article = article
-        cell.delegate = self as! YourCellDelegate
+        cell.delegate = self
         cell.contentLabel.text = article.content
         
         return cell
@@ -114,7 +113,13 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
                     self.articleArray.append(article)
                 }
             
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+
+                print("tableView Height:\(self.tableView.frame.size.height)")
+//                print("tableView tableViewContentHeight:\(self.tableViewContentHeight.constant)")
+                print("tableView content Size:\(self.tableView.contentSize.height)")
+            }
         }
     }
 }

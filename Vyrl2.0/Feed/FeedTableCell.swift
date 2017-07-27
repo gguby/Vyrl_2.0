@@ -23,6 +23,8 @@ class FeedTableCell: UITableViewCell {
     
     @IBOutlet weak var collectionViewLeading: NSLayoutConstraint!
     
+    @IBOutlet weak var photo: UIImageView!
+    
     var cellWidth = 124
 
     var delegate: YourCellDelegate!
@@ -30,11 +32,22 @@ class FeedTableCell: UITableViewCell {
     var article : Article? {
         didSet{
             
+            let count = (self.article!.mediaCount)!
+            
             guard self.collectionView != nil else {
+                
+                if ( count == 1 ){
+                    let url : URL = URL.init(string: (article?.images[0])!)!
+                    self.photo.af_setImage(withURL: url)
+                }
+                
                 return
             }
-            
-            let count = (self.article!.mediaCount)!
+  
+            if ( count == 1 ){
+                let url : URL = URL.init(string: (article?.images[0])!)!
+                self.photo.af_setImage(withURL: url)
+            }
             
             if ( count == 2 ){
                 cellWidth = 186
