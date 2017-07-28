@@ -164,24 +164,6 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
                 }
         })
     }
-    
-    func getProfileData() {
-//        let uri = LoginManager.sharedInstance.baseURL + "my/profile"
-//        let destination = DownloadRequest.suggestedDownloadDestination(for: .documentDirectory)
-//        
-//        Alamofire.download(
-//            uri,
-//            method: .get,
-//            parameters: nil,
-//            encoding: JSONEncoding.default,
-//            headers: nil,
-//            to: destination).downloadProgress(closure: { (progress) in
-//                print(progress)
-//            }).response(completionHandler: { (DefaultDownloadResponse) in
-//                print(DefaultDownloadResponse)
-//            })
-
-    }
 
     func showAlert() {
         let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.alert)
@@ -193,6 +175,9 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
            self.changeProfile()
         })
         let defaultProfileAction = UIAlertAction(title: "기본 이미지로 변경", style: .default, handler: { (action) -> Void in
+            
+            self.photoView.setImage(UIImage.init(named: "icon_user_03"), for: UIControlState.normal)
+            
             self.dismiss(animated: true, completion: {
                 
             })
@@ -297,7 +282,6 @@ extension ProfileController : UITextFieldDelegate {
         }
         
         return true
-
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

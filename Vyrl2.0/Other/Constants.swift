@@ -31,20 +31,26 @@ struct Constants {
     struct VyrlFeedURL {
         static let FEED = VyrlAPIConstants.baseURL + "feeds"
         
-        static func deleteFeedLike(articleId :String)-> String{
-            return VyrlAPIConstants.baseURL + "feeds/likes/" + articleId
+        static func feedLike(articleId :Int)-> String{
+            
+            let str = "\(articleId)"
+            return VyrlAPIConstants.baseURL + "feeds/likes/" + str
         }
         
-        static func usersFeedLike(articleId :String)-> String{
-            return VyrlAPIConstants.baseURL + "feeds/users/" + articleId + "/likes"
+        static func usersFeedLike(articleId :Int)-> String{
+            
+            let str = "\(articleId)"
+            return VyrlAPIConstants.baseURL + "feeds/users/" + str + "/likes"
         }
         
-        static func feed(articleId :String)-> String{
-            return VyrlAPIConstants.baseURL + "feeds/" + articleId
+        static func feed(articleId :Int)-> String{
+            let str = "\(articleId)"
+            return VyrlAPIConstants.baseURL + "feeds/" + str
         }
         
-        static func feedComment(articleId:String)-> String{
-            return VyrlAPIConstants.baseURL + "feeds/" + articleId + "/comments"
+        static func feedComment(articleId:Int)-> String{
+            let str = "\(articleId)"
+            return VyrlAPIConstants.baseURL + "feeds/" + str + "/comments"
         }
     }
     

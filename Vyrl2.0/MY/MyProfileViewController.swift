@@ -163,7 +163,7 @@ class MyProfileViewController: UIViewController, UIImagePickerControllerDelegate
                 self.introField.text = jsonData["selfIntro"] as? String
                 self.webURLField.text = jsonData["homepageUrl"] as? String
                 
-                if(jsonData["imagePata"] != nil) {
+                if(jsonData["imagePath"] != nil) {
                     let url = NSURL(string: jsonData["imagePath"] as! String)
                     self.photoView.af_setImage(for: UIControlState.normal, url: url! as URL)
                 }
@@ -184,6 +184,9 @@ class MyProfileViewController: UIViewController, UIImagePickerControllerDelegate
             self.changeProfile()
         })
         let defaultProfileAction = UIAlertAction(title: "기본 이미지로 변경", style: .default, handler: { (action) -> Void in
+            
+            self.photoView.setImage(UIImage.init(named: "icon_user_03"), for: UIControlState.normal)
+            
             self.dismiss(animated: true, completion: {
                 
             })

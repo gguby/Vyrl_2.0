@@ -24,6 +24,11 @@ class FeedTableCell: UITableViewCell {
     @IBOutlet weak var collectionViewLeading: NSLayoutConstraint!
     
     @IBOutlet weak var photo: UIImageView!
+    @IBOutlet weak var likeBtn: UIButton!
+    @IBOutlet weak var cntLike: UIButton!
+    
+    @IBOutlet weak var share: UIButton!
+    @IBOutlet weak var comment: UIButton!
     
     var cellWidth = 124
 
@@ -34,21 +39,33 @@ class FeedTableCell: UITableViewCell {
             
             let count = (self.article!.mediaCount)!
             
-            guard self.collectionView != nil else {
-                
-                if ( count == 1 ){
-                    let url : URL = URL.init(string: (article?.images[0])!)!
-                    self.photo.af_setImage(withURL: url)
-                }
-                
-                return
-            }
-  
             if ( count == 1 ){
                 let url : URL = URL.init(string: (article?.images[0])!)!
                 self.photo.af_setImage(withURL: url)
             }
             
+            var str : String!
+            
+            if let x = article?.cntLike {
+                str = "\(x)"
+            } else {
+                str = "0"
+            }
+            
+            self.cntLike.setTitle(str, for: .normal)
+            
+            if let x = article?.cntComment {
+                str = "\(x)"
+            }else {
+                str = "0"
+            }
+            
+            self.comment.setTitle(str, for: .normal)
+            
+            guard self.collectionView != nil else {                
+                return
+            }
+  
             if ( count == 2 ){
                 cellWidth = 186
             }
@@ -80,6 +97,39 @@ class FeedTableCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    @IBAction func like(_ sender: UIButton) {
+        if sender.tag == 0 {
+            let uri = URL.init(string: Constants.VyrlFeedURL.feedLike(articleId: (self.article?.id)!))
+            Alamofire.request(uri!, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: {
+                response in switch response.result {
+                case .success(let json):
+                    print((response.response?.statusCode)!)
+                    print(json)
+                    sender.setImage(UIImage.init(named: "icon_heart_01_on"), for: .normal)
+                    sender.tag = 1
+                case .failure(let error):
+                    print(error)
+                }
+            })
+        }else {
+            
+            let uri = URL.init(string: Constants.VyrlFeedURL.feedLike(articleId: (self.article?.id)!))
+            Alamofire.request(uri!, method: .delete, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: {
+                response in switch response.result {
+                case .success(let json):
+                    print((response.response?.statusCode)!)
+                    print(json)
+                    
+                    sender.setImage(UIImage.init(named: "icon_heart_01"), for: .normal)
+                    sender.tag = 0
+                    
+                case .failure(let error):
+                    print(error)
+                }
+            })
+        }
     }
 }
 
