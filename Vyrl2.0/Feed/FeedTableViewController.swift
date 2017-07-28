@@ -115,10 +115,6 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
             
             DispatchQueue.main.async {
                 self.tableView.reloadData()
-
-                print("tableView Height:\(self.tableView.frame.size.height)")
-//                print("tableView tableViewContentHeight:\(self.tableViewContentHeight.constant)")
-                print("tableView content Size:\(self.tableView.contentSize.height)")
             }
         }
     }

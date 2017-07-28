@@ -17,9 +17,12 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     @IBOutlet weak var accountTable: UITableView!
     
+    @IBOutlet weak var feedTable: UITableView!
+  
     @IBOutlet weak var footer: UIView!
     
-    var accountList : Array<Account> = []
+    var accountList  = [Account]()
+    var articleArray = [Article]()    
     
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var nickNameLabel: UILabel!
@@ -34,14 +37,18 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         profileImage.layer.cornerRadius = profileImage.frame.width / 2
         profileImage.layer.borderColor = UIColor.black.cgColor
         profileImage.layer.borderWidth = 1.0
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
         self.accountTable.delegate = self
         self.accountTable.dataSource = self
         self.accountTable.rowHeight = 50
+        
+        self.setupFeedTable()
+        
+        self.getAllFeed()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         self.loadMyProfile()
     }
@@ -150,11 +157,26 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
+        if tableView == feedTable {
+            return self.articleArray.count
+        }
+        
         return accountList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
+        if tableView == feedTable {
+            let article = self.articleArray[indexPath.row]
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: article.type.rawValue, for: indexPath) as! FeedTableCell
+            cell.article = article
+            cell.delegate = self
+            cell.contentLabel.text = article.content
+            
+            return cell
+        }
+        
         let cell :MyAccountCell = tableView.dequeueReusableCell(withIdentifier: "myaccountcell") as! MyAccountCell
         
         let account : Account = accountList[indexPath.row]
@@ -189,6 +211,9 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if ( tableView == feedTable ) {return}
+        
         let account : Account = accountList[indexPath.row]
         
         let currentAccount : Account = LoginManager.sharedInstance.getCurrentAccount()!
@@ -206,15 +231,53 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        
+        if ( tableView == feedTable ) {return 0}
+        
         return 50
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
+        if ( tableView == feedTable ) {return nil}
+        
         return footer
     }
 
     @IBAction func showAccountManagement(_ sender: Any) {
         self.pushView(storyboardName: "Setting", controllerName: "AccountManagement")
+    }
+}
+
+extension MyViewController : YourCellDelegate {
+    func didPressCell(sender: Any) {
+        self.pushView(storyboardName: "FeedStyle", controllerName: "FeedDetailViewController")
+    }
+    
+    func setupFeedTable(){
+        self.feedTable.delegate = self
+        self.feedTable.dataSource = self
+        self.feedTable.rowHeight = UITableViewAutomaticDimension
+        self.feedTable.estimatedRowHeight = 400
+    }
+    
+    func getAllFeed(){
+        self.articleArray.removeAll()
+        
+        let url = URL.init(string: Constants.VyrlFeedURL.FEED)
+        
+        Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Article]>) in
+            
+            let array = response.result.value ?? []
+            
+            for article in array {
+                self.articleArray.append(article)
+            }
+            
+            DispatchQueue.main.async {
+                self.feedTable.reloadData()
+            }
+        }
     }
 }
 
@@ -226,44 +289,4 @@ class MyAccountCell : UITableViewCell{
     @IBOutlet weak var iconCheck: UIImageView!
     @IBOutlet weak var iconDot: UIImageView!
     
-}
-
-fileprivate let minimumHitArea = CGSize(width: 100, height: 100)
-
-class SmallButton : UIButton {
-    
-}
-
-extension SmallButton {
-    open override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        // if the button is hidden/disabled/transparent it can't be hit
-        if self.isHidden || !self.isUserInteractionEnabled || self.alpha < 0.01 { return nil }
-        
-        // increase the hit frame to be at least as big as `minimumHitArea`
-        let buttonSize = self.bounds.size
-        let widthToAdd = max(minimumHitArea.width - buttonSize.width, 0)
-        let heightToAdd = max(minimumHitArea.height - buttonSize.height, 0)
-        let largerFrame = self.bounds.insetBy(dx: -widthToAdd / 2, dy: -heightToAdd / 2)
-        
-        // perform hit test on larger frame
-        return (largerFrame.contains(point)) ? self : nil
-    }
-}
-
-class CustomButton : UIButton {
-    
-}
-
-extension CustomButton {
-    override var isHighlighted: Bool {
-        didSet {
-            if isHighlighted
-            {
-                self.backgroundColor = UIColor(red: 62.0 / 255.0, green: 58.0 / 255.0, blue: 57.0 / 255.0, alpha: 0.3)
-            } else
-            {
-                self.backgroundColor = UIColor.clear
-            }
-        }
-    }
 }
