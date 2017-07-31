@@ -21,8 +21,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hMk-gj-QMF" userLabel="UploadLoading">
+                                <rect key="frame" x="0.0" y="20" width="375" height="63"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="We0-y4-zh3">
+                                        <rect key="frame" x="119" y="26" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="C1c-FQ-t3h"/>
+                                            <constraint firstAttribute="width" constant="20" id="mjB-Vk-8uX"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="게시글을 등록중입니다!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exE-Vh-Zz2">
+                                        <rect key="frame" x="145" y="26" width="110.5" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="asC-8t-ylf"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
+                                        <color key="textColor" red="0.50196078431372548" green="0.32156862745098036" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="We0-y4-zh3" firstAttribute="leading" secondItem="hMk-gj-QMF" secondAttribute="leading" constant="119" id="6sX-RN-roe"/>
+                                    <constraint firstItem="exE-Vh-Zz2" firstAttribute="top" secondItem="hMk-gj-QMF" secondAttribute="top" constant="26" id="ExA-Nd-ntR"/>
+                                    <constraint firstItem="We0-y4-zh3" firstAttribute="top" secondItem="hMk-gj-QMF" secondAttribute="top" constant="26" id="HLw-p0-KPq"/>
+                                    <constraint firstItem="exE-Vh-Zz2" firstAttribute="leading" secondItem="We0-y4-zh3" secondAttribute="trailing" constant="6" id="KXt-mR-e1s"/>
+                                    <constraint firstAttribute="height" constant="63" id="qbo-zP-XTb"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oyc-ga-sJv">
-                                <rect key="frame" x="0.0" y="20" width="375" height="637"/>
+                                <rect key="frame" x="0.0" y="83" width="375" height="637"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="637" id="na1-vq-4kG"/>
@@ -180,7 +209,7 @@
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofj-Hf-ojv">
-                                                            <rect key="frame" x="15" y="434" width="367" height="57.5"/>
+                                                            <rect key="frame" x="15" y="434" width="367" height="58"/>
                                                             <string key="text">귀염둥이들 #내사랑 #샤이니 언제 나오지ㅠ 컴백 무대 넘나 기다리는
 중...!! 하ㅠㅠ 저 사탕은 저에게 주는 건가요?ㅠㅠㅠㅠ
 #shinee_s_back #shinee...</string>
@@ -189,7 +218,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fUX-hJ-PSH" userLabel="Time View">
-                                                            <rect key="frame" x="0.0" y="498.5" width="375" height="15"/>
+                                                            <rect key="frame" x="0.0" y="499" width="375" height="15"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4분 전" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IEv-XZ-B5O">
                                                                     <rect key="frame" x="14" y="0.0" width="31" height="15"/>
@@ -231,7 +260,7 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pBl-QI-v6M" userLabel="comment View">
-                                                            <rect key="frame" x="0.0" y="513.5" width="375" height="59"/>
+                                                            <rect key="frame" x="0.0" y="514" width="375" height="59"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="shine_shinee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPS-QH-FqM">
                                                                     <rect key="frame" x="15" y="11" width="69" height="16"/>
@@ -283,7 +312,7 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YDM-A2-OL4" userLabel="button view">
-                                                            <rect key="frame" x="0.0" y="572.5" width="375" height="34"/>
+                                                            <rect key="frame" x="0.0" y="573" width="375" height="34"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tbe-fo-INV" userLabel="like">
                                                                     <rect key="frame" x="15" y="0.0" width="21" height="34"/>
@@ -293,7 +322,7 @@
                                                                     </constraints>
                                                                     <state key="normal" title="Button" image="icon_heart_01"/>
                                                                     <connections>
-                                                                        <action selector="like:" destination="PFc-q2-8d2" eventType="touchUpInside" id="YOE-SY-wVW"/>
+                                                                        <action selector="like:" destination="PFc-q2-8d2" eventType="touchUpInside" id="FcB-mY-o6W"/>
                                                                     </connections>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iIQ-Xp-lud" userLabel="cntLike">
@@ -321,7 +350,7 @@
                                                                     </state>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="75y-js-nAt" userLabel="share">
-                                                                    <rect key="frame" x="169" y="-0.5" width="76" height="34"/>
+                                                                    <rect key="frame" x="169" y="0.0" width="76" height="34"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="34" id="0hN-6a-fVo"/>
                                                                         <constraint firstAttribute="width" constant="76" id="WMr-vA-aAd"/>
@@ -401,12 +430,12 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="cntLike" destination="iIQ-Xp-lud" id="abl-FB-aJ4"/>
-                                            <outlet property="comment" destination="hS6-cq-huW" id="ZFj-eR-ixa"/>
+                                            <outlet property="cntLike" destination="iIQ-Xp-lud" id="Prx-dG-szi"/>
+                                            <outlet property="comment" destination="hS6-cq-huW" id="JcM-1V-4yb"/>
                                             <outlet property="contentLabel" destination="ofj-Hf-ojv" id="1H0-nN-3j9"/>
-                                            <outlet property="likeBtn" destination="tbe-fo-INV" id="Ju1-P7-bpW"/>
+                                            <outlet property="likeBtn" destination="tbe-fo-INV" id="HZK-Ai-H9E"/>
                                             <outlet property="photo" destination="Jvw-3o-Vw5" id="q9r-Gf-elW"/>
-                                            <outlet property="share" destination="75y-js-nAt" id="Hov-KY-lXj"/>
+                                            <outlet property="share" destination="75y-js-nAt" id="O3P-OV-ULn"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="FeedTableCell2" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="advertisingFeed" rowHeight="508" id="XHz-Pc-KGu" customClass="FeedTableCell" customModule="Vyrl2_0" customModuleProvider="target">
@@ -752,13 +781,13 @@
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="최강창민......the love!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ix7-7i-6zp">
-                                                            <rect key="frame" x="15" y="115" width="345" height="156.5"/>
+                                                            <rect key="frame" x="15" y="115" width="345" height="157"/>
                                                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
                                                             <color key="textColor" red="0.32549019607843138" green="0.30980392156862746" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2SY-Cu-VO0" userLabel="Time View">
-                                                            <rect key="frame" x="0.0" y="280.5" width="375" height="15"/>
+                                                            <rect key="frame" x="0.0" y="281" width="375" height="15"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4분 전" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GcC-Wg-wss">
                                                                     <rect key="frame" x="14" y="0.0" width="31" height="15"/>
@@ -796,7 +825,7 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WXZ-B2-pbI" userLabel="comment View">
-                                                            <rect key="frame" x="0.0" y="295.5" width="375" height="59"/>
+                                                            <rect key="frame" x="0.0" y="296" width="375" height="59"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="shine_shinee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T6V-ym-nI9">
                                                                     <rect key="frame" x="15" y="11" width="69" height="15"/>
@@ -849,7 +878,7 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lLE-QP-xY5" userLabel="button view">
-                                                            <rect key="frame" x="0.0" y="354.5" width="375" height="34"/>
+                                                            <rect key="frame" x="0.0" y="355" width="375" height="34"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eGz-vy-KOM" userLabel="like">
                                                                     <rect key="frame" x="15" y="0.0" width="21" height="34"/>
@@ -1143,7 +1172,7 @@
                                                             </cells>
                                                         </collectionView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ldW-t4-vrG">
-                                                            <rect key="frame" x="15" y="414" width="367" height="60.5"/>
+                                                            <rect key="frame" x="15" y="414" width="367" height="61"/>
                                                             <string key="text">귀염둥이들 #내사랑 #샤이니 언제 나오지ㅠ 컴백 무대 넘나 기다리는
 중...!! 하ㅠㅠ 저 사탕은 저에게 주는 건가요?ㅠㅠㅠㅠ
 #shinee_s_back #shinee...</string>
@@ -1152,7 +1181,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8H3-Y0-v61" userLabel="Time View">
-                                                            <rect key="frame" x="0.0" y="481.5" width="375" height="15"/>
+                                                            <rect key="frame" x="0.0" y="482" width="375" height="15"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4분 전" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDs-mJ-9kJ">
                                                                     <rect key="frame" x="14" y="0.0" width="31" height="15"/>
@@ -1194,7 +1223,7 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cKz-XI-bjx" userLabel="comment View">
-                                                            <rect key="frame" x="0.0" y="496.5" width="375" height="59"/>
+                                                            <rect key="frame" x="0.0" y="497" width="375" height="59"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="shine_shinee" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kxo-iE-hFz">
                                                                     <rect key="frame" x="15" y="11" width="69" height="16"/>
@@ -1246,10 +1275,10 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5oN-rj-eY4" userLabel="button view">
-                                                            <rect key="frame" x="0.0" y="555.5" width="375" height="34"/>
+                                                            <rect key="frame" x="0.0" y="556" width="375" height="34"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dl3-oN-piD">
-                                                                    <rect key="frame" x="15" y="-0.5" width="21" height="34"/>
+                                                                    <rect key="frame" x="15" y="0.0" width="21" height="34"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="34" id="9ey-sF-hCs"/>
                                                                         <constraint firstAttribute="width" constant="21" id="9sb-T3-1PK"/>
@@ -1599,7 +1628,7 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wi2-37-Jrr" userLabel="button view">
-                                                            <rect key="frame" x="0.0" y="465.5" width="375" height="34"/>
+                                                            <rect key="frame" x="0.0" y="466" width="375" height="34"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6xh-zG-hKZ" userLabel="like">
                                                                     <rect key="frame" x="15" y="0.0" width="21" height="34"/>
@@ -1637,7 +1666,7 @@
                                                                     </state>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xYY-X1-pci" userLabel="share">
-                                                                    <rect key="frame" x="169" y="-0.5" width="76" height="34"/>
+                                                                    <rect key="frame" x="169" y="0.0" width="76" height="34"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="34" id="Eam-r4-Qgx"/>
                                                                         <constraint firstAttribute="width" constant="76" id="MVz-hu-SrS"/>
@@ -1719,16 +1748,22 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="hMk-gj-QMF" firstAttribute="top" secondItem="Qv9-mE-9rf" secondAttribute="bottom" id="4ue-vM-aK4"/>
+                            <constraint firstItem="oyc-ga-sJv" firstAttribute="top" secondItem="hMk-gj-QMF" secondAttribute="bottom" id="DZF-cX-g7e"/>
                             <constraint firstItem="oyc-ga-sJv" firstAttribute="leading" secondItem="9u1-B7-T7E" secondAttribute="leading" id="J55-oc-zHR"/>
                             <constraint firstAttribute="trailing" secondItem="oyc-ga-sJv" secondAttribute="trailing" id="aQN-b9-m8H"/>
-                            <constraint firstItem="oyc-ga-sJv" firstAttribute="top" secondItem="Qv9-mE-9rf" secondAttribute="bottom" id="dvl-Eb-EOt"/>
+                            <constraint firstItem="hMk-gj-QMF" firstAttribute="leading" secondItem="oyc-ga-sJv" secondAttribute="leading" id="vDy-2l-p0w"/>
+                            <constraint firstItem="hMk-gj-QMF" firstAttribute="width" secondItem="9u1-B7-T7E" secondAttribute="width" id="w5J-lk-A6n"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
+                        <outlet property="loadingImage" destination="We0-y4-zh3" id="2Xa-EX-PIB"/>
                         <outlet property="tableView" destination="oyc-ga-sJv" id="aTw-Y0-OGL"/>
                         <outlet property="tableViewContentHeight" destination="na1-vq-4kG" id="z3N-TZ-59j"/>
+                        <outlet property="uploadLoadingHeight" destination="qbo-zP-XTb" id="m3B-Yn-02V"/>
+                        <outlet property="uploadLoadingView" destination="hMk-gj-QMF" id="8Hd-D3-F0I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UDs-sZ-MBN" userLabel="First Responder" sceneMemberID="firstResponder"/>

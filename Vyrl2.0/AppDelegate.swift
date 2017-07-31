@@ -43,6 +43,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
+    var rootViewController : ViewController!
+    var feedView : FeedTableViewController!
+    
     func goLogin(){
         
         let storyboard = UIStoryboard(name: "Login", bundle: nil)

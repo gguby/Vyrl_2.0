@@ -37,7 +37,7 @@ class FeedTableCell: UITableViewCell {
     var article : Article? {
         didSet{
             
-            let count = (self.article!.mediaCount)!
+            var count = (self.article!.mediaCount)!
             
             if ( count == 1 ){
                 let url : URL = URL.init(string: (article?.images[0])!)!
@@ -68,6 +68,10 @@ class FeedTableCell: UITableViewCell {
   
             if ( count == 2 ){
                 cellWidth = 186
+            }
+            
+            if ( count > 6){
+                count = 6
             }
             
             contentHeight.constant = CGFloat(ceilf( Float(count) / 3) * Float(cellWidth))

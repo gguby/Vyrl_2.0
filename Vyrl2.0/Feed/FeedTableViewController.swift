@@ -11,17 +11,25 @@ import Alamofire
 import ObjectMapper
 import Alamofire
 import AlamofireObjectMapper
-import KRPullLoader
 import AVFoundation
 
-class FeedTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , KRPullLoadViewDelegate{
+class FeedTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
     @IBOutlet weak var tableView: UITableView!
     var articleArray = [Article]()
     
     var refreshControl : UIRefreshControl!
     
+    @IBOutlet weak var uploadLoadingView: UIView!
+    @IBOutlet weak var uploadLoadingHeight: NSLayoutConstraint!
     @IBOutlet weak var tableViewContentHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var loadingImage: UIImageView!
+    
+    
+    var refreshLoadingView : UIView!
+    var refreshColorView : UIView!
+    var refreshLoadingImageView : UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,21 +45,92 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 400
         
-        let refreshView = KRPullLoadView()
-        refreshView.delegate = self
-        tableView.addPullLoadableView(refreshView, type: .refresh)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.feedView = self
+        
+        self.initLoader()
+        
+        self.initRefresh()
     }
     
-    func pullLoadView(_ pullLoadView: KRPullLoadView, didChangeState state: KRPullLoaderState, viewType type: KRPullLoaderType){
-        switch state {
-        case let .loading(completionHandler):
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+1) {
-                completionHandler()
-                self.getAllFeed()
-            }
-        default:
-            break
+    func refresh(sender:AnyObject) {
+        self.getAllFeed()        
+    }
+    
+    func uploadHidden(hidden : Bool){
+        
+        UIView.animate(withDuration: 0.2,
+                       delay: 0.0,
+                       options: .curveEaseIn,
+                       animations: {
+                        
+                        if hidden {
+                            self.uploadLoadingHeight.constant = 0
+                            self.uploadLoadingView.alpha = 0
+                        }else {
+                            self.uploadLoadingHeight.constant = 63
+                            self.uploadLoadingView.alpha = 1
+                        }
+
+                        
+        }, completion: nil)
+    }
+    
+    func initRefresh(){
+        refreshControl = UIRefreshControl()
+        refreshControl.backgroundColor = UIColor.black
+        
+        self.refreshLoadingView = UIView(frame: self.refreshControl!.bounds)
+        self.refreshControl.backgroundColor = UIColor.clear
+        
+        self.refreshColorView = UIView(frame: self.refreshControl!.bounds)
+        self.refreshColorView.backgroundColor = UIColor.clear
+        self.refreshColorView.alpha = 0.30
+        
+        self.refreshLoadingImageView = UIImageView.init(image: UIImage.init(named: "icon_loader_02_1"))
+        
+        var imgList = [UIImage]()
+        
+        for count in 1...3 {
+            let strImageName : String = "icon_loader_02_\(count)"
+            let image = UIImage(named: strImageName)
+            imgList.append(image!)
         }
+        
+        self.refreshLoadingImageView.animationImages = imgList
+        self.refreshLoadingImageView.animationDuration = 1.0
+        self.refreshLoadingImageView.startAnimating()
+        
+        self.refreshLoadingView.addSubview(self.refreshLoadingImageView)
+        self.refreshLoadingView.clipsToBounds = true
+        
+        let x = UIScreen.main.bounds.width / 2 - 10
+        
+        self.refreshLoadingImageView.frame = CGRect(x: x, y: 20, width: 20, height: 20)
+        
+        self.refreshControl!.tintColor = UIColor.clear
+        self.refreshControl!.addSubview(self.refreshColorView)
+        self.refreshControl!.addSubview(self.refreshLoadingView)
+        
+        self.refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
+        self.tableView.addSubview(refreshControl) // not required when using UITableViewController
+        
+    }
+    
+    func initLoader(){
+        var imgList = [UIImage]()
+        
+        for count in 1...3 {
+            let strImageName : String = "icon_loader_02_\(count)"
+            let image = UIImage(named: strImageName)
+            imgList.append(image!)
+        }
+        
+        self.loadingImage.animationImages = imgList
+        self.loadingImage.animationDuration = 1.0
+        self.loadingImage.startAnimating()
+        
+        self.uploadHidden(hidden: true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -70,26 +149,6 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-       
-//        switch indexPath.row {
-//        case 0:
-//            cell = tableView.dequeueReusableCell(withIdentifier: "oneFeed") as! FeedTableCell
-//            break
-//        case 1:
-//            cell = tableView.dequeueReusableCell(withIdentifier: "advertisingFeed") as! FeedTableCell
-//            break
-//        case 2:
-//            cell = tableView.dequeueReusableCell(withIdentifier: "textOnlyFeed") as! FeedTableCell
-//            break
-//        case 3:
-//            cell = tableView.dequeueReusableCell(withIdentifier: "multiFeed") as! FeedTableCell
-//            break
-//        case 4:
-//            cell = tableView.dequeueReusableCell(withIdentifier: "channelFeed") as! FeedTableCell
-//            break
-//        default: break
-//        }
-        
         let article = self.articleArray[indexPath.row]
 
         let cell = tableView.dequeueReusableCell(withIdentifier: article.type.rawValue, for: indexPath) as! FeedTableCell
@@ -115,9 +174,66 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
             
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
             }
         }
     }
+    
+    func upload(query: URL, array : Array<AVAsset>){
+        
+        var fileName : String!
+        
+        self.uploadHidden(hidden: false)
+        
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            
+            var count = 1
+            
+            for asset in array {
+                
+                if asset.type == .photo {
+                    fileName = "\(count)" + ".jpg"
+                    
+                    if let imageData = asset.mediaData {
+                        multipartFormData.append(imageData, withName: "image", fileName: fileName, mimeType: "image/jpg")
+                    }
+                } else {
+                    fileName = "\(count)" + ".mpeg"
+                    
+                    if let imageData = asset.mediaData {
+                        multipartFormData.append(imageData, withName: "video", fileName: fileName, mimeType: "video/mpeg")
+                    }
+                }
+                
+                count = count + 1
+            }
+            
+        }, usingThreshold: UInt64.init(), to: query, method: .post, headers: Constants.VyrlAPIConstants.getHeader(), encodingCompletion:
+            {
+                encodingResult in
+                switch encodingResult {
+                case .success(let upload, _, _):
+                    
+                    upload.uploadProgress(closure: { (progress) in
+                    })
+                    
+                    upload.responseString { response in
+
+                        if ((response.response?.statusCode)! == 200){
+                            self.uploadHidden(hidden: true)
+                            self.getAllFeed()
+                        }
+                        
+                    }
+                case .failure(let encodingError):
+                    self.uploadHidden(hidden: true)
+                    print(encodingError.localizedDescription)
+                }
+        })
+
+    }
+    
+    
 }
 
 extension FeedTableViewController : YourCellDelegate {
@@ -131,6 +247,8 @@ public enum ArticleType : String{
     case oneFeed   = "oneFeed"
     case multiFeed = "multiFeed"
     case textOnlyFeed = "textOnlyFeed"
+    case advertisingFeed = "advertisingFeed"
+    case channelFeed = "channelFeed"
 }
 
 struct Article : Mappable {

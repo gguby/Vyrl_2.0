@@ -68,6 +68,12 @@ extension UIViewController
         swipeLeft.direction = UISwipeGestureRecognizerDirection.left
         self.view.addGestureRecognizer(swipeLeft)
     }
+    
+    func showToast(str: String){
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let vc = appDelegate.rootViewController
+        vc?.showToast(string: str)
+    }
 }
 
 class ViewController: UITabBarController , UITabBarControllerDelegate {
@@ -141,6 +147,10 @@ class ViewController: UITabBarController , UITabBarControllerDelegate {
         self.setupTabbar()
 
         self.delegate = self
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        appDelegate.rootViewController = self
     }
     
     func setupTabbar(){

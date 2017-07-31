@@ -170,6 +170,7 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             let article = self.articleArray[indexPath.row]
             
             let cell = tableView.dequeueReusableCell(withIdentifier: article.type.rawValue, for: indexPath) as! FeedTableCell
+
             cell.article = article
             cell.delegate = self
             cell.contentLabel.text = article.content

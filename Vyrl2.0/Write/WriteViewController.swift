@@ -77,56 +77,11 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
         
         let queryUrl = URL.init(string: uri, parameters: parameters)
         
-        self.view.isUserInteractionEnabled = false
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.feedView.upload(query: queryUrl!, array: self.selectedAssetArray)
         
-        Alamofire.upload(multipartFormData: { (multipartFormData) in
-            
-            var count = 1
-            
-            for asset in self.selectedAssetArray {
-                
-                if asset.type == .photo {
-                    fileName = "\(count)" + ".jpg"
-                    
-                    if let imageData = asset.mediaData {
-                        multipartFormData.append(imageData, withName: "image", fileName: fileName, mimeType: "image/jpg")
-                    }
-                } else {
-                    fileName = "\(count)" + ".mpeg"
-                    
-                    if let imageData = asset.mediaData {
-                        multipartFormData.append(imageData, withName: "video", fileName: fileName, mimeType: "video/mpeg")
-                    }
-                }
-                
-                count = count + 1
-            }
-            
-        }, usingThreshold: UInt64.init(), to: queryUrl!, method: .post, headers: Constants.VyrlAPIConstants.getHeader(), encodingCompletion:
-            {
-                encodingResult in
-                switch encodingResult {
-                case .success(let upload, _, _):
-                    
-                    self.view.isUserInteractionEnabled = true
-                    
-                    upload.uploadProgress(closure: { (progress) in
-                        
-                    })
-                    
-                    upload.responseString { response in
-
-                        print(response)
-                        if ((response.response?.statusCode)! == 200){
-                            self.dismiss(animated: true, completion: nil)
-                        }
-                        
-                    }
-                case .failure(let encodingError):
-                    self.view.isUserInteractionEnabled = true
-                    print(encodingError.localizedDescription)
-                }
-        })
+        self.dismiss(animated: true, completion: nil)
+        
     }
     
     @IBAction func dimissPop() {
