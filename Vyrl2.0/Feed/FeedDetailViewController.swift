@@ -206,6 +206,8 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
             cell = tableView.dequeueReusableCell(withIdentifier: "Comment") as! FeedDetailTableCell
             cell.commentNicknameLabel.text = self.commentArray[indexPath.row-1].nickName
             cell.commentContextTextView.text = self.commentArray[indexPath.row-1].content
+            cell.commentProfileButton.af_setBackgroundImage(for: .normal, url: URL.init(string: self.commentArray[indexPath.row-1].profileImageURL)!)
+            
             break
         }
         
@@ -268,7 +270,6 @@ struct Comment : Mappable {
     var content : String!
     var nickName : String!
     var profileImageURL : String!
-    var image : UIImage!
     
     init?(map: Map) {
         
@@ -279,12 +280,6 @@ struct Comment : Mappable {
         content <- map["content"]
         nickName <- map["nickName"]
         profileImageURL <- map["profile"]
-        
-        if let url = NSURL(string: profileImageURL) {
-            if let data = NSData(contentsOf: url as URL) {
-                image = UIImage(data: data as Data)
-            }
-        }
     }
 }
 
