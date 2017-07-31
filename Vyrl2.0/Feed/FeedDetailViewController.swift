@@ -36,8 +36,12 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
         super.viewDidLoad()
 
         tableView.tableFooterView = UIView(frame: .zero)
-        tableView.reloadData()
-        
+        let longPressGesture:UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+        longPressGesture.minimumPressDuration = 1.0 // 1 second press
+        longPressGesture.delegate = self as? UIGestureRecognizerDelegate
+        self.tableView.addGestureRecognizer(longPressGesture)
+        self.tableView.reloadData()
+
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
@@ -152,7 +156,7 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
                                      height: window.origin.y + window.height - keyboardSize.height)
            
             kbHeight = keyboardSize.height
-            emoticonView = EmoticonView.init(frame: CGRect.init(x: 0, y: keyboardSize.origin.y + keyboardSize.height, width: keyboardSize.width, height: keyboardSize.height), delegate: self as! EmoticonViewDelegate)
+            emoticonView = EmoticonView.init(frame: CGRect.init(x: 0, y: keyboardSize.origin.y + keyboardSize.height, width: keyboardSize.width, height: keyboardSize.height), delegate: self as EmoticonViewDelegate)
             emoticonView.backgroundColor = UIColor.white
             UIApplication.shared.windows[UIApplication.shared.windows.count-1].addSubview(emoticonView)
         } else {
@@ -183,11 +187,6 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
         return UITableViewAutomaticDimension
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("select \(indexPath.row)")
-        self.showAlert()
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return self.commentArray.count + 1
@@ -206,6 +205,8 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
             cell = tableView.dequeueReusableCell(withIdentifier: "Comment") as! FeedDetailTableCell
             cell.commentNicknameLabel.text = self.commentArray[indexPath.row-1].nickName
             cell.commentContextTextView.text = self.commentArray[indexPath.row-1].content
+            cell.commentProfileButton.af_setBackgroundImage(for: .normal, url: URL.init(string: self.commentArray[indexPath.row-1].profileImageURL)!)
+            
             break
         }
         
@@ -229,14 +230,57 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
         }
     }
     
-    func showAlert() {
-        let dialog = UIAlertController(title: "제목", message: "내용", preferredStyle: .alert)
+    func handleLongPress(_ longPressGestureRecognizer: UILongPressGestureRecognizer) {
         
-        let action = UIAlertAction(title: "확인", style: UIAlertActionStyle.default)
-        dialog.addAction(action)
+        if longPressGestureRecognizer.state == UIGestureRecognizerState.began {
+            
+            let touchPoint = longPressGestureRecognizer.location(in: self.tableView)
+            if let indexPath = tableView.indexPathForRow(at: touchPoint) {
+                // your code here, get the row for the indexPath or do whatever you want
+                self.showAlert(indexPath: indexPath)
+            }
+        }
+    }
+    
+    func showAlert(indexPath: IndexPath) {
+        let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.alert)
         
-        self.present(dialog, animated: true, completion: nil)
+        let modifyAction = UIAlertAction(title: "수정", style: .default,handler: { (action) -> Void in
+            
+        })
+        let deleteAction = UIAlertAction(title: "삭제", style: .default, handler: { (action) -> Void in
+            let uri = Constants.VyrlAPIConstants.baseURL + "/feeds/17/comments/\(self.commentArray[indexPath.row-1].id as Int)"
+            
+            Alamofire.request(uri, method: .delete, parameters: nil, encoding:JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: { (response) in
+                switch response.result {
+                case .success(let json):
+                    print(json)
+                    print(response.response?.statusCode)
+                    self.requestComment()
+                case .failure(let error):
+                    print(error)
+                }
 
+                
+            })
+            
+        })
+        
+        alertController.addAction(modifyAction)
+        alertController.addAction(deleteAction)
+        
+        alertController.popoverPresentationController?.sourceView = self.view
+        alertController.popoverPresentationController?.sourceRect = self.tableView.cellForRow(at: indexPath)!.frame
+        
+        present(alertController, animated: true, completion: {
+            alertController.view.superview?.isUserInteractionEnabled = true
+            alertController.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.alertControllerBackgroundTapped)))
+        })
+    }
+    
+    func alertControllerBackgroundTapped()
+    {
+        self.dismiss(animated: true, completion: nil)
     }
 
 }
@@ -264,27 +308,20 @@ extension FeedDetailViewController : EmoticonViewDelegate {
 }
 
 struct Comment : Mappable {
+    /// This function can be used to validate JSON prior to mapping. Return nil to cancel mapping at this point
+    init?(map: Map) {
+        
+    }
     var id : Int!
     var content : String!
     var nickName : String!
     var profileImageURL : String!
-    var image : UIImage!
-    
-    init?(map: Map) {
-        
-    }
-    
+
     mutating func mapping(map: Map){
         id <- map["id"]
         content <- map["content"]
         nickName <- map["nickName"]
         profileImageURL <- map["profile"]
-        
-        if let url = NSURL(string: profileImageURL) {
-            if let data = NSData(contentsOf: url as URL) {
-                image = UIImage(data: data as Data)
-            }
-        }
     }
 }
 
@@ -355,9 +392,7 @@ class FeedDetailTableCell : UITableViewCell {
                     
                 }).responseData { response in
                     if let data = response.result.value {
-                        print("finish")
-                        
-                        let image = UIImage(data: data)
+                       let image = UIImage(data: data)
                         
                         self.imageViewArray[self.index].image = image
                         self.imageViewArray[self.index].contentMode = .scaleAspectFit
