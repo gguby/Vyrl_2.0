@@ -12,7 +12,7 @@ import AVFoundation
 import Alamofire
 import ObjectMapper
 
-class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableViewDataSource {
+class FeedDetailViewController: UIViewController{
    
 
     @IBOutlet weak var commentTextView: UITextView!
@@ -25,6 +25,10 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
     @IBOutlet weak var emoticonImageView: UIImageView!
     @IBOutlet weak var showEmoticonButton: UIButton!
     
+    @IBOutlet weak var postCommentButton: UIButton!
+    @IBOutlet weak var modifyCommentButton: UIButton!
+    
+    
     var emoticonView : EmoticonView!
     var kbHeight: CGFloat!
     
@@ -36,10 +40,6 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
         super.viewDidLoad()
 
         tableView.tableFooterView = UIView(frame: .zero)
-        let longPressGesture:UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
-        longPressGesture.minimumPressDuration = 1.0 // 1 second press
-        longPressGesture.delegate = self as? UIGestureRecognizerDelegate
-        self.tableView.addGestureRecognizer(longPressGesture)
         self.tableView.reloadData()
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -108,6 +108,9 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
         emoticonView.frame = CGRect.init(x: 0, y: keyboard.frame.size.height, width: keyboard.frame.size.width, height:0)
         
         showCommentTextView()
+    }
+    
+    @IBAction func modifyButtonClick(_ sender: UIButton) {
     }
 
  
@@ -182,37 +185,6 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
         showButtonView()
     }
     
-    
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
-        return self.commentArray.count + 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    {
-        var cell :FeedDetailTableCell = tableView.dequeueReusableCell(withIdentifier: "oneFeed") as! FeedDetailTableCell
-        
-        switch indexPath.row {
-        case 0:
-            cell = tableView.dequeueReusableCell(withIdentifier: "oneFeed") as! FeedDetailTableCell
-            break
-       
-        default:
-            cell = tableView.dequeueReusableCell(withIdentifier: "Comment") as! FeedDetailTableCell
-            cell.commentNicknameLabel.text = self.commentArray[indexPath.row-1].nickName
-            cell.commentContextTextView.text = self.commentArray[indexPath.row-1].content
-            cell.commentProfileButton.af_setBackgroundImage(for: .normal, url: URL.init(string: self.commentArray[indexPath.row-1].profileImageURL)!)
-            
-            break
-        }
-        
-        return cell
-    }
-    
     func requestComment() {
        
         let uri = Constants.VyrlAPIConstants.baseURL + "/feeds/17/comments"
@@ -241,36 +213,36 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
             }
         }
     }
-    
+
     func showAlert(indexPath: IndexPath) {
-        let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.alert)
+        let alertController = UIAlertController (title:nil, message:"이 댓글을 영구적으로 삭제하시겠습니가?",preferredStyle:.actionSheet)
         
-        let modifyAction = UIAlertAction(title: "수정", style: .default,handler: { (action) -> Void in
-            
-        })
-        let deleteAction = UIAlertAction(title: "삭제", style: .default, handler: { (action) -> Void in
+        let deleteAction = UIAlertAction(title: "삭제", style: .default,handler: { (action) -> Void in
             let uri = Constants.VyrlAPIConstants.baseURL + "/feeds/17/comments/\(self.commentArray[indexPath.row-1].id as Int)"
             
             Alamofire.request(uri, method: .delete, parameters: nil, encoding:JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: { (response) in
                 switch response.result {
                 case .success(let json):
-                    print(json)
-                    print(response.response?.statusCode)
-                    self.requestComment()
+                    if(response.response?.statusCode == 200){
+                        self.requestComment()
+                    }
                 case .failure(let error):
                     print(error)
                 }
-
-                
             })
-            
+
+        })
+        let cancelAction = UIAlertAction(title: "취소", style: .destructive, handler: { (action) -> Void in
+           self.alertControllerBackgroundTapped()
         })
         
-        alertController.addAction(modifyAction)
         alertController.addAction(deleteAction)
+        alertController.addAction(cancelAction)
         
-        alertController.popoverPresentationController?.sourceView = self.view
-        alertController.popoverPresentationController?.sourceRect = self.tableView.cellForRow(at: indexPath)!.frame
+        
+//        alertController.popoverPresentationController?.sourceView = currentCell?.contentView
+//        alertController.popoverPresentationController?.sourceRect = self.tableView.cellForRow(at: indexPath)!.frame
+//        alertController.popoverPresentationController?.sourceRect = self.tableView.convert(self.tableView.rectForRow(at: indexPath), to: self.tableView.superview)
         
         present(alertController, animated: true, completion: {
             alertController.view.superview?.isUserInteractionEnabled = true
@@ -283,6 +255,60 @@ class FeedDetailViewController: UIViewController,  UITableViewDelegate, UITableV
         self.dismiss(animated: true, completion: nil)
     }
 
+}
+
+extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+            // delete item at indexPath
+            self.showAlert(indexPath: indexPath)
+        }
+        
+        let modify = UITableViewRowAction(style: .normal, title: "Modify") { (action, indexPath) in
+            // share item at indexPath
+            self.showCommentFieldView()
+            self.postCommentButton.isHidden = true
+            self.modifyCommentButton.isHidden = false
+        }
+        
+        modify.backgroundColor = UIColor.blue
+        
+        return [delete, modify]
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return self.commentArray.count + 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
+        var cell :FeedDetailTableCell = tableView.dequeueReusableCell(withIdentifier: "oneFeed") as! FeedDetailTableCell
+        
+        switch indexPath.row {
+        case 0:
+            cell = tableView.dequeueReusableCell(withIdentifier: "oneFeed") as! FeedDetailTableCell
+            break
+            
+        default:
+            cell = tableView.dequeueReusableCell(withIdentifier: "Comment") as! FeedDetailTableCell
+            cell.commentNicknameLabel.text = self.commentArray[indexPath.row-1].nickName
+            cell.commentContextTextView.text = self.commentArray[indexPath.row-1].content
+            cell.commentProfileButton.af_setBackgroundImage(for: .normal, url: URL.init(string: self.commentArray[indexPath.row-1].profileImageURL)!)
+            
+            break
+        }
+        
+        return cell
+    }
 }
 
 extension FeedDetailViewController : GrowingTextViewDelegate {
