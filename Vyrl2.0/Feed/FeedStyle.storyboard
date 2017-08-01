@@ -2347,6 +2347,20 @@
                                                     <action selector="postButtonClick:" destination="n3t-LG-PEh" eventType="touchUpInside" id="72E-tw-37B"/>
                                                 </connections>
                                             </button>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aBp-VL-cW9">
+                                                <rect key="frame" x="330" y="45" width="45" height="45"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="45" id="SxR-B2-Crl"/>
+                                                    <constraint firstAttribute="height" constant="45" id="Vz7-XG-gQ7"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="13"/>
+                                                <state key="normal" title="수정">
+                                                    <color key="titleColor" red="0.50196078430000002" green="0.32156862749999998" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="modifyButtonClick:" destination="n3t-LG-PEh" eventType="touchUpInside" id="jMQ-0M-gQF"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -2361,9 +2375,11 @@
                                             <constraint firstAttribute="trailing" secondItem="UCR-JP-rK8" secondAttribute="trailing" id="LhY-ds-yKX"/>
                                             <constraint firstItem="07c-MM-kcz" firstAttribute="top" secondItem="LYe-d8-wXC" secondAttribute="top" constant="-1" id="Mnh-Jr-D03"/>
                                             <constraint firstItem="o74-Yp-V2Y" firstAttribute="top" secondItem="LYe-d8-wXC" secondAttribute="top" id="RY3-Yz-ydz"/>
+                                            <constraint firstAttribute="bottom" secondItem="aBp-VL-cW9" secondAttribute="bottom" id="RZb-yZ-P9x"/>
                                             <constraint firstItem="UCR-JP-rK8" firstAttribute="leading" secondItem="o74-Yp-V2Y" secondAttribute="trailing" constant="1.5" id="UAJ-jt-yR2"/>
                                             <constraint firstAttribute="bottom" secondItem="UCR-JP-rK8" secondAttribute="bottom" id="adP-Gh-Q31"/>
                                             <constraint firstItem="VLZ-is-Rqe" firstAttribute="top" secondItem="o74-Yp-V2Y" secondAttribute="top" id="bVN-Ap-T7a"/>
+                                            <constraint firstAttribute="trailing" secondItem="aBp-VL-cW9" secondAttribute="trailing" id="kn8-ln-vRG"/>
                                             <constraint firstItem="o74-Yp-V2Y" firstAttribute="leading" secondItem="gN7-bU-VMj" secondAttribute="trailing" constant="1" id="oef-g2-xpr"/>
                                             <constraint firstAttribute="bottom" secondItem="o74-Yp-V2Y" secondAttribute="bottom" id="vOw-hC-1qp"/>
                                         </constraints>
@@ -2396,6 +2412,8 @@
                         <outlet property="commentFieldView" destination="LYe-d8-wXC" id="OyE-Oy-WaP"/>
                         <outlet property="commentTextView" destination="E6u-eI-gIG" id="pVe-0u-wwa"/>
                         <outlet property="emoticonImageView" destination="QUa-Mc-u28" id="GLS-EW-H6X"/>
+                        <outlet property="modifyCommentButton" destination="aBp-VL-cW9" id="9TW-Eq-oZD"/>
+                        <outlet property="postCommentButton" destination="UCR-JP-rK8" id="DpS-cJ-kuX"/>
                         <outlet property="showEmoticonButton" destination="gN7-bU-VMj" id="UVd-cA-H2p"/>
                         <outlet property="tableView" destination="6OT-TR-Fg8" id="0wV-TK-XeY"/>
                     </connections>
