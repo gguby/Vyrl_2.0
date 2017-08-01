@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -1833,7 +1833,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6OT-TR-Fg8">
-                                <rect key="frame" x="0.0" y="66" width="375" height="883"/>
+                                <rect key="frame" x="0.0" y="66" width="375" height="793"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="oneFeed" rowHeight="493" id="zR0-1h-8yf" customClass="FeedDetailTableCell" customModule="Vyrl2_0" customModuleProvider="target">
@@ -2190,7 +2190,7 @@
                                 </connections>
                             </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ryL-dx-hGd">
-                                <rect key="frame" x="0.0" y="949" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="859" width="375" height="140"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u4S-AA-lYV" userLabel="button view">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
@@ -2266,7 +2266,7 @@
                                         </constraints>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LYe-d8-wXC" userLabel="Comment Field View">
-                                        <rect key="frame" x="0.0" y="50" width="375" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="50" width="375" height="90"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="07c-MM-kcz" userLabel="line">
                                                 <rect key="frame" x="0.0" y="-1" width="375" height="1"/>
@@ -2275,10 +2275,11 @@
                                                     <constraint firstAttribute="height" constant="1" id="OCi-2L-QEZ"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gN7-bU-VMj">
-                                                <rect key="frame" x="0.0" y="0.0" width="40" height="22"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gN7-bU-VMj">
+                                                <rect key="frame" x="8.5" y="45" width="45" height="45"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="40" id="3yU-ZV-1Ik"/>
+                                                    <constraint firstAttribute="width" constant="45" id="3yU-ZV-1Ik"/>
+                                                    <constraint firstAttribute="height" constant="45" id="O3i-6a-qS8"/>
                                                 </constraints>
                                                 <state key="normal" image="icon_emoji_01"/>
                                                 <connections>
@@ -2286,10 +2287,10 @@
                                                 </connections>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="o74-Yp-V2Y">
-                                                <rect key="frame" x="56" y="0.0" width="264" height="0.0"/>
+                                                <rect key="frame" x="54.5" y="0.0" width="274" height="90"/>
                                                 <subviews>
                                                     <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E6u-eI-gIG" customClass="GrowingTextView">
-                                                        <rect key="frame" x="0.0" y="0.0" width="264" height="0.0"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="274" height="32"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
@@ -2310,8 +2311,8 @@
                                                             <outlet property="delegate" destination="n3t-LG-PEh" id="qHU-1a-eCy"/>
                                                         </connections>
                                                     </textView>
-                                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QUa-Mc-u28">
-                                                        <rect key="frame" x="0.0" y="0.0" width="57" height="0.0"/>
+                                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QUa-Mc-u28">
+                                                        <rect key="frame" x="0.0" y="32" width="57" height="58"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="58" id="4Xv-hF-0fw"/>
                                                             <constraint firstAttribute="width" constant="57" id="pED-Fk-gya"/>
@@ -2326,17 +2327,17 @@
                                                 <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                                             </stackView>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VLZ-is-Rqe">
-                                                <rect key="frame" x="56" y="0.0" width="264" height="0.0"/>
+                                                <rect key="frame" x="54.5" y="0.0" width="274" height="90"/>
                                                 <state key="normal" title="이모티콘 닫기"/>
                                                 <connections>
                                                     <action selector="closeEmoticon:" destination="n3t-LG-PEh" eventType="touchUpInside" id="P1j-bV-kSS"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UCR-JP-rK8">
-                                                <rect key="frame" x="330" y="-30" width="30" height="15"/>
+                                                <rect key="frame" x="330" y="45" width="45" height="45"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="15.5" id="A4A-Wc-gL9"/>
-                                                    <constraint firstAttribute="width" constant="30" id="hKH-03-yKg"/>
+                                                    <constraint firstAttribute="height" constant="45" id="A4A-Wc-gL9"/>
+                                                    <constraint firstAttribute="width" constant="45" id="hKH-03-yKg"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="13"/>
                                                 <state key="normal" title="게시">
@@ -2353,18 +2354,17 @@
                                             <constraint firstItem="VLZ-is-Rqe" firstAttribute="bottom" secondItem="o74-Yp-V2Y" secondAttribute="bottom" id="5TO-dO-nH0"/>
                                             <constraint firstItem="07c-MM-kcz" firstAttribute="leading" secondItem="LYe-d8-wXC" secondAttribute="leading" id="6Ts-Zu-xly"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="750" constant="45" id="89H-76-zM1"/>
-                                            <constraint firstItem="gN7-bU-VMj" firstAttribute="leading" secondItem="LYe-d8-wXC" secondAttribute="leading" id="8kc-eB-SEQ"/>
+                                            <constraint firstItem="gN7-bU-VMj" firstAttribute="leading" secondItem="LYe-d8-wXC" secondAttribute="leading" constant="8.5" id="8kc-eB-SEQ"/>
                                             <constraint firstItem="VLZ-is-Rqe" firstAttribute="leading" secondItem="o74-Yp-V2Y" secondAttribute="leading" id="Gvl-tB-EJF"/>
                                             <constraint firstItem="VLZ-is-Rqe" firstAttribute="trailing" secondItem="o74-Yp-V2Y" secondAttribute="trailing" id="Jts-cq-hGN"/>
-                                            <constraint firstAttribute="bottom" secondItem="gN7-bU-VMj" secondAttribute="bottom" constant="12" id="Kf0-xE-Xw5"/>
-                                            <constraint firstAttribute="trailing" secondItem="UCR-JP-rK8" secondAttribute="trailing" constant="15" id="LhY-ds-yKX"/>
+                                            <constraint firstAttribute="bottom" secondItem="gN7-bU-VMj" secondAttribute="bottom" id="Kf0-xE-Xw5"/>
+                                            <constraint firstAttribute="trailing" secondItem="UCR-JP-rK8" secondAttribute="trailing" id="LhY-ds-yKX"/>
                                             <constraint firstItem="07c-MM-kcz" firstAttribute="top" secondItem="LYe-d8-wXC" secondAttribute="top" constant="-1" id="Mnh-Jr-D03"/>
                                             <constraint firstItem="o74-Yp-V2Y" firstAttribute="top" secondItem="LYe-d8-wXC" secondAttribute="top" id="RY3-Yz-ydz"/>
-                                            <constraint firstItem="UCR-JP-rK8" firstAttribute="leading" secondItem="o74-Yp-V2Y" secondAttribute="trailing" constant="10" id="UAJ-jt-yR2"/>
-                                            <constraint firstAttribute="bottom" secondItem="UCR-JP-rK8" secondAttribute="bottom" constant="15" id="adP-Gh-Q31"/>
+                                            <constraint firstItem="UCR-JP-rK8" firstAttribute="leading" secondItem="o74-Yp-V2Y" secondAttribute="trailing" constant="1.5" id="UAJ-jt-yR2"/>
+                                            <constraint firstAttribute="bottom" secondItem="UCR-JP-rK8" secondAttribute="bottom" id="adP-Gh-Q31"/>
                                             <constraint firstItem="VLZ-is-Rqe" firstAttribute="top" secondItem="o74-Yp-V2Y" secondAttribute="top" id="bVN-Ap-T7a"/>
-                                            <constraint firstItem="gN7-bU-VMj" firstAttribute="top" secondItem="LYe-d8-wXC" secondAttribute="top" id="cSf-P7-ilr"/>
-                                            <constraint firstItem="o74-Yp-V2Y" firstAttribute="leading" secondItem="gN7-bU-VMj" secondAttribute="trailing" constant="15.5" id="oef-g2-xpr"/>
+                                            <constraint firstItem="o74-Yp-V2Y" firstAttribute="leading" secondItem="gN7-bU-VMj" secondAttribute="trailing" constant="1" id="oef-g2-xpr"/>
                                             <constraint firstAttribute="bottom" secondItem="o74-Yp-V2Y" secondAttribute="bottom" id="vOw-hC-1qp"/>
                                         </constraints>
                                     </view>
