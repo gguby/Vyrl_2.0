@@ -158,7 +158,7 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         
         return cell
     }
-
+    
     func getAllFeed(){
         self.articleArray.removeAll()
         
@@ -236,10 +236,50 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
 }
 
-extension FeedTableViewController : YourCellDelegate {
+extension FeedTableViewController : FeedCellDelegate {
     func didPressCell(sender: Any) {
         self.pushView(storyboardName: "FeedStyle", controllerName: "FeedDetailViewController")
     }
+    
+    func showAlert(articleId : Int) {
+        let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.actionSheet)
+        
+        let modify = UIAlertAction(title: "수정", style: .default,handler: { (action) -> Void in
+            
+        })
+        let remove = UIAlertAction(title: "삭제", style: .default, handler: { (action) -> Void in
+            let uri = Constants.VyrlFeedURL.feed(articleId: articleId)
+            
+            Alamofire.request(uri, method: .delete, parameters: nil, encoding:JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: { (response) in
+                switch response.result {
+                case .success(let json):
+                    print(json)
+                    
+                    if let code = response.response?.statusCode {
+                        if code == 200 {
+                            self.getAllFeed()
+                        }
+                    }
+                    
+                case .failure(let error):
+                    print(error)
+                }
+                
+                
+            })
+        })
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
+            alertController.dismiss(animated: true, completion: nil)
+        })
+        
+        alertController.addAction(modify)
+        alertController.addAction(remove)
+        alertController.addAction(cancel)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }    
+    
 }
 
 

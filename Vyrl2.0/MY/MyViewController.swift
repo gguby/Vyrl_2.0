@@ -250,7 +250,12 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
 }
 
-extension MyViewController : YourCellDelegate {
+extension MyViewController : FeedCellDelegate {
+    
+    func showAlert() {
+        
+    }
+    
     func didPressCell(sender: Any) {
         self.pushView(storyboardName: "FeedStyle", controllerName: "FeedDetailViewController")
     }
