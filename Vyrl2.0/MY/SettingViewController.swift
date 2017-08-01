@@ -11,7 +11,7 @@ import UIKit
 class SettingViewController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
-//    @IBOutlet weak var contentHeight: NSLayoutConstraint!
+    @IBOutlet weak var contentHeight: NSLayoutConstraint!
 
     @IBOutlet weak var socialLabel: UILabel!
     
@@ -21,7 +21,7 @@ class SettingViewController: UIViewController, UIScrollViewDelegate {
         // Do any additional setup after loading the view.
         scrollView.delegate = self
         
-//        self.contentHeight.constant = 220
+        self.contentHeight.constant = 220
         
         let account : Account = LoginManager.sharedInstance.getCurrentAccount()!
         
