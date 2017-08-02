@@ -27,6 +27,7 @@
 		8F916A8E1EDC264900E3EC8B /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F916A8D1EDC264900E3EC8B /* UIView+Extension.swift */; };
 		8F9AF9911EE800E700DE069E /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9AF9901EE800E700DE069E /* FeedTableViewController.swift */; };
 		A62EF2EB1F1F5282000CD43A /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62EF2EA1F1F5282000CD43A /* LocationViewController.swift */; };
+		A64E99A31F317DBB00D9BCFF /* FeedModifyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64E99A21F317DBB00D9BCFF /* FeedModifyController.swift */; };
 		A650368B1F0E30BA00AD540A /* ModalAnimatorPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65036881F0E30BA00AD540A /* ModalAnimatorPhoto.swift */; };
 		A650368C1F0E30BA00AD540A /* FeedNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65036891F0E30BA00AD540A /* FeedNavigationController.swift */; };
 		A650368D1F0E30BA00AD540A /* FeedNavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A650368A1F0E30BA00AD540A /* FeedNavigationControllerExtension.swift */; };
@@ -94,6 +95,7 @@
 		8F916A8D1EDC264900E3EC8B /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		8F9AF9901EE800E700DE069E /* FeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
 		A62EF2EA1F1F5282000CD43A /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
+		A64E99A21F317DBB00D9BCFF /* FeedModifyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedModifyController.swift; sourceTree = "<group>"; };
 		A65036881F0E30BA00AD540A /* ModalAnimatorPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalAnimatorPhoto.swift; sourceTree = "<group>"; };
 		A65036891F0E30BA00AD540A /* FeedNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedNavigationController.swift; sourceTree = "<group>"; };
 		A650368A1F0E30BA00AD540A /* FeedNavigationControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedNavigationControllerExtension.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				8F62CC141F00EC330069ACFE /* EmoticonView.swift */,
 				8F57B73E1F186E44009FD0EA /* FeedFullScreenViewController.swift */,
 				A6722C301F25F7D600CEBBD6 /* FeedTableCell.swift */,
+				A64E99A21F317DBB00D9BCFF /* FeedModifyController.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -570,6 +573,7 @@
 				CE08981C1ECD704F000D6D6C /* SearchViewController.swift in Sources */,
 				8F829E7C1EFB6648001D418F /* MyProfileViewController.swift in Sources */,
 				A650368B1F0E30BA00AD540A /* ModalAnimatorPhoto.swift in Sources */,
+				A64E99A31F317DBB00D9BCFF /* FeedModifyController.swift in Sources */,
 				CE33F0021ED2BB690050C21D /* SMLoginViewController.swift in Sources */,
 				8F9AF9911EE800E700DE069E /* FeedTableViewController.swift in Sources */,
 				A6722C311F25F7D600CEBBD6 /* FeedTableCell.swift in Sources */,

@@ -12,7 +12,7 @@ import AlamofireImage
 
 @objc protocol FeedCellDelegate {
     func didPressCell(sender: Any)
-    @objc optional func showAlert(articleId: Int)
+    @objc optional func showAlert(cell : FeedTableCell)
 }
 
 class FeedTableCell: UITableViewCell {
@@ -137,9 +137,8 @@ class FeedTableCell: UITableViewCell {
         }
     }
     @IBAction func editFeed(_ sender: Any) {
-        delegate.showAlert!(articleId: (self.article?.id)!)
-    }
-    
+        delegate.showAlert!(cell: self)
+    }    
 }
 
 extension FeedTableCell : UICollectionViewDelegateFlowLayout {
