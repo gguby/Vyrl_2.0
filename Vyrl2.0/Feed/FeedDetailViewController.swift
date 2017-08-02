@@ -26,9 +26,7 @@ class FeedDetailViewController: UIViewController{
     @IBOutlet weak var showEmoticonButton: UIButton!
     
     @IBOutlet weak var postCommentButton: UIButton!
-    @IBOutlet weak var modifyCommentButton: UIButton!
-    
-    
+   
     var emoticonView : EmoticonView!
     var kbHeight: CGFloat!
     
@@ -109,11 +107,7 @@ class FeedDetailViewController: UIViewController{
         
         showCommentTextView()
     }
-    
-    @IBAction func modifyButtonClick(_ sender: UIButton) {
-    }
 
- 
     @IBAction func postButtonClick(_ sender: UIButton) {
         let uri = Constants.VyrlAPIConstants.baseURL + "feeds/17/comments"
 
@@ -263,21 +257,24 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+        let delete = UITableViewRowAction(style: .destructive, title: "       ") { (action, indexPath) in
             // delete item at indexPath
             self.showAlert(indexPath: indexPath)
         }
+        delete.backgroundColor = UIColor.init(patternImage: UIImage.init(named: "icon_more_02")!)
         
-        let modify = UITableViewRowAction(style: .normal, title: "Modify") { (action, indexPath) in
-            // share item at indexPath
-            self.showCommentFieldView()
-            self.postCommentButton.isHidden = true
-            self.modifyCommentButton.isHidden = false
+        let more = UITableViewRowAction(style: .normal, title: "       ") { (action, indexPath) in
+            
         }
+        more.backgroundColor = UIColor.init(patternImage: UIImage.init(named: "icon_more_02")!)
         
-        modify.backgroundColor = UIColor.blue
-        
-        return [delete, modify]
+        let currentAccount : Account = LoginManager.sharedInstance.getCurrentAccount()!
+        if(currentAccount.nickName == self.commentArray[indexPath.row-1].nickName)
+        {
+            return [delete]
+        } else {
+            return [more]
+        }
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -350,7 +347,6 @@ struct Comment : Mappable {
         profileImageURL <- map["profile"]
     }
 }
-
 
 class FeedDetailTableCell : UITableViewCell {
     let samplePhotos = ["https://cdn2.vyrl.com/vyrl/images/post/_temp/temp/4ec6d08055c4ebcc76494080bbcd4ee2.jpg",
