@@ -43,6 +43,13 @@ extension UIViewController
         return controller
     }
     
+    func pushModal(storyboardName : String, controllerName : String)-> UIViewController {
+        let storyboard = UIStoryboard(name:storyboardName, bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: controllerName)
+        self.present(controller, animated: true, completion: nil)
+        return controller
+    }
+    
     func respondToSwipeGesture(gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {

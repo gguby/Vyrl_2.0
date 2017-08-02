@@ -73,7 +73,6 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
         ]
         
         let uri = Constants.VyrlFeedURL.FEED
-        var fileName : String!
         
         let queryUrl = URL.init(string: uri, parameters: parameters)
         

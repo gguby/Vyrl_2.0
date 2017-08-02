@@ -34,10 +34,10 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.getAllFeed()
-        
         self.tableViewContentHeight.constant = UIScreen.main.bounds.height - 44 - 20 - 45
 
+        self.getAllFeed()
+        
         // Do any additional setup after loading the view.
         
         self.tableView.delegate = self
@@ -114,7 +114,6 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         
         self.refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
         self.tableView.addSubview(refreshControl) // not required when using UITableViewController
-        
     }
     
     func initLoader(){
@@ -166,17 +165,43 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         
         Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Article]>) in
             
-                let array = response.result.value ?? []
+            let array = response.result.value ?? []
             
-                for article in array {
-                    self.articleArray.append(article)
-                }
-            
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-                self.refreshControl.endRefreshing()
+            for article in array {
+                self.articleArray.append(article)
             }
+            
+            self.tableView.reloadData()
+            self.refreshControl.endRefreshing()
         }
+    }
+    
+    func uploadPatch(query: URL){
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            
+        }, usingThreshold: UInt64.init(), to: query, method: .patch, headers: Constants.VyrlAPIConstants.getHeader(), encodingCompletion:
+            {
+                encodingResult in
+                switch encodingResult {
+                case .success(let upload, _, _):
+                    
+                    upload.uploadProgress(closure: { (progress) in
+                    })
+                    
+                    upload.responseString { response in
+                        
+                        if ((response.response?.statusCode)! == 200){
+                            self.tabBarController?.selectedIndex = 0
+                            self.uploadHidden(hidden: true)
+                            self.getAllFeed()
+                        }
+                        
+                    }
+                case .failure(let encodingError):
+                    self.uploadHidden(hidden: true)
+                    print(encodingError.localizedDescription)
+                }
+        })
     }
     
     func upload(query: URL, array : Array<AVAsset>){
@@ -220,6 +245,7 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
                     upload.responseString { response in
 
                         if ((response.response?.statusCode)! == 200){
+                            self.tabBarController?.selectedIndex = 0
                             self.uploadHidden(hidden: true)
                             self.getAllFeed()
                         }
@@ -230,10 +256,7 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
                     print(encodingError.localizedDescription)
                 }
         })
-
     }
-    
-    
 }
 
 extension FeedTableViewController : FeedCellDelegate {
@@ -241,13 +264,18 @@ extension FeedTableViewController : FeedCellDelegate {
         self.pushView(storyboardName: "FeedStyle", controllerName: "FeedDetailViewController")
     }
     
-    func showAlert(articleId : Int) {
+    func showAlert(cell : FeedTableCell) {
         let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.actionSheet)
         
         let modify = UIAlertAction(title: "수정", style: .default,handler: { (action) -> Void in
-            
+            let vc : FeedModifyController = self.pushModal(storyboardName: "FeedStyle", controllerName: "feedModify") as! FeedModifyController
+            vc.setText(text: cell.contentLabel.text!)
+            vc.articleId = cell.article?.id
         })
         let remove = UIAlertAction(title: "삭제", style: .default, handler: { (action) -> Void in
+            
+            let articleId = (cell.article?.id)!
+            
             let uri = Constants.VyrlFeedURL.feed(articleId: articleId)
             
             Alamofire.request(uri, method: .delete, parameters: nil, encoding:JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: { (response) in
