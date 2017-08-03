@@ -208,6 +208,67 @@ class FeedDetailViewController: UIViewController{
         }
     }
 
+    
+    func showReportAlert(indexPath: IndexPath) {
+        let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.actionSheet)
+        
+        let action1 = UIAlertAction(title: "성인 컨텐츠", style: .default, handler: { (action) -> Void in
+            self.alertControllerBackgroundTapped()
+        })
+        
+        let action2 = UIAlertAction(title: "해롭겁나 불쾌", style: .default, handler: { (action) -> Void in
+            self.alertControllerBackgroundTapped()
+        })
+        
+        let action3 = UIAlertAction(title: "스팸 또는 사기", style: .default, handler: { (action) -> Void in
+            self.alertControllerBackgroundTapped()
+        })
+        
+        alertController.addAction(action1)
+        alertController.addAction(action2)
+        alertController.addAction(action3)
+        
+        present(alertController, animated: true, completion: {
+            alertController.view.superview?.subviews[1].addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.alertControllerBackgroundTapped)))
+            alertController.view.superview?.subviews[1].isUserInteractionEnabled = true
+        })
+    }
+
+    
+    func showMoreAlert(indexPath: IndexPath) {
+        let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.actionSheet)
+        
+        let reportAction = UIAlertAction(title: "이 게시물 신고하기", style: .default, handler: { (action) -> Void in
+            self.alertControllerBackgroundTapped()
+            self.showReportAlert(indexPath: indexPath)
+        })
+       
+        let blindAction = UIAlertAction(title: "이 댓글 안보기", style: .default, handler: { (action) -> Void in
+            self.alertControllerBackgroundTapped()
+        })
+        
+        let blockAction = UIAlertAction(title: "작성자 차단", style: .default, handler: { (action) -> Void in
+            self.alertControllerBackgroundTapped()
+        })
+        
+        let translateAction = UIAlertAction(title: "번역 보기", style: .default, handler: { (action) -> Void in
+            self.alertControllerBackgroundTapped()
+        })
+        
+        
+        alertController.addAction(reportAction)
+        alertController.addAction(blindAction)
+        alertController.addAction(blockAction)
+        alertController.addAction(translateAction)
+        
+        
+        present(alertController, animated: true, completion: {
+            alertController.view.superview?.subviews[1].addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.alertControllerBackgroundTapped)))
+            alertController.view.superview?.subviews[1].isUserInteractionEnabled = true
+        })
+    }
+    
+
     func showAlert(indexPath: IndexPath) {
         let alertController = UIAlertController (title:nil, message:"이 댓글을 영구적으로 삭제하시겠습니가?",preferredStyle:.actionSheet)
         
@@ -239,8 +300,8 @@ class FeedDetailViewController: UIViewController{
 //        alertController.popoverPresentationController?.sourceRect = self.tableView.convert(self.tableView.rectForRow(at: indexPath), to: self.tableView.superview)
         
         present(alertController, animated: true, completion: {
-            alertController.view.superview?.isUserInteractionEnabled = true
-            alertController.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.alertControllerBackgroundTapped)))
+            alertController.view.superview?.subviews[1].addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.alertControllerBackgroundTapped)))
+            alertController.view.superview?.subviews[1].isUserInteractionEnabled = true
         })
     }
     
@@ -257,22 +318,24 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let delete = UITableViewRowAction(style: .destructive, title: "       ") { (action, indexPath) in
-            // delete item at indexPath
-            self.showAlert(indexPath: indexPath)
-        }
-        delete.backgroundColor = UIColor.init(patternImage: UIImage.init(named: "icon_more_02")!)
-        
-        let more = UITableViewRowAction(style: .normal, title: "       ") { (action, indexPath) in
-            
-        }
-        more.backgroundColor = UIColor.init(patternImage: UIImage.init(named: "icon_more_02")!)
-        
         let currentAccount : Account = LoginManager.sharedInstance.getCurrentAccount()!
         if(currentAccount.nickName == self.commentArray[indexPath.row-1].nickName)
         {
+            let delete = UITableViewRowAction(style: .destructive, title: "       ") { (action, indexPath) in
+                // delete item at indexPath
+                self.showAlert(indexPath: indexPath)
+            }
+            delete.backgroundColor = UIColor.init(patternImage: UIImage.init(named: "icon_more_02.png")!)
+            
             return [delete]
         } else {
+            let more = UITableViewRowAction(style: .normal, title: "       ") { (action, indexPath) in
+                self.showMoreAlert(indexPath: indexPath)
+            }
+            more.backgroundColor = UIColor.init(patternImage: UIImage.init(named: "icon_more_02.png")!)
+            
+            
+            
             return [more]
         }
     }
