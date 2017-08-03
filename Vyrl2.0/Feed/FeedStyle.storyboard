@@ -162,7 +162,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="622"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PFc-q2-8d2" id="htJ-gY-KZu">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="621.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="622"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6oz-ad-0AK">
@@ -422,7 +422,7 @@
                                                                         <constraint firstAttribute="height" constant="34" id="GMZ-s6-oxz"/>
                                                                         <constraint firstAttribute="width" constant="21" id="nxe-hu-0vr"/>
                                                                     </constraints>
-                                                                    <state key="normal" title="Button" image="icon_heart_01"/>
+                                                                    <state key="normal" image="icon_heart_01"/>
                                                                     <connections>
                                                                         <action selector="like:" destination="PFc-q2-8d2" eventType="touchUpInside" id="FcB-mY-o6W"/>
                                                                     </connections>
@@ -462,6 +462,9 @@
                                                                     <state key="normal" title="20" image="icon_share_01">
                                                                         <color key="titleColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                     </state>
+                                                                    <connections>
+                                                                        <action selector="share:" destination="PFc-q2-8d2" eventType="touchUpInside" id="qp1-J4-NU0"/>
+                                                                    </connections>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UUA-iw-h4C" userLabel="bookmark">
                                                                     <rect key="frame" x="325" y="0.0" width="50" height="34"/>
@@ -544,7 +547,7 @@
                                         <rect key="frame" x="0.0" y="650" width="375" height="508"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XHz-Pc-KGu" id="Eg0-gn-Gir">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="507.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="508"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5RG-Br-Aih">
@@ -699,6 +702,9 @@
                                                                     <state key="normal" title="20" image="icon_share_01">
                                                                         <color key="titleColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                     </state>
+                                                                    <connections>
+                                                                        <action selector="share:" destination="XHz-Pc-KGu" eventType="touchUpInside" id="HAv-dU-uEA"/>
+                                                                    </connections>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d47-SN-f7h">
                                                                     <rect key="frame" x="340" y="0.0" width="20" height="20"/>
@@ -779,7 +785,7 @@
                                         <rect key="frame" x="0.0" y="1158" width="375" height="404"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dCK-YA-8eZ" id="k1m-T5-Ks1">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="403.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="404"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N2C-re-nAU">
@@ -992,7 +998,7 @@
                                                                         <constraint firstAttribute="width" constant="21" id="iff-ab-uEo"/>
                                                                         <constraint firstAttribute="height" constant="34" id="u06-Vc-cv6"/>
                                                                     </constraints>
-                                                                    <state key="normal" title="Button" image="icon_heart_01"/>
+                                                                    <state key="normal" image="icon_heart_01"/>
                                                                     <connections>
                                                                         <action selector="like:" destination="dCK-YA-8eZ" eventType="touchUpInside" id="kdr-mF-vQL"/>
                                                                     </connections>
@@ -1020,6 +1026,9 @@
                                                                     <state key="normal" title="20" image="icon_share_01">
                                                                         <color key="titleColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                     </state>
+                                                                    <connections>
+                                                                        <action selector="share:" destination="dCK-YA-8eZ" eventType="touchUpInside" id="yAF-eP-Afx"/>
+                                                                    </connections>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jvu-Xn-k4H">
                                                                     <rect key="frame" x="325" y="0.0" width="50" height="34"/>
@@ -1106,7 +1115,7 @@
                                         <rect key="frame" x="0.0" y="1562" width="375" height="605"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hth-2A-IVu" id="k3M-TB-ltL">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="604.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="605"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WMK-Sp-CTz">
@@ -1420,6 +1429,9 @@
                                                                     <state key="normal" title="20" image="icon_share_01">
                                                                         <color key="titleColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                     </state>
+                                                                    <connections>
+                                                                        <action selector="share:" destination="hth-2A-IVu" eventType="touchUpInside" id="d4d-vU-9zg"/>
+                                                                    </connections>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HVv-xS-DEP">
                                                                     <rect key="frame" x="325" y="0.0" width="50" height="34"/>
@@ -1514,7 +1526,7 @@
                                         <rect key="frame" x="0.0" y="2167" width="375" height="514"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bRN-IR-0WK" id="tP3-hm-ZoS">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="513.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="514"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e5z-pD-jtg">
@@ -1748,7 +1760,7 @@
                                                                         <constraint firstAttribute="width" constant="21" id="BNO-g3-ZFf"/>
                                                                         <constraint firstAttribute="height" constant="34" id="Gh1-JJ-gcR"/>
                                                                     </constraints>
-                                                                    <state key="normal" title="Button" image="icon_heart_01"/>
+                                                                    <state key="normal" image="icon_heart_01"/>
                                                                     <connections>
                                                                         <action selector="like:" destination="bRN-IR-0WK" eventType="touchUpInside" id="uLK-m1-qZV"/>
                                                                     </connections>
@@ -1788,6 +1800,9 @@
                                                                     <state key="normal" title="20" image="icon_share_01">
                                                                         <color key="titleColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                     </state>
+                                                                    <connections>
+                                                                        <action selector="share:" destination="bRN-IR-0WK" eventType="touchUpInside" id="anG-wi-Coq"/>
+                                                                    </connections>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nMC-IX-Z2A" userLabel="bookmark">
                                                                     <rect key="frame" x="325" y="0.0" width="50" height="34"/>
@@ -1939,6 +1954,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="500"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zR0-1h-8yf" id="yfI-AA-HMt">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="493"/>
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="499.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -2215,7 +2231,7 @@
                                         <rect key="frame" x="0.0" y="528" width="375" height="117"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gUf-7M-eaG" id="8ZM-qn-VKd">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="116.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="117"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CA6-nz-EPH">
@@ -2296,7 +2312,7 @@
                                         <rect key="frame" x="0.0" y="645" width="375" height="41"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="077-Yx-TGl" id="hsu-hD-m9v">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="40.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="41"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tJc-SG-5BI">

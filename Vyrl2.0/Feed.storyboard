@@ -155,6 +155,7 @@
                         <constraints>
                             <constraint firstItem="YRP-qn-Z9Y" firstAttribute="top" secondItem="Tes-lH-Pt1" secondAttribute="bottom" id="5Fz-lK-OkF"/>
                             <constraint firstItem="RIH-dH-w9m" firstAttribute="top" secondItem="kQx-bF-K19" secondAttribute="bottom" id="ClT-Pa-LCm"/>
+                            <constraint firstAttribute="bottom" secondItem="AEJ-wP-T1Q" secondAttribute="bottom" constant="49" id="IDj-mr-hg1"/>
                             <constraint firstItem="kQx-bF-K19" firstAttribute="leading" secondItem="25h-lX-nou" secondAttribute="leading" id="JrI-rA-afq"/>
                             <constraint firstItem="kQx-bF-K19" firstAttribute="top" secondItem="YRP-qn-Z9Y" secondAttribute="bottom" id="Pi2-Ub-Byn"/>
                             <constraint firstAttribute="trailing" secondItem="YRP-qn-Z9Y" secondAttribute="trailing" id="UZa-w2-ave"/>
@@ -163,7 +164,6 @@
                             <constraint firstItem="AEJ-wP-T1Q" firstAttribute="top" secondItem="kQx-bF-K19" secondAttribute="bottom" id="a4W-y8-OWW"/>
                             <constraint firstAttribute="trailing" secondItem="kQx-bF-K19" secondAttribute="trailing" id="dZo-ZR-otT"/>
                             <constraint firstAttribute="trailing" secondItem="AEJ-wP-T1Q" secondAttribute="trailing" id="dha-Wb-Xzf"/>
-                            <constraint firstItem="Ocq-YV-XIX" firstAttribute="top" secondItem="AEJ-wP-T1Q" secondAttribute="bottom" id="fKH-kq-yam"/>
                             <constraint firstAttribute="trailing" secondItem="RIH-dH-w9m" secondAttribute="trailing" id="igo-8d-fO2"/>
                             <constraint firstItem="Ocq-YV-XIX" firstAttribute="top" secondItem="RIH-dH-w9m" secondAttribute="bottom" id="qKC-Ni-ChP"/>
                             <constraint firstItem="YRP-qn-Z9Y" firstAttribute="leading" secondItem="25h-lX-nou" secondAttribute="leading" id="vGV-Iv-qXq"/>
@@ -188,7 +188,7 @@
         <scene sceneID="zbW-6X-bXo">
             <objects>
                 <navigationController navigationBarHidden="YES" id="AqP-hB-Wsq" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="wxq-cz-Xzg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wxq-cz-Xzg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
