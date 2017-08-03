@@ -55,6 +55,14 @@ class FeedDetailViewController: UIViewController{
         self.navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func likeButtonClick(_ sender: UIButton) {
+        print("like")
+    }
+    
+    @IBAction func shareButtonClick(_ sender: UIButton) {
+        print("share")
+    }
+    
     func showButtonView() {
         self.commentTextView.resignFirstResponder()
         

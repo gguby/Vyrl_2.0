@@ -106,7 +106,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LNg-DD-YlL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2647" y="-1149"/>
+            <point key="canvasLocation" x="-1897" y="-1286"/>
         </scene>
         <!--Feed Table View Controller-->
         <scene sceneID="AN8-KD-5tL">
@@ -1935,15 +1935,15 @@
                                 <rect key="frame" x="0.0" y="66" width="375" height="793"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="oneFeed" rowHeight="493" id="zR0-1h-8yf" customClass="FeedDetailTableCell" customModule="Vyrl2_0" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="493"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="oneFeed" rowHeight="500" id="zR0-1h-8yf" customClass="FeedDetailTableCell" customModule="Vyrl2_0" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="500"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zR0-1h-8yf" id="yfI-AA-HMt">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="492.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="499.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zF9-ni-apD">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="492"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="499.5"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Liz-Qr-sW4" userLabel="Nicname View">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="32"/>
@@ -2068,10 +2068,23 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FIv-nw-FLC">
-                                                            <rect key="frame" x="0.0" y="387" width="375" height="55"/>
+                                                            <rect key="frame" x="0.0" y="394" width="375" height="55.5"/>
                                                             <subviews>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TM7-3d-9PM">
+                                                                    <rect key="frame" x="15" y="0.0" width="63" height="14.5"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="14.5" id="ipA-4s-IeV"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="12"/>
+                                                                    <state key="normal" title="좋아요 193명">
+                                                                        <color key="titleColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    </state>
+                                                                    <connections>
+                                                                        <action selector="likeButtonClick:" destination="n3t-LG-PEh" eventType="touchUpInside" id="Ajo-NO-auc"/>
+                                                                    </connections>
+                                                                </button>
                                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YjI-XN-yBq" customClass="GrowingTextView">
-                                                                    <rect key="frame" x="15" y="0.0" width="345" height="55"/>
+                                                                    <rect key="frame" x="15" y="21.5" width="345" height="34"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <string key="text">귀염둥이들 #내사랑 #샤이니 언제 나오지ㅠ 컴백 무대 넘나 기다리는
 중...!! 하ㅠㅠ 저 사탕은 저에게 주는 건가요?ㅠㅠㅠㅠ
@@ -2086,22 +2099,44 @@
                                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                 </textView>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HBb-Ww-8kC">
-                                                                    <rect key="frame" x="308" y="25" width="52" height="30"/>
+                                                                    <rect key="frame" x="308" y="25.5" width="52" height="30"/>
                                                                     <state key="normal" title="번역보기"/>
+                                                                </button>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_dot_03" translatesAutoresizingMaskIntoConstraints="NO" id="lVu-Sc-uwC">
+                                                                    <rect key="frame" x="86" y="6.5" width="2" height="2"/>
+                                                                </imageView>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cqX-j3-stw">
+                                                                    <rect key="frame" x="96" y="0.0" width="52" height="14.5"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="14.5" id="W6f-gq-KVu"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="12"/>
+                                                                    <state key="normal" title="공유 153명">
+                                                                        <color key="titleColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    </state>
+                                                                    <connections>
+                                                                        <action selector="shareButtonClick:" destination="n3t-LG-PEh" eventType="touchUpInside" id="1xf-te-Idf"/>
+                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
+                                                                <constraint firstItem="YjI-XN-yBq" firstAttribute="top" secondItem="TM7-3d-9PM" secondAttribute="bottom" constant="7" id="0oA-8d-AhM"/>
+                                                                <constraint firstItem="cqX-j3-stw" firstAttribute="leading" secondItem="lVu-Sc-uwC" secondAttribute="trailing" constant="8" id="B3g-eW-CT2"/>
+                                                                <constraint firstItem="cqX-j3-stw" firstAttribute="top" secondItem="FIv-nw-FLC" secondAttribute="top" id="D67-Zl-Ec2"/>
+                                                                <constraint firstItem="TM7-3d-9PM" firstAttribute="top" secondItem="FIv-nw-FLC" secondAttribute="top" id="DVP-0W-ifY"/>
+                                                                <constraint firstItem="TM7-3d-9PM" firstAttribute="leading" secondItem="FIv-nw-FLC" secondAttribute="leading" constant="15" id="IZT-wS-Wzh"/>
                                                                 <constraint firstItem="YjI-XN-yBq" firstAttribute="leading" secondItem="FIv-nw-FLC" secondAttribute="leading" constant="15" id="PZz-wl-xbN"/>
+                                                                <constraint firstItem="lVu-Sc-uwC" firstAttribute="centerY" secondItem="TM7-3d-9PM" secondAttribute="centerY" id="QgP-EX-MSA"/>
                                                                 <constraint firstItem="HBb-Ww-8kC" firstAttribute="bottom" secondItem="YjI-XN-yBq" secondAttribute="bottom" id="RnK-w2-Cg6"/>
-                                                                <constraint firstItem="YjI-XN-yBq" firstAttribute="top" secondItem="FIv-nw-FLC" secondAttribute="top" id="WVy-66-Svb"/>
                                                                 <constraint firstAttribute="bottom" secondItem="YjI-XN-yBq" secondAttribute="bottom" id="Wir-RU-Of4"/>
                                                                 <constraint firstItem="HBb-Ww-8kC" firstAttribute="trailing" secondItem="YjI-XN-yBq" secondAttribute="trailing" id="oRu-52-Ui1"/>
                                                                 <constraint firstAttribute="trailing" secondItem="YjI-XN-yBq" secondAttribute="trailing" constant="15" id="rq6-64-Fxd"/>
+                                                                <constraint firstItem="lVu-Sc-uwC" firstAttribute="leading" secondItem="TM7-3d-9PM" secondAttribute="trailing" constant="8" id="zhV-FD-Woe"/>
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dl6-XC-8fd" userLabel="Time View">
-                                                            <rect key="frame" x="0.0" y="442" width="375" height="50"/>
+                                                            <rect key="frame" x="0.0" y="449.5" width="375" height="50"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4분 전" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A7g-G0-TOv">
                                                                     <rect key="frame" x="14" y="18" width="31" height="15"/>
@@ -2143,6 +2178,7 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
+                                                        <constraint firstItem="FIv-nw-FLC" firstAttribute="top" secondItem="dJN-wT-b13" secondAttribute="bottom" constant="7" id="0eC-AC-KFX"/>
                                                         <constraint firstItem="dJN-wT-b13" firstAttribute="top" secondItem="UIZ-Cm-upV" secondAttribute="bottom" id="54a-p7-0YD"/>
                                                         <constraint firstItem="UIZ-Cm-upV" firstAttribute="leading" secondItem="zF9-ni-apD" secondAttribute="leading" id="7f2-BH-rAp"/>
                                                         <constraint firstItem="MGz-sw-Lhi" firstAttribute="leading" secondItem="zF9-ni-apD" secondAttribute="leading" id="Mhp-dT-2Oi"/>
@@ -2157,7 +2193,6 @@
                                                         <constraint firstAttribute="trailing" secondItem="dJN-wT-b13" secondAttribute="trailing" id="fcn-aS-Cre"/>
                                                         <constraint firstAttribute="trailing" secondItem="Liz-Qr-sW4" secondAttribute="trailing" id="gIW-cX-pMu"/>
                                                         <constraint firstAttribute="trailing" secondItem="Dl6-XC-8fd" secondAttribute="trailing" id="ghb-Wm-6AP"/>
-                                                        <constraint firstItem="FIv-nw-FLC" firstAttribute="top" secondItem="dJN-wT-b13" secondAttribute="bottom" id="nQB-rJ-wn6"/>
                                                         <constraint firstAttribute="trailing" secondItem="FIv-nw-FLC" secondAttribute="trailing" id="oNw-4N-6oP"/>
                                                         <constraint firstAttribute="trailing" secondItem="MGz-sw-Lhi" secondAttribute="trailing" id="oRp-Jc-2nC"/>
                                                         <constraint firstItem="dJN-wT-b13" firstAttribute="leading" secondItem="zF9-ni-apD" secondAttribute="leading" id="oUK-Rb-nqV"/>
@@ -2177,7 +2212,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Comment" rowHeight="117" id="gUf-7M-eaG" customClass="FeedDetailTableCell" customModule="Vyrl2_0" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="521" width="375" height="117"/>
+                                        <rect key="frame" x="0.0" y="528" width="375" height="117"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gUf-7M-eaG" id="8ZM-qn-VKd">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="116.5"/>
@@ -2258,7 +2293,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="moreComment" rowHeight="41" id="077-Yx-TGl" customClass="FeedDetailTableCell" customModule="Vyrl2_0" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="638" width="375" height="41"/>
+                                        <rect key="frame" x="0.0" y="645" width="375" height="41"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="077-Yx-TGl" id="hsu-hD-m9v">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="40.5"/>
