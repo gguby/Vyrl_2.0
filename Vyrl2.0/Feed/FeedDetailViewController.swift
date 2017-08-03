@@ -57,6 +57,7 @@ class FeedDetailViewController: UIViewController{
     
     @IBAction func likeButtonClick(_ sender: UIButton) {
         print("like")
+        self.pushView(storyboardName: "Feed", controllerName: "FeedLikeUserListViewController")
     }
     
     @IBAction func shareButtonClick(_ sender: UIButton) {
