@@ -13,7 +13,7 @@ import Alamofire
 import AlamofireObjectMapper
 import AVFoundation
 
-class FeedTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class FeedTableViewController: UIViewController{
 
     @IBOutlet weak var tableView: UITableView!
     var articleArray = [Article]()
@@ -71,8 +71,6 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
                             self.uploadLoadingHeight.constant = 63
                             self.uploadLoadingView.alpha = 1
                         }
-
-                        
         }, completion: nil)
     }
     
@@ -141,22 +139,6 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
         self.pushView(storyboardName: "Feed", controllerName: "FeedFullScreenViewController")
     }
    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
-        return self.articleArray.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    {
-        let article = self.articleArray[indexPath.row]
-
-        let cell = tableView.dequeueReusableCell(withIdentifier: article.type.rawValue, for: indexPath) as! FeedTableCell
-        cell.article = article
-        cell.delegate = self
-        cell.contentLabel.text = article.content
-        
-        return cell
-    }
     
     func getAllFeed(){
         self.articleArray.removeAll()
@@ -259,12 +241,53 @@ class FeedTableViewController: UIViewController, UITableViewDelegate, UITableVie
     }
 }
 
+extension FeedTableViewController : UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return self.articleArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
+        let article = self.articleArray[indexPath.row]
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: article.type.rawValue, for: indexPath) as! FeedTableCell
+        cell.article = article
+        cell.delegate = self
+        cell.contentLabel.text = article.content
+        
+        return cell
+    }
+}
+
 extension FeedTableViewController : FeedCellDelegate {
     func didPressCell(sender: Any) {
         self.pushView(storyboardName: "FeedStyle", controllerName: "FeedDetailViewController")
     }
     
-    func showAlert(cell : FeedTableCell) {
+    func showFeedShareAlert(cell: FeedTableCell) {
+        let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.actionSheet)
+        
+        let share = UIAlertAction(title: "내 Feed로 공유", style: .default,handler: { (action) -> Void in
+            
+        })
+        let linkCopy = UIAlertAction(title: "링크 복사", style: .default, handler: { (action) -> Void in
+            UIPasteboard.general.string = "Feed link"
+            self.showToast(str: UIPasteboard.general.string!)
+        })
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
+            alertController.dismiss(animated: true, completion: nil)
+        })
+        
+        alertController.addAction(share)
+        alertController.addAction(linkCopy)
+        alertController.addAction(cancel)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func showFeedAlert(cell : FeedTableCell) {
         let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.actionSheet)
         
         let modify = UIAlertAction(title: "수정", style: .default,handler: { (action) -> Void in
