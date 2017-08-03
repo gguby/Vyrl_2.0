@@ -12,6 +12,7 @@
 		8F3B36F61F147A2400B91672 /* TermsOfUseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3B36F51F147A2400B91672 /* TermsOfUseViewController.swift */; };
 		8F3C90331EDFFAE80041B770 /* AccountManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3C90321EDFFAE80041B770 /* AccountManagementViewController.swift */; };
 		8F3C90371EE010320041B770 /* FanclubManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3C90361EE010320041B770 /* FanclubManagementViewController.swift */; };
+		8F408E3D1F32EC98008F8FCB /* FeedLikeUserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F408E3C1F32EC98008F8FCB /* FeedLikeUserListViewController.swift */; };
 		8F42E4971EE10F1E0010EB88 /* FanclubMembershipCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F42E4961EE10F1E0010EB88 /* FanclubMembershipCardViewController.swift */; };
 		8F42E4991EE144C70010EB88 /* OfficialFanClubTermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F42E4981EE144C70010EB88 /* OfficialFanClubTermsViewController.swift */; };
 		8F47B6C71EDEACA600A5DBAC /* BlockManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F47B6C61EDEACA600A5DBAC /* BlockManagementViewController.swift */; };
@@ -81,6 +82,7 @@
 		8F3B36F51F147A2400B91672 /* TermsOfUseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsOfUseViewController.swift; sourceTree = "<group>"; };
 		8F3C90321EDFFAE80041B770 /* AccountManagementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountManagementViewController.swift; sourceTree = "<group>"; };
 		8F3C90361EE010320041B770 /* FanclubManagementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanclubManagementViewController.swift; sourceTree = "<group>"; };
+		8F408E3C1F32EC98008F8FCB /* FeedLikeUserListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedLikeUserListViewController.swift; sourceTree = "<group>"; };
 		8F42E4961EE10F1E0010EB88 /* FanclubMembershipCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanclubMembershipCardViewController.swift; sourceTree = "<group>"; };
 		8F42E4981EE144C70010EB88 /* OfficialFanClubTermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfficialFanClubTermsViewController.swift; sourceTree = "<group>"; };
 		8F47B6C61EDEACA600A5DBAC /* BlockManagementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockManagementViewController.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				8F57B73E1F186E44009FD0EA /* FeedFullScreenViewController.swift */,
 				A6722C301F25F7D600CEBBD6 /* FeedTableCell.swift */,
 				A64E99A21F317DBB00D9BCFF /* FeedModifyController.swift */,
+				8F408E3C1F32EC98008F8FCB /* FeedLikeUserListViewController.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -593,6 +596,7 @@
 				8F42E4971EE10F1E0010EB88 /* FanclubMembershipCardViewController.swift in Sources */,
 				CE33F0061ED2DF320050C21D /* ProfileController.swift in Sources */,
 				CE1340A61EDD3CD500EA330F /* NoticeController.swift in Sources */,
+				8F408E3D1F32EC98008F8FCB /* FeedLikeUserListViewController.swift in Sources */,
 				8F3C90371EE010320041B770 /* FanclubManagementViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
