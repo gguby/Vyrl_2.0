@@ -141,11 +141,12 @@ class FeedTableViewController: UIViewController{
    
     
     func getAllFeed(){
-        self.articleArray.removeAll()
         
         let url = URL.init(string: Constants.VyrlFeedURL.FEED)
         
         Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Article]>) in
+            
+            self.articleArray.removeAll()
             
             let array = response.result.value ?? []
             

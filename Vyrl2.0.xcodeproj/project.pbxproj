@@ -34,6 +34,7 @@
 		A650368F1F0E3F1A00AD540A /* WriteMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A650368E1F0E3F1A00AD540A /* WriteMediaViewController.swift */; };
 		A67143981F29B69000B79432 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A67143971F29B69000B79432 /* Image.xcassets */; };
 		A6722C311F25F7D600CEBBD6 /* FeedTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6722C301F25F7D600CEBBD6 /* FeedTableCell.swift */; };
+		A67C0EEA1F33254D00EF3D92 /* FanDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A67C0EE91F33254D00EF3D92 /* FanDetail.storyboard */; };
 		CE08981C1ECD704F000D6D6C /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08981B1ECD704F000D6D6C /* SearchViewController.swift */; };
 		CE08981E1ECD706A000D6D6C /* FanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08981D1ECD706A000D6D6C /* FanViewController.swift */; };
 		CE0898201ECD7079000D6D6C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08981F1ECD7079000D6D6C /* LoginViewController.swift */; };
@@ -102,6 +103,7 @@
 		A650368E1F0E3F1A00AD540A /* WriteMediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteMediaViewController.swift; sourceTree = "<group>"; };
 		A67143971F29B69000B79432 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
 		A6722C301F25F7D600CEBBD6 /* FeedTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableCell.swift; sourceTree = "<group>"; };
+		A67C0EE91F33254D00EF3D92 /* FanDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FanDetail.storyboard; sourceTree = "<group>"; };
 		C2AE70CA913C7D61FE18140C /* Pods-Vyrl2.0UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vyrl2.0UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vyrl2.0UITests/Pods-Vyrl2.0UITests.release.xcconfig"; sourceTree = "<group>"; };
 		CE08981B1ECD704F000D6D6C /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = Vyrl2.0/SEARCH/SearchViewController.swift; sourceTree = SOURCE_ROOT; };
 		CE08981D1ECD706A000D6D6C /* FanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanViewController.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				CE08981D1ECD706A000D6D6C /* FanViewController.swift */,
+				A67C0EE91F33254D00EF3D92 /* FanDetail.storyboard */,
 			);
 			name = Fan;
 			path = FAN;
@@ -432,6 +435,7 @@
 				CE29B1CD1ECD6161003F4D2E /* Feed.storyboard in Resources */,
 				CE29B1D01ECD6161003F4D2E /* GoogleService-Info.plist in Resources */,
 				CE1340A41EDD3C6D00EA330F /* Setting.storyboard in Resources */,
+				A67C0EEA1F33254D00EF3D92 /* FanDetail.storyboard in Resources */,
 				CE29B1AA1ECD5FEE003F4D2E /* LaunchScreen.storyboard in Resources */,
 				8F4C09291EE528840026D49F /* FeedStyle.storyboard in Resources */,
 				CE29B1CE1ECD6161003F4D2E /* Login.storyboard in Resources */,
