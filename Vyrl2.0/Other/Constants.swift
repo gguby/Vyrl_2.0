@@ -58,6 +58,10 @@ struct Constants {
         static let FANPAGE = VyrlAPIConstants.baseURL + "fan-pages"
         static let FANPAGELIST = VyrlAPIConstants.baseURL + "fan-pages/my"
         static let SUGGESTFANPAGELIST = VyrlAPIConstants.baseURL + "fan-pages/suggests"
+        static func checkFanPageName(fanPageName:String)-> String{
+            return VyrlAPIConstants.baseURL + "fan-pages/check-names/" + fanPageName
+        }
+
     }
     
     struct VyrlAPIConstants{

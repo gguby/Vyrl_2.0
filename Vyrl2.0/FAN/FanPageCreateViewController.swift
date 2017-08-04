@@ -32,7 +32,10 @@ class FanPageCreateViewController: UIViewController,UIImagePickerControllerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.nameTextField.delegate = self
         // Do any additional setup after loading the view.
+        duplicationCheckButton.setTitleColor(UIColor.ivGreyish, for: .disabled)
+        duplicationCheckButton.setTitleColor(UIColor.ivLighterPurple, for: .normal)
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,10 +43,14 @@ class FanPageCreateViewController: UIViewController,UIImagePickerControllerDeleg
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func checkNicname(_ sender: UIButton) {
+    @IBAction func checkFanpageName(_ sender: UIButton) {
         self.duplicationCheckButton.isEnabled = false;
-        LoginManager.sharedInstance.checkNickname(nickname: nameTextField.text!) { (response)
-            in switch response.result {
+        
+        let uri = Constants.VyrlFanAPIURL.checkFanPageName(fanPageName: self.nameTextField.text!)
+        
+        
+        Alamofire.request(uri, method: .get, parameters: nil, encoding: URLEncoding.queryString, headers:Constants.VyrlAPIConstants.getHeader()).responseString { (response) in
+            switch response.result {
             case .success(let json):
                 print((response.response?.statusCode)!)
                 print(json)
@@ -63,6 +70,7 @@ class FanPageCreateViewController: UIViewController,UIImagePickerControllerDeleg
             case .failure(let error):
                 print(error)
             }
+
         }
     }
     
@@ -105,6 +113,35 @@ class FanPageCreateViewController: UIViewController,UIImagePickerControllerDeleg
     }
 
 }
+
+extension FanPageCreateViewController : UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        duplicationCheckButton.isEnabled = false;
+        
+        signUpFanPageButton.isEnabled = false
+        signUpFanPageButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#ACACAC")
+        
+        self.checkView.isHidden = true
+        self.duplicationCheckButton.isHidden = false
+        
+        
+        let newLength = textField.text!.characters.count + string.characters.count - range.length;
+        if(newLength > 3 && newLength < 30)
+        {
+            duplicationCheckButton.isEnabled = true;
+        }
+        
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+}
+
 
 extension FanPageCreateViewController: SHViewControllerDelegate {
     
