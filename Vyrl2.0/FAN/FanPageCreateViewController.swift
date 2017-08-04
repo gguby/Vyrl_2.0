@@ -15,6 +15,20 @@ import AlamofireImage
 class FanPageCreateViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate, TOCropViewControllerDelegate {
 
     @IBOutlet weak var fanClubImageView: UIImageView!
+    
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var introduceTextField: UITextField!
+    @IBOutlet weak var linkTextField: UITextField!
+    @IBOutlet weak var noticeTextView: UITextView!
+    
+    @IBOutlet weak var duplicationCheckButton: UIButton!
+    @IBOutlet weak var checkView: UIImageView!
+    
+    @IBOutlet weak var signUpFanPageButton: UIButton!
+    
+    @IBOutlet weak var photoButtonVIew: UIStackView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,6 +38,32 @@ class FanPageCreateViewController: UIViewController,UIImagePickerControllerDeleg
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func checkNicname(_ sender: UIButton) {
+        self.duplicationCheckButton.isEnabled = false;
+        LoginManager.sharedInstance.checkNickname(nickname: nameTextField.text!) { (response)
+            in switch response.result {
+            case .success(let json):
+                print((response.response?.statusCode)!)
+                print(json)
+                
+                if((response.response?.statusCode)! == Constants.VyrlResponseCode.NickNameAleadyInUse.rawValue)
+                {
+                    
+                } else if ((response.response?.statusCode)! == 200)
+                {
+                    self.checkView.isHidden = false
+                    self.duplicationCheckButton.isHidden = true
+                    
+                    self.signUpFanPageButton.isEnabled = true
+                    self.signUpFanPageButton.backgroundColor = UIColor.ivLighterPurple
+                }
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     @IBAction func cameraButtonClick(_ sender: UIButton) {
