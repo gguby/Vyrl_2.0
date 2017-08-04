@@ -46,7 +46,7 @@ class FanPageCreateViewController: UIViewController,UIImagePickerControllerDeleg
     @IBAction func checkFanpageName(_ sender: UIButton) {
         self.duplicationCheckButton.isEnabled = false;
         
-        let uri = Constants.VyrlFanAPIURL.checkFanPageName(fanPageName: self.nameTextField.text!)
+        let uri = Constants.VyrlFanAPIURL.checkFanPageName(fanPageName:nameTextField.text!.addingPercentEncoding( withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)
         
         
         Alamofire.request(uri, method: .get, parameters: nil, encoding: URLEncoding.queryString, headers:Constants.VyrlAPIConstants.getHeader()).responseString { (response) in
