@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import ObjectMapper
+import Alamofire
+import AlamofireObjectMapper
 
 class FanViewController: UIViewController {
-    @IBOutlet weak var officialFanclubCollectionView: UICollectionView!
     
     @IBOutlet weak var joinFanpageCollectionView: UICollectionView!
     
+    @IBOutlet weak var joinFanPageHeight: NSLayoutConstraint!
     @IBOutlet weak var recommandFanpageTableView: UITableView!
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -21,19 +24,23 @@ class FanViewController: UIViewController {
     @IBOutlet weak var cancelButton: UIButton!
     
     @IBOutlet weak var searchTableView: UIView!
-
+    
+    var joinFanPages = [FanPage]()
+    var suggestFanPages = [FanPage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         registerSwipe()
         
-        print("Fan");
         initSearchBar()
         self.automaticallyAdjustsScrollViewInsets = false
         
         self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         
+        self.getMyFanPage()
+        
+        self.getSuggesetFanPage()
     }
     
     func initSearchBar()
@@ -49,57 +56,160 @@ class FanViewController: UIViewController {
         textFieldInsideSearchBarLabel?.font = UIFont.ivTextStyleFont()
         
     }
+    
     @IBAction func hiddenAction(_ sender: Any) {
         searchTableView.isHidden = true;
         searchBar.resignFirstResponder()
     }
+    
+    func enableEmptyView(){
+        if (self.joinFanPages.count == 0 ){
+            self.joinFanPageHeight.constant = 197.5
+            self.joinFanpageCollectionView.alpha = 0
+        } else {
+            self.joinFanPageHeight.constant = 334
+            self.joinFanpageCollectionView.alpha = 1
+        }
+    }
+    
+    func getMyFanPage(){
+        
+        let uri = Constants.VyrlFanAPIURL.FANPAGELIST
+        
+        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[FanPage]>) in
+            
+            self.joinFanPages.removeAll()
+            
+            let array = response.result.value ?? []
+            
+            for fan in array {
+                self.joinFanPages.append(fan)
+            }
+            
+            self.joinFanpageCollectionView.reloadData()
+            
+            self.enableEmptyView()
+        }
+    }
+    
+    func getSuggesetFanPage(){
+        
+        let uri = Constants.VyrlFanAPIURL.SUGGESTFANPAGELIST
+        
+        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[FanPage]>) in
+            
+            self.suggestFanPages.removeAll()
+            
+            let array = response.result.value ?? []
+            
+            for fan in array {
+                self.suggestFanPages.append(fan)
+            }
+            
+            self.recommandFanpageTableView.reloadData()
+        }
+    }
+    
+    @IBAction func createFanPage(_ sender: Any) {
+    }
+}
 
+class FanCollectionCell : UICollectionViewCell {
+    
+    @IBOutlet weak var imageView: UIImageView!
 }
 
 extension FanViewController : UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if(collectionView == self.officialFanclubCollectionView){
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OfficialFanclubCell", for: indexPath) as UICollectionViewCell
-            
-            return cell
-        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! FanCollectionCell
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as UICollectionViewCell
+        let fan = self.joinFanPages[indexPath.row]
+        
+        cell.imageView.af_setImage(withURL: URL.init(string: fan.pageprofileImagePath)!)
         
         return cell
 
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return self.joinFanPages.count
     }
+}
 
+class RecommendFanPageCell : UITableViewCell {
+    @IBOutlet weak var profile: UIImageView!
+    
+    @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var detail: UILabel!
+    @IBOutlet weak var member: UILabel!
+    
+    @IBAction func remove(_ sender: Any) {
+    }
+    
+    @IBAction func follow(_ sender: Any) {
+    }
 }
 
 extension FanViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return 4
+        return self.suggestFanPages.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    {
-        var cell : UITableViewCell = UITableViewCell()
+    {        
         if(tableView == self.searchTable)
         {
-            cell = tableView.dequeueReusableCell(withIdentifier: "OfficialBannerCell", for: indexPath) as UITableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "OfficialBannerCell", for: indexPath) as UITableViewCell
+            return cell
         } else if(tableView == self.recommandFanpageTableView) {
-            cell = tableView.dequeueReusableCell(withIdentifier: "RecommandFanpageCell", for: indexPath) as UITableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "RecommandFanpageCell", for: indexPath) as! RecommendFanPageCell
+            
+            let fan = self.suggestFanPages[indexPath.row]
+            
+            cell.profile.af_setImage(withURL: URL.init(string: fan.pageprofileImagePath)!)
+            
+            return cell
         }
-        return cell
+        
+        return UITableViewCell()
     }
-
 }
 
 extension FanViewController : UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         searchTableView.isHidden = false
         return true
+    }
+}
+
+struct FanPage : Mappable {
+    
+    var fanPageId : Int!
+    var level : String!
+    var link : String!
+    var nickName : String!
+    var pageInfo : String!
+    var pageName : String!
+    var pageprofileImagePath : String!
+    
+    var cntPost : Int!
+    var cntMember : Int!
+    
+    init?(map: Map) {
+        
+    }
+    
+    mutating func mapping(map: Map){
+        fanPageId <- map["fanPageId"]
+        level <- map["level"]
+        link <- map["link"]
+        nickName <- map["nickName"]
+        pageInfo <- map["pageInfo"]
+        pageName <- map["pageName"]
+        pageprofileImagePath <- map["pageprofileImagePath"]
+        cntPost <- map["postCount"]
+        cntMember <- map["memberCount"]
     }
 }
