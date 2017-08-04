@@ -203,13 +203,13 @@ class FeedTableViewController: UIViewController{
                     fileName = "\(count)" + ".jpg"
                     
                     if let imageData = asset.mediaData {
-                        multipartFormData.append(imageData, withName: "image", fileName: fileName, mimeType: "image/jpg")
+                        multipartFormData.append(imageData, withName: "file", fileName: fileName, mimeType: "image/jpg")
                     }
                 } else {
                     fileName = "\(count)" + ".mpeg"
                     
                     if let imageData = asset.mediaData {
-                        multipartFormData.append(imageData, withName: "video", fileName: fileName, mimeType: "video/mpeg")
+                        multipartFormData.append(imageData, withName: "file", fileName: fileName, mimeType: "video/mpeg")
                     }
                 }
                 
@@ -357,6 +357,7 @@ struct Article : Mappable {
     var comments : [String]!
     var cntComment : Int!
     var cntLike : Int!
+    var cntShare : Int!
     
     var mediaCount : Int!
     
@@ -372,6 +373,7 @@ struct Article : Mappable {
         cntComment <- map["cntComment"]
         cntLike <- map["cntLike"]
         comments <- map["comments"]
+        cntShare <- map["cntShare"]
         
         self.setUpType()
     }
