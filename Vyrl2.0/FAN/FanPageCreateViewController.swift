@@ -78,6 +78,8 @@ class FanPageCreateViewController: UIViewController,UIImagePickerControllerDeleg
         let uri = Constants.VyrlFanAPIURL.FANPAGE
         
         let parameters : Parameters = [
+            "pageInfo": introduceTextField.text!,
+            "link": linkTextField.text!,
             "pageName": nameTextField.text!,
             ]
 
@@ -85,10 +87,11 @@ class FanPageCreateViewController: UIViewController,UIImagePickerControllerDeleg
         
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             if let imageData = UIImageJPEGRepresentation(self.fanClubImageView.image!, 1.0) {
-                multipartFormData.append(imageData, withName: "profile", fileName: fileName, mimeType: "image/jpg")
+                multipartFormData.append(imageData, withName: "profileImagefile", fileName: fileName, mimeType: "image/jpg")
             }
             
-    
+           
+            
         }, usingThreshold: UInt64.init(), to:URL(string: uri, parameters: parameters as! [String : String])!, method: .post, headers: Constants.VyrlAPIConstants.getHeader(), encodingCompletion:
             {
                 encodingResult in
