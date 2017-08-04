@@ -25,7 +25,8 @@ class FanViewController: UIViewController {
     
     @IBOutlet weak var searchTableView: UIView!
     
-    var fanArray = [Fan]()
+    var joinFanPages = [FanPage]()
+    var suggestFanPages = [FanPage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +39,8 @@ class FanViewController: UIViewController {
         self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         
         self.getMyFanPage()
+        
+        self.getSuggesetFanPage()
     }
     
     func initSearchBar()
@@ -60,9 +63,12 @@ class FanViewController: UIViewController {
     }
     
     func enableEmptyView(){
-        if (self.fanArray.count == 0 ){
+        if (self.joinFanPages.count == 0 ){
             self.joinFanPageHeight.constant = 197.5
             self.joinFanpageCollectionView.alpha = 0
+        } else {
+            self.joinFanPageHeight.constant = 334
+            self.joinFanpageCollectionView.alpha = 1
         }
     }
     
@@ -70,20 +76,41 @@ class FanViewController: UIViewController {
         
         let uri = Constants.VyrlFanAPIURL.FANPAGELIST
         
-        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Fan]>) in
+        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[FanPage]>) in
             
-            self.fanArray.removeAll()
+            self.joinFanPages.removeAll()
             
             let array = response.result.value ?? []
             
             for fan in array {
-                self.fanArray.append(fan)
+                self.joinFanPages.append(fan)
             }
             
             self.joinFanpageCollectionView.reloadData()
             
             self.enableEmptyView()
         }
+    }
+    
+    func getSuggesetFanPage(){
+        
+        let uri = Constants.VyrlFanAPIURL.SUGGESTFANPAGELIST
+        
+        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[FanPage]>) in
+            
+            self.suggestFanPages.removeAll()
+            
+            let array = response.result.value ?? []
+            
+            for fan in array {
+                self.suggestFanPages.append(fan)
+            }
+            
+            self.recommandFanpageTableView.reloadData()
+        }
+    }
+    
+    @IBAction func createFanPage(_ sender: Any) {
     }
 }
 
@@ -97,7 +124,7 @@ extension FanViewController : UICollectionViewDataSource, UICollectionViewDelega
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! FanCollectionCell
         
-        let fan = self.fanArray[indexPath.row]
+        let fan = self.joinFanPages[indexPath.row]
         
         cell.imageView.af_setImage(withURL: URL.init(string: fan.pageprofileImagePath)!)
         
@@ -106,29 +133,48 @@ extension FanViewController : UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.fanArray.count
+        return self.joinFanPages.count
     }
+}
 
+class RecommendFanPageCell : UITableViewCell {
+    @IBOutlet weak var profile: UIImageView!
+    
+    @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var detail: UILabel!
+    @IBOutlet weak var member: UILabel!
+    
+    @IBAction func remove(_ sender: Any) {
+    }
+    
+    @IBAction func follow(_ sender: Any) {
+    }
 }
 
 extension FanViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return 4
+        return self.suggestFanPages.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    {
-        var cell : UITableViewCell = UITableViewCell()
+    {        
         if(tableView == self.searchTable)
         {
-            cell = tableView.dequeueReusableCell(withIdentifier: "OfficialBannerCell", for: indexPath) as UITableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "OfficialBannerCell", for: indexPath) as UITableViewCell
+            return cell
         } else if(tableView == self.recommandFanpageTableView) {
-            cell = tableView.dequeueReusableCell(withIdentifier: "RecommandFanpageCell", for: indexPath) as UITableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "RecommandFanpageCell", for: indexPath) as! RecommendFanPageCell
+            
+            let fan = self.suggestFanPages[indexPath.row]
+            
+            cell.profile.af_setImage(withURL: URL.init(string: fan.pageprofileImagePath)!)
+            
+            return cell
         }
-        return cell
+        
+        return UITableViewCell()
     }
-
 }
 
 extension FanViewController : UISearchBarDelegate {
@@ -138,7 +184,7 @@ extension FanViewController : UISearchBarDelegate {
     }
 }
 
-struct Fan : Mappable {
+struct FanPage : Mappable {
     
     var fanPageId : Int!
     var level : String!

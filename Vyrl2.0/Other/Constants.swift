@@ -57,6 +57,7 @@ struct Constants {
     struct VyrlFanAPIURL {
         static let FANPAGE = VyrlAPIConstants.baseURL + "fan-pages"
         static let FANPAGELIST = VyrlAPIConstants.baseURL + "fan-pages/my"
+        static let SUGGESTFANPAGELIST = VyrlAPIConstants.baseURL + "fan-pages/suggests"
     }
     
     struct VyrlAPIConstants{
