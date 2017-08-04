@@ -74,6 +74,47 @@ class FanPageCreateViewController: UIViewController,UIImagePickerControllerDeleg
         }
     }
     
+    @IBAction func createFanPage(_ sender: UIButton) {
+        let uri = Constants.VyrlFanAPIURL.FANPAGE
+        
+        let parameters : Parameters = [
+            "pageName": nameTextField.text!,
+            ]
+
+        let fileName = "\(nameTextField.text!).jpg"
+        
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            if let imageData = UIImageJPEGRepresentation(self.fanClubImageView.image!, 1.0) {
+                multipartFormData.append(imageData, withName: "profile", fileName: fileName, mimeType: "image/jpg")
+            }
+            
+    
+        }, usingThreshold: UInt64.init(), to:URL(string: uri, parameters: parameters as! [String : String])!, method: .post, headers: Constants.VyrlAPIConstants.getHeader(), encodingCompletion:
+            {
+                encodingResult in
+                switch encodingResult {
+                case .success(let upload, _, _):
+                    
+                    upload.uploadProgress(closure: { (progress) in
+                        
+                    })
+                    
+                    upload.responseString { response in
+                        print(response.result)
+                        print((response.response?.statusCode)!)
+                        print(response)
+                        
+                        if ((response.response?.statusCode)! == 200){
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    }
+                case .failure(let encodingError):
+                    print(encodingError.localizedDescription)
+                }
+        })
+    }
+    
+    
     @IBAction func cameraButtonClick(_ sender: UIButton) {
         if ( UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) == false ){
             return

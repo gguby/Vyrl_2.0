@@ -209,7 +209,7 @@ struct FanPage : Mappable {
         nickName <- map["nickName"]
         pageInfo <- map["pageInfo"]
         pageName <- map["pageName"]
-        pageprofileImagePath <- map["pageprofileImagePath"]
+        pageprofileImagePath <- map["profileImagePath"]
         cntPost <- map["postCount"]
         cntMember <- map["memberCount"]
     }

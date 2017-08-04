@@ -247,6 +247,9 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
                                                 <state key="normal" title="팬페이지 완성!"/>
+                                                <connections>
+                                                    <action selector="createFanPage:" destination="SGL-jy-bpM" eventType="touchUpInside" id="2w6-IW-YZG"/>
+                                                </connections>
                                             </button>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yhf-RP-Tjk">
                                                 <rect key="frame" x="30" y="472.5" width="314" height="79"/>
