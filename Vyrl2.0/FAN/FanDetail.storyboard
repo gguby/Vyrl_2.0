@@ -140,6 +140,9 @@
                                         <state key="normal" title="중복확인">
                                             <color key="titleColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.67450980390000004" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="checkFanpageName:" destination="SGL-jy-bpM" eventType="touchUpInside" id="QD4-jV-Aas"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
