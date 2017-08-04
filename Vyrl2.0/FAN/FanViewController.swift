@@ -111,6 +111,7 @@ class FanViewController: UIViewController {
     }
     
     @IBAction func createFanPage(_ sender: Any) {
+        self.pushView(storyboardName: "FanDetail", controllerName: "FanPageCreateViewController")
     }
 }
 
