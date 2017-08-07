@@ -37,6 +37,10 @@ class FanViewController: UIViewController {
         self.automaticallyAdjustsScrollViewInsets = false
         
         self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         self.getMyFanPage()
         
@@ -54,7 +58,6 @@ class FanViewController: UIViewController {
         
         let textFieldInsideSearchBarLabel = textFieldInsideSearchBar!.value(forKey: "placeholderLabel") as? UILabel
         textFieldInsideSearchBarLabel?.font = UIFont.ivTextStyleFont()
-        
     }
     
     @IBAction func hiddenAction(_ sender: Any) {

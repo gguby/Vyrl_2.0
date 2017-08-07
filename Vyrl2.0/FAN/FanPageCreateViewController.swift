@@ -22,20 +22,61 @@ class FanPageCreateViewController: UIViewController,UIImagePickerControllerDeleg
     @IBOutlet weak var noticeTextView: UITextView!
     
     @IBOutlet weak var duplicationCheckButton: UIButton!
-    @IBOutlet weak var checkView: UIImageView!
-    
     @IBOutlet weak var signUpFanPageButton: UIButton!
     
-    @IBOutlet weak var photoButtonVIew: UIStackView!
+    @IBOutlet weak var scrollView : UIScrollView!
+    @IBOutlet weak var agreeLabel: UILabel!
+    @IBOutlet weak var checkBox: CheckBox!
     
+    @IBOutlet weak var iconCheck: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.nameTextField.delegate = self
+        self.introduceTextField.delegate = self
+        self.linkTextField.delegate = self
+        
         // Do any additional setup after loading the view.
         duplicationCheckButton.setTitleColor(UIColor.ivGreyish, for: .disabled)
         duplicationCheckButton.setTitleColor(UIColor.ivLighterPurple, for: .normal)
+        duplicationCheckButton.isEnabled = false        
+        
+        self.checkBox.delegate = self
+        self.checkBox.label = self.agreeLabel
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: .UIKeyboardWillHide, object: nil)
+        
+        let tapGestureReconizer = UITapGestureRecognizer(target: self, action: #selector(self.tap(sender:)))
+        view.addGestureRecognizer(tapGestureReconizer)
+    }
+
+    func tap(sender: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
+
+    func keyboardWillShow(notification : NSNotification){
+        
+        if self.nameTextField.isFirstResponder {
+            return
+        }
+        
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            
+            if self.view.frame.origin.y == 0{
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+    
+    func keyboardWillHide(notification : NSNotification){
+        
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y != 0{
+                self.view.frame.origin.y += keyboardSize.height
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,48 +89,43 @@ class FanPageCreateViewController: UIViewController,UIImagePickerControllerDeleg
         
         let uri = Constants.VyrlFanAPIURL.checkFanPageName(fanPageName:nameTextField.text!.addingPercentEncoding( withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)
         
-        
-        Alamofire.request(uri, method: .get, parameters: nil, encoding: URLEncoding.queryString, headers:Constants.VyrlAPIConstants.getHeader()).responseString { (response) in
+        Alamofire.request(uri, method: .get, parameters: nil, encoding: URLEncoding.queryString, headers:Constants.VyrlAPIConstants.getHeader()).responseJSON { (response) in
             switch response.result {
             case .success(let json):
-                print((response.response?.statusCode)!)
-                print(json)
                 
-                if((response.response?.statusCode)! == Constants.VyrlResponseCode.NickNameAleadyInUse.rawValue)
-                {
+                let jsonData = json as! NSDictionary
+                
+                let isExistFanpage = jsonData["exist"] as! Bool
+                
+                if isExistFanpage == false {
                     
-                } else if ((response.response?.statusCode)! == 200)
-                {
-                    self.checkView.isHidden = false
                     self.duplicationCheckButton.isHidden = true
-                    
-                    self.signUpFanPageButton.isEnabled = true
-                    self.signUpFanPageButton.backgroundColor = UIColor.ivLighterPurple
+                    self.iconCheck.isHidden  = false
+                    self.nameTextField.resignFirstResponder()
                 }
-                
             case .failure(let error):
                 print(error)
             }
-
         }
     }
     
     @IBAction func createFanPage(_ sender: UIButton) {
         let uri = Constants.VyrlFanAPIURL.FANPAGE
         
-        let parameters : Parameters = [
+        let parameters : [String:String] = [
             "pageName": nameTextField.text!,
-            ]
+            "pageInfo" : introduceTextField.text!,
+            "link" : linkTextField.text!
+        ]
 
         let fileName = "\(nameTextField.text!).jpg"
         
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             if let imageData = UIImageJPEGRepresentation(self.fanClubImageView.image!, 1.0) {
-                multipartFormData.append(imageData, withName: "profile", fileName: fileName, mimeType: "image/jpg")
+                multipartFormData.append(imageData, withName: "profileImagefile", fileName: fileName, mimeType: "image/jpg")
             }
-            
     
-        }, usingThreshold: UInt64.init(), to:URL(string: uri, parameters: parameters as! [String : String])!, method: .post, headers: Constants.VyrlAPIConstants.getHeader(), encodingCompletion:
+        }, usingThreshold: UInt64.init(), to:URL.init(string: uri, parameters: parameters)!, method: .post, headers: Constants.VyrlAPIConstants.getHeader(), encodingCompletion:
             {
                 encodingResult in
                 switch encodingResult {
@@ -100,10 +136,6 @@ class FanPageCreateViewController: UIViewController,UIImagePickerControllerDeleg
                     })
                     
                     upload.responseString { response in
-                        print(response.result)
-                        print((response.response?.statusCode)!)
-                        print(response)
-                        
                         if ((response.response?.statusCode)! == 200){
                             self.navigationController?.popViewController(animated: true)
                         }
@@ -126,7 +158,6 @@ class FanPageCreateViewController: UIViewController,UIImagePickerControllerDeleg
         imagePicker.sourceType = UIImagePickerControllerSourceType.savedPhotosAlbum
         
         self.present(imagePicker, animated: true, completion: nil)
-
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]){
@@ -158,14 +189,15 @@ class FanPageCreateViewController: UIViewController,UIImagePickerControllerDeleg
 extension FanPageCreateViewController : UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        duplicationCheckButton.isEnabled = false;
         
-        signUpFanPageButton.isEnabled = false
-        signUpFanPageButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#ACACAC")
+        if (textField == self.introduceTextField || textField == self.linkTextField )
+        {
+            return true
+        }
         
-        self.checkView.isHidden = true
         self.duplicationCheckButton.isHidden = false
-        
+        self.duplicationCheckButton.isEnabled = false
+        self.iconCheck.isHidden = true
         
         let newLength = textField.text!.characters.count + string.characters.count - range.length;
         if(newLength > 3 && newLength < 30)
@@ -180,9 +212,7 @@ extension FanPageCreateViewController : UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
-    
 }
-
 
 extension FanPageCreateViewController: SHViewControllerDelegate {
     
@@ -196,6 +226,18 @@ extension FanPageCreateViewController: SHViewControllerDelegate {
     
     func shViewControllerDidCancel() {
         // This will be called when you cancel filtering the image.
+    }
+}
+
+extension FanPageCreateViewController : checkBoxDelegate {
+    func respondCheckBox(checkBox: CheckBox) {
+        if checkBox.isChecked && self.nameTextField.text?.isEmpty == false {
+            self.signUpFanPageButton.isEnabled = true
+            self.signUpFanPageButton.backgroundColor = UIColor.ivLighterPurple
+        } else {
+            signUpFanPageButton.isEnabled = false
+            signUpFanPageButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#ACACAC")
+        }
     }
 }
 
