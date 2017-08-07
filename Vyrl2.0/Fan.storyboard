@@ -107,7 +107,7 @@
                                                                                 <constraint firstAttribute="height" constant="50" id="jPt-tF-M2e"/>
                                                                             </constraints>
                                                                         </view>
-                                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="백현러브" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ndr-jc-CcF">
+                                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ndr-jc-CcF">
                                                                             <rect key="frame" x="10" y="67" width="91" height="50"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="50" id="28g-ge-aYM"/>
@@ -132,9 +132,10 @@
                                                                 </constraints>
                                                                 <connections>
                                                                     <outlet property="imageView" destination="BI7-Pp-yLB" id="AU7-OX-gtb"/>
+                                                                    <outlet property="textView" destination="Ndr-jc-CcF" id="gQW-GA-d4c"/>
                                                                 </connections>
                                                             </collectionViewCell>
-                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="yYu-CG-VId">
+                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="createFan" id="yYu-CG-VId">
                                                                 <rect key="frame" x="117" y="0.0" width="111" height="117"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -636,6 +637,7 @@
                     <size key="freeformSize" width="375" height="1035"/>
                     <connections>
                         <outlet property="cancelButton" destination="3L6-XR-IvJ" id="4sf-AJ-NJa"/>
+                        <outlet property="emptyView" destination="h6t-ld-KiC" id="c4i-MB-Io4"/>
                         <outlet property="joinFanPageHeight" destination="9OS-p4-sWL" id="6oB-Nm-mHG"/>
                         <outlet property="joinFanpageCollectionView" destination="JkV-Fm-xmY" id="tt7-Yz-oPL"/>
                         <outlet property="recommandFanpageTableView" destination="pai-rP-I3z" id="d45-EU-qXu"/>

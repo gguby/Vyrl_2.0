@@ -25,6 +25,8 @@ class FanViewController: UIViewController {
     
     @IBOutlet weak var searchTableView: UIView!
     
+    @IBOutlet weak var emptyView: UIView!
+    
     var joinFanPages = [FanPage]()
     var suggestFanPages = [FanPage]()
     
@@ -69,9 +71,11 @@ class FanViewController: UIViewController {
         if (self.joinFanPages.count == 0 ){
             self.joinFanPageHeight.constant = 197.5
             self.joinFanpageCollectionView.alpha = 0
+            self.emptyView.alpha = 1
         } else {
             self.joinFanPageHeight.constant = 334
             self.joinFanpageCollectionView.alpha = 1
+            self.emptyView.alpha = 0
         }
     }
     
@@ -119,25 +123,46 @@ class FanViewController: UIViewController {
 }
 
 class FanCollectionCell : UICollectionViewCell {
-    
+    @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var imageView: UIImageView!
 }
 
 extension FanViewController : UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
+        if indexPath.row == self.joinFanPages.count - 1 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "createFan", for: indexPath)
+            return cell
+        }
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! FanCollectionCell
         
         let fan = self.joinFanPages[indexPath.row]
         
         cell.imageView.af_setImage(withURL: URL.init(string: fan.pageprofileImagePath)!)
+        cell.textView.text = fan.pageName
         
         return cell
-
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        if ( self.joinFanPages.count > 5 ){
+            return 6
+        }
+        
         return self.joinFanPages.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        
+        if cell?.reuseIdentifier == "createFan" {
+            self.pushView(storyboardName: "FanDetail", controllerName: "FanPageCreateViewController")
+        } else {
+            let vc = self.pushViewControllrer(storyboardName: "FanDetail", controllerName: "FanPage") as! FanPageController
+            vc.fanPage = self.joinFanPages[indexPath.row]        
+        }
     }
 }
 
@@ -209,7 +234,7 @@ struct FanPage : Mappable {
         fanPageId <- map["fanPageId"]
         level <- map["level"]
         link <- map["link"]
-        nickName <- map["nickName"]
+        nickName <- map["nickname"]
         pageInfo <- map["pageInfo"]
         pageName <- map["pageName"]
         pageprofileImagePath <- map["profileImagePath"]
