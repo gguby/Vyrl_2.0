@@ -263,7 +263,9 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="79" id="Tfx-kg-Pdc"/>
                                                         </constraints>
-                                                        <string key="text">15일동안 아무런 업데이트가 없을 시, 팬클럽은 자동 휴면계정이 되고, 그 후 30일간 휴면 해제를 하지 않으면 자동삭제 됩니다.</string>
+                                                        <string key="text">15일동안 아무런 업데이트가 없을 시, 팬클럽은 자동 휴면
+계정이 되고, 그 후 30일간 휴면 해제를 하지 않으면 자동
+삭제 됩니다.</string>
                                                         <color key="textColor" red="0.32549019607843138" green="0.30980392156862746" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -919,7 +921,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DUP-ZX-HUP">
-                                <rect key="frame" x="0.0" y="684" width="375" height="45"/>
+                                <rect key="frame" x="0.0" y="683.5" width="375" height="45"/>
                                 <color key="backgroundColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.67450980390000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="n5Y-HG-ydc"/>
@@ -1052,7 +1054,7 @@
                                         <rect key="frame" x="0.0" y="1" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="znS-Yl-v1g" id="Bxs-3P-NIe">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
