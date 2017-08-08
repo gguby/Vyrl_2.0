@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bYS-Q1-v3j">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bYS-Q1-v3j">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -1070,10 +1070,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d4e-b1-Bom">
-                                <rect key="frame" x="15" y="10" width="20" height="20"/>
+                                <rect key="frame" x="0.0" y="0.0" width="55" height="45"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="20" id="7EE-ex-gQC"/>
-                                    <constraint firstAttribute="height" constant="20" id="yDj-l9-xVZ"/>
+                                    <constraint firstAttribute="width" constant="55" id="7EE-ex-gQC"/>
+                                    <constraint firstAttribute="height" constant="45" id="yDj-l9-xVZ"/>
                                 </constraints>
                                 <state key="normal" image="icon_cancel_03"/>
                                 <connections>
@@ -1081,7 +1081,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0wD-ps-B7J">
-                                <rect key="frame" x="0.0" y="85" width="375" height="497"/>
+                                <rect key="frame" x="0.0" y="100" width="375" height="467"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="251kb" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qgt-aU-asX">
                                 <rect key="frame" x="306" y="632" width="54" height="19"/>
@@ -1100,10 +1100,10 @@
                             <constraint firstAttribute="trailing" secondItem="0wD-ps-B7J" secondAttribute="trailing" id="HoY-iE-hTd"/>
                             <constraint firstItem="0wD-ps-B7J" firstAttribute="centerY" secondItem="71s-sC-1aX" secondAttribute="centerY" id="N6E-A5-qfP"/>
                             <constraint firstItem="slc-JK-O1k" firstAttribute="top" secondItem="Qgt-aU-asX" secondAttribute="bottom" constant="16" id="SGz-ej-Ufz"/>
-                            <constraint firstItem="d4e-b1-Bom" firstAttribute="top" secondItem="71s-sC-1aX" secondAttribute="top" constant="10" id="WqH-5o-Ei5"/>
+                            <constraint firstItem="d4e-b1-Bom" firstAttribute="top" secondItem="71s-sC-1aX" secondAttribute="top" id="WqH-5o-Ei5"/>
                             <constraint firstItem="0wD-ps-B7J" firstAttribute="top" secondItem="d4e-b1-Bom" secondAttribute="bottom" constant="55" id="jbl-hz-39Q"/>
                             <constraint firstAttribute="trailing" secondItem="Qgt-aU-asX" secondAttribute="trailing" constant="15" id="ngy-WR-dRT"/>
-                            <constraint firstItem="d4e-b1-Bom" firstAttribute="leading" secondItem="71s-sC-1aX" secondAttribute="leading" constant="15" id="xf4-Ax-yQq"/>
+                            <constraint firstItem="d4e-b1-Bom" firstAttribute="leading" secondItem="71s-sC-1aX" secondAttribute="leading" id="xf4-Ax-yQq"/>
                         </constraints>
                     </view>
                     <connections>

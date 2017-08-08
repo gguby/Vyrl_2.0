@@ -73,14 +73,10 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IJf-Js-yg4" userLabel="Top">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y6Z-oi-XRf">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
-                                                    </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hDY-Vf-fnp">
-                                                        <rect key="frame" x="163" y="93" width="49" height="39"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="39" id="CI9-eJ-iRr"/>
-                                                            <constraint firstAttribute="width" constant="49" id="n6D-f4-6AZ"/>
+                                                            <constraint firstAttribute="height" constant="225" id="nBk-K5-s2D"/>
                                                         </constraints>
                                                         <state key="normal" image="icon_camera_02"/>
                                                         <connections>
@@ -88,7 +84,7 @@
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="팬페이지 대표 사진" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pLt-pM-0Ar">
-                                                        <rect key="frame" x="135" y="143" width="105" height="17"/>
+                                                        <rect key="frame" x="135" y="143.5" width="105" height="17"/>
                                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="14"/>
                                                         <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -97,14 +93,13 @@
                                                 <color key="backgroundColor" red="0.96862745098039216" green="0.96470588235294119" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="225" id="1Ei-Vl-YxQ"/>
-                                                    <constraint firstItem="pLt-pM-0Ar" firstAttribute="top" secondItem="hDY-Vf-fnp" secondAttribute="bottom" constant="11.5" id="ESz-AV-vTX"/>
-                                                    <constraint firstAttribute="bottom" secondItem="Y6Z-oi-XRf" secondAttribute="bottom" id="Ihd-7x-Jvf"/>
+                                                    <constraint firstItem="hDY-Vf-fnp" firstAttribute="top" secondItem="IJf-Js-yg4" secondAttribute="top" id="CuC-4e-aNQ"/>
+                                                    <constraint firstItem="pLt-pM-0Ar" firstAttribute="centerX" secondItem="hDY-Vf-fnp" secondAttribute="centerX" id="GaG-z8-GfE"/>
+                                                    <constraint firstItem="pLt-pM-0Ar" firstAttribute="top" secondItem="hDY-Vf-fnp" secondAttribute="bottom" constant="-81.5" id="Lvd-6E-xAT"/>
+                                                    <constraint firstAttribute="trailing" secondItem="hDY-Vf-fnp" secondAttribute="trailing" id="NSU-wE-o3C"/>
                                                     <constraint firstItem="hDY-Vf-fnp" firstAttribute="centerY" secondItem="IJf-Js-yg4" secondAttribute="centerY" id="SOk-wi-9yC"/>
                                                     <constraint firstItem="hDY-Vf-fnp" firstAttribute="centerX" secondItem="IJf-Js-yg4" secondAttribute="centerX" id="Ten-yv-q3A"/>
-                                                    <constraint firstItem="Y6Z-oi-XRf" firstAttribute="leading" secondItem="IJf-Js-yg4" secondAttribute="leading" id="gJ8-wK-HoR"/>
-                                                    <constraint firstItem="pLt-pM-0Ar" firstAttribute="centerX" secondItem="IJf-Js-yg4" secondAttribute="centerX" id="gkU-AQ-Zz9"/>
-                                                    <constraint firstItem="Y6Z-oi-XRf" firstAttribute="top" secondItem="IJf-Js-yg4" secondAttribute="top" id="ph6-sf-09p"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Y6Z-oi-XRf" secondAttribute="trailing" id="s4G-PW-5Gk"/>
+                                                    <constraint firstItem="hDY-Vf-fnp" firstAttribute="leading" secondItem="IJf-Js-yg4" secondAttribute="leading" id="iiE-lC-bX0"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VSj-zT-wm0" userLabel="Center">
@@ -126,8 +121,11 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FXI-nG-8So" userLabel="NameTextView">
                                                         <rect key="frame" x="30" y="44" width="315" height="33"/>
                                                         <subviews>
-                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NYb-mv-kTM">
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="NYb-mv-kTM">
                                                                 <rect key="frame" x="0.0" y="8" width="255" height="18"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="18" id="xj5-S8-7Rg"/>
+                                                                </constraints>
                                                                 <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="15"/>
                                                                 <textInputTraits key="textInputTraits"/>
@@ -183,7 +181,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KO0-JF-6PW" userLabel="Intro">
                                                         <rect key="frame" x="30" y="117" width="315" height="33"/>
                                                         <subviews>
-                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dR2-Bp-Txq">
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="dR2-Bp-Txq">
                                                                 <rect key="frame" x="0.0" y="8" width="315" height="18"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="18" id="usw-w3-c5R"/>
@@ -228,7 +226,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tCu-FO-oUQ" userLabel="Link">
                                                         <rect key="frame" x="30" y="197" width="315" height="33"/>
                                                         <subviews>
-                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="http://" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N7n-9z-QJs">
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="http://" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="N7n-9z-QJs">
                                                                 <rect key="frame" x="0.0" y="8" width="315" height="18"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="18" id="9Js-bN-yOh"/>
@@ -257,15 +255,12 @@
                                                             <constraint firstItem="vwn-tA-1NA" firstAttribute="top" secondItem="tCu-FO-oUQ" secondAttribute="top" constant="32" id="lIU-Va-Hlx"/>
                                                         </constraints>
                                                     </view>
-                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Vb-8R-RsH">
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="15일동안 아무런 업데이트가 없을 시, 팬클럽은 자동 휴면 계정이 되고,그 후 30일간 휴면 해제를 하지 않으면 자동 삭제 됩니다." selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Vb-8R-RsH">
                                                         <rect key="frame" x="30" y="260" width="315" height="79"/>
                                                         <color key="backgroundColor" red="0.96862745098039216" green="0.96470588235294119" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="79" id="Tfx-kg-Pdc"/>
                                                         </constraints>
-                                                        <string key="text">15일동안 아무런 업데이트가 없을 시, 팬클럽은 자동 휴면
-계정이 되고, 그 후 30일간 휴면 해제를 하지 않으면 자동
-삭제 됩니다.</string>
                                                         <color key="textColor" red="0.32549019607843138" green="0.30980392156862746" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -350,7 +345,6 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="nUK-hW-1gJ" secondAttribute="bottom" id="2LI-jA-4BK"/>
-                                            <constraint firstItem="nUK-hW-1gJ" firstAttribute="top" secondItem="72s-ab-9EM" secondAttribute="top" constant="616" id="63J-1y-mW7"/>
                                             <constraint firstItem="VSj-zT-wm0" firstAttribute="leading" secondItem="72s-ab-9EM" secondAttribute="leading" id="7VB-RX-1ke"/>
                                             <constraint firstItem="VSj-zT-wm0" firstAttribute="width" secondItem="72s-ab-9EM" secondAttribute="width" id="D6C-sH-NgF"/>
                                             <constraint firstAttribute="bottom" secondItem="VSj-zT-wm0" secondAttribute="bottom" constant="41" id="JFL-qA-w3a"/>
@@ -390,7 +384,7 @@
                         <outlet property="agreeLabel" destination="RD6-pR-ikV" id="QkT-jt-3ej"/>
                         <outlet property="checkBox" destination="tKv-UB-BJa" id="hJW-l0-wnY"/>
                         <outlet property="duplicationCheckButton" destination="Fp6-MJ-Pwj" id="1vQ-bb-Hhw"/>
-                        <outlet property="fanClubImageView" destination="Y6Z-oi-XRf" id="CXc-TJ-Xdy"/>
+                        <outlet property="fanClubImageButton" destination="hDY-Vf-fnp" id="Mc3-KR-hR4"/>
                         <outlet property="iconCheck" destination="1h2-1q-OYM" id="mys-Sg-dgm"/>
                         <outlet property="introduceTextField" destination="dR2-Bp-Txq" id="liK-Sp-T50"/>
                         <outlet property="linkTextField" destination="N7n-9z-QJs" id="ciB-UL-nqo"/>
@@ -402,7 +396,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dvR-AB-utn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="991" y="-37"/>
+            <point key="canvasLocation" x="989.60000000000002" y="-37.331334332833585"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="WpB-bY-cd8">

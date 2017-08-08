@@ -11,7 +11,7 @@ import Alamofire
 import AlamofireImage
 
 @objc protocol FeedCellDelegate {
-    func didPressCell(sender: Any)
+    func didPressCell(sender: Any, cell : FeedTableCell)
     @objc optional func showFeedAlert(cell : FeedTableCell)
     @objc optional func showFeedShareAlert(cell : FeedTableCell)
 }
@@ -89,7 +89,7 @@ class FeedTableCell: UITableViewCell {
     }
     
     @IBAction func commentButtonClick(_ sender: UIButton) {
-       delegate.didPressCell(sender: sender)
+       delegate.didPressCell(sender: sender, cell: self)
     }
 
     override func awakeFromNib() {
