@@ -14,7 +14,7 @@ import AlamofireImage
 
 class FanPageCreateViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate, TOCropViewControllerDelegate {
 
-    @IBOutlet weak var fanClubImageView: UIImageView!
+    @IBOutlet weak var fanClubImageButton: UIButton!
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var introduceTextField: UITextField!
@@ -121,7 +121,7 @@ class FanPageCreateViewController: UIViewController,UIImagePickerControllerDeleg
         let fileName = "\(nameTextField.text!).jpg"
         
         Alamofire.upload(multipartFormData: { (multipartFormData) in
-            if let imageData = UIImageJPEGRepresentation(self.fanClubImageView.image!, 1.0) {
+            if let imageData = UIImageJPEGRepresentation(self.fanClubImageButton.image(for: .normal)!, 1.0) {
                 multipartFormData.append(imageData, withName: "profileImagefile", fileName: fileName, mimeType: "image/jpg")
             }
     
@@ -146,8 +146,45 @@ class FanPageCreateViewController: UIViewController,UIImagePickerControllerDeleg
         })
     }
     
+    func showAlert() {
+        let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.alert)
+        
+        let showProfileAction = UIAlertAction(title: "사진 크게 보기", style: .default,handler: { (action) -> Void in
+            self.showProfileViewController()
+        })
+        let changeProfileAction = UIAlertAction(title: "프로필 사진 변경", style: .default, handler: { (action) -> Void in
+            self.changeProfile()
+        })
+        let defaultProfileAction = UIAlertAction(title: "기본 이미지로 변경", style: .default, handler: { (action) -> Void in
+            
+            self.dismiss(animated: true, completion: {
+                
+            })
+        })
+        
+        alertController.addAction(showProfileAction)
+        alertController.addAction(changeProfileAction)
+        alertController.addAction(defaultProfileAction)
+        
+        present(alertController, animated: true, completion: {
+            alertController.view.superview?.isUserInteractionEnabled = true
+            alertController.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.alertControllerBackgroundTapped)))
+        })
+    }
     
-    @IBAction func cameraButtonClick(_ sender: UIButton) {
+    func alertControllerBackgroundTapped()
+    {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func showProfileViewController() {
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ProfilePhotoViewController") as! ProfilePhotoViewController
+        
+        present(vc, animated: true, completion: nil)
+    }
+    
+    func changeProfile() {
         if ( UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) == false ){
             return
         }
@@ -158,6 +195,11 @@ class FanPageCreateViewController: UIViewController,UIImagePickerControllerDeleg
         imagePicker.sourceType = UIImagePickerControllerSourceType.savedPhotosAlbum
         
         self.present(imagePicker, animated: true, completion: nil)
+    }
+
+    
+    @IBAction func cameraButtonClick(_ sender: UIButton) {
+         self.showAlert()
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]){
@@ -200,7 +242,7 @@ extension FanPageCreateViewController : UITextFieldDelegate {
         self.iconCheck.isHidden = true
         
         let newLength = textField.text!.characters.count + string.characters.count - range.length;
-        if(newLength > 3 && newLength < 30)
+        if(newLength > 1 && newLength < 50)
         {
             duplicationCheckButton.isEnabled = true;
         }
@@ -219,7 +261,7 @@ extension FanPageCreateViewController: SHViewControllerDelegate {
     func shViewControllerImageDidFilter(image: UIImage) {
         // Filtered image will be returned here.
         
-        fanClubImageView.image = image
+        fanClubImageButton.setImage(image, for: .normal)
         
         self.dismiss(animated:true, completion: nil)
     }
