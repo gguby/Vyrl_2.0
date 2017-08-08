@@ -25,7 +25,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="966"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pmf-Rg-7Sp" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="999"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="995"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lwv-XR-L1e" userLabel="SearchView">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
@@ -458,11 +458,73 @@
                                                     <constraint firstItem="upw-XJ-ZYQ" firstAttribute="width" secondItem="mwA-1v-ny6" secondAttribute="width" id="i8x-i9-E5G"/>
                                                 </constraints>
                                             </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mnD-iZ-KBL" userLabel="Post">
+                                                <rect key="frame" x="0.0" y="826.5" width="375" height="168.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="인기 포스트" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JGm-f2-NAu">
+                                                        <rect key="frame" x="15" y="24" width="64.5" height="17"/>
+                                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="14"/>
+                                                        <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="SEX-Zj-pJ2">
+                                                        <rect key="frame" x="0.0" y="54" width="375" height="114.5"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="114.5" id="c9b-xZ-fku"/>
+                                                        </constraints>
+                                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1.5" minimumInteritemSpacing="1.5" id="hph-Tf-tGk">
+                                                            <size key="itemSize" width="124" height="124"/>
+                                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                        </collectionViewFlowLayout>
+                                                        <cells>
+                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="post" id="moY-td-WS1">
+                                                                <rect key="frame" x="0.0" y="0.0" width="124" height="124"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="124" height="124"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <subviews>
+                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rHj-Es-scZ">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="124" height="124"/>
+                                                                            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        </imageView>
+                                                                    </subviews>
+                                                                </view>
+                                                                <constraints>
+                                                                    <constraint firstItem="rHj-Es-scZ" firstAttribute="top" secondItem="moY-td-WS1" secondAttribute="top" id="FM0-Hd-d5Q"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="rHj-Es-scZ" secondAttribute="trailing" id="Jnq-Dc-Fcs"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="rHj-Es-scZ" secondAttribute="bottom" id="PEO-6S-hqA"/>
+                                                                    <constraint firstItem="rHj-Es-scZ" firstAttribute="leading" secondItem="moY-td-WS1" secondAttribute="leading" id="zQW-nl-Pj3"/>
+                                                                </constraints>
+                                                            </collectionViewCell>
+                                                        </cells>
+                                                        <connections>
+                                                            <outlet property="dataSource" destination="RYV-v3-nCi" id="Uvq-ph-Nwm"/>
+                                                            <outlet property="delegate" destination="RYV-v3-nCi" id="j12-cF-0fZ"/>
+                                                        </connections>
+                                                    </collectionView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="SEX-Zj-pJ2" firstAttribute="leading" secondItem="mnD-iZ-KBL" secondAttribute="leading" id="ESW-Ih-QUp"/>
+                                                    <constraint firstAttribute="trailing" secondItem="SEX-Zj-pJ2" secondAttribute="trailing" id="Fuz-03-yFO"/>
+                                                    <constraint firstAttribute="bottom" secondItem="SEX-Zj-pJ2" secondAttribute="bottom" id="ZdM-Yj-wNh"/>
+                                                    <constraint firstItem="SEX-Zj-pJ2" firstAttribute="top" secondItem="mnD-iZ-KBL" secondAttribute="top" constant="54" id="af3-UM-Xj5"/>
+                                                    <constraint firstItem="JGm-f2-NAu" firstAttribute="top" secondItem="mnD-iZ-KBL" secondAttribute="top" constant="24" id="chT-p3-6fl"/>
+                                                    <constraint firstItem="JGm-f2-NAu" firstAttribute="leading" secondItem="mnD-iZ-KBL" secondAttribute="leading" constant="15" id="yaP-ic-u9j"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="Did-DW-3Fp" secondAttribute="trailing" id="2Dt-mK-JOW"/>
                                             <constraint firstAttribute="trailing" secondItem="mwA-1v-ny6" secondAttribute="trailing" id="4xW-V9-H2p"/>
+                                            <constraint firstItem="mnD-iZ-KBL" firstAttribute="leading" secondItem="pmf-Rg-7Sp" secondAttribute="leading" id="8AS-NX-EIf"/>
+                                            <constraint firstItem="mnD-iZ-KBL" firstAttribute="top" secondItem="mwA-1v-ny6" secondAttribute="bottom" id="AbZ-FV-CYm"/>
+                                            <constraint firstAttribute="bottom" secondItem="mnD-iZ-KBL" secondAttribute="bottom" id="Cmz-vk-0zz"/>
                                             <constraint firstItem="bkc-Y1-cFv" firstAttribute="leading" secondItem="pmf-Rg-7Sp" secondAttribute="leading" id="EAY-Ba-Ud4"/>
                                             <constraint firstItem="bkc-Y1-cFv" firstAttribute="top" secondItem="lwv-XR-L1e" secondAttribute="bottom" id="EFt-bk-0yK"/>
                                             <constraint firstItem="6VS-QJ-CU3" firstAttribute="top" secondItem="Did-DW-3Fp" secondAttribute="bottom" id="Gl7-Q9-9WQ"/>
@@ -478,7 +540,9 @@
                                             <constraint firstAttribute="trailing" secondItem="6VS-QJ-CU3" secondAttribute="trailing" id="fm5-TA-uZJ"/>
                                             <constraint firstItem="M31-eI-pou" firstAttribute="top" secondItem="6VS-QJ-CU3" secondAttribute="bottom" id="gDe-ud-AO4"/>
                                             <constraint firstItem="Did-DW-3Fp" firstAttribute="leading" secondItem="pmf-Rg-7Sp" secondAttribute="leading" id="hK6-oO-ueG"/>
+                                            <constraint firstItem="mnD-iZ-KBL" firstAttribute="width" secondItem="pmf-Rg-7Sp" secondAttribute="width" id="lLB-bu-sBX"/>
                                             <constraint firstAttribute="trailing" secondItem="bkc-Y1-cFv" secondAttribute="trailing" id="mgP-rB-29l"/>
+                                            <constraint firstAttribute="trailing" secondItem="mnD-iZ-KBL" secondAttribute="trailing" id="mx1-np-f1l"/>
                                             <constraint firstAttribute="trailing" secondItem="lwv-XR-L1e" secondAttribute="trailing" id="ztN-yF-MCl"/>
                                         </constraints>
                                     </view>
@@ -488,7 +552,6 @@
                                     <constraint firstItem="pmf-Rg-7Sp" firstAttribute="leading" secondItem="hiT-QE-hpv" secondAttribute="leading" id="V4v-Rg-sEe"/>
                                     <constraint firstAttribute="bottom" secondItem="pmf-Rg-7Sp" secondAttribute="bottom" id="Xhy-Er-RdY"/>
                                     <constraint firstItem="pmf-Rg-7Sp" firstAttribute="top" secondItem="hiT-QE-hpv" secondAttribute="top" id="qE5-n2-Fsp"/>
-                                    <constraint firstItem="pmf-Rg-7Sp" firstAttribute="width" secondItem="hiT-QE-hpv" secondAttribute="width" id="sOE-RW-zuR"/>
                                 </constraints>
                             </scrollView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XFi-k8-WNe">
@@ -616,11 +679,13 @@
                         <constraints>
                             <constraint firstItem="XFi-k8-WNe" firstAttribute="top" secondItem="YyX-BO-peD" secondAttribute="bottom" constant="45" id="20J-Lx-0jY"/>
                             <constraint firstAttribute="trailing" secondItem="XFi-k8-WNe" secondAttribute="trailing" id="6eE-cu-d1I"/>
+                            <constraint firstItem="pmf-Rg-7Sp" firstAttribute="height" secondItem="53i-Zu-Vnk" secondAttribute="height" priority="250" id="9zb-CG-xrR"/>
                             <constraint firstAttribute="trailing" secondItem="hiT-QE-hpv" secondAttribute="trailing" id="Og3-kB-vd3"/>
                             <constraint firstItem="XFi-k8-WNe" firstAttribute="leading" secondItem="53i-Zu-Vnk" secondAttribute="leading" id="he6-qW-tPB"/>
                             <constraint firstItem="hiT-QE-hpv" firstAttribute="leading" secondItem="53i-Zu-Vnk" secondAttribute="leading" id="kQo-Hw-K7d"/>
                             <constraint firstItem="hiT-QE-hpv" firstAttribute="bottom" secondItem="4CU-3f-ylp" secondAttribute="top" id="pFf-Nn-CWL"/>
                             <constraint firstItem="hiT-QE-hpv" firstAttribute="top" secondItem="YyX-BO-peD" secondAttribute="bottom" id="ps0-tN-GQ9"/>
+                            <constraint firstItem="pmf-Rg-7Sp" firstAttribute="width" secondItem="53i-Zu-Vnk" secondAttribute="width" id="rV8-Zu-xHP"/>
                             <constraint firstItem="4CU-3f-ylp" firstAttribute="top" secondItem="XFi-k8-WNe" secondAttribute="bottom" id="tWe-Hn-gEI"/>
                         </constraints>
                     </view>
@@ -636,8 +701,11 @@
                         <outlet property="emptyView" destination="h6t-ld-KiC" id="c4i-MB-Io4"/>
                         <outlet property="joinFanPageHeight" destination="9OS-p4-sWL" id="6oB-Nm-mHG"/>
                         <outlet property="joinFanpageCollectionView" destination="JkV-Fm-xmY" id="tt7-Yz-oPL"/>
+                        <outlet property="popularPostView" destination="SEX-Zj-pJ2" id="93n-aP-FHY"/>
+                        <outlet property="postView" destination="mnD-iZ-KBL" id="NEO-NI-fZ5"/>
                         <outlet property="recommandFanpageTableView" destination="pai-rP-I3z" id="d45-EU-qXu"/>
                         <outlet property="scrollView" destination="hiT-QE-hpv" id="YHC-Ep-PQ5"/>
+                        <outlet property="scrollViewHeight" destination="c9b-xZ-fku" id="vQs-Ew-Ivj"/>
                         <outlet property="searchBar" destination="rKL-xd-wl7" id="sJa-2J-bbM"/>
                         <outlet property="searchTable" destination="loD-50-r76" id="Xyy-d6-Hye"/>
                         <outlet property="searchTableView" destination="XFi-k8-WNe" id="5fz-vK-FEz"/>

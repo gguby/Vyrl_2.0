@@ -31,6 +31,11 @@ class FanViewController: UIViewController {
     
     @IBOutlet weak var emptyView: UIView!
     
+    @IBOutlet weak var popularPostView: UICollectionView!
+    
+    @IBOutlet weak var postView: UIView!
+    
+    @IBOutlet weak var scrollViewHeight: NSLayoutConstraint!
     var joinFanPages = [FanPage]()
     var suggestFanPages = [FanPage]()
     
@@ -47,12 +52,10 @@ class FanViewController: UIViewController {
         self.getMyFanPage()
         
         self.getSuggesetFanPage()
+        
+        self.scrollViewHeight.constant = 500
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
     func initSearchBar()
     {
         searchBar.setImage(UIImage.init(named: "icon_search_02_off"), for: UISearchBarIcon.search, state: UIControlState.normal)
@@ -140,6 +143,11 @@ class FanCollectionCell : UICollectionViewCell {
 extension FanViewController : UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
+        if collectionView == popularPostView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "post", for: indexPath)
+            return cell
+        }
+        
         if indexPath.row == self.joinFanPages.count - 1 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "createFan", for: indexPath)
             return cell
@@ -156,6 +164,10 @@ extension FanViewController : UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        if collectionView == popularPostView {
+            return 10
+        }
         
         if ( self.joinFanPages.count > 5 ){
             return 6
