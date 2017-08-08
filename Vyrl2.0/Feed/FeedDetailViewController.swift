@@ -119,15 +119,14 @@ class FeedDetailViewController: UIViewController{
     }
 
     @IBAction func postButtonClick(_ sender: UIButton) {
-        let uri = Constants.VyrlAPIConstants.baseURL + "feeds/17/comments"
-
+        let uri = URL.init(string: Constants.VyrlFeedURL.feedComment(articleId: articleId))
         
         let parameters : Parameters = [
             "content": self.commentTextView.text!,
             ]
 
         
-        Alamofire.request(uri, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON { (response) in
+        Alamofire.request(uri!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON { (response) in
             switch response.result {
             case .success(let json):
                 print(json)
@@ -190,10 +189,9 @@ class FeedDetailViewController: UIViewController{
     }
     
     func requestComment() {
-       
-        let uri = Constants.VyrlAPIConstants.baseURL + "/feeds/17/comments"
+        let uri = URL.init(string: Constants.VyrlFeedURL.feedComment(articleId: articleId))
         
-        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Comment]>) in
+        Alamofire.request(uri!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Comment]>) in
             
             let array = response.result.value ?? []
             self.commentArray.removeAll()
@@ -324,6 +322,10 @@ class FeedDetailViewController: UIViewController{
 
 extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if(indexPath.row == 0) {
+            return false
+        }
+        
         return true
     }
     
@@ -344,8 +346,6 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
             }
             more.backgroundColor = UIColor.init(patternImage: UIImage.init(named: "icon_more_02.png")!)
             
-            
-            
             return [more]
         }
     }
@@ -361,23 +361,23 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        var cell :FeedDetailTableCell = tableView.dequeueReusableCell(withIdentifier: "oneFeed") as! FeedDetailTableCell
-        
         switch indexPath.row {
         case 0:
-            cell = tableView.dequeueReusableCell(withIdentifier: "oneFeed") as! FeedDetailTableCell
-            break
+            let cell = tableView.dequeueReusableCell(withIdentifier: "oneFeed") as! FeedDetailTableCell
+            cell.articleID = self.articleId
+            cell.initImageVideo()
+            return cell
             
         default:
-            cell = tableView.dequeueReusableCell(withIdentifier: "Comment") as! FeedDetailTableCell
+          let  cell = tableView.dequeueReusableCell(withIdentifier: "Comment") as! FeedDetailTableCell
             cell.commentNicknameLabel.text = self.commentArray[indexPath.row-1].nickName
             cell.commentContextTextView.text = self.commentArray[indexPath.row-1].content
             cell.commentProfileButton.af_setBackgroundImage(for: .normal, url: URL.init(string: self.commentArray[indexPath.row-1].profileImageURL)!)
             
-            break
+            return cell
         }
         
-        return cell
+        
     }
 }
 
@@ -422,18 +422,13 @@ struct Comment : Mappable {
 }
 
 class FeedDetailTableCell : UITableViewCell {
-    let samplePhotos = ["https://cdn2.vyrl.com/vyrl/images/post/_temp/temp/4ec6d08055c4ebcc76494080bbcd4ee2.jpg",
-                        "https://cdn2.vyrl.com/vyrl/images/post/_temp/54841/cfc79b7201ff0caae5fb1f25ac7145a8.jpg",
-                        "https://cdn2.vyrl.com/vyrl/images/post/_temp/temp/ae47d8dd720a1f1b36c6aebe635663c7.jpg",
-                        "https://cdn2.vyrl.com/vyrl/images/post/_temp/temp/77ee0896da31740db3ee64fd2f30795a.jpg",
-                        "https://cdn2.vyrl.com/vyrl/images/post/_temp/temp/b0926fdcadf9b4ab2083efaee041cfc7.jpg"
-    ]
-    let sampleVideo = ["http://jplayer.org/video/m4v/Big_Buck_Bunny_Trailer.m4v",
-                       "https://firebasestorage.googleapis.com/v0/b/shaberi-a249e.appspot.com/o/message-videos%2F8EDAC3FC-D754-4165-990A-97F6ECE120A6.mp4?alt=media&token=b3271370-a408-467d-abbc-7df2beef45c7"
-    ]
+    var samplePhotos = [String]()
+    
+    var sampleVideo = [String]()
+    
     var imageViewArray : [UIImageView] = []
     var index : Int = 0;
-    
+    var articleID : Int = 0;
    
     @IBOutlet weak var commentNicknameLabel: UILabel!
     @IBOutlet weak var commentProfileButton: UIButton!
@@ -446,24 +441,50 @@ class FeedDetailTableCell : UITableViewCell {
         // Initialization code
         if(self.imageScrollView != nil) {
             self.imageScrollView.delegate = self as UIScrollViewDelegate
-            self.index = 0
-            self.initImageVideo()
+            
         } else if (commentNicknameLabel != nil) {
             
         }
     }
     
     func initImageVideo() {
-        for i in 0..<(samplePhotos.count) + (sampleVideo.count)  {
-            let contentImageView = UIImageView()
-            contentImageView.frame = CGRect.init(x: 0, y: 0, width: self.imageScrollView.frame.width, height: self.imageScrollView.frame.height)
-            self.imageViewArray.append(contentImageView)
-            
-            self.imageScrollView.contentSize.width = contentImageView.frame.width * CGFloat(i+1)
-            self.imageScrollView.addSubview(contentImageView)
-        }
+        self.index = 0
         
-        requestImageVideo()
+        let url = URL.init(string: Constants.VyrlFeedURL.feed(articleId: articleID))
+        
+        samplePhotos.removeAll()
+        sampleVideo.removeAll()
+        
+        Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON(completionHandler: { (response) in
+            switch response.result {
+            case .success(let json):
+                
+                if let code = response.response?.statusCode {
+                    if code == 200 {
+                        let jsonData = json as! NSDictionary
+                        
+                        self.samplePhotos = jsonData["images"]  as! [String]
+                        self.sampleVideo = jsonData["videos"]  as! [String]
+                        
+                        for i in 0..<(self.samplePhotos.count) + (self.sampleVideo.count)  {
+                            let contentImageView = UIImageView()
+                            contentImageView.frame = CGRect.init(x: 0, y: 0, width: self.imageScrollView.frame.width, height: self.imageScrollView.frame.height)
+                            self.imageViewArray.append(contentImageView)
+                            
+                            self.imageScrollView.contentSize.width = contentImageView.frame.width * CGFloat(i+1)
+                            self.imageScrollView.addSubview(contentImageView)
+                        }
+
+                        self.requestImageVideo()
+                    }
+                }
+                
+                print((response.response?.statusCode)!)
+                print(json)
+            case .failure(let error):
+                print(error)
+            }
+        })
     }
     
     func requestImageVideo() {
