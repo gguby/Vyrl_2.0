@@ -143,14 +143,10 @@
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_add_03" translatesAutoresizingMaskIntoConstraints="NO" id="Ply-Kj-Sw1">
-                                                                            <rect key="frame" x="43.5" y="42.5" width="24" height="24"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="width" constant="24" id="2VX-4j-2BI"/>
-                                                                                <constraint firstAttribute="height" constant="24" id="tMZ-oc-LnY"/>
-                                                                            </constraints>
+                                                                            <rect key="frame" x="44" y="35" width="24" height="24"/>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="팬페이지 만들기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="556-Vf-Yn7">
-                                                                            <rect key="frame" x="14" y="73.5" width="82.5" height="15.5"/>
+                                                                            <rect key="frame" x="14" y="74" width="83" height="16"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="15.5" id="h6j-F1-sWb"/>
                                                                             </constraints>
@@ -162,10 +158,10 @@
                                                                 </view>
                                                                 <color key="backgroundColor" red="0.96862745100000003" green="0.96470588239999999" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <constraints>
-                                                                    <constraint firstItem="Ply-Kj-Sw1" firstAttribute="centerX" secondItem="yYu-CG-VId" secondAttribute="centerX" id="8Rt-k4-fJC"/>
-                                                                    <constraint firstItem="Ply-Kj-Sw1" firstAttribute="top" secondItem="yYu-CG-VId" secondAttribute="topMargin" constant="34.5" id="BIF-sA-9W5"/>
-                                                                    <constraint firstItem="556-Vf-Yn7" firstAttribute="centerX" secondItem="Ply-Kj-Sw1" secondAttribute="centerX" id="KQO-7P-dDL"/>
-                                                                    <constraint firstItem="556-Vf-Yn7" firstAttribute="top" secondItem="Ply-Kj-Sw1" secondAttribute="bottom" constant="7" id="rAv-zX-K1P"/>
+                                                                    <constraint firstItem="Ply-Kj-Sw1" firstAttribute="top" secondItem="yYu-CG-VId" secondAttribute="topMargin" constant="27" id="0zb-mU-uOO"/>
+                                                                    <constraint firstItem="Ply-Kj-Sw1" firstAttribute="centerX" secondItem="yYu-CG-VId" secondAttribute="centerX" id="O1M-0x-LhY"/>
+                                                                    <constraint firstItem="556-Vf-Yn7" firstAttribute="top" secondItem="Ply-Kj-Sw1" secondAttribute="bottom" constant="15" id="ZJO-fO-Tk1"/>
+                                                                    <constraint firstItem="Ply-Kj-Sw1" firstAttribute="centerX" secondItem="556-Vf-Yn7" secondAttribute="centerX" id="nfI-oM-Pv2"/>
                                                                 </constraints>
                                                             </collectionViewCell>
                                                         </cells>
