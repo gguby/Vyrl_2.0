@@ -30,6 +30,8 @@ class FanPageCreateViewController: UIViewController,UIImagePickerControllerDeleg
     
     @IBOutlet weak var iconCheck: UIImageView!
     
+    var delegate : FanViewControllerDelegate!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -138,6 +140,7 @@ class FanPageCreateViewController: UIViewController,UIImagePickerControllerDeleg
                     upload.responseString { response in
                         if ((response.response?.statusCode)! == 200){
                             self.navigationController?.popViewController(animated: true)
+                            self.delegate.refresh()
                         }
                     }
                 case .failure(let encodingError):

@@ -26,7 +26,6 @@ class FeedTableViewController: UIViewController{
     
     @IBOutlet weak var loadingImage: UIImageView!
     
-    
     var refreshLoadingView : UIView!
     var refreshColorView : UIView!
     var refreshLoadingImageView : UIImageView!
@@ -51,6 +50,11 @@ class FeedTableViewController: UIViewController{
         self.initLoader()
         
         self.initRefresh()
+    }
+    
+    func resizeTable(height : CGFloat)
+    {
+        self.tableViewContentHeight.constant = height
     }
     
     func refresh(sender:AnyObject) {

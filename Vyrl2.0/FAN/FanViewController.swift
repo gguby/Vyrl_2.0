@@ -11,6 +11,10 @@ import ObjectMapper
 import Alamofire
 import AlamofireObjectMapper
 
+protocol FanViewControllerDelegate {
+    func refresh()
+}
+
 class FanViewController: UIViewController {
     
     @IBOutlet weak var joinFanpageCollectionView: UICollectionView!
@@ -39,14 +43,14 @@ class FanViewController: UIViewController {
         self.automaticallyAdjustsScrollViewInsets = false
         
         self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
         self.getMyFanPage()
         
         self.getSuggesetFanPage()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     func initSearchBar()
@@ -122,6 +126,12 @@ class FanViewController: UIViewController {
     }
 }
 
+extension FanViewController : FanViewControllerDelegate {
+    func refresh() {
+        self.getMyFanPage()
+    }
+}
+
 class FanCollectionCell : UICollectionViewCell {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var imageView: UIImageView!
@@ -158,9 +168,10 @@ extension FanViewController : UICollectionViewDataSource, UICollectionViewDelega
         let cell = collectionView.cellForItem(at: indexPath)
         
         if cell?.reuseIdentifier == "createFan" {
-            self.pushView(storyboardName: "FanDetail", controllerName: "FanPageCreateViewController")
+            let vc = self.pushViewControllrer(storyboardName: "FanDetail", controllerName: "FanPageCreateViewController") as! FanPageCreateViewController
+            vc.delegate = self
         } else {
-            let vc = self.pushViewControllrer(storyboardName: "FanDetail", controllerName: "FanPage") as! FanPageController
+            let vc = self.pushViewControllrer(storyboardName: "Fan", controllerName: "FanPage") as! FanPageController
             vc.fanPage = self.joinFanPages[indexPath.row]        
         }
     }

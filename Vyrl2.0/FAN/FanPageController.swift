@@ -24,12 +24,25 @@ class FanPageController : UIViewController {
     @IBOutlet weak var feedView: UIView!
     @IBOutlet weak var noFeedView: UIView!
     
+    @IBOutlet weak var feedContainer: UIView!
     @IBOutlet weak var post: UILabel!
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         self.initPage()
+        
+        self.setupFeed()
+    }
+    
+    func setupFeed(){
+        let storyboard = UIStoryboard(name: "FeedStyle", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "feedTable") as! FeedTableViewController
+        addChildViewController(controller)
+        feedContainer.addSubview(controller.view)
+        controller.didMove(toParentViewController: self)
+        controller.resizeTable(height: feedContainer.frame.height)
     }
     
     func initPage() {
