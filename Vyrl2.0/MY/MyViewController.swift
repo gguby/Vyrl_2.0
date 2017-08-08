@@ -256,7 +256,7 @@ extension MyViewController : FeedCellDelegate {
         
     }
     
-    func didPressCell(sender: Any) {
+    func didPressCell(sender: Any, cell : FeedTableCell) {
         self.pushView(storyboardName: "FeedStyle", controllerName: "FeedDetailViewController")
     }
     

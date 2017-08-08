@@ -27,6 +27,7 @@ class FeedDetailViewController: UIViewController{
     
     @IBOutlet weak var postCommentButton: UIButton!
    
+    var articleId : Int!
     var emoticonView : EmoticonView!
     var kbHeight: CGFloat!
     
