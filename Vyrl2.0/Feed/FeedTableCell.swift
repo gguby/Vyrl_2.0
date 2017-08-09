@@ -39,10 +39,11 @@ class FeedTableCell: UITableViewCell {
     var article : Article? {
         didSet{
             
-            var count = (self.article!.mediaCount)!
+            var count = article?.medias.count
             
             if ( count == 1 ){
-                let url : URL = URL.init(string: (article?.images[0])!)!
+                let str = article?.medias[0].url
+                let url : URL = URL.init(string: str!)!
                 self.photo.af_setImage(withURL: url)
             }
             
@@ -80,11 +81,11 @@ class FeedTableCell: UITableViewCell {
                 cellWidth = 186
             }
             
-            if ( count > 6){
+            if ( count! > 6){
                 count = 6
             }
             
-            contentHeight.constant = CGFloat(ceilf( Float(count) / 3) * Float(cellWidth))
+            contentHeight.constant = CGFloat(ceilf( Float(count!) / 3) * Float(cellWidth))
         }
     }
     
@@ -164,13 +165,23 @@ extension FeedTableCell : UICollectionViewDelegateFlowLayout {
 
 extension FeedTableCell: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (article?.images.count)!
+        return (article?.medias.count)!
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BoxCell", for: indexPath) as! BoxCell
         
-        let url : URL = URL.init(string: (article?.images[indexPath.row])!)!
+        var str : String!
+        
+        let media : ArticleMedia = (self.article?.medias[indexPath.row])!
+        
+        if media.type == "IMAGE" {
+            str = media.url
+        } else {
+            str = media.thumbnail
+        }
+        
+        let url : URL = URL.init(string: str)!
         
         cell.imageView.af_setImage(withURL: url)
         

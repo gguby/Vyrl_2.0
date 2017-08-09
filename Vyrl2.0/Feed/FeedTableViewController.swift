@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Alamofire
 import ObjectMapper
 import Alamofire
 import AlamofireObjectMapper
@@ -355,17 +354,15 @@ struct Article : Mappable {
     var id : Int!
     var content : String!
     
-    var images : [String]!
-    var videos : [String]!
+    var comments : [Comment]!
+    var medias : [ArticleMedia]!
     
-    var medias : [String]!
-    
-    var comments : [String]!
     var cntComment : Int!
     var cntLike : Int!
     var cntShare : Int!
     
-    var mediaCount : Int!
+    var profile : Profile!
+    var date : Date?
     
     init?(map: Map) {
         
@@ -374,28 +371,52 @@ struct Article : Mappable {
     mutating func mapping(map: Map){
         id <- map["id"]
         content <- map["content"]
-        images <- map["images"]
-        videos <- map["videos"]
         cntComment <- map["cntComment"]
         cntLike <- map["cntLike"]
         comments <- map["comments"]
         cntShare <- map["cntShare"]
+        profile <- map["profile"]
+        medias <- map["media"]
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        
+        if let dateString = map["createdAt"].currentValue as? String, let _date = dateFormatter.date(from: dateString){
+            date = _date
+        }
         
         self.setUpType()
     }
     
     mutating func setUpType(){
-        self.medias = self.images + self.videos
-        self.mediaCount = self.medias.count
-        if ( self.mediaCount > 1){
+        if ( self.medias.count > 1){
             type = ArticleType.multiFeed
-        }else if ( self.mediaCount == 1){
+        }else if ( self.medias.count == 1){
             type = ArticleType.oneFeed
-        }else if ( self.mediaCount == 0){
+        }else if ( self.medias.count == 0){
             type = ArticleType.textOnlyFeed
         }        
     }
 }
+
+struct ArticleMedia : Mappable {
+
+    var thumbnail : String?
+    var type : String?
+    var url : String?
+    
+    init?(map: Map) {
+        
+    }
+    
+    mutating func mapping(map: Map){
+        thumbnail <- map["thumbnail"]
+        type <- map["type"]
+        url <- map["url"]
+    }
+}
+
+
 
 
 

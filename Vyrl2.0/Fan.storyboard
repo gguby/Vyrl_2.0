@@ -25,7 +25,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="966"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pmf-Rg-7Sp" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="995"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="999"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lwv-XR-L1e" userLabel="SearchView">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
@@ -459,7 +459,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mnD-iZ-KBL" userLabel="Post">
-                                                <rect key="frame" x="0.0" y="826.5" width="375" height="168.5"/>
+                                                <rect key="frame" x="0.0" y="826.5" width="375" height="172.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="인기 포스트" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JGm-f2-NAu">
                                                         <rect key="frame" x="15" y="24" width="64.5" height="17"/>
@@ -467,53 +467,17 @@
                                                         <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="SEX-Zj-pJ2">
-                                                        <rect key="frame" x="0.0" y="54" width="375" height="114.5"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="114.5" id="c9b-xZ-fku"/>
-                                                        </constraints>
-                                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1.5" minimumInteritemSpacing="1.5" id="hph-Tf-tGk">
-                                                            <size key="itemSize" width="124" height="124"/>
-                                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                        </collectionViewFlowLayout>
-                                                        <cells>
-                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="post" id="moY-td-WS1">
-                                                                <rect key="frame" x="0.0" y="0.0" width="124" height="124"/>
-                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="124" height="124"/>
-                                                                    <autoresizingMask key="autoresizingMask"/>
-                                                                    <subviews>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rHj-Es-scZ">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="124" height="124"/>
-                                                                            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                        </imageView>
-                                                                    </subviews>
-                                                                </view>
-                                                                <constraints>
-                                                                    <constraint firstItem="rHj-Es-scZ" firstAttribute="top" secondItem="moY-td-WS1" secondAttribute="top" id="FM0-Hd-d5Q"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="rHj-Es-scZ" secondAttribute="trailing" id="Jnq-Dc-Fcs"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="rHj-Es-scZ" secondAttribute="bottom" id="PEO-6S-hqA"/>
-                                                                    <constraint firstItem="rHj-Es-scZ" firstAttribute="leading" secondItem="moY-td-WS1" secondAttribute="leading" id="zQW-nl-Pj3"/>
-                                                                </constraints>
-                                                            </collectionViewCell>
-                                                        </cells>
-                                                        <connections>
-                                                            <outlet property="dataSource" destination="RYV-v3-nCi" id="Uvq-ph-Nwm"/>
-                                                            <outlet property="delegate" destination="RYV-v3-nCi" id="j12-cF-0fZ"/>
-                                                        </connections>
-                                                    </collectionView>
+                                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KmV-zU-3oo">
+                                                        <rect key="frame" x="0.0" y="58" width="375" height="115"/>
+                                                    </containerView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstItem="SEX-Zj-pJ2" firstAttribute="leading" secondItem="mnD-iZ-KBL" secondAttribute="leading" id="ESW-Ih-QUp"/>
-                                                    <constraint firstAttribute="trailing" secondItem="SEX-Zj-pJ2" secondAttribute="trailing" id="Fuz-03-yFO"/>
-                                                    <constraint firstAttribute="bottom" secondItem="SEX-Zj-pJ2" secondAttribute="bottom" id="ZdM-Yj-wNh"/>
-                                                    <constraint firstItem="SEX-Zj-pJ2" firstAttribute="top" secondItem="mnD-iZ-KBL" secondAttribute="top" constant="54" id="af3-UM-Xj5"/>
+                                                    <constraint firstItem="KmV-zU-3oo" firstAttribute="leading" secondItem="mnD-iZ-KBL" secondAttribute="leading" id="4RT-Ox-cWN"/>
+                                                    <constraint firstItem="KmV-zU-3oo" firstAttribute="top" secondItem="JGm-f2-NAu" secondAttribute="bottom" constant="17" id="ARs-DJ-75K"/>
                                                     <constraint firstItem="JGm-f2-NAu" firstAttribute="top" secondItem="mnD-iZ-KBL" secondAttribute="top" constant="24" id="chT-p3-6fl"/>
+                                                    <constraint firstAttribute="trailing" secondItem="KmV-zU-3oo" secondAttribute="trailing" id="mXt-Iq-FPZ"/>
+                                                    <constraint firstAttribute="bottom" secondItem="KmV-zU-3oo" secondAttribute="bottom" id="q89-cI-R8b"/>
                                                     <constraint firstItem="JGm-f2-NAu" firstAttribute="leading" secondItem="mnD-iZ-KBL" secondAttribute="leading" constant="15" id="yaP-ic-u9j"/>
                                                 </constraints>
                                             </view>
@@ -698,14 +662,13 @@
                     <size key="freeformSize" width="375" height="1035"/>
                     <connections>
                         <outlet property="cancelButton" destination="3L6-XR-IvJ" id="4sf-AJ-NJa"/>
+                        <outlet property="container" destination="KmV-zU-3oo" id="qrX-ay-VS5"/>
                         <outlet property="emptyView" destination="h6t-ld-KiC" id="c4i-MB-Io4"/>
                         <outlet property="joinFanPageHeight" destination="9OS-p4-sWL" id="6oB-Nm-mHG"/>
                         <outlet property="joinFanpageCollectionView" destination="JkV-Fm-xmY" id="tt7-Yz-oPL"/>
-                        <outlet property="popularPostView" destination="SEX-Zj-pJ2" id="93n-aP-FHY"/>
                         <outlet property="postView" destination="mnD-iZ-KBL" id="NEO-NI-fZ5"/>
                         <outlet property="recommandFanpageTableView" destination="pai-rP-I3z" id="d45-EU-qXu"/>
                         <outlet property="scrollView" destination="hiT-QE-hpv" id="YHC-Ep-PQ5"/>
-                        <outlet property="scrollViewHeight" destination="c9b-xZ-fku" id="vQs-Ew-Ivj"/>
                         <outlet property="searchBar" destination="rKL-xd-wl7" id="sJa-2J-bbM"/>
                         <outlet property="searchTable" destination="loD-50-r76" id="Xyy-d6-Hye"/>
                         <outlet property="searchTableView" destination="XFi-k8-WNe" id="5fz-vK-FEz"/>

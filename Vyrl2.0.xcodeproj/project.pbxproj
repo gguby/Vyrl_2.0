@@ -34,6 +34,8 @@
 		A650368C1F0E30BA00AD540A /* FeedNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65036891F0E30BA00AD540A /* FeedNavigationController.swift */; };
 		A650368D1F0E30BA00AD540A /* FeedNavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A650368A1F0E30BA00AD540A /* FeedNavigationControllerExtension.swift */; };
 		A650368F1F0E3F1A00AD540A /* WriteMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A650368E1F0E3F1A00AD540A /* WriteMediaViewController.swift */; };
+		A652BA351F3AA5F500007767 /* PostCollectionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A652BA341F3AA5F500007767 /* PostCollectionViewController.storyboard */; };
+		A652BA371F3AA61E00007767 /* PostCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A652BA361F3AA61E00007767 /* PostCollectionViewController.swift */; };
 		A65677791F384E18001A69F8 /* FanPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65677781F384E18001A69F8 /* FanPageController.swift */; };
 		A66FF7891F341C8300D7D3AA /* FanDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A66FF7881F341C8300D7D3AA /* FanDetail.storyboard */; };
 		A67143981F29B69000B79432 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A67143971F29B69000B79432 /* Image.xcassets */; };
@@ -106,6 +108,8 @@
 		A65036891F0E30BA00AD540A /* FeedNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedNavigationController.swift; sourceTree = "<group>"; };
 		A650368A1F0E30BA00AD540A /* FeedNavigationControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedNavigationControllerExtension.swift; sourceTree = "<group>"; };
 		A650368E1F0E3F1A00AD540A /* WriteMediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteMediaViewController.swift; sourceTree = "<group>"; };
+		A652BA341F3AA5F500007767 /* PostCollectionViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostCollectionViewController.storyboard; sourceTree = "<group>"; };
+		A652BA361F3AA61E00007767 /* PostCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCollectionViewController.swift; sourceTree = "<group>"; };
 		A65677781F384E18001A69F8 /* FanPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanPageController.swift; sourceTree = "<group>"; };
 		A66FF7881F341C8300D7D3AA /* FanDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FanDetail.storyboard; sourceTree = "<group>"; };
 		A67143971F29B69000B79432 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
@@ -314,6 +318,8 @@
 			isa = PBXGroup;
 			children = (
 				CE08981B1ECD704F000D6D6C /* SearchViewController.swift */,
+				A652BA341F3AA5F500007767 /* PostCollectionViewController.storyboard */,
+				A652BA361F3AA61E00007767 /* PostCollectionViewController.swift */,
 			);
 			name = Search;
 			path = SEARCH;
@@ -448,6 +454,7 @@
 				CE29B1AA1ECD5FEE003F4D2E /* LaunchScreen.storyboard in Resources */,
 				8F4C09291EE528840026D49F /* FeedStyle.storyboard in Resources */,
 				CE29B1CE1ECD6161003F4D2E /* Login.storyboard in Resources */,
+				A652BA351F3AA5F500007767 /* PostCollectionViewController.storyboard in Resources */,
 				CE29B1D11ECD6161003F4D2E /* Search.storyboard in Resources */,
 				A67143981F29B69000B79432 /* Image.xcassets in Resources */,
 				CE29B1A71ECD5FEE003F4D2E /* Emoticon.xcassets in Resources */,
@@ -597,6 +604,7 @@
 				8F829E801EFB9CD4001D418F /* WriteViewController.swift in Sources */,
 				8F47B6C71EDEACA600A5DBAC /* BlockManagementViewController.swift in Sources */,
 				8F90911D1EEFC57D0095A335 /* FeedDetailViewController.swift in Sources */,
+				A652BA371F3AA61E00007767 /* PostCollectionViewController.swift in Sources */,
 				CE33F0041ED2D2900050C21D /* AgreeMentController.swift in Sources */,
 				CE29B1D41ECD6515003F4D2E /* Constants.swift in Sources */,
 				CE36D4A01ED3C96B00ABC7FE /* CheckBox.swift in Sources */,
