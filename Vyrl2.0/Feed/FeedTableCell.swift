@@ -120,6 +120,7 @@ class FeedTableCell: UITableViewCell {
             Alamofire.request(uri!, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: {
                 response in switch response.result {
                 case .success(let json):
+                    print(json)
                     sender.setImage(UIImage.init(named: "icon_heart_01_on"), for: .normal)
                     sender.tag = 1
                 case .failure(let error):
@@ -132,6 +133,7 @@ class FeedTableCell: UITableViewCell {
             Alamofire.request(uri!, method: .delete, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: {
                 response in switch response.result {
                 case .success(let json):
+                    print(json)
                     sender.setImage(UIImage.init(named: "icon_heart_01"), for: .normal)
                     sender.tag = 0
                     
@@ -171,17 +173,11 @@ extension FeedTableCell: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BoxCell", for: indexPath) as! BoxCell
         
-        var str : String!
-        
         let media : ArticleMedia = (self.article?.medias[indexPath.row])!
         
-        if media.type == "IMAGE" {
-            str = media.url
-        } else {
-            str = media.thumbnail
-        }
+        let str = media.image
         
-        let url : URL = URL.init(string: str)!
+        let url : URL = URL.init(string: str!)!
         
         cell.imageView.af_setImage(withURL: url)
         

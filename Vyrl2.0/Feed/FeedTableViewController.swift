@@ -206,13 +206,13 @@ class FeedTableViewController: UIViewController{
                     fileName = "\(count)" + ".jpg"
                     
                     if let imageData = asset.mediaData {
-                        multipartFormData.append(imageData, withName: "file", fileName: fileName, mimeType: "image/jpg")
+                        multipartFormData.append(imageData, withName: "files", fileName: fileName, mimeType: "image/jpg")
                     }
                 } else {
                     fileName = "\(count)" + ".mpeg"
                     
                     if let imageData = asset.mediaData {
-                        multipartFormData.append(imageData, withName: "file", fileName: fileName, mimeType: "video/mpeg")
+                        multipartFormData.append(imageData, withName: "files", fileName: fileName, mimeType: "video/mpeg")
                     }
                 }
                 
@@ -405,6 +405,8 @@ struct ArticleMedia : Mappable {
     var type : String?
     var url : String?
     
+    var image : String!
+    
     init?(map: Map) {
         
     }
@@ -413,6 +415,12 @@ struct ArticleMedia : Mappable {
         thumbnail <- map["thumbnail"]
         type <- map["type"]
         url <- map["url"]
+        
+        if type! == "IMAGE" {
+            image = url
+        } else {
+            image = thumbnail
+        }
     }
 }
 
