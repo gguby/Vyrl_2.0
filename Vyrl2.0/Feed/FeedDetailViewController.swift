@@ -52,7 +52,6 @@ class FeedDetailViewController: UIViewController{
         requestFeedDetail()
         requestComment()
         
-       
     }
     
     @IBAction func dismiss(_ sender: UIButton) {
@@ -66,6 +65,9 @@ class FeedDetailViewController: UIViewController{
     
     @IBAction func shareButtonClick(_ sender: UIButton) {
         print("share")
+    }
+    @IBAction func translateContent(_ sender: UIButton) {
+        
     }
     
     func showButtonView() {
@@ -199,10 +201,8 @@ class FeedDetailViewController: UIViewController{
             let array = response.result.value ?? []
             self.commentArray.removeAll()
             for comment in array {
-               
-                self.commentArray.append(comment)
-                
-            }
+               self.commentArray.append(comment)
+             }
             self.tableView.reloadData()
         }
     }
@@ -222,9 +222,14 @@ class FeedDetailViewController: UIViewController{
                         self.feedDetail.shareCount = jsonData["cntShare"] as! Int
                         self.feedDetail.content = jsonData["content"] as! String
                         self.feedDetail.id = jsonData["id"] as! Int
-                        self.feedDetail.imagesArray = jsonData["images"] as! [String]
-                        self.feedDetail.videosArray = jsonData["videos"] as! [String]
+                        self.feedDetail.mediasArray = jsonData["media"] as? [[String:
+                            String]]
                         
+                        let profile = jsonData["profile"] as! [String : AnyObject]
+                        
+                        self.feedDetail.profileId = profile["id"] as! Int
+                        self.feedDetail.profileImagePath = profile["imagePath"] as! String
+                        self.feedDetail.profileNickname = profile["nickName"] as! String
                         self.tableView.reloadData()
                     }
                 }
@@ -402,7 +407,13 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
                 cell.contentTextView.text = self.feedDetail.content
                 cell.likeCountButton.setTitle(String("좋아요 \(self.feedDetail.likeCount!)명"), for: .normal)
                 cell.shareCountButton.setTitle(String("공유 \(self.feedDetail.shareCount!)명"), for: .normal)
-                cell.pageLabel.text = String("1 / \(self.feedDetail.imagesArray.count+self.feedDetail.videosArray.count)")
+                cell.pageLabel.text = String("1 / \(self.feedDetail.mediasArray.count)")
+                
+                cell.profileButton.af_setBackgroundImage(for: .normal, url: URL.init(string: self.feedDetail.profileImagePath)!)
+                cell.nickNameLabel.text = self.feedDetail.profileNickname
+                
+                cell.profileId = self.feedDetail.profileId
+                cell.delegate = self
             }
             return cell
             
@@ -416,6 +427,20 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
         }
         
         
+    }
+}
+
+extension FeedDetailViewController : CellDidSelectProtocol {
+    func profileButtonDidSelect(profileId : Int) {
+        
+    }
+    
+    func imageDidSelect(profileId : Int) {
+        let storyboard = UIStoryboard(name: "Feed", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "FeedFullScreenViewController") as! FeedFullScreenViewController // or whatever it is
+        vc.mediasArray = self.feedDetail.mediasArray
+        
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -469,31 +494,39 @@ struct FeedDetail : Mappable {
     }
     
     var id : Int!
-    var imagesArray : [String]!
-    var videosArray : [String]!
+    var mediasArray : [[String:String]]!
     var content : String!
-    
     var commentCount : Int!
     var likeCount : Int!
     var shareCount : Int!
     
+    var profileId: Int!
+    var profileImagePath : String!
+    var profileNickname : String!
+    
     mutating func mapping(map: Map){
         id <- map["id"]
         content <- map["content"]
-        imagesArray <- map["images"]
-        videosArray <- map["videos"]
+        mediasArray <- map["media"]
         
         commentCount <- map["cntComment"]
         likeCount <- map["cntLike"]
         shareCount <- map["cntShare"]
-    }
+     }
     
+}
+
+protocol CellDidSelectProtocol {
+    func profileButtonDidSelect(profileId : Int)
+    func imageDidSelect(profileId : Int)
 }
 
 class FeedDetailTableCell : UITableViewCell {
     var feedDetail : FeedDetail!
     var imageViewArray : [UIImageView] = []
     var index : Int = 0;
+    var profileId : Int!
+    var delegate: CellDidSelectProtocol!
     
     @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var nickNameLabel: UILabel!
@@ -509,14 +542,21 @@ class FeedDetailTableCell : UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         self.imageScrollView.delegate = self as UIScrollViewDelegate
+        self.contentTextView.textContainerInset = UIEdgeInsets.zero
+        self.contentTextView.textContainer.lineFragmentPadding = 0
     }
     
     func initImageVideo() {
         self.index = 0
         
-        for i in 0..<(feedDetail.imagesArray.count) + (feedDetail.videosArray.count)  {
+        for i in 0..<(feedDetail.mediasArray.count) {
             let contentImageView = UIImageView()
             contentImageView.frame = CGRect.init(x: 0, y: 0, width: self.imageScrollView.frame.width, height: self.imageScrollView.frame.height)
+            
+            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+            contentImageView.isUserInteractionEnabled = true
+            contentImageView.addGestureRecognizer(tapGestureRecognizer)
+            
             self.imageViewArray.append(contentImageView)
             
             self.imageScrollView.contentSize.width = contentImageView.frame.width * CGFloat(i+1)
@@ -526,23 +566,21 @@ class FeedDetailTableCell : UITableViewCell {
         self.requestImageVideo()
     }
     
+    func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
+    {
+        delegate.imageDidSelect(profileId: self.profileId)
+    }
+    
     func requestImageVideo() {
-        if(self.index > feedDetail.imagesArray.count-1)
-        {
-            let asset = AVURLAsset.init(url: URL(string:feedDetail.videosArray[1])!)
-            let imgGenerator = AVAssetImageGenerator(asset: asset)
-            imgGenerator.appliesPreferredTrackTransform = true
-            let cgImage = try! imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
-            let uiImage = UIImage.init(cgImage:  cgImage)
-            
-            self.imageViewArray[self.index].image = uiImage
-            self.imageViewArray[self.index].contentMode = .scaleAspectFit
-            
-            let xPosition = self.imageScrollView.frame.width * CGFloat(self.index)
-            self.imageViewArray[self.index].frame = CGRect.init(x: xPosition, y: 0, width: self.imageScrollView.frame.width, height: self.imageScrollView.frame.height)
-            
+        
+        var uri : URL
+        if(feedDetail.mediasArray[index]["type"] == "IMAGE"){
+            uri = URL.init(string: feedDetail.mediasArray[index]["url"]!)!
         } else {
-            Alamofire.request(feedDetail.imagesArray[index])
+            uri = URL.init(string: feedDetail.mediasArray[index]["thumbnail"]!)!
+        }
+        
+            Alamofire.request(uri)
                 .downloadProgress(closure: { (progress) in
                     
                 }).responseData { response in
@@ -556,16 +594,15 @@ class FeedDetailTableCell : UITableViewCell {
                         self.imageViewArray[self.index].frame = CGRect.init(x: xPosition, y: 0, width: self.imageScrollView.frame.width, height: self.imageScrollView.frame.height)
                     }
             }
-        }
+        
     }
-    
-   
+ 
 }
 
 extension FeedDetailTableCell : UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let page = Int(round(Double(scrollView.contentOffset.x) / Double(scrollView.bounds.size.width)))
-        self.pageLabel.text =  String("\(page+1) / \(self.feedDetail.imagesArray.count+self.feedDetail.videosArray.count)")
+        self.pageLabel.text =  String("\(page+1) / \(self.feedDetail.mediasArray.count)")
         
         if(page > self.index) {
             self.index = page
@@ -579,4 +616,9 @@ class FeedCommentTableCell : UITableViewCell {
     @IBOutlet weak var commentNicknameLabel: UILabel!
     @IBOutlet weak var commentProfileButton: UIButton!
     @IBOutlet weak var commentContextTextView: UITextView!
+    
+    override func awakeFromNib() {
+        self.commentContextTextView.textContainerInset = UIEdgeInsets.zero
+        self.commentContextTextView.textContainer.lineFragmentPadding = 0
+    }
 }
