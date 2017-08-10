@@ -2095,7 +2095,7 @@
                                                                         <color key="titleColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
                                                                     </state>
                                                                     <connections>
-                                                                        <action selector="likeButtonClick:" destination="n3t-LG-PEh" eventType="touchUpInside" id="Ajo-NO-auc"/>
+                                                                        <action selector="likeListButtonClick:" destination="n3t-LG-PEh" eventType="touchUpInside" id="jBu-mK-jJx"/>
                                                                     </connections>
                                                                 </button>
                                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YjI-XN-yBq" customClass="GrowingTextView">
@@ -2133,7 +2133,7 @@
                                                                         <color key="titleColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
                                                                     </state>
                                                                     <connections>
-                                                                        <action selector="shareButtonClick:" destination="n3t-LG-PEh" eventType="touchUpInside" id="1xf-te-Idf"/>
+                                                                        <action selector="shareListButtonClick:" destination="n3t-LG-PEh" eventType="touchUpInside" id="ziU-rx-HXa"/>
                                                                     </connections>
                                                                 </button>
                                                             </subviews>
@@ -2371,6 +2371,9 @@
                                                 <state key="normal" title="208K" image="icon_heart_01">
                                                     <color key="titleColor" red="0.50196078430000002" green="0.32156862749999998" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="likeButtonClick:" destination="n3t-LG-PEh" eventType="touchUpInside" id="lBi-3j-HR4"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LFs-Pt-Kaa">
                                                 <rect key="frame" x="92" y="2.5" width="76" height="45"/>
@@ -2551,10 +2554,13 @@
                     <connections>
                         <outlet property="buttonView" destination="u4S-AA-lYV" id="YH4-Zv-Rga"/>
                         <outlet property="closeEmoticonButton" destination="VLZ-is-Rqe" id="9qF-Lu-USU"/>
+                        <outlet property="commentButton" destination="LFs-Pt-Kaa" id="mWm-ey-pYQ"/>
                         <outlet property="commentFieldView" destination="LYe-d8-wXC" id="OyE-Oy-WaP"/>
                         <outlet property="commentTextView" destination="E6u-eI-gIG" id="pVe-0u-wwa"/>
                         <outlet property="emoticonImageView" destination="QUa-Mc-u28" id="GLS-EW-H6X"/>
+                        <outlet property="likeButton" destination="iGX-fw-6hv" id="5SX-Zl-gVW"/>
                         <outlet property="postCommentButton" destination="UCR-JP-rK8" id="DpS-cJ-kuX"/>
+                        <outlet property="shareButton" destination="H5U-78-Din" id="zff-Nr-Oii"/>
                         <outlet property="showEmoticonButton" destination="gN7-bU-VMj" id="UVd-cA-H2p"/>
                         <outlet property="tableView" destination="6OT-TR-Fg8" id="0wV-TK-XeY"/>
                     </connections>

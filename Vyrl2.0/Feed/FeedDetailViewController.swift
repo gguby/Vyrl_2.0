@@ -20,13 +20,16 @@ class FeedDetailViewController: UIViewController{
     @IBOutlet weak var tableView: UITableView!
   
     @IBOutlet weak var commentFieldView: UIView!
-    @IBOutlet weak var buttonView: UIView!
     @IBOutlet weak var closeEmoticonButton: UIButton!
     @IBOutlet weak var emoticonImageView: UIImageView!
     @IBOutlet weak var showEmoticonButton: UIButton!
-    
     @IBOutlet weak var postCommentButton: UIButton!
-   
+    
+    @IBOutlet weak var buttonView: UIView!
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var commentButton: UIButton!
+    @IBOutlet weak var shareButton: UIButton!
+    
     var articleId : Int!
     var emoticonView : EmoticonView!
     var kbHeight: CGFloat!
@@ -58,12 +61,12 @@ class FeedDetailViewController: UIViewController{
         self.navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func likeButtonClick(_ sender: UIButton) {
+    @IBAction func likeListButtonClick(_ sender: UIButton) {
         print("like")
         self.pushView(storyboardName: "Feed", controllerName: "FeedLikeUserListViewController")
     }
     
-    @IBAction func shareButtonClick(_ sender: UIButton) {
+    @IBAction func shareListButtonClick(_ sender: UIButton) {
         print("share")
     }
     @IBAction func translateContent(_ sender: UIButton) {
@@ -142,6 +145,36 @@ class FeedDetailViewController: UIViewController{
             case .failure(let error):
                 print(error)
             }
+        }
+    }
+    
+    @IBAction func likeButtonClick(_ sender: UIButton) {
+        if sender.tag == 0 {
+            let uri = URL.init(string: Constants.VyrlFeedURL.feedLike(articleId: (articleId)!))
+            Alamofire.request(uri!, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: {
+                response in switch response.result {
+                case .success(let json):
+                    print(json)
+                    sender.setImage(UIImage.init(named: "icon_heart_01_on"), for: .normal)
+                    sender.tag = 1
+                case .failure(let error):
+                    print(error)
+                }
+            })
+        }else {
+            
+            let uri = URL.init(string: Constants.VyrlFeedURL.feedLike(articleId: (articleId)!))
+            Alamofire.request(uri!, method: .delete, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: {
+                response in switch response.result {
+                case .success(let json):
+                    print(json)
+                    sender.setImage(UIImage.init(named: "icon_heart_01"), for: .normal)
+                    sender.tag = 0
+                    
+                case .failure(let error):
+                    print(error)
+                }
+            })
         }
     }
     
@@ -230,6 +263,11 @@ class FeedDetailViewController: UIViewController{
                         self.feedDetail.profileId = profile["id"] as! Int
                         self.feedDetail.profileImagePath = profile["imagePath"] as! String
                         self.feedDetail.profileNickname = profile["nickName"] as! String
+                        
+                        self.likeButton.setTitle("\(self.feedDetail.likeCount as Int)", for: .normal)
+                        self.commentButton.setTitle("\(self.feedDetail.commentCount as Int)", for: .normal)
+                        self.shareButton.setTitle("\(self.feedDetail.shareCount as Int)", for: .normal)
+                        
                         self.tableView.reloadData()
                     }
                 }
@@ -484,12 +522,8 @@ struct Comment : Mappable {
     }
 }
 
-struct FeedDetail : Mappable {
+struct FeedDetail{
     init() {
-        
-    }
-    
-    init?(map: Map) {
         
     }
     
@@ -503,16 +537,6 @@ struct FeedDetail : Mappable {
     var profileId: Int!
     var profileImagePath : String!
     var profileNickname : String!
-    
-    mutating func mapping(map: Map){
-        id <- map["id"]
-        content <- map["content"]
-        mediasArray <- map["media"]
-        
-        commentCount <- map["cntComment"]
-        likeCount <- map["cntLike"]
-        shareCount <- map["cntShare"]
-     }
     
 }
 

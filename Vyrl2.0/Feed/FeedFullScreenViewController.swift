@@ -213,24 +213,30 @@ extension FeedFullScreenViewController : UIScrollViewDelegate {
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let page = Int(round(Double(scrollView.contentOffset.x) / Double(scrollView.bounds.size.width)))
-        let uri : URL = URL.init(string: mediasArray[index]["url"]!)!
-        
-        if(mediasArray[index]["type"] == "IMAGE"){
+        let uri : URL = URL.init(string: mediasArray[page]["url"]!)!
+//
+        if(mediasArray[page]["type"] == "IMAGE"){
             if(self.player != nil) {
                 self.player!.pause()
                 self.playerLayer?.removeFromSuperlayer()
             }
         } else {
-            self.player = AVPlayer.init(url: uri)
+            if(self.imageViewArray[page].layer.sublayers != nil) {
+                self.imageViewArray[page].layer.sublayers?.removeAll()
+            }
+            
+            self.playerItem = AVPlayerItem.init(url: uri)
+            self.player = AVPlayer.init(playerItem: self.playerItem)
             
             // Layer for display… Video plays at the full size of the iPad
             self.playerLayer = AVPlayerLayer(player: player)
             
-            if(self.imageViewArray[page].layer.sublayers == nil) {
-                self.imageViewArray[page].layer.addSublayer(self.playerLayer!)
-            }
+            self.imageViewArray[page].layer.addSublayer(self.playerLayer!)
+            
             self.playerLayer?.frame = self.imageViewArray[page].frame
-            self.player!.play()
+            self.player?.seek(to: kCMTimeZero)
+            self.player?.play()
+            
         }
         print("\(page) scrollViewDidEndDecelerating")
     }
