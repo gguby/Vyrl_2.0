@@ -47,8 +47,11 @@ class FeedTableViewController: UIViewController{
         appDelegate.feedView = self
         
         self.initLoader()
-        
         self.initRefresh()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        getAllFeed()
     }
     
     func resizeTable(height : CGFloat)
