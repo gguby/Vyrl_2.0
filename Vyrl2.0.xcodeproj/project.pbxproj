@@ -17,6 +17,7 @@
 		8F42E4991EE144C70010EB88 /* OfficialFanClubTermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F42E4981EE144C70010EB88 /* OfficialFanClubTermsViewController.swift */; };
 		8F47B6C71EDEACA600A5DBAC /* BlockManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F47B6C61EDEACA600A5DBAC /* BlockManagementViewController.swift */; };
 		8F48CA6C1ED560CD0037A35B /* StartCoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F48CA6B1ED560CD0037A35B /* StartCoverViewController.swift */; };
+		8F492C3A1F3DA01D0049F600 /* UITextView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F492C391F3DA01D0049F600 /* UITextView+Extension.swift */; };
 		8F4C09291EE528840026D49F /* FeedStyle.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F4C09281EE528840026D49F /* FeedStyle.storyboard */; };
 		8F5165D11ED6A8A900EC468B /* ProfilePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5165D01ED6A8A900EC468B /* ProfilePhotoViewController.swift */; };
 		8F57B73F1F186E44009FD0EA /* FeedFullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F57B73E1F186E44009FD0EA /* FeedFullScreenViewController.swift */; };
@@ -91,6 +92,7 @@
 		8F42E4981EE144C70010EB88 /* OfficialFanClubTermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfficialFanClubTermsViewController.swift; sourceTree = "<group>"; };
 		8F47B6C61EDEACA600A5DBAC /* BlockManagementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockManagementViewController.swift; sourceTree = "<group>"; };
 		8F48CA6B1ED560CD0037A35B /* StartCoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartCoverViewController.swift; sourceTree = "<group>"; };
+		8F492C391F3DA01D0049F600 /* UITextView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextView+Extension.swift"; sourceTree = "<group>"; };
 		8F4C09281EE528840026D49F /* FeedStyle.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FeedStyle.storyboard; sourceTree = "<group>"; };
 		8F5165D01ED6A8A900EC468B /* ProfilePhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePhotoViewController.swift; sourceTree = "<group>"; };
 		8F57B73E1F186E44009FD0EA /* FeedFullScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedFullScreenViewController.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 				CE29B1D31ECD6515003F4D2E /* Constants.swift */,
 				CE36D49F1ED3C96B00ABC7FE /* CheckBox.swift */,
 				8F916A8D1EDC264900E3EC8B /* UIView+Extension.swift */,
+				8F492C391F3DA01D0049F600 /* UITextView+Extension.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -596,6 +599,7 @@
 				A650368B1F0E30BA00AD540A /* ModalAnimatorPhoto.swift in Sources */,
 				A64E99A31F317DBB00D9BCFF /* FeedModifyController.swift in Sources */,
 				CE33F0021ED2BB690050C21D /* SMLoginViewController.swift in Sources */,
+				8F492C3A1F3DA01D0049F600 /* UITextView+Extension.swift in Sources */,
 				8F9AF9911EE800E700DE069E /* FeedTableViewController.swift in Sources */,
 				A6722C311F25F7D600CEBBD6 /* FeedTableCell.swift in Sources */,
 				A650368D1F0E30BA00AD540A /* FeedNavigationControllerExtension.swift in Sources */,

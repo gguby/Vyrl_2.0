@@ -443,6 +443,7 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
                 cell.initImageVideo()
                 
                 cell.contentTextView.text = self.feedDetail.content
+                cell.contentTextView.resolveHashTags()
                 cell.likeCountButton.setTitle(String("좋아요 \(self.feedDetail.likeCount!)명"), for: .normal)
                 cell.shareCountButton.setTitle(String("공유 \(self.feedDetail.shareCount!)명"), for: .normal)
                 cell.pageLabel.text = String("1 / \(self.feedDetail.mediasArray.count)")
@@ -615,11 +616,12 @@ class FeedDetailTableCell : UITableViewCell {
                         self.imageViewArray[self.index].contentMode = .scaleAspectFit
                         
                         let xPosition = self.imageScrollView.frame.width * CGFloat(self.index)
-                        self.imageViewArray[self.index].frame = CGRect.init(x: xPosition, y: 0, width: self.imageScrollView.frame.width, height: self.imageScrollView.frame.height)
+                        self.imageViewArray[self.index].frame = CGRect.init(x: xPosition, y: 0, width: self.imageScrollView.frame.width, height: (image?.size.height)!)
+                        
+                        self.imageScrollView.contentSize.height = (image?.size.height)!
                     }
             }
-        
-    }
+      }
  
 }
 
