@@ -35,6 +35,8 @@ class FeedTableCell: UITableViewCell {
     @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var nickNameLabel: UILabel!
     
+    @IBOutlet weak var commentView: UIView!
+    
     
     var cellWidth = 124
 
@@ -52,6 +54,7 @@ class FeedTableCell: UITableViewCell {
             }
             
             var str : String!
+            
             if let url = URL.init(string:(article?.profile.imagePath)!) {
                 self.profileButton.af_setBackgroundImage(for: .normal, url: url)
             }
@@ -72,8 +75,12 @@ class FeedTableCell: UITableViewCell {
             }else {
                 str = "0"
             }
-            
             self.comment.setTitle(str, for: .normal)
+            if(article?.cntComment == 0) {
+                self.commentView.isHidden = true
+            } else {
+                self.commentView.isHidden = false
+            }
             
             if let x = article?.cntShare {
                 str = "\(x)"

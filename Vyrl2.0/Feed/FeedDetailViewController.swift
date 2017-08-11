@@ -355,9 +355,9 @@ class FeedDetailViewController: UIViewController{
         let alertController = UIAlertController (title:nil, message:"이 댓글을 영구적으로 삭제하시겠습니가?",preferredStyle:.actionSheet)
         
         let deleteAction = UIAlertAction(title: "삭제", style: .default,handler: { (action) -> Void in
-            let uri = Constants.VyrlAPIConstants.baseURL + "/feeds/17/comments/\(self.commentArray[indexPath.row-1].id as Int)"
+             let url = Constants.VyrlFeedURL.feedCommentDelete(articleId: self.articleId, commentId: self.commentArray[indexPath.row-1].id)
             
-            Alamofire.request(uri, method: .delete, parameters: nil, encoding:JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: { (response) in
+            Alamofire.request(url, method: .delete, parameters: nil, encoding:JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: { (response) in
                 switch response.result {
                 case .success(let json):
                     if(response.response?.statusCode == 200){
