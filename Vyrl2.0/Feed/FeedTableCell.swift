@@ -32,6 +32,10 @@ class FeedTableCell: UITableViewCell {
     @IBOutlet weak var share: UIButton!
     @IBOutlet weak var comment: UIButton!
     
+    @IBOutlet weak var profileButton: UIButton!
+    @IBOutlet weak var nickNameLabel: UILabel!
+    
+    
     var cellWidth = 124
 
     var delegate: FeedCellDelegate!
@@ -48,6 +52,12 @@ class FeedTableCell: UITableViewCell {
             }
             
             var str : String!
+            if let url = URL.init(string:(article?.profile.imagePath)!) {
+                self.profileButton.af_setBackgroundImage(for: .normal, url: url)
+            }
+            
+            self.nickNameLabel.text = article?.profile.nickName
+            
             
             if let x = article?.cntLike {
                 str = "\(x)"
