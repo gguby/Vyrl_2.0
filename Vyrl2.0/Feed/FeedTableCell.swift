@@ -36,6 +36,15 @@ class FeedTableCell: UITableViewCell {
     @IBOutlet weak var nickNameLabel: UILabel!
     
     @IBOutlet weak var commentView: UIView!
+    @IBOutlet weak var firstCommentView: UIView!
+    @IBOutlet weak var firstCommentNicknameButton: UIButton!
+    @IBOutlet weak var firstCommentContent: UILabel!
+    
+    
+    @IBOutlet weak var secondCommentView: UIView!
+    @IBOutlet weak var secondCommentNicknameButton: UIButton!
+    @IBOutlet weak var seconCommentContent: UILabel!
+    
     
     
     var cellWidth = 124
@@ -78,8 +87,12 @@ class FeedTableCell: UITableViewCell {
             self.comment.setTitle(str, for: .normal)
             if(article?.cntComment == 0) {
                 self.commentView.isHidden = true
+            } else if (article?.cntComment == 1){
+                self.commentView.isHidden = false
+                self.secondCommentView.isHidden = true
             } else {
                 self.commentView.isHidden = false
+                self.secondCommentView.isHidden = false
             }
             
             if let x = article?.cntShare {
