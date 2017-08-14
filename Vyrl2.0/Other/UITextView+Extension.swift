@@ -35,12 +35,11 @@ extension UITextView {
                 word = "#" + word
                 if word.hasPrefix("#") {
                     let matchRange:NSRange = nsText.range(of: word as String)
-//                    attrString.addAttribute(NSLinkAttributeName, value: "\(i):", range: matchRange)
-                    attrString.addAttributes([
-                        NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-SemiBold", size: 13.0)!,
-                        NSForegroundColorAttributeName: UIColor(red: 62.0 / 255.0, green: 58.0 / 255.0, blue: 57.0 / 255.0, alpha: 1.0)
-                        ], range: matchRange)
-                  
+                    
+                    let attributes: [String:AnyObject] =
+                        [NSFontAttributeName : UIFont(name: "AppleSDGothicNeo-SemiBold", size: 13.0)!,
+                         NSForegroundColorAttributeName : UIColor.ivGreyishBrownTwo]
+                    attrString.addAttributes(attributes, range: matchRange)
                     i += 1
                 }
             }

@@ -19,7 +19,7 @@ import AlamofireImage
 class FeedTableCell: UITableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var contentLabel: UILabel!
+    @IBOutlet weak var contentTextView: UITextView!
     
     @IBOutlet weak var contentHeight: NSLayoutConstraint!
     
