@@ -11,6 +11,7 @@ import GrowingTextView
 import AVFoundation
 import Alamofire
 import ObjectMapper
+import NSDate_TimeAgo
 
 class FeedDetailViewController: UIViewController{
    
@@ -255,9 +256,9 @@ class FeedDetailViewController: UIViewController{
                         self.feedDetail.shareCount = jsonData["cntShare"] as! Int
                         self.feedDetail.content = jsonData["content"] as! String
                         self.feedDetail.id = jsonData["id"] as! Int
+                        self.feedDetail.createAt = jsonData["createdAt"] as! String
                         self.feedDetail.mediasArray = jsonData["media"] as? [[String:
                             String]]
-                        
                         let profile = jsonData["profile"] as! [String : AnyObject]
                         
                         self.feedDetail.profileId = profile["id"] as! Int
@@ -444,6 +445,8 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
                 
                 cell.contentTextView.text = self.feedDetail.content
                 cell.contentTextView.resolveHashTags()
+                cell.timeLabel.text = self.feedDetail.createAt.toDateTime().timeAgo()
+                
                 cell.likeCountButton.setTitle(String("좋아요 \(self.feedDetail.likeCount!)명"), for: .normal)
                 cell.shareCountButton.setTitle(String("공유 \(self.feedDetail.shareCount!)명"), for: .normal)
                 cell.pageLabel.text = String("1 / \(self.feedDetail.mediasArray.count)")
@@ -534,6 +537,7 @@ struct FeedDetail{
     var commentCount : Int!
     var likeCount : Int!
     var shareCount : Int!
+    var createAt : String!
     
     var profileId: Int!
     var profileImagePath : String!
@@ -562,6 +566,9 @@ class FeedDetailTableCell : UITableViewCell {
     @IBOutlet weak var contentTextView: UITextView!
     
     @IBOutlet weak var imageScrollView: UIScrollView!
+    
+    @IBOutlet weak var timeLabel: UILabel!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -646,5 +653,23 @@ class FeedCommentTableCell : UITableViewCell {
     override func awakeFromNib() {
         self.commentContextTextView.textContainerInset = UIEdgeInsets.zero
         self.commentContextTextView.textContainer.lineFragmentPadding = 0
+    }
+}
+
+extension String
+{
+    func toDateTime() -> NSDate
+    {
+        //Create Date Formatter
+        let dateFormatter = DateFormatter()
+        
+        //Specify Format of String to Parse
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        
+        //Parse into NSDate
+        let dateFromString : NSDate = dateFormatter.date(from: self)! as NSDate
+        
+        //Return Parsed Date
+        return dateFromString
     }
 }

@@ -270,6 +270,7 @@ extension FeedTableViewController : UITableViewDelegate, UITableViewDataSource {
         cell.contentTextView.text = article.content
         cell.contentTextView.resolveHashTags()
         cell.contentTextView.delegate = self
+        
         return cell
     }
 }

@@ -579,6 +579,7 @@
                                             <outlet property="firstCommentNicknameButton" destination="Hp3-wf-JOt" id="zbz-ft-a0c"/>
                                             <outlet property="firstCommentView" destination="QwL-7u-PhX" id="rcg-yc-tCm"/>
                                             <outlet property="likeBtn" destination="tbe-fo-INV" id="HZK-Ai-H9E"/>
+                                            <outlet property="locationLabel" destination="fQb-to-pNo" id="Pm5-lg-nwS"/>
                                             <outlet property="nickNameLabel" destination="6qs-Ks-sBY" id="0pP-Ws-YqJ"/>
                                             <outlet property="photo" destination="Jvw-3o-Vw5" id="q9r-Gf-elW"/>
                                             <outlet property="profileButton" destination="VlA-Tj-LQj" id="JVr-ka-jCO"/>
@@ -586,6 +587,7 @@
                                             <outlet property="secondCommentNicknameButton" destination="rDx-ha-TKw" id="K6b-w7-b4k"/>
                                             <outlet property="secondCommentView" destination="r9Y-Dr-8il" id="TAD-kh-hAO"/>
                                             <outlet property="share" destination="75y-js-nAt" id="O3P-OV-ULn"/>
+                                            <outlet property="timeLabel" destination="IEv-XZ-B5O" id="Qwl-Hm-FHf"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="FeedTableCell4" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="multiFeed" rowHeight="605" id="hth-2A-IVu" customClass="FeedTableCell" customModule="Vyrl2_0" customModuleProvider="target">
@@ -1039,12 +1041,14 @@
                                             <outlet property="firstCommentNicknameButton" destination="73R-G3-7x8" id="5O4-Yr-e0b"/>
                                             <outlet property="firstCommentView" destination="t2p-HS-xhz" id="7De-8W-K8c"/>
                                             <outlet property="likeBtn" destination="WBx-k1-hb6" id="d4C-rr-yss"/>
+                                            <outlet property="locationLabel" destination="yTj-Iu-YpD" id="9sR-J6-Gl6"/>
                                             <outlet property="nickNameLabel" destination="5HT-ZQ-5cg" id="LGV-QS-OkU"/>
                                             <outlet property="profileButton" destination="85i-Jy-JcF" id="aQo-Fo-rUS"/>
                                             <outlet property="seconCommentContent" destination="QgZ-pN-U0d" id="K8I-DN-15O"/>
                                             <outlet property="secondCommentNicknameButton" destination="y8L-bv-Kpz" id="CWE-uZ-QmI"/>
                                             <outlet property="secondCommentView" destination="NqV-2n-pWP" id="gTK-DA-d4r"/>
                                             <outlet property="share" destination="S2k-8N-QGK" id="0dc-jK-CYj"/>
+                                            <outlet property="timeLabel" destination="IDs-mJ-9kJ" id="ZcM-Fd-B1I"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="channelFeed" rowHeight="514" id="bRN-IR-0WK" customClass="FeedTableCell" customModule="Vyrl2_0" customModuleProvider="target">
@@ -1392,7 +1396,9 @@
                                             <outlet property="cntLike" destination="gOB-pX-uRJ" id="VFR-PO-Ngb"/>
                                             <outlet property="comment" destination="rex-iG-UDL" id="KvK-sH-Xe9"/>
                                             <outlet property="likeBtn" destination="6xh-zG-hKZ" id="T1C-Sh-hyE"/>
+                                            <outlet property="locationLabel" destination="Fn0-yo-GXO" id="OeB-yM-eKB"/>
                                             <outlet property="share" destination="xYY-X1-pci" id="Rhm-wE-a8l"/>
+                                            <outlet property="timeLabel" destination="XH9-pl-YHf" id="F9n-TN-xhD"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="FeedTableCell2" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="advertisingFeed" rowHeight="508" id="XHz-Pc-KGu" customClass="FeedTableCell" customModule="Vyrl2_0" customModuleProvider="target">
@@ -1957,7 +1963,9 @@
                                             <outlet property="comment" destination="i9s-yN-POK" id="lB3-7O-Hw2"/>
                                             <outlet property="contentTextView" destination="ssl-Ct-Jvi" id="kZ5-GX-s75"/>
                                             <outlet property="likeBtn" destination="eGz-vy-KOM" id="Kxj-fe-3xU"/>
+                                            <outlet property="locationLabel" destination="FNg-4f-Aid" id="7es-89-dKn"/>
                                             <outlet property="share" destination="Z59-hb-zB0" id="gac-mT-vML"/>
+                                            <outlet property="timeLabel" destination="GcC-Wg-wss" id="ZGc-XD-Yeb"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -2352,6 +2360,7 @@
                                             <outlet property="pageLabel" destination="a7n-bo-j8L" id="BaW-YC-cd2"/>
                                             <outlet property="profileButton" destination="ctY-q2-Qoh" id="FFX-Ue-veF"/>
                                             <outlet property="shareCountButton" destination="cqX-j3-stw" id="x9Y-3o-enD"/>
+                                            <outlet property="timeLabel" destination="A7g-G0-TOv" id="goF-Wa-paG"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Comment" rowHeight="117" id="gUf-7M-eaG" customClass="FeedCommentTableCell" customModule="Vyrl2_0" customModuleProvider="target">

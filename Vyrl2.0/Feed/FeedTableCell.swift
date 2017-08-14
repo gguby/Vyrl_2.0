@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import AlamofireImage
+import NSDate_TimeAgo
 
 @objc protocol FeedCellDelegate {
     func didPressCell(sender: Any, cell : FeedTableCell)
@@ -24,6 +25,9 @@ class FeedTableCell: UITableViewCell {
     @IBOutlet weak var contentHeight: NSLayoutConstraint!
     
     @IBOutlet weak var collectionViewLeading: NSLayoutConstraint!
+    
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
     
     @IBOutlet weak var photo: UIImageView!
     @IBOutlet weak var likeBtn: UIButton!
@@ -69,7 +73,7 @@ class FeedTableCell: UITableViewCell {
             }
             
             self.nickNameLabel.text = article?.profile.nickName
-            
+            self.timeLabel.text = (article?.date! as! NSDate).timeAgo()
             
             if let x = article?.cntLike {
                 str = "\(x)"
@@ -135,6 +139,11 @@ class FeedTableCell: UITableViewCell {
             if (size.width > 375){
                 self.collectionViewLeading.constant = 20
             }            
+        }
+        
+        if(self.contentTextView != nil) {
+            self.contentTextView.textContainerInset = UIEdgeInsets.zero
+            self.contentTextView.textContainer.lineFragmentPadding = 0
         }
     }
 
