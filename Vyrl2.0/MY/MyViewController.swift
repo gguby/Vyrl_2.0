@@ -11,18 +11,17 @@ import Alamofire
 import AlamofireImage
 
 
-class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class MyViewController: UIViewController{
     
     @IBOutlet weak var dropTableView: UIView!
     
     @IBOutlet weak var accountTable: UITableView!
     
-    @IBOutlet weak var feedTable: UITableView!
-  
     @IBOutlet weak var footer: UIView!
     
+    @IBOutlet weak var containerView: UIView!
+    
     var accountList  = [Account]()
-    var articleArray = [Article]()    
     
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var nickNameLabel: UILabel!
@@ -42,9 +41,34 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         self.accountTable.dataSource = self
         self.accountTable.rowHeight = 50
         
-        self.setupFeedTable()
+        self.containerView.translatesAutoresizingMaskIntoConstraints  = false
         
-        self.getAllFeed()
+        self.setupFeed()
+    }
+    
+    func setupPostContainer(){
+        let storyboard = UIStoryboard(name: "PostCollectionViewController", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "PostCollection")
+        
+        controller.removeFromParentViewController()
+        controller.view.removeFromSuperview()
+        
+        addChildViewController(controller)
+        containerView.addSubview(controller.view)
+        controller.didMove(toParentViewController: self)
+    }
+    
+    func setupFeed(){
+        let storyboard = UIStoryboard(name: "FeedStyle", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "feedTable")
+        
+        controller.removeFromParentViewController()
+        controller.view.removeFromSuperview()
+        
+        addChildViewController(controller)
+        
+        containerView.addSubview(controller.view)
+        controller.didMove(toParentViewController: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -155,30 +179,31 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         self.pushView(storyboardName: "My", controllerName: "setting")
     }
     
+    @IBAction func showAccountManagement(_ sender: Any) {
+        self.pushView(storyboardName: "Setting", controllerName: "AccountManagement")
+    }
+    
+    @IBAction func showFeed(_ sender: Any) {
+        self.setupFeed()
+    }
+    
+    @IBAction func showPost(_ sender: Any) {
+        self.setupPostContainer()
+    }
+    
+    @IBAction func showBookmark(_ sender: Any) {
+        self.setupFeed()
+    }
+}
+
+extension MyViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        if tableView == feedTable {
-            return self.articleArray.count
-        }
-        
         return accountList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        if tableView == feedTable {
-            let article = self.articleArray[indexPath.row]
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: article.type.rawValue, for: indexPath) as! FeedTableCell
-
-            cell.article = article
-            cell.delegate = self
-            cell.contentTextView.text = article.content
-            cell.contentTextView.resolveHashTags()
-            
-            return cell
-        }
-        
         let cell :MyAccountCell = tableView.dequeueReusableCell(withIdentifier: "myaccountcell") as! MyAccountCell
         
         let account : Account = accountList[indexPath.row]
@@ -214,8 +239,6 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if ( tableView == feedTable ) {return}
-        
         let account : Account = accountList[indexPath.row]
         
         let currentAccount : Account = LoginManager.sharedInstance.getCurrentAccount()!
@@ -234,20 +257,12 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         
-        if ( tableView == feedTable ) {return 0}
-        
         return 50
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         
-        if ( tableView == feedTable ) {return nil}
-        
         return footer
-    }
-
-    @IBAction func showAccountManagement(_ sender: Any) {
-        self.pushView(storyboardName: "Setting", controllerName: "AccountManagement")
     }
 }
 
@@ -260,32 +275,7 @@ extension MyViewController : FeedCellDelegate {
     func didPressCell(sender: Any, cell : FeedTableCell) {
         self.pushView(storyboardName: "FeedStyle", controllerName: "FeedDetailViewController")
     }
-    
-    func setupFeedTable(){
-        self.feedTable.delegate = self
-        self.feedTable.dataSource = self
-        self.feedTable.rowHeight = UITableViewAutomaticDimension
-        self.feedTable.estimatedRowHeight = 400
-    }
-    
-    func getAllFeed(){
-        self.articleArray.removeAll()
-        
-        let url = URL.init(string: Constants.VyrlFeedURL.FEED)
-        
-        Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Article]>) in
-            
-            let array = response.result.value ?? []
-            
-            for article in array {
-                self.articleArray.append(article)
-            }
-            
-            DispatchQueue.main.async {
-                self.feedTable.reloadData()
-            }
-        }
-    }
+
 }
 
 class MyAccountCell : UITableViewCell{
