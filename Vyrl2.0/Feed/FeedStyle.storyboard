@@ -1961,9 +1961,12 @@
                                         <connections>
                                             <outlet property="cntLike" destination="F9V-lM-aYu" id="chy-EY-Hi5"/>
                                             <outlet property="comment" destination="i9s-yN-POK" id="lB3-7O-Hw2"/>
+                                            <outlet property="commentView" destination="WXZ-B2-pbI" id="PTK-Wp-9RY"/>
                                             <outlet property="contentTextView" destination="ssl-Ct-Jvi" id="kZ5-GX-s75"/>
                                             <outlet property="likeBtn" destination="eGz-vy-KOM" id="Kxj-fe-3xU"/>
                                             <outlet property="locationLabel" destination="FNg-4f-Aid" id="7es-89-dKn"/>
+                                            <outlet property="nickNameLabel" destination="ldF-qE-Kn0" id="yjh-yO-mwP"/>
+                                            <outlet property="profileButton" destination="wJY-q5-13w" id="vsC-gC-32S"/>
                                             <outlet property="share" destination="Z59-hb-zB0" id="gac-mT-vML"/>
                                             <outlet property="timeLabel" destination="GcC-Wg-wss" id="ZGc-XD-Yeb"/>
                                         </connections>
