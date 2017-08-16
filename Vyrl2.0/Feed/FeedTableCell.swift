@@ -47,31 +47,11 @@ class FeedTableCell: UITableViewCell {
                 self.photo.af_setImage(withURL: url)
             }
             
-            var str : String!
+            self.cntLike.setTitle(article?.likeCount, for: .normal)
             
-            if let x = article?.cntLike {
-                str = "\(x)"
-            } else {
-                str = "0"
-            }
+            self.comment.setTitle(article?.commentCount, for: .normal)
             
-            self.cntLike.setTitle(str, for: .normal)
-            
-            if let x = article?.cntComment {
-                str = "\(x)"
-            }else {
-                str = "0"
-            }
-            
-            self.comment.setTitle(str, for: .normal)
-            
-            if let x = article?.cntShare {
-                str = "\(x)"
-            }else {
-                str = "0"
-            }
-            
-            self.share.setTitle(str, for: .normal)
+            self.share.setTitle(article?.shareCount, for: .normal)
             
             guard self.collectionView != nil else {                
                 return

@@ -119,7 +119,9 @@ extension LocationViewController : CLLocationManagerDelegate {
                     
                     if let name = pName, let formattedAddress = pFormattedAddress, let geometry = pGeometry {
                         
-                        let place = Place.init(name: name, address: formattedAddress, geometry: geometry)
+                        var place = Place.init(name: name, address: formattedAddress, geometry: geometry)
+                        place.latitude = latitude
+                        place.longitude = longitude
                         
                         self.places.append(place)
                     }
@@ -228,6 +230,9 @@ struct Place {
     var name : String!
     var address: String!
     var geometry: [String: AnyObject]!
+    
+    var latitude : Double!
+    var longitude : Double!
     
     var isSelectedCell : Bool! = false
     

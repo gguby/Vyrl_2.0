@@ -364,6 +364,10 @@ struct Article : Mappable {
     var profile : Profile!
     var date : Date?
     
+    var commentCount : String!
+    var likeCount : String!
+    var shareCount: String!
+    
     init?(map: Map) {
         
     }
@@ -384,6 +388,10 @@ struct Article : Mappable {
         if let dateString = map["createdAt"].currentValue as? String, let _date = dateFormatter.date(from: dateString){
             date = _date
         }
+        
+        commentCount = "\(cntComment!)"
+        likeCount = "\(cntLike!)"
+        shareCount = "\(cntShare!)"
         
         self.setUpType()
     }
