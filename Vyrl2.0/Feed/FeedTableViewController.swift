@@ -386,6 +386,8 @@ struct Article : Mappable {
     var likeCount : String!
     var shareCount: String!
     
+    var location : String!
+    
     init?(map: Map) {
         
     }
@@ -399,6 +401,7 @@ struct Article : Mappable {
         cntShare <- map["cntShare"]
         profile <- map["profile"]
         medias <- map["media"]
+        location <- map["location"]
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"

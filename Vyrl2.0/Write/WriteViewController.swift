@@ -70,8 +70,9 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
         
         let parameters :[String:String] = [
             "content": textView.text,
-            "latitude" : "\(self.currentPlace.latitude!)",
-            "longitude" : "\(self.currentPlace.longitude!)"
+//            "latitude" : "\(self.currentPlace.latitude!)",
+//            "longitude" : "\(self.currentPlace.longitude!)"
+            "location" :self.currentPlace.name
         ]
         
         let uri = Constants.VyrlFeedURL.FEED

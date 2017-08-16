@@ -77,6 +77,9 @@ class FeedTableCell: UITableViewCell {
             self.nickNameLabel.text = article?.profile.nickName
             self.timeLabel.text = (article?.date! as! NSDate).timeAgo()
             
+            if let str = article?.location {
+                self.locationLabel.text = str + "에서"
+            }
             
             if(article?.cntComment == 0) {
                 self.commentView.isHidden = true
