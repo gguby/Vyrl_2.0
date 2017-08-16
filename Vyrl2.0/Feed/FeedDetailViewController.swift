@@ -11,6 +11,7 @@ import GrowingTextView
 import AVFoundation
 import Alamofire
 import ObjectMapper
+import NSDate_TimeAgo
 
 class FeedDetailViewController: UIViewController{
    
@@ -20,13 +21,16 @@ class FeedDetailViewController: UIViewController{
     @IBOutlet weak var tableView: UITableView!
   
     @IBOutlet weak var commentFieldView: UIView!
-    @IBOutlet weak var buttonView: UIView!
     @IBOutlet weak var closeEmoticonButton: UIButton!
     @IBOutlet weak var emoticonImageView: UIImageView!
     @IBOutlet weak var showEmoticonButton: UIButton!
-    
     @IBOutlet weak var postCommentButton: UIButton!
-   
+    
+    @IBOutlet weak var buttonView: UIView!
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var commentButton: UIButton!
+    @IBOutlet weak var shareButton: UIButton!
+    
     var articleId : Int!
     var emoticonView : EmoticonView!
     var kbHeight: CGFloat!
@@ -52,20 +56,22 @@ class FeedDetailViewController: UIViewController{
         requestFeedDetail()
         requestComment()
         
-       
     }
     
     @IBAction func dismiss(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func likeButtonClick(_ sender: UIButton) {
+    @IBAction func likeListButtonClick(_ sender: UIButton) {
         print("like")
         self.pushView(storyboardName: "Feed", controllerName: "FeedLikeUserListViewController")
     }
     
-    @IBAction func shareButtonClick(_ sender: UIButton) {
+    @IBAction func shareListButtonClick(_ sender: UIButton) {
         print("share")
+    }
+    @IBAction func translateContent(_ sender: UIButton) {
+        
     }
     
     func showButtonView() {
@@ -143,6 +149,36 @@ class FeedDetailViewController: UIViewController{
         }
     }
     
+    @IBAction func likeButtonClick(_ sender: UIButton) {
+        if sender.tag == 0 {
+            let uri = URL.init(string: Constants.VyrlFeedURL.feedLike(articleId: (articleId)!))
+            Alamofire.request(uri!, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: {
+                response in switch response.result {
+                case .success(let json):
+                    print(json)
+                    sender.setImage(UIImage.init(named: "icon_heart_01_on"), for: .normal)
+                    sender.tag = 1
+                case .failure(let error):
+                    print(error)
+                }
+            })
+        }else {
+            
+            let uri = URL.init(string: Constants.VyrlFeedURL.feedLike(articleId: (articleId)!))
+            Alamofire.request(uri!, method: .delete, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: {
+                response in switch response.result {
+                case .success(let json):
+                    print(json)
+                    sender.setImage(UIImage.init(named: "icon_heart_01"), for: .normal)
+                    sender.tag = 0
+                    
+                case .failure(let error):
+                    print(error)
+                }
+            })
+        }
+    }
+    
     func keyboardShow(notification: NSNotification) {
         DispatchQueue.main.asyncAfter(deadline: .now()) {
             let numberOfSections = self.tableView.numberOfSections
@@ -199,10 +235,8 @@ class FeedDetailViewController: UIViewController{
             let array = response.result.value ?? []
             self.commentArray.removeAll()
             for comment in array {
-               
-                self.commentArray.append(comment)
-                
-            }
+               self.commentArray.append(comment)
+             }
             self.tableView.reloadData()
         }
     }
@@ -222,8 +256,18 @@ class FeedDetailViewController: UIViewController{
                         self.feedDetail.shareCount = jsonData["cntShare"] as! Int
                         self.feedDetail.content = jsonData["content"] as! String
                         self.feedDetail.id = jsonData["id"] as! Int
-                        self.feedDetail.imagesArray = jsonData["images"] as! [String]
-                        self.feedDetail.videosArray = jsonData["videos"] as! [String]
+                        self.feedDetail.createAt = jsonData["createdAt"] as! String
+                        self.feedDetail.mediasArray = jsonData["media"] as? [[String:
+                            String]]
+                        let profile = jsonData["profile"] as! [String : AnyObject]
+                        
+                        self.feedDetail.profileId = profile["id"] as! Int
+                        self.feedDetail.profileImagePath = profile["imagePath"] as! String
+                        self.feedDetail.profileNickname = profile["nickName"] as! String
+                        
+                        self.likeButton.setTitle("\(self.feedDetail.likeCount as Int)", for: .normal)
+                        self.commentButton.setTitle("\(self.feedDetail.commentCount as Int)", for: .normal)
+                        self.shareButton.setTitle("\(self.feedDetail.shareCount as Int)", for: .normal)
                         
                         self.tableView.reloadData()
                     }
@@ -312,9 +356,9 @@ class FeedDetailViewController: UIViewController{
         let alertController = UIAlertController (title:nil, message:"이 댓글을 영구적으로 삭제하시겠습니가?",preferredStyle:.actionSheet)
         
         let deleteAction = UIAlertAction(title: "삭제", style: .default,handler: { (action) -> Void in
-            let uri = Constants.VyrlAPIConstants.baseURL + "/feeds/17/comments/\(self.commentArray[indexPath.row-1].id as Int)"
+             let url = Constants.VyrlFeedURL.feedCommentDelete(articleId: self.articleId, commentId: self.commentArray[indexPath.row-1].id)
             
-            Alamofire.request(uri, method: .delete, parameters: nil, encoding:JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: { (response) in
+            Alamofire.request(url, method: .delete, parameters: nil, encoding:JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: { (response) in
                 switch response.result {
                 case .success(let json):
                     if(response.response?.statusCode == 200){
@@ -400,9 +444,18 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
                 cell.initImageVideo()
                 
                 cell.contentTextView.text = self.feedDetail.content
+                cell.contentTextView.resolveHashTags()
+                cell.timeLabel.text = self.feedDetail.createAt.toDateTime().timeAgo()
+                
                 cell.likeCountButton.setTitle(String("좋아요 \(self.feedDetail.likeCount!)명"), for: .normal)
                 cell.shareCountButton.setTitle(String("공유 \(self.feedDetail.shareCount!)명"), for: .normal)
-                cell.pageLabel.text = String("1 / \(self.feedDetail.imagesArray.count+self.feedDetail.videosArray.count)")
+                cell.pageLabel.text = String("1 / \(self.feedDetail.mediasArray.count)")
+                
+                cell.profileButton.af_setBackgroundImage(for: .normal, url: URL.init(string: self.feedDetail.profileImagePath)!)
+                cell.nickNameLabel.text = self.feedDetail.profileNickname
+                
+                cell.profileId = self.feedDetail.profileId
+                cell.delegate = self
             }
             return cell
             
@@ -416,6 +469,20 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
         }
         
         
+    }
+}
+
+extension FeedDetailViewController : CellDidSelectProtocol {
+    func profileButtonDidSelect(profileId : Int) {
+        
+    }
+    
+    func imageDidSelect(profileId : Int) {
+        let storyboard = UIStoryboard(name: "Feed", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "FeedFullScreenViewController") as! FeedFullScreenViewController // or whatever it is
+        vc.mediasArray = self.feedDetail.mediasArray
+        
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -459,41 +526,36 @@ struct Comment : Mappable {
     }
 }
 
-struct FeedDetail : Mappable {
+struct FeedDetail{
     init() {
         
     }
     
-    init?(map: Map) {
-        
-    }
-    
     var id : Int!
-    var imagesArray : [String]!
-    var videosArray : [String]!
+    var mediasArray : [[String:String]]!
     var content : String!
-    
     var commentCount : Int!
     var likeCount : Int!
     var shareCount : Int!
+    var createAt : String!
     
-    mutating func mapping(map: Map){
-        id <- map["id"]
-        content <- map["content"]
-        imagesArray <- map["images"]
-        videosArray <- map["videos"]
-        
-        commentCount <- map["cntComment"]
-        likeCount <- map["cntLike"]
-        shareCount <- map["cntShare"]
-    }
+    var profileId: Int!
+    var profileImagePath : String!
+    var profileNickname : String!
     
+}
+
+protocol CellDidSelectProtocol {
+    func profileButtonDidSelect(profileId : Int)
+    func imageDidSelect(profileId : Int)
 }
 
 class FeedDetailTableCell : UITableViewCell {
     var feedDetail : FeedDetail!
     var imageViewArray : [UIImageView] = []
     var index : Int = 0;
+    var profileId : Int!
+    var delegate: CellDidSelectProtocol!
     
     @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var nickNameLabel: UILabel!
@@ -505,18 +567,28 @@ class FeedDetailTableCell : UITableViewCell {
     
     @IBOutlet weak var imageScrollView: UIScrollView!
     
+    @IBOutlet weak var timeLabel: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         self.imageScrollView.delegate = self as UIScrollViewDelegate
+        self.contentTextView.textContainerInset = UIEdgeInsets.zero
+        self.contentTextView.textContainer.lineFragmentPadding = 0
     }
     
     func initImageVideo() {
         self.index = 0
         
-        for i in 0..<(feedDetail.imagesArray.count) + (feedDetail.videosArray.count)  {
+        for i in 0..<(feedDetail.mediasArray.count) {
             let contentImageView = UIImageView()
             contentImageView.frame = CGRect.init(x: 0, y: 0, width: self.imageScrollView.frame.width, height: self.imageScrollView.frame.height)
+            
+            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+            contentImageView.isUserInteractionEnabled = true
+            contentImageView.addGestureRecognizer(tapGestureRecognizer)
+            
             self.imageViewArray.append(contentImageView)
             
             self.imageScrollView.contentSize.width = contentImageView.frame.width * CGFloat(i+1)
@@ -526,23 +598,21 @@ class FeedDetailTableCell : UITableViewCell {
         self.requestImageVideo()
     }
     
+    func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
+    {
+        delegate.imageDidSelect(profileId: self.profileId)
+    }
+    
     func requestImageVideo() {
-        if(self.index > feedDetail.imagesArray.count-1)
-        {
-            let asset = AVURLAsset.init(url: URL(string:feedDetail.videosArray[1])!)
-            let imgGenerator = AVAssetImageGenerator(asset: asset)
-            imgGenerator.appliesPreferredTrackTransform = true
-            let cgImage = try! imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
-            let uiImage = UIImage.init(cgImage:  cgImage)
-            
-            self.imageViewArray[self.index].image = uiImage
-            self.imageViewArray[self.index].contentMode = .scaleAspectFit
-            
-            let xPosition = self.imageScrollView.frame.width * CGFloat(self.index)
-            self.imageViewArray[self.index].frame = CGRect.init(x: xPosition, y: 0, width: self.imageScrollView.frame.width, height: self.imageScrollView.frame.height)
-            
+        
+        var uri : URL
+        if(feedDetail.mediasArray[index]["type"] == "IMAGE"){
+            uri = URL.init(string: feedDetail.mediasArray[index]["url"]!)!
         } else {
-            Alamofire.request(feedDetail.imagesArray[index])
+            uri = URL.init(string: feedDetail.mediasArray[index]["thumbnail"]!)!
+        }
+        
+            Alamofire.request(uri)
                 .downloadProgress(closure: { (progress) in
                     
                 }).responseData { response in
@@ -553,19 +623,19 @@ class FeedDetailTableCell : UITableViewCell {
                         self.imageViewArray[self.index].contentMode = .scaleAspectFit
                         
                         let xPosition = self.imageScrollView.frame.width * CGFloat(self.index)
-                        self.imageViewArray[self.index].frame = CGRect.init(x: xPosition, y: 0, width: self.imageScrollView.frame.width, height: self.imageScrollView.frame.height)
+                        self.imageViewArray[self.index].frame = CGRect.init(x: xPosition, y: 0, width: self.imageScrollView.frame.width, height: (image?.size.height)!)
+                        
+                        self.imageScrollView.contentSize.height = (image?.size.height)!
                     }
             }
-        }
-    }
-    
-   
+      }
+ 
 }
 
 extension FeedDetailTableCell : UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let page = Int(round(Double(scrollView.contentOffset.x) / Double(scrollView.bounds.size.width)))
-        self.pageLabel.text =  String("\(page+1) / \(self.feedDetail.imagesArray.count+self.feedDetail.videosArray.count)")
+        self.pageLabel.text =  String("\(page+1) / \(self.feedDetail.mediasArray.count)")
         
         if(page > self.index) {
             self.index = page
@@ -579,4 +649,27 @@ class FeedCommentTableCell : UITableViewCell {
     @IBOutlet weak var commentNicknameLabel: UILabel!
     @IBOutlet weak var commentProfileButton: UIButton!
     @IBOutlet weak var commentContextTextView: UITextView!
+    
+    override func awakeFromNib() {
+        self.commentContextTextView.textContainerInset = UIEdgeInsets.zero
+        self.commentContextTextView.textContainer.lineFragmentPadding = 0
+    }
+}
+
+extension String
+{
+    func toDateTime() -> NSDate
+    {
+        //Create Date Formatter
+        let dateFormatter = DateFormatter()
+        
+        //Specify Format of String to Parse
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        
+        //Parse into NSDate
+        let dateFromString : NSDate = dateFormatter.date(from: self)! as NSDate
+        
+        //Return Parsed Date
+        return dateFromString
+    }
 }

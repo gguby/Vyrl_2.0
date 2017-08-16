@@ -173,7 +173,8 @@ class MyViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
 
             cell.article = article
             cell.delegate = self
-            cell.contentLabel.text = article.content
+            cell.contentTextView.text = article.content
+            cell.contentTextView.resolveHashTags()
             
             return cell
         }

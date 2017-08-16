@@ -52,6 +52,12 @@ struct Constants {
             let str = "\(articleId)"
             return VyrlAPIConstants.baseURL + "feeds/" + str + "/comments"
         }
+        
+        static func feedCommentDelete(articleId:Int, commentId:Int)-> String{
+            let str = "\(articleId)"
+            let commentId = "\(commentId)"
+            return VyrlAPIConstants.baseURL + "feeds/" + str + "/comments/" + commentId
+        }
     }
     
     struct VyrlFanAPIURL {

@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import AlamofireImage
+import NSDate_TimeAgo
 
 @objc protocol FeedCellDelegate {
     func didPressCell(sender: Any, cell : FeedTableCell)
@@ -19,11 +20,14 @@ import AlamofireImage
 class FeedTableCell: UITableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var contentLabel: UILabel!
+    @IBOutlet weak var contentTextView: UITextView!
     
     @IBOutlet weak var contentHeight: NSLayoutConstraint!
     
     @IBOutlet weak var collectionViewLeading: NSLayoutConstraint!
+    
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
     
     @IBOutlet weak var photo: UIImageView!
     @IBOutlet weak var likeBtn: UIButton!
@@ -31,6 +35,21 @@ class FeedTableCell: UITableViewCell {
     
     @IBOutlet weak var share: UIButton!
     @IBOutlet weak var comment: UIButton!
+    
+    @IBOutlet weak var profileButton: UIButton!
+    @IBOutlet weak var nickNameLabel: UILabel!
+    
+    @IBOutlet weak var commentView: UIView!
+    @IBOutlet weak var firstCommentView: UIView!
+    @IBOutlet weak var firstCommentNicknameButton: UIButton!
+    @IBOutlet weak var firstCommentContent: UILabel!
+    
+    
+    @IBOutlet weak var secondCommentView: UIView!
+    @IBOutlet weak var secondCommentNicknameButton: UIButton!
+    @IBOutlet weak var seconCommentContent: UILabel!
+    
+    
     
     var cellWidth = 124
 
@@ -50,6 +69,24 @@ class FeedTableCell: UITableViewCell {
             self.cntLike.setTitle(article?.likeCount, for: .normal)
             
             self.comment.setTitle(article?.commentCount, for: .normal)
+
+            if let url = URL.init(string:(article?.profile.imagePath)!) {
+                self.profileButton.af_setBackgroundImage(for: .normal, url: url)
+            }
+            
+            self.nickNameLabel.text = article?.profile.nickName
+            self.timeLabel.text = (article?.date! as! NSDate).timeAgo()
+            
+            
+            if(article?.cntComment == 0) {
+                self.commentView.isHidden = true
+            } else if (article?.cntComment == 1){
+                self.commentView.isHidden = false
+                self.secondCommentView.isHidden = true
+            } else {
+                self.commentView.isHidden = false
+                self.secondCommentView.isHidden = false
+            }
             
             self.share.setTitle(article?.shareCount, for: .normal)
             
@@ -85,6 +122,11 @@ class FeedTableCell: UITableViewCell {
             if (size.width > 375){
                 self.collectionViewLeading.constant = 20
             }            
+        }
+        
+        if(self.contentTextView != nil) {
+            self.contentTextView.textContainerInset = UIEdgeInsets.zero
+            self.contentTextView.textContainer.lineFragmentPadding = 0
         }
     }
 

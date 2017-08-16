@@ -47,8 +47,17 @@ class FeedTableViewController: UIViewController{
         appDelegate.feedView = self
         
         self.initLoader()
-        
         self.initRefresh()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        getAllFeed()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        self.view.frame = CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
     }
     
     func resizeTable(height : CGFloat)
@@ -258,9 +267,18 @@ extension FeedTableViewController : UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: article.type.rawValue, for: indexPath) as! FeedTableCell
         cell.article = article
         cell.delegate = self
-        cell.contentLabel.text = article.content
+        cell.contentTextView.text = article.content
+        cell.contentTextView.resolveHashTags()
+        cell.contentTextView.delegate = self
         
         return cell
+    }
+}
+
+extension FeedTableViewController : UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        tableView.beginUpdates()
+        tableView.endUpdates()
     }
 }
 
@@ -298,7 +316,7 @@ extension FeedTableViewController : FeedCellDelegate {
         
         let modify = UIAlertAction(title: "수정", style: .default,handler: { (action) -> Void in
             let vc : FeedModifyController = self.pushModal(storyboardName: "FeedStyle", controllerName: "feedModify") as! FeedModifyController
-            vc.setText(text: cell.contentLabel.text!)
+            vc.setText(text: cell.contentTextView.text!)
             vc.articleId = cell.article?.id
         })
         let remove = UIAlertAction(title: "삭제", style: .default, handler: { (action) -> Void in
