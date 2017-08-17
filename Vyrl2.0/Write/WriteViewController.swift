@@ -68,12 +68,15 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
         
         textView.resignFirstResponder()
         
-        let parameters :[String:String] = [
+        var parameters :[String:String] = [
             "content": textView.text,
 //            "latitude" : "\(self.currentPlace.latitude!)",
 //            "longitude" : "\(self.currentPlace.longitude!)"
-            "location" :self.currentPlace.name
-        ]
+         ]
+        
+        if let place = self.currentPlace {
+            parameters["location"] = place.name
+        }
         
         let uri = Constants.VyrlFeedURL.FEED
         
@@ -83,7 +86,6 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
         appDelegate.feedView.upload(query: queryUrl!, array: self.selectedAssetArray)
         
         self.dismiss(animated: true, completion: nil)
-        
     }
     
     @IBAction func dimissPop() {

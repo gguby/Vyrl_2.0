@@ -38,6 +38,7 @@
 		A652BA351F3AA5F500007767 /* PostCollectionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A652BA341F3AA5F500007767 /* PostCollectionViewController.storyboard */; };
 		A652BA371F3AA61E00007767 /* PostCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A652BA361F3AA61E00007767 /* PostCollectionViewController.swift */; };
 		A65677791F384E18001A69F8 /* FanPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65677781F384E18001A69F8 /* FanPageController.swift */; };
+		A65A0A521F45838700F7D852 /* FeedPullLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65A0A511F45838700F7D852 /* FeedPullLoader.swift */; };
 		A66FF7891F341C8300D7D3AA /* FanDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A66FF7881F341C8300D7D3AA /* FanDetail.storyboard */; };
 		A67143981F29B69000B79432 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A67143971F29B69000B79432 /* Image.xcassets */; };
 		A6722C311F25F7D600CEBBD6 /* FeedTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6722C301F25F7D600CEBBD6 /* FeedTableCell.swift */; };
@@ -113,6 +114,7 @@
 		A652BA341F3AA5F500007767 /* PostCollectionViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostCollectionViewController.storyboard; sourceTree = "<group>"; };
 		A652BA361F3AA61E00007767 /* PostCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCollectionViewController.swift; sourceTree = "<group>"; };
 		A65677781F384E18001A69F8 /* FanPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanPageController.swift; sourceTree = "<group>"; };
+		A65A0A511F45838700F7D852 /* FeedPullLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedPullLoader.swift; sourceTree = "<group>"; };
 		A66FF7881F341C8300D7D3AA /* FanDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FanDetail.storyboard; sourceTree = "<group>"; };
 		A67143971F29B69000B79432 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
 		A6722C301F25F7D600CEBBD6 /* FeedTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableCell.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				A6722C301F25F7D600CEBBD6 /* FeedTableCell.swift */,
 				A64E99A21F317DBB00D9BCFF /* FeedModifyController.swift */,
 				8F408E3C1F32EC98008F8FCB /* FeedLikeUserListViewController.swift */,
+				A65A0A511F45838700F7D852 /* FeedPullLoader.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -598,6 +601,7 @@
 				8F829E7C1EFB6648001D418F /* MyProfileViewController.swift in Sources */,
 				A650368B1F0E30BA00AD540A /* ModalAnimatorPhoto.swift in Sources */,
 				A64E99A31F317DBB00D9BCFF /* FeedModifyController.swift in Sources */,
+				A65A0A521F45838700F7D852 /* FeedPullLoader.swift in Sources */,
 				CE33F0021ED2BB690050C21D /* SMLoginViewController.swift in Sources */,
 				8F492C3A1F3DA01D0049F600 /* UITextView+Extension.swift in Sources */,
 				8F9AF9911EE800E700DE069E /* FeedTableViewController.swift in Sources */,

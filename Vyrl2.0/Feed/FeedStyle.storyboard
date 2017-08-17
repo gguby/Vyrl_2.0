@@ -431,7 +431,7 @@
                                                                                 <color key="titleColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                             </state>
                                                                             <connections>
-                                                                                <action selector="commentButtonClick:" destination="dCK-YA-8eZ" eventType="touchUpInside" id="WBj-Oe-JlV"/>
+                                                                                <action selector="commentButtonClick:" destination="dCK-YA-8eZ" eventType="touchUpInside" id="5nI-jS-wqT"/>
                                                                             </connections>
                                                                         </button>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zvq-yB-SWQ" userLabel="share">
@@ -521,17 +521,22 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="bookmarkBtn" destination="3TX-gJ-jqd" id="Geq-Ls-MDi"/>
+                                            <outlet property="cntLike" destination="Nt7-1c-mTr" id="s65-VX-3G3"/>
+                                            <outlet property="comment" destination="bLt-SG-TyU" id="kSX-95-2hL"/>
                                             <outlet property="commentView" destination="Cfw-aE-XhQ" id="GX5-s9-dWD"/>
                                             <outlet property="contentTextView" destination="ssl-Ct-Jvi" id="kZ5-GX-s75"/>
                                             <outlet property="firstCommentContent" destination="WnF-dV-jLF" id="wK0-dg-hsw"/>
                                             <outlet property="firstCommentNicknameButton" destination="706-fh-SBP" id="dZl-xt-p0s"/>
                                             <outlet property="firstCommentView" destination="STQ-lm-Ueu" id="a7B-I4-dVO"/>
+                                            <outlet property="likeBtn" destination="zZF-uV-RWF" id="LWu-7T-juS"/>
                                             <outlet property="locationLabel" destination="FNg-4f-Aid" id="7es-89-dKn"/>
                                             <outlet property="nickNameLabel" destination="ldF-qE-Kn0" id="yjh-yO-mwP"/>
                                             <outlet property="profileButton" destination="wJY-q5-13w" id="vsC-gC-32S"/>
                                             <outlet property="seconCommentContent" destination="lAf-AF-C0P" id="fGb-aO-ZWp"/>
                                             <outlet property="secondCommentNicknameButton" destination="JUy-mz-nyB" id="1i2-lQ-zZ9"/>
                                             <outlet property="secondCommentView" destination="aUF-vl-jeP" id="Bs8-84-8EG"/>
+                                            <outlet property="share" destination="zvq-yB-SWQ" id="7VG-BW-oEd"/>
                                             <outlet property="timeLabel" destination="GcC-Wg-wss" id="ZGc-XD-Yeb"/>
                                         </connections>
                                     </tableViewCell>
@@ -915,14 +920,19 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="bookmarkBtn" destination="bnk-We-z2p" id="Udh-He-Yub"/>
+                                            <outlet property="cntLike" destination="RVC-dx-6my" id="45F-Mt-gNg"/>
+                                            <outlet property="comment" destination="aoh-k2-dAR" id="TfU-Op-iFt"/>
                                             <outlet property="commentView" destination="ihP-0g-cAs" id="NiM-ro-duz"/>
                                             <outlet property="firstCommentContent" destination="V85-Vu-Cc0" id="IVI-Ea-Wk5"/>
                                             <outlet property="firstCommentNicknameButton" destination="mpt-Cq-69G" id="Hfz-qU-2Eo"/>
                                             <outlet property="firstCommentView" destination="xW7-PS-XQ1" id="51Q-1E-PED"/>
+                                            <outlet property="likeBtn" destination="ZY9-43-puq" id="Mhi-bu-3X0"/>
                                             <outlet property="locationLabel" destination="Fn0-yo-GXO" id="OeB-yM-eKB"/>
                                             <outlet property="seconCommentContent" destination="tFf-UP-WvV" id="JqS-Zn-ilD"/>
                                             <outlet property="secondCommentNicknameButton" destination="wU0-8c-pBz" id="Hs8-O2-wb8"/>
                                             <outlet property="secondCommentView" destination="FVs-uT-cpg" id="YjT-31-tgn"/>
+                                            <outlet property="share" destination="aoo-cM-ARU" id="7rw-xI-AKA"/>
                                             <outlet property="timeLabel" destination="XH9-pl-YHf" id="F9n-TN-xhD"/>
                                         </connections>
                                     </tableViewCell>
@@ -1217,6 +1227,9 @@
                                                                                 <constraint firstAttribute="width" constant="21" id="nxe-hu-0vr"/>
                                                                             </constraints>
                                                                             <state key="normal" image="icon_heart_01"/>
+                                                                            <connections>
+                                                                                <action selector="like:" destination="PFc-q2-8d2" eventType="touchUpInside" id="2Wg-El-nFM"/>
+                                                                            </connections>
                                                                         </button>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iIQ-Xp-lud" userLabel="cntLike">
                                                                             <rect key="frame" x="36" y="0.0" width="55" height="34"/>

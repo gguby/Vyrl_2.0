@@ -11,6 +11,7 @@ import ObjectMapper
 import Alamofire
 import AlamofireObjectMapper
 import AVFoundation
+import KRPullLoader
 
 enum FeedTableType {
     case ALLFEED,MYFEED, BOOKMARK
@@ -53,7 +54,12 @@ class FeedTableViewController: UIViewController{
         appDelegate.feedView = self
         
         self.initLoader()
-        self.initRefresh()
+//        self.initRefresh()
+        
+        let refreshView = FeedPullLoaderView()
+        refreshView.delegate = self
+        self.tableView.addPullLoadableView(refreshView, type: .refresh)
+//        self.tableView.addPullLoadableView(refreshView, type: .loadMore)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -99,10 +105,6 @@ class FeedTableViewController: UIViewController{
         self.refreshLoadingView = UIView(frame: self.refreshControl!.bounds)
         self.refreshControl.backgroundColor = UIColor.clear
         
-        self.refreshColorView = UIView(frame: self.refreshControl!.bounds)
-        self.refreshColorView.backgroundColor = UIColor.clear
-        self.refreshColorView.alpha = 0.30
-        
         self.refreshLoadingImageView = UIImageView.init(image: UIImage.init(named: "icon_loader_02_1"))
         
         var imgList = [UIImage]()
@@ -125,7 +127,7 @@ class FeedTableViewController: UIViewController{
         self.refreshLoadingImageView.frame = CGRect(x: x, y: 20, width: 20, height: 20)
         
         self.refreshControl!.tintColor = UIColor.clear
-        self.refreshControl!.addSubview(self.refreshColorView)
+        
         self.refreshControl!.addSubview(self.refreshLoadingView)
         
         self.refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
@@ -177,7 +179,6 @@ class FeedTableViewController: UIViewController{
             }
             
             self.tableView.reloadData()
-            self.refreshControl.endRefreshing()
         }
     }
     
@@ -400,6 +401,24 @@ extension FeedTableViewController : FeedCellDelegate {
     }
 }
 
+extension FeedTableViewController : FeedPullLoaderDelegate {
+    func pullLoadView(_ pullLoadView: FeedPullLoaderView, didChageState state: KRPullLoaderState, viewType type: KRPullLoaderType) {
+        if (type == .loadMore){
+            
+            return
+        }
+        
+        switch state {
+        case let .loading(completionHandler: completionHandler):
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+1) {
+                completionHandler()
+                self.getAllFeed()
+            }
+        default:
+            break
+        }
+    }
+}
 
 public enum ArticleType : String{
     case oneFeed   = "oneFeed"
