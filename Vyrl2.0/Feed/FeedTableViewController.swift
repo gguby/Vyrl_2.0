@@ -294,7 +294,7 @@ extension FeedTableViewController : UITextViewDelegate {
 
 extension FeedTableViewController : FeedCellDelegate {
     func didPressCell(sender: Any, cell : FeedTableCell) {
-        let vc : FeedDetailViewController = self.pushViewControllrer(storyboardName: "FeedStyle", controllerName: "FeedDetailViewController") as! FeedDetailViewController
+        let vc : FeedDetailViewController = self.pushViewControllrer(storyboardName: "FeedDetail", controllerName: "FeedDetailViewController") as! FeedDetailViewController
         vc.articleId = cell.article?.id
     }
     

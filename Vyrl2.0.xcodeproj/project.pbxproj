@@ -19,6 +19,7 @@
 		8F48CA6C1ED560CD0037A35B /* StartCoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F48CA6B1ED560CD0037A35B /* StartCoverViewController.swift */; };
 		8F492C3A1F3DA01D0049F600 /* UITextView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F492C391F3DA01D0049F600 /* UITextView+Extension.swift */; };
 		8F4C09291EE528840026D49F /* FeedStyle.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F4C09281EE528840026D49F /* FeedStyle.storyboard */; };
+		8F514D511F4586A1000338E4 /* FeedDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F514D501F4586A1000338E4 /* FeedDetail.storyboard */; };
 		8F5165D11ED6A8A900EC468B /* ProfilePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5165D01ED6A8A900EC468B /* ProfilePhotoViewController.swift */; };
 		8F57B73F1F186E44009FD0EA /* FeedFullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F57B73E1F186E44009FD0EA /* FeedFullScreenViewController.swift */; };
 		8F62CC151F00EC330069ACFE /* EmoticonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F62CC141F00EC330069ACFE /* EmoticonView.swift */; };
@@ -94,6 +95,7 @@
 		8F48CA6B1ED560CD0037A35B /* StartCoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartCoverViewController.swift; sourceTree = "<group>"; };
 		8F492C391F3DA01D0049F600 /* UITextView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextView+Extension.swift"; sourceTree = "<group>"; };
 		8F4C09281EE528840026D49F /* FeedStyle.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FeedStyle.storyboard; sourceTree = "<group>"; };
+		8F514D501F4586A1000338E4 /* FeedDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FeedDetail.storyboard; sourceTree = "<group>"; };
 		8F5165D01ED6A8A900EC468B /* ProfilePhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePhotoViewController.swift; sourceTree = "<group>"; };
 		8F57B73E1F186E44009FD0EA /* FeedFullScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedFullScreenViewController.swift; sourceTree = "<group>"; };
 		8F62CC141F00EC330069ACFE /* EmoticonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonView.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				A6722C301F25F7D600CEBBD6 /* FeedTableCell.swift */,
 				A64E99A21F317DBB00D9BCFF /* FeedModifyController.swift */,
 				8F408E3C1F32EC98008F8FCB /* FeedLikeUserListViewController.swift */,
+				8F514D501F4586A1000338E4 /* FeedDetail.storyboard */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -453,6 +456,7 @@
 				CE29B1CD1ECD6161003F4D2E /* Feed.storyboard in Resources */,
 				CE29B1D01ECD6161003F4D2E /* GoogleService-Info.plist in Resources */,
 				CE1340A41EDD3C6D00EA330F /* Setting.storyboard in Resources */,
+				8F514D511F4586A1000338E4 /* FeedDetail.storyboard in Resources */,
 				A66FF7891F341C8300D7D3AA /* FanDetail.storyboard in Resources */,
 				CE29B1AA1ECD5FEE003F4D2E /* LaunchScreen.storyboard in Resources */,
 				8F4C09291EE528840026D49F /* FeedStyle.storyboard in Resources */,

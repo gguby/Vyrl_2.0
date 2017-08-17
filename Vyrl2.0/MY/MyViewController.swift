@@ -270,7 +270,7 @@ extension MyViewController : UITableViewDelegate, UITableViewDataSource {
 extension MyViewController : FeedCellDelegate {
     
     func didPressCell(sender: Any, cell : FeedTableCell) {
-        self.pushView(storyboardName: "FeedStyle", controllerName: "FeedDetailViewController")
+        self.pushView(storyboardName: "FeedDetail", controllerName: "FeedDetailViewController")
     }
 }
 
