@@ -408,18 +408,16 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
         let currentAccount : Account = LoginManager.sharedInstance.getCurrentAccount()!
         if(currentAccount.nickName == self.commentArray[indexPath.row-1].nickName)
         {
-            let delete = UITableViewRowAction(style: .destructive, title: "       ") { (action, indexPath) in
-                // delete item at indexPath
-                self.showAlert(indexPath: indexPath)
+            let delete = UITableViewRowAction(style: .normal, title: "DEL") { (action, indexPath) in
+               self.showAlert(indexPath: indexPath)
             }
-            delete.backgroundColor = UIColor.init(patternImage: UIImage.init(named: "icon_more_02.png")!)
-            
+            delete.backgroundColor = UIColor.red
             return [delete]
         } else {
-            let more = UITableViewRowAction(style: .normal, title: "       ") { (action, indexPath) in
+            let more = UITableViewRowAction(style: .normal, title: "  \u{205D}  ") { (action, indexPath) in
                 self.showMoreAlert(indexPath: indexPath)
             }
-            more.backgroundColor = UIColor.init(patternImage: UIImage.init(named: "icon_more_02.png")!)
+            more.backgroundColor = UIColor.ivGreyish
             
             return [more]
         }
@@ -623,10 +621,8 @@ class FeedDetailTableCell : UITableViewCell {
                         self.imageViewArray[self.index].contentMode = .scaleAspectFit
                         
                         let xPosition = self.imageScrollView.frame.width * CGFloat(self.index)
-                        self.imageViewArray[self.index].frame = CGRect.init(x: xPosition, y: 0, width: self.imageScrollView.frame.width, height: (image?.size.height)!)
-                        
-                        self.imageScrollView.contentSize.height = (image?.size.height)!
-                    }
+                        self.imageViewArray[self.index].frame = CGRect.init(x: xPosition, y: 0, width: self.imageScrollView.frame.width, height: self.imageScrollView.frame.height)
+                }
             }
       }
  
