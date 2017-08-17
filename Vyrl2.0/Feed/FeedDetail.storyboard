@@ -184,7 +184,7 @@
                                                                 </view>
                                                                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NE5-is-INP">
                                                                     <rect key="frame" x="0.0" y="31" width="375" height="375"/>
-                                                                    <color key="backgroundColor" red="0.87450980389999999" green="0.87058823529999996" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <color key="backgroundColor" red="0.96862745098039216" green="0.96470588235294119" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="NE5-is-INP" secondAttribute="height" multiplier="1:1" id="JwD-4g-fJq"/>
                                                                     </constraints>

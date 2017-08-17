@@ -439,7 +439,9 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
             let cell = tableView.dequeueReusableCell(withIdentifier: "oneFeed") as! FeedDetailTableCell
             if(self.feedDetail != nil) {
                 cell.feedDetail = self.feedDetail
-                cell.initImageVideo()
+                if(self.feedDetail.mediasArray.count > 0){
+                    cell.initImageVideo()
+                }
                 
                 cell.contentTextView.text = self.feedDetail.content
                 cell.contentTextView.resolveHashTags()
