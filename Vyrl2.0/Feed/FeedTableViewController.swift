@@ -12,12 +12,18 @@ import Alamofire
 import AlamofireObjectMapper
 import AVFoundation
 
+enum FeedTableType {
+    case ALLFEED,MYFEED, BOOKMARK
+}
+
 class FeedTableViewController: UIViewController{
 
     @IBOutlet weak var tableView: UITableView!
     var articleArray = [Article]()
     
     var refreshControl : UIRefreshControl!
+    
+    var feedType = FeedTableType.ALLFEED
     
     @IBOutlet weak var uploadLoadingView: UIView!
     @IBOutlet weak var uploadLoadingHeight: NSLayoutConstraint!
@@ -51,7 +57,7 @@ class FeedTableViewController: UIViewController{
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        getAllFeed()
+//        getAllFeed()
     }
     
     override func viewDidLayoutSubviews() {
@@ -153,8 +159,12 @@ class FeedTableViewController: UIViewController{
    
     
     func getAllFeed(){
-        
-        let url = URL.init(string: Constants.VyrlFeedURL.FEED)
+        var url: URL!
+        if self.feedType == FeedTableType.ALLFEED {
+            url = URL.init(string: Constants.VyrlFeedURL.FEED)
+        }else {
+            url = URL.init(string: Constants.VyrlFeedURL.FEEDBOOKMARK)
+        }
         
         Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Article]>) in
             
@@ -286,7 +296,44 @@ extension FeedTableViewController : FeedCellDelegate {
     func didPressCell(sender: Any, cell : FeedTableCell) {
         let vc : FeedDetailViewController = self.pushViewControllrer(storyboardName: "FeedStyle", controllerName: "FeedDetailViewController") as! FeedDetailViewController
         vc.articleId = cell.article?.id
-
+    }
+    
+    func setBookMark(cell: FeedTableCell) {
+        let articleId = (cell.article?.id)!
+        
+        let parameters : Parameters = [
+            "articleId": articleId,
+            "contentType" : "ARTICLE"
+        ]
+        
+        let uri = Constants.VyrlFeedURL.FEEDBOOKMARK
+        
+        var method : HTTPMethod = .post
+        
+        if ( cell.isBookMark == true ){
+            method = .delete
+        }
+        
+        Alamofire.request(uri, method: method, parameters: parameters, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: {
+            response in
+            switch response.result {
+            case .success(let json) :
+                print(json)
+                
+                if let code = response.response?.statusCode {
+                    if code == 200 {
+                        if method == .post{
+                            self.showToast(str: "저장되었습니다.My 에서 확인하세요!")
+                            cell.isBookMark = true
+                        } else {
+                            cell.isBookMark = false
+                        }
+                    }
+                }
+            case .failure(let error) :
+                print(error)
+            }
+        })
     }
     
     func showFeedShareAlert(cell: FeedTableCell) {
@@ -335,12 +382,9 @@ extension FeedTableViewController : FeedCellDelegate {
                             self.getAllFeed()
                         }
                     }
-                    
                 case .failure(let error):
                     print(error)
                 }
-                
-                
             })
         })
         
@@ -353,8 +397,7 @@ extension FeedTableViewController : FeedCellDelegate {
         alertController.addAction(cancel)
         
         self.present(alertController, animated: true, completion: nil)
-    }    
-    
+    }
 }
 
 
@@ -388,6 +431,8 @@ struct Article : Mappable {
     
     var location : String!
     
+    var isBookMark : Bool!
+    
     init?(map: Map) {
         
     }
@@ -402,6 +447,7 @@ struct Article : Mappable {
         profile <- map["profile"]
         medias <- map["media"]
         location <- map["location"]
+        isBookMark <- map["bookmark"]
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"

@@ -162,7 +162,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="622"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PFc-q2-8d2" id="htJ-gY-KZu">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="622"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="621.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6oz-ad-0AK">
@@ -502,6 +502,9 @@
                                                                                 <constraint firstAttribute="height" constant="34" id="zCA-Ae-2XL"/>
                                                                             </constraints>
                                                                             <state key="normal" image="icon_bookmark_01"/>
+                                                                            <connections>
+                                                                                <action selector="setBookMark:" destination="PFc-q2-8d2" eventType="touchUpInside" id="hhL-9Z-w2v"/>
+                                                                            </connections>
                                                                         </button>
                                                                     </subviews>
                                                                     <constraints>
@@ -571,6 +574,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="bookmarkBtn" destination="UUA-iw-h4C" id="gAK-Rf-TeD"/>
                                             <outlet property="cntLike" destination="iIQ-Xp-lud" id="Prx-dG-szi"/>
                                             <outlet property="comment" destination="hS6-cq-huW" id="JcM-1V-4yb"/>
                                             <outlet property="commentView" destination="pBl-QI-v6M" id="PO1-Ek-Qo0"/>
@@ -594,7 +598,7 @@
                                         <rect key="frame" x="0.0" y="650" width="375" height="605"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hth-2A-IVu" id="k3M-TB-ltL">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="605"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="604.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WMK-Sp-CTz">
@@ -966,6 +970,9 @@
                                                                                 <constraint firstAttribute="width" constant="50" id="MaQ-cg-PM4"/>
                                                                             </constraints>
                                                                             <state key="normal" image="icon_bookmark_01"/>
+                                                                            <connections>
+                                                                                <action selector="setBookMark:" destination="hth-2A-IVu" eventType="touchUpInside" id="rRt-lZ-xzf"/>
+                                                                            </connections>
                                                                         </button>
                                                                     </subviews>
                                                                     <constraints>
@@ -1030,6 +1037,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="bookmarkBtn" destination="Tc9-6a-2Vt" id="clk-5i-7z3"/>
                                             <outlet property="cntLike" destination="1Nx-kk-7wI" id="rVe-Gn-XkS"/>
                                             <outlet property="collectionView" destination="gp8-L5-WQ0" id="Qsd-cD-OpS"/>
                                             <outlet property="collectionViewLeading" destination="F17-GL-bsR" id="xtX-di-oqv"/>
@@ -1055,7 +1063,7 @@
                                         <rect key="frame" x="0.0" y="1255" width="375" height="514"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bRN-IR-0WK" id="tP3-hm-ZoS">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="514"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="513.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e5z-pD-jtg">
@@ -1340,6 +1348,9 @@
                                                                         <constraint firstAttribute="width" constant="50" id="fy0-Wh-Eio"/>
                                                                     </constraints>
                                                                     <state key="normal" image="icon_bookmark_01"/>
+                                                                    <connections>
+                                                                        <action selector="setBookMark:" destination="bRN-IR-0WK" eventType="touchUpInside" id="suG-Rl-8AK"/>
+                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                             <constraints>
@@ -1393,6 +1404,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="bookmarkBtn" destination="nMC-IX-Z2A" id="AWz-Yk-HLD"/>
                                             <outlet property="cntLike" destination="gOB-pX-uRJ" id="VFR-PO-Ngb"/>
                                             <outlet property="comment" destination="rex-iG-UDL" id="KvK-sH-Xe9"/>
                                             <outlet property="likeBtn" destination="6xh-zG-hKZ" id="T1C-Sh-hyE"/>
@@ -1405,7 +1417,7 @@
                                         <rect key="frame" x="0.0" y="1769" width="375" height="508"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XHz-Pc-KGu" id="Eg0-gn-Gir">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="508"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="507.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5RG-Br-Aih">
@@ -1566,6 +1578,9 @@
                                                                         <constraint firstAttribute="width" constant="20" id="YeU-gJ-A8Q"/>
                                                                     </constraints>
                                                                     <state key="normal" title="Button" image="icon_bookmark_01"/>
+                                                                    <connections>
+                                                                        <action selector="setBookMark:" destination="XHz-Pc-KGu" eventType="touchUpInside" id="HzF-U9-kqX"/>
+                                                                    </connections>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="30d-hb-avG">
                                                                     <rect key="frame" x="94" y="0.0" width="76" height="20"/>
@@ -1628,6 +1643,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="bookmarkBtn" destination="d47-SN-f7h" id="N3z-bh-gWy"/>
                                             <outlet property="cntLike" destination="GFo-VE-M2W" id="muD-fA-Pby"/>
                                             <outlet property="comment" destination="30d-hb-avG" id="5cL-Ff-2cf"/>
                                             <outlet property="contentTextView" destination="vtP-Zc-Ysl" id="cmb-AM-RQu"/>
@@ -1639,7 +1655,7 @@
                                         <rect key="frame" x="0.0" y="2277" width="375" height="404"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dCK-YA-8eZ" id="k1m-T5-Ks1">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="404"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="403.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N2C-re-nAU">
@@ -1892,6 +1908,9 @@
                                                                         <constraint firstAttribute="width" constant="50" id="jFC-ca-HBQ"/>
                                                                     </constraints>
                                                                     <state key="normal" image="icon_bookmark_01"/>
+                                                                    <connections>
+                                                                        <action selector="setBookMark:" destination="dCK-YA-8eZ" eventType="touchUpInside" id="cxd-Go-dHb"/>
+                                                                    </connections>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i9s-yN-POK">
                                                                     <rect key="frame" x="92" y="0.0" width="76" height="34"/>
@@ -1959,6 +1978,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="bookmarkBtn" destination="jvu-Xn-k4H" id="8Mi-ZM-WFC"/>
                                             <outlet property="cntLike" destination="F9V-lM-aYu" id="chy-EY-Hi5"/>
                                             <outlet property="comment" destination="i9s-yN-POK" id="lB3-7O-Hw2"/>
                                             <outlet property="commentView" destination="WXZ-B2-pbI" id="PTK-Wp-9RY"/>
@@ -2055,7 +2075,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="500"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zR0-1h-8yf" id="yfI-AA-HMt">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="499.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zF9-ni-apD">
@@ -2370,7 +2390,7 @@
                                         <rect key="frame" x="0.0" y="528" width="375" height="117"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gUf-7M-eaG" id="8ZM-qn-VKd">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="117"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="116.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CA6-nz-EPH">
@@ -2462,7 +2482,7 @@
                                         <rect key="frame" x="0.0" y="645" width="375" height="41"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="077-Yx-TGl" id="hsu-hD-m9v">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="41"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="40.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tJc-SG-5BI">

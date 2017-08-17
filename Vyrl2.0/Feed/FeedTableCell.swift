@@ -13,6 +13,7 @@ import NSDate_TimeAgo
 
 @objc protocol FeedCellDelegate {
     func didPressCell(sender: Any, cell : FeedTableCell)
+    @objc optional func setBookMark(cell : FeedTableCell)
     @objc optional func showFeedAlert(cell : FeedTableCell)
     @objc optional func showFeedShareAlert(cell : FeedTableCell)
 }
@@ -33,6 +34,7 @@ class FeedTableCell: UITableViewCell {
     @IBOutlet weak var likeBtn: UIButton!
     @IBOutlet weak var cntLike: UIButton!
     
+    @IBOutlet weak var bookmarkBtn: UIButton!
     @IBOutlet weak var share: UIButton!
     @IBOutlet weak var comment: UIButton!
     
@@ -49,11 +51,19 @@ class FeedTableCell: UITableViewCell {
     @IBOutlet weak var secondCommentNicknameButton: UIButton!
     @IBOutlet weak var seconCommentContent: UILabel!
     
-    
-    
     var cellWidth = 124
 
     var delegate: FeedCellDelegate!
+    
+    var isBookMark : Bool! {
+        didSet {
+            if isBookMark {
+                self.bookmarkBtn.setImage(UIImage.init(named: "icon_bookmark_01_on"), for: .normal)
+            } else {
+                self.bookmarkBtn.setImage(UIImage.init(named: "icon_bookmark_01_off"), for: .normal)
+            }
+        }
+    }
     
     var article : Article? {
         didSet{
@@ -92,6 +102,8 @@ class FeedTableCell: UITableViewCell {
             }
             
             self.share.setTitle(article?.shareCount, for: .normal)
+            
+            self.isBookMark = (article?.isBookMark)!
             
             guard self.collectionView != nil else {                
                 return
@@ -177,6 +189,9 @@ class FeedTableCell: UITableViewCell {
         delegate.showFeedShareAlert!(cell: self)
     }
     
+    @IBAction func setBookMark(_ sender: Any) {
+        delegate.setBookMark!(cell: self)
+    }    
 }
 
 extension FeedTableCell : UICollectionViewDelegateFlowLayout {

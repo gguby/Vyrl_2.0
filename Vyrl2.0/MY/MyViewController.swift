@@ -43,7 +43,7 @@ class MyViewController: UIViewController{
         
         self.containerView.translatesAutoresizingMaskIntoConstraints  = false
         
-        self.setupFeed()
+        self.setupFeed(feedType: FeedTableType.ALLFEED)
     }
     
     func setupPostContainer(){
@@ -58,10 +58,11 @@ class MyViewController: UIViewController{
         controller.didMove(toParentViewController: self)
     }
     
-    func setupFeed(){
+    func setupFeed(feedType : FeedTableType){
         let storyboard = UIStoryboard(name: "FeedStyle", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "feedTable")
+        let controller = storyboard.instantiateViewController(withIdentifier: "feedTable") as! FeedTableViewController
         
+        controller.feedType = feedType
         controller.removeFromParentViewController()
         controller.view.removeFromSuperview()
         
@@ -184,7 +185,7 @@ class MyViewController: UIViewController{
     }
     
     @IBAction func showFeed(_ sender: Any) {
-        self.setupFeed()
+        self.setupFeed(feedType: FeedTableType.ALLFEED)
     }
     
     @IBAction func showPost(_ sender: Any) {
@@ -192,7 +193,7 @@ class MyViewController: UIViewController{
     }
     
     @IBAction func showBookmark(_ sender: Any) {
-        self.setupFeed()
+        self.setupFeed(feedType: FeedTableType.BOOKMARK)
     }
 }
 
@@ -268,14 +269,9 @@ extension MyViewController : UITableViewDelegate, UITableViewDataSource {
 
 extension MyViewController : FeedCellDelegate {
     
-    func showAlert() {
-        
-    }
-    
     func didPressCell(sender: Any, cell : FeedTableCell) {
         self.pushView(storyboardName: "FeedStyle", controllerName: "FeedDetailViewController")
     }
-
 }
 
 class MyAccountCell : UITableViewCell{

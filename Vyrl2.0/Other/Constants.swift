@@ -58,6 +58,8 @@ struct Constants {
             let commentId = "\(commentId)"
             return VyrlAPIConstants.baseURL + "feeds/" + str + "/comments/" + commentId
         }
+        
+        static let FEEDBOOKMARK = VyrlAPIConstants.baseURL + "feeds/bookmarks"
     }
     
     struct VyrlFanAPIURL {
