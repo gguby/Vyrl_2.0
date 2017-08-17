@@ -439,7 +439,9 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
             let cell = tableView.dequeueReusableCell(withIdentifier: "oneFeed") as! FeedDetailTableCell
             if(self.feedDetail != nil) {
                 cell.feedDetail = self.feedDetail
-                cell.initImageVideo()
+                if(self.feedDetail.mediasArray.count > 0){
+                    cell.initImageVideo()
+                }
                 
                 cell.contentTextView.text = self.feedDetail.content
                 cell.contentTextView.resolveHashTags()
@@ -462,6 +464,8 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
             cell.commentNicknameLabel.text = self.commentArray[indexPath.row-1].nickName
             cell.commentContextTextView.text = self.commentArray[indexPath.row-1].content
             cell.commentProfileButton.af_setBackgroundImage(for: .normal, url: URL.init(string: self.commentArray[indexPath.row-1].profileImageURL)!)
+          
+            cell.commentTimaLavel.text = self.commentArray[indexPath.row-1].createAt.toDateTime().timeAgo()
             
             return cell
         }
@@ -515,12 +519,14 @@ struct Comment : Mappable {
     var content : String!
     var nickName : String!
     var profileImageURL : String!
+    var createAt : String!
 
     mutating func mapping(map: Map){
         id <- map["id"]
         content <- map["content"]
         nickName <- map["nickName"]
         profileImageURL <- map["profile"]
+        createAt <- map["createdAt"]
     }
 }
 
@@ -645,6 +651,7 @@ class FeedCommentTableCell : UITableViewCell {
     @IBOutlet weak var commentNicknameLabel: UILabel!
     @IBOutlet weak var commentProfileButton: UIButton!
     @IBOutlet weak var commentContextTextView: UITextView!
+    @IBOutlet weak var commentTimaLavel: UILabel!
     
     override func awakeFromNib() {
         self.commentContextTextView.textContainerInset = UIEdgeInsets.zero
