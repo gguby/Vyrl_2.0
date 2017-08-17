@@ -1101,6 +1101,11 @@
                                                                                 <constraint firstAttribute="width" constant="32" id="ok8-rJ-ey4"/>
                                                                             </constraints>
                                                                             <state key="normal" title="Button" backgroundImage="border_circle_01"/>
+                                                                            <userDefinedRuntimeAttributes>
+                                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                                    <real key="value" value="16"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                            </userDefinedRuntimeAttributes>
                                                                         </button>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tag_official_01" translatesAutoresizingMaskIntoConstraints="NO" id="rM1-0K-Aua">
                                                                             <rect key="frame" x="57" y="21.5" width="41" height="13"/>
@@ -1400,6 +1405,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="bookmarkBtn" destination="3TX-gJ-jqd" id="ADB-tz-2RX"/>
+                                            <outlet property="cntLike" destination="Nt7-1c-mTr" id="SCk-6n-W3X"/>
+                                            <outlet property="comment" destination="bLt-SG-TyU" id="Kdc-Wb-h8R"/>
                                             <outlet property="commentView" destination="Cfw-aE-XhQ" id="GX5-s9-dWD"/>
                                             <outlet property="contentTextView" destination="ssl-Ct-Jvi" id="kZ5-GX-s75"/>
                                             <outlet property="firstCommentContent" destination="WnF-dV-jLF" id="wK0-dg-hsw"/>
@@ -1411,6 +1419,7 @@
                                             <outlet property="seconCommentContent" destination="lAf-AF-C0P" id="fGb-aO-ZWp"/>
                                             <outlet property="secondCommentNicknameButton" destination="JUy-mz-nyB" id="1i2-lQ-zZ9"/>
                                             <outlet property="secondCommentView" destination="aUF-vl-jeP" id="Bs8-84-8EG"/>
+                                            <outlet property="share" destination="zvq-yB-SWQ" id="Iz2-H4-gW5"/>
                                             <outlet property="timeLabel" destination="GcC-Wg-wss" id="ZGc-XD-Yeb"/>
                                         </connections>
                                     </tableViewCell>
