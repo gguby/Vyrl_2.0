@@ -2541,6 +2541,7 @@
                                             <outlet property="commentContextTextView" destination="fCe-EI-dSb" id="Ya9-SA-jvA"/>
                                             <outlet property="commentNicknameLabel" destination="geN-mN-2lV" id="wCB-0d-K6o"/>
                                             <outlet property="commentProfileButton" destination="sck-CG-ezx" id="jxh-fy-1Md"/>
+                                            <outlet property="commentTimaLavel" destination="75n-qM-0xw" id="13D-gH-sOL"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="moreComment" rowHeight="41" id="077-Yx-TGl" customClass="FeedDetailTableCell" customModule="Vyrl2_0" customModuleProvider="target">

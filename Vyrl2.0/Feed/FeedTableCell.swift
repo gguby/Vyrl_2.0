@@ -96,9 +96,19 @@ class FeedTableCell: UITableViewCell {
             } else if (article?.cntComment == 1){
                 self.commentView.isHidden = false
                 self.secondCommentView.isHidden = true
+                
+                self.firstCommentNicknameButton.setTitle(article?.comments[0].nickName, for: .normal)
+                self.firstCommentContent.text = article?.comments[0].content
             } else {
                 self.commentView.isHidden = false
                 self.secondCommentView.isHidden = false
+                
+                self.firstCommentNicknameButton.setTitle(article?.comments[0].nickName, for: .normal)
+                self.firstCommentContent.text = article?.comments[0].content
+
+                self.secondCommentNicknameButton.setTitle(article?.comments[1].nickName, for: .normal)
+                self.seconCommentContent.text = article?.comments[1].content
+
             }
             
             self.share.setTitle(article?.shareCount, for: .normal)
