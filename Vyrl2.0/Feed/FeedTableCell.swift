@@ -128,6 +128,14 @@ class FeedTableCell: UITableViewCell {
             self.isBookMark = (article?.isBookMark)!
             self.isMyArticle = article?.isMyArticle
             
+            if (article?.isLike)! {
+                self.likeBtn.setImage(UIImage.init(named: "icon_heart_01_on"), for: .normal)
+                self.likeBtn.tag = 1
+            } else {
+                self.likeBtn.setImage(UIImage.init(named: "icon_heart_01"), for: .normal)
+                self.likeBtn.tag = 0
+            }
+            
             guard self.collectionView != nil else {                
                 return
             }
@@ -201,10 +209,14 @@ class FeedTableCell: UITableViewCell {
         }
         
         let uri = URL.init(string: Constants.VyrlFeedURL.feedLike(articleId: (self.article?.id)!))
-        Alamofire.request(uri!, method: method, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: {
+        Alamofire.request(uri!, method: method, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON(completionHandler: {
             response in switch response.result {
             case .success(let json):
-                print(json)
+                
+                let jsonData = json as! NSDictionary
+                let cntLike = jsonData["cntLike"] as! Int
+                self.cntLike.setTitle("\(cntLike)", for: .normal)
+                
                 if sender.tag == 0 {
                     sender.setImage(UIImage.init(named: "icon_heart_01_on"), for: .normal)
                     sender.tag = 1

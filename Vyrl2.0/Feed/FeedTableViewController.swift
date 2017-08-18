@@ -388,7 +388,40 @@ extension FeedTableViewController : FeedCellDelegate {
         self.present(alertController, animated: true, completion: nil)
     }
     
+    func showAlertNotMine(cell: FeedTableCell){
+        let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.actionSheet)
+        
+        let report = UIAlertAction(title: "이 게시물 신고하기", style: .default,handler: { (action) -> Void in
+            
+        })
+        
+        let notShow = UIAlertAction(title: "이 게시물 안보기", style: .default, handler: { (action) -> Void in            
+            
+        })
+    
+        let prevent = UIAlertAction(title: "작성자 차단", style: .default, handler: { (action) -> Void in
+            
+        })
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
+            alertController.dismiss(animated: true, completion: nil)
+        })
+        
+        alertController.addAction(report)
+        alertController.addAction(notShow)
+        alertController.addAction(prevent)
+        alertController.addAction(cancel)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     func showFeedAlert(cell : FeedTableCell) {
+        
+        if cell.isMyArticle == false {
+            self.showAlertNotMine(cell: cell)
+            return
+        }
+        
         let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.actionSheet)
         
         let modify = UIAlertAction(title: "수정", style: .default,handler: { (action) -> Void in
@@ -512,6 +545,7 @@ struct Article : Mappable {
     
     var isBookMark : Bool!
     var isMyArticle : Bool!
+    var isLike :Bool!
     
     init?(map: Map) {
         
@@ -528,6 +562,7 @@ struct Article : Mappable {
         medias <- map["media"]
         location <- map["location"]
         isBookMark <- map["bookmark"]
+        isLike <- map["like"]
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
