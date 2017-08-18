@@ -51,9 +51,21 @@ class FeedTableCell: UITableViewCell {
     @IBOutlet weak var secondCommentNicknameButton: UIButton!
     @IBOutlet weak var seconCommentContent: UILabel!
     
+    @IBOutlet weak var followBtn: UIButton!
+    
     var cellWidth = 124
 
     var delegate: FeedCellDelegate!
+    
+    var isMyArticle : Bool! {
+        didSet {
+            if isMyArticle {
+                self.followBtn.alpha = 0
+            } else {
+                self.followBtn.alpha = 1
+            }
+        }
+    }
     
     var isBookMark : Bool! {
         didSet {
@@ -114,6 +126,7 @@ class FeedTableCell: UITableViewCell {
             self.share.setTitle(article?.shareCount, for: .normal)
             
             self.isBookMark = (article?.isBookMark)!
+            self.isMyArticle = article?.isMyArticle
             
             guard self.collectionView != nil else {                
                 return
@@ -130,9 +143,24 @@ class FeedTableCell: UITableViewCell {
             contentHeight.constant = CGFloat(ceilf( Float(count!) / 3) * Float(cellWidth))
         }
     }
+
     
-    @IBAction func commentButtonClick(_ sender: UIButton) {
-       delegate.didPressCell(sender: sender, cell: self)
+    func showCommentDetail(sender:UIButton){
+        delegate.didPressCell(sender: sender, cell: self)
+    }
+    
+    func followUser(sender:UIButton)
+    {
+        let uri = URL.init(string: Constants.VyrlFeedURL.follow(followId: (self.article?.profile.id)!))
+        Alamofire.request(uri!, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: {
+            response in switch response.result {
+            case .success(let json):
+                self.isMyArticle = true
+                print(json)
+            case .failure(let error):
+                print(error)
+            }
+        })
     }
 
     override func awakeFromNib() {
@@ -153,6 +181,9 @@ class FeedTableCell: UITableViewCell {
             self.contentTextView.textContainerInset = UIEdgeInsets.zero
             self.contentTextView.textContainer.lineFragmentPadding = 0
         }
+        
+        self.followBtn.addTarget(self, action: #selector(followUser(sender:)), for: .touchUpInside)
+        self.comment.addTarget(self, action: #selector(showCommentDetail(sender:)), for: .touchUpInside)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -162,33 +193,29 @@ class FeedTableCell: UITableViewCell {
     }
     
     @IBAction func like(_ sender: UIButton) {
-        if sender.tag == 0 {
-            let uri = URL.init(string: Constants.VyrlFeedURL.feedLike(articleId: (self.article?.id)!))
-            Alamofire.request(uri!, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: {
-                response in switch response.result {
-                case .success(let json):
-                    print(json)
+        
+        var method = HTTPMethod.post
+        
+        if sender.tag == 1 {
+            method = HTTPMethod.delete
+        }
+        
+        let uri = URL.init(string: Constants.VyrlFeedURL.feedLike(articleId: (self.article?.id)!))
+        Alamofire.request(uri!, method: method, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: {
+            response in switch response.result {
+            case .success(let json):
+                print(json)
+                if sender.tag == 0 {
                     sender.setImage(UIImage.init(named: "icon_heart_01_on"), for: .normal)
                     sender.tag = 1
-                case .failure(let error):
-                    print(error)
-                }
-            })
-        }else {
-            
-            let uri = URL.init(string: Constants.VyrlFeedURL.feedLike(articleId: (self.article?.id)!))
-            Alamofire.request(uri!, method: .delete, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: {
-                response in switch response.result {
-                case .success(let json):
-                    print(json)
+                }else {
                     sender.setImage(UIImage.init(named: "icon_heart_01"), for: .normal)
                     sender.tag = 0
-                    
-                case .failure(let error):
-                    print(error)
                 }
-            })
-        }
+            case .failure(let error):
+                print(error)
+            }
+        })
     }
     
     @IBAction func editFeed(_ sender: Any) {
