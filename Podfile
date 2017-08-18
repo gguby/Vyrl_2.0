@@ -29,7 +29,7 @@ target 'Vyrl2.0' do
     pod 'AlamofireObjectMapper', '~> 4.0'
     pod 'KRPullLoader'
     pod 'NSDate+TimeAgo'
-
+    pod 'VGPlayer'
 end
 
 

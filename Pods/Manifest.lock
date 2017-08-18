@@ -93,12 +93,15 @@ PODS:
     - RxSwift (~> 3.0)
   - RxSwift (3.5.0)
   - Sharaku (1.0.2)
+  - SnapKit (3.2.0)
   - SwiftyJSON (3.1.4)
   - TOCropViewController (2.0.12)
   - TwitterCore (2.8.0):
     - Fabric
   - TwitterKit (2.8.1):
     - TwitterCore (>= 2.8)
+  - VGPlayer (0.1.2):
+    - SnapKit (~> 3.2.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.5)
@@ -123,6 +126,7 @@ DEPENDENCIES:
   - SwiftyJSON
   - TOCropViewController
   - TwitterKit
+  - VGPlayer
 
 SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
@@ -157,11 +161,13 @@ SPEC CHECKSUMS:
   RxAlamofire: 5eb39188c4917ad98127c0ecb4878a61b7517003
   RxSwift: 18ee9d78b45edb3b0b7e79916b47a116e6dbc842
   Sharaku: c18de569fc99f6e936f46ca812b571826cc658a7
+  SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   TOCropViewController: e6e31b38d785a901e5651a1e7fff71bcda6c5214
   TwitterCore: e959987be23c767004d29eb7fab8d85d8585a2e5
   TwitterKit: 3b6044a7320340326a4098f3e37aa1dbaeb94942
+  VGPlayer: efb65613d38998c4786141fc04d41dbde7174db8
 
-PODFILE CHECKSUM: d99a2431f2db77c2caa0a5a6c71f959aabe7ca1b
+PODFILE CHECKSUM: 8854aa22141f9d6c65aa63b2099aedf16e6f1029
 
 COCOAPODS: 1.2.1

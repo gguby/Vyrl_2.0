@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import Alamofire
+import VGPlayer
 
 class FeedFullScreenViewController: UIViewController {
 
@@ -18,10 +19,7 @@ class FeedFullScreenViewController: UIViewController {
     var textViewArray : [UITextView] = []
     var contentScrollViewArray : [UIScrollView] = []
     
-    
-    var playerItem: AVPlayerItem?
-    var player: AVPlayer?
-    var playerLayer : AVPlayerLayer?
+    var player = VGPlayer()
     
     var currentPage : Int = 0;
     var index : Int = 0;
@@ -37,7 +35,9 @@ class FeedFullScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.player.backgroundMode = .proceed
+        self.player.delegate = self
+        self.player.displayView.delegate = self
     }
     
     @IBAction func dismiss(_ sender: UIButton) {
@@ -152,10 +152,10 @@ class FeedFullScreenViewController: UIViewController {
                     }
                 }
                 self.mainScrollView.setContentOffset(CGPoint.init(x: size.width*CGFloat(self.currentPage), y: 0), animated: true)
-                if(self.currentPage > 4)
-                {
-                    self.playerLayer?.frame = self.imageViewArray[self.currentPage].frame
-                }
+//                if(self.currentPage > 4)
+//                {
+//                    self.playerLayer?.frame = self.imageViewArray[self.currentPage].frame
+//                }
                 print("Portrait")
             case .landscapeLeft,.landscapeRight :
                 for i in 0..<self.index+1 {
@@ -172,10 +172,10 @@ class FeedFullScreenViewController: UIViewController {
                    
                 }
                 self.mainScrollView.setContentOffset(CGPoint.init(x: size.width*CGFloat(self.currentPage), y: 0), animated: true)
-                if(self.currentPage > 4)
-                {
-                    self.playerLayer?.frame = self.imageViewArray[self.currentPage].frame
-                }
+//                if(self.currentPage > 4)
+//                {
+//                    self.playerLayer?.frame = self.imageViewArray[self.currentPage].frame
+//                }
                 print("Landscape")
                 
             default:
@@ -214,30 +214,54 @@ extension FeedFullScreenViewController : UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let page = Int(round(Double(scrollView.contentOffset.x) / Double(scrollView.bounds.size.width)))
         let uri : URL = URL.init(string: mediasArray[page]["url"]!)!
-//
+
         if(mediasArray[page]["type"] == "IMAGE"){
-            if(self.player != nil) {
-                self.player!.pause()
-                self.playerLayer?.removeFromSuperlayer()
-            }
+          
         } else {
-            if(self.imageViewArray[page].layer.sublayers != nil) {
-                self.imageViewArray[page].layer.sublayers?.removeAll()
+            self.player.replaceVideo(uri)
+            self.player.displayView.frame = CGRect(x: 0, y:0, width: self.imageViewArray[page].frame.width, height: self.imageViewArray[page].frame.height)
+            
+            for view in self.contentScrollViewArray[self.index].subviews {
+                if (view == self.player.displayView) {
+                    view.removeFromSuperview()
+                }
             }
-            
-            self.playerItem = AVPlayerItem.init(url: uri)
-            self.player = AVPlayer.init(playerItem: self.playerItem)
-            
-            // Layer for display… Video plays at the full size of the iPad
-            self.playerLayer = AVPlayerLayer(player: player)
-            
-            self.imageViewArray[page].layer.addSublayer(self.playerLayer!)
-            
-            self.playerLayer?.frame = self.imageViewArray[page].frame
-            self.player?.seek(to: kCMTimeZero)
-            self.player?.play()
+            self.contentScrollViewArray[page].addSubview(self.player.displayView)
+            self.player.play()
             
         }
         print("\(page) scrollViewDidEndDecelerating")
     }
 }
+
+extension FeedFullScreenViewController: VGPlayerDelegate {
+    func vgPlayer(_ player: VGPlayer, playerFailed error: VGPlayerError) {
+        print(error)
+    }
+    func vgPlayer(_ player: VGPlayer, stateDidChange state: VGPlayerState) {
+        print("player State ",state)
+    }
+    func vgPlayer(_ player: VGPlayer, bufferStateDidChange state: VGPlayerBufferstate) {
+        print("buffer State", state)
+    }
+    
+}
+
+extension FeedFullScreenViewController: VGPlayerViewDelegate {
+    
+    func vgPlayerView(_ playerView: VGPlayerView, willFullscreen fullscreen: Bool) {
+        
+    }
+    func vgPlayerView(didTappedClose playerView: VGPlayerView) {
+        if playerView.isFullScreen {
+            playerView.exitFullscreen()
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
+        
+    }
+    func vgPlayerView(didDisplayControl playerView: VGPlayerView) {
+        UIApplication.shared.setStatusBarHidden(!playerView.isDisplayControl, with: .fade)
+    }
+}
+
