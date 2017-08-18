@@ -32,10 +32,6 @@ class FeedTableViewController: UIViewController{
     
     @IBOutlet weak var loadingImage: UIImageView!
     
-    var refreshLoadingView : UIView!
-    var refreshColorView : UIView!
-    var refreshLoadingImageView : UIImageView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -54,12 +50,14 @@ class FeedTableViewController: UIViewController{
         appDelegate.feedView = self
         
         self.initLoader()
-//        self.initRefresh()
         
         let refreshView = FeedPullLoaderView()
         refreshView.delegate = self
         self.tableView.addPullLoadableView(refreshView, type: .refresh)
-//        self.tableView.addPullLoadableView(refreshView, type: .loadMore)
+        
+        let bottomRefresh = FeedPullLoaderView()
+        bottomRefresh.delegate = self
+        self.tableView.addPullLoadableView(bottomRefresh, type: .loadMore)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -98,42 +96,6 @@ class FeedTableViewController: UIViewController{
         }, completion: nil)
     }
     
-    func initRefresh(){
-        refreshControl = UIRefreshControl()
-        refreshControl.backgroundColor = UIColor.black
-        
-        self.refreshLoadingView = UIView(frame: self.refreshControl!.bounds)
-        self.refreshControl.backgroundColor = UIColor.clear
-        
-        self.refreshLoadingImageView = UIImageView.init(image: UIImage.init(named: "icon_loader_02_1"))
-        
-        var imgList = [UIImage]()
-        
-        for count in 1...3 {
-            let strImageName : String = "icon_loader_02_\(count)"
-            let image = UIImage(named: strImageName)
-            imgList.append(image!)
-        }
-        
-        self.refreshLoadingImageView.animationImages = imgList
-        self.refreshLoadingImageView.animationDuration = 1.0
-        self.refreshLoadingImageView.startAnimating()
-        
-        self.refreshLoadingView.addSubview(self.refreshLoadingImageView)
-        self.refreshLoadingView.clipsToBounds = true
-        
-        let x = UIScreen.main.bounds.width / 2 - 10
-        
-        self.refreshLoadingImageView.frame = CGRect(x: x, y: 20, width: 20, height: 20)
-        
-        self.refreshControl!.tintColor = UIColor.clear
-        
-        self.refreshControl!.addSubview(self.refreshLoadingView)
-        
-        self.refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
-        self.tableView.addSubview(refreshControl) // not required when using UITableViewController
-    }
-    
     func initLoader(){
         var imgList = [UIImage]()
         
@@ -158,12 +120,43 @@ class FeedTableViewController: UIViewController{
     @IBAction func photoClick(_ sender: UIButton) {
         self.pushView(storyboardName: "Feed", controllerName: "FeedFullScreenViewController")
     }
-   
     
+    func getFeedLoadMore(){
+        var url: URL!
+        if self.feedType == FeedTableType.ALLFEED {
+            
+            let parameters :[String:String] = [
+                "lastId" : (self.articleArray.last?.idStr)!,
+                "size" : "\(10)"
+            ]
+            
+            url = URL.init(string: Constants.VyrlFeedURL.FEED, parameters: parameters)
+        }else {
+            url = URL.init(string: Constants.VyrlFeedURL.FEEDBOOKMARK)
+        }
+        
+        Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Article]>) in
+            
+            let array = response.result.value ?? []
+            
+            for article in array {
+                self.articleArray.append(article)
+            }
+            
+            self.tableView.reloadData()
+        }
+    }
+
+   
     func getAllFeed(){
         var url: URL!
         if self.feedType == FeedTableType.ALLFEED {
-            url = URL.init(string: Constants.VyrlFeedURL.FEED)
+            
+            let parameters :[String:String] = [
+                "size" : "\(10)"
+            ]
+            
+            url = URL.init(string: Constants.VyrlFeedURL.FEED, parameters: parameters)
         }else {
             url = URL.init(string: Constants.VyrlFeedURL.FEEDBOOKMARK)
         }
@@ -405,6 +398,16 @@ extension FeedTableViewController : FeedPullLoaderDelegate {
     func pullLoadView(_ pullLoadView: FeedPullLoaderView, didChageState state: KRPullLoaderState, viewType type: KRPullLoaderType) {
         if (type == .loadMore){
             
+            switch state {
+            case let .loading(completionHandler: completionHandler):
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+1) {
+                    completionHandler()
+                    self.getFeedLoadMore()
+                }
+            default:
+                break
+            }
+
             return
         }
         
@@ -447,6 +450,7 @@ struct Article : Mappable {
     var commentCount : String!
     var likeCount : String!
     var shareCount: String!
+    var idStr : String!
     
     var location : String!
     
@@ -478,6 +482,7 @@ struct Article : Mappable {
         commentCount = "\(cntComment!)"
         likeCount = "\(cntLike!)"
         shareCount = "\(cntShare!)"
+        idStr = "\(id!)"
         
         self.setUpType()
     }

@@ -18,8 +18,27 @@ public protocol FeedPullLoaderDelegate: class {
 open class FeedPullLoaderView : UIView, KRPullLoadable {
     
     open weak var delegate :FeedPullLoaderDelegate?
+    
+    open let activityIndicator = UIActivityIndicatorView()
+    open let messageLabel = UILabel()
 
-    var refreshLoadingImageView = UIImageView.init(image: UIImage.init(named: "icon_loader_02_1"))
+    lazy var refreshLoadingImageView : UIImageView = {
+        
+        let imageView = UIImageView.init(image: UIImage.init(named: "icon_loader_02_1"))
+        
+        var imgList = [UIImage]()
+        
+        for count in 1...3 {
+            let strImageName : String = "icon_loader_02_\(count)"
+            let image = UIImage(named: strImageName)
+            imgList.append(image!)
+        }
+        
+        imageView.animationImages = imgList
+        imageView.animationDuration = 1.0
+        
+        return imageView
+    }()
     
     var shouldSetConstraints = true
     
@@ -33,25 +52,27 @@ open class FeedPullLoaderView : UIView, KRPullLoadable {
     
     open func setUp(){
         
-        var imgList = [UIImage]()
-        
-        for count in 1...3 {
-            let strImageName : String = "icon_loader_02_\(count)"
-            let image = UIImage(named: strImageName)
-            imgList.append(image!)
-        }
-        
-        self.refreshLoadingImageView.animationImages = imgList
-        self.refreshLoadingImageView.animationDuration = 1.0
-        
-//        self.refreshLoadingImageView.translatesAutoresizingMaskIntoConstraints = false
+        self.refreshLoadingImageView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(self.refreshLoadingImageView)
         
-        self.refreshLoadingImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        self.refreshLoadingImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        messageLabel.font = UIFont.systemFont(ofSize: 10)
+        messageLabel.textAlignment = .center
+        messageLabel.textColor = .gray
+        messageLabel.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(messageLabel)
         
-        self.refreshLoadingImageView.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        self.refreshLoadingImageView.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        addConstraints([
+            NSLayoutConstraint(item: refreshLoadingImageView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 15.0),
+            NSLayoutConstraint(item: refreshLoadingImageView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0.0),
+            NSLayoutConstraint(item: messageLabel, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 40.0),
+            NSLayoutConstraint(item: messageLabel, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0.0),
+            NSLayoutConstraint(item: messageLabel, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: -15.0)
+            ])
+        
+        messageLabel.addConstraint(
+            NSLayoutConstraint(item: messageLabel, attribute: .width, relatedBy: .lessThanOrEqual, toItem: nil, attribute: .width, multiplier: 1.0, constant: 300)
+        )
+
     }
     
     open func didChangeState(_ state: KRPullLoaderState, viewType type: KRPullLoaderType){
