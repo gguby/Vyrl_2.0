@@ -218,7 +218,7 @@
                                     <outlet property="delegate" destination="yXq-xH-jGk" id="hhj-8G-2QG"/>
                                 </connections>
                             </scrollView>
-                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WRr-F5-dSP" userLabel="top View">
+                            <view hidden="YES" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WRr-F5-dSP" userLabel="top View">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a4Y-r8-Epy">
@@ -297,9 +297,34 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jwF-I1-olL">
+                                        <rect key="frame" x="15" y="0.0" width="257" height="50"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1:00:09" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qPY-hl-6Gz">
+                                                <rect key="frame" x="0.0" y="15" width="58.5" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="K0t-gq-VaH">
+                                                <rect key="frame" x="71.5" y="10" width="172.5" height="31"/>
+                                            </slider>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="qPY-hl-6Gz" firstAttribute="centerY" secondItem="jwF-I1-olL" secondAttribute="centerY" id="7Zy-Nc-shX"/>
+                                            <constraint firstAttribute="trailing" secondItem="K0t-gq-VaH" secondAttribute="trailing" constant="15" id="Fqf-18-ohP"/>
+                                            <constraint firstItem="K0t-gq-VaH" firstAttribute="leading" secondItem="qPY-hl-6Gz" secondAttribute="trailing" constant="15" id="UTw-kj-YXl"/>
+                                            <constraint firstItem="K0t-gq-VaH" firstAttribute="centerY" secondItem="jwF-I1-olL" secondAttribute="centerY" id="fYd-vZ-Rs3"/>
+                                            <constraint firstItem="qPY-hl-6Gz" firstAttribute="leading" secondItem="jwF-I1-olL" secondAttribute="leading" id="jNf-ew-7OY"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="jwF-I1-olL" firstAttribute="top" secondItem="uUj-iA-brH" secondAttribute="top" id="3D0-aL-inD"/>
+                                    <constraint firstAttribute="bottom" secondItem="jwF-I1-olL" secondAttribute="bottom" id="3Zp-5e-GU3"/>
+                                    <constraint firstItem="jwF-I1-olL" firstAttribute="leading" secondItem="uUj-iA-brH" secondAttribute="leading" constant="15" id="NRb-QG-cJD"/>
+                                    <constraint firstItem="kJh-XW-pEH" firstAttribute="leading" secondItem="jwF-I1-olL" secondAttribute="trailing" constant="35" id="RGq-hD-v8R"/>
                                     <constraint firstAttribute="height" constant="50" id="VwS-xl-peB"/>
                                     <constraint firstItem="kJh-XW-pEH" firstAttribute="centerY" secondItem="uUj-iA-brH" secondAttribute="centerY" id="ZNZ-Gd-3Uu"/>
                                     <constraint firstAttribute="trailing" secondItem="kJh-XW-pEH" secondAttribute="trailing" constant="15" id="i3B-L2-zTV"/>
@@ -322,13 +347,15 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
+                        <outlet property="currentTimeLabel" destination="qPY-hl-6Gz" id="j3H-Jp-bWC"/>
                         <outlet property="mainScrollView" destination="jId-fV-qHA" id="8kb-IA-MUx"/>
                         <outlet property="pageNumberLabel" destination="GE5-7W-BNp" id="pFp-Sj-jyh"/>
+                        <outlet property="timeSlider" destination="K0t-gq-VaH" id="CBT-04-xfD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RD4-1O-p4t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1153" y="-116"/>
+            <point key="canvasLocation" x="1152.8" y="-116.49175412293854"/>
         </scene>
         <!--Feed Like User List View Controller-->
         <scene sceneID="WS7-Sc-8M5">
