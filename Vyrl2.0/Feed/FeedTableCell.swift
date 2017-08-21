@@ -120,7 +120,6 @@ class FeedTableCell: UITableViewCell {
 
                 self.secondCommentNicknameButton.setTitle(article?.comments[1].nickName, for: .normal)
                 self.seconCommentContent.text = article?.comments[1].content
-
             }
             
             self.share.setTitle(article?.shareCount, for: .normal)

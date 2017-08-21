@@ -26,12 +26,21 @@ class FanPageController : UIViewController {
     
     @IBOutlet weak var feedContainer: UIView!
     @IBOutlet weak var post: UILabel!
+    @IBOutlet weak var containerViewHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var scrollview: UIScrollView!
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         self.initPage()
+        
+        if UIScreen.main.bounds.size.height <= 667 {
+            self.containerViewHeight.constant = 600
+        }else {
+            self.containerViewHeight.constant = 650
+        }
         
         self.setupFeed()
     }
@@ -42,7 +51,6 @@ class FanPageController : UIViewController {
         addChildViewController(controller)
         feedContainer.addSubview(controller.view)
         controller.didMove(toParentViewController: self)
-        controller.resizeTable(height: feedContainer.frame.height)
     }
     
     func initPage() {
@@ -59,7 +67,9 @@ class FanPageController : UIViewController {
         }
         
         self.ownerLabel.text = fanPage.nickName + "님 개설"
-        self.pageImage.af_setImage(withURL: URL.init(string: fanPage.pageprofileImagePath)!)
+         if fanPage.pageprofileImagePath.isEmpty == false {
+            self.pageImage.af_setImage(withURL: URL.init(string: fanPage.pageprofileImagePath!)!)
+        }
         self.pageName.text = fanPage.pageName
         
         if (fanPage.pageInfo) != nil {

@@ -161,7 +161,9 @@ extension FanViewController : UICollectionViewDataSource, UICollectionViewDelega
         
         let fan = self.joinFanPages[indexPath.row]
         
-        cell.imageView.af_setImage(withURL: URL.init(string: fan.pageprofileImagePath)!)
+        if fan.pageprofileImagePath.isEmpty == false {
+            cell.imageView.af_setImage(withURL: URL.init(string: fan.pageprofileImagePath)!)
+        }
         cell.textView.text = fan.pageName
         
         return cell
@@ -220,7 +222,13 @@ extension FanViewController : UITableViewDelegate, UITableViewDataSource {
             
             let fan = self.suggestFanPages[indexPath.row]
             
-            cell.profile.af_setImage(withURL: URL.init(string: fan.pageprofileImagePath)!)
+            if fan.pageprofileImagePath.isEmpty == false {
+                cell.profile.af_setImage(withURL: URL.init(string: fan.pageprofileImagePath)!)
+            }
+            
+            cell.title.text = fan.pageName
+            cell.member.text = "\(fan.cntMember!) members"
+            cell.detail.text = fan.pageInfo
             
             return cell
         }
