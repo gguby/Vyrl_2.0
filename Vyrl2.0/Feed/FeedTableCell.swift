@@ -51,6 +51,7 @@ class FeedTableCell: UITableViewCell {
     @IBOutlet weak var secondCommentNicknameButton: UIButton!
     @IBOutlet weak var seconCommentContent: UILabel!
     
+    @IBOutlet weak var officialImage: UIImageView!
     @IBOutlet weak var followBtn: UIButton!
     
     var cellWidth = 124
@@ -135,6 +136,8 @@ class FeedTableCell: UITableViewCell {
                 self.likeBtn.tag = 0
             }
             
+            self.officialImage.isHidden  = true
+            
             guard self.collectionView != nil else {                
                 return
             }
@@ -149,25 +152,6 @@ class FeedTableCell: UITableViewCell {
             
             contentHeight.constant = CGFloat(ceilf( Float(count!) / 3) * Float(cellWidth))
         }
-    }
-
-    
-    func showCommentDetail(sender:UIButton){
-        delegate.didPressCell(sender: sender, cell: self)
-    }
-    
-    func followUser(sender:UIButton)
-    {
-        let uri = URL.init(string: Constants.VyrlFeedURL.follow(followId: (self.article?.profile.id)!))
-        Alamofire.request(uri!, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: {
-            response in switch response.result {
-            case .success(let json):
-                self.isMyArticle = true
-                print(json)
-            case .failure(let error):
-                print(error)
-            }
-        })
     }
 
     override func awakeFromNib() {
@@ -191,6 +175,7 @@ class FeedTableCell: UITableViewCell {
         
         self.followBtn.addTarget(self, action: #selector(followUser(sender:)), for: .touchUpInside)
         self.comment.addTarget(self, action: #selector(showCommentDetail(sender:)), for: .touchUpInside)
+        self.likeBtn.addTarget(self, action: #selector(like(sender:)), for: .touchUpInside)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -199,8 +184,25 @@ class FeedTableCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    @IBAction func like(_ sender: UIButton) {
-        
+    func showCommentDetail(sender:UIButton){
+        delegate.didPressCell(sender: sender, cell: self)
+    }
+    
+    func followUser(sender:UIButton)
+    {
+        let uri = URL.init(string: Constants.VyrlFeedURL.follow(followId: (self.article?.profile.id)!))
+        Alamofire.request(uri!, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: {
+            response in switch response.result {
+            case .success(let json):
+                self.isMyArticle = true
+                print(json)
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+    
+    func like(sender:UIButton){
         var method = HTTPMethod.post
         
         if sender.tag == 1 {
