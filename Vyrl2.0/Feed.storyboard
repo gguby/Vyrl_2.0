@@ -218,7 +218,7 @@
                                     <outlet property="delegate" destination="yXq-xH-jGk" id="hhj-8G-2QG"/>
                                 </connections>
                             </scrollView>
-                            <view hidden="YES" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WRr-F5-dSP" userLabel="top View">
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WRr-F5-dSP" userLabel="top View">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a4Y-r8-Epy">
@@ -308,6 +308,9 @@
                                             </label>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="K0t-gq-VaH">
                                                 <rect key="frame" x="71.5" y="10" width="172.5" height="31"/>
+                                                <connections>
+                                                    <action selector="timeSlideValueChanged:" destination="yXq-xH-jGk" eventType="valueChanged" id="HzR-um-dST"/>
+                                                </connections>
                                             </slider>
                                         </subviews>
                                         <constraints>
@@ -351,6 +354,7 @@
                         <outlet property="mainScrollView" destination="jId-fV-qHA" id="8kb-IA-MUx"/>
                         <outlet property="pageNumberLabel" destination="GE5-7W-BNp" id="pFp-Sj-jyh"/>
                         <outlet property="timeSlider" destination="K0t-gq-VaH" id="CBT-04-xfD"/>
+                        <outlet property="videoStatusView" destination="jwF-I1-olL" id="u3r-Pi-64s"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RD4-1O-p4t" userLabel="First Responder" sceneMemberID="firstResponder"/>

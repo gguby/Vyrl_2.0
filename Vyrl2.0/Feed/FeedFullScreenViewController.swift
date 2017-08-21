@@ -25,6 +25,7 @@ class FeedFullScreenViewController: UIViewController {
     
     @IBOutlet weak var currentTimeLabel: UILabel!
     @IBOutlet weak var timeSlider: UISlider!
+    @IBOutlet weak var videoStatusView: UIView!
     
     
     var currentPage : Int = 0;
@@ -80,6 +81,7 @@ class FeedFullScreenViewController: UIViewController {
         }
         
         requestImageVideo()
+        self.showImageVideo(page: 0)
     }
     
     func requestImageVideo() {
@@ -194,6 +196,15 @@ class FeedFullScreenViewController: UIViewController {
         })
         super.viewWillTransition(to: size, with: coordinator)
     }
+    
+    @IBAction func timeSlideValueChanged(_ sender: UISlider) {
+//        if((self.player?.rate)! > Float(0) && self.player?.error == nil) {
+//            let newTime = CMTimeMake(Int64(Float(sender.value)), 1)
+//            player?.seek(to: newTime, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
+//        }
+
+    }
+    
 }
 
 extension FeedFullScreenViewController : UIScrollViewDelegate {
@@ -218,6 +229,10 @@ extension FeedFullScreenViewController : UIScrollViewDelegate {
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let page = Int(round(Double(scrollView.contentOffset.x) / Double(scrollView.bounds.size.width)))
+        self.showImageVideo(page: page)
+    }
+    
+    func showImageVideo(page: Int) {
         let uri : URL = URL.init(string: mediasArray[page]["url"]!)!
         //
         if(mediasArray[page]["type"] == "IMAGE"){
@@ -225,7 +240,11 @@ extension FeedFullScreenViewController : UIScrollViewDelegate {
                 self.player!.pause()
                 self.playerLayer?.removeFromSuperlayer()
             }
+            
+            self.videoStatusView.isHidden = true
         } else {
+            self.videoStatusView.isHidden = false
+            
             if(self.imageViewArray[page].layer.sublayers != nil) {
                 self.imageViewArray[page].layer.sublayers?.removeAll()
             }
@@ -234,10 +253,17 @@ extension FeedFullScreenViewController : UIScrollViewDelegate {
             
             self.playerItem = AVPlayerItem.init(url: uri)
             self.player = AVPlayer.init(playerItem: self.playerItem)
-            self.player?.addPeriodicTimeObserver(forInterval: CMTimeMake(1, 30), queue: .main, using: { (time) in
-               let timeElapsed = Float(CMTimeGetSeconds(time))
-                self.timeSlider.value = Float(CMTimeGetSeconds(time) / CMTimeGetSeconds((self.player?.currentItem!.duration)!))
-                self.currentTimeLabel.text = self.createTimeString(time: timeElapsed)
+            self.player?.addPeriodicTimeObserver(forInterval: CMTimeMake(33, 1000), queue: .main, using: { (time) in
+                if let currentItem = self.player?.currentItem {
+                    let duration = currentItem.duration
+                    if (CMTIME_IS_INVALID(duration)) {
+                        // Do sth
+                        return;
+                    }
+                    let currentTime = currentItem.currentTime()
+                    self.timeSlider.value = Float(CMTimeGetSeconds(currentTime) / CMTimeGetSeconds(duration))
+                    self.currentTimeLabel.text = self.createTimeString(time: Float(CMTimeGetSeconds(currentTime)))
+                }
             })
             
             // Layer for display… Video plays at the full size of the iPad
