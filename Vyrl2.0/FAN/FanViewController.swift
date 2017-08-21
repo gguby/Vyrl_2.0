@@ -53,6 +53,8 @@ class FanViewController: UIViewController {
         self.getMyFanPage()
         
         self.getSuggesetFanPage()
+        
+        self.recommandFanpageTableView.tableFooterView = UIView(frame: .zero)
     }
     
     func setupPostContainer(){

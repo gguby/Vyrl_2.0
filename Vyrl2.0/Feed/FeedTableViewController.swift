@@ -388,11 +388,64 @@ extension FeedTableViewController : FeedCellDelegate {
         self.present(alertController, animated: true, completion: nil)
     }
     
+    func report(articleId : Int, reportType : ReportType){
+        let parameters : Parameters = [
+            "articleId": articleId,
+            "reportType" : reportType.rawValue,
+            "contentType" : "ARTICLE"
+        ]
+        
+        let uri = Constants.VyrlFeedURL.FEEDREPORT
+        
+        Alamofire.request(uri, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: {
+            response in
+            switch response.result {
+            case .success(let json) :
+                print(json)
+                
+                if let code = response.response?.statusCode {
+                    if code == 200 {
+                       self.showToast(str: "정상적으로 신고 되었습니다! 감사합니다.")
+                    }
+                }
+            case .failure(let error) :
+                print(error)
+            }
+        })
+    }
+    
+    func showReport(articleId : Int){
+        let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.actionSheet)
+        
+        let report = UIAlertAction(title: "성인컨텐츠", style: .default,handler: { (action) -> Void in
+            self.report(articleId: articleId, reportType: ReportType.ADULT)
+        })
+        
+        let notShow = UIAlertAction(title: "해롭거나 불쾌", style: .default, handler: { (action) -> Void in
+            self.report(articleId: articleId, reportType: ReportType.OFFEND)
+        })
+        
+        let prevent = UIAlertAction(title: "스팸 또는 사기", style: .default, handler: { (action) -> Void in
+            self.report(articleId: articleId, reportType: ReportType.SPAM)
+        })
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
+            alertController.dismiss(animated: true, completion: nil)
+        })
+        
+        alertController.addAction(report)
+        alertController.addAction(notShow)
+        alertController.addAction(prevent)
+        alertController.addAction(cancel)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     func showAlertNotMine(cell: FeedTableCell){
         let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.actionSheet)
         
         let report = UIAlertAction(title: "이 게시물 신고하기", style: .default,handler: { (action) -> Void in
-            
+            self.showReport(articleId: (cell.article?.id)!)
         })
         
         let notShow = UIAlertAction(title: "이 게시물 안보기", style: .default, handler: { (action) -> Void in            
@@ -417,7 +470,7 @@ extension FeedTableViewController : FeedCellDelegate {
     
     func showFeedAlert(cell : FeedTableCell) {
         
-        if cell.isMyArticle == false {
+        if cell.isMyArticle == true {
             self.showAlertNotMine(cell: cell)
             return
         }
@@ -617,6 +670,9 @@ struct ArticleMedia : Mappable {
     }
 }
 
+enum ReportType :String {
+    case ADULT = "ADULT", OFFEND = "OFFEND", SPAM = "SPAM"
+}
 
 
 
