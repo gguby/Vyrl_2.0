@@ -188,7 +188,7 @@
         <scene sceneID="zbW-6X-bXo">
             <objects>
                 <navigationController navigationBarHidden="YES" id="AqP-hB-Wsq" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="wxq-cz-Xzg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wxq-cz-Xzg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -218,6 +218,13 @@
                                     <outlet property="delegate" destination="yXq-xH-jGk" id="hhj-8G-2QG"/>
                                 </connections>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pV9-PJ-dAj">
+                                <rect key="frame" x="167" y="313" width="40" height="40"/>
+                                <state key="normal" image="icon_play_01"/>
+                                <connections>
+                                    <action selector="toggleVideoPlay:" destination="yXq-xH-jGk" eventType="touchUpInside" id="ohK-Zi-Gqf"/>
+                                </connections>
+                            </button>
                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WRr-F5-dSP" userLabel="top View">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                 <subviews>
@@ -301,34 +308,24 @@
                                         <rect key="frame" x="15" y="0.0" width="257" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1:00:09" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qPY-hl-6Gz">
-                                                <rect key="frame" x="50" y="15" width="58.5" height="21"/>
+                                                <rect key="frame" x="0.0" y="15" width="58.5" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="K0t-gq-VaH">
-                                                <rect key="frame" x="121" y="10" width="123" height="31"/>
+                                                <rect key="frame" x="71" y="10" width="173" height="31"/>
                                                 <connections>
                                                     <action selector="timeSlideValueChanged:" destination="yXq-xH-jGk" eventType="valueChanged" id="HzR-um-dST"/>
                                                 </connections>
                                             </slider>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pV9-PJ-dAj">
-                                                <rect key="frame" x="0.0" y="0.0" width="40" height="50"/>
-                                                <state key="normal" image="icon_play_01"/>
-                                                <connections>
-                                                    <action selector="toggleVideoPlay:" destination="yXq-xH-jGk" eventType="touchUpInside" id="ohK-Zi-Gqf"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="qPY-hl-6Gz" firstAttribute="centerY" secondItem="jwF-I1-olL" secondAttribute="centerY" id="7Zy-Nc-shX"/>
-                                            <constraint firstAttribute="bottom" secondItem="pV9-PJ-dAj" secondAttribute="bottom" id="Egv-x4-f5A"/>
                                             <constraint firstAttribute="trailing" secondItem="K0t-gq-VaH" secondAttribute="trailing" constant="15" id="Fqf-18-ohP"/>
-                                            <constraint firstItem="pV9-PJ-dAj" firstAttribute="leading" secondItem="jwF-I1-olL" secondAttribute="leading" id="M8d-2f-fd0"/>
                                             <constraint firstItem="K0t-gq-VaH" firstAttribute="leading" secondItem="qPY-hl-6Gz" secondAttribute="trailing" constant="15" id="UTw-kj-YXl"/>
                                             <constraint firstItem="K0t-gq-VaH" firstAttribute="centerY" secondItem="jwF-I1-olL" secondAttribute="centerY" id="fYd-vZ-Rs3"/>
-                                            <constraint firstItem="qPY-hl-6Gz" firstAttribute="leading" secondItem="pV9-PJ-dAj" secondAttribute="trailing" constant="10" id="wsO-Xu-9VF"/>
-                                            <constraint firstItem="pV9-PJ-dAj" firstAttribute="top" secondItem="jwF-I1-olL" secondAttribute="top" id="zvl-8P-dJU"/>
+                                            <constraint firstItem="qPY-hl-6Gz" firstAttribute="leading" secondItem="jwF-I1-olL" secondAttribute="leading" id="iv0-cP-alg"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -347,6 +344,7 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="WRr-F5-dSP" secondAttribute="trailing" id="3H6-T2-mws"/>
+                            <constraint firstItem="pV9-PJ-dAj" firstAttribute="centerY" secondItem="LXy-cD-Otz" secondAttribute="centerY" id="4a7-He-f0t"/>
                             <constraint firstItem="K2P-64-HXQ" firstAttribute="top" secondItem="jId-fV-qHA" secondAttribute="bottom" id="4hW-Gz-GF8"/>
                             <constraint firstItem="uUj-iA-brH" firstAttribute="leading" secondItem="LXy-cD-Otz" secondAttribute="leading" id="7cE-hn-TiS"/>
                             <constraint firstItem="K2P-64-HXQ" firstAttribute="top" secondItem="uUj-iA-brH" secondAttribute="bottom" id="C7r-x0-jat"/>
@@ -356,6 +354,7 @@
                             <constraint firstItem="jId-fV-qHA" firstAttribute="top" secondItem="LXy-cD-Otz" secondAttribute="top" id="msf-j5-0Bj"/>
                             <constraint firstAttribute="trailing" secondItem="jId-fV-qHA" secondAttribute="trailing" id="plB-vU-Fm9"/>
                             <constraint firstItem="jId-fV-qHA" firstAttribute="leading" secondItem="LXy-cD-Otz" secondAttribute="leading" id="uKP-e8-wiu"/>
+                            <constraint firstItem="pV9-PJ-dAj" firstAttribute="centerX" secondItem="LXy-cD-Otz" secondAttribute="centerX" id="ulr-ZO-DSa"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>

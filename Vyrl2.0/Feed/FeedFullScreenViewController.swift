@@ -61,15 +61,28 @@ class FeedFullScreenViewController: UIViewController {
         mainScrollView.addGestureRecognizer(singleTap)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.pageNumberLabel.text =  "1 / \(self.mediasArray.count)"
+        self.index = 0
+        
+        self.initImageVideo()
+        
+    }
+    
     func handleTap() {
         if(self.topView.isHidden == false) {
             self.topView.isHidden = true
             self.bottomView.isHidden = true
+            self.videoPlayButton.isHidden = true
             
             stopTimer()
         } else {
             self.topView.isHidden = false
             self.bottomView.isHidden = false
+            if(mediasArray[currentPage]["type"] == "VIDEO"){
+                self.videoPlayButton.isHidden = false
+                self.videoStatusView.isHidden = false
+            }
             
             startTimer()
         }
@@ -94,6 +107,7 @@ class FeedFullScreenViewController: UIViewController {
         if(self.topView.isHidden == false) {
             self.topView.isHidden = true
             self.bottomView.isHidden = true
+            self.videoPlayButton.isHidden = true
             
             stopTimer()
         }
@@ -117,14 +131,6 @@ class FeedFullScreenViewController: UIViewController {
         for subView in subViews {
             subView.removeFromSuperview()
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        self.pageNumberLabel.text =  "1 / \(self.mediasArray.count)"
-        self.index = 0
-        
-        self.initImageVideo()
-    
     }
     
     func initImageVideo() {
@@ -312,9 +318,8 @@ extension FeedFullScreenViewController : UIScrollViewDelegate {
             }
             
             self.videoStatusView.isHidden = true
+            self.videoPlayButton.isHidden = true
         } else {
-            self.videoStatusView.isHidden = false
-            
             if(self.imageViewArray[page].layer.sublayers != nil) {
                 self.imageViewArray[page].layer.sublayers?.removeAll()
             }
@@ -344,6 +349,7 @@ extension FeedFullScreenViewController : UIScrollViewDelegate {
             self.playerLayer?.frame = self.imageViewArray[page].frame
             self.player?.seek(to: kCMTimeZero)
             self.player?.play()
+            self.videoPlayButton.setImage(UIImage.init(named: "icon_pause_01"), for: .normal)
             
         }
         print("\(page) scrollViewDidEndDecelerating")
