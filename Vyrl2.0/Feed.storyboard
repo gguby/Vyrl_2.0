@@ -301,24 +301,34 @@
                                         <rect key="frame" x="15" y="0.0" width="257" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1:00:09" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qPY-hl-6Gz">
-                                                <rect key="frame" x="0.0" y="15" width="58.5" height="21"/>
+                                                <rect key="frame" x="50" y="15" width="58.5" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="K0t-gq-VaH">
-                                                <rect key="frame" x="71.5" y="10" width="172.5" height="31"/>
+                                                <rect key="frame" x="121" y="10" width="123" height="31"/>
                                                 <connections>
                                                     <action selector="timeSlideValueChanged:" destination="yXq-xH-jGk" eventType="valueChanged" id="HzR-um-dST"/>
                                                 </connections>
                                             </slider>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pV9-PJ-dAj">
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="50"/>
+                                                <state key="normal" image="icon_play_01"/>
+                                                <connections>
+                                                    <action selector="toggleVideoPlay:" destination="yXq-xH-jGk" eventType="touchUpInside" id="ohK-Zi-Gqf"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="qPY-hl-6Gz" firstAttribute="centerY" secondItem="jwF-I1-olL" secondAttribute="centerY" id="7Zy-Nc-shX"/>
+                                            <constraint firstAttribute="bottom" secondItem="pV9-PJ-dAj" secondAttribute="bottom" id="Egv-x4-f5A"/>
                                             <constraint firstAttribute="trailing" secondItem="K0t-gq-VaH" secondAttribute="trailing" constant="15" id="Fqf-18-ohP"/>
+                                            <constraint firstItem="pV9-PJ-dAj" firstAttribute="leading" secondItem="jwF-I1-olL" secondAttribute="leading" id="M8d-2f-fd0"/>
                                             <constraint firstItem="K0t-gq-VaH" firstAttribute="leading" secondItem="qPY-hl-6Gz" secondAttribute="trailing" constant="15" id="UTw-kj-YXl"/>
                                             <constraint firstItem="K0t-gq-VaH" firstAttribute="centerY" secondItem="jwF-I1-olL" secondAttribute="centerY" id="fYd-vZ-Rs3"/>
-                                            <constraint firstItem="qPY-hl-6Gz" firstAttribute="leading" secondItem="jwF-I1-olL" secondAttribute="leading" id="jNf-ew-7OY"/>
+                                            <constraint firstItem="qPY-hl-6Gz" firstAttribute="leading" secondItem="pV9-PJ-dAj" secondAttribute="trailing" constant="10" id="wsO-Xu-9VF"/>
+                                            <constraint firstItem="pV9-PJ-dAj" firstAttribute="top" secondItem="jwF-I1-olL" secondAttribute="top" id="zvl-8P-dJU"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -350,10 +360,13 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
+                        <outlet property="bottomView" destination="uUj-iA-brH" id="Mnx-uc-sQd"/>
                         <outlet property="currentTimeLabel" destination="qPY-hl-6Gz" id="j3H-Jp-bWC"/>
                         <outlet property="mainScrollView" destination="jId-fV-qHA" id="8kb-IA-MUx"/>
                         <outlet property="pageNumberLabel" destination="GE5-7W-BNp" id="pFp-Sj-jyh"/>
                         <outlet property="timeSlider" destination="K0t-gq-VaH" id="CBT-04-xfD"/>
+                        <outlet property="topView" destination="WRr-F5-dSP" id="bcy-Yr-UKK"/>
+                        <outlet property="videoPlayButton" destination="pV9-PJ-dAj" id="Hs1-w3-Wic"/>
                         <outlet property="videoStatusView" destination="jwF-I1-olL" id="u3r-Pi-64s"/>
                     </connections>
                 </viewController>
@@ -527,6 +540,7 @@
         <image name="icon_cancel_03" width="20" height="20"/>
         <image name="icon_download_01" width="20" height="20"/>
         <image name="icon_home_01_off" width="28" height="28"/>
+        <image name="icon_play_01" width="40" height="40"/>
         <image name="img_arrow_01" width="14" height="33"/>
         <image name="img_nofeed_01" width="236" height="217"/>
         <image name="tag_official_01" width="41" height="13"/>

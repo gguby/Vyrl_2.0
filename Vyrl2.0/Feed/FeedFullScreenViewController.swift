@@ -18,7 +18,10 @@ class FeedFullScreenViewController: UIViewController {
     var textViewArray : [UITextView] = []
     var contentScrollViewArray : [UIScrollView] = []
     
-    
+    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var bottomView: UIView!
+
+    @IBOutlet weak var videoPlayButton: UIButton!
     var playerItem: AVPlayerItem?
     var player: AVPlayer?
     var playerLayer : AVPlayerLayer?
@@ -27,12 +30,13 @@ class FeedFullScreenViewController: UIViewController {
     @IBOutlet weak var timeSlider: UISlider!
     @IBOutlet weak var videoStatusView: UIView!
     
-    
     var currentPage : Int = 0;
     var index : Int = 0;
     var isRotate = false
     var profileId : Int!
     var mediasArray : [[String:String]]!
+    
+    var timer : Timer?
     
     var initialConstraints = [NSLayoutConstraint]()
      var imageIndex: NSInteger = 0
@@ -50,7 +54,61 @@ class FeedFullScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        startTimer()
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        singleTap.cancelsTouchesInView = false
+        singleTap.numberOfTapsRequired = 1
+        mainScrollView.addGestureRecognizer(singleTap)
     }
+    
+    func handleTap() {
+        if(self.topView.isHidden == false) {
+            self.topView.isHidden = true
+            self.bottomView.isHidden = true
+            
+            stopTimer()
+        } else {
+            self.topView.isHidden = false
+            self.bottomView.isHidden = false
+            
+            startTimer()
+        }
+   }
+    
+    func startTimer()
+    {
+        if timer == nil {
+            timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+        }
+    }
+    
+    func stopTimer()
+    {
+        if timer != nil {
+            timer!.invalidate()
+            timer = nil
+        }
+    }
+    
+    func timerAction() {
+        if(self.topView.isHidden == false) {
+            self.topView.isHidden = true
+            self.bottomView.isHidden = true
+            
+            stopTimer()
+        }
+    }
+
+    @IBAction func toggleVideoPlay(_ sender: Any) {
+        if(self.player?.rate != 0 && self.player?.error == nil) {
+            self.videoPlayButton.setImage(UIImage.init(named: "icon_play_01"), for: .normal)
+            self.player?.pause()
+        } else {
+            self.videoPlayButton.setImage(UIImage.init(named: "icon_pause_01"), for: .normal)
+            self.player?.play()
+        }
+    }
+    
     
     @IBAction func dismiss(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
@@ -66,6 +124,7 @@ class FeedFullScreenViewController: UIViewController {
         self.index = 0
         
         self.initImageVideo()
+    
     }
     
     func initImageVideo() {
@@ -81,7 +140,7 @@ class FeedFullScreenViewController: UIViewController {
         }
         
         requestImageVideo()
-        self.showImageVideo(page: 0)
+        
     }
     
     func requestImageVideo() {
@@ -128,6 +187,10 @@ class FeedFullScreenViewController: UIViewController {
                         self.contentScrollViewArray[self.index].center = CGPoint.init(x: self.contentScrollViewArray[self.index].center.x, y: self.view.center.y)
                     } else {
                         self.contentScrollViewArray[self.index].frame = CGRect.init(x: xPosition, y: 0, width: self.mainScrollView.frame.width, height: self.mainScrollView.frame.height)
+                    }
+                    
+                    if(self.index == 0){
+                        self.showImageVideo(page: 0)
                     }
                     
                 }
@@ -202,7 +265,14 @@ class FeedFullScreenViewController: UIViewController {
 //            let newTime = CMTimeMake(Int64(Float(sender.value)), 1)
 //            player?.seek(to: newTime, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
 //        }
-
+        self.player?.pause()
+        var timeInSecond = sender.value
+        timeInSecond *= 1000;
+        let cmTime = CMTimeMake(Int64(timeInSecond), 1000)
+        
+        self.player?.seek(to: cmTime, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
+        
+        
     }
     
 }
