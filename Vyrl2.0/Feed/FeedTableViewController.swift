@@ -17,12 +17,11 @@ enum FeedTableType {
     case ALLFEED,MYFEED, BOOKMARK
 }
 
-class FeedTableViewController: UIViewController{
+class FeedTableViewController: UIViewController, UIScrollViewDelegate{
 
     @IBOutlet weak var tableView: UITableView!
     var articleArray = [Article]()
-    
-    var refreshControl : UIRefreshControl!
+    var loadMoreArray = [Article]()
     
     var feedType = FeedTableType.ALLFEED
     
@@ -34,8 +33,6 @@ class FeedTableViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.tableViewContentHeight.constant = UIScreen.main.bounds.height - 44 - 20 - 45
 
         self.getAllFeed()
         
@@ -51,13 +48,58 @@ class FeedTableViewController: UIViewController{
         
         self.initLoader()
         
+       self.setUpRefresh()
+    }
+    
+    func setUpRefresh(){
         let refreshView = FeedPullLoaderView()
         refreshView.delegate = self
         self.tableView.addPullLoadableView(refreshView, type: .refresh)
         
-        let bottomRefresh = FeedPullLoaderView()
-        bottomRefresh.delegate = self
-        self.tableView.addPullLoadableView(bottomRefresh, type: .loadMore)
+        let customView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
+        customView.backgroundColor = UIColor.clear
+        let bottomRefresh = UIImageView.init(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        bottomRefresh.animationImages = self.getImgList()
+        bottomRefresh.animationDuration = 1.0
+        bottomRefresh.startAnimating()
+        
+        bottomRefresh.translatesAutoresizingMaskIntoConstraints = false
+        customView.addSubview(bottomRefresh)
+        
+        customView.addConstraints([
+            NSLayoutConstraint(item: bottomRefresh, attribute: .centerX, relatedBy: .equal, toItem: customView, attribute: .centerX, multiplier: 1.0, constant: 0.0),
+            NSLayoutConstraint(item: bottomRefresh, attribute: .centerY, relatedBy: .equal, toItem: customView, attribute: .centerY, multiplier: 1.0, constant: 0.0)
+        ])
+        
+        self.tableView.tableFooterView = customView
+    }
+    
+    func getImgList()->[UIImage]{
+        var imgList = [UIImage]()
+        
+        for count in 1...3 {
+            let strImageName : String = "icon_loader_02_\(count)"
+            let image = UIImage(named: strImageName)
+            imgList.append(image!)
+        }
+        
+        return imgList
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let offset = scrollView.contentOffset
+        let bounds = scrollView.bounds
+        let size = scrollView.contentSize
+        let inset = scrollView.contentInset
+        
+        let y = offset.y + bounds.size.height - inset.bottom
+        let h = size.height
+        
+        let reloadDistance = CGFloat(30.0)
+        if y > h + reloadDistance {
+            print("Load More")
+            self.getFeedLoadMore()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -97,15 +139,8 @@ class FeedTableViewController: UIViewController{
     }
     
     func initLoader(){
-        var imgList = [UIImage]()
         
-        for count in 1...3 {
-            let strImageName : String = "icon_loader_02_\(count)"
-            let image = UIImage(named: strImageName)
-            imgList.append(image!)
-        }
-        
-        self.loadingImage.animationImages = imgList
+        self.loadingImage.animationImages = self.getImgList()
         self.loadingImage.animationDuration = 1.0
         self.loadingImage.startAnimating()
         
@@ -137,16 +172,17 @@ class FeedTableViewController: UIViewController{
         
         Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Article]>) in
             
+            self.articleArray.removeAll()
+            
             let array = response.result.value ?? []
             
-            for article in array {
-                self.articleArray.append(article)
-            }
+            self.articleArray.append(contentsOf: array)
             
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
-
    
     func getAllFeed(){
         var url: URL!
@@ -352,7 +388,40 @@ extension FeedTableViewController : FeedCellDelegate {
         self.present(alertController, animated: true, completion: nil)
     }
     
+    func showAlertNotMine(cell: FeedTableCell){
+        let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.actionSheet)
+        
+        let report = UIAlertAction(title: "이 게시물 신고하기", style: .default,handler: { (action) -> Void in
+            
+        })
+        
+        let notShow = UIAlertAction(title: "이 게시물 안보기", style: .default, handler: { (action) -> Void in            
+            
+        })
+    
+        let prevent = UIAlertAction(title: "작성자 차단", style: .default, handler: { (action) -> Void in
+            
+        })
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
+            alertController.dismiss(animated: true, completion: nil)
+        })
+        
+        alertController.addAction(report)
+        alertController.addAction(notShow)
+        alertController.addAction(prevent)
+        alertController.addAction(cancel)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     func showFeedAlert(cell : FeedTableCell) {
+        
+        if cell.isMyArticle == false {
+            self.showAlertNotMine(cell: cell)
+            return
+        }
+        
         let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.actionSheet)
         
         let modify = UIAlertAction(title: "수정", style: .default,handler: { (action) -> Void in
@@ -394,6 +463,22 @@ extension FeedTableViewController : FeedCellDelegate {
     }
 }
 
+extension FeedTableViewController : KRPullLoadViewDelegate {
+    func pullLoadView(_ pullLoadView: KRPullLoadView, didChangeState state: KRPullLoaderState, viewType type: KRPullLoaderType){
+        switch state {
+        case let .loading(completionHandler: completionHandler):
+            
+            DispatchQueue.main.async {
+                completionHandler()
+                self.getFeedLoadMore()
+            }
+            
+        default:
+            break
+        }
+    }
+}
+
 extension FeedTableViewController : FeedPullLoaderDelegate {
     func pullLoadView(_ pullLoadView: FeedPullLoaderView, didChageState state: KRPullLoaderState, viewType type: KRPullLoaderType) {
         if (type == .loadMore){
@@ -402,7 +487,11 @@ extension FeedTableViewController : FeedPullLoaderDelegate {
             case let .loading(completionHandler: completionHandler):
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+1) {
                     completionHandler()
+                    
+//                    self.tableView.removePullLoadableView(self.bottomRefresh)
+                    
                     self.getFeedLoadMore()
+                    
                 }
             default:
                 break
@@ -455,6 +544,8 @@ struct Article : Mappable {
     var location : String!
     
     var isBookMark : Bool!
+    var isMyArticle : Bool!
+    var isLike :Bool!
     
     init?(map: Map) {
         
@@ -471,6 +562,7 @@ struct Article : Mappable {
         medias <- map["media"]
         location <- map["location"]
         isBookMark <- map["bookmark"]
+        isLike <- map["like"]
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
@@ -483,6 +575,8 @@ struct Article : Mappable {
         likeCount = "\(cntLike!)"
         shareCount = "\(cntShare!)"
         idStr = "\(id!)"
+        
+        isMyArticle = LoginManager.sharedInstance.isMyProfile(id: profile.id)
         
         self.setUpType()
     }

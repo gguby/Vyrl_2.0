@@ -60,6 +60,11 @@ struct Constants {
         }
         
         static let FEEDBOOKMARK = VyrlAPIConstants.baseURL + "feeds/bookmarks"
+        
+        static func follow(followId :Int)-> String{
+            let str = "\(followId)"
+            return VyrlAPIConstants.baseURL + "follows/" + str
+        }
     }
     
     struct VyrlFanAPIURL {

@@ -611,6 +611,18 @@ extension LoginManager {
         
         return accountList
     }
+    
+    func isMyProfile(id : Int) -> Bool {
+        let myAccount = self.getCurrentAccount()
+        
+        let userId = Int((myAccount?.userId)!)
+        
+        if ( userId == id) {
+            return true
+        }
+        
+        return false
+    }
 }
 
 
