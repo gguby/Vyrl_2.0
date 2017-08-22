@@ -16,6 +16,7 @@ import FBSDKLoginKit
 import Fabric
 import TwitterKit
 import AlamofireNetworkActivityLogger
+import GoogleMobileAds
 
 extension AppDelegate
 {
@@ -24,6 +25,7 @@ extension AppDelegate
         FIRApp.configure()
         
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
+        GADMobileAds.configure(withApplicationID: Constants.GoogleADKey)
         
         guard let gai = GAI.sharedInstance() else {
             assert(false, "Google Analytics not configured correctly")

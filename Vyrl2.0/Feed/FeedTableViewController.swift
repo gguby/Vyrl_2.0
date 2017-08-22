@@ -12,6 +12,7 @@ import Alamofire
 import AlamofireObjectMapper
 import AVFoundation
 import KRPullLoader
+import GoogleMobileAds
 
 enum FeedTableType {
     case ALLFEED,MYFEED, BOOKMARK
@@ -31,6 +32,8 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
     
     @IBOutlet weak var loadingImage: UIImageView!
     
+    var adLoader: GADAdLoader!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -49,6 +52,15 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         self.initLoader()
         
        self.setUpRefresh()
+        
+        var adTypes = [GADAdLoaderAdType]()
+        adTypes.append(GADAdLoaderAdType.nativeContent)
+        adTypes.append(GADAdLoaderAdType.nativeAppInstall)
+
+        adLoader = GADAdLoader(adUnitID: Constants.GoogleADKey, rootViewController: self,
+                               adTypes: adTypes, options: nil)
+        adLoader.delegate = self
+        adLoader.load(GADRequest())
     }
     
     func setUpRefresh(){
@@ -564,6 +576,18 @@ extension FeedTableViewController : FeedPullLoaderDelegate {
         default:
             break
         }
+    }
+}
+
+extension FeedTableViewController : GADNativeContentAdLoaderDelegate , GADNativeAppInstallAdLoaderDelegate{
+    func adLoader(_ adLoader: GADAdLoader, didReceive nativeContentAd: GADNativeContentAd){
+        
+    }
+    func adLoader(_ adLoader: GADAdLoader, didReceive nativeAppInstallAd: GADNativeAppInstallAd){
+        
+    }
+    func adLoader(_ adLoader: GADAdLoader, didFailToReceiveAdWithError error: GADRequestError){
+        
     }
 }
 

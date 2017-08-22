@@ -13,6 +13,7 @@ import Alamofire
 struct Constants {
     
     static var GoogleMapsAPIServerKey="AIzaSyAv8onWg1agUiUQU_n5HFMaMjnGtlrinSQ"
+    static var GoogleADKey = "ca-app-pub-3940256099942544/3986624511"//ca-app-pub-5207930350156417~1155719688"
     
     struct GoogleAnalysis {
         static let kTrackingId = "UA-102838629-1"

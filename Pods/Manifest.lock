@@ -54,6 +54,7 @@ PODS:
   - FirebaseInstanceID (1.0.10):
     - FirebaseCore (~> 3.6)
   - GKActionSheetPicker (0.4)
+  - Google-Mobile-Ads-SDK (7.22.0)
   - Google/Analytics (3.0.3):
     - Google/Core
     - GoogleAnalytics (~> 3.12)
@@ -113,6 +114,7 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
   - GKActionSheetPicker
+  - Google-Mobile-Ads-SDK
   - Google/Analytics
   - GoogleSignIn
   - GrowingTextView
@@ -145,6 +147,7 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: b9eedd6846fb5e1f0f7279e1deaa7a7e4cf8392e
   GKActionSheetPicker: 5fa80433fea23161ed1427063835b39655a635fc
   Google: cd92fab98f800f509da88c1e0c570275713bc9d5
+  Google-Mobile-Ads-SDK: 1bdf1a4244d0553b1840239874c209c01aef055f
   GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
   GoogleSignIn: d7ad83f13480e1f30453471d00d19b5293ac46af
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
@@ -162,6 +165,6 @@ SPEC CHECKSUMS:
   TwitterCore: e959987be23c767004d29eb7fab8d85d8585a2e5
   TwitterKit: 3b6044a7320340326a4098f3e37aa1dbaeb94942
 
-PODFILE CHECKSUM: 96bb4a6563adcc715f991728e3b3ec545601c5fd
+PODFILE CHECKSUM: c52d3abe83e77e00d2dccc916330cb5e35aac129
 
 COCOAPODS: 1.2.1
