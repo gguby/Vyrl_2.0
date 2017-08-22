@@ -389,15 +389,17 @@ extension FeedTableViewController : FeedCellDelegate {
     }
     
     func report(articleId : Int, reportType : ReportType){
-        let parameters : Parameters = [
-            "articleId": articleId,
+        let parameters : [String:String] = [
+            "articleId": "\(articleId)",
             "reportType" : reportType.rawValue,
             "contentType" : "ARTICLE"
         ]
         
         let uri = Constants.VyrlFeedURL.FEEDREPORT
         
-        Alamofire.request(uri, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: {
+        let url = URL.init(string: uri, parameters: parameters)
+        
+        Alamofire.request(url!, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: {
             response in
             switch response.result {
             case .success(let json) :
