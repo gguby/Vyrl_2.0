@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import Alamofire
+import ReachabilitySwift
 
 class FeedFullScreenViewController: UIViewController {
     
@@ -59,6 +60,8 @@ class FeedFullScreenViewController: UIViewController {
         singleTap.cancelsTouchesInView = false
         singleTap.numberOfTapsRequired = 1
         mainScrollView.addGestureRecognizer(singleTap)
+        
+        print("network status : \(Reachability.init()?.currentReachabilityStatus)")
     }
     
     override func viewDidAppear(_ animated: Bool) {

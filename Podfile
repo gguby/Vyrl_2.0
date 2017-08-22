@@ -28,6 +28,7 @@ target 'Vyrl2.0' do
     pod 'RxAlamofire'
     pod 'AlamofireObjectMapper', '~> 4.0'
     pod 'KRPullLoader'
+    pod 'ReachabilitySwift'
     pod 'NSDate+TimeAgo'
     pod 'Google-Mobile-Ads-SDK'
 end
