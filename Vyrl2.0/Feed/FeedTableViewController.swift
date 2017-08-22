@@ -12,7 +12,6 @@ import Alamofire
 import AlamofireObjectMapper
 import AVFoundation
 import KRPullLoader
-import GoogleMobileAds
 
 enum FeedTableType {
     case ALLFEED,MYFEED, BOOKMARK
@@ -24,7 +23,7 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
     var articleArray = [Article]()
     var loadMoreArray = [Article]()
     
-    var feedType = FeedTableType.ALLFEED
+    var feedType = FeedTableType.MYFEED
     
     @IBOutlet weak var uploadLoadingView: UIView!
     @IBOutlet weak var uploadLoadingHeight: NSLayoutConstraint!
@@ -32,13 +31,9 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
     
     @IBOutlet weak var loadingImage: UIImageView!
     
-    var adLoader: GADAdLoader!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.getAllFeed()
-        
         // Do any additional setup after loading the view.
         
         self.tableView.delegate = self
@@ -51,16 +46,9 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         
         self.initLoader()
         
-       self.setUpRefresh()
+        self.setUpRefresh()
         
-        var adTypes = [GADAdLoaderAdType]()
-        adTypes.append(GADAdLoaderAdType.nativeContent)
-        adTypes.append(GADAdLoaderAdType.nativeAppInstall)
-
-        adLoader = GADAdLoader(adUnitID: Constants.GoogleADKey, rootViewController: self,
-                               adTypes: adTypes, options: nil)
-        adLoader.delegate = self
-        adLoader.load(GADRequest())
+        self.getAllFeed()
     }
     
     func setUpRefresh(){
@@ -170,13 +158,18 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
     
     func getFeedLoadMore(){
         var url: URL!
+        
+        let parameters :[String:String] = [
+            "size" : "\(10)"
+        ]
+        
+//        if self.articleArray.count > 0 {
+//            parameters["lastId"] = (self.articleArray.last?.idStr)!
+//        }
+        
         if self.feedType == FeedTableType.ALLFEED {
-            
-            let parameters :[String:String] = [
-                "lastId" : (self.articleArray.last?.idStr)!,
-                "size" : "\(10)"
-            ]
-            
+            url = URL.init(string: Constants.VyrlFeedURL.FEEDALL, parameters: parameters)
+        }else if self.feedType == FeedTableType.MYFEED {
             url = URL.init(string: Constants.VyrlFeedURL.FEED, parameters: parameters)
         }else {
             url = URL.init(string: Constants.VyrlFeedURL.FEEDBOOKMARK)
@@ -198,14 +191,17 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
    
     func getAllFeed(){
         var url: URL!
+
+        let parameters :[String:String] = [
+            "size" : "\(10)"
+        ]
+
         if self.feedType == FeedTableType.ALLFEED {
-            
-            let parameters :[String:String] = [
-                "size" : "\(10)"
-            ]
-            
+            url = URL.init(string: Constants.VyrlFeedURL.FEEDALL, parameters: parameters)
+        }else if self.feedType == FeedTableType.MYFEED{
             url = URL.init(string: Constants.VyrlFeedURL.FEED, parameters: parameters)
-        }else {
+        }
+        else {
             url = URL.init(string: Constants.VyrlFeedURL.FEEDBOOKMARK)
         }
         
@@ -528,6 +524,11 @@ extension FeedTableViewController : FeedCellDelegate {
         
         self.present(alertController, animated: true, completion: nil)
     }
+    
+    func showUserProfileView(userId: Int) {
+        let profile = self.pushViewControllrer(storyboardName: "My", controllerName: "My") as! MyViewController
+        profile.profileUserId = userId
+    }
 }
 
 extension FeedTableViewController : KRPullLoadViewDelegate {
@@ -576,18 +577,6 @@ extension FeedTableViewController : FeedPullLoaderDelegate {
         default:
             break
         }
-    }
-}
-
-extension FeedTableViewController : GADNativeContentAdLoaderDelegate , GADNativeAppInstallAdLoaderDelegate{
-    func adLoader(_ adLoader: GADAdLoader, didReceive nativeContentAd: GADNativeContentAd){
-        
-    }
-    func adLoader(_ adLoader: GADAdLoader, didReceive nativeAppInstallAd: GADNativeAppInstallAd){
-        
-    }
-    func adLoader(_ adLoader: GADAdLoader, didFailToReceiveAdWithError error: GADRequestError){
-        
     }
 }
 

@@ -23,10 +23,20 @@ class MyViewController: UIViewController{
     
     var accountList  = [Account]()
     
+    var isMyProfile = true
+    
+    var profileUserId : Int! {
+        didSet {
+            isMyProfile = false
+        }
+    }
+    
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var nickNameLabel: UILabel!
     @IBOutlet weak var introLabel: UILabel!
     @IBOutlet weak var homepageLabel: UILabel!
+    
+    @IBOutlet weak var storeBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +53,16 @@ class MyViewController: UIViewController{
         
         self.containerView.translatesAutoresizingMaskIntoConstraints  = false
         
-        self.setupFeed(feedType: FeedTableType.ALLFEED)
+        if self.isMyProfile == true {
+            self.setupFeed(feedType: FeedTableType.MYFEED)
+        }else {
+            self.storeBtn.setImage(UIImage.init(named: "icon_back_01"), for: .normal)
+            self.storeBtn.addTarget(self, action: #selector(back(sender:)), for: .touchUpInside)
+        }
+    }
+    
+    func back(sender:UIButton){
+        self.navigationController?.popViewController(animated: true)
     }
     
     func setupPostContainer(){
@@ -79,6 +98,10 @@ class MyViewController: UIViewController{
     }
     
     func loadMyProfile(){
+        
+        if self.isMyProfile == false {
+            return
+        }
         
         self.accountList.removeAll()
         

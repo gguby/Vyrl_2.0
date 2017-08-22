@@ -516,6 +516,7 @@ struct Comment : Mappable {
         
     }
     var id : Int!
+    var userId : Int!
     var content : String!
     var nickName : String!
     var profileImageURL : String!
@@ -527,6 +528,7 @@ struct Comment : Mappable {
         nickName <- map["nickName"]
         profileImageURL <- map["profile"]
         createAt <- map["createdAt"]
+        userId <- map["userId"]
     }
 }
 

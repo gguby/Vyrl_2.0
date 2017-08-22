@@ -10,12 +10,14 @@ import UIKit
 import Alamofire
 import AlamofireImage
 import NSDate_TimeAgo
+import GoogleMobileAds
 
 @objc protocol FeedCellDelegate {
     func didPressCell(sender: Any, cell : FeedTableCell)
     @objc optional func setBookMark(cell : FeedTableCell)
     @objc optional func showFeedAlert(cell : FeedTableCell)
     @objc optional func showFeedShareAlert(cell : FeedTableCell)
+    @objc optional func showUserProfileView(userId : Int)
 }
 
 class FeedTableCell: UITableViewCell {
@@ -54,9 +56,13 @@ class FeedTableCell: UITableViewCell {
     @IBOutlet weak var officialImage: UIImageView!
     @IBOutlet weak var followBtn: UIButton!
     
+    var adLoader: GADAdLoader!
+    
     var cellWidth = 124
 
     var delegate: FeedCellDelegate!
+    
+    var isAdTypeGoogle = false
     
     var isMyArticle : Bool! {
         didSet {
@@ -112,15 +118,21 @@ class FeedTableCell: UITableViewCell {
                 
                 self.firstCommentNicknameButton.setTitle(article?.comments[0].nickName, for: .normal)
                 self.firstCommentContent.text = article?.comments[0].content
+                self.firstCommentNicknameButton.tag = (article?.comments[0].userId)!
+                self.firstCommentNicknameButton.addTarget(self, action: #selector(showProfile(sender:)), for: .touchUpInside)
             } else {
                 self.commentView.isHidden = false
                 self.secondCommentView.isHidden = false
                 
                 self.firstCommentNicknameButton.setTitle(article?.comments[0].nickName, for: .normal)
                 self.firstCommentContent.text = article?.comments[0].content
+                self.firstCommentNicknameButton.tag = (article?.comments[0].userId)!
+                self.firstCommentNicknameButton.addTarget(self, action: #selector(showProfile(sender:)), for: .touchUpInside)
 
                 self.secondCommentNicknameButton.setTitle(article?.comments[1].nickName, for: .normal)
                 self.seconCommentContent.text = article?.comments[1].content
+                self.secondCommentNicknameButton.tag = (article?.comments[1].userId)!
+                self.secondCommentNicknameButton.addTarget(self, action: #selector(showProfile(sender:)), for: .touchUpInside)
             }
             
             self.share.setTitle(article?.shareCount, for: .normal)
@@ -176,6 +188,16 @@ class FeedTableCell: UITableViewCell {
         self.followBtn.addTarget(self, action: #selector(followUser(sender:)), for: .touchUpInside)
         self.comment.addTarget(self, action: #selector(showCommentDetail(sender:)), for: .touchUpInside)
         self.likeBtn.addTarget(self, action: #selector(like(sender:)), for: .touchUpInside)
+        
+        if isAdTypeGoogle {
+            var adTypes = [GADAdLoaderAdType]()
+            adTypes.append(GADAdLoaderAdType.nativeContent)
+            
+            adLoader = GADAdLoader(adUnitID: Constants.GoogleADTest, rootViewController: self.delegate as? UIViewController,
+                                   adTypes: adTypes, options: nil)
+            adLoader.delegate = self
+            adLoader.load(GADRequest())
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -186,6 +208,10 @@ class FeedTableCell: UITableViewCell {
     
     func showCommentDetail(sender:UIButton){
         delegate.didPressCell(sender: sender, cell: self)
+    }
+    
+    func showProfile(sender:UIButton){
+        delegate.showUserProfileView!(userId: sender.tag)
     }
     
     func followUser(sender:UIButton)
@@ -272,6 +298,23 @@ extension FeedTableCell: UICollectionViewDataSource, UICollectionViewDelegate {
         cell.imageView.af_setImage(withURL: url)
         
         return cell
+    }
+}
+
+extension FeedTableCell : GADNativeContentAdLoaderDelegate , GADNativeAppInstallAdLoaderDelegate{
+    func adLoader(_ adLoader: GADAdLoader, didReceive nativeContentAd: GADNativeContentAd){
+        print(nativeContentAd.headline!)
+        print(nativeContentAd.body!)
+        print(nativeContentAd.callToAction!)
+    }
+    func adLoader(_ adLoader: GADAdLoader, didReceive nativeAppInstallAd: GADNativeAppInstallAd){
+        print(nativeAppInstallAd.headline!)
+        print(nativeAppInstallAd.body!)
+        print(nativeAppInstallAd.callToAction!)
+        print(nativeAppInstallAd.store!)
+    }
+    func adLoader(_ adLoader: GADAdLoader, didFailToReceiveAdWithError error: GADRequestError){
+        print(adLoader.adUnitID)
     }
 }
 

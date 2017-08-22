@@ -48,20 +48,34 @@ class FeedViewController: UIViewController {
     
     func showAlert() {
         let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.actionSheet)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let feedView = appDelegate.feedView
         
         let allFeedAction = UIAlertAction(title: "All Feed", style: .default,handler: { (action) -> Void in
             self.feedTtile.text = "전체 피드"
             self.selectImageview.image = UIImage.init(named: "btn_select_down_02")
+            
+            feedView?.feedType = FeedTableType.ALLFEED
+            feedView?.getAllFeed()
+            
             alertController.dismiss(animated: true, completion: nil )
         })
         let myFeedAction = UIAlertAction(title: "My Feed", style: .default, handler: { (action) -> Void in
             self.feedTtile.text = "내 피드"
             self.selectImageview.image = UIImage.init(named: "btn_select_down_02")
+            
+            feedView?.feedType = FeedTableType.MYFEED
+            feedView?.getAllFeed()
+            
             alertController.dismiss(animated: true, completion: nil)
         })
         let fanFeedAction = UIAlertAction(title: "Fan Feed", style: .default, handler: { (action) -> Void in
             self.feedTtile.text = "팬 피드"
             self.selectImageview.image = UIImage.init(named: "btn_select_down_02")
+            
+            feedView?.feedType = FeedTableType.MYFEED
+            feedView?.getAllFeed()
+            
             alertController.dismiss(animated: true, completion: nil)
         })
         

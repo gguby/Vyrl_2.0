@@ -25,7 +25,7 @@ extension AppDelegate
         FIRApp.configure()
         
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
-        GADMobileAds.configure(withApplicationID: Constants.GoogleADKey)
+        GADMobileAds.configure(withApplicationID: "ca-app-pub-5207930350156417~1155719688")
         
         guard let gai = GAI.sharedInstance() else {
             assert(false, "Google Analytics not configured correctly")

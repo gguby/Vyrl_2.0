@@ -13,7 +13,8 @@ import Alamofire
 struct Constants {
     
     static var GoogleMapsAPIServerKey="AIzaSyAv8onWg1agUiUQU_n5HFMaMjnGtlrinSQ"
-    static var GoogleADKey = "ca-app-pub-3940256099942544/3986624511"//ca-app-pub-5207930350156417~1155719688"
+    static var GoogleADKey = "ca-app-pub-5207930350156417/4448363513"
+    static var GoogleADTest = "ca-app-pub-3940256099942544/3986624511"
     
     struct GoogleAnalysis {
         static let kTrackingId = "UA-102838629-1"
@@ -31,6 +32,7 @@ struct Constants {
     
     struct VyrlFeedURL {
         static let FEED = VyrlAPIConstants.baseURL + "feeds"
+        static let FEEDALL = VyrlAPIConstants.baseURL + "feeds/all"
         
         static func feedLike(articleId :Int)-> String{
             
