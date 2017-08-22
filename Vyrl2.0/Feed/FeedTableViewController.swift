@@ -417,15 +417,15 @@ extension FeedTableViewController : FeedCellDelegate {
     func showReport(articleId : Int){
         let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.actionSheet)
         
-        let report = UIAlertAction(title: "성인컨텐츠", style: .default,handler: { (action) -> Void in
+        let adult = UIAlertAction(title: "성인컨텐츠", style: .default,handler: { (action) -> Void in
             self.report(articleId: articleId, reportType: ReportType.ADULT)
         })
         
-        let notShow = UIAlertAction(title: "해롭거나 불쾌", style: .default, handler: { (action) -> Void in
+        let offend = UIAlertAction(title: "해롭거나 불쾌", style: .default, handler: { (action) -> Void in
             self.report(articleId: articleId, reportType: ReportType.OFFEND)
         })
         
-        let prevent = UIAlertAction(title: "스팸 또는 사기", style: .default, handler: { (action) -> Void in
+        let spam = UIAlertAction(title: "스팸 또는 사기", style: .default, handler: { (action) -> Void in
             self.report(articleId: articleId, reportType: ReportType.SPAM)
         })
         
@@ -433,9 +433,9 @@ extension FeedTableViewController : FeedCellDelegate {
             alertController.dismiss(animated: true, completion: nil)
         })
         
-        alertController.addAction(report)
-        alertController.addAction(notShow)
-        alertController.addAction(prevent)
+        alertController.addAction(adult)
+        alertController.addAction(offend)
+        alertController.addAction(spam)
         alertController.addAction(cancel)
         
         self.present(alertController, animated: true, completion: nil)
@@ -444,7 +444,7 @@ extension FeedTableViewController : FeedCellDelegate {
     func showAlertNotMine(cell: FeedTableCell){
         let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.actionSheet)
         
-        let report = UIAlertAction(title: "이 게시물 신고하기", style: .default,handler: { (action) -> Void in
+        let report = UIAlertAction(title: "이 게시물 신고하기".localized(comment: ""), style: .default,handler: { (action) -> Void in
             self.showReport(articleId: (cell.article?.id)!)
         })
         

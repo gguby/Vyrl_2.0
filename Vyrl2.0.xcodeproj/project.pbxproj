@@ -31,6 +31,7 @@
 		8F916A8E1EDC264900E3EC8B /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F916A8D1EDC264900E3EC8B /* UIView+Extension.swift */; };
 		8F9AF9911EE800E700DE069E /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9AF9901EE800E700DE069E /* FeedTableViewController.swift */; };
 		A62EF2EB1F1F5282000CD43A /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62EF2EA1F1F5282000CD43A /* LocationViewController.swift */; };
+		A64E35FA1F4BBCF500670168 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A64E35FC1F4BBCF500670168 /* Localizable.strings */; };
 		A64E99A31F317DBB00D9BCFF /* FeedModifyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64E99A21F317DBB00D9BCFF /* FeedModifyController.swift */; };
 		A650368B1F0E30BA00AD540A /* ModalAnimatorPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65036881F0E30BA00AD540A /* ModalAnimatorPhoto.swift */; };
 		A650368C1F0E30BA00AD540A /* FeedNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65036891F0E30BA00AD540A /* FeedNavigationController.swift */; };
@@ -108,6 +109,8 @@
 		8F916A8D1EDC264900E3EC8B /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		8F9AF9901EE800E700DE069E /* FeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
 		A62EF2EA1F1F5282000CD43A /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
+		A64E35FB1F4BBCF500670168 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A64E35FD1F4BBD0F00670168 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A64E99A21F317DBB00D9BCFF /* FeedModifyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedModifyController.swift; sourceTree = "<group>"; };
 		A65036881F0E30BA00AD540A /* ModalAnimatorPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalAnimatorPhoto.swift; sourceTree = "<group>"; };
 		A65036891F0E30BA00AD540A /* FeedNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedNavigationController.swift; sourceTree = "<group>"; };
@@ -319,6 +322,7 @@
 				CE36D49F1ED3C96B00ABC7FE /* CheckBox.swift */,
 				8F916A8D1EDC264900E3EC8B /* UIView+Extension.swift */,
 				8F492C391F3DA01D0049F600 /* UITextView+Extension.swift */,
+				A64E35FC1F4BBCF500670168 /* Localizable.strings */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -461,6 +465,7 @@
 				CE1340A41EDD3C6D00EA330F /* Setting.storyboard in Resources */,
 				8F514D511F4586A1000338E4 /* FeedDetail.storyboard in Resources */,
 				A66FF7891F341C8300D7D3AA /* FanDetail.storyboard in Resources */,
+				A64E35FA1F4BBCF500670168 /* Localizable.strings in Resources */,
 				CE29B1AA1ECD5FEE003F4D2E /* LaunchScreen.storyboard in Resources */,
 				8F4C09291EE528840026D49F /* FeedStyle.storyboard in Resources */,
 				CE29B1CE1ECD6161003F4D2E /* Login.storyboard in Resources */,
@@ -648,6 +653,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		A64E35FC1F4BBCF500670168 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A64E35FB1F4BBCF500670168 /* en */,
+				A64E35FD1F4BBD0F00670168 /* Base */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		CE29B1A31ECD5FEE003F4D2E /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
