@@ -182,20 +182,22 @@ class FeedFullScreenViewController: UIViewController {
                     self.contentScrollViewArray[self.index].addSubview(self.imageViewArray[self.index])
                     
                     let textView = UITextView()
-                    textView.text = "반갑습니다."
+                    textView.text = self.mediasArray[self.index]["content"]
                     textView.textColor = UIColor.white
                     textView.backgroundColor = UIColor.ivGreyish
                     let size = textView.sizeThatFits(CGSize.init(width: self.view.frame.width, height: 9999))
                     textView.frame = CGRect.init(x: 0, y: self.imageViewArray[self.index].frame.size.height, width: self.view.frame.width, height: size.height)
                     textView.isScrollEnabled = false
                     
-                    self.contentScrollViewArray[self.index].addSubview(textView)
-                    self.contentScrollViewArray[self.index].contentSize = CGSize.init(width: self.mainScrollView.frame.width, height: self.imageViewArray[self.index].frame.height + textView.frame.height)
+                    self.textViewArray.append(textView)
+                    
+                    self.contentScrollViewArray[self.index].addSubview(self.textViewArray[self.index])
+                    self.contentScrollViewArray[self.index].contentSize = CGSize.init(width: self.mainScrollView.frame.width, height: self.imageViewArray[self.index].frame.height + self.textViewArray[self.index].frame.height)
                     
                     let xPosition = self.view.frame.width * CGFloat(self.index)
                     
-                    if( self.imageViewArray[self.index].frame.height + textView.frame.height < self.mainScrollView.frame.height){
-                        self.contentScrollViewArray[self.index].frame = CGRect.init(x: xPosition, y: 0, width: self.mainScrollView.frame.width, height: self.imageViewArray[self.index].frame.size.height + textView.frame.size.height)
+                    if( self.imageViewArray[self.index].frame.height + self.textViewArray[self.index].frame.height < self.mainScrollView.frame.height){
+                        self.contentScrollViewArray[self.index].frame = CGRect.init(x: xPosition, y: 0, width: self.mainScrollView.frame.width, height: self.imageViewArray[self.index].frame.size.height + self.textViewArray[self.index].frame.size.height)
                         self.contentScrollViewArray[self.index].center = CGPoint.init(x: self.contentScrollViewArray[self.index].center.x, y: self.view.center.y)
                     } else {
                         self.contentScrollViewArray[self.index].frame = CGRect.init(x: xPosition, y: 0, width: self.mainScrollView.frame.width, height: self.mainScrollView.frame.height)
@@ -280,13 +282,15 @@ class FeedFullScreenViewController: UIViewController {
                     
                     let xPosition = self.view.frame.width * CGFloat(i)
                     
-                    if( self.imageViewArray[i].frame.height < self.mainScrollView.frame.height){
-                        self.contentScrollViewArray[i].frame = CGRect.init(x: xPosition, y: 0, width: self.mainScrollView.frame.width, height: self.imageViewArray[i].frame.size.height)
-                        self.contentScrollViewArray[i].center = CGPoint.init(x: self.contentScrollViewArray[i].center.x, y: self.view.center.y)
+                    
+                    if( self.imageViewArray[self.index].frame.height + self.textViewArray[self.index].frame.height < self.mainScrollView.frame.height){
+                        self.contentScrollViewArray[self.index].frame = CGRect.init(x: xPosition, y: 0, width: self.mainScrollView.frame.width, height: self.imageViewArray[self.index].frame.size.height + self.textViewArray[self.index].frame.size.height)
+                        self.contentScrollViewArray[self.index].center = CGPoint.init(x: self.contentScrollViewArray[self.index].center.x, y: self.view.center.y)
                     } else {
-                        self.contentScrollViewArray[i].frame = CGRect.init(x: xPosition, y: 0, width: self.mainScrollView.frame.width, height: self.mainScrollView.frame.height)
+                        self.contentScrollViewArray[self.index].frame = CGRect.init(x: xPosition, y: 0, width: self.mainScrollView.frame.width, height: self.mainScrollView.frame.height)
                     }
                 }
+                
                 self.mainScrollView.setContentOffset(CGPoint.init(x: size.width*CGFloat(self.currentPage), y: 0), animated: true)
                 self.playerLayer?.frame = self.imageViewArray[self.currentPage].frame
                 print("Portrait")
@@ -341,6 +345,31 @@ class FeedFullScreenViewController: UIViewController {
         }
   
     }
+    
+    func showUseDataAlert() {
+        let alertController = UIAlertController (title:"영상 재생시 3G/LTE를 사용하시겠습니가?", message:"영상 재생시 3G/LTE를 사용하시겠습니가?",preferredStyle:.actionSheet)
+        
+        let okay = UIAlertAction(title: "okay", style: .default,handler: { (action) -> Void in
+            self.player?.play()
+            self.videoPlayButton.setImage(UIImage.init(named: "icon_pause_01"), for: .normal)
+        })
+        
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
+            alertController.dismiss(animated: true, completion: nil)
+        })
+        
+        alertController.addAction(okay)
+        alertController.addAction(cancel)
+        
+        if(Reachability.init()?.currentReachabilityStatus == .reachableViaWWAN) {
+            self.present(alertController, animated: true, completion: nil)
+        } else {
+            self.player?.play()
+            self.videoPlayButton.setImage(UIImage.init(named: "icon_pause_01"), for: .normal)
+        }
+    }
+
 }
 
 extension FeedFullScreenViewController : UIScrollViewDelegate {
@@ -409,8 +438,8 @@ extension FeedFullScreenViewController : UIScrollViewDelegate {
             
             self.playerLayer?.frame = self.imageViewArray[page].frame
             self.player?.seek(to: kCMTimeZero)
-            self.player?.play()
-            self.videoPlayButton.setImage(UIImage.init(named: "icon_pause_01"), for: .normal)
+            self.showUseDataAlert()
+            
             
         }
         print("\(page) scrollViewDidEndDecelerating")
