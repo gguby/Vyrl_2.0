@@ -36,18 +36,14 @@ class FanPageController : UIViewController {
         
         self.initPage()
         
-        if UIScreen.main.bounds.size.height <= 667 {
-            self.containerViewHeight.constant = 600
-        }else {
-            self.containerViewHeight.constant = 650
-        }
-        
         self.setupFeed()
     }
     
     func setupFeed(){
         let storyboard = UIStoryboard(name: "FeedStyle", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "feedTable") as! FeedTableViewController
+        controller.feedType = .FANFEED
+        controller.fanPageId = fanPage.fanPageId
         addChildViewController(controller)
         feedContainer.addSubview(controller.view)
         controller.didMove(toParentViewController: self)

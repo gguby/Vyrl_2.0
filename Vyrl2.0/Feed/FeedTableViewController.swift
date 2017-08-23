@@ -14,7 +14,7 @@ import AVFoundation
 import KRPullLoader
 
 enum FeedTableType {
-    case ALLFEED,MYFEED, BOOKMARK, USERFEED
+    case ALLFEED,MYFEED, BOOKMARK, USERFEED, FANFEED
 }
 
 class FeedTableViewController: UIViewController, UIScrollViewDelegate{
@@ -25,11 +25,11 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
     
     var feedType = FeedTableType.MYFEED
     var userId : Int!
+    var fanPageId : Int!
     
     @IBOutlet weak var uploadLoadingView: UIView!
     @IBOutlet weak var uploadLoadingHeight: NSLayoutConstraint!
-    @IBOutlet weak var tableViewContentHeight: NSLayoutConstraint!
-    
+    @IBOutlet weak var bottomSpace: NSLayoutConstraint!
     @IBOutlet weak var loadingImage: UIImageView!
     
     override func viewDidLoad() {
@@ -42,17 +42,19 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 400
         
-        if self.feedType != .USERFEED {
+        if self.feedType != .USERFEED && self.feedType != .FANFEED {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.feedView = self
             
             self.setUpRefresh()
+            self.bottomSpace.constant = 65
+        } else {
+            self.bottomSpace.constant = 0
         }
         
         self.initLoader()
         
-        self.getAllFeed()
-        
+        self.getAllFeed()        
     }
     
     func setUpRefresh(){
@@ -108,17 +110,6 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
     
     override func viewDidAppear(_ animated: Bool) {
 //        getAllFeed()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        self.view.frame = CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
-    }
-    
-    func resizeTable(height : CGFloat)
-    {
-        self.tableViewContentHeight.constant = height
     }
     
     func refresh(sender:AnyObject) {
@@ -206,6 +197,8 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
             url = URL.init(string: Constants.VyrlFeedURL.FEED, parameters: parameters)
         }else if self.feedType == .USERFEED {
             url = URL.init(string: Constants.VyrlFeedURL.feed(userId: self.userId))
+        }else if self.feedType == .FANFEED {
+            url = URL.init(string: Constants.VyrlFanAPIURL.getFanPagePosts(fanPageId: self.fanPageId))
         }
         else {
             url = URL.init(string: Constants.VyrlFeedURL.FEEDBOOKMARK)
@@ -222,8 +215,7 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
             }
             
             self.tableView.reloadData()
-            
-            if self.feedType == .USERFEED {
+            if self.feedType == .USERFEED && self.feedType == .FANFEED {
                 self.tableView.contentSize = CGSize.init(width: self.tableView.contentSize.width, height: self.tableView.contentSize.height + 45)
             }
         }
@@ -389,10 +381,55 @@ extension FeedTableViewController : FeedCellDelegate {
         
         let share = UIAlertAction(title: "내 Feed로 공유", style: .default,handler: { (action) -> Void in
             
+            let uri = Constants.VyrlFeedURL.share(articleId: (cell.article?.id)!)
+            
+            Alamofire.request(uri, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON(completionHandler: {
+                response in
+                switch response.result {
+                case .success(let json) :
+                    print(json)
+                    
+                    if let code = response.response?.statusCode {
+                        if code == 200 {
+                            
+                            self.showToast(str: "공유가 완료되었습니다!")
+                            
+                            let jsonData = json as! NSDictionary
+                            
+                            let cntShare = jsonData["cntShare"] as! Int
+                            cell.share.setTitle("\(cntShare)", for: .normal)
+                        }
+                    }
+                case .failure(let error) :
+                    print(error)
+                }
+            })
+
         })
         let linkCopy = UIAlertAction(title: "링크 복사", style: .default, handler: { (action) -> Void in
-            UIPasteboard.general.string = "Feed link"
-            self.showToast(str: UIPasteboard.general.string!)
+            
+            let uri = Constants.VyrlFeedURL.share(articleId: (cell.article?.id)!)
+            
+            Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON(completionHandler: {
+                response in
+                switch response.result {
+                case .success(let json) :
+                    print(json)
+                    
+                    if let code = response.response?.statusCode {
+                        if code == 200 {
+                            let jsonData = json as! NSDictionary
+                            
+                            let url = jsonData["url"] as? String
+                            
+                            UIPasteboard.general.string = url
+                            self.showToast(str: UIPasteboard.general.string!)
+                        }
+                    }
+                case .failure(let error) :
+                    print(error)
+                }
+            })
         })
         
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in

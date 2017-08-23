@@ -78,6 +78,11 @@ struct Constants {
             let str = "\(followId)"
             return VyrlAPIConstants.baseURL + "follows/" + str
         }
+        
+        static func share(articleId :Int)-> String{
+            let str = "\(articleId)"
+            return VyrlAPIConstants.baseURL + "share/" + str
+        }
     }
     
     struct VyrlFanAPIURL {
@@ -87,6 +92,10 @@ struct Constants {
         static let HOTPOST = VyrlAPIConstants.baseURL + "fan-pages/hot-fanpage-posts"
         static func checkFanPageName(fanPageName:String)-> String{
             return VyrlAPIConstants.baseURL + "fan-pages/check-names/" + fanPageName
+        }        
+        static func getFanPagePosts(fanPageId : Int)-> String{
+            let str = "\(fanPageId)"
+            return VyrlAPIConstants.baseURL + "fan-pages/" + str + "/posts"
         }
 
     }

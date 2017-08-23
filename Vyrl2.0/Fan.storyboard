@@ -1039,7 +1039,7 @@
                                 <rect key="frame" x="0.0" y="315" width="375" height="352"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2jl-eu-EBp" userLabel="contentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="352"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="704"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ETO-4b-mGs" userLabel="shadow">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="5"/>
@@ -1102,18 +1102,16 @@
                                                 </constraints>
                                             </view>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F68-gx-N1e">
-                                                <rect key="frame" x="0.0" y="50" width="375" height="352"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="352" id="Yzw-3T-co9"/>
-                                                </constraints>
+                                                <rect key="frame" x="0.0" y="50" width="375" height="654"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             </containerView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="ETO-4b-mGs" firstAttribute="top" secondItem="2jl-eu-EBp" secondAttribute="top" id="1Uc-Zk-FMp"/>
                                             <constraint firstItem="F68-gx-N1e" firstAttribute="leading" secondItem="2jl-eu-EBp" secondAttribute="leading" id="29z-dG-cUb"/>
-                                            <constraint firstItem="F68-gx-N1e" firstAttribute="height" secondItem="2jl-eu-EBp" secondAttribute="height" id="BIt-4L-SbA"/>
                                             <constraint firstItem="ETO-4b-mGs" firstAttribute="width" secondItem="2jl-eu-EBp" secondAttribute="width" id="Ky4-4f-Tcv"/>
+                                            <constraint firstAttribute="bottom" secondItem="F68-gx-N1e" secondAttribute="bottom" id="M15-83-w7Y"/>
                                             <constraint firstItem="DN8-ir-cEq" firstAttribute="width" secondItem="2jl-eu-EBp" secondAttribute="width" id="Y8B-lT-BpP"/>
                                             <constraint firstItem="F68-gx-N1e" firstAttribute="width" secondItem="2jl-eu-EBp" secondAttribute="width" id="czo-Cd-nc3"/>
                                             <constraint firstItem="DN8-ir-cEq" firstAttribute="leading" secondItem="2jl-eu-EBp" secondAttribute="leading" id="f50-UF-YlT"/>
@@ -1128,7 +1126,7 @@
                                     <constraint firstAttribute="trailing" secondItem="2jl-eu-EBp" secondAttribute="trailing" id="32j-TA-T7f"/>
                                     <constraint firstItem="2jl-eu-EBp" firstAttribute="leading" secondItem="qxD-mB-VC9" secondAttribute="leading" id="Df7-0x-Fwl"/>
                                     <constraint firstItem="2jl-eu-EBp" firstAttribute="width" secondItem="qxD-mB-VC9" secondAttribute="width" id="bbe-TP-Dw8"/>
-                                    <constraint firstItem="2jl-eu-EBp" firstAttribute="height" secondItem="qxD-mB-VC9" secondAttribute="height" priority="250" id="gTi-gO-bhc"/>
+                                    <constraint firstItem="2jl-eu-EBp" firstAttribute="height" secondItem="qxD-mB-VC9" secondAttribute="height" priority="250" constant="352" id="gTi-gO-bhc"/>
                                     <constraint firstAttribute="bottom" secondItem="2jl-eu-EBp" secondAttribute="bottom" id="pCz-oJ-J5V"/>
                                 </constraints>
                             </scrollView>
@@ -1224,7 +1222,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="containerViewHeight" destination="Yzw-3T-co9" id="iM8-R3-kwc"/>
                         <outlet property="feedContainer" destination="F68-gx-N1e" id="Uoo-xC-Uny"/>
                         <outlet property="feedView" destination="2jl-eu-EBp" id="FLZ-Ud-9mW"/>
                         <outlet property="members" destination="TCu-pN-saf" id="HZH-ar-Wah"/>

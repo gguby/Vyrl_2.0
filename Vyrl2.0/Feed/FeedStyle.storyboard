@@ -152,9 +152,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oyc-ga-sJv">
                                 <rect key="frame" x="0.0" y="83" width="375" height="1652"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" priority="250" constant="1652" id="P1F-6z-zU9"/>
-                                </constraints>
                                 <color key="separatorColor" red="0.67450980390000004" green="0.6705882353" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
@@ -2076,9 +2073,9 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1800"/>
                     <connections>
+                        <outlet property="bottomSpace" destination="12M-Jg-PsZ" id="Axe-o9-eAI"/>
                         <outlet property="loadingImage" destination="We0-y4-zh3" id="2Xa-EX-PIB"/>
                         <outlet property="tableView" destination="oyc-ga-sJv" id="aTw-Y0-OGL"/>
-                        <outlet property="tableViewContentHeight" destination="P1F-6z-zU9" id="EV2-rp-LNL"/>
                         <outlet property="uploadLoadingHeight" destination="qbo-zP-XTb" id="m3B-Yn-02V"/>
                         <outlet property="uploadLoadingView" destination="hMk-gj-QMF" id="8Hd-D3-F0I"/>
                     </connections>
