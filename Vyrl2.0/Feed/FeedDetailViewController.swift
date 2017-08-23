@@ -36,7 +36,7 @@ class FeedDetailViewController: UIViewController{
     var kbHeight: CGFloat!
     
     var commentArray : [Comment] = []
-    var feedDetail : FeedDetail!
+    var article : Article!
     
     var tapGesture : UITapGestureRecognizer!
 
@@ -54,8 +54,6 @@ class FeedDetailViewController: UIViewController{
         
         showButtonView()
         requestFeedDetail()
-        requestComment()
-        
     }
     
     @IBAction func dismiss(_ sender: UIButton) {
@@ -243,39 +241,16 @@ class FeedDetailViewController: UIViewController{
     
     func requestFeedDetail() {
          let url = URL.init(string: Constants.VyrlFeedURL.feed(articleId: articleId))
-        Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON { (response) in
-            switch response.result {
-            case .success(let json):
-                
-                if let code = response.response?.statusCode {
-                    if code == 200 {
-                        let jsonData = json as! NSDictionary
-                        self.feedDetail = FeedDetail.init()
-                        self.feedDetail.commentCount = jsonData["cntComment"] as! Int
-                        self.feedDetail.likeCount = jsonData["cntLike"] as! Int
-                        self.feedDetail.shareCount = jsonData["cntShare"] as! Int
-                        self.feedDetail.content = jsonData["content"] as! String
-                        self.feedDetail.id = jsonData["id"] as! Int
-                        self.feedDetail.createAt = jsonData["createdAt"] as! String
-                        self.feedDetail.mediasArray = jsonData["media"] as? [[String:
-                            String]]
-                        let profile = jsonData["profile"] as! [String : AnyObject]
-                        
-                        self.feedDetail.profileId = profile["id"] as! Int
-                        self.feedDetail.profileImagePath = profile["imagePath"] as! String
-                        self.feedDetail.profileNickname = profile["nickName"] as! String
-                        
-                        self.likeButton.setTitle("\(self.feedDetail.likeCount as Int)", for: .normal)
-                        self.commentButton.setTitle("\(self.feedDetail.commentCount as Int)", for: .normal)
-                        self.shareButton.setTitle("\(self.feedDetail.shareCount as Int)", for: .normal)
-                        
-                        self.tableView.reloadData()
-                    }
-                }
-             case .failure(let error):
-                print(error)
+        Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseObject { (response: DataResponse<Article>) in
+            let article = response.result.value
+            self.article = article
+            
+            self.commentArray.removeAll()
+            for comment in (article?.comments)! {
+                self.commentArray.append(comment)
             }
-
+            
+            self.tableView.reloadData()
         }
     }
     
@@ -437,24 +412,24 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "oneFeed") as! FeedDetailTableCell
-            if(self.feedDetail != nil) {
-                cell.feedDetail = self.feedDetail
-                if(self.feedDetail.mediasArray.count > 0){
+            if(self.article != nil) {
+                cell.article = self.article
+                if(self.article.medias.count > 0){
                     cell.initImageVideo()
                 }
                 
-                cell.contentTextView.text = self.feedDetail.content
+                cell.contentTextView.text = self.article.content
                 cell.contentTextView.resolveHashTags()
-                cell.timeLabel.text = self.feedDetail.createAt.toDateTime().timeAgo()
+                cell.timeLabel.text = (self.article.date! as! NSDate).timeAgo()
                 
-                cell.likeCountButton.setTitle(String("좋아요 \(self.feedDetail.likeCount!)명"), for: .normal)
-                cell.shareCountButton.setTitle(String("공유 \(self.feedDetail.shareCount!)명"), for: .normal)
-                cell.pageLabel.text = String("1 / \(self.feedDetail.mediasArray.count)")
+                cell.likeCountButton.setTitle(String("좋아요 \(self.article.likeCount!)명"), for: .normal)
+                cell.shareCountButton.setTitle(String("공유 \(self.article.shareCount!)명"), for: .normal)
+                cell.pageLabel.text = String("1 / \(self.article.medias.count)")
                 
-                cell.profileButton.af_setBackgroundImage(for: .normal, url: URL.init(string: self.feedDetail.profileImagePath)!)
-                cell.nickNameLabel.text = self.feedDetail.profileNickname
+                cell.profileButton.af_setBackgroundImage(for: .normal, url: URL.init(string: self.article.profile.imagePath)!)
+                cell.nickNameLabel.text = self.article.profile.nickName
                 
-                cell.profileId = self.feedDetail.profileId
+                cell.profileId = self.article.profile.id
                 cell.delegate = self
             }
             return cell
@@ -482,7 +457,7 @@ extension FeedDetailViewController : CellDidSelectProtocol {
     func imageDidSelect(profileId : Int) {
         let storyboard = UIStoryboard(name: "Feed", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "FeedFullScreenViewController") as! FeedFullScreenViewController // or whatever it is
-        vc.mediasArray = self.feedDetail.mediasArray
+        vc.mediasArray = self.article.medias
         
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -532,24 +507,6 @@ struct Comment : Mappable {
     }
 }
 
-struct FeedDetail{
-    init() {
-        
-    }
-    
-    var id : Int!
-    var mediasArray : [[String:String]]!
-    var content : String!
-    var commentCount : Int!
-    var likeCount : Int!
-    var shareCount : Int!
-    var createAt : String!
-    
-    var profileId: Int!
-    var profileImagePath : String!
-    var profileNickname : String!
-    
-}
 
 protocol CellDidSelectProtocol {
     func profileButtonDidSelect(profileId : Int)
@@ -557,7 +514,7 @@ protocol CellDidSelectProtocol {
 }
 
 class FeedDetailTableCell : UITableViewCell {
-    var feedDetail : FeedDetail!
+    var article : Article!
     var imageViewArray : [UIImageView] = []
     var index : Int = 0;
     var profileId : Int!
@@ -587,7 +544,7 @@ class FeedDetailTableCell : UITableViewCell {
     func initImageVideo() {
         self.index = 0
         
-        for i in 0..<(feedDetail.mediasArray.count) {
+        for i in 0..<(article.medias.count) {
             let contentImageView = UIImageView()
             contentImageView.frame = CGRect.init(x: 0, y: 0, width: self.imageScrollView.frame.width, height: self.imageScrollView.frame.height)
             
@@ -612,10 +569,10 @@ class FeedDetailTableCell : UITableViewCell {
     func requestImageVideo() {
         
         var uri : URL
-        if(feedDetail.mediasArray[index]["type"] == "IMAGE"){
-            uri = URL.init(string: feedDetail.mediasArray[index]["url"]!)!
+        if(article.medias[index].type == "IMAGE"){
+            uri = URL.init(string: article.medias[index].url!)!
         } else {
-            uri = URL.init(string: feedDetail.mediasArray[index]["thumbnail"]!)!
+            uri = URL.init(string: article.medias[index].thumbnail!)!
         }
         
             Alamofire.request(uri)
@@ -639,7 +596,7 @@ class FeedDetailTableCell : UITableViewCell {
 extension FeedDetailTableCell : UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let page = Int(round(Double(scrollView.contentOffset.x) / Double(scrollView.bounds.size.width)))
-        self.pageLabel.text =  String("\(page+1) / \(self.feedDetail.mediasArray.count)")
+        self.pageLabel.text =  String("\(page+1) / \(self.article.medias.count)")
         
         if(page > self.index) {
             self.index = page

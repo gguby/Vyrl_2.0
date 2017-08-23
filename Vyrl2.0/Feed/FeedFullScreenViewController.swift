@@ -38,7 +38,7 @@ class FeedFullScreenViewController: UIViewController {
     var index : Int = 0;
     var isRotate = false
     var profileId : Int!
-    var mediasArray : [[String:String]]!
+    var mediasArray : [ArticleMedia]!
     
     var timer : Timer?
     
@@ -85,7 +85,7 @@ class FeedFullScreenViewController: UIViewController {
         } else {
             self.topView.isHidden = false
             self.bottomView.isHidden = false
-            if(mediasArray[currentPage]["type"] == "VIDEO"){
+            if(mediasArray[currentPage].type == "VIDEO"){
                 self.videoPlayButton.isHidden = false
                 self.videoStatusView.isHidden = false
             }
@@ -157,10 +157,10 @@ class FeedFullScreenViewController: UIViewController {
     
     func requestImageVideo() {
         var uri : URL
-        if(mediasArray[index]["type"] == "IMAGE"){
-            uri = URL.init(string: mediasArray[index]["url"]!)!
+        if(mediasArray[index].type == "IMAGE"){
+            uri = URL.init(string: mediasArray[index].url!)!
         } else {
-            uri = URL.init(string: mediasArray[index]["thumbnail"]!)!
+            uri = URL.init(string: mediasArray[index].thumbnail!)!
         }
         
         Alamofire.request(uri)
@@ -182,7 +182,7 @@ class FeedFullScreenViewController: UIViewController {
                     self.contentScrollViewArray[self.index].addSubview(self.imageViewArray[self.index])
                     
                     let textView = UITextView()
-                    textView.text = self.mediasArray[self.index]["content"]
+//                    textView.text = self.mediasArray[self.index].
                     textView.textColor = UIColor.white
                     textView.backgroundColor = UIColor.ivGreyish
                     let size = textView.sizeThatFits(CGSize.init(width: self.view.frame.width, height: 9999))
@@ -216,7 +216,7 @@ class FeedFullScreenViewController: UIViewController {
         let alertController = UIAlertController (title:"사진 다운로드시 3G/LTE를 사용하시겠습니가?", message:"사진 다운로드시 3G/LTE를 사용하시겠습니가?",preferredStyle:.actionSheet)
         
         let okay = UIAlertAction(title: "okay", style: .default,handler: { (action) -> Void in
-           self.downloadImage(urlString: self.mediasArray[self.currentPage]["url"]!)
+           self.downloadImage(urlString: self.mediasArray[self.currentPage].url!)
         })
         
         
@@ -230,7 +230,7 @@ class FeedFullScreenViewController: UIViewController {
         if(Reachability.init()?.currentReachabilityStatus == .reachableViaWWAN) {
             self.present(alertController, animated: true, completion: nil)
         } else {
-            self.downloadImage(urlString: self.mediasArray[self.currentPage]["url"]!)
+            self.downloadImage(urlString: self.mediasArray[self.currentPage].url!)
         }
     }
     
@@ -338,7 +338,7 @@ class FeedFullScreenViewController: UIViewController {
     }
     
     func enableDownloadImageButton() {
-        if(mediasArray[self.currentPage]["type"] == "IMAGE") {
+        if(mediasArray[self.currentPage].type == "IMAGE") {
             self.downloadButton.isEnabled = true
         } else {
             self.downloadButton.isEnabled = false
@@ -399,9 +399,9 @@ extension FeedFullScreenViewController : UIScrollViewDelegate {
     }
     
     func showImageVideo(page: Int) {
-        let uri : URL = URL.init(string: mediasArray[page]["url"]!)!
+        let uri : URL = URL.init(string: mediasArray[page].url!)!
         //
-        if(mediasArray[page]["type"] == "IMAGE"){
+        if(mediasArray[page].type == "IMAGE"){
             if(self.player != nil) {
                 self.player!.pause()
                 self.playerLayer?.removeFromSuperlayer()
