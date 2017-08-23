@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 import Alamofire
 import ReachabilitySwift
+import Photos
 
 class FeedFullScreenViewController: UIViewController {
     
@@ -30,6 +31,8 @@ class FeedFullScreenViewController: UIViewController {
     @IBOutlet weak var currentTimeLabel: UILabel!
     @IBOutlet weak var timeSlider: UISlider!
     @IBOutlet weak var videoStatusView: UIView!
+    
+    @IBOutlet weak var downloadButton: UIButton!
     
     var currentPage : Int = 0;
     var index : Int = 0;
@@ -61,7 +64,7 @@ class FeedFullScreenViewController: UIViewController {
         singleTap.numberOfTapsRequired = 1
         mainScrollView.addGestureRecognizer(singleTap)
         
-        print("network status : \(Reachability.init()?.currentReachabilityStatus)")
+        enableDownloadImageButton()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -207,6 +210,54 @@ class FeedFullScreenViewController: UIViewController {
         
     }
     
+    @IBAction func downloadImageButtonClick(_ sender: UIButton) {
+        let alertController = UIAlertController (title:"사진 다운로드시 3G/LTE를 사용하시겠습니가?", message:"사진 다운로드시 3G/LTE를 사용하시겠습니가?",preferredStyle:.actionSheet)
+        
+        let okay = UIAlertAction(title: "okay", style: .default,handler: { (action) -> Void in
+           self.downloadImage(urlString: self.mediasArray[self.currentPage]["url"]!)
+        })
+        
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
+            alertController.dismiss(animated: true, completion: nil)
+        })
+        
+        alertController.addAction(okay)
+        alertController.addAction(cancel)
+        
+        if(Reachability.init()?.currentReachabilityStatus == .reachableViaWWAN) {
+            self.present(alertController, animated: true, completion: nil)
+        } else {
+            self.downloadImage(urlString: self.mediasArray[self.currentPage]["url"]!)
+        }
+    }
+    
+    func downloadImage(urlString : String) {
+        DispatchQueue.global(qos: .background).async {
+            if let url = URL(string: urlString),
+                let urlData = NSData(contentsOf: url)
+            {
+                let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0];
+                let filePath="\(documentsPath)/\(url.lastPathComponent)";
+                DispatchQueue.main.async {
+                    urlData.write(toFile: filePath, atomically: true)
+                    PHPhotoLibrary.shared().performChanges({
+                        PHAssetChangeRequest.creationRequestForAssetFromImage(atFileURL: URL(fileURLWithPath: filePath))
+                    }) { completed, error in
+                        if completed {
+                            print("photo is saved!")
+                        }
+                        
+                        if (error != nil) {
+                            print(error as Any)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    
     func canRotate() -> Void {
     }
     
@@ -280,10 +331,16 @@ class FeedFullScreenViewController: UIViewController {
         let cmTime = CMTimeMake(Int64(timeInSecond), 1000)
         
         self.player?.seek(to: cmTime, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
-        
-        
     }
     
+    func enableDownloadImageButton() {
+        if(mediasArray[self.currentPage]["type"] == "IMAGE") {
+            self.downloadButton.isEnabled = true
+        } else {
+            self.downloadButton.isEnabled = false
+        }
+  
+    }
 }
 
 extension FeedFullScreenViewController : UIScrollViewDelegate {
@@ -308,6 +365,7 @@ extension FeedFullScreenViewController : UIScrollViewDelegate {
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let page = Int(round(Double(scrollView.contentOffset.x) / Double(scrollView.bounds.size.width)))
+        self.enableDownloadImageButton()
         self.showImageVideo(page: page)
     }
     

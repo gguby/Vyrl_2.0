@@ -188,7 +188,7 @@
         <scene sceneID="zbW-6X-bXo">
             <objects>
                 <navigationController navigationBarHidden="YES" id="AqP-hB-Wsq" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wxq-cz-Xzg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="wxq-cz-Xzg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -263,6 +263,9 @@
                                             <constraint firstAttribute="height" constant="40" id="yE4-Bf-PQt"/>
                                         </constraints>
                                         <state key="normal" image="icon_download_01"/>
+                                        <connections>
+                                            <action selector="downloadImageButtonClick:" destination="yXq-xH-jGk" eventType="touchUpInside" id="rLo-i3-H0f"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QnE-jh-NR3">
                                         <rect key="frame" x="115" y="0.0" width="55" height="40"/>
@@ -361,6 +364,7 @@
                     <connections>
                         <outlet property="bottomView" destination="uUj-iA-brH" id="Mnx-uc-sQd"/>
                         <outlet property="currentTimeLabel" destination="qPY-hl-6Gz" id="j3H-Jp-bWC"/>
+                        <outlet property="downloadButton" destination="P13-TR-zp9" id="qXX-fR-uSz"/>
                         <outlet property="mainScrollView" destination="jId-fV-qHA" id="8kb-IA-MUx"/>
                         <outlet property="pageNumberLabel" destination="GE5-7W-BNp" id="pFp-Sj-jyh"/>
                         <outlet property="timeSlider" destination="K0t-gq-VaH" id="CBT-04-xfD"/>
