@@ -25,9 +25,15 @@ struct Constants {
     
     struct VyrlAPIURL{
         static let MYPROFILE = VyrlAPIConstants.baseURL + "users/profile/me"
+        
         static let changeProfile = VyrlAPIConstants.baseURL + "users/profile"
         static let notices = VyrlAPIConstants.baseURL + "notices"
         static let faqs = VyrlAPIConstants.baseURL + "faqs"
+        
+        static func userProfile(userId :Int)-> String{
+            let str = "\(userId)"
+            return VyrlAPIConstants.baseURL + "users/profile/" + str
+        }
     }
     
     struct VyrlFeedURL {
@@ -35,13 +41,11 @@ struct Constants {
         static let FEEDALL = VyrlAPIConstants.baseURL + "feeds/all"
         
         static func feedLike(articleId :Int)-> String{
-            
             let str = "\(articleId)"
             return VyrlAPIConstants.baseURL + "feeds/likes/" + str
         }
         
         static func usersFeedLike(articleId :Int)-> String{
-            
             let str = "\(articleId)"
             return VyrlAPIConstants.baseURL + "feeds/users/" + str + "/likes"
         }
@@ -49,6 +53,11 @@ struct Constants {
         static func feed(articleId :Int)-> String{
             let str = "\(articleId)"
             return VyrlAPIConstants.baseURL + "feeds/" + str
+        }
+        
+        static func feed(userId :Int)-> String{
+            let str = "\(userId)"
+            return VyrlAPIConstants.baseURL + "feeds/others/" + str
         }
         
         static func feedComment(articleId:Int)-> String{

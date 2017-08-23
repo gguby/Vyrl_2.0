@@ -14,7 +14,7 @@ import AVFoundation
 import KRPullLoader
 
 enum FeedTableType {
-    case ALLFEED,MYFEED, BOOKMARK
+    case ALLFEED,MYFEED, BOOKMARK, USERFEED
 }
 
 class FeedTableViewController: UIViewController, UIScrollViewDelegate{
@@ -24,6 +24,7 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
     var loadMoreArray = [Article]()
     
     var feedType = FeedTableType.MYFEED
+    var userId : Int!
     
     @IBOutlet weak var uploadLoadingView: UIView!
     @IBOutlet weak var uploadLoadingHeight: NSLayoutConstraint!
@@ -41,14 +42,17 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 400
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.feedView = self
+        if self.feedType != .USERFEED {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.feedView = self
+            
+            self.setUpRefresh()
+        }
         
         self.initLoader()
         
-        self.setUpRefresh()
-        
         self.getAllFeed()
+        
     }
     
     func setUpRefresh(){
@@ -200,6 +204,8 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
             url = URL.init(string: Constants.VyrlFeedURL.FEEDALL, parameters: parameters)
         }else if self.feedType == FeedTableType.MYFEED{
             url = URL.init(string: Constants.VyrlFeedURL.FEED, parameters: parameters)
+        }else if self.feedType == .USERFEED {
+            url = URL.init(string: Constants.VyrlFeedURL.feed(userId: self.userId))
         }
         else {
             url = URL.init(string: Constants.VyrlFeedURL.FEEDBOOKMARK)
@@ -216,6 +222,10 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
             }
             
             self.tableView.reloadData()
+            
+            if self.feedType == .USERFEED {
+                self.tableView.contentSize = CGSize.init(width: self.tableView.contentSize.width, height: self.tableView.contentSize.height + 45)
+            }
         }
     }
     
@@ -555,9 +565,6 @@ extension FeedTableViewController : FeedPullLoaderDelegate {
             case let .loading(completionHandler: completionHandler):
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+1) {
                     completionHandler()
-                    
-//                    self.tableView.removePullLoadableView(self.bottomRefresh)
-                    
                     self.getFeedLoadMore()
                     
                 }

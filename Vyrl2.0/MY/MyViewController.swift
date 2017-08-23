@@ -38,6 +38,17 @@ class MyViewController: UIViewController{
     
     @IBOutlet weak var storeBtn: UIButton!
     
+    @IBOutlet weak var bottomSpace: NSLayoutConstraint!
+    
+    @IBOutlet weak var post: UILabel!
+    @IBOutlet weak var following: UILabel!
+    @IBOutlet weak var follower: UILabel!
+    
+    @IBOutlet weak var titleLbl: UILabel!
+    @IBOutlet weak var accountSelect: SmallButton!
+    @IBOutlet weak var bookMakrBtn: UIButton!
+    @IBOutlet weak var middlePostBtn: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -55,9 +66,16 @@ class MyViewController: UIViewController{
         
         if self.isMyProfile == true {
             self.setupFeed(feedType: FeedTableType.MYFEED)
+            self.accountSelect.isHidden = false
+            self.bottomSpace.constant = 45
+            self.bookMakrBtn.isHidden = false
         }else {
             self.storeBtn.setImage(UIImage.init(named: "icon_back_01"), for: .normal)
             self.storeBtn.addTarget(self, action: #selector(back(sender:)), for: .touchUpInside)
+            self.setupFeed(feedType: FeedTableType.USERFEED)
+            self.bottomSpace.constant = 0
+            self.accountSelect.isHidden = true
+            self.bookMakrBtn.isHidden = true
         }
     }
     
@@ -82,6 +100,7 @@ class MyViewController: UIViewController{
         let controller = storyboard.instantiateViewController(withIdentifier: "feedTable") as! FeedTableViewController
         
         controller.feedType = feedType
+        controller.userId = profileUserId
         controller.removeFromParentViewController()
         controller.view.removeFromSuperview()
         
@@ -97,12 +116,7 @@ class MyViewController: UIViewController{
         self.loadMyProfile()
     }
     
-    func loadMyProfile(){
-        
-        if self.isMyProfile == false {
-            return
-        }
-        
+    func refreshMyAccout(){
         self.accountList.removeAll()
         
         self.accountList.append(LoginManager.sharedInstance.getCurrentAccount()!)
@@ -126,11 +140,17 @@ class MyViewController: UIViewController{
                         self.profileImage.image = responseImg;
                         UserDefaults.standard.set(image: responseImg, forKey: (currentAccount?.userId)!)
                     }
-                }            
+                }
             }
         }
+    }
+    
+    func getProfile(){
+        var uri = Constants.VyrlAPIURL.MYPROFILE
         
-        let uri = Constants.VyrlAPIURL.MYPROFILE
+        if self.isMyProfile == false {
+            uri = Constants.VyrlAPIURL.userProfile(userId: self.profileUserId)
+        }
         
         Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON(completionHandler: {
             response in
@@ -146,27 +166,21 @@ class MyViewController: UIViewController{
                         self.introLabel.text = jsonData["selfIntro"] as? String
                         self.homepageLabel.text = jsonData["homepageUrl"] as? String
                         
-                        let account = LoginManager.sharedInstance.getCurrentAccount()
+                        let image = jsonData["imagePath"] as? String
                         
-                        account?.nickName = jsonData["nickName"] as? String
-                        account?.imagePath = jsonData["imagePath"] as? String
+                        let url = URL.init(string: (image)!)
+                        self.profileImage.af_setImage(withURL: url!)
                         
-                        LoginManager.sharedInstance.replaceAccount(account: account!)
-                        
-                        let index = self.accountList.index(where :{ $0.userId == account?.userId })
-                        if let index = index {
-                            self.accountList[index] = account!
+                        if self.isMyProfile {
+                            let account = LoginManager.sharedInstance.getCurrentAccount()
+                            
+                            account?.nickName = jsonData["nickName"] as? String
+                            account?.imagePath = jsonData["imagePath"] as? String
+                            
+                            LoginManager.sharedInstance.replaceAccount(account: account!)
+                        }else {
+                            self.titleLbl.text = jsonData["nickName"] as? String
                         }
-                        
-                        guard let image = UserDefaults.standard.image(forKey: (currentAccount?.userId)!) else {
-                            if(account?.imagePath != nil) {
-                                let url = URL.init(string: (account?.imagePath)!)
-                                self.profileImage.af_setImage(withURL: url!)
-                            }
-                            return
-                        }
-                        
-                        self.profileImage.image = image
                     }
                 }
                 
@@ -176,6 +190,15 @@ class MyViewController: UIViewController{
                 print(error)
             }
         })
+    }
+    
+    func loadMyProfile(){
+        
+        if self.isMyProfile {
+            self.refreshMyAccout()
+        }
+        
+        self.getProfile()
     }
     
     override func didReceiveMemoryWarning() {
