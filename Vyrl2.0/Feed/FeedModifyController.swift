@@ -15,12 +15,13 @@ class FeedModifyController : UIViewController
     @IBOutlet weak var btnSave: UIButton!
     
     var articleId : Int!
+    var originText : String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.textView.delegate = self
-        self.enabledBtnSave(enabled: !self.textView.text.isEmpty)
+        self.enabledBtnSave(enabled: false)
         
         self.textView.becomeFirstResponder()
     }
@@ -57,21 +58,13 @@ class FeedModifyController : UIViewController
     
     func setText(text :String){
         self.textView.text = text
+        originText = text
     }
 }
 
 extension FeedModifyController : UITextViewDelegate {
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        let chracterCount = textView.text?.characters.count ?? 0
-        
-        if (range.length + range.location > chracterCount){
-            return false
-        }
-        
-        let textLength = chracterCount + text.characters.count - range.length
-        
-        self.enabledBtnSave(enabled: textLength > 0)
-        
-        return true
+    public func textViewDidChange(_ textView: UITextView){
+        let enable = self.originText != textView.text && textView.text.isEmpty == false
+        self.enabledBtnSave(enabled: enable)
     }
 }

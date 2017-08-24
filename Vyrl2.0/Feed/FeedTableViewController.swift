@@ -26,6 +26,7 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
     var feedType = FeedTableType.MYFEED
     var userId : Int!
     var fanPageId : Int!
+    var isBottomRefresh = false
     
     @IBOutlet weak var uploadLoadingView: UIView!
     @IBOutlet weak var uploadLoadingHeight: NSLayoutConstraint!
@@ -49,7 +50,7 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
             self.setUpRefresh()
             self.bottomSpace.constant = 65
         } else {
-            self.bottomSpace.constant = 0
+            self.bottomSpace.constant = 100
         }
         
         self.initLoader()
@@ -61,6 +62,10 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         let refreshView = FeedPullLoaderView()
         refreshView.delegate = self
         self.tableView.addPullLoadableView(refreshView, type: .refresh)
+        
+//        let bottom = FeedPullLoaderView()
+//        bottom.delegate = self
+//        self.tableView.addPullLoadableView(bottom, type: .loadMore)
         
         let customView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
         customView.backgroundColor = UIColor.clear
@@ -78,6 +83,8 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         ])
         
         self.tableView.tableFooterView = customView
+        
+        self.isBottomRefresh = true
     }
     
     func getImgList()->[UIImage]{
@@ -93,6 +100,11 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+        if self.isBottomRefresh == false {
+            return
+        }
+        
         let offset = scrollView.contentOffset
         let bounds = scrollView.bounds
         let size = scrollView.contentSize
@@ -154,13 +166,13 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
     func getFeedLoadMore(){
         var url: URL!
         
-        let parameters :[String:String] = [
+        var parameters :[String:String] = [
             "size" : "\(10)"
         ]
         
-//        if self.articleArray.count > 0 {
-//            parameters["lastId"] = (self.articleArray.last?.idStr)!
-//        }
+        if self.articleArray.count > 0 {
+            parameters["lastId"] = (self.articleArray.last?.idStr)!
+        }
         
         if self.feedType == FeedTableType.ALLFEED {
             url = URL.init(string: Constants.VyrlFeedURL.FEEDALL, parameters: parameters)
@@ -172,15 +184,12 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         
         Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Article]>) in
             
-            self.articleArray.removeAll()
-            
             let array = response.result.value ?? []
             
             self.articleArray.append(contentsOf: array)
             
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
+            self.tableView.reloadData()
+//            self.tableView.contentSize = CGSize.init(width: self.tableView.contentSize.width, height: self.tableView.contentSize.height + 45)
         }
     }
    
@@ -215,9 +224,9 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
             }
             
             self.tableView.reloadData()
-            if self.feedType == .USERFEED && self.feedType == .FANFEED {
-                self.tableView.contentSize = CGSize.init(width: self.tableView.contentSize.width, height: self.tableView.contentSize.height + 45)
-            }
+//            if self.feedType == .USERFEED && self.feedType == .FANFEED {
+//                self.tableView.contentSize = CGSize.init(width: self.tableView.contentSize.width, height: self.tableView.contentSize.height + 45)
+//            }
         }
     }
     
@@ -527,7 +536,7 @@ extension FeedTableViewController : FeedCellDelegate {
     
     func showFeedAlert(cell : FeedTableCell) {
         
-        if cell.isMyArticle == true {
+        if cell.isMyArticle == false {
             self.showAlertNotMine(cell: cell)
             return
         }
@@ -575,22 +584,6 @@ extension FeedTableViewController : FeedCellDelegate {
     func showUserProfileView(userId: Int) {
         let profile = self.pushViewControllrer(storyboardName: "My", controllerName: "My") as! MyViewController
         profile.profileUserId = userId
-    }
-}
-
-extension FeedTableViewController : KRPullLoadViewDelegate {
-    func pullLoadView(_ pullLoadView: KRPullLoadView, didChangeState state: KRPullLoaderState, viewType type: KRPullLoaderType){
-        switch state {
-        case let .loading(completionHandler: completionHandler):
-            
-            DispatchQueue.main.async {
-                completionHandler()
-                self.getFeedLoadMore()
-            }
-            
-        default:
-            break
-        }
     }
 }
 
