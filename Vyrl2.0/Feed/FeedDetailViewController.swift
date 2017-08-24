@@ -38,6 +38,9 @@ class FeedDetailViewController: UIViewController{
     var commentArray : [Comment] = []
     var article : Article!
     
+    var commentIndex = 1
+    var commentLastId = 0
+    
     var tapGesture : UITapGestureRecognizer!
 
     override func viewDidLoad() {
@@ -226,15 +229,23 @@ class FeedDetailViewController: UIViewController{
     }
     
     func requestComment() {
-        let uri = URL.init(string: Constants.VyrlFeedURL.feedComment(articleId: articleId))
+        let parameters : Parameters = [
+            "lastId": "\(self.commentLastId)",
+            "size": "\(20*self.commentIndex)"
+        ]
         
-        Alamofire.request(uri!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Comment]>) in
+        let uri = URL.init(string: Constants.VyrlFeedURL.feedComment(articleId: articleId), parameters: parameters as! [String : String])
+        
+
+        Alamofire.request(uri!, method: .get, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Comment]>) in
             
             let array = response.result.value ?? []
             self.commentArray.removeAll()
             for comment in array {
                self.commentArray.append(comment)
              }
+            
+            self.commentLastId = self.commentArray[0].id
             self.tableView.reloadData()
         }
     }
@@ -246,10 +257,13 @@ class FeedDetailViewController: UIViewController{
             self.article = article
             
             self.commentArray.removeAll()
-            for comment in (article?.comments)! {
-                self.commentArray.append(comment)
+            if(article?.comments != nil){
+                for comment in (article?.comments)! {
+                    self.commentArray.append(comment)
+                }
+                
+                self.commentLastId = self.commentArray[0].id
             }
-            
             self.tableView.reloadData()
         }
     }
@@ -371,6 +385,20 @@ class FeedDetailViewController: UIViewController{
 }
 
 extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if(self.article != nil && self.article.comments != nil && self.article.cntComment > 20) {
+            if(indexPath.row == 1) {
+                self.commentIndex += 1
+                self.requestComment()
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return self.commentArray.count + 2
+    }
+    
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         if(indexPath.row == 0) {
             return false
@@ -402,15 +430,9 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
         return UITableViewAutomaticDimension
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
-        return self.commentArray.count + 1
-    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        switch indexPath.row {
-        case 0:
+        if(indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "oneFeed") as! FeedDetailTableCell
             if(self.article != nil) {
                 cell.article = self.article
@@ -422,8 +444,8 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
                 cell.contentTextView.resolveHashTags()
                 cell.timeLabel.text = (self.article.date! as! NSDate).timeAgo()
                 
-                cell.likeCountButton.setTitle(String("좋아요 \(self.article.likeCount!)명"), for: .normal)
-                cell.shareCountButton.setTitle(String("공유 \(self.article.shareCount!)명"), for: .normal)
+                cell.likeCountButton.setTitle(String("좋아요 \(self.article.cntLike!)명"), for: .normal)
+                cell.shareCountButton.setTitle(String("공유 \(self.article.cntShare!)명"), for: .normal)
                 cell.pageLabel.text = String("1 / \(self.article.medias.count)")
                 
                 cell.profileButton.af_setBackgroundImage(for: .normal, url: URL.init(string: self.article.profile.imagePath)!)
@@ -433,19 +455,34 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
                 cell.delegate = self
             }
             return cell
-            
-        default:
-          let  cell = tableView.dequeueReusableCell(withIdentifier: "Comment") as! FeedCommentTableCell
-            cell.commentNicknameLabel.text = self.commentArray[indexPath.row-1].nickName
-            cell.commentContextTextView.text = self.commentArray[indexPath.row-1].content
-            cell.commentProfileButton.af_setBackgroundImage(for: .normal, url: URL.init(string: self.commentArray[indexPath.row-1].profileImageURL)!)
-          
-            cell.commentTimaLavel.text = self.commentArray[indexPath.row-1].createAt.toDateTime().timeAgo()
-            
-            return cell
+
+        } else if (indexPath.row == 1 && self.article != nil) {
+            if(self.article.comments != nil && self.article.cntComment > 20) {
+                let  cell = tableView.dequeueReusableCell(withIdentifier: "moreComment") as! FeedDetailTableCell
+                return cell
+            }
         }
         
+        var index = 0
+        let  cell = tableView.dequeueReusableCell(withIdentifier: "Comment") as! FeedCommentTableCell
+        if(self.article != nil)
+        {
+           if(self.article.comments != nil && self.article.cntComment > 20) {
+                index = indexPath.row - 2
+            } else {
+                 index = indexPath.row - 1
+            }
+            
+            cell.commentNicknameLabel.text = self.commentArray[index].nickName
+            cell.commentContextTextView.text = self.commentArray[index].content
+            cell.commentProfileButton.af_setBackgroundImage(for: .normal, url: URL.init(string: self.commentArray[index].profileImageURL)!)
+            
+            cell.commentTimaLavel.text = self.commentArray[index].createAt.toDateTime().timeAgo()
+
+        }
         
+        return cell
+
     }
 }
 
@@ -536,9 +573,11 @@ class FeedDetailTableCell : UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.imageScrollView.delegate = self as UIScrollViewDelegate
-        self.contentTextView.textContainerInset = UIEdgeInsets.zero
-        self.contentTextView.textContainer.lineFragmentPadding = 0
+        if(self.imageScrollView != nil) {
+            self.imageScrollView.delegate = self as UIScrollViewDelegate
+            self.contentTextView.textContainerInset = UIEdgeInsets.zero
+            self.contentTextView.textContainer.lineFragmentPadding = 0
+        }
     }
     
     func initImageVideo() {
