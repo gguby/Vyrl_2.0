@@ -31,6 +31,7 @@ target 'Vyrl2.0' do
     pod 'ReachabilitySwift'
     pod 'NSDate+TimeAgo'
     pod 'Google-Mobile-Ads-SDK'
+    pod 'FBAudienceNetwork'
 end
 
 
