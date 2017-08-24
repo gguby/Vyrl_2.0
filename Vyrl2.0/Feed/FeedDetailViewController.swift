@@ -38,7 +38,6 @@ class FeedDetailViewController: UIViewController{
     var commentArray : [Comment] = []
     var article : Article!
     
-    var commentIndex = 1
     var commentLastId = 0
     
     var tapGesture : UITapGestureRecognizer!
@@ -231,7 +230,7 @@ class FeedDetailViewController: UIViewController{
     func requestComment() {
         let parameters : Parameters = [
             "lastId": "\(self.commentLastId)",
-            "size": "\(20*self.commentIndex)"
+            "size": "\(20)"
         ]
         
         let uri = URL.init(string: Constants.VyrlFeedURL.feedComment(articleId: articleId), parameters: parameters as! [String : String])
@@ -240,13 +239,12 @@ class FeedDetailViewController: UIViewController{
         Alamofire.request(uri!, method: .get, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Comment]>) in
             
             let array = response.result.value ?? []
-            self.commentArray.removeAll()
             for comment in array {
-               self.commentArray.append(comment)
+               self.commentArray.insert(comment, at: 0)
              }
-            
             self.commentLastId = self.commentArray[0].id
-            self.tableView.reloadData()
+            
+           self.tableView.reloadData()
         }
     }
     
@@ -256,7 +254,6 @@ class FeedDetailViewController: UIViewController{
             let article = response.result.value
             self.article = article
             
-            self.commentArray.removeAll()
             if(article?.comments != nil){
                 for comment in (article?.comments)! {
                     self.commentArray.append(comment)
@@ -388,7 +385,6 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if(self.article != nil && self.article.comments != nil && self.article.cntComment > 20) {
             if(indexPath.row == 1) {
-                self.commentIndex += 1
                 self.requestComment()
             }
         }
