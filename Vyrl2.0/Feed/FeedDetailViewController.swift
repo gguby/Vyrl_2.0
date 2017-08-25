@@ -584,7 +584,7 @@ class FeedDetailTableCell : UITableViewCell {
         for i in 0..<(article.medias.count) {
             var contentImageView : UIImageView
             
-            let url = URL.init(string: article.medias[i].image)
+            let url = URL.init(string: article.medias[i].imageUrl)
             if(url?.pathExtension == "gif")
             {
                 contentImageView = FLAnimatedImageView()
@@ -615,7 +615,7 @@ class FeedDetailTableCell : UITableViewCell {
     func requestImageVideo() {
         
         var uri : URL
-        uri = URL.init(string: article.medias[index].image!)!
+        uri = URL.init(string: article.medias[index].imageUrl!)!
         
         Alamofire.request(uri)
                 .downloadProgress(closure: { (progress) in

@@ -677,6 +677,7 @@
                     <connections>
                         <outlet property="cancelButton" destination="3L6-XR-IvJ" id="4sf-AJ-NJa"/>
                         <outlet property="container" destination="KmV-zU-3oo" id="qrX-ay-VS5"/>
+                        <outlet property="emptyLabel" destination="U6R-tu-exM" id="Hbq-lb-pkF"/>
                         <outlet property="emptyView" destination="h6t-ld-KiC" id="c4i-MB-Io4"/>
                         <outlet property="joinFanPageHeight" destination="9OS-p4-sWL" id="6oB-Nm-mHG"/>
                         <outlet property="joinFanpageCollectionView" destination="JkV-Fm-xmY" id="tt7-Yz-oPL"/>
@@ -861,7 +862,7 @@
             <objects>
                 <navigationController navigationBarHidden="YES" id="FGb-AU-ze0" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lpZ-SK-Jsl">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="lpZ-SK-Jsl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

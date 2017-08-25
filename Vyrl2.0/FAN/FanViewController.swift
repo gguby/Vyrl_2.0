@@ -34,6 +34,8 @@ class FanViewController: UIViewController {
     
     @IBOutlet weak var container: UIView!
     
+    @IBOutlet weak var emptyLabel: UILabel!
+    
     var joinFanPages = [FanPage]()
     var suggestFanPages = [FanPage]()
     var searchResults = [FanPage]()
@@ -86,6 +88,7 @@ class FanViewController: UIViewController {
         searchTableView.isHidden = true;
         self.searchResults.removeAll()
         self.searchTable.reloadData()
+        self.emptyLabel.alpha = 1
         searchBar.resignFirstResponder()
     }
     
@@ -265,6 +268,7 @@ extension FanViewController : UISearchBarDelegate {
         if searchText.isEmpty {
             self.searchResults.removeAll()
             self.searchTable.reloadData()
+            self.emptyLabel.alpha = 1
             return
         }
         
@@ -274,6 +278,12 @@ extension FanViewController : UISearchBarDelegate {
             
             self.searchResults.removeAll()
             let array  = response.result.value ?? []
+            
+            if array.isEmpty {
+                self.emptyLabel.alpha = 1
+            }else {
+                self.emptyLabel.alpha = 0
+            }
             
             self.searchResults.append(contentsOf: array)
             
