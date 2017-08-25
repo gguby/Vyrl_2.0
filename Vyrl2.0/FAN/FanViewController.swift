@@ -36,6 +36,7 @@ class FanViewController: UIViewController {
     
     var joinFanPages = [FanPage]()
     var suggestFanPages = [FanPage]()
+    var searchResults = [FanPage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +56,7 @@ class FanViewController: UIViewController {
         self.getSuggesetFanPage()
         
         self.recommandFanpageTableView.tableFooterView = UIView(frame: .zero)
+        self.searchTable.tableFooterView = UIView(frame: .zero)
     }
     
     func setupPostContainer(){
@@ -82,6 +84,8 @@ class FanViewController: UIViewController {
     
     @IBAction func hiddenAction(_ sender: Any) {
         searchTableView.isHidden = true;
+        self.searchResults.removeAll()
+        self.searchTable.reloadData()
         searchBar.resignFirstResponder()
     }
     
@@ -210,6 +214,10 @@ class RecommendFanPageCell : UITableViewCell {
 extension FanViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
+        if tableView == self.searchTable {
+            return self.searchResults.count
+        }
+        
         return self.suggestFanPages.count
     }
     
@@ -217,7 +225,14 @@ extension FanViewController : UITableViewDelegate, UITableViewDataSource {
     {        
         if(tableView == self.searchTable)
         {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "OfficialBannerCell", for: indexPath) as UITableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "fanSearch", for: indexPath) as! FanCell
+            let fanPage = self.searchResults[indexPath.row]
+            
+            cell.profile.af_setImage(withURL: URL(string: fanPage.pageprofileImagePath)!)
+            cell.members.text = "\(fanPage.cntMember!) members "
+            cell.title.text = fanPage.pageName
+            cell.intro.text = fanPage.pageInfo
+            
             return cell
         } else if(tableView == self.recommandFanpageTableView) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "RecommandFanpageCell", for: indexPath) as! RecommendFanPageCell
@@ -244,6 +259,28 @@ extension FanViewController : UISearchBarDelegate {
         searchTableView.isHidden = false
         return true
     }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchText.isEmpty {
+            self.searchResults.removeAll()
+            self.searchTable.reloadData()
+            return
+        }
+        
+        let uri = Constants.VyrlFanAPIURL.search(searchWord: searchText)
+        
+        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[FanPage]>) in
+            
+            self.searchResults.removeAll()
+            let array  = response.result.value ?? []
+            
+            self.searchResults.append(contentsOf: array)
+            
+            self.searchTable.reloadData()
+        }
+    }
+
 }
 
 struct FanPage : Mappable {

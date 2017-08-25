@@ -11,13 +11,14 @@ import Alamofire
 import AlamofireImage
 import NSDate_TimeAgo
 import GoogleMobileAds
+import FBAudienceNetwork
 
 @objc protocol FeedCellDelegate {
     func didPressCell(sender: Any, cell : FeedTableCell)
     @objc optional func setBookMark(cell : FeedTableCell)
     @objc optional func showFeedAlert(cell : FeedTableCell)
     @objc optional func showFeedShareAlert(cell : FeedTableCell)
-    @objc optional func showUserProfileView(userId : Int)
+    @objc optional func showUserProfileView(userId : Int)    
 }
 
 class FeedTableCell: UITableViewCell {
@@ -55,6 +56,8 @@ class FeedTableCell: UITableViewCell {
     
     @IBOutlet weak var officialImage: UIImageView!
     @IBOutlet weak var followBtn: UIButton!
+    
+    var nativeAd :FBNativeAd!
     
     var adLoader: GADAdLoader!
     
@@ -150,12 +153,15 @@ class FeedTableCell: UITableViewCell {
             
             self.officialImage.isHidden  = true
             
-            guard self.collectionView != nil else {                
+            guard self.collectionView != nil else {
+                
                 return
             }
   
             if ( count == 2 ){
                 cellWidth = 186
+            }else {
+                cellWidth = 124
             }
             
             if ( count! > 6){
@@ -163,6 +169,8 @@ class FeedTableCell: UITableViewCell {
             }
             
             contentHeight.constant = CGFloat(ceilf( Float(count!) / 3) * Float(cellWidth))
+            
+            self.collectionView.reloadData()
         }
     }
 
@@ -291,13 +299,13 @@ extension FeedTableCell: UICollectionViewDataSource, UICollectionViewDelegate {
         
         let media : ArticleMedia = (self.article?.medias[indexPath.row])!
         
-        let str = media.image
-        
-        let url : URL = URL.init(string: str!)!
-        
-        cell.imageView.af_setImage(withURL: url)
+        cell.imageView.af_setImage(withURL: URL(string: media.imageUrl)!)
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.delegate.didPressCell(sender: self, cell: self)
     }
 }
 
@@ -321,4 +329,6 @@ extension FeedTableCell : GADNativeContentAdLoaderDelegate , GADNativeAppInstall
 class BoxCell : UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
 }
+
+
 

@@ -36,6 +36,12 @@ struct Constants {
         }
     }
     
+    struct VyrlSearchURL {
+        static func search(searchWord : String) -> String{
+            return VyrlAPIConstants.baseURL + "/search/" + searchWord
+        }
+    }
+    
     struct VyrlFeedURL {
         static let FEED = VyrlAPIConstants.baseURL + "feeds"
         static let FEEDALL = VyrlAPIConstants.baseURL + "feeds/all"
@@ -96,6 +102,10 @@ struct Constants {
         static func getFanPagePosts(fanPageId : Int)-> String{
             let str = "\(fanPageId)"
             return VyrlAPIConstants.baseURL + "fan-pages/" + str + "/posts"
+        }
+        
+        static func search(searchWord : String) -> String{
+            return VyrlAPIConstants.baseURL + "/fan-pages/searchs/" + searchWord
         }
 
     }

@@ -8,6 +8,9 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireObjectMapper
+import ObjectMapper
 
 class SearchViewController: UIViewController, UISearchBarDelegate {
     
@@ -27,6 +30,11 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var searchTable: UITableView!
+    
+    var searchObj : SearchObj!
+    var tagList = [Tag]()
+    var userList = [Profile]()
+    var fanPageList = [FanPage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,7 +82,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var selectedLine2: UIView!
     @IBOutlet weak var selectedLine3: UIView!
     
-    var selectedIdx = 0.0
+    var selectedIdx = 0
     
     @IBAction func tagAction(_ sender: UIButton) {
         sender.setTitleColor(UIColor.ivLighterPurple, for: .normal)
@@ -129,11 +137,23 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
 }
 
 extension SearchViewController : UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         if tableView == self.searchTable {
+            switch self.selectedIdx {
+            case 1:
+                return self.tagList.count
+            case 2:
+                return self.userList.count
+            case 3:
+                return self.fanPageList.count
+            default:
+                break
+            }
             
-            return 4
+            return 0
+
         }
         return 3
     }
@@ -160,24 +180,34 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        var cell : UITableViewCell = UITableViewCell()
         if tableView == self.searchTable {
             switch selectedIdx {
             case 1:
-                cell = tableView.dequeueReusableCell(withIdentifier: "tagcell") as! TagCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "tagcell") as! TagCell
+                return cell
             case 2:
-                cell = tableView.dequeueReusableCell(withIdentifier: "usercell") as! UserCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "usercell") as! UserCell
+                return cell
             case 3:
-                cell = tableView.dequeueReusableCell(withIdentifier: "fancell") as! FanCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "fancell") as! FanCell
+                
+                let fanPage = self.fanPageList[indexPath.row]
+                
+                cell.profile.af_setImage(withURL: URL(string: fanPage.pageprofileImagePath)!)
+                cell.members.text = "\(fanPage.cntMember)"
+                cell.title.text = fanPage.pageName
+                cell.intro.text = fanPage.pageInfo
+                return cell
             default:
                 break
             }
         }
         else {
-            cell = tableView.dequeueReusableCell(withIdentifier: "FollowCell") as! FollowCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "FollowCell") as! FollowCell
+            return cell
         }
         
-        return cell
+        return UITableViewCell()
     }
 }
 
@@ -216,24 +246,31 @@ extension SearchViewController {
         return true
     }
     
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-    }
-    
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+        if searchText.isEmpty {
+            self.searchTable.reloadData()
+            return
+        }
         
-    }
-    
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        let uri = Constants.VyrlSearchURL.search(searchWord: searchText)
         
-    }
+        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseObject { (response: DataResponse<SearchObj>) in
+            self.searchObj = response.result.value
+            
+            self.tagList.removeAll()
+            self.userList.removeAll()
+            self.fanPageList.removeAll()
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        
+            self.tagList = self.searchObj.tagList
+            self.userList = self.searchObj.userList
+            self.fanPageList = self.searchObj.fanPageList
+            
+            self.searchTable.reloadData()
+        }
     }
-    
     func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        self.searchTable.reloadData()
+
         return true
     }
 
@@ -312,5 +349,56 @@ class FanCell : UITableViewCell {
     
     @IBOutlet weak var members: UILabel!
     @IBOutlet weak var intro: UILabel!
+}
+
+struct Tag : Mappable {
+    var hashTag : String!
+    var postCount : Int!
+    
+    init?(map: Map) {
+    }
+    
+    mutating func mapping(map: Map){
+        hashTag <- map["hashTag"]
+        postCount <- map["postCount"]
+    }
+}
+
+struct SearchUser {
+    
+    var followerCount : Int!
+    var level : String!
+    var nickName : String!
+    var profileImagePath : String!
+    var userId : Int!
+    
+    init?(map: Map) {
+    }
+    
+    mutating func mapping(map: Map){
+        followerCount <- map["followerCount"]
+        level <- map["postCount"]
+        nickName <- map["nickName"]
+        profileImagePath <- map["profileImagePath"]
+        userId <- map["userId"]
+    }
+}
+
+struct SearchObj : Mappable {
+    
+    var fanPageList : [FanPage]!
+    var tagList : [Tag]!
+    var userList : [Profile]!
+    
+    init?(map: Map) {
+        
+    }
+    
+    mutating func mapping(map: Map){
+        fanPageList <- map["fanPageList"]
+        tagList <- map["tagList"]
+        userList <- map["userList"]
+    }
+
 }
 

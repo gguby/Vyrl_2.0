@@ -520,6 +520,13 @@
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XFi-k8-WNe">
                                 <rect key="frame" x="0.0" y="65" width="375" height="921"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uSJ-fp-cw0" userLabel="Line">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                                        <color key="backgroundColor" red="0.9137254901960784" green="0.90980392156862744" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="LSQ-KU-5P0"/>
+                                        </constraints>
+                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="팬클럽/팬페이지를 검색해 보세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U6R-tu-exM">
                                         <rect key="frame" x="101.5" y="452.5" width="172.5" height="16"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
@@ -527,8 +534,8 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="97" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="loD-50-r76">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="921"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <rect key="frame" x="0.0" y="1" width="375" height="920"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OfficialBannerCell" rowHeight="97" id="eKI-1v-J6q">
                                                 <rect key="frame" x="0.0" y="1" width="375" height="97"/>
@@ -559,7 +566,7 @@
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" red="0.50196078430000002" green="0.32156862749999998" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                             </tableViewCell>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="72" id="5uh-rI-vLZ">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="fanSearch" rowHeight="72" id="5uh-rI-vLZ" customClass="FanCell" customModule="Vyrl2_0" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="98" width="375" height="72"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5uh-rI-vLZ" id="C0x-mh-2o1">
@@ -619,6 +626,12 @@
                                                         <constraint firstItem="e6T-hc-xOM" firstAttribute="leading" secondItem="yUV-Ib-RD2" secondAttribute="trailing" constant="14" id="sZY-Fs-A4u"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="intro" destination="zmo-8P-ga5" id="WTa-YD-pg7"/>
+                                                    <outlet property="members" destination="dc1-EP-4V7" id="QY5-fU-gl8"/>
+                                                    <outlet property="profile" destination="yUV-Ib-RD2" id="8uh-hY-N1G"/>
+                                                    <outlet property="title" destination="CYt-0w-GY6" id="sBk-fN-oLW"/>
+                                                </connections>
                                             </tableViewCell>
                                         </prototypes>
                                         <connections>
@@ -634,7 +647,10 @@
                                     <constraint firstItem="loD-50-r76" firstAttribute="leading" secondItem="XFi-k8-WNe" secondAttribute="leading" id="REn-ov-dNc"/>
                                     <constraint firstItem="U6R-tu-exM" firstAttribute="centerX" secondItem="XFi-k8-WNe" secondAttribute="centerX" id="ROC-Sa-ieW"/>
                                     <constraint firstAttribute="trailing" secondItem="loD-50-r76" secondAttribute="trailing" id="S4K-5A-sud"/>
-                                    <constraint firstItem="loD-50-r76" firstAttribute="top" secondItem="XFi-k8-WNe" secondAttribute="top" id="oYw-Rv-2Ug"/>
+                                    <constraint firstItem="loD-50-r76" firstAttribute="top" secondItem="uSJ-fp-cw0" secondAttribute="bottom" id="Xt1-VX-IXl"/>
+                                    <constraint firstItem="uSJ-fp-cw0" firstAttribute="top" secondItem="XFi-k8-WNe" secondAttribute="top" id="dNS-AC-k9M"/>
+                                    <constraint firstItem="uSJ-fp-cw0" firstAttribute="leading" secondItem="XFi-k8-WNe" secondAttribute="leading" id="gni-Bq-lwa"/>
+                                    <constraint firstAttribute="trailing" secondItem="uSJ-fp-cw0" secondAttribute="trailing" id="tue-CC-onY"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -845,7 +861,7 @@
             <objects>
                 <navigationController navigationBarHidden="YES" id="FGb-AU-ze0" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="lpZ-SK-Jsl">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lpZ-SK-Jsl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

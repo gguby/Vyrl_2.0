@@ -379,8 +379,8 @@ class MediaPhotoCell : UICollectionViewCell {
             
             let requestOptions = PHImageRequestOptions()
             requestOptions.isSynchronous = true
-            requestOptions.deliveryMode = .highQualityFormat
-            requestOptions.resizeMode = .exact
+            requestOptions.deliveryMode = .fastFormat
+            requestOptions.resizeMode = .fast
             
             if let id = assetID {
                 

@@ -9,6 +9,7 @@
 import UIKit
 import ObjectMapper
 import Alamofire
+import AlamofireImage
 import AlamofireObjectMapper
 import AVFoundation
 import KRPullLoader
@@ -429,10 +430,10 @@ extension FeedTableViewController : FeedCellDelegate {
                         if code == 200 {
                             let jsonData = json as! NSDictionary
                             
-                            let url = jsonData["url"] as? String
+                            let url = jsonData["url"] as! String
                             
                             UIPasteboard.general.string = url
-                            self.showToast(str: UIPasteboard.general.string!)
+                            self.showToast(str: url)
                         }
                     }
                 case .failure(let error) :
@@ -703,7 +704,7 @@ struct ArticleMedia : Mappable {
     var type : String?
     var url : String?
     
-    var image : String!
+    var imageUrl : String!
     
     init?(map: Map) {
         
@@ -715,11 +716,12 @@ struct ArticleMedia : Mappable {
         url <- map["url"]
         
         if type! == "IMAGE" {
-            image = url
+            imageUrl = url
         } else {
-            image = thumbnail
+            imageUrl = thumbnail
         }
     }
+
 }
 
 enum ReportType :String {
