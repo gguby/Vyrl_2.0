@@ -12,6 +12,8 @@ import AVFoundation
 import Alamofire
 import ObjectMapper
 import NSDate_TimeAgo
+import NukeFLAnimatedImagePlugin
+import FLAnimatedImage
 
 class FeedDetailViewController: UIViewController{
    
@@ -580,9 +582,18 @@ class FeedDetailTableCell : UITableViewCell {
         self.index = 0
         
         for i in 0..<(article.medias.count) {
-            let contentImageView = UIImageView()
-            contentImageView.frame = CGRect.init(x: 0, y: 0, width: self.imageScrollView.frame.width, height: self.imageScrollView.frame.height)
+            var contentImageView : UIImageView
             
+            let url = URL.init(string: article.medias[i].image)
+            if(url?.pathExtension == "gif")
+            {
+                contentImageView = FLAnimatedImageView()
+            } else {
+                
+                contentImageView = UIImageView()
+            }
+            
+            contentImageView.frame = CGRect.init(x: 0, y: 0, width: self.imageScrollView.frame.width, height: self.imageScrollView.frame.height)
             let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
             contentImageView.isUserInteractionEnabled = true
             contentImageView.addGestureRecognizer(tapGestureRecognizer)
@@ -604,20 +615,20 @@ class FeedDetailTableCell : UITableViewCell {
     func requestImageVideo() {
         
         var uri : URL
-        if(article.medias[index].type == "IMAGE"){
-            uri = URL.init(string: article.medias[index].url!)!
-        } else {
-            uri = URL.init(string: article.medias[index].thumbnail!)!
-        }
+        uri = URL.init(string: article.medias[index].image!)!
         
-            Alamofire.request(uri)
+        Alamofire.request(uri)
                 .downloadProgress(closure: { (progress) in
                     
                 }).responseData { response in
                     if let data = response.result.value {
-                       let image = UIImage(data: data)
+                        if(uri.pathExtension == "gif") {
+                           (self.imageViewArray[self.index] as! FLAnimatedImageView).animatedImage = FLAnimatedImage.init(animatedGIFData: data)
+                        } else {
+                            self.imageViewArray[self.index].image =  UIImage(data: data)!
+                        }
                         
-                        self.imageViewArray[self.index].image = image
+                        
                         self.imageViewArray[self.index].contentMode = .scaleAspectFit
                         
                         let xPosition = self.imageScrollView.frame.width * CGFloat(self.index)

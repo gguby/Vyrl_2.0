@@ -15,6 +15,7 @@ target 'Vyrl2.0' do
     pod 'FacebookLogin'
     pod 'FacebookShare'
     pod 'GrowingTextView'
+    pod "Nuke-FLAnimatedImage-Plugin"
     pod 'Firebase/Core'
     pod 'Firebase/Auth'
     pod 'GoogleSignIn'
