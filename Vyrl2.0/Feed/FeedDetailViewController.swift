@@ -238,10 +238,10 @@ class FeedDetailViewController: UIViewController{
 
         Alamofire.request(uri!, method: .get, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Comment]>) in
             
-            let array = response.result.value ?? []
-            for comment in array {
-               self.commentArray.insert(comment, at: 0)
-             }
+            var array = response.result.value ?? []
+            array.append(contentsOf: self.commentArray)
+            self.commentArray = array
+            
             self.commentLastId = self.commentArray[0].id
             
            self.tableView.reloadData()
@@ -392,7 +392,7 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return self.commentArray.count + 2
+        return self.commentArray.count + 1
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -464,7 +464,7 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
         if(self.article != nil)
         {
            if(self.article.comments != nil && self.article.cntComment > 20) {
-                index = indexPath.row - 2
+//                index = indexPath.row - 2
             } else {
                  index = indexPath.row - 1
             }
