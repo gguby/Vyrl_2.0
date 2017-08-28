@@ -340,6 +340,28 @@ extension FeedTableViewController : UITextViewDelegate {
         tableView.beginUpdates()
         tableView.endUpdates()
     }
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        switch URL.scheme {
+        case "hash"? :
+            showHashTagAlert(tagType: "hash", payload: ((URL as NSURL).resourceSpecifier?.removingPercentEncoding)!)
+        case "mention"? :
+            showHashTagAlert(tagType: "mention", payload: ((URL as NSURL).resourceSpecifier?.removingPercentEncoding)!)
+        default:
+            print("just a regular url")
+        }
+        
+        return true
+    }
+    
+    func showHashTagAlert(tagType:String, payload:String){
+        let alertView = UIAlertView()
+        alertView.title = "\(tagType) tag detected"
+        // get a handle on the payload
+        alertView.message = "\(payload)"
+        alertView.addButton(withTitle: "Ok")
+        alertView.show()
+    }
 }
 
 extension FeedTableViewController : FeedCellDelegate {
