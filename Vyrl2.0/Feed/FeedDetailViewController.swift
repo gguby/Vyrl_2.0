@@ -440,6 +440,7 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
                 
                 cell.contentTextView.text = self.article.content
                 cell.contentTextView.resolveHashTags()
+                cell.contentTextView.delegate = self
                 cell.timeLabel.text = (self.article.date! as! NSDate).timeAgo()
                 
                 cell.likeCountButton.setTitle(String("좋아요 \(self.article.cntLike!)명"), for: .normal)
@@ -504,6 +505,28 @@ extension FeedDetailViewController : GrowingTextViewDelegate {
             self.view.layoutIfNeeded()
         }, completion: nil)
     }
+}
+
+extension FeedDetailViewController : UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        switch URL.scheme {
+        case "hash"? :
+            let vc : SearchViewController = UIStoryboard(name:"Search", bundle: nil).instantiateViewController(withIdentifier: "search") as! SearchViewController
+            self.navigationController?.present(vc, animated: true, completion: {
+                vc.searchBar.becomeFirstResponder()
+                vc.searchBar.text = ((URL as NSURL).resourceSpecifier?.removingPercentEncoding)!
+                vc.searchBar(vc.searchBar, textDidChange: vc.searchBar.text!)
+            })
+            
+        case "mention"? :
+            print("mention : \(((URL as NSURL).resourceSpecifier?.removingPercentEncoding)!)")
+        default:
+            print("just a regular url")
+        }
+        
+        return true
+    }
+
 }
 
 extension FeedDetailViewController : EmoticonViewDelegate {

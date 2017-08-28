@@ -75,7 +75,7 @@ extension UITextView {
             var wordWithTagRemoved = String(word.characters.dropFirst())
             
             // Drop any trailing punctuation
-            wordWithTagRemoved.dropTrailingNonAlphaNumericCharacters()
+//            wordWithTagRemoved.dropTrailingNonAlphaNumericCharacters()
             
             // Make sure we still have a valid word (i.e. not just '#' or '@' by itself, not #100)
             guard let schemeMatch = scheme, Int(wordWithTagRemoved) == nil && !wordWithTagRemoved.isEmpty
