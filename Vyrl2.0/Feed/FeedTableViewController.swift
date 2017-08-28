@@ -345,9 +345,10 @@ extension FeedTableViewController : UITextViewDelegate {
         switch URL.scheme {
         case "hash"? :
             let vc : SearchViewController = UIStoryboard(name:"Search", bundle: nil).instantiateViewController(withIdentifier: "search") as! SearchViewController
-            self.present(vc, animated: true, completion: {
+            self.navigationController?.present(vc, animated: true, completion: {
                 vc.searchBar.becomeFirstResponder()
                 vc.searchBar.text = ((URL as NSURL).resourceSpecifier?.removingPercentEncoding)!
+                vc.searchBar(vc.searchBar, textDidChange: vc.searchBar.text!)
             })
             
         case "mention"? :
