@@ -38,7 +38,7 @@ struct Constants {
     
     struct VyrlSearchURL {
         static func search(searchWord : String) -> String{
-            return VyrlAPIConstants.baseURL + "/search/" + searchWord
+            return VyrlAPIConstants.baseURL + "search/" + searchWord
         }
     }
     
