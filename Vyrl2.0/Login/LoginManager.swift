@@ -319,6 +319,12 @@ extension LoginManager {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.goLogin()
     }
+    
+    func checkLogout(statusCode :Int){
+        if statusCode == HTTPCode.UNAUTORIZED.rawValue {
+            self.goLoginView()
+        }
+    }
 }
 
 

@@ -72,7 +72,7 @@ extension UITextView {
             }
             
             // Drop the # or @
-            var wordWithTagRemoved = String(word.characters.dropFirst())
+            let wordWithTagRemoved = String(word.characters.dropFirst())
             
             // Drop any trailing punctuation
 //            wordWithTagRemoved.dropTrailingNonAlphaNumericCharacters()

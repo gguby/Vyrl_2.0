@@ -154,7 +154,6 @@ class FeedTableCell: UITableViewCell {
             self.officialImage.isHidden  = true
             
             guard self.collectionView != nil else {
-                
                 return
             }
   
@@ -191,6 +190,12 @@ class FeedTableCell: UITableViewCell {
         if(self.contentTextView != nil) {
             self.contentTextView.textContainerInset = UIEdgeInsets.zero
             self.contentTextView.textContainer.lineFragmentPadding = 0
+            
+//            let readMoreTextAttributes: [String: Any] = [
+//                NSForegroundColorAttributeName: UIColor.init(red: 134.0 / 255.0, green: 131.0 / 255.0, blue: 131.0 / 255.0, alpha: 1.0),
+//                NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Regular", size: 11.0)!,
+//                NSUnderlineStyleAttributeName : NSUnderlineStyle.styleSingle.rawValue
+//            ]            
         }
         
         self.followBtn.addTarget(self, action: #selector(followUser(sender:)), for: .touchUpInside)
@@ -212,6 +217,10 @@ class FeedTableCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func reloadContext(){
+//        contentTextView.resolveHashTags()
     }
     
     func showCommentDetail(sender:UIButton){

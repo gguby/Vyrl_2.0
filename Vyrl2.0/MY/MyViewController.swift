@@ -62,8 +62,6 @@ class MyViewController: UIViewController{
         self.accountTable.dataSource = self
         self.accountTable.rowHeight = 50
         
-        self.containerView.translatesAutoresizingMaskIntoConstraints  = false
-        
         if self.isMyProfile == true {
             self.setupFeed(feedType: FeedTableType.MYFEED)
             self.accountSelect.isHidden = false
@@ -168,8 +166,10 @@ class MyViewController: UIViewController{
                         
                         let image = jsonData["imagePath"] as? String
                         
-                        let url = URL.init(string: (image)!)
-                        self.profileImage.af_setImage(withURL: url!)
+                        if image?.isEmpty == false {
+                            let url = URL.init(string: (image)!)
+                            self.profileImage.af_setImage(withURL: url!)
+                        }
                         
                         if self.isMyProfile {
                             let account = LoginManager.sharedInstance.getCurrentAccount()
