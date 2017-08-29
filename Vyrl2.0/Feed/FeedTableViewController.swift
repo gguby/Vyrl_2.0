@@ -121,10 +121,6 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-//        getAllFeed()
-    }
-    
     func refresh(sender:AnyObject) {
         self.getAllFeed()        
     }
@@ -216,6 +212,11 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         
         Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Article]>) in
             
+            response.result.ifFailure {
+                LoginManager.sharedInstance.checkLogout(statusCode: (response.response?.statusCode)!)
+                return
+            }
+            
             self.articleArray.removeAll()
             
             let array = response.result.value ?? []
@@ -225,9 +226,6 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
             }
             
             self.tableView.reloadData()
-//            if self.feedType == .USERFEED && self.feedType == .FANFEED {
-//                self.tableView.contentSize = CGSize.init(width: self.tableView.contentSize.width, height: self.tableView.contentSize.height + 45)
-//            }
         }
     }
     

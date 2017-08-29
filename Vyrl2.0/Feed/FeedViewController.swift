@@ -28,10 +28,11 @@ class FeedViewController: UIViewController {
     
     func setupFeedTableView (){
         if LoginManager.sharedInstance.isExistFollower == false {
-            self.containerView.translatesAutoresizingMaskIntoConstraints  = false
+            self.containerView.translatesAutoresizingMaskIntoConstraints = true
             let storyboard = UIStoryboard(name: "FeedStyle", bundle: nil)
             let controller = storyboard.instantiateViewController(withIdentifier: "feedTable")
             addChildViewController(controller)
+            controller.view.translatesAutoresizingMaskIntoConstraints = true
             containerView.addSubview(controller.view)
             controller.didMove(toParentViewController: self)
         }

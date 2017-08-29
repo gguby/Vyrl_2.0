@@ -188,7 +188,7 @@
         <scene sceneID="zbW-6X-bXo">
             <objects>
                 <navigationController navigationBarHidden="YES" id="AqP-hB-Wsq" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="wxq-cz-Xzg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wxq-cz-Xzg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -219,7 +219,7 @@
                                 </connections>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pV9-PJ-dAj">
-                                <rect key="frame" x="167" y="313" width="40" height="40"/>
+                                <rect key="frame" x="167.5" y="313.5" width="40" height="40"/>
                                 <state key="normal" image="icon_play_01"/>
                                 <connections>
                                     <action selector="toggleVideoPlay:" destination="yXq-xH-jGk" eventType="touchUpInside" id="ohK-Zi-Gqf"/>
@@ -475,7 +475,7 @@
                                                     </constraints>
                                                 </stackView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ljs-0q-Tgl">
-                                                    <rect key="frame" x="325" y="5" width="50" height="40"/>
+                                                    <rect key="frame" x="364" y="5" width="50" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="N7T-6c-DIV"/>
                                                         <constraint firstAttribute="width" constant="50" id="dGc-cu-75X"/>
