@@ -38,7 +38,22 @@ class FeedDetailViewController: UIViewController{
     var kbHeight: CGFloat!
     
     var commentArray : [Comment] = []
-    var article : Article!
+    var article : Article? {
+        didSet {
+            self.likeButton.setTitle(article?.likeCount, for: .normal)
+            
+            self.shareButton.setTitle(article?.shareCount, for: .normal)
+            
+            if (article?.isLike)! {
+                self.likeButton.setImage(UIImage.init(named: "icon_heart_01_on"), for: .normal)
+                self.likeButton.tag = 1
+            } else {
+                self.likeButton.setImage(UIImage.init(named: "icon_heart_01"), for: .normal)
+                self.likeButton.tag = 0
+            }
+
+        }
+    }
     
     var commentLastId = 0
     
@@ -152,33 +167,32 @@ class FeedDetailViewController: UIViewController{
     }
     
     @IBAction func likeButtonClick(_ sender: UIButton) {
-        if sender.tag == 0 {
-            let uri = URL.init(string: Constants.VyrlFeedURL.feedLike(articleId: (articleId)!))
-            Alamofire.request(uri!, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: {
-                response in switch response.result {
-                case .success(let json):
-                    print(json)
+        var method = HTTPMethod.post
+        
+        if sender.tag == 1 {
+            method = HTTPMethod.delete
+        }
+        
+        let uri = URL.init(string: Constants.VyrlFeedURL.feedLike(articleId: (self.article?.id)!))
+        Alamofire.request(uri!, method: method, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON(completionHandler: {
+            response in switch response.result {
+            case .success(let json):
+                
+                let jsonData = json as! NSDictionary
+                let cntLike = jsonData["cntLike"] as! Int
+                self.likeButton.setTitle("\(cntLike)", for: .normal)
+                
+                if sender.tag == 0 {
                     sender.setImage(UIImage.init(named: "icon_heart_01_on"), for: .normal)
                     sender.tag = 1
-                case .failure(let error):
-                    print(error)
-                }
-            })
-        }else {
-            
-            let uri = URL.init(string: Constants.VyrlFeedURL.feedLike(articleId: (articleId)!))
-            Alamofire.request(uri!, method: .delete, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: {
-                response in switch response.result {
-                case .success(let json):
-                    print(json)
+                }else {
                     sender.setImage(UIImage.init(named: "icon_heart_01"), for: .normal)
                     sender.tag = 0
-                    
-                case .failure(let error):
-                    print(error)
                 }
-            })
-        }
+            case .failure(let error):
+                print(error)
+            }
+        })
     }
     
     func keyboardShow(notification: NSNotification) {
@@ -385,7 +399,7 @@ class FeedDetailViewController: UIViewController{
 
 extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if(self.article != nil && self.article.comments != nil && self.article.cntComment > 20) {
+        if(self.article != nil && self.article?.comments != nil && (self.article?.cntComment)! > 20) {
             if(indexPath.row == 1) {
                 self.requestComment()
             }
@@ -434,29 +448,29 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
             let cell = tableView.dequeueReusableCell(withIdentifier: "oneFeed") as! FeedDetailTableCell
             if(self.article != nil) {
                 cell.article = self.article
-                if(self.article.medias.count > 0){
+                if((self.article?.medias.count)! > 0){
                     cell.initImageVideo()
                 }
                 
-                cell.contentTextView.text = self.article.content
+                cell.contentTextView.text = self.article?.content
                 cell.contentTextView.resolveHashTags()
                 cell.contentTextView.delegate = self
-                cell.timeLabel.text = (self.article.date! as! NSDate).timeAgo()
+                cell.timeLabel.text = (self.article?.date! as! NSDate).timeAgo()
                 
-                cell.likeCountButton.setTitle(String("좋아요 \(self.article.cntLike!)명"), for: .normal)
-                cell.shareCountButton.setTitle(String("공유 \(self.article.cntShare!)명"), for: .normal)
-                cell.pageLabel.text = String("1 / \(self.article.medias.count)")
+                cell.likeCountButton.setTitle(String("좋아요 \(self.article?.cntLike as! Int)명"), for: .normal)
+                cell.shareCountButton.setTitle(String("공유 \(self.article?.cntShare as! Int)명"), for: .normal)
+                cell.pageLabel.text = String("1 / \(self.article?.medias.count as! Int)")
                 
-                cell.profileButton.af_setBackgroundImage(for: .normal, url: URL.init(string: self.article.profile.imagePath)!)
-                cell.nickNameLabel.text = self.article.profile.nickName
+                cell.profileButton.af_setBackgroundImage(for: .normal, url: URL.init(string: (self.article?.profile.imagePath)!)!)
+                cell.nickNameLabel.text = self.article?.profile.nickName
                 
-                cell.profileId = self.article.profile.id
+                cell.profileId = self.article?.profile.id
                 cell.delegate = self
             }
             return cell
 
         } else if (indexPath.row == 1 && self.article != nil) {
-            if(self.article.comments != nil && self.article.cntComment > 20) {
+            if(self.article?.comments != nil && (self.article?.cntComment)! > 20) {
                 let  cell = tableView.dequeueReusableCell(withIdentifier: "moreComment") as! FeedDetailTableCell
                 return cell
             }
@@ -466,7 +480,7 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
         let  cell = tableView.dequeueReusableCell(withIdentifier: "Comment") as! FeedCommentTableCell
         if(self.article != nil)
         {
-           if(self.article.comments != nil && self.article.cntComment > 20) {
+           if(self.article?.comments != nil && (self.article?.cntComment)! > 20) {
 //                index = indexPath.row - 2
             } else {
                  index = indexPath.row - 1
@@ -493,7 +507,7 @@ extension FeedDetailViewController : CellDidSelectProtocol {
     func imageDidSelect(profileId : Int) {
         let storyboard = UIStoryboard(name: "Feed", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "FeedFullScreenViewController") as! FeedFullScreenViewController // or whatever it is
-        vc.mediasArray = self.article.medias
+        vc.mediasArray = self.article?.medias
         
         self.navigationController?.pushViewController(vc, animated: true)
     }
