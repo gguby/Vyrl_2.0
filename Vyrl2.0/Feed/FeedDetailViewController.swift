@@ -195,6 +195,74 @@ class FeedDetailViewController: UIViewController{
         })
     }
     
+    @IBAction func shareButtonClick(_ sender: UIButton) {
+        let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.actionSheet)
+        
+        let share = UIAlertAction(title: "내 Feed로 공유", style: .default,handler: { (action) -> Void in
+            
+            let uri = Constants.VyrlFeedURL.share(articleId: (self.article?.id)!)
+            
+            Alamofire.request(uri, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON(completionHandler: {
+                response in
+                switch response.result {
+                case .success(let json) :
+                    print(json)
+                    
+                    if let code = response.response?.statusCode {
+                        if code == 200 {
+                            
+                            self.showToast(str: "공유가 완료되었습니다!")
+                            
+                            let jsonData = json as! NSDictionary
+                            
+                            let cntShare = jsonData["cntShare"] as! Int
+                            self.shareButton.setTitle("\(cntShare)", for: .normal)
+                        }
+                    }
+                case .failure(let error) :
+                    print(error)
+                }
+            })
+            
+        })
+        let linkCopy = UIAlertAction(title: "링크 복사", style: .default, handler: { (action) -> Void in
+            
+            let uri = Constants.VyrlFeedURL.share(articleId: (self.article?.id)!)
+            
+            Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON(completionHandler: {
+                response in
+                switch response.result {
+                case .success(let json) :
+                    print(json)
+                    
+                    if let code = response.response?.statusCode {
+                        if code == 200 {
+                            let jsonData = json as! NSDictionary
+                            
+                            let url = jsonData["url"] as! String
+                            
+                            UIPasteboard.general.string = url
+                            self.showToast(str: url)
+                        }
+                    }
+                case .failure(let error) :
+                    print(error)
+                }
+            })
+        })
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
+            alertController.dismiss(animated: true, completion: nil)
+        })
+        
+        alertController.addAction(share)
+        alertController.addAction(linkCopy)
+        alertController.addAction(cancel)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+
+    
     func keyboardShow(notification: NSNotification) {
         DispatchQueue.main.asyncAfter(deadline: .now()) {
             let numberOfSections = self.tableView.numberOfSections
