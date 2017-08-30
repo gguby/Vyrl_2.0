@@ -38,7 +38,8 @@ struct Constants {
     
     struct VyrlSearchURL {
         static func search(searchWord : String) -> String{
-            return VyrlAPIConstants.baseURL + "search/" + searchWord
+            let str = searchWord.addingPercentEncoding(withAllowedCharacters:  NSCharacterSet.urlQueryAllowed)
+            return VyrlAPIConstants.baseURL + "search/" + str!
         }
     }
     

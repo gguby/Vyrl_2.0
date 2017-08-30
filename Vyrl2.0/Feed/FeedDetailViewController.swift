@@ -476,6 +476,10 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
+        if(self.article?.comments != nil && (self.article?.cntComment)! > 20) {
+            return self.commentArray.count + 2
+        }
+        
         return self.commentArray.count + 1
     }
     
@@ -549,7 +553,7 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
         if(self.article != nil)
         {
            if(self.article?.comments != nil && (self.article?.cntComment)! > 20) {
-//                index = indexPath.row - 2
+                 index = indexPath.row - 2
             } else {
                  index = indexPath.row - 1
             }
