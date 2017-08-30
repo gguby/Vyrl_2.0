@@ -171,9 +171,10 @@
                                                         </connections>
                                                     </collectionView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hUd-bX-ryV">
-                                                        <rect key="frame" x="158" y="307" width="58" height="14.5"/>
+                                                        <rect key="frame" x="138" y="298" width="100" height="33"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="14.5" id="u7M-4e-1B1"/>
+                                                            <constraint firstAttribute="width" constant="100" id="nIs-WD-Pp2"/>
+                                                            <constraint firstAttribute="height" constant="33" id="u7M-4e-1B1"/>
                                                         </constraints>
                                                         <inset key="titleEdgeInsets" minX="-50" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         <inset key="imageEdgeInsets" minX="50" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -182,7 +183,7 @@
                                                         </state>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h6t-ld-KiC" userLabel="EmptyView">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="307.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="298.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아직 참여한 팬페이지가 없군요!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KrY-V7-8z5">
                                                                 <rect key="frame" x="107.5" y="60" width="160" height="16"/>
@@ -286,11 +287,11 @@
                                                     <constraint firstItem="zqa-Dm-BLj" firstAttribute="top" secondItem="Did-DW-3Fp" secondAttribute="top" constant="22" id="CPB-hp-HCj"/>
                                                     <constraint firstItem="hUd-bX-ryV" firstAttribute="top" secondItem="h6t-ld-KiC" secondAttribute="bottom" id="En9-zY-bVg"/>
                                                     <constraint firstItem="hUd-bX-ryV" firstAttribute="centerX" secondItem="Did-DW-3Fp" secondAttribute="centerX" id="J1m-AD-9Dx"/>
-                                                    <constraint firstAttribute="bottom" secondItem="hUd-bX-ryV" secondAttribute="bottom" constant="22" id="K0N-Mt-Ebr"/>
+                                                    <constraint firstAttribute="bottom" secondItem="hUd-bX-ryV" secondAttribute="bottom" constant="13" id="K0N-Mt-Ebr"/>
                                                     <constraint firstItem="JkV-Fm-xmY" firstAttribute="top" secondItem="zqa-Dm-BLj" secondAttribute="bottom" constant="15" id="KHF-IR-pBz"/>
                                                     <constraint firstItem="h6t-ld-KiC" firstAttribute="width" secondItem="Did-DW-3Fp" secondAttribute="width" id="S2g-Cu-Vee"/>
                                                     <constraint firstItem="JkV-Fm-xmY" firstAttribute="leading" secondItem="zqa-Dm-BLj" secondAttribute="leading" id="Tzs-f9-Xde"/>
-                                                    <constraint firstItem="hUd-bX-ryV" firstAttribute="top" secondItem="JkV-Fm-xmY" secondAttribute="bottom" constant="13.5" id="UXf-Cf-dA2"/>
+                                                    <constraint firstItem="hUd-bX-ryV" firstAttribute="top" secondItem="JkV-Fm-xmY" secondAttribute="bottom" constant="4" id="UXf-Cf-dA2"/>
                                                     <constraint firstItem="h6t-ld-KiC" firstAttribute="top" secondItem="Did-DW-3Fp" secondAttribute="top" id="XlM-vm-ddg"/>
                                                     <constraint firstItem="zqa-Dm-BLj" firstAttribute="leading" secondItem="Did-DW-3Fp" secondAttribute="leading" constant="15" id="gL0-fG-W5O"/>
                                                 </constraints>
@@ -335,7 +336,7 @@
                                                                 <rect key="frame" x="0.0" y="1" width="375" height="92"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GNj-Xb-pfL" id="JS6-7x-3Fx">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="91.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="91"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="guM-Vz-nt2">
@@ -541,7 +542,7 @@
                                                 <rect key="frame" x="0.0" y="1" width="375" height="97"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eKI-1v-J6q" id="yBB-sJ-en7">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="96.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="97"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uWB-ID-i9x">
@@ -570,7 +571,7 @@
                                                 <rect key="frame" x="0.0" y="98" width="375" height="72"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5uh-rI-vLZ" id="C0x-mh-2o1">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="71.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="72"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yUV-Ib-RD2">
@@ -681,6 +682,7 @@
                         <outlet property="emptyView" destination="h6t-ld-KiC" id="c4i-MB-Io4"/>
                         <outlet property="joinFanPageHeight" destination="9OS-p4-sWL" id="6oB-Nm-mHG"/>
                         <outlet property="joinFanpageCollectionView" destination="JkV-Fm-xmY" id="tt7-Yz-oPL"/>
+                        <outlet property="more" destination="hUd-bX-ryV" id="N7B-yD-zNV"/>
                         <outlet property="postView" destination="mnD-iZ-KBL" id="NEO-NI-fZ5"/>
                         <outlet property="recommandFanpageTableView" destination="pai-rP-I3z" id="d45-EU-qXu"/>
                         <outlet property="scrollView" destination="hiT-QE-hpv" id="YHC-Ep-PQ5"/>
@@ -751,7 +753,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="47"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BlB-zW-AOm" id="N55-Og-UdQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="46.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="팬페이지 프로필 수정" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T8m-uo-0uy">
@@ -781,7 +783,7 @@
                                         <rect key="frame" x="0.0" y="75" width="375" height="47"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5Iv-UT-BRZ" id="Z5N-Lk-Oy4">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="46.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="팬페이제 폐쇄" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HyW-HU-Scb">
@@ -812,7 +814,7 @@
                                         <rect key="frame" x="0.0" y="122" width="375" height="47"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bDF-5D-paM" id="XAP-Sn-Svt">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="46.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="팬페이지 탈퇴" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4cX-hN-c5u">

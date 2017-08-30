@@ -35,6 +35,7 @@ class FanViewController: UIViewController {
     @IBOutlet weak var container: UIView!
     
     @IBOutlet weak var emptyLabel: UILabel!
+    @IBOutlet weak var more: UIButton!
     
     var joinFanPages = [FanPage]()
     var suggestFanPages = [FanPage]()
@@ -51,6 +52,7 @@ class FanViewController: UIViewController {
         
         self.automaticallyAdjustsScrollViewInsets = false
         
+        
         self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         
         self.getMyFanPage()
@@ -62,11 +64,11 @@ class FanViewController: UIViewController {
     }
     
     func setupPostContainer(){
-        self.container.translatesAutoresizingMaskIntoConstraints  = false
+        self.container.translatesAutoresizingMaskIntoConstraints  = true
         let storyboard = UIStoryboard(name: "PostCollectionViewController", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "PostCollection")
         addChildViewController(controller)
-        controller.view.translatesAutoresizingMaskIntoConstraints = false
+        controller.view.translatesAutoresizingMaskIntoConstraints = true
         container.addSubview(controller.view)
         controller.didMove(toParentViewController: self)
     }
@@ -97,10 +99,17 @@ class FanViewController: UIViewController {
             self.joinFanPageHeight.constant = 197.5
             self.joinFanpageCollectionView.alpha = 0
             self.emptyView.alpha = 1
+            self.more.isHidden = true
         } else {
             self.joinFanPageHeight.constant = 334
             self.joinFanpageCollectionView.alpha = 1
             self.emptyView.alpha = 0
+            
+            if (self.joinFanPages.count > 6){
+                self.more.isHidden = false
+            } else {
+                self.more.isHidden = true
+            }
         }
     }
     

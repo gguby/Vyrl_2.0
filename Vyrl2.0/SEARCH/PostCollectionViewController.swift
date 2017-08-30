@@ -102,6 +102,7 @@ struct Profile : Mappable {
     var homepageUrl : String!
     var selfIntro : String!
     var socialType : String!
+    var follow : Bool!
     
     var date : Date?
     
@@ -114,6 +115,7 @@ struct Profile : Mappable {
         homepageUrl <- map["homepageUrl"]
         selfIntro <- map["selfIntro"]
         socialType <- map["socialType"]
+        follow <- map["follow"]
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"

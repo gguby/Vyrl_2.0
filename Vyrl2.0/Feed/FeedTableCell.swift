@@ -71,8 +71,6 @@ class FeedTableCell: UITableViewCell {
         didSet {
             if isMyArticle {
                 self.followBtn.alpha = 0
-            } else {
-                self.followBtn.alpha = 1
             }
         }
     }
@@ -144,6 +142,10 @@ class FeedTableCell: UITableViewCell {
             
             self.isBookMark = (article?.isBookMark)!
             self.isMyArticle = article?.isMyArticle
+            
+            if self.isMyArticle == false && article?.profile.follow == false {
+                self.followBtn.alpha = 1
+            }
             
             if (article?.isLike)! {
                 self.likeBtn.setImage(UIImage.init(named: "icon_heart_01_on"), for: .normal)
