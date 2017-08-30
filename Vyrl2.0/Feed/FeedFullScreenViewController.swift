@@ -33,6 +33,7 @@ class FeedFullScreenViewController: UIViewController {
     @IBOutlet weak var videoStatusView: UIView!
     
     @IBOutlet weak var downloadButton: UIButton!
+    @IBOutlet weak var fileSizeButton: UIButton!
     
     var currentPage : Int = 0;
     var index : Int = 0;
@@ -70,6 +71,7 @@ class FeedFullScreenViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         self.pageNumberLabel.text =  "1 / \(self.mediasArray.count)"
         self.index = 0
+        self.fileSizeButton.setTitle("\(self.mediasArray[0].mbFileSize!)MB", for: .normal)
         
         self.initImageVideo()
         
@@ -186,7 +188,7 @@ class FeedFullScreenViewController: UIViewController {
                     textView.textColor = UIColor.white
                     textView.backgroundColor = UIColor.ivGreyish
                     let size = textView.sizeThatFits(CGSize.init(width: self.view.frame.width, height: 9999))
-                    textView.frame = CGRect.init(x: 0, y: self.imageViewArray[self.index].frame.size.height, width: self.view.frame.width, height: size.height)
+                    textView.frame = CGRect.init(x: 0, y: self.imageViewArray[self.index].frame.size.height, width: self.view.frame.width, height: 0)
                     textView.isScrollEnabled = false
                     
                     self.textViewArray.append(textView)
@@ -394,6 +396,8 @@ extension FeedFullScreenViewController : UIScrollViewDelegate {
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let page = Int(round(Double(scrollView.contentOffset.x) / Double(scrollView.bounds.size.width)))
+        
+        self.fileSizeButton.setTitle("\(self.mediasArray[page].mbFileSize!)MB", for: .normal)
         self.enableDownloadImageButton()
         self.showImageVideo(page: page)
     }

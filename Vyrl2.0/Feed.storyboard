@@ -365,6 +365,7 @@
                         <outlet property="bottomView" destination="uUj-iA-brH" id="Mnx-uc-sQd"/>
                         <outlet property="currentTimeLabel" destination="qPY-hl-6Gz" id="j3H-Jp-bWC"/>
                         <outlet property="downloadButton" destination="P13-TR-zp9" id="qXX-fR-uSz"/>
+                        <outlet property="fileSizeButton" destination="kJh-XW-pEH" id="3Xn-r9-EfE"/>
                         <outlet property="mainScrollView" destination="jId-fV-qHA" id="8kb-IA-MUx"/>
                         <outlet property="pageNumberLabel" destination="GE5-7W-BNp" id="pFp-Sj-jyh"/>
                         <outlet property="timeSlider" destination="K0t-gq-VaH" id="CBT-04-xfD"/>
@@ -475,7 +476,7 @@
                                                     </constraints>
                                                 </stackView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ljs-0q-Tgl">
-                                                    <rect key="frame" x="364" y="5" width="50" height="40"/>
+                                                    <rect key="frame" x="325" y="5" width="50" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="N7T-6c-DIV"/>
                                                         <constraint firstAttribute="width" constant="50" id="dGc-cu-75X"/>

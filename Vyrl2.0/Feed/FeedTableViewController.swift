@@ -729,6 +729,8 @@ struct ArticleMedia : Mappable {
     var thumbnail : String?
     var type : String?
     var url : String?
+    var fileSize :Int64?
+    var mbFileSize : Int64?
     
     var imageUrl : String!
     
@@ -746,6 +748,9 @@ struct ArticleMedia : Mappable {
         } else {
             imageUrl = thumbnail
         }
+        
+        fileSize <- map["fileSize"]
+        mbFileSize = fileSize! / 1024 / 1024
     }
 
 }

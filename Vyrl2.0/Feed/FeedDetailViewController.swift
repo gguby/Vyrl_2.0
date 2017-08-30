@@ -684,6 +684,8 @@ class FeedDetailTableCell : UITableViewCell {
             self.imageScrollView.delegate = self as UIScrollViewDelegate
             self.contentTextView.textContainerInset = UIEdgeInsets.zero
             self.contentTextView.textContainer.lineFragmentPadding = 0
+            
+            
         }
     }
     
@@ -706,6 +708,17 @@ class FeedDetailTableCell : UITableViewCell {
             let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
             contentImageView.isUserInteractionEnabled = true
             contentImageView.addGestureRecognizer(tapGestureRecognizer)
+            
+            if(article.medias[i].type == "VIDEO")
+            {
+                let playImage = UIImage.init(named: "icon_play_01")
+                let subImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: (playImage?.size.width)!, height: (playImage?.size.height)!))
+                subImageView.center = CGPoint.init(x: contentImageView.frame.size.width/2, y: contentImageView.frame.size.height/2)
+                subImageView.image = playImage
+                
+                contentImageView.addSubview(subImageView)
+                
+            }
             
             self.imageViewArray.append(contentImageView)
             
