@@ -433,6 +433,7 @@ extension WriteViewController : UICollectionViewDataSource, UICollectionViewDele
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UploadMediaPhotoCell", for: indexPath) as! UploadMediaPhotoCell
             cell.delegte = self
             cell.asset = asset
+            asset.getImage(size: cell.image.frame.size)
             cell.image.image = asset.photo
             return cell
         }else {
@@ -441,6 +442,7 @@ extension WriteViewController : UICollectionViewDataSource, UICollectionViewDele
             cell.delegte = self
             cell.asset = asset
             cell.duration.text = asset.getDurationStr()
+            asset.getImage(size: cell.photo.frame.size)
             cell.photo.image = asset.photo
             return cell
         }

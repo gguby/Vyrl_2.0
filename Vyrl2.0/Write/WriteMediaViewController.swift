@@ -393,12 +393,11 @@ class MediaPhotoCell : UICollectionViewCell {
                     
                     self.asset = AVAsset(type: .photo, identifier: id)
                     
-                    manager.requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFill, options: requestOptions, resultHandler: {
+                    manager.requestImage(for: asset, targetSize: self.photo.frame.size, contentMode: .aspectFill, options: requestOptions, resultHandler: {
                         
                         image,error  in
                         
                         self.photo.image = image
-                        self.asset?.photo = image
                         
                         if error != nil {
                         }
@@ -414,14 +413,12 @@ class MediaPhotoCell : UICollectionViewCell {
                     self.asset = AVAsset(type: .video, identifier: id)
                     self.asset?.duration = duration
                     
-                    manager.requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFill, options: requestOptions, resultHandler: {
+                    manager.requestImage(for: asset, targetSize: self.photo.frame.size, contentMode: .aspectFill, options: requestOptions, resultHandler: {
                         
                         image,error  in
                         
                         if error != nil {
-                            
                             self.photo.image = image
-                            self.asset?.photo = image
                         }
                     })
                     
@@ -483,11 +480,43 @@ class AVAsset {
                 return data
             }
             
-            if let image = photo {
-                return UIImageJPEGRepresentation(image, 1.0)!
+            if self.type == .photo {
+                let size = PHImageManagerMaximumSize
+                self.getImage(size: size)
+                return UIImageJPEGRepresentation(self.photo!, 1.0)!
             }
             
             return nil
+        }
+    }
+    
+    func getImage(size : CGSize){
+        let manager = PHImageManager()
+        
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        
+        let requestOptions = PHImageRequestOptions()
+        requestOptions.isSynchronous = true
+        requestOptions.deliveryMode = .fastFormat
+        requestOptions.resizeMode = .fast
+
+        let fetchResult = PHAsset.fetchAssets(withLocalIdentifiers: [self.identifier!], options: fetchOptions)
+        
+        guard let asset = fetchResult.firstObject
+            else { return  }
+        
+        if asset.mediaType == .image {
+            
+            manager.requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: requestOptions, resultHandler: {
+                
+                image,error  in
+                
+                self.photo = image
+                
+                if error != nil {
+                }
+            })
         }
     }
     
