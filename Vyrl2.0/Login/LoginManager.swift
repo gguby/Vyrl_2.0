@@ -404,6 +404,7 @@ extension LoginManager {
     }
     
     func loadCookies() {
+        print(UserDefaults.standard.object(forKey: "currentCookie"))
         guard let cookieArray = UserDefaults.standard.array(forKey: "currentCookie") as? [[HTTPCookiePropertyKey: Any]] else { return  }
         for cookieProperties in cookieArray {
             if let cookie = HTTPCookie(properties: cookieProperties) {

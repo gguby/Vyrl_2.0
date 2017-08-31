@@ -94,11 +94,17 @@ extension UITextView {
                 let escapedString = wordWithTagRemoved.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
                 attributedString.addAttribute(NSLinkAttributeName, value: "\(schemeMatch):\(escapedString)", range: text.NSRangeFromRange(range: matchRange))
                 
-                let attributes: [String:AnyObject] =
+                let attributes: [String:Any] =
                     [NSFontAttributeName : UIFont(name: "AppleSDGothicNeo-SemiBold", size: 13.0)!,
                      NSForegroundColorAttributeName : UIColor.ivLighterPurple]
-                self.linkTextAttributes = attributes
                 
+//                if word.hasPrefix("더보기") {
+//                    attributes =  [NSFontAttributeName : UIFont(name: "AppleSDGothicNeo-Regular", size: 11.0)!,
+//                                   NSForegroundColorAttributeName : UIColor.init(red: 134.0 / 255.0, green: 131.0 / 255.0, blue: 131.0 / 255.0, alpha: 1.0),
+//                                   NSUnderlineStyleAttributeName : NSUnderlineStyle.styleSingle.rawValue]
+//                }
+                
+                self.linkTextAttributes = attributes
             }
             
             // just cycled through a word. Move the bookmark forward by the length of the word plus a space

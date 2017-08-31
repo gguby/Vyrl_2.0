@@ -31,6 +31,7 @@ class FeedFullScreenViewController: UIViewController {
     @IBOutlet weak var currentTimeLabel: UILabel!
     @IBOutlet weak var timeSlider: UISlider!
     @IBOutlet weak var videoStatusView: UIView!
+    @IBOutlet weak var totalTimeLabel: UILabel!
     
     @IBOutlet weak var downloadButton: UIButton!
     @IBOutlet weak var fileSizeButton: UIButton!
@@ -432,6 +433,7 @@ extension FeedFullScreenViewController : UIScrollViewDelegate {
                     let currentTime = currentItem.currentTime()
                     self.timeSlider.value = Float(CMTimeGetSeconds(currentTime) / CMTimeGetSeconds(duration))
                     self.currentTimeLabel.text = self.createTimeString(time: Float(CMTimeGetSeconds(currentTime)))
+                    self.totalTimeLabel.text = self.createTimeString(time: Float(CMTimeGetSeconds(duration)))
                 }
             })
             

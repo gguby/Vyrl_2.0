@@ -309,15 +309,23 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="K0t-gq-VaH">
-                                                <rect key="frame" x="71" y="10" width="173" height="31"/>
+                                                <rect key="frame" x="71" y="10" width="121.5" height="31"/>
                                                 <connections>
                                                     <action selector="timeSlideValueChanged:" destination="yXq-xH-jGk" eventType="valueChanged" id="HzR-um-dST"/>
                                                 </connections>
                                             </slider>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1:00:09" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eFA-Xg-nBp">
+                                                <rect key="frame" x="198.5" y="14" width="58.5" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="qPY-hl-6Gz" firstAttribute="centerY" secondItem="jwF-I1-olL" secondAttribute="centerY" id="7Zy-Nc-shX"/>
-                                            <constraint firstAttribute="trailing" secondItem="K0t-gq-VaH" secondAttribute="trailing" constant="15" id="Fqf-18-ohP"/>
+                                            <constraint firstItem="eFA-Xg-nBp" firstAttribute="leading" secondItem="K0t-gq-VaH" secondAttribute="trailing" constant="8" id="KbQ-ks-IB1"/>
+                                            <constraint firstItem="eFA-Xg-nBp" firstAttribute="centerY" secondItem="jwF-I1-olL" secondAttribute="centerY" id="OJS-Uv-Zpf"/>
+                                            <constraint firstAttribute="trailing" secondItem="eFA-Xg-nBp" secondAttribute="trailing" id="U7d-JF-bjc"/>
                                             <constraint firstItem="K0t-gq-VaH" firstAttribute="leading" secondItem="qPY-hl-6Gz" secondAttribute="trailing" constant="15" id="UTw-kj-YXl"/>
                                             <constraint firstItem="K0t-gq-VaH" firstAttribute="centerY" secondItem="jwF-I1-olL" secondAttribute="centerY" id="fYd-vZ-Rs3"/>
                                             <constraint firstItem="qPY-hl-6Gz" firstAttribute="leading" secondItem="jwF-I1-olL" secondAttribute="leading" id="iv0-cP-alg"/>
@@ -362,6 +370,7 @@
                         <outlet property="pageNumberLabel" destination="GE5-7W-BNp" id="pFp-Sj-jyh"/>
                         <outlet property="timeSlider" destination="K0t-gq-VaH" id="CBT-04-xfD"/>
                         <outlet property="topView" destination="WRr-F5-dSP" id="bcy-Yr-UKK"/>
+                        <outlet property="totalTimeLabel" destination="eFA-Xg-nBp" id="lFK-Pv-jLQ"/>
                         <outlet property="videoPlayButton" destination="pV9-PJ-dAj" id="Hs1-w3-Wic"/>
                         <outlet property="videoStatusView" destination="jwF-I1-olL" id="u3r-Pi-64s"/>
                     </connections>
