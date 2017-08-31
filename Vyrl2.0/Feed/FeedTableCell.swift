@@ -85,8 +85,6 @@ class FeedTableCell: UITableViewCell {
         }
     }
     
-    var isFirstLoadImage = false
-    
     var article : Article? {
         didSet{
             
@@ -183,10 +181,7 @@ class FeedTableCell: UITableViewCell {
             
             contentHeight.constant = CGFloat(ceilf( Float(count!) / 3) * Float(cellWidth))
             
-            if self.isFirstLoadImage == false {
-                self.collectionView.reloadData()
-                self.isFirstLoadImage = true
-            }
+            self.collectionView.reloadData()
         }
     }
 

@@ -147,23 +147,16 @@
                                     <constraint firstAttribute="trailing" secondItem="5JM-Jr-nv6" secondAttribute="trailing" constant="15" id="yGf-Ai-GaA"/>
                                 </constraints>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AEJ-wP-T1Q">
-                                <rect key="frame" x="0.0" y="66" width="375" height="601"/>
-                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="YRP-qn-Z9Y" firstAttribute="top" secondItem="Tes-lH-Pt1" secondAttribute="bottom" id="5Fz-lK-OkF"/>
                             <constraint firstItem="RIH-dH-w9m" firstAttribute="top" secondItem="kQx-bF-K19" secondAttribute="bottom" id="ClT-Pa-LCm"/>
-                            <constraint firstAttribute="bottom" secondItem="AEJ-wP-T1Q" secondAttribute="bottom" id="IDj-mr-hg1"/>
                             <constraint firstItem="kQx-bF-K19" firstAttribute="leading" secondItem="25h-lX-nou" secondAttribute="leading" id="JrI-rA-afq"/>
                             <constraint firstItem="kQx-bF-K19" firstAttribute="top" secondItem="YRP-qn-Z9Y" secondAttribute="bottom" id="Pi2-Ub-Byn"/>
                             <constraint firstAttribute="trailing" secondItem="YRP-qn-Z9Y" secondAttribute="trailing" id="UZa-w2-ave"/>
-                            <constraint firstItem="AEJ-wP-T1Q" firstAttribute="leading" secondItem="25h-lX-nou" secondAttribute="leading" id="UZb-3i-E3W"/>
                             <constraint firstItem="RIH-dH-w9m" firstAttribute="leading" secondItem="25h-lX-nou" secondAttribute="leading" id="VbE-5M-Wtr"/>
-                            <constraint firstItem="AEJ-wP-T1Q" firstAttribute="top" secondItem="kQx-bF-K19" secondAttribute="bottom" id="a4W-y8-OWW"/>
                             <constraint firstAttribute="trailing" secondItem="kQx-bF-K19" secondAttribute="trailing" id="dZo-ZR-otT"/>
-                            <constraint firstAttribute="trailing" secondItem="AEJ-wP-T1Q" secondAttribute="trailing" id="dha-Wb-Xzf"/>
                             <constraint firstAttribute="trailing" secondItem="RIH-dH-w9m" secondAttribute="trailing" id="igo-8d-fO2"/>
                             <constraint firstItem="Ocq-YV-XIX" firstAttribute="top" secondItem="RIH-dH-w9m" secondAttribute="bottom" id="qKC-Ni-ChP"/>
                             <constraint firstItem="YRP-qn-Z9Y" firstAttribute="leading" secondItem="25h-lX-nou" secondAttribute="leading" id="vGV-Iv-qXq"/>
@@ -175,7 +168,6 @@
                     <navigationItem key="navigationItem" id="fCh-ef-yzS"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="containerView" destination="AEJ-wP-T1Q" id="duI-Zb-Op5"/>
                         <outlet property="feedTtile" destination="TEk-Yp-GIZ" id="LhQ-8r-z8a"/>
                         <outlet property="selectImageview" destination="fCj-3P-OuT" id="Bvr-Ge-tC0"/>
                     </connections>
@@ -188,7 +180,7 @@
         <scene sceneID="zbW-6X-bXo">
             <objects>
                 <navigationController navigationBarHidden="YES" id="AqP-hB-Wsq" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wxq-cz-Xzg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="wxq-cz-Xzg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
