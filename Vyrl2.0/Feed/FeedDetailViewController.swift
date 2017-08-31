@@ -32,6 +32,7 @@ class FeedDetailViewController: UIViewController{
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
+
     
     var articleId : Int!
     var emoticonView : EmoticonView!
@@ -51,7 +52,6 @@ class FeedDetailViewController: UIViewController{
                 self.likeButton.setImage(UIImage.init(named: "icon_heart_01"), for: .normal)
                 self.likeButton.tag = 0
             }
-
         }
     }
     
@@ -72,6 +72,10 @@ class FeedDetailViewController: UIViewController{
          self.commentTextView.textContainerInset = UIEdgeInsetsMake(12, 0, 12, 0)
         
         showButtonView()
+        requestFeedDetail()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         requestFeedDetail()
     }
     
@@ -462,7 +466,76 @@ class FeedDetailViewController: UIViewController{
     {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func showEditFeedAlert(_ sender: UIButton) {
+        
+        if self.article?.isMyArticle == false {
+            return
+        }
+        
+        let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.actionSheet)
+        
+        let modify = UIAlertAction(title: "수정", style: .default,handler: { (action) -> Void in
+            let vc : FeedModifyController = self.pushModal(storyboardName: "FeedStyle", controllerName: "feedModify") as! FeedModifyController
+            vc.setText(text: (self.article?.content)!)
+            vc.articleId = self.article?.id
+        })
+        let remove = UIAlertAction(title: "삭제", style: .default, handler: { (action) -> Void in
+            
+            let articleId = (self.article?.id)!
+            
+            let uri = Constants.VyrlFeedURL.feed(articleId: articleId)
+            
+            Alamofire.request(uri, method: .delete, parameters: nil, encoding:JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: { (response) in
+                switch response.result {
+                case .success(let json):
+                    print(json)
+                    
+                    if let code = response.response?.statusCode {
+                        if code == 200 {
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    }
+                case .failure(let error):
+                    print(error)
+                }
+            })
+        })
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
+            alertController.dismiss(animated: true, completion: nil)
+        })
+        
+        alertController.addAction(modify)
+        alertController.addAction(remove)
+        alertController.addAction(cancel)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    @IBAction func followUser(_ sender: UIButton)
+    {
+        if self.article?.isMyArticle == true {
+            return
+        }
 
+        
+        let uri = URL.init(string: Constants.VyrlFeedURL.follow(followId: (self.article?.profile.id)!))
+        Alamofire.request(uri!, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: {
+            response in switch response.result {
+            case .success(let json):
+                print(json)
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+
+
+    func showUserProfileView(userId: Int) {
+        let profile = self.pushViewControllrer(storyboardName: "My", controllerName: "My") as! MyViewController
+        profile.profileUserId = userId
+    }
 }
 
 extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource {
@@ -524,6 +597,11 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
                     cell.initImageVideo()
                 }
                 
+                if (article?.profile.follow)! {
+                    cell.followButton.isHidden = true
+                } else {
+                    cell.followButton.isHidden = false
+                }
                 cell.contentTextView.text = self.article?.content
                 cell.contentTextView.resolveHashTags()
                 cell.contentTextView.delegate = self
@@ -675,6 +753,7 @@ class FeedDetailTableCell : UITableViewCell {
     @IBOutlet weak var imageScrollView: UIScrollView!
     
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var followButton: UIButton!
     
     
     override func awakeFromNib() {
@@ -684,8 +763,6 @@ class FeedDetailTableCell : UITableViewCell {
             self.imageScrollView.delegate = self as UIScrollViewDelegate
             self.contentTextView.textContainerInset = UIEdgeInsets.zero
             self.contentTextView.textContainer.lineFragmentPadding = 0
-            
-            
         }
     }
     
