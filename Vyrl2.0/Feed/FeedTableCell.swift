@@ -96,6 +96,16 @@ class FeedTableCell: UITableViewCell {
                 let str = article?.medias[0].url
                 let url : URL = URL.init(string: str!)!
                 self.photo.af_setImage(withURL: url)
+                
+                if(self.article?.medias[0].type == "VIDEO")
+                {
+                    let playImage = UIImage.init(named: "icon_play_01")
+                    let subImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: (playImage?.size.width)!, height: (playImage?.size.height)!))
+                    subImageView.center = CGPoint.init(x: self.photo.frame.size.width/2, y: self.photo.frame.size.height/2)
+                    subImageView.image = playImage
+                    
+                    self.photo.addSubview(subImageView)
+                }
             }
             
             self.cntLike.setTitle(article?.likeCount, for: .normal)
@@ -313,6 +323,17 @@ extension FeedTableCell: UICollectionViewDataSource, UICollectionViewDelegate {
         let media : ArticleMedia = (self.article?.medias[indexPath.row])!
         
         cell.imageView.af_setImage(withURL: URL(string: media.imageUrl)!)
+        
+        if(self.article?.medias[indexPath.row].type == "VIDEO")
+        {
+            let playImage = UIImage.init(named: "icon_play_01")
+            let subImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: (playImage?.size.width)!, height: (playImage?.size.height)!))
+            subImageView.center = CGPoint.init(x: cell.frame.size.width/2, y: cell.frame.size.height/2)
+            subImageView.image = playImage
+            
+            cell.imageView.addSubview(subImageView)
+        }
+
         
         return cell
     }
