@@ -307,6 +307,20 @@ extension FeedTableCell: UICollectionViewDataSource, UICollectionViewDelegate {
         
         let media : ArticleMedia = (self.article?.medias[indexPath.row])!
         
+        if (self.article?.medias.count)! > 6 && indexPath.row == 5 {
+            cell.dimView.alpha = 1
+            cell.mediaCount.alpha = 1
+            
+            let str = "+\((self.article?.medias.count)! - 6)"
+            
+            let attributedString = NSMutableAttributedString(string: str + " 더보기")
+            attributedString.addAttribute(NSFontAttributeName, value: UIFont(name: "AppleSDGothicNeo-SemiBold", size: 13.0)!, range: NSRange(location: 0, length: str.characters.count))
+            cell.mediaCount.attributedText = attributedString
+        }else {
+            cell.dimView.alpha = 0
+            cell.mediaCount.alpha = 0
+        }
+        
         cell.imageView.af_setImage(withURL: URL(string: media.imageUrl)!)
         
         return cell
@@ -336,6 +350,8 @@ extension FeedTableCell : GADNativeContentAdLoaderDelegate , GADNativeAppInstall
 
 class BoxCell : UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var dimView: UIView!
+    @IBOutlet weak var mediaCount: UILabel!
 }
 
 
