@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import Alamofire
 
 class FanPageController : UIViewController {
     
@@ -30,13 +30,17 @@ class FanPageController : UIViewController {
     
     @IBOutlet weak var scrollview: UIScrollView!
     
+    
+    @IBOutlet weak var noFeedTopLbl: UILabel!
+    @IBOutlet weak var noFeedDownLbl: UILabel!
+    
+    @IBOutlet weak var noFeedBtn: UIButton!
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         self.initPage()
-        
-        self.setupFeed()
     }
     
     func setupFeed(){
@@ -50,16 +54,26 @@ class FanPageController : UIViewController {
     }
     
     func initPage() {
-        if fanPage.level == "OWNER" {
+        if fanPage.level == "GUEST" {
+            self.signUpOrWithDraw.setTitle("가입하기", for: .normal)
+            self.signUpOrWithDraw.backgroundColor = UIColor.ivLighterPurple
+            
+            self.signUpOrWithDraw.addTarget(self, action: #selector(joinFanPage(_:)), for: .touchUpInside)
+        }else {
             self.signUpOrWithDraw.setTitle("탈퇴하기", for: .normal)
             self.signUpOrWithDraw.backgroundColor = UIColor.init(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.5)
             self.feedView.alpha = 1
             self.noFeedView.alpha = 0
-        }else {
-            self.signUpOrWithDraw.setTitle("가입하기", for: .normal)
-            self.signUpOrWithDraw.backgroundColor = UIColor.ivLighterPurple
-            self.feedView.alpha = 0
-            self.noFeedView.alpha = 1
+            
+            self.signUpOrWithDraw.addTarget(self, action: #selector(withDrawFanPage(_:)), for: .touchUpInside)
+            
+            self.noFeedTopLbl.text = "팬페이지에 아직 글이 없습니다."
+            self.noFeedDownLbl.text = "새 글을 작성해보세요~!"
+            self.noFeedBtn.setTitle("글쓰기", for: .normal)
+        }
+        
+        if fanPage.level == "OWNER" {
+            self.signUpOrWithDraw.alpha = 0
         }
         
         self.ownerLabel.text = fanPage.nickName + "님 개설"
@@ -78,6 +92,46 @@ class FanPageController : UIViewController {
         str = "\(fanPage.cntPost!) posts"
         self.post.text = str
         
+        if fanPage.cntPost == 0 {
+            self.feedView.alpha = 0
+            self.noFeedView.alpha = 1
+        }
+        else {
+            self.feedView.alpha = 1
+            self.noFeedView.alpha = 0
+            
+            self.setupFeed()
+        }
+    }
+    
+    func joinFanPage(_ sender: UIButton){
+        
+        let uri = URL.init(string: Constants.VyrlFanAPIURL.joinFanPage(fanPageId: self.fanPage.fanPageId))
+        Alamofire.request(uri!, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON { (response) in
+            switch response.result {
+            case .success(let json):
+                print(json)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func withDrawFanPage(_ sender: UIButton){
+        let uri = Constants.VyrlFanAPIURL.withdrawFanPage(fanPageId: self.fanPage.fanPageId)
+        
+        Alamofire.request(uri, method: .delete, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: {
+            response in
+            
+            switch response.result {
+            case .success(let json):
+                
+                print(json)
+                
+            case .failure(let error):
+                print(error)
+            }
+        })
     }
     
     @IBAction func sortList(_ sender: Any) {

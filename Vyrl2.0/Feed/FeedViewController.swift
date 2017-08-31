@@ -76,7 +76,7 @@ class FeedViewController: UIViewController {
             self.feedTtile.text = "팬 피드"
             self.selectImageview.image = UIImage.init(named: "btn_select_down_02")
             
-            feedView?.feedType = FeedTableType.MYFEED
+            feedView?.feedType = FeedTableType.FANALLFEED
             feedView?.getAllFeed()
             
             alertController.dismiss(animated: true, completion: nil)

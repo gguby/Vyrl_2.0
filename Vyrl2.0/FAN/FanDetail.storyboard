@@ -321,7 +321,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DUP-ZX-HUP">
-                                <rect key="frame" x="0.0" y="683.66666666666663" width="375" height="45"/>
+                                <rect key="frame" x="0.0" y="684.33333333333337" width="375" height="45"/>
                                 <color key="backgroundColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.67450980390000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="n5Y-HG-ydc"/>
