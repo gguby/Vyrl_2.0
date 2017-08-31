@@ -11,9 +11,10 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
-    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var feedTtile: UILabel!
     @IBOutlet weak var selectImageview: UIImageView!
+    
+    var embedController : EmbedController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,20 +22,21 @@ class FeedViewController: UIViewController {
        
         registerSwipe()
         
-        LoginManager.sharedInstance.checkPush(viewConroller: self)        
+        LoginManager.sharedInstance.checkPush(viewConroller: self)
+        
+        embedController = EmbedController.init(rootViewController: self)
         
         self.setupFeedTableView()
     }
     
     func setupFeedTableView (){
         if LoginManager.sharedInstance.isExistFollower == false {
-            self.containerView.translatesAutoresizingMaskIntoConstraints = true
             let storyboard = UIStoryboard(name: "FeedStyle", bundle: nil)
             let controller = storyboard.instantiateViewController(withIdentifier: "feedTable")
-            addChildViewController(controller)
-            controller.view.translatesAutoresizingMaskIntoConstraints = true
-            containerView.addSubview(controller.view)
-            controller.didMove(toParentViewController: self)
+            
+            controller.view.frame.origin = CGPoint.init(x: 0, y: 65)
+            
+            embedController.append(viewController: controller)
         }
     }
     
@@ -95,3 +97,32 @@ class FeedViewController: UIViewController {
     }
 }
 
+class EmbedController {
+    
+    public private(set) weak var rootViewController: UIViewController?
+    
+    public private(set) var controllers = [UIViewController]()
+    
+    init (rootViewController: UIViewController) {
+        self.rootViewController = rootViewController
+    }
+    
+    func append(viewController: UIViewController) {
+        if let rootViewController = self.rootViewController {
+            controllers.append(viewController)
+            rootViewController.addChildViewController(viewController)
+            rootViewController.view.addSubview(viewController.view)
+        }
+    }
+    
+    deinit {
+        if self.rootViewController != nil {
+            for controller in controllers {
+                controller.view.removeFromSuperview()
+                controller.removeFromParentViewController()
+            }
+            controllers.removeAll()
+            self.rootViewController = nil
+        }
+    }
+}
