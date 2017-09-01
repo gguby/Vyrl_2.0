@@ -49,7 +49,7 @@
 		A679A4991F5908FA0006D480 /* FanModifyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A679A4981F5908FA0006D480 /* FanModifyController.swift */; };
 		A679A49B1F5909650006D480 /* FanPageCloseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A679A49A1F5909650006D480 /* FanPageCloseViewController.swift */; };
 		A679A49D1F5909910006D480 /* FanPageWithDrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A679A49C1F5909910006D480 /* FanPageWithDrawViewController.swift */; };
-		A679A49F1F590DB80006D480 /* FanPageMoify.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A679A49E1F590DB80006D480 /* FanPageMoify.storyboard */; };
+		A679A49F1F590DB80006D480 /* FanPageModify.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A679A49E1F590DB80006D480 /* FanPageModify.storyboard */; };
 		CE08981C1ECD704F000D6D6C /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08981B1ECD704F000D6D6C /* SearchViewController.swift */; };
 		CE08981E1ECD706A000D6D6C /* FanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08981D1ECD706A000D6D6C /* FanViewController.swift */; };
 		CE0898201ECD7079000D6D6C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08981F1ECD7079000D6D6C /* LoginViewController.swift */; };
@@ -134,7 +134,7 @@
 		A679A4981F5908FA0006D480 /* FanModifyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanModifyController.swift; sourceTree = "<group>"; };
 		A679A49A1F5909650006D480 /* FanPageCloseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanPageCloseViewController.swift; sourceTree = "<group>"; };
 		A679A49C1F5909910006D480 /* FanPageWithDrawViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanPageWithDrawViewController.swift; sourceTree = "<group>"; };
-		A679A49E1F590DB80006D480 /* FanPageMoify.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FanPageMoify.storyboard; sourceTree = "<group>"; };
+		A679A49E1F590DB80006D480 /* FanPageModify.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FanPageModify.storyboard; sourceTree = "<group>"; };
 		C2AE70CA913C7D61FE18140C /* Pods-Vyrl2.0UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vyrl2.0UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vyrl2.0UITests/Pods-Vyrl2.0UITests.release.xcconfig"; sourceTree = "<group>"; };
 		CE08981B1ECD704F000D6D6C /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = Vyrl2.0/SEARCH/SearchViewController.swift; sourceTree = SOURCE_ROOT; };
 		CE08981D1ECD706A000D6D6C /* FanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanViewController.swift; sourceTree = "<group>"; };
@@ -291,7 +291,7 @@
 				A679A4981F5908FA0006D480 /* FanModifyController.swift */,
 				A679A49A1F5909650006D480 /* FanPageCloseViewController.swift */,
 				A679A49C1F5909910006D480 /* FanPageWithDrawViewController.swift */,
-				A679A49E1F590DB80006D480 /* FanPageMoify.storyboard */,
+				A679A49E1F590DB80006D480 /* FanPageModify.storyboard */,
 			);
 			name = Fan;
 			path = FAN;
@@ -484,7 +484,7 @@
 				8F514D511F4586A1000338E4 /* FeedDetail.storyboard in Resources */,
 				A66FF7891F341C8300D7D3AA /* FanDetail.storyboard in Resources */,
 				A64E35FA1F4BBCF500670168 /* Localizable.strings in Resources */,
-				A679A49F1F590DB80006D480 /* FanPageMoify.storyboard in Resources */,
+				A679A49F1F590DB80006D480 /* FanPageModify.storyboard in Resources */,
 				CE29B1AA1ECD5FEE003F4D2E /* LaunchScreen.storyboard in Resources */,
 				8F4C09291EE528840026D49F /* FeedStyle.storyboard in Resources */,
 				CE29B1CE1ECD6161003F4D2E /* Login.storyboard in Resources */,

@@ -12,9 +12,12 @@ class FanSettingViewController: UIViewController {
     
     @IBOutlet weak var tableView : UITableView!
     
+    var fanPage : FanPage!
+    var fanPageView : FanPageController!
+    
     override func viewDidLoad(){
         super.viewDidLoad()
-    }    
+    }
 }
 
 extension FanSettingViewController : UITableViewDelegate , UITableViewDataSource {
@@ -39,7 +42,9 @@ extension FanSettingViewController : UITableViewDelegate , UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            self.pushView(storyboardName: "FanDetail", controllerName: "fanpagemodify")
+            let vc = self.pushViewControllrer(storyboardName: "FanPageModify", controllerName: "fanpagemodify") as! FanModifyController            
+            vc.fanPage = self.fanPage
+            vc.fanPageView = self.fanPageView
         }else if indexPath.row == 1 {
             self.pushView(storyboardName: "FanDetail", controllerName: "fanpageclose")
         }else {

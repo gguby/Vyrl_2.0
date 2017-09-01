@@ -123,7 +123,9 @@ class FanPageController : UIViewController {
             })
             
             let setting = UIAlertAction(title: "설정", style: .default, handler: { (action) -> Void in
-                self.pushView(storyboardName: "Fan", controllerName: "FanSetting")
+                let vc = self.pushViewControllrer(storyboardName: "Fan", controllerName: "FanSetting") as! FanSettingViewController
+                vc.fanPage = self.fanPage
+                vc.fanPageView = self
             })
             
             let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
@@ -176,5 +178,15 @@ class FanPageController : UIViewController {
     }
     
     @IBAction func fanPageSetting(_ sender: Any) {
+    }
+    
+    func reloadFanPage(){
+        let uri = URL.init(string: Constants.VyrlFanAPIURL.fanPage(fanPageId: self.fanPage.fanPageId))
+        
+        Alamofire.request(uri!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseObject { (response: DataResponse<FanPage>) in
+            self.fanPage = response.result.value
+            
+            self.initPage()
+        }
     }
 }
