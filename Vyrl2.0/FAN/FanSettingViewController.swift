@@ -38,7 +38,13 @@ extension FanSettingViewController : UITableViewDelegate , UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        if indexPath.row == 0 {
+            self.pushView(storyboardName: "FanDetail", controllerName: "fanpagemodify")
+        }else if indexPath.row == 1 {
+            self.pushView(storyboardName: "FanDetail", controllerName: "fanpageclose")
+        }else {
+            self.pushView(storyboardName: "FanDetail", controllerName: "fanpagewithdraw")
+        }
     }
 }
 

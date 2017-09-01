@@ -46,6 +46,10 @@
 		A67143981F29B69000B79432 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A67143971F29B69000B79432 /* Image.xcassets */; };
 		A6722C311F25F7D600CEBBD6 /* FeedTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6722C301F25F7D600CEBBD6 /* FeedTableCell.swift */; };
 		A679A4971F5901220006D480 /* FanSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A679A4961F5901220006D480 /* FanSettingViewController.swift */; };
+		A679A4991F5908FA0006D480 /* FanModifyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A679A4981F5908FA0006D480 /* FanModifyController.swift */; };
+		A679A49B1F5909650006D480 /* FanPageCloseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A679A49A1F5909650006D480 /* FanPageCloseViewController.swift */; };
+		A679A49D1F5909910006D480 /* FanPageWithDrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A679A49C1F5909910006D480 /* FanPageWithDrawViewController.swift */; };
+		A679A49F1F590DB80006D480 /* FanPageMoify.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A679A49E1F590DB80006D480 /* FanPageMoify.storyboard */; };
 		CE08981C1ECD704F000D6D6C /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08981B1ECD704F000D6D6C /* SearchViewController.swift */; };
 		CE08981E1ECD706A000D6D6C /* FanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08981D1ECD706A000D6D6C /* FanViewController.swift */; };
 		CE0898201ECD7079000D6D6C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08981F1ECD7079000D6D6C /* LoginViewController.swift */; };
@@ -127,6 +131,10 @@
 		A67143971F29B69000B79432 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
 		A6722C301F25F7D600CEBBD6 /* FeedTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableCell.swift; sourceTree = "<group>"; };
 		A679A4961F5901220006D480 /* FanSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanSettingViewController.swift; sourceTree = "<group>"; };
+		A679A4981F5908FA0006D480 /* FanModifyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanModifyController.swift; sourceTree = "<group>"; };
+		A679A49A1F5909650006D480 /* FanPageCloseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanPageCloseViewController.swift; sourceTree = "<group>"; };
+		A679A49C1F5909910006D480 /* FanPageWithDrawViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanPageWithDrawViewController.swift; sourceTree = "<group>"; };
+		A679A49E1F590DB80006D480 /* FanPageMoify.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FanPageMoify.storyboard; sourceTree = "<group>"; };
 		C2AE70CA913C7D61FE18140C /* Pods-Vyrl2.0UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vyrl2.0UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vyrl2.0UITests/Pods-Vyrl2.0UITests.release.xcconfig"; sourceTree = "<group>"; };
 		CE08981B1ECD704F000D6D6C /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = Vyrl2.0/SEARCH/SearchViewController.swift; sourceTree = SOURCE_ROOT; };
 		CE08981D1ECD706A000D6D6C /* FanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanViewController.swift; sourceTree = "<group>"; };
@@ -280,6 +288,10 @@
 				A66FF7881F341C8300D7D3AA /* FanDetail.storyboard */,
 				A65677781F384E18001A69F8 /* FanPageController.swift */,
 				A679A4961F5901220006D480 /* FanSettingViewController.swift */,
+				A679A4981F5908FA0006D480 /* FanModifyController.swift */,
+				A679A49A1F5909650006D480 /* FanPageCloseViewController.swift */,
+				A679A49C1F5909910006D480 /* FanPageWithDrawViewController.swift */,
+				A679A49E1F590DB80006D480 /* FanPageMoify.storyboard */,
 			);
 			name = Fan;
 			path = FAN;
@@ -472,6 +484,7 @@
 				8F514D511F4586A1000338E4 /* FeedDetail.storyboard in Resources */,
 				A66FF7891F341C8300D7D3AA /* FanDetail.storyboard in Resources */,
 				A64E35FA1F4BBCF500670168 /* Localizable.strings in Resources */,
+				A679A49F1F590DB80006D480 /* FanPageMoify.storyboard in Resources */,
 				CE29B1AA1ECD5FEE003F4D2E /* LaunchScreen.storyboard in Resources */,
 				8F4C09291EE528840026D49F /* FeedStyle.storyboard in Resources */,
 				CE29B1CE1ECD6161003F4D2E /* Login.storyboard in Resources */,
@@ -596,7 +609,9 @@
 				8F5165D11ED6A8A900EC468B /* ProfilePhotoViewController.swift in Sources */,
 				A650368C1F0E30BA00AD540A /* FeedNavigationController.swift in Sources */,
 				CE0898201ECD7079000D6D6C /* LoginViewController.swift in Sources */,
+				A679A49D1F5909910006D480 /* FanPageWithDrawViewController.swift in Sources */,
 				CE29B19E1ECD5FEE003F4D2E /* AppDelegate.swift in Sources */,
+				A679A49B1F5909650006D480 /* FanPageCloseViewController.swift in Sources */,
 				8F916A8A1EDC17D900E3EC8B /* SettingViewController.swift in Sources */,
 				CE0898281ECD9AB9000D6D6C /* LoginManager.swift in Sources */,
 				8F48CA6C1ED560CD0037A35B /* StartCoverViewController.swift in Sources */,
@@ -634,6 +649,7 @@
 				CE29B1D41ECD6515003F4D2E /* Constants.swift in Sources */,
 				CE36D4A01ED3C96B00ABC7FE /* CheckBox.swift in Sources */,
 				A650368F1F0E3F1A00AD540A /* WriteMediaViewController.swift in Sources */,
+				A679A4991F5908FA0006D480 /* FanModifyController.swift in Sources */,
 				8F42E4971EE10F1E0010EB88 /* FanclubMembershipCardViewController.swift in Sources */,
 				CE33F0061ED2DF320050C21D /* ProfileController.swift in Sources */,
 				CE1340A61EDD3CD500EA330F /* NoticeController.swift in Sources */,
