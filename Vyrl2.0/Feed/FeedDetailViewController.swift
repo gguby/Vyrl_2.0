@@ -642,10 +642,11 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
                  index = indexPath.row - 1
             }
             
+            cell.delegate = self as! FeedCommentTableCellProtocol
+            cell.userId = self.commentArray[index].userId
             cell.commentNicknameLabel.text = self.commentArray[index].nickName
             cell.commentContextTextView.text = self.commentArray[index].content
             cell.commentProfileButton.af_setBackgroundImage(for: .normal, url: URL.init(string: self.commentArray[index].profileImageURL)!)
-            
             cell.commentTimaLavel.text = self.commentArray[index].createAt.toDateTime().timeAgo()
 
         }
@@ -666,6 +667,12 @@ extension FeedDetailViewController : FeedDetailTableCellProtocol {
         vc.mediasArray = self.article?.medias
         
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension FeedDetailViewController : FeedCommentTableCellProtocol {
+    func commentProfileButtonDidSelect(profileId : Int) {
+        self.showUserProfileView(userId: profileId)
     }
 }
 
@@ -814,7 +821,6 @@ class FeedDetailTableCell : UITableViewCell {
     
     func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {
-        delegate.imageDidSelect(profileId: self.profileId)
     }
     
     func requestImageVideo() {
@@ -841,6 +847,11 @@ class FeedDetailTableCell : UITableViewCell {
                 }
             }
       }
+    
+    @IBAction func profileButtonClick(_ sender: UIButton) {
+        delegate.profileButtonDidSelect(profileId: self.profileId)
+    }
+    
  
 }
 
@@ -857,16 +868,28 @@ extension FeedDetailTableCell : UIScrollViewDelegate {
     }
 }
 
+protocol FeedCommentTableCellProtocol {
+    func commentProfileButtonDidSelect(profileId : Int)
+}
+
 class FeedCommentTableCell : UITableViewCell {
     @IBOutlet weak var commentNicknameLabel: UILabel!
     @IBOutlet weak var commentProfileButton: UIButton!
     @IBOutlet weak var commentContextTextView: UITextView!
     @IBOutlet weak var commentTimaLavel: UILabel!
+    var userId : Int!
+    
+    var delegate: FeedCommentTableCellProtocol!
     
     override func awakeFromNib() {
         self.commentContextTextView.textContainerInset = UIEdgeInsets.zero
         self.commentContextTextView.textContainer.lineFragmentPadding = 0
     }
+    
+    @IBAction func profileButtonClick(_ sender: UIButton) {
+        delegate.commentProfileButtonDidSelect(profileId: self.userId)
+    }
+    
 }
 
 extension String
