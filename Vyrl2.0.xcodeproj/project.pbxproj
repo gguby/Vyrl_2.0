@@ -23,6 +23,7 @@
 		8F5165D11ED6A8A900EC468B /* ProfilePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5165D01ED6A8A900EC468B /* ProfilePhotoViewController.swift */; };
 		8F57B73F1F186E44009FD0EA /* FeedFullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F57B73E1F186E44009FD0EA /* FeedFullScreenViewController.swift */; };
 		8F62CC151F00EC330069ACFE /* EmoticonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F62CC141F00EC330069ACFE /* EmoticonView.swift */; };
+		8F6F1D8F1F58EE9400C163D0 /* OtherProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6F1D8E1F58EE9400C163D0 /* OtherProfileViewController.swift */; };
 		8F797B7F1F340E080019C475 /* FanPageCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F797B7E1F340E080019C475 /* FanPageCreateViewController.swift */; };
 		8F829E7C1EFB6648001D418F /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F829E7B1EFB6648001D418F /* MyProfileViewController.swift */; };
 		8F829E801EFB9CD4001D418F /* WriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F829E7F1EFB9CD4001D418F /* WriteViewController.swift */; };
@@ -101,6 +102,7 @@
 		8F5165D01ED6A8A900EC468B /* ProfilePhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePhotoViewController.swift; sourceTree = "<group>"; };
 		8F57B73E1F186E44009FD0EA /* FeedFullScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedFullScreenViewController.swift; sourceTree = "<group>"; };
 		8F62CC141F00EC330069ACFE /* EmoticonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonView.swift; sourceTree = "<group>"; };
+		8F6F1D8E1F58EE9400C163D0 /* OtherProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherProfileViewController.swift; sourceTree = "<group>"; };
 		8F797B7E1F340E080019C475 /* FanPageCreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanPageCreateViewController.swift; sourceTree = "<group>"; };
 		8F829E7B1EFB6648001D418F /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		8F829E7F1EFB9CD4001D418F /* WriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteViewController.swift; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 				CE08981B1ECD704F000D6D6C /* SearchViewController.swift */,
 				A652BA341F3AA5F500007767 /* PostCollectionViewController.storyboard */,
 				A652BA361F3AA61E00007767 /* PostCollectionViewController.swift */,
+				8F6F1D8E1F58EE9400C163D0 /* OtherProfileViewController.swift */,
 			);
 			name = Search;
 			path = SEARCH;
@@ -597,6 +600,7 @@
 				A62EF2EB1F1F5282000CD43A /* LocationViewController.swift in Sources */,
 				8F57B73F1F186E44009FD0EA /* FeedFullScreenViewController.swift in Sources */,
 				8F42E4991EE144C70010EB88 /* OfficialFanClubTermsViewController.swift in Sources */,
+				8F6F1D8F1F58EE9400C163D0 /* OtherProfileViewController.swift in Sources */,
 				CE29B1A01ECD5FEE003F4D2E /* ViewController.swift in Sources */,
 				8F62CC151F00EC330069ACFE /* EmoticonView.swift in Sources */,
 				8F916A8E1EDC264900E3EC8B /* UIView+Extension.swift in Sources */,
