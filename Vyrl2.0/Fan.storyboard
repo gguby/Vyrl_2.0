@@ -718,7 +718,7 @@
                                         </constraints>
                                         <state key="normal" image="icon_back_01"/>
                                         <connections>
-                                            <action selector="back" destination="Xra-9e-yfa" eventType="touchUpInside" id="CWK-Se-vms"/>
+                                            <action selector="back" destination="Xra-9e-yfa" eventType="touchUpInside" id="5DU-US-r7I"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="설정" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zv5-Pi-gaM">
