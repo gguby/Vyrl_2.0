@@ -30,11 +30,12 @@ class FanPageController : UIViewController {
     
     @IBOutlet weak var scrollview: UIScrollView!
     
-    
     @IBOutlet weak var noFeedTopLbl: UILabel!
     @IBOutlet weak var noFeedDownLbl: UILabel!
     
     @IBOutlet weak var noFeedBtn: UIButton!
+    
+    @IBOutlet weak var detailBtn: UIButton!
     
     override func viewDidLoad() {
         
@@ -59,6 +60,8 @@ class FanPageController : UIViewController {
             self.signUpOrWithDraw.backgroundColor = UIColor.ivLighterPurple
             
             self.signUpOrWithDraw.addTarget(self, action: #selector(joinFanPage(_:)), for: .touchUpInside)
+            
+            self.detailBtn.alpha = 0
         }else {
             self.signUpOrWithDraw.setTitle("탈퇴하기", for: .normal)
             self.signUpOrWithDraw.backgroundColor = UIColor.init(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.5)
@@ -70,6 +73,9 @@ class FanPageController : UIViewController {
             self.noFeedTopLbl.text = "팬페이지에 아직 글이 없습니다."
             self.noFeedDownLbl.text = "새 글을 작성해보세요~!"
             self.noFeedBtn.setTitle("글쓰기", for: .normal)
+            
+            self.detailBtn.alpha = 1
+            self.detailBtn.addTarget(self, action: #selector(showDetailFanPage(_:)), for: .touchUpInside)
         }
         
         if fanPage.level == "OWNER" {
@@ -101,6 +107,35 @@ class FanPageController : UIViewController {
             self.noFeedView.alpha = 0
             
             self.setupFeed()
+        }
+    }
+    
+    func showDetailFanPage(_ sender:UIButton){
+        if fanPage.level == "OWNER" {
+            let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.actionSheet)
+            
+            let share = UIAlertAction(title: "공유하기", style: .default,handler: { (action) -> Void in
+                
+            })
+            
+            let push = UIAlertAction(title: "알림켜기", style: .default, handler: { (action) -> Void in
+                
+            })
+            
+            let setting = UIAlertAction(title: "설정", style: .default, handler: { (action) -> Void in
+                self.pushView(storyboardName: "Fan", controllerName: "FanSetting")
+            })
+            
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
+                alertController.dismiss(animated: true, completion: nil)
+            })
+            
+            alertController.addAction(share)
+            alertController.addAction(push)
+            alertController.addAction(setting)
+            alertController.addAction(cancel)
+            
+            self.present(alertController, animated: true, completion: nil)
         }
     }
     

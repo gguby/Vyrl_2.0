@@ -120,7 +120,7 @@ struct Constants {
             return VyrlAPIConstants.baseURL + "fan-pages/members/join/" + str
         }
 
-        static let FANPAGEALLFEED = VyrlAPIConstants.baseURL + "fan-pages/all-feeds"
+        static let FANPAGEALLFEED = VyrlAPIConstants.baseURL + "fan-pages/feeds"
     }
     
     static func getHeader() -> HTTPHeaders {

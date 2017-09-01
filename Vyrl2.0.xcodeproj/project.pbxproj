@@ -44,6 +44,7 @@
 		A66FF7891F341C8300D7D3AA /* FanDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A66FF7881F341C8300D7D3AA /* FanDetail.storyboard */; };
 		A67143981F29B69000B79432 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A67143971F29B69000B79432 /* Image.xcassets */; };
 		A6722C311F25F7D600CEBBD6 /* FeedTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6722C301F25F7D600CEBBD6 /* FeedTableCell.swift */; };
+		A679A4971F5901220006D480 /* FanSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A679A4961F5901220006D480 /* FanSettingViewController.swift */; };
 		CE08981C1ECD704F000D6D6C /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08981B1ECD704F000D6D6C /* SearchViewController.swift */; };
 		CE08981E1ECD706A000D6D6C /* FanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08981D1ECD706A000D6D6C /* FanViewController.swift */; };
 		CE0898201ECD7079000D6D6C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08981F1ECD7079000D6D6C /* LoginViewController.swift */; };
@@ -123,6 +124,7 @@
 		A66FF7881F341C8300D7D3AA /* FanDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FanDetail.storyboard; sourceTree = "<group>"; };
 		A67143971F29B69000B79432 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
 		A6722C301F25F7D600CEBBD6 /* FeedTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableCell.swift; sourceTree = "<group>"; };
+		A679A4961F5901220006D480 /* FanSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanSettingViewController.swift; sourceTree = "<group>"; };
 		C2AE70CA913C7D61FE18140C /* Pods-Vyrl2.0UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vyrl2.0UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vyrl2.0UITests/Pods-Vyrl2.0UITests.release.xcconfig"; sourceTree = "<group>"; };
 		CE08981B1ECD704F000D6D6C /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = Vyrl2.0/SEARCH/SearchViewController.swift; sourceTree = SOURCE_ROOT; };
 		CE08981D1ECD706A000D6D6C /* FanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanViewController.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 				8F797B7E1F340E080019C475 /* FanPageCreateViewController.swift */,
 				A66FF7881F341C8300D7D3AA /* FanDetail.storyboard */,
 				A65677781F384E18001A69F8 /* FanPageController.swift */,
+				A679A4961F5901220006D480 /* FanSettingViewController.swift */,
 			);
 			name = Fan;
 			path = FAN;
@@ -612,6 +615,7 @@
 				A64E99A31F317DBB00D9BCFF /* FeedModifyController.swift in Sources */,
 				A65A0A521F45838700F7D852 /* FeedPullLoader.swift in Sources */,
 				CE33F0021ED2BB690050C21D /* SMLoginViewController.swift in Sources */,
+				A679A4971F5901220006D480 /* FanSettingViewController.swift in Sources */,
 				8F492C3A1F3DA01D0049F600 /* UITextView+Extension.swift in Sources */,
 				8F9AF9911EE800E700DE069E /* FeedTableViewController.swift in Sources */,
 				A6722C311F25F7D600CEBBD6 /* FeedTableCell.swift in Sources */,

@@ -695,10 +695,10 @@
             </objects>
             <point key="canvasLocation" x="601" y="178"/>
         </scene>
-        <!--View Controller-->
+        <!--Fan Setting View Controller-->
         <scene sceneID="gJ8-HF-xHI">
             <objects>
-                <viewController storyboardIdentifier="FanSetting" id="Xra-9e-yfa" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FanSetting" id="Xra-9e-yfa" customClass="FanSettingViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Kaq-ec-Hfr"/>
                         <viewControllerLayoutGuide type="bottom" id="DSn-Ok-Qjw"/>
@@ -717,6 +717,9 @@
                                             <constraint firstAttribute="height" constant="45" id="j9v-zH-YXj"/>
                                         </constraints>
                                         <state key="normal" image="icon_back_01"/>
+                                        <connections>
+                                            <action selector="back" destination="Xra-9e-yfa" eventType="touchUpInside" id="CWK-Se-vms"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="설정" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zv5-Pi-gaM">
                                         <rect key="frame" x="174" y="13" width="28" height="20"/>
@@ -749,7 +752,7 @@
                                 <color key="backgroundColor" red="0.87450980392156863" green="0.87058823529411766" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="separatorColor" red="0.94901960784313721" green="0.94117647058823528" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="BlB-zW-AOm">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="fansettingcell" id="BlB-zW-AOm" customClass="FanSettingCell" customModule="Vyrl2_0" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="47"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BlB-zW-AOm" id="N55-Og-UdQ">
@@ -778,69 +781,15 @@
                                                 <constraint firstAttribute="trailing" secondItem="bHv-Cv-QBE" secondAttribute="trailing" id="n1t-zb-WoJ"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="5Iv-UT-BRZ">
-                                        <rect key="frame" x="0.0" y="75" width="375" height="47"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5Iv-UT-BRZ" id="Z5N-Lk-Oy4">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="46.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="팬페이제 폐쇄" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HyW-HU-Scb">
-                                                    <rect key="frame" x="15" y="14" width="76.5" height="17"/>
-                                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
-                                                    <color key="textColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zr4-bq-DcI">
-                                                    <rect key="frame" x="355" y="0.0" width="20" height="47"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="20" id="K9I-mO-o8W"/>
-                                                        <constraint firstAttribute="height" constant="47" id="Rj9-yR-M9m"/>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="20" id="gXf-Ug-i87"/>
-                                                    </constraints>
-                                                    <state key="normal" image="icon_bullet_01"/>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="HyW-HU-Scb" firstAttribute="leading" secondItem="Z5N-Lk-Oy4" secondAttribute="leadingMargin" constant="7" id="26t-Ea-k3F"/>
-                                                <constraint firstItem="Zr4-bq-DcI" firstAttribute="top" secondItem="Z5N-Lk-Oy4" secondAttribute="top" id="G6D-ec-RfX"/>
-                                                <constraint firstItem="HyW-HU-Scb" firstAttribute="centerY" secondItem="Z5N-Lk-Oy4" secondAttribute="centerY" id="Lvk-Sk-zGm"/>
-                                                <constraint firstAttribute="trailing" secondItem="Zr4-bq-DcI" secondAttribute="trailing" id="qaO-ew-og6"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="bDF-5D-paM">
-                                        <rect key="frame" x="0.0" y="122" width="375" height="47"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bDF-5D-paM" id="XAP-Sn-Svt">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="46.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="팬페이지 탈퇴" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4cX-hN-c5u">
-                                                    <rect key="frame" x="15" y="14" width="76.5" height="17"/>
-                                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
-                                                    <color key="textColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wjG-pp-TMP">
-                                                    <rect key="frame" x="355" y="0.0" width="20" height="47"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="20" id="3Lp-KQ-Ctv"/>
-                                                        <constraint firstAttribute="height" constant="47" id="Or2-0e-Wd6"/>
-                                                    </constraints>
-                                                    <state key="normal" image="icon_bullet_01"/>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="4cX-hN-c5u" firstAttribute="leading" secondItem="XAP-Sn-Svt" secondAttribute="leadingMargin" constant="7" id="FbT-67-Nlt"/>
-                                                <constraint firstItem="4cX-hN-c5u" firstAttribute="centerY" secondItem="XAP-Sn-Svt" secondAttribute="centerY" id="NyN-2w-rVB"/>
-                                                <constraint firstAttribute="trailing" secondItem="wjG-pp-TMP" secondAttribute="trailing" id="cJZ-Fs-hHK"/>
-                                                <constraint firstItem="wjG-pp-TMP" firstAttribute="top" secondItem="XAP-Sn-Svt" secondAttribute="top" id="dJS-ni-uMG"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="titleLabel" destination="T8m-uo-0uy" id="3da-Y7-81J"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Xra-9e-yfa" id="ZuC-fY-end"/>
+                                    <outlet property="delegate" destination="Xra-9e-yfa" id="05R-Mn-edf"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -854,6 +803,9 @@
                             <constraint firstItem="Tej-pb-lql" firstAttribute="top" secondItem="btE-ol-L1m" secondAttribute="bottom" id="zhV-Is-sBE"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="Tej-pb-lql" id="FgY-R3-bTf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O3a-xM-FYk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1241,6 +1193,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="detailBtn" destination="ler-Fn-4e6" id="hMS-hN-bKN"/>
                         <outlet property="feedContainer" destination="F68-gx-N1e" id="Uoo-xC-Uny"/>
                         <outlet property="feedView" destination="2jl-eu-EBp" id="FLZ-Ud-9mW"/>
                         <outlet property="members" destination="TCu-pN-saf" id="HZH-ar-Wah"/>
