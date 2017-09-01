@@ -15,7 +15,7 @@ import AVFoundation
 import KRPullLoader
 
 enum FeedTableType {
-    case ALLFEED,MYFEED, BOOKMARK, USERFEED, FANFEED
+    case ALLFEED,MYFEED, BOOKMARK, USERFEED, FANFEED, FANALLFEED
 }
 
 class FeedTableViewController: UIViewController, UIScrollViewDelegate{
@@ -160,6 +160,28 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         self.pushView(storyboardName: "Feed", controllerName: "FeedFullScreenViewController")
     }
     
+    func getFeeddType(parameters : [String:String]) -> URL! {
+        
+        var url : URL!
+        
+        if self.feedType == FeedTableType.ALLFEED {
+            url = URL.init(string: Constants.VyrlFeedURL.FEEDALL, parameters: parameters)
+        }else if self.feedType == FeedTableType.MYFEED{
+            url = URL.init(string: Constants.VyrlFeedURL.FEED, parameters: parameters)
+        }else if self.feedType == .USERFEED {
+            url = URL.init(string: Constants.VyrlFeedURL.feed(userId: self.userId))
+        }else if self.feedType == .FANFEED {
+            url = URL.init(string: Constants.VyrlFanAPIURL.getFanPagePosts(fanPageId: self.fanPageId))
+        }else if self.feedType == .FANALLFEED {
+            url = URL.init(string: Constants.VyrlFanAPIURL.FANPAGEALLFEED)
+        }
+        else {
+            url = URL.init(string: Constants.VyrlFeedURL.FEEDBOOKMARK)
+        }
+
+        return url
+    }
+    
     func getFeedLoadMore(){
         var url: URL!
         
@@ -171,13 +193,7 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
             parameters["lastId"] = (self.articleArray.last?.idStr)!
         }
         
-        if self.feedType == FeedTableType.ALLFEED {
-            url = URL.init(string: Constants.VyrlFeedURL.FEEDALL, parameters: parameters)
-        }else if self.feedType == FeedTableType.MYFEED {
-            url = URL.init(string: Constants.VyrlFeedURL.FEED, parameters: parameters)
-        }else {
-            url = URL.init(string: Constants.VyrlFeedURL.FEEDBOOKMARK)
-        }
+        url = self.getFeeddType(parameters: parameters)
         
         Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Article]>) in
             
@@ -191,24 +207,13 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
     }
    
     func getAllFeed(){
-        var url: URL!
 
         let parameters :[String:String] = [
             "size" : "\(10)"
         ]
+        
+        let url = self.getFeeddType(parameters: parameters)
 
-        if self.feedType == FeedTableType.ALLFEED {
-            url = URL.init(string: Constants.VyrlFeedURL.FEEDALL, parameters: parameters)
-        }else if self.feedType == FeedTableType.MYFEED{
-            url = URL.init(string: Constants.VyrlFeedURL.FEED, parameters: parameters)
-        }else if self.feedType == .USERFEED {
-            url = URL.init(string: Constants.VyrlFeedURL.feed(userId: self.userId))
-        }else if self.feedType == .FANFEED {
-            url = URL.init(string: Constants.VyrlFanAPIURL.getFanPagePosts(fanPageId: self.fanPageId))
-        }
-        else {
-            url = URL.init(string: Constants.VyrlFeedURL.FEEDBOOKMARK)
-        }
         
         Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Article]>) in
             

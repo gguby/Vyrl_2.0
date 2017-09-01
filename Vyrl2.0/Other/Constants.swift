@@ -99,7 +99,8 @@ struct Constants {
         static let HOTPOST = VyrlAPIConstants.baseURL + "fan-pages/hot-fanpage-posts"
         static func checkFanPageName(fanPageName:String)-> String{
             return VyrlAPIConstants.baseURL + "fan-pages/check-names/" + fanPageName
-        }        
+        }
+        
         static func getFanPagePosts(fanPageId : Int)-> String{
             let str = "\(fanPageId)"
             return VyrlAPIConstants.baseURL + "fan-pages/" + str + "/posts"
@@ -108,7 +109,22 @@ struct Constants {
         static func search(searchWord : String) -> String{
             return VyrlAPIConstants.baseURL + "/fan-pages/searchs/" + searchWord
         }
+        
+        static func withdrawFanPage(fanPageId : Int)-> String{
+            let str = "\(fanPageId)"
+            return VyrlAPIConstants.baseURL + "fan-pages/members/withdraw/" + str 
+        }
+        
+        static func joinFanPage(fanPageId : Int)-> String{
+            let str = "\(fanPageId)"
+            return VyrlAPIConstants.baseURL + "fan-pages/members/join/" + str
+        }
 
+        static let FANPAGEALLFEED = VyrlAPIConstants.baseURL + "fan-pages/all-feeds"
+    }
+    
+    static func getHeader() -> HTTPHeaders {
+        return VyrlAPIConstants.getHeader()
     }
     
     struct VyrlAPIConstants{
