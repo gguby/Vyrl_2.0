@@ -533,8 +533,14 @@ class FeedDetailViewController: UIViewController{
 
 
     func showUserProfileView(userId: Int) {
-        let profile = self.pushViewControllrer(storyboardName: "My", controllerName: "My") as! MyViewController
-        profile.profileUserId = userId
+        if(LoginManager.sharedInstance.getCurrentAccount()?.userId == "\(userId)"){
+            let profile = self.pushViewControllrer(storyboardName: "My", controllerName: "My") as! MyViewController
+            profile.profileUserId = userId
+        } else {
+            let otherProfile = self.pushViewControllrer(storyboardName: "Search", controllerName: "OtherProfile") as! OtherProfileViewController
+            otherProfile.profileUserId = userId
+        }
+        
     }
 }
 
@@ -615,7 +621,7 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
                 cell.nickNameLabel.text = self.article?.profile.nickName
                 
                 cell.profileId = self.article?.profile.id
-                cell.delegate = self
+                cell.delegate = self as! FeedDetailTableCellProtocol
             }
             return cell
 
@@ -649,9 +655,9 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
     }
 }
 
-extension FeedDetailViewController : CellDidSelectProtocol {
+extension FeedDetailViewController : FeedDetailTableCellProtocol {
     func profileButtonDidSelect(profileId : Int) {
-        
+        self.showUserProfileView(userId: profileId)
     }
     
     func imageDidSelect(profileId : Int) {
@@ -730,7 +736,7 @@ struct Comment : Mappable {
 }
 
 
-protocol CellDidSelectProtocol {
+protocol FeedDetailTableCellProtocol {
     func profileButtonDidSelect(profileId : Int)
     func imageDidSelect(profileId : Int)
 }
@@ -740,7 +746,7 @@ class FeedDetailTableCell : UITableViewCell {
     var imageViewArray : [UIImageView] = []
     var index : Int = 0;
     var profileId : Int!
-    var delegate: CellDidSelectProtocol!
+    var delegate: FeedDetailTableCellProtocol!
     
     @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var nickNameLabel: UILabel!

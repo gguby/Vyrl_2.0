@@ -25,12 +25,22 @@ class OtherProfileViewController: UIViewController {
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var middlePostBtn: UILabel!
     
+    @IBOutlet weak var followButton: UIButton!
+    
     var profileUserId : Int!
+    var followState : Bool! = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.setupFeed(feedType: FeedTableType.USERFEED)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.loadUserProfile()
     }
 
     func setupPostContainer(){
@@ -60,12 +70,6 @@ class OtherProfileViewController: UIViewController {
         controller.didMove(toParentViewController: self)
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.loadUserProfile()
-    }
-    
     func getProfile(){
         var uri = Constants.VyrlAPIURL.MYPROFILE
         
@@ -91,6 +95,16 @@ class OtherProfileViewController: UIViewController {
                             let url = URL.init(string: (image)!)
                             self.profileImage.af_setImage(withURL: url!)
                         }
+                        
+                        if(jsonData["follow"] as! Bool == true)
+                        {
+                            self.followButton.setImage(UIImage.init(named: "icon_check_05_on"), for: .normal)
+                            self.followButton.tag = 1
+                        } else {
+                            self.followButton.setImage(UIImage.init(named: "icon_check_05_off"), for: .normal)
+                            self.followButton.tag = 0
+                        }
+                        
                     }
                 }
                 
@@ -103,16 +117,40 @@ class OtherProfileViewController: UIViewController {
     }
     
     func loadUserProfile(){
-        
-         self.getProfile()
+        self.getProfile()
     }
     
     @IBAction func showFeed(_ sender: Any) {
-        self.setupFeed(feedType: FeedTableType.ALLFEED)
+        self.setupFeed(feedType: FeedTableType.USERFEED)
     }
     
     @IBAction func showPost(_ sender: Any) {
         self.setupPostContainer()
+    }
+    
+    @IBAction func setFollow(_ sender: UIButton) {
+        var method = HTTPMethod.post
+        
+        if sender.tag == 1 {
+            method = HTTPMethod.delete
+        }
+        
+        let uri = URL.init(string: Constants.VyrlFeedURL.follow(followId: self.profileUserId))
+        Alamofire.request(uri!, method: method, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON(completionHandler: {
+            response in switch response.result {
+            case .success(let json):
+                
+                if sender.tag == 0 {
+                    sender.setImage(UIImage.init(named: "icon_check_05_on"), for: .normal)
+                    sender.tag = 1
+                }else {
+                    sender.setImage(UIImage.init(named: "icon_check_05_off"), for: .normal)
+                    sender.tag = 0
+                }
+            case .failure(let error):
+                print(error)
+            }
+        })
     }
 }
 

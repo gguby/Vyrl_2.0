@@ -841,13 +841,16 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cFM-8Q-eeL" userLabel="Edit">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cFM-8Q-eeL">
                                                 <rect key="frame" x="188" y="122" width="30" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="QTp-e6-tpp"/>
                                                     <constraint firstAttribute="width" constant="30" id="tyq-Co-1UY"/>
                                                 </constraints>
                                                 <state key="normal" image="icon_check_05_on"/>
+                                                <connections>
+                                                    <action selector="setFollow:" destination="mQi-og-yIE" eventType="touchUpInside" id="Z8l-mi-ZP8"/>
+                                                </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="border_circle_01" translatesAutoresizingMaskIntoConstraints="NO" id="eqI-ma-79K" userLabel="profile image View">
                                                 <rect key="frame" x="144" y="27" width="87" height="87"/>
@@ -855,6 +858,11 @@
                                                     <constraint firstAttribute="height" constant="87" id="2UQ-dX-VbE"/>
                                                     <constraint firstAttribute="width" constant="87" id="90W-eD-OWW"/>
                                                 </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="43.5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hHc-D4-H6v">
                                                 <rect key="frame" x="188" y="158" width="0.0" height="15"/>
@@ -1121,6 +1129,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="containerView" destination="uir-Xa-kcR" id="NRb-Wa-e7B"/>
+                        <outlet property="followButton" destination="cFM-8Q-eeL" id="tpW-Ub-A51"/>
                         <outlet property="follower" destination="2Ky-Ji-vE2" id="MhW-wO-ufu"/>
                         <outlet property="following" destination="946-Yc-zwh" id="x7P-n4-DWU"/>
                         <outlet property="homepageLabel" destination="0cq-0J-udt" id="et6-Kg-7nf"/>
