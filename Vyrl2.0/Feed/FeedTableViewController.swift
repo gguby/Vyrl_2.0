@@ -614,8 +614,13 @@ extension FeedTableViewController : FeedCellDelegate {
     }
     
     func showUserProfileView(userId: Int) {
-        let profile = self.pushViewControllrer(storyboardName: "My", controllerName: "My") as! MyViewController
-        profile.profileUserId = userId
+        if(LoginManager.sharedInstance.getCurrentAccount()?.userId == "\(userId)"){
+            let profile = self.pushViewControllrer(storyboardName: "My", controllerName: "My") as! MyViewController
+            profile.profileUserId = userId
+        } else {
+            let otherProfile = self.pushViewControllrer(storyboardName: "Search", controllerName: "OtherProfile") as! OtherProfileViewController
+            otherProfile.profileUserId = userId
+        }
     }
 }
 
