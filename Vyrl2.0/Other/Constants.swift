@@ -124,6 +124,11 @@ struct Constants {
             let str = "\(fanPageId)"
             return VyrlAPIConstants.baseURL + "fan-pages/members/join/" + str
         }
+        
+        static func joinUserList(fanPageId : Int)-> String{
+            let str = "\(fanPageId)"
+            return VyrlAPIConstants.baseURL + "fan-pages/" + str + "/members"
+        }
 
         static let FANPAGEALLFEED = VyrlAPIConstants.baseURL + "fan-pages/feeds"
     }

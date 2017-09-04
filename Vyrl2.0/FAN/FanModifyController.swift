@@ -55,7 +55,7 @@ class FanModifyController : UIViewController {
                 parameters["link"] = text
             }
         }
-        
+            
         let fileName = "1.jpg"
         
         Alamofire.upload(multipartFormData: { (multipartFormData) in
