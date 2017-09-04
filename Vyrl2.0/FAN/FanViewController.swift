@@ -302,6 +302,94 @@ extension FanViewController : UISearchBarDelegate {
 
 }
 
+struct FanPageArticle : Mappable {
+    
+    var bookmark : Bool!
+    var cntComment : Int!
+    var cntLike : Int!
+    var cntShare : Int!
+    var cntView : Int!
+    var comments : [Comment]!
+
+    
+    var content : String!
+    var date : Date?
+    var fanPageId : Int!
+    var fanPagePostId : Int!
+    var likeCheck : Bool!
+    var medias : [FanPageArticleMedia]!
+    
+    var openYn : Bool!
+    var profile : Profile!
+    var shareCheck : Bool!
+    
+    
+    init?(map: Map) {
+        
+    }
+    
+    mutating func mapping(map: Map){
+        bookmark <- map["bookmark"]
+        cntComment <- map["cntComment"]
+        cntLike <- map["cntLike"]
+        cntShare <- map["cntShare"]
+        cntView <- map["cntView"]
+        comments <- map["comments"]
+
+        
+        content <- map["content"]
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        
+        if let dateString = map["createdAt"].currentValue as? String, let _date = dateFormatter.date(from: dateString){
+            date = _date
+        }
+        
+        fanPageId <- map["fanPageId"]
+        fanPagePostId <- map["fanPagePostId"]
+        likeCheck <- map["likeCheck"]
+        medias <- map["media"]
+        openYn <- map["openYn"]
+        profile <- map["profile"]
+        shareCheck <- map["shareCheck"]
+        
+    }
+}
+
+struct FanPageArticleMedia : Mappable {
+    var mediaId : Int!
+    var thumbnail : String?
+    var type : String?
+    var url : String?
+    var fileSize :Int64?
+    var mbFileSize : Int64?
+    var imageUrl : String!
+    var seq : Int?
+    
+    init?(map: Map) {
+        
+    }
+    
+    mutating func mapping(map: Map){
+        mediaId <- map["mediaId"]
+        seq <- map["seq"]
+        thumbnail <- map["thumbnail"]
+        type <- map["type"]
+        url <- map["url"]
+        
+        if type! == "IMAGE" {
+            imageUrl = url
+        } else {
+            imageUrl = thumbnail
+        }
+        
+        fileSize <- map["size"]
+        mbFileSize = fileSize! / 1024 / 1024
+    }
+    
+}
+
+
 struct FanPage : Mappable {
     
     var fanPageId : Int!
