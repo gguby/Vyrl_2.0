@@ -1211,7 +1211,151 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T4k-jT-tbH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1669.5999999999999" y="-29.23538230884558"/>
+            <point key="canvasLocation" x="1294" y="12"/>
+        </scene>
+        <!--Fan Page Report View Controller-->
+        <scene sceneID="VLB-ry-c1z">
+            <objects>
+                <viewController storyboardIdentifier="Report" id="s2V-E5-WwY" customClass="FanPageReportViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1yf-sb-IOC"/>
+                        <viewControllerLayoutGuide type="bottom" id="l87-eK-lgc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="e3Z-0X-PZc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ZT-uZ-QeY" userLabel="TopView">
+                                <rect key="frame" x="0.0" y="20" width="375" height="45"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zEN-D3-Idj">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="2Xg-ho-IRS"/>
+                                            <constraint firstAttribute="height" constant="45" id="o7J-KH-shm"/>
+                                        </constraints>
+                                        <state key="normal" image="icon_back_01"/>
+                                        <connections>
+                                            <action selector="back" destination="s2V-E5-WwY" eventType="touchUpInside" id="gf8-2v-eyy"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="팬페이지 신고" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4M-DY-6NA">
+                                        <rect key="frame" x="144.5" y="13" width="87.5" height="20"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
+                                        <color key="textColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dgk-MQ-QrN" userLabel="Line">
+                                        <rect key="frame" x="0.0" y="44" width="375" height="1"/>
+                                        <color key="backgroundColor" red="0.91372549020000005" green="0.90980392160000001" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="NpE-ei-fjk"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="zEN-D3-Idj" firstAttribute="top" secondItem="7ZT-uZ-QeY" secondAttribute="top" id="46f-e8-7MJ"/>
+                                    <constraint firstItem="Dgk-MQ-QrN" firstAttribute="width" secondItem="7ZT-uZ-QeY" secondAttribute="width" id="8x3-dm-5JM"/>
+                                    <constraint firstItem="c4M-DY-6NA" firstAttribute="centerX" secondItem="7ZT-uZ-QeY" secondAttribute="centerX" id="EkE-AD-BaP"/>
+                                    <constraint firstItem="Dgk-MQ-QrN" firstAttribute="leading" secondItem="zEN-D3-Idj" secondAttribute="leading" id="I6T-py-xN5"/>
+                                    <constraint firstItem="zEN-D3-Idj" firstAttribute="leading" secondItem="7ZT-uZ-QeY" secondAttribute="leading" id="TGD-Ga-5j4"/>
+                                    <constraint firstAttribute="height" constant="45" id="VkK-Qf-YuS"/>
+                                    <constraint firstItem="Dgk-MQ-QrN" firstAttribute="top" secondItem="7ZT-uZ-QeY" secondAttribute="top" constant="44" id="bBP-iN-pGr"/>
+                                    <constraint firstItem="c4M-DY-6NA" firstAttribute="centerY" secondItem="7ZT-uZ-QeY" secondAttribute="centerY" id="gmt-Ly-oUx"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="신고 팬페이지" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogg-1K-LPZ">
+                                <rect key="frame" x="15" y="91" width="60" height="13"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="13" id="IS9-uu-tkx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="11"/>
+                                <color key="textColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아이린_짱조아" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NdQ-9H-d6K">
+                                <rect key="frame" x="95" y="89" width="83" height="17.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="17.5" id="5tB-j9-qeh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="15"/>
+                                <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="신고 이유" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZjS-Zw-YTR">
+                                <rect key="frame" x="15" y="122" width="41" height="13.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="13" id="6vo-Ow-KZW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="11"/>
+                                <color key="textColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="내용을 작성해 주세요" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="rwg-uc-WfH">
+                                <rect key="frame" x="15" y="144" width="345" height="260"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="260" id="yuN-p1-0fr"/>
+                                </constraints>
+                                <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.9137254901960784" green="0.90980392156862744" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oEC-xG-zg7">
+                                <rect key="frame" x="25" y="442" width="335" height="150"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">이 곳은 팬페이지 전체를 신고하는 공간입니다.팬페이지 멤버 개인/특정 게시물에 대한 신고는 각 게시글과 유저프로필에서 해주세요.팬페이지 신고는 운영자에게 바로 전달 됩니다.운영자 검토 후 해당 팬페이지에 적절한 조취를 요구 하거나팬페이지를 정지, 폐쇄 할수 있습니다. </string>
+                                <color key="textColor" red="0.52549019607843139" green="0.51372549019607838" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ddA-Ze-3am">
+                                <rect key="frame" x="0.0" y="622" width="375" height="45"/>
+                                <color key="backgroundColor" red="0.50196078431372548" green="0.32156862745098036" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="mJE-kM-8Y2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
+                                <state key="normal" title="신고하기">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ddA-Ze-3am" secondAttribute="trailing" id="2Bc-dI-B5r"/>
+                            <constraint firstItem="7ZT-uZ-QeY" firstAttribute="top" secondItem="1yf-sb-IOC" secondAttribute="bottom" id="2Uc-OR-poI"/>
+                            <constraint firstItem="NdQ-9H-d6K" firstAttribute="leading" secondItem="ogg-1K-LPZ" secondAttribute="trailing" constant="20" id="4Dz-4U-aNA"/>
+                            <constraint firstItem="7ZT-uZ-QeY" firstAttribute="leading" secondItem="e3Z-0X-PZc" secondAttribute="leading" id="AYy-bM-uaM"/>
+                            <constraint firstItem="ZjS-Zw-YTR" firstAttribute="leading" secondItem="ogg-1K-LPZ" secondAttribute="leading" id="AmG-l9-uZV"/>
+                            <constraint firstAttribute="trailing" secondItem="oEC-xG-zg7" secondAttribute="trailing" constant="15" id="BEO-DN-RhS"/>
+                            <constraint firstItem="rwg-uc-WfH" firstAttribute="top" secondItem="ZjS-Zw-YTR" secondAttribute="bottom" constant="8.5" id="BIV-as-d3e"/>
+                            <constraint firstItem="ogg-1K-LPZ" firstAttribute="leading" secondItem="e3Z-0X-PZc" secondAttribute="leading" constant="15" id="BQD-uQ-93a"/>
+                            <constraint firstItem="oEC-xG-zg7" firstAttribute="leading" secondItem="e3Z-0X-PZc" secondAttribute="leading" constant="25" id="D1Z-Yb-MWb"/>
+                            <constraint firstAttribute="trailing" secondItem="7ZT-uZ-QeY" secondAttribute="trailing" id="J23-EL-4Fa"/>
+                            <constraint firstItem="NdQ-9H-d6K" firstAttribute="centerY" secondItem="ogg-1K-LPZ" secondAttribute="centerY" id="P8Y-D6-piU"/>
+                            <constraint firstItem="oEC-xG-zg7" firstAttribute="top" secondItem="rwg-uc-WfH" secondAttribute="bottom" constant="38" id="QMf-5I-BbQ"/>
+                            <constraint firstItem="ogg-1K-LPZ" firstAttribute="top" secondItem="7ZT-uZ-QeY" secondAttribute="bottom" constant="26" id="RmS-pl-xlE"/>
+                            <constraint firstItem="ddA-Ze-3am" firstAttribute="leading" secondItem="e3Z-0X-PZc" secondAttribute="leading" id="USq-wa-ErZ"/>
+                            <constraint firstItem="rwg-uc-WfH" firstAttribute="leading" secondItem="ogg-1K-LPZ" secondAttribute="leading" id="cy3-xG-ihj"/>
+                            <constraint firstItem="ZjS-Zw-YTR" firstAttribute="top" secondItem="ogg-1K-LPZ" secondAttribute="bottom" constant="18.5" id="mLC-lq-sDG"/>
+                            <constraint firstItem="l87-eK-lgc" firstAttribute="top" secondItem="ddA-Ze-3am" secondAttribute="bottom" id="oWu-cm-z4k"/>
+                            <constraint firstItem="ddA-Ze-3am" firstAttribute="top" secondItem="oEC-xG-zg7" secondAttribute="bottom" constant="30" id="wHS-W4-eUQ"/>
+                            <constraint firstAttribute="trailing" secondItem="rwg-uc-WfH" secondAttribute="trailing" constant="15" id="z4f-AQ-gTp"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YiV-88-v2b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1333.5999999999999" y="718.29085457271367"/>
         </scene>
     </scenes>
     <resources>

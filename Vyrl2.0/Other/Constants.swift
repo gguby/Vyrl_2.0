@@ -106,6 +106,10 @@ struct Constants {
             return VyrlAPIConstants.baseURL + "fan-pages/" + str
         }
         
+        static func reportFanPage() -> String {
+            return VyrlAPIConstants.baseURL + "fan-pages/reports"
+        }
+        
         static func getFanPagePosts(fanPageId : Int)-> String{
             let str = "\(fanPageId)"
             return VyrlAPIConstants.baseURL + "fan-pages/" + str + "/posts"

@@ -138,6 +138,32 @@ class FanPageController : UIViewController {
             alertController.addAction(cancel)
             
             self.present(alertController, animated: true, completion: nil)
+        } else {
+            let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.actionSheet)
+            
+            let share = UIAlertAction(title: "공유하기", style: .default,handler: { (action) -> Void in
+                
+            })
+            
+            let push = UIAlertAction(title: "알림켜기", style: .default, handler: { (action) -> Void in
+                
+            })
+            
+            let report = UIAlertAction(title: "신고하기", style: .default, handler: { (action) -> Void in
+                let vc = self.pushViewControllrer(storyboardName: "Fan", controllerName: "Report") as! FanPageReportViewController
+            })
+            
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
+                alertController.dismiss(animated: true, completion: nil)
+            })
+            
+            alertController.addAction(share)
+            alertController.addAction(push)
+            alertController.addAction(report)
+            alertController.addAction(cancel)
+            
+            self.present(alertController, animated: true, completion: nil)
+
         }
     }
     
@@ -188,5 +214,18 @@ class FanPageController : UIViewController {
             
             self.initPage()
         }
+    }
+    
+    func reportsFanpage(){
+        let uri = URL.init(string: Constants.VyrlFanAPIURL.reportFanPage())
+        
+        let parameters : Parameters = [
+            "fanPageId": self.fanPage.fanPageId,
+            "report": "",]
+        
+        Alamofire.request(uri!, method: .post, parameters: parameters as! [String : String], encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON { (response) in
+            
+        }
+
     }
 }
