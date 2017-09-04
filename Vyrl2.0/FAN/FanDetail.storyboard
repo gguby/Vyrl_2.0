@@ -165,8 +165,8 @@
                                             <action selector="back" destination="RDS-YI-6Oh" eventType="touchUpInside" id="dG1-hk-R0g"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="설정" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jLS-bK-93b">
-                                        <rect key="frame" x="193.66666666666666" y="13" width="28" height="20"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="팬페이지 폐쇄" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jLS-bK-93b">
+                                        <rect key="frame" x="164" y="13" width="87.333333333333343" height="20"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
                                         <color key="textColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -188,18 +188,27 @@
                                     <constraint firstAttribute="height" constant="1" id="E3v-3N-ubN"/>
                                 </constraints>
                             </view>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PzC-wl-zZv">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PzC-wl-zZv">
                                 <rect key="frame" x="35" y="86" width="344" height="87"/>
                                 <color key="backgroundColor" red="0.96862745100000003" green="0.96470588239999999" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="87" id="EeT-1D-mCo"/>
                                 </constraints>
-                                <string key="text">팬페이지를 폐쇄하기 위해서는 모든 가입자들이 해당 팬페이지에서
-탈퇴해야 가능합니다. 모든 유저들에게 PUSH알림을 보내서 탈퇴를
-요청해 주세요.</string>
-                                <color key="textColor" red="0.32549019610000002" green="0.30980392159999998" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="팬페이지를 폐쇄하기 위해서는 모든 가입자들이 해당 팬페이지에서 탈퇴해야 가능합니다. 모든 유저들에게 PUSH알림을 보내서 탈퇴를 요청해 주세요.">
+                                        <attributes>
+                                            <color key="NSColor" red="0.32549019610000002" green="0.30980392159999998" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="12" name="AppleSDGothicNeo-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8.5" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="rect" keyPath="textContainerInset">
+                                        <rect key="value" x="15.5" y="15" width="15" height="21"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="탈퇴를 요청할 유저를 선택해 주세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7n-Ls-PVC">
                                 <rect key="frame" x="35" y="206" width="200" height="17"/>
@@ -211,19 +220,69 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="zsI-la-RUr">
-                                <rect key="frame" x="0.0" y="229" width="414" height="507"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="0.0" y="229" width="414" height="462"/>
+                                <color key="backgroundColor" red="0.87450980392156863" green="0.87058823529411766" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="znS-Yl-v1g">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="fanclosecell" id="znS-Yl-v1g" customClass="FanCloseCell" customModule="Vyrl2_0" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="znS-Yl-v1g" id="Bxs-3P-NIe">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="49.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sxL-LK-WLW">
+                                                    <rect key="frame" x="23" y="8" width="32" height="32"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="32" id="CJN-Vy-4kv"/>
+                                                        <constraint firstAttribute="width" constant="32" id="RwC-zj-PCh"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <integer key="value" value="16"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                            <real key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zut-S1-gE5">
+                                                    <rect key="frame" x="64.666666666666671" y="24" width="0.0" height="0.0"/>
+                                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="14"/>
+                                                    <color key="textColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Zut-S1-gE5" firstAttribute="leading" secondItem="sxL-LK-WLW" secondAttribute="trailing" constant="10" id="KdL-N8-3Wk"/>
+                                                <constraint firstItem="Zut-S1-gE5" firstAttribute="centerY" secondItem="Bxs-3P-NIe" secondAttribute="centerY" id="PmH-3N-LGX"/>
+                                                <constraint firstItem="sxL-LK-WLW" firstAttribute="centerY" secondItem="Bxs-3P-NIe" secondAttribute="centerY" id="ctn-Qp-o19"/>
+                                                <constraint firstItem="sxL-LK-WLW" firstAttribute="leading" secondItem="Bxs-3P-NIe" secondAttribute="leadingMargin" constant="15" id="xTz-v4-vj2"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="nickname" destination="Zut-S1-gE5" id="9pF-hw-tEh"/>
+                                            <outlet property="profile" destination="sxL-LK-WLW" id="mxH-Oj-TVk"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="RDS-YI-6Oh" id="Xn4-Ia-o7i"/>
+                                    <outlet property="delegate" destination="RDS-YI-6Oh" id="LZD-d5-eZs"/>
+                                </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZQO-JB-RFO">
+                                <rect key="frame" x="0.0" y="691" width="414" height="45"/>
+                                <color key="backgroundColor" red="0.50196078431372548" green="0.32156862745098036" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="ABu-Sk-6IG"/>
+                                </constraints>
+                                <state key="normal" title="모두에게 탈퇴 요청하기">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="pushAllWithDraw:" destination="RDS-YI-6Oh" eventType="touchUpInside" id="B2Z-r0-jN7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -232,10 +291,13 @@
                             <constraint firstItem="S9v-F9-Xuw" firstAttribute="top" secondItem="lY8-Bf-8cl" secondAttribute="bottom" id="9xd-4C-SY4"/>
                             <constraint firstItem="lY8-Bf-8cl" firstAttribute="leading" secondItem="kWq-Nz-fZt" secondAttribute="leading" id="Aot-xE-HCy"/>
                             <constraint firstItem="PzC-wl-zZv" firstAttribute="leading" secondItem="kWq-Nz-fZt" secondAttribute="leadingMargin" constant="15" id="CPi-AM-CZa"/>
+                            <constraint firstItem="ZQO-JB-RFO" firstAttribute="trailing" secondItem="zsI-la-RUr" secondAttribute="trailing" id="Iyx-1L-720"/>
                             <constraint firstItem="h7n-Ls-PVC" firstAttribute="leading" secondItem="PzC-wl-zZv" secondAttribute="leading" id="J7g-jU-7EG"/>
+                            <constraint firstItem="ZQO-JB-RFO" firstAttribute="leading" secondItem="zsI-la-RUr" secondAttribute="leading" id="LCU-Sn-3lU"/>
                             <constraint firstItem="h7n-Ls-PVC" firstAttribute="top" secondItem="PzC-wl-zZv" secondAttribute="bottom" constant="33" id="LZ6-tV-SIc"/>
+                            <constraint firstItem="ZQO-JB-RFO" firstAttribute="top" secondItem="zsI-la-RUr" secondAttribute="bottom" id="MVw-2s-jrx"/>
                             <constraint firstItem="lY8-Bf-8cl" firstAttribute="top" secondItem="3X4-SS-2Iu" secondAttribute="bottom" id="OMS-EE-EPa"/>
-                            <constraint firstItem="3BZ-9L-MWU" firstAttribute="top" secondItem="zsI-la-RUr" secondAttribute="bottom" id="eZI-jX-EkO"/>
+                            <constraint firstItem="3BZ-9L-MWU" firstAttribute="top" secondItem="ZQO-JB-RFO" secondAttribute="bottom" id="U36-PS-bEi"/>
                             <constraint firstItem="zsI-la-RUr" firstAttribute="leading" secondItem="kWq-Nz-fZt" secondAttribute="leading" id="hqb-Tx-zdH"/>
                             <constraint firstItem="PzC-wl-zZv" firstAttribute="top" secondItem="S9v-F9-Xuw" secondAttribute="bottom" constant="20" id="jEy-IN-s1d"/>
                             <constraint firstAttribute="trailing" secondItem="S9v-F9-Xuw" secondAttribute="trailing" id="qui-sz-pUD"/>
@@ -243,8 +305,13 @@
                             <constraint firstAttribute="trailingMargin" secondItem="PzC-wl-zZv" secondAttribute="trailing" constant="15" id="s6I-rR-eOc"/>
                             <constraint firstAttribute="trailing" secondItem="lY8-Bf-8cl" secondAttribute="trailing" id="uFV-TU-hfe"/>
                             <constraint firstItem="S9v-F9-Xuw" firstAttribute="top" secondItem="lY8-Bf-8cl" secondAttribute="bottom" id="vW3-iu-M3w"/>
+                            <constraint firstItem="ZQO-JB-RFO" firstAttribute="width" secondItem="zsI-la-RUr" secondAttribute="width" id="yI9-ge-HSc"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="pushAllBtn" destination="ZQO-JB-RFO" id="se3-tm-qmN"/>
+                        <outlet property="tableView" destination="zsI-la-RUr" id="C7J-f2-Aqg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NFp-OQ-jtA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -273,7 +340,7 @@
                                         </constraints>
                                         <state key="normal" image="icon_back_01"/>
                                         <connections>
-                                            <action selector="back" destination="RDS-YI-6Oh" eventType="touchUpInside" id="Vl4-7F-U6z"/>
+                                            <action selector="back" destination="k6h-F3-vsH" eventType="touchUpInside" id="9Si-sr-bEw"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="팬페이지 탈퇴" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gpL-Yr-bXQ">
@@ -338,7 +405,7 @@
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oDz-N2-r7w">
                                 <rect key="frame" x="0.0" y="294" width="414" height="442"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.87450980392156863" green="0.87058823529411766" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="delegateUser" id="vYj-cy-paB" customClass="DelegateUserCell" customModule="Vyrl2_0" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="50"/>
@@ -356,9 +423,6 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                             <integer key="value" value="16"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="ra">
-                                                            <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                             <real key="value" value="1"/>

@@ -46,7 +46,8 @@ extension FanSettingViewController : UITableViewDelegate , UITableViewDataSource
             vc.fanPage = self.fanPage
             vc.fanPageView = self.fanPageView
         }else if indexPath.row == 1 {
-            self.pushView(storyboardName: "FanDetail", controllerName: "fanpageclose")
+            let vc = self.pushViewControllrer(storyboardName: "FanDetail", controllerName: "fanpageclose") as! FanPageCloseViewController
+            vc.fanPage = self.fanPage
         }else {
             let vc = self.pushViewControllrer(storyboardName: "FanDetail", controllerName: "fanpagewithdraw") as! FanPageWithDrawViewController
             vc.fanPage = self.fanPage

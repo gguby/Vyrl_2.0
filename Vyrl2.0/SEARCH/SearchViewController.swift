@@ -193,8 +193,13 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource {
                 
                 let fanPage = self.fanPageList[indexPath.row]
                 
-                cell.profile.af_setImage(withURL: URL(string: fanPage.pageprofileImagePath)!)
-                cell.members.text = "\(fanPage.cntMember)"
+                if fanPage.pageprofileImagePath != nil {
+                    if fanPage.pageprofileImagePath.isEmpty == false {
+                        cell.profile.af_setImage(withURL: URL(string: fanPage.pageprofileImagePath)!)
+                    }
+                }
+                
+                cell.members.text = "\(fanPage.cntMember!) + members"
                 cell.title.text = fanPage.pageName
                 cell.intro.text = fanPage.pageInfo
                 return cell

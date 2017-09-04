@@ -734,7 +734,7 @@
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="qYc-rH-SsF">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qYc-rH-SsF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -827,7 +827,7 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bYr-3u-tFO">
-                                <rect key="frame" x="0.0" y="66" width="375" height="556"/>
+                                <rect key="frame" x="0.0" y="66" width="375" height="601"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pS1-F5-e2G" userLabel="ContentView">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
@@ -1121,7 +1121,7 @@
                             <constraint firstItem="xUZ-do-X37" firstAttribute="leading" secondItem="d9J-gH-6it" secondAttribute="leading" id="NWD-Gr-Ike"/>
                             <constraint firstItem="bYr-3u-tFO" firstAttribute="top" secondItem="xUZ-do-X37" secondAttribute="bottom" id="tp9-Lg-sbQ"/>
                             <constraint firstAttribute="trailing" secondItem="bYr-3u-tFO" secondAttribute="trailing" id="uWx-1Y-Nfz"/>
-                            <constraint firstAttribute="bottom" secondItem="bYr-3u-tFO" secondAttribute="bottom" constant="45" id="vVA-lW-6le"/>
+                            <constraint firstAttribute="bottom" secondItem="bYr-3u-tFO" secondAttribute="bottom" id="vVA-lW-6le"/>
                             <constraint firstItem="bYr-3u-tFO" firstAttribute="leading" secondItem="d9J-gH-6it" secondAttribute="leading" id="wLq-fC-cUR"/>
                         </constraints>
                     </view>

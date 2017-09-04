@@ -231,6 +231,8 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
             }
             
             self.tableView.reloadData()
+            
+            self.tableView.contentSize = CGSize.init(width: self.tableView.contentSize.width, height: self.tableView.contentSize.height + 65)
         }
     }
     
