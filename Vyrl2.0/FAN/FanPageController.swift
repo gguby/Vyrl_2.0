@@ -288,4 +288,12 @@ class FanPageController : UIViewController {
         }
 
     }
+    
+    @IBAction func showMemberList(_ sender: UIButton) {
+        
+        let vc = self.pushViewControllrer(storyboardName: "FanDetail", controllerName: "MemberList") as! FanPageMemberListViewController
+        vc.fanPage = self.fanPage
+
+    }
+    
 }

@@ -988,12 +988,23 @@
                                             <constraint firstAttribute="width" constant="4" id="zDC-q2-a1w"/>
                                         </constraints>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NBo-nh-RrZ">
+                                        <rect key="frame" x="15" y="55" width="360" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="KPB-yy-pp3"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="showMemberList:" destination="zoW-S4-iDO" eventType="touchUpInside" id="CsV-LE-QFT"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="TCu-pN-saf" firstAttribute="leading" secondItem="Jts-Se-Ibk" secondAttribute="trailing" constant="10.5" id="39G-ys-GpC"/>
                                     <constraint firstItem="x3A-ix-ube" firstAttribute="leading" secondItem="wNd-t7-2G7" secondAttribute="leading" constant="15" id="DT6-La-4ej"/>
                                     <constraint firstAttribute="trailing" secondItem="pOc-pU-zty" secondAttribute="trailing" constant="15" id="FGc-4R-fGR"/>
+                                    <constraint firstItem="NBo-nh-RrZ" firstAttribute="leading" secondItem="Jts-Se-Ibk" secondAttribute="leading" id="IBr-I8-O0U"/>
                                     <constraint firstItem="x3A-ix-ube" firstAttribute="top" secondItem="wNd-t7-2G7" secondAttribute="top" constant="16" id="NaV-cQ-npm"/>
                                     <constraint firstAttribute="trailing" secondItem="Wo4-N5-u5B" secondAttribute="trailing" constant="47" id="Puy-5B-UUe"/>
                                     <constraint firstItem="Wo4-N5-u5B" firstAttribute="centerY" secondItem="x3A-ix-ube" secondAttribute="centerY" id="Xug-Xo-WEY"/>
@@ -1002,8 +1013,10 @@
                                     <constraint firstAttribute="height" constant="89" id="koV-iM-wpV"/>
                                     <constraint firstItem="Wo4-N5-u5B" firstAttribute="leading" secondItem="x3A-ix-ube" secondAttribute="trailing" constant="10" id="lN8-UQ-czq"/>
                                     <constraint firstAttribute="trailing" secondItem="TCu-pN-saf" secondAttribute="trailing" constant="19" id="n36-4c-hrL"/>
+                                    <constraint firstAttribute="trailing" secondItem="NBo-nh-RrZ" secondAttribute="trailing" id="pqG-oH-8Gk"/>
                                     <constraint firstItem="TCu-pN-saf" firstAttribute="centerY" secondItem="Jts-Se-Ibk" secondAttribute="centerY" id="sYI-m7-Zr7"/>
                                     <constraint firstItem="pOc-pU-zty" firstAttribute="centerY" secondItem="TCu-pN-saf" secondAttribute="centerY" id="t8v-fe-XkG"/>
+                                    <constraint firstItem="NBo-nh-RrZ" firstAttribute="centerY" secondItem="Jts-Se-Ibk" secondAttribute="centerY" id="wJb-9B-mGd"/>
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qxD-mB-VC9">
@@ -1211,7 +1224,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T4k-jT-tbH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1294" y="12"/>
+            <point key="canvasLocation" x="1293.5999999999999" y="11.244377811094454"/>
         </scene>
         <!--Fan Page Report View Controller-->
         <scene sceneID="VLB-ry-c1z">
@@ -1312,7 +1325,12 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oEC-xG-zg7">
                                 <rect key="frame" x="25" y="442" width="335" height="150"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">이 곳은 팬페이지 전체를 신고하는 공간입니다.팬페이지 멤버 개인/특정 게시물에 대한 신고는 각 게시글과 유저프로필에서 해주세요.팬페이지 신고는 운영자에게 바로 전달 됩니다.운영자 검토 후 해당 팬페이지에 적절한 조취를 요구 하거나팬페이지를 정지, 폐쇄 할수 있습니다. </string>
+                                <string key="text">이 곳은 팬페이지 전체를 신고하는 공간입니다.
+팬페이지 멤버 개인/특정 게시물에 대한 신고는 각 게시글과 유저
+프로필에서 해주세요.
+팬페이지 신고는 운영자에게 바로 전달 됩니다.
+운영자 검토 후 해당 팬페이지에 적절한 조취를 요구 하거나
+팬페이지를 정지, 폐쇄 할수 있습니다. </string>
                                 <color key="textColor" red="0.52549019607843139" green="0.51372549019607838" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
