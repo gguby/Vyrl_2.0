@@ -217,6 +217,7 @@ class FanPageController : UIViewController {
             
             let report = UIAlertAction(title: "신고하기", style: .default, handler: { (action) -> Void in
                 let vc = self.pushViewControllrer(storyboardName: "Fan", controllerName: "Report") as! FanPageReportViewController
+                vc.fanPage = self.fanPage
             })
             
             alertController.addAction(report)
@@ -276,19 +277,7 @@ class FanPageController : UIViewController {
         }
     }
     
-    func reportsFanpage(){
-        let uri = URL.init(string: Constants.VyrlFanAPIURL.reportFanPage())
         
-        let parameters : Parameters = [
-            "fanPageId": self.fanPage.fanPageId,
-            "report": "",]
-        
-        Alamofire.request(uri!, method: .post, parameters: parameters as! [String : String], encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON { (response) in
-            
-        }
-
-    }
-    
     @IBAction func showMemberList(_ sender: UIButton) {
         
         let vc = self.pushViewControllrer(storyboardName: "FanDetail", controllerName: "MemberList") as! FanPageMemberListViewController

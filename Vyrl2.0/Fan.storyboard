@@ -1345,6 +1345,9 @@
                                 <state key="normal" title="신고하기">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="reportButtonClick:" destination="s2V-E5-WwY" eventType="touchUpInside" id="YdD-0d-Ncb"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1370,6 +1373,10 @@
                             <constraint firstAttribute="trailing" secondItem="rwg-uc-WfH" secondAttribute="trailing" constant="15" id="z4f-AQ-gTp"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="fanPageName" destination="NdQ-9H-d6K" id="6xd-v7-4vi"/>
+                        <outlet property="reportContentTextfield" destination="rwg-uc-WfH" id="N3w-JO-VQo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YiV-88-v2b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

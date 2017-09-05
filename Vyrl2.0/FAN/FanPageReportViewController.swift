@@ -7,29 +7,39 @@
 //
 
 import UIKit
+import Alamofire
 
 class FanPageReportViewController: UIViewController {
 
+    @IBOutlet weak var fanPageName: UILabel!
+    @IBOutlet weak var reportContentTextfield: UITextField!
+    
+    var fanPage : FanPage!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.fanPageName.text = fanPage.pageName
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+   
+    @IBAction func reportButtonClick(_ sender: UIButton) {
+        self.reportsFanpage()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func reportsFanpage(){
+        let uri = URL.init(string: Constants.VyrlFanAPIURL.reportFanPage())
+        
+        let parameters : Parameters = [
+            "fanPageId": self.fanPage.fanPageId,
+            "report": self.reportContentTextfield.text,]
+        
+        Alamofire.request(uri!, method: .post, parameters: parameters as! [String : String], encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON { (response) in
+            
+        }
+        
     }
-    */
+
 
 }
