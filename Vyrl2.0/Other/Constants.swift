@@ -135,6 +135,22 @@ struct Constants {
         }
 
         static let FANPAGEALLFEED = VyrlAPIConstants.baseURL + "fan-pages/feeds"
+        static let AuthChange = VyrlAPIConstants.baseURL + "fan-pages/auth-changes"
+        
+        static func WithDrawAll(fanPageId : Int)-> String{
+            let str = "\(fanPageId)"
+            return VyrlAPIConstants.baseURL + "fan-pages/members/request-withdraws/" + str
+        }
+        
+        static func fanPageClose(fanPageId : Int)-> String{
+            let str = "\(fanPageId)"
+            return VyrlAPIConstants.baseURL + "fan-pages/close-requests/" + str
+        }
+        
+        static func fanPagePush(fanPageId : Int)-> String{
+            let str = "\(fanPageId)"
+            return VyrlAPIConstants.baseURL + "fan-pages/alarms/" + str
+        }
     }
     
     static func getHeader() -> HTTPHeaders {

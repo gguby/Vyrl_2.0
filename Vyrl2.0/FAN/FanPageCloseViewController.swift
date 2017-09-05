@@ -26,10 +26,33 @@ class FanPageCloseViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @IBAction func pushAllWithDraw(_ sender: UIButton) {
+        
+        var uri : URL!
+        var method : HTTPMethod!
         if sender.tag == 0 {
-            
+            uri = URL.init(string: Constants.VyrlFanAPIURL.WithDrawAll(fanPageId: self.fanPage.fanPageId))
+            method = .post
+           
         }else {
-            
+            uri = URL.init(string: Constants.VyrlFanAPIURL.fanPageClose(fanPageId: self.fanPage.fanPageId))
+            method = .delete
+        }
+        
+        Alamofire.request(uri!, method: method, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON { (response) in
+            switch response.result {
+            case .success(let json):
+                
+                let jsonData = json as! NSDictionary
+                
+                let result = jsonData["result"] as? Bool
+                
+                if result == true {
+                    
+                }
+                
+            case .failure(let error):
+                print(error)
+            }
         }
     }
     func getFanPageUserList(){

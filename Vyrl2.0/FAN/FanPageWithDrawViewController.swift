@@ -11,12 +11,17 @@ import ObjectMapper
 import Alamofire
 import AlamofireObjectMapper
 
-class FanPageWithDrawViewController : UIViewController ,UITableViewDelegate, UITableViewDataSource{
+protocol AuthChangeDelegate {
+    func change(cell : DelegateUserCell)
+}
+
+class FanPageWithDrawViewController : UIViewController ,UITableViewDelegate, UITableViewDataSource, AuthChangeDelegate{
     
     @IBOutlet weak var tableView: UITableView!
     
     var userList = [FanPageUser]()
     var fanPage : FanPage!
+    var isRequestDelegate = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,18 +56,38 @@ class FanPageWithDrawViewController : UIViewController ,UITableViewDelegate, UIT
         let cell = tableView.dequeueReusableCell(withIdentifier: "delegateUser", for: indexPath) as! DelegateUserCell
         
         let fanPageUser = self.userList[indexPath.row]
-        
-        cell.profile.af_setImage(withURL: URL.init(string: fanPageUser.pageprofileImagePath!)!)
-        
-        if fanPageUser.level == "OWNER" {
-            cell.isOwner = true
-        }else {
-            cell.isOwner = false
-        }
-        
-        cell.userTitle.text = fanPageUser.nickName
+        cell.fanPageUser = fanPageUser
+        cell.delegate = self
         
         return cell
+    }
+    
+    func change(cell: DelegateUserCell) {
+        let fanPageUser = cell.fanPageUser
+        
+        let parameters : Parameters = [
+            "fanPageId": "\(fanPageUser!.fanPageId!)",
+            "fanPageMemberId": "\(fanPageUser!.fanPageMemberId!)"
+        ]
+        
+        let uri = URL.init(string: Constants.VyrlFanAPIURL.AuthChange, parameters: parameters as! [String:String])
+        
+        Alamofire.request(uri!, method: .post,encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON { (response) in
+            switch response.result {
+            case .success(let json):
+                
+                let jsonData = json as! NSDictionary
+                
+                let result = jsonData["result"] as? Bool
+                
+                if result == true {
+                    self.getFanPageUserList()
+                }
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
 
@@ -72,10 +97,30 @@ class DelegateUserCell : UITableViewCell {
     @IBOutlet weak var profile: UIImageView!
     @IBOutlet weak var delegateUser: UIButton!
     
+    var delegate : AuthChangeDelegate!
+    var fanPageUser : FanPageUser! {
+        didSet {
+            
+            self.profile.af_setImage(withURL: URL.init(string: fanPageUser.pageprofileImagePath!)!)
+            
+            if fanPageUser.level == "OWNER" {
+                self.isOwner = true
+            }else {
+                self.isOwner = false
+            }
+            
+            self.userTitle.text = fanPageUser.nickName
+            
+            self.deleageStatus = DelegateStatus.init(rawValue: fanPageUser.requestState)
+
+        }
+    }
+    
     var isOwner : Bool! {
         didSet {
             if isOwner {
                 self.profile.borderColor = UIColor.ivLighterPurple
+                self.delegateUser.isEnabled = false
             }else {
                 self.profile.borderColor = UIColor.black
             }
@@ -84,9 +129,9 @@ class DelegateUserCell : UITableViewCell {
     
     var deleageStatus : DelegateStatus! {
         didSet {
-            if deleageStatus == DelegateStatus.normal {
+            if deleageStatus == DelegateStatus.none {
                 self.delegateUser.isEnabled = true
-            }else if deleageStatus == DelegateStatus.notRequest {
+            }else if deleageStatus == DelegateStatus.disable {
                 self.delegateUser.isEnabled = false
             }else {
                 self.delegateUser.backgroundColor = UIColor.ivLighterPurple
@@ -100,7 +145,13 @@ class DelegateUserCell : UITableViewCell {
         
         self.delegateUser.setTitleColor(UIColor.init(red: 62.0/255.0, green: 58.0/255.0, blue: 57.0/255.0, alpha: 1), for: .normal)
         self.delegateUser.setTitleColor(UIColor.ivGreyish, for: .disabled)
+        self.delegateUser.addTarget(self, action: #selector(delegateUser(sender:)), for: .touchUpInside)
     }
+    
+    func delegateUser(sender : UIButton ){
+        self.delegate.change(cell: self)
+    }
+    
 }
 
 struct FanPageUser : Mappable {
@@ -111,6 +162,7 @@ struct FanPageUser : Mappable {
     var level : String!
     var nickName : String!
     var pageprofileImagePath : String!
+    var requestState : String!
     
     init?(map: Map) {
         
@@ -123,11 +175,12 @@ struct FanPageUser : Mappable {
         level <- map["level"]
         nickName <- map["nickname"]
         pageprofileImagePath <- map["profileImagePath"]
+        requestState <- map["requestState"]
     }
 }
 
-enum DelegateStatus : Int {
-    case normal = 1
-    case request = 2
-    case notRequest = 3
+enum DelegateStatus : String {
+    case none = "NONE"
+    case request = "REQUEST"
+    case disable = "DISABLE"
 }

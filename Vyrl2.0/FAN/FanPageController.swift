@@ -110,61 +110,121 @@ class FanPageController : UIViewController {
         }
     }
     
+    func shareAlert(){
+        let alertController = UIAlertController (title:"어떻게 공유하시겠어요?", message:nil,preferredStyle:.alert)
+        
+        let share = UIAlertAction(title: "링크복사", style: .default,handler: { (action) -> Void in
+            let uri = Constants.VyrlFeedURL.share(articleId: (self.fanPage.fanPageId)!)
+            
+            Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON(completionHandler: {
+                response in
+                switch response.result {
+                case .success(let json) :
+                    print(json)
+                    
+                    if let code = response.response?.statusCode {
+                        if code == 200 {
+                            let jsonData = json as! NSDictionary
+                            
+                            let url = jsonData["url"] as! String
+                            
+                            UIPasteboard.general.string = url
+                            self.showToast(str: url)
+                        }
+                    }
+                case .failure(let error) :
+                    print(error)
+                }
+            })
+        })
+        
+        let push = UIAlertAction(title: "내 Feed에서 공유", style: .default, handler: { (action) -> Void in
+            
+        })
+        
+        alertController.addAction(share)
+        alertController.addAction(push)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func pushFanPage(){
+        let uri = URL.init(string: Constants.VyrlFanAPIURL.fanPagePush(fanPageId: self.fanPage.fanPageId))
+        Alamofire.request(uri!, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON { (response) in
+            switch response.result {
+            case .success(let json):
+                let jsonData = json as! NSDictionary
+                
+                let result = jsonData["result"] as? Bool
+                
+                if result == true {
+                    
+                }
+
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     func showDetailFanPage(_ sender:UIButton){
+        
+        let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.actionSheet)
+        
+        let share = UIAlertAction(title: "공유하기", style: .default,handler: { (action) -> Void in
+            self.shareAlert()
+        })
+        
+        var str = "알림켜기"
+        var content = "이 페이지의 모든 글을 알림으로 받으시겠습니까?"
+        if self.fanPage.isAlarm == true {
+            str = "알림끄기"
+            content = "이 유저의 모든 글 알림을 끊습니다."
+        }
+        
+        let push = UIAlertAction(title: str, style: .default, handler: { (action) -> Void in
+            let alertController = UIAlertController (title:content, message:nil,preferredStyle:.alert)
+            let ok = UIAlertAction(title: "네", style: .default, handler: { (action) -> Void in
+                self.pushFanPage()
+            })
+            let cancel = UIAlertAction(title: "아니오", style: .cancel, handler: { (action) -> Void in
+            })            
+            
+            alertController.addAction(ok)
+            alertController.addAction(cancel)
+            
+            self.present(alertController, animated: true, completion: nil)
+        })
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
+            alertController.dismiss(animated: true, completion: nil)
+        })
+        
+        alertController.addAction(share)
+        alertController.addAction(push)
+        
+        
         if fanPage.level == "OWNER" {
-            let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.actionSheet)
-            
-            let share = UIAlertAction(title: "공유하기", style: .default,handler: { (action) -> Void in
-                
-            })
-            
-            let push = UIAlertAction(title: "알림켜기", style: .default, handler: { (action) -> Void in
-                
-            })
-            
             let setting = UIAlertAction(title: "설정", style: .default, handler: { (action) -> Void in
                 let vc = self.pushViewControllrer(storyboardName: "Fan", controllerName: "FanSetting") as! FanSettingViewController
                 vc.fanPage = self.fanPage
                 vc.fanPageView = self
             })
             
-            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
-                alertController.dismiss(animated: true, completion: nil)
-            })
-            
-            alertController.addAction(share)
-            alertController.addAction(push)
             alertController.addAction(setting)
-            alertController.addAction(cancel)
             
-            self.present(alertController, animated: true, completion: nil)
         } else {
-            let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.actionSheet)
-            
-            let share = UIAlertAction(title: "공유하기", style: .default,handler: { (action) -> Void in
-                
-            })
-            
-            let push = UIAlertAction(title: "알림켜기", style: .default, handler: { (action) -> Void in
-                
-            })
             
             let report = UIAlertAction(title: "신고하기", style: .default, handler: { (action) -> Void in
                 let vc = self.pushViewControllrer(storyboardName: "Fan", controllerName: "Report") as! FanPageReportViewController
             })
             
-            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
-                alertController.dismiss(animated: true, completion: nil)
-            })
-            
-            alertController.addAction(share)
-            alertController.addAction(push)
             alertController.addAction(report)
-            alertController.addAction(cancel)
-            
-            self.present(alertController, animated: true, completion: nil)
-
         }
+        
+        alertController.addAction(cancel)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func joinFanPage(_ sender: UIButton){

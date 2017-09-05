@@ -38,7 +38,7 @@ class FanViewController: UIViewController {
     @IBOutlet weak var more: UIButton!
     
     var joinFanPages = [FanPage]()
-    var suggestFanPages = [FanPage]()
+    var suggestFanPages = [SuggestFanPage]()
     var searchResults = [FanPage]()
     
     override func viewDidLoad() {
@@ -137,7 +137,7 @@ class FanViewController: UIViewController {
         
         let uri = Constants.VyrlFanAPIURL.SUGGESTFANPAGELIST
         
-        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[FanPage]>) in
+        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[SuggestFanPage]>) in
             
             self.suggestFanPages.removeAll()
             
@@ -389,6 +389,27 @@ struct FanPageArticleMedia : Mappable {
     
 }
 
+struct SuggestFanPage : Mappable {
+    
+    var fanPageId : Int!
+    var pageInfo : String!
+    var pageName : String!
+    var pageprofileImagePath : String!
+    
+    var cntMember : Int!
+    init?(map: Map) {
+        
+    }
+    
+    mutating func mapping(map: Map){
+        fanPageId <- map["fanPageId"]
+        pageInfo <- map["pageInfo"]
+        pageName <- map["pageName"]
+        pageprofileImagePath <- map["profileImagePath"]
+        cntMember <- map["memberCount"]
+    }
+}
+
 
 struct FanPage : Mappable {
     
@@ -402,6 +423,9 @@ struct FanPage : Mappable {
     
     var cntPost : Int!
     var cntMember : Int!
+    var isAlarm : Bool!
+    
+    var alarm : String!
     
     init?(map: Map) {
         
@@ -411,11 +435,18 @@ struct FanPage : Mappable {
         fanPageId <- map["fanPageId"]
         level <- map["level"]
         link <- map["link"]
-        nickName <- map["nickname"]
+        nickName <- map["nickName"]
         pageInfo <- map["pageInfo"]
         pageName <- map["pageName"]
         pageprofileImagePath <- map["profileImagePath"]
         cntPost <- map["postCount"]
         cntMember <- map["memberCount"]
+        
+        alarm <- map["alarm"]        
+        if alarm == "ON" {
+            isAlarm = true
+        }else {
+            isAlarm = false
+        }
     }
 }

@@ -159,8 +159,8 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
     @IBAction func photoClick(_ sender: UIButton) {
         self.pushView(storyboardName: "Feed", controllerName: "FeedFullScreenViewController")
     }
-    
-    func getFeeddType(parameters : [String:String]) -> URL! {
+
+    func getFeedType(parameters : [String:String]) -> URL! {
         
         var url : URL!
         
@@ -193,7 +193,7 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
             parameters["lastId"] = (self.articleArray.last?.idStr)!
         }
         
-        url = self.getFeeddType(parameters: parameters)
+        url = self.getFeedType(parameters: parameters)
         
         Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Article]>) in
             
@@ -212,7 +212,7 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
             "size" : "\(10)"
         ]
         
-        let url = self.getFeeddType(parameters: parameters)
+        let url = self.getFeedType(parameters: parameters)
 
         
         Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Article]>) in
