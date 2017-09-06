@@ -30,7 +30,6 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
     var isBottomRefresh = false
     
     @IBOutlet weak var uploadLoadingView: UIView!
-    @IBOutlet weak var uploadLoadingHeight: NSLayoutConstraint!
     @IBOutlet weak var bottomSpace: NSLayoutConstraint!
     @IBOutlet weak var loadingImage: UIImageView!
     
@@ -46,12 +45,6 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         self.tableView.dataSource = self
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 400
-        
-        if self.isEntireView == true {
-            self.bottomSpace.constant = 50
-        }else {
-            self.bottomSpace.constant = 65
-        }
         
         self.setUpRefresh()
         
@@ -123,19 +116,7 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
     
     func uploadHidden(hidden : Bool){
         
-        UIView.animate(withDuration: 0.2,
-                       delay: 0.0,
-                       options: .curveEaseIn,
-                       animations: {
-                        
-                        if hidden {
-                            self.uploadLoadingHeight.constant = 0
-                            self.uploadLoadingView.alpha = 0
-                        }else {
-                            self.uploadLoadingHeight.constant = 63
-                            self.uploadLoadingView.alpha = 1
-                        }
-        }, completion: nil)
+        self.uploadLoadingView.isHidden = hidden
     }
     
     func initLoader(){
@@ -198,8 +179,15 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
             self.articleArray.append(contentsOf: array)
             
             self.tableView.reloadData()
-//            self.tableView.contentSize = CGSize.init(width: self.tableView.contentSize.width, height: self.tableView.contentSize.height + 45)
+            self.resetSizeTableView()
         }
+    }
+    
+    func resetSizeTableView(){
+        var wholeSize = self.tableView.contentSize
+        
+        wholeSize.height = self.tableView.contentSize.height - (self.tableView.tableFooterView?.frame.size.height)!
+        self.tableView.contentSize = wholeSize
     }
    
     func getAllFeed(){
@@ -209,7 +197,6 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         ]
         
         let url = self.getFeedType(parameters: parameters)
-
         
         Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Article]>) in
             
@@ -234,7 +221,7 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
             
             self.tableView.reloadData()
             
-            self.tableView.contentSize = CGSize.init(width: self.tableView.contentSize.width, height: self.tableView.contentSize.height + 65)
+            self.resetSizeTableView()
         }
     }
     

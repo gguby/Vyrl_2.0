@@ -99,9 +99,11 @@ class MyViewController: UIViewController{
         
         controller.feedType = feedType
         controller.userId = profileUserId
-        controller.isEntireView = true
         controller.removeFromParentViewController()
         controller.view.removeFromSuperview()
+        
+        print(controller.view.frame)
+        controller.view.frame.size.height -= 80
         
         addChildViewController(controller)
         

@@ -34,7 +34,8 @@ class FeedViewController: UIViewController {
             let storyboard = UIStoryboard(name: "FeedStyle", bundle: nil)
             let controller = storyboard.instantiateViewController(withIdentifier: "feedTable")
             
-            controller.view.frame.origin = CGPoint.init(x: 0, y: 65)
+            controller.view.frame.origin = CGPoint.init(x: 0, y: 66)
+            controller.view.frame.size.height -= 66
             
             embedController.append(viewController: controller)
         }

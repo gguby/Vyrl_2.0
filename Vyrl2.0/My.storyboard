@@ -331,11 +331,11 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstItem="ls8-cF-dXE" firstAttribute="leading" secondItem="DzS-Bj-N11" secondAttribute="leading" id="2kP-Pv-uwB"/>
+                                                    <constraint firstAttribute="bottom" secondItem="ls8-cF-dXE" secondAttribute="bottom" id="Gd0-oR-YtR"/>
                                                     <constraint firstItem="DzS-Bj-N11" firstAttribute="top" secondItem="A1A-CZ-F5T" secondAttribute="top" id="Lut-YF-ofp"/>
                                                     <constraint firstItem="ls8-cF-dXE" firstAttribute="top" secondItem="DzS-Bj-N11" secondAttribute="bottom" id="SuT-BM-AXu"/>
                                                     <constraint firstItem="ls8-cF-dXE" firstAttribute="width" secondItem="A1A-CZ-F5T" secondAttribute="width" id="eb1-lq-ERM"/>
                                                     <constraint firstItem="DzS-Bj-N11" firstAttribute="leading" secondItem="A1A-CZ-F5T" secondAttribute="leading" id="f5y-hR-buU"/>
-                                                    <constraint firstAttribute="bottom" secondItem="ls8-cF-dXE" secondAttribute="bottom" id="oDw-BX-xTD"/>
                                                     <constraint firstItem="DzS-Bj-N11" firstAttribute="width" secondItem="A1A-CZ-F5T" secondAttribute="width" id="z4T-WM-pkb"/>
                                                 </constraints>
                                             </view>
@@ -1769,7 +1769,7 @@
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kYw-l5-hi8">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kYw-l5-hi8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
