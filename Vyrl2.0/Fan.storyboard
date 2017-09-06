@@ -181,6 +181,9 @@
                                                         <state key="normal" title="더보기 " image="icon_arrow_01_open">
                                                             <color key="titleColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.67450980390000004" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="moreFanPage:" destination="RYV-v3-nCi" eventType="touchUpInside" id="CR4-EZ-SLP"/>
+                                                        </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h6t-ld-KiC" userLabel="EmptyView">
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="298.5"/>
@@ -627,6 +630,7 @@
                                                         <constraint firstItem="e6T-hc-xOM" firstAttribute="leading" secondItem="yUV-Ib-RD2" secondAttribute="trailing" constant="14" id="sZY-Fs-A4u"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
+                                                <inset key="separatorInset" minX="99" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <connections>
                                                     <outlet property="intro" destination="zmo-8P-ga5" id="WTa-YD-pg7"/>
                                                     <outlet property="members" destination="dc1-EP-4V7" id="QY5-fU-gl8"/>
@@ -816,7 +820,7 @@
             <objects>
                 <navigationController navigationBarHidden="YES" id="FGb-AU-ze0" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="lpZ-SK-Jsl">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lpZ-SK-Jsl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1356,6 +1360,9 @@
                                 <state key="normal" title="신고하기">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="reportButtonClick:" destination="s2V-E5-WwY" eventType="touchUpInside" id="YdD-0d-Ncb"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1381,6 +1388,10 @@
                             <constraint firstAttribute="trailing" secondItem="rwg-uc-WfH" secondAttribute="trailing" constant="15" id="z4f-AQ-gTp"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="fanPageName" destination="NdQ-9H-d6K" id="6xd-v7-4vi"/>
+                        <outlet property="reportContentTextfield" destination="rwg-uc-WfH" id="N3w-JO-VQo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YiV-88-v2b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

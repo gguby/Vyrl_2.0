@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class FanPageMemberListViewController: UIViewController {
+class FanPageMemberListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var memberLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
@@ -37,10 +37,13 @@ class FanPageMemberListViewController: UIViewController {
             
             self.userList.append(contentsOf: array)
             
+            
+            self.memberLabel.text = "\(self.userList.count)명의 멤버"
             self.tableView.reloadData()
         }
 
     }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
@@ -54,12 +57,23 @@ class FanPageMemberListViewController: UIViewController {
         let fanPageUser = self.userList[indexPath.row]
         
         cell.profile.af_setImage(withURL: URL.init(string: fanPageUser.pageprofileImagePath!)!)
+        cell.profileUserId = fanPageUser.fanPageMemberId
         
         if fanPageUser.level == "OWNER" {
             cell.isOwner = true
         }else {
             cell.isOwner = false
         }
+        
+        if fanPageUser.followCheck != "NONE" {
+            if(fanPageUser.followCheck == "ME") {
+                cell.isMe = true
+            }
+            cell.isFollow = true
+        } else {
+            cell.isFollow = false
+        }
+        
         
         cell.userTitle.text = fanPageUser.nickName
         
@@ -73,16 +87,60 @@ class FanPageUserCell : UITableViewCell {
     @IBOutlet weak var profile: UIImageView!
     @IBOutlet weak var followUserButton: UIButton!
     
+    var profileUserId : Int!
+    var isMe : Bool! = false
     var isOwner : Bool! {
         didSet {
             if isOwner {
                 self.profile.borderColor = UIColor.ivLighterPurple
             }else {
-                self.profile.borderColor = UIColor.black
+                self.profile.borderColor = UIColor.clear
+            }
+        }
+    }
+    
+    var isFollow : Bool! {
+        didSet {
+            if isFollow {
+                self.followUserButton.setImage(UIImage.init(named: "icon_check_05_on"), for: .normal)
+                self.followUserButton.tag = 1
+            } else {
+                self.followUserButton.setImage(UIImage.init(named: "icon_add_01"), for: .normal)
+                self.followUserButton.tag = 0
             }
         }
     }
    
+    @IBAction func setFollow(_ sender: UIButton) {
+        if(isMe){
+            return;
+        }
+        
+        var method = HTTPMethod.post
+        
+        if sender.tag == 1 {
+            method = HTTPMethod.delete
+        }
+        
+        let uri = URL.init(string: Constants.VyrlFeedURL.follow(followId: self.profileUserId))
+        Alamofire.request(uri!, method: method, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON(completionHandler: {
+            response in switch response.result {
+            case .success(let json):
+                
+                if sender.tag == 0 {
+                    sender.setImage(UIImage.init(named: "icon_check_05_on"), for: .normal)
+                    sender.tag = 1
+                }else {
+                    sender.setImage(UIImage.init(named: "icon_add_01"), for: .normal)
+                    sender.tag = 0
+                }
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
