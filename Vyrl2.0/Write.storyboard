@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vaU-cB-7TB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vaU-cB-7TB">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -44,23 +44,35 @@
                                             <action selector="post:" destination="pmO-Cv-AaH" eventType="touchUpInside" id="dtm-e2-qeL"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="게시글 작성" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xms-zG-Vpc">
-                                        <rect key="frame" x="150.5" y="12.5" width="73.5" height="20"/>
-                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
-                                        <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="uze-yc-OoZ">
+                                        <rect key="frame" x="153" y="0.0" width="69" height="45"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="게시글 작성" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xms-zG-Vpc">
+                                                <rect key="frame" x="0.0" y="0.0" width="69" height="31.5"/>
+                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="15"/>
+                                                <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="엑소좋아해" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uKq-Yr-eDy">
+                                                <rect key="frame" x="0.0" y="31.5" width="69" height="13.5"/>
+                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="11"/>
+                                                <color key="textColor" red="0.52549019607843139" green="0.51372549019607838" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="375" id="0Xv-0j-5lS"/>
+                                    <constraint firstItem="uze-yc-OoZ" firstAttribute="top" secondItem="NVo-jD-H2w" secondAttribute="top" id="17T-rb-7iQ"/>
                                     <constraint firstItem="o5k-wb-5c5" firstAttribute="leading" secondItem="NVo-jD-H2w" secondAttribute="leading" constant="15" id="HGI-dk-7hB"/>
-                                    <constraint firstItem="xms-zG-Vpc" firstAttribute="centerX" secondItem="NVo-jD-H2w" secondAttribute="centerX" id="MZG-YQ-s5U"/>
                                     <constraint firstAttribute="height" constant="45" id="UMR-Mo-dHT"/>
                                     <constraint firstItem="jaX-uA-xsT" firstAttribute="centerY" secondItem="NVo-jD-H2w" secondAttribute="centerY" id="Wjr-Td-bEY"/>
                                     <constraint firstItem="o5k-wb-5c5" firstAttribute="centerY" secondItem="NVo-jD-H2w" secondAttribute="centerY" id="mI5-gk-JCW"/>
+                                    <constraint firstItem="uze-yc-OoZ" firstAttribute="height" secondItem="NVo-jD-H2w" secondAttribute="height" id="omV-am-jEb"/>
+                                    <constraint firstItem="uze-yc-OoZ" firstAttribute="centerX" secondItem="NVo-jD-H2w" secondAttribute="centerX" id="s9e-6j-Fj5"/>
                                     <constraint firstAttribute="trailing" secondItem="jaX-uA-xsT" secondAttribute="trailing" constant="15" id="xwr-su-9n9"/>
-                                    <constraint firstItem="xms-zG-Vpc" firstAttribute="centerY" secondItem="NVo-jD-H2w" secondAttribute="centerY" id="zwN-MT-nAb"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ElE-Bp-lgJ" userLabel="line">
@@ -298,6 +310,7 @@
                     <connections>
                         <outlet property="collectionView" destination="zN6-gc-FbD" id="tKW-9v-3UU"/>
                         <outlet property="collectionViewHeight" destination="Fcc-Ov-6Fq" id="j5E-XD-y55"/>
+                        <outlet property="fanPageTitle" destination="uKq-Yr-eDy" id="Ofl-Hj-XlT"/>
                         <outlet property="location" destination="JiU-du-Qg9" id="6Bx-Um-vNr"/>
                         <outlet property="postBtn" destination="jaX-uA-xsT" id="yiT-fE-D7o"/>
                         <outlet property="scrollView" destination="jfM-K4-9gs" id="eJp-cj-GbQ"/>
@@ -386,7 +399,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SAW-iu-VD1" id="FUM-7v-lHg">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="54.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_map_02_on" translatesAutoresizingMaskIntoConstraints="NO" id="c27-Zw-90h">
@@ -446,7 +459,7 @@
                                         <rect key="frame" x="0.0" y="83" width="375" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GfM-9u-cr8" id="9w1-rA-Dnd">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="54.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6D4-qu-4Mx">
@@ -768,7 +781,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="74"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2co-30-Kc4" id="0hf-YG-rjE">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="73.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="C7T-VW-psq">

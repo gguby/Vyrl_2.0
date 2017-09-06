@@ -9,6 +9,10 @@
 import Foundation
 import Alamofire
 
+protocol FanPagePostDelegate {
+    func upload(query: URL, array : Array<AVAsset>)
+}
+
 class FanPageController : UIViewController {
     
     var fanPage : FanPage!
@@ -37,11 +41,15 @@ class FanPageController : UIViewController {
     
     @IBOutlet weak var detailBtn: UIButton!
     
+    @IBOutlet weak var writeBtn: UIButton!
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         self.initPage()
+        
+        self.writeBtn.addTarget(self, action: #selector(self.writePost(_:)), for: .touchUpInside)
     }
     
     func setupFeed(){
@@ -49,6 +57,7 @@ class FanPageController : UIViewController {
         let controller = storyboard.instantiateViewController(withIdentifier: "feedTable") as! FeedTableViewController
         controller.feedType = .FANFEED
         controller.fanPageId = fanPage.fanPageId
+        controller.isEntireView = true
         addChildViewController(controller)
         feedContainer.addSubview(controller.view)
         controller.didMove(toParentViewController: self)
@@ -73,6 +82,7 @@ class FanPageController : UIViewController {
             self.noFeedTopLbl.text = "팬페이지에 아직 글이 없습니다."
             self.noFeedDownLbl.text = "새 글을 작성해보세요~!"
             self.noFeedBtn.setTitle("글쓰기", for: .normal)
+            self.noFeedBtn.addTarget(self, action: #selector(self.writePost(_:)), for: .touchUpInside)
             
             self.detailBtn.alpha = 1
             self.detailBtn.addTarget(self, action: #selector(showDetailFanPage(_:)), for: .touchUpInside)
@@ -101,13 +111,23 @@ class FanPageController : UIViewController {
         if fanPage.cntPost == 0 {
             self.feedView.alpha = 0
             self.noFeedView.alpha = 1
+            self.writeBtn.alpha = 0
         }
         else {
             self.feedView.alpha = 1
             self.noFeedView.alpha = 0
-            
+            self.writeBtn.alpha = 1
             self.setupFeed()
         }
+    }
+    
+    func writePost(_ sender:UIButton){
+        let storyboard = UIStoryboard(name:"Write", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "writenavi") as? UINavigationController
+        let controller =  vc?.topViewController as! WriteViewController
+        controller.fanPage = self.fanPage
+        controller.fanPagePostDelegate = self
+        self.present(vc!, animated: true, completion: nil)
     }
     
     func shareAlert(){
@@ -296,4 +316,55 @@ class FanPageController : UIViewController {
 
     }
     
+}
+
+extension FanPageController : FanPagePostDelegate {
+    func upload(query: URL, array : Array<AVAsset>){
+        
+        var fileName : String!
+        
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            
+            var count = 1
+            
+            for asset in array {
+                
+                if asset.type == .photo {
+                    fileName = "\(count)" + ".jpg"
+                    
+                    if let imageData = asset.mediaData {
+                        multipartFormData.append(imageData, withName: "files", fileName: fileName, mimeType: "image/jpg")
+                    }
+                } else {
+                    fileName = "\(count)" + ".mpeg"
+                    
+                    if let imageData = asset.mediaData {
+                        multipartFormData.append(imageData, withName: "files", fileName: fileName, mimeType: "video/mpeg")
+                    }
+                }
+                
+                count = count + 1
+            }
+            
+        }, usingThreshold: UInt64.init(), to: query, method: .post, headers: Constants.VyrlAPIConstants.getHeader(), encodingCompletion:
+            {
+                encodingResult in
+                switch encodingResult {
+                case .success(let upload, _, _):
+                    
+                    upload.uploadProgress(closure: { (progress) in
+                    })
+                    
+                    upload.responseString { response in
+                        
+                        if ((response.response?.statusCode)! == 200){
+                            self.reloadFanPage()
+                        }
+                        
+                    }
+                case .failure(let encodingError):
+                    print(encodingError.localizedDescription)
+                }
+        })
+    }
 }

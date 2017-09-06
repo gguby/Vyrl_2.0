@@ -34,6 +34,9 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
     @IBOutlet weak var bottomSpace: NSLayoutConstraint!
     @IBOutlet weak var loadingImage: UIImageView!
     
+    var bottomView : UIView!
+    var isEntireView : Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -44,15 +47,13 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 400
         
-        if self.feedType != .USERFEED && self.feedType != .FANFEED {
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.feedView = self
-            
-            self.setUpRefresh()
+        if self.isEntireView == true {
+            self.bottomSpace.constant = 50
+        }else {
             self.bottomSpace.constant = 65
-        } else {
-            self.bottomSpace.constant = 100
         }
+        
+        self.setUpRefresh()
         
         self.initLoader()
         
@@ -64,26 +65,21 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         refreshView.delegate = self
         self.tableView.addPullLoadableView(refreshView, type: .refresh)
         
-//        let bottom = FeedPullLoaderView()
-//        bottom.delegate = self
-//        self.tableView.addPullLoadableView(bottom, type: .loadMore)
-        
-        let customView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
-        customView.backgroundColor = UIColor.clear
+        self.bottomView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 50))
         let bottomRefresh = UIImageView.init(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
         bottomRefresh.animationImages = self.getImgList()
         bottomRefresh.animationDuration = 1.0
         bottomRefresh.startAnimating()
         
         bottomRefresh.translatesAutoresizingMaskIntoConstraints = false
-        customView.addSubview(bottomRefresh)
+        bottomView.addSubview(bottomRefresh)
         
-        customView.addConstraints([
-            NSLayoutConstraint(item: bottomRefresh, attribute: .centerX, relatedBy: .equal, toItem: customView, attribute: .centerX, multiplier: 1.0, constant: 0.0),
-            NSLayoutConstraint(item: bottomRefresh, attribute: .centerY, relatedBy: .equal, toItem: customView, attribute: .centerY, multiplier: 1.0, constant: 0.0)
+        bottomView.addConstraints([
+            NSLayoutConstraint(item: bottomRefresh, attribute: .centerX, relatedBy: .equal, toItem: bottomView, attribute: .centerX, multiplier: 1.0, constant: 0.0),
+            NSLayoutConstraint(item: bottomRefresh, attribute: .centerY, relatedBy: .equal, toItem: bottomView, attribute: .centerY, multiplier: 1.0, constant: 0.0)
         ])
         
-        self.tableView.tableFooterView = customView
+        self.tableView.tableFooterView = self.bottomView
         
         self.isBottomRefresh = true
     }
@@ -226,6 +222,12 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
             
             let array = response.result.value ?? []
             
+            if ( array.count == 1 ){
+                self.tableView.tableFooterView = UIView(frame: .zero)
+            }else {
+                self.tableView.tableFooterView = self.bottomView
+            }
+            
             for article in array {
                 self.articleArray.append(article)
             }
@@ -237,6 +239,10 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
     }
     
     func uploadPatch(query: URL){
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.feedView = self
+        
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             
         }, usingThreshold: UInt64.init(), to: query, method: .patch, headers: Constants.VyrlAPIConstants.getHeader(), encodingCompletion:
@@ -265,6 +271,9 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
     }
     
     func upload(query: URL, array : Array<AVAsset>){
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.feedView = self
         
         var fileName : String!
         
@@ -305,9 +314,14 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
                     upload.responseString { response in
 
                         if ((response.response?.statusCode)! == 200){
-                            self.tabBarController?.selectedIndex = 0
-                            self.uploadHidden(hidden: true)
+                            if self.feedType != .FANFEED {
+                                self.tabBarController?.selectedIndex = 0
+                                
+                            }else {
+                                
+                            }
                             self.getAllFeed()
+                            self.uploadHidden(hidden: true)
                         }
                         
                     }

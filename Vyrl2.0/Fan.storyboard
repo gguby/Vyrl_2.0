@@ -1183,6 +1183,14 @@
                                     <constraint firstItem="DQa-zJ-IG1" firstAttribute="centerX" secondItem="4io-G1-pGO" secondAttribute="centerX" id="ozZ-17-edq"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1gs-8X-WJY">
+                                <rect key="frame" x="289.5" y="597.5" width="62" height="62"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="62" id="4FY-eW-Ms6"/>
+                                    <constraint firstAttribute="height" constant="62" id="wKW-1r-KEb"/>
+                                </constraints>
+                                <state key="normal" image="icon_write_02"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1190,9 +1198,11 @@
                             <constraint firstItem="qxD-mB-VC9" firstAttribute="leading" secondItem="wNd-t7-2G7" secondAttribute="leading" id="3Ge-ho-z3T"/>
                             <constraint firstItem="WIW-GZ-kTZ" firstAttribute="top" secondItem="4io-G1-pGO" secondAttribute="bottom" id="4ca-cw-Q5y"/>
                             <constraint firstItem="4io-G1-pGO" firstAttribute="leading" secondItem="noP-Ef-f5u" secondAttribute="leading" id="5a8-XS-YXf"/>
+                            <constraint firstItem="WIW-GZ-kTZ" firstAttribute="top" secondItem="1gs-8X-WJY" secondAttribute="bottom" constant="7.5" id="6wk-h4-wnw"/>
                             <constraint firstItem="wNd-t7-2G7" firstAttribute="leading" secondItem="noP-Ef-f5u" secondAttribute="leading" id="FdP-3I-kB4"/>
                             <constraint firstAttribute="trailing" secondItem="4io-G1-pGO" secondAttribute="trailing" id="Hfw-b4-hWn"/>
                             <constraint firstItem="WIW-GZ-kTZ" firstAttribute="top" secondItem="qxD-mB-VC9" secondAttribute="bottom" id="KxL-0f-Em1"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="1gs-8X-WJY" secondAttribute="trailing" constant="7.5" id="Xsa-Xw-tZ9"/>
                             <constraint firstAttribute="trailing" secondItem="hEm-d8-ZM9" secondAttribute="trailing" id="Yaf-OL-5op"/>
                             <constraint firstItem="hEm-d8-ZM9" firstAttribute="top" secondItem="wNd-t7-2G7" secondAttribute="bottom" id="a5w-1D-Kn1"/>
                             <constraint firstItem="wNd-t7-2G7" firstAttribute="top" secondItem="KC6-d2-GUr" secondAttribute="bottom" id="cfZ-ZN-Rw6"/>
@@ -1220,6 +1230,7 @@
                         <outlet property="pageName" destination="2b9-fe-SET" id="LOM-hx-iVF"/>
                         <outlet property="post" destination="5wj-ey-kKX" id="Ujc-ao-sD0"/>
                         <outlet property="signUpOrWithDraw" destination="L70-a9-wUS" id="eoX-Vf-afJ"/>
+                        <outlet property="writeBtn" destination="1gs-8X-WJY" id="7Ic-PA-Kkq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T4k-jT-tbH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1546,6 +1557,7 @@ AEEAAAAAAAAAAAAAAAAAABCMA
         <image name="icon_fan_01_off" width="28" height="28"/>
         <image name="icon_more_02" width="20" height="20"/>
         <image name="icon_user_02" width="14" height="14"/>
+        <image name="icon_write_02" width="62" height="62"/>
         <image name="tag_official_02" width="78" height="13"/>
     </resources>
 </document>

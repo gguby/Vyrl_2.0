@@ -31,11 +31,15 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
     @IBOutlet weak var textViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var fanPageTitle: UILabel!
     
     var isSelectedMedia : Bool = false
     var selectedAssetArray = [AVAsset]()
     var albumTitle : String!
     var currentPlace : Place!
+    
+    var fanPage : FanPage?
+    var fanPagePostDelegate : FanPagePostDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +60,13 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
         }
         
         self.collectionViewHeight.constant = 0.0
+        
+        if let fanPage = self.fanPage {
+            self.fanPageTitle.isHidden = false
+            self.fanPageTitle.text = fanPage.pageName
+        }else {
+            self.fanPageTitle.isHidden = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,15 +75,12 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
         self.setupMediaView(hidden: false)
     }
     
-    @IBAction func post(_ sender: UIButton) {
-        
-        textView.resignFirstResponder()
-        
+    func createFeed(){
         var parameters :[String:String] = [
             "content": textView.text,
-//            "latitude" : "\(self.currentPlace.latitude!)",
-//            "longitude" : "\(self.currentPlace.longitude!)"
-         ]
+            //            "latitude" : "\(self.currentPlace.latitude!)",
+            //            "longitude" : "\(self.currentPlace.longitude!)"
+        ]
         
         if let place = self.currentPlace {
             parameters["location"] = place.name
@@ -84,6 +92,40 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.feedView.upload(query: queryUrl!, array: self.selectedAssetArray)
+    }
+    
+    func createFanPagePost(){
+        
+        let fanPageId = (self.fanPage?.fanPageId)!
+        
+        let parameters : [String:String] = [
+            "fanPageId" : "\(fanPageId)",
+            "content": textView.text,
+            "openYn" : "false"
+        ]
+        
+        let uri = Constants.VyrlFanAPIURL.FANPAGEPOST
+        
+        let queryUrl = URL.init(string: uri, parameters: parameters)
+        
+        if ( self.fanPage?.cntPost == 0 ){
+            self.fanPagePostDelegate.upload(query: queryUrl!, array: self.selectedAssetArray)
+            return
+        }
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.feedView.upload(query: queryUrl!, array: self.selectedAssetArray)
+    }
+    
+    @IBAction func post(_ sender: UIButton) {
+        
+        textView.resignFirstResponder()
+        
+        if let fanpage = self.fanPage {
+            self.createFanPagePost()
+        }else {
+            self.createFeed()
+        }
         
         self.dismiss(animated: true, completion: nil)
     }
