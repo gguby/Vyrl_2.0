@@ -37,6 +37,7 @@ class FanViewController: UIViewController {
     @IBOutlet weak var emptyLabel: UILabel!
     @IBOutlet weak var more: UIButton!
     
+    var moreCount : Int = 1
     var joinFanPages = [FanPage]()
     var suggestFanPages = [SuggestFanPage]()
     var searchResults = [FanPage]()
@@ -154,6 +155,21 @@ class FanViewController: UIViewController {
     @IBAction func createFanPage(_ sender: Any) {
         self.pushView(storyboardName: "FanDetail", controllerName: "FanPageCreateViewController")
     }
+    
+    @IBAction func moreFanPage(_ sender: UIButton) {
+        if (self.joinFanPages.count > 6 ){
+            
+            let fanPageHeight = 334 + (167 * moreCount)
+            self.joinFanPageHeight.constant = CGFloat(fanPageHeight)
+            self.joinFanpageCollectionView.alpha = 1
+            self.emptyView.alpha = 0
+            self.more.isHidden = true
+            
+            moreCount += 1
+            self.joinFanpageCollectionView.reloadData()
+        }
+    }
+    
 }
 
 extension FanViewController : FanViewControllerDelegate {
@@ -190,7 +206,15 @@ extension FanViewController : UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if ( self.joinFanPages.count > 5 ){
-            return 6
+            
+            let count = 6 * moreCount
+            if(count > self.joinFanPages.count)
+            {
+                self.more.isHidden = true
+                return self.joinFanPages.count
+            } else {
+                return count
+            }
         }
         
         return self.joinFanPages.count
