@@ -630,6 +630,7 @@
                                                         <constraint firstItem="e6T-hc-xOM" firstAttribute="leading" secondItem="yUV-Ib-RD2" secondAttribute="trailing" constant="14" id="sZY-Fs-A4u"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
+                                                <inset key="separatorInset" minX="99" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <connections>
                                                     <outlet property="intro" destination="zmo-8P-ga5" id="WTa-YD-pg7"/>
                                                     <outlet property="members" destination="dc1-EP-4V7" id="QY5-fU-gl8"/>
@@ -819,7 +820,7 @@
             <objects>
                 <navigationController navigationBarHidden="YES" id="FGb-AU-ze0" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="lpZ-SK-Jsl">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lpZ-SK-Jsl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

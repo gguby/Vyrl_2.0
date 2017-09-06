@@ -116,7 +116,8 @@ struct Constants {
         }
         
         static func search(searchWord : String) -> String{
-            return VyrlAPIConstants.baseURL + "/fan-pages/searchs/" + searchWord
+            let str = searchWord.addingPercentEncoding(withAllowedCharacters:  NSCharacterSet.urlQueryAllowed)
+            return VyrlAPIConstants.baseURL + "/fan-pages/searchs/" + str!
         }
         
         static func withdrawFanPage(fanPageId : Int)-> String{

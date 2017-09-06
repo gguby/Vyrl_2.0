@@ -288,6 +288,14 @@ extension FanViewController : UITableViewDelegate, UITableViewDataSource {
         
         return UITableViewCell()
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if(tableView == self.searchTable) {
+            let fanPage = self.searchResults[indexPath.row]
+            let vc = self.pushViewControllrer(storyboardName: "Fan", controllerName: "FanPage") as! FanPageController
+            vc.fanPage = fanPage
+        }
+    }
 }
 
 extension FanViewController : UISearchBarDelegate {
@@ -467,7 +475,7 @@ struct FanPage : Mappable {
         cntMember <- map["memberCount"]
         
         alarm <- map["alarm"]        
-        if alarm == "ON" {
+        if alarm != nil && alarm == "ON" {
             isAlarm = true
         }else {
             isAlarm = false
