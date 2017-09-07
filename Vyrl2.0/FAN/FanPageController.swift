@@ -11,6 +11,7 @@ import Alamofire
 
 protocol FanPagePostDelegate {
     func upload(query: URL, array : Array<AVAsset>)
+    func reloadFanPage()
 }
 
 class FanPageController : UIViewController {
@@ -57,8 +58,9 @@ class FanPageController : UIViewController {
         let controller = storyboard.instantiateViewController(withIdentifier: "feedTable") as! FeedTableViewController
         controller.feedType = .FANFEED
         controller.fanPageId = fanPage.fanPageId
-        controller.isEntireView = true
         addChildViewController(controller)
+        
+        controller.view.frame.size.height = feedContainer.frame.height
         feedContainer.addSubview(controller.view)
         controller.didMove(toParentViewController: self)
     }
@@ -287,17 +289,6 @@ class FanPageController : UIViewController {
     @IBAction func fanPageSetting(_ sender: Any) {
     }
     
-    func reloadFanPage(){
-        let uri = URL.init(string: Constants.VyrlFanAPIURL.fanPage(fanPageId: self.fanPage.fanPageId))
-        
-        Alamofire.request(uri!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseObject { (response: DataResponse<FanPage>) in
-            self.fanPage = response.result.value
-            
-            self.initPage()
-        }
-    }
-    
-        
     @IBAction func showMemberList(_ sender: UIButton) {
         
         let vc = self.pushViewControllrer(storyboardName: "FanDetail", controllerName: "MemberList") as! FanPageMemberListViewController
@@ -308,6 +299,17 @@ class FanPageController : UIViewController {
 }
 
 extension FanPageController : FanPagePostDelegate {
+    
+    func reloadFanPage(){
+        let uri = URL.init(string: Constants.VyrlFanAPIURL.fanPage(fanPageId: self.fanPage.fanPageId))
+        
+        Alamofire.request(uri!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseObject { (response: DataResponse<FanPage>) in
+            self.fanPage = response.result.value
+            
+            self.initPage()
+        }
+    }
+
     func upload(query: URL, array : Array<AVAsset>){
         
         var fileName : String!

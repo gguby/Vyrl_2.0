@@ -820,7 +820,7 @@
             <objects>
                 <navigationController navigationBarHidden="YES" id="FGb-AU-ze0" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lpZ-SK-Jsl">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="lpZ-SK-Jsl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

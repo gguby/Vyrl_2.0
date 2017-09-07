@@ -102,8 +102,7 @@ class MyViewController: UIViewController{
         controller.removeFromParentViewController()
         controller.view.removeFromSuperview()
         
-        print(controller.view.frame)
-        controller.view.frame.size.height -= 80
+        controller.view.frame.size.height = containerView.frame.height
         
         addChildViewController(controller)
         

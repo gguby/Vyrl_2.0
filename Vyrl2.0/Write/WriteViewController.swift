@@ -91,7 +91,7 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
         let queryUrl = URL.init(string: uri, parameters: parameters)
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.feedView.upload(query: queryUrl!, array: self.selectedAssetArray)
+        appDelegate.feedView.upload(query: queryUrl!, array: self.selectedAssetArray, completion: nil)
     }
     
     func createFanPagePost(){
@@ -114,7 +114,9 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
         }
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.feedView.upload(query: queryUrl!, array: self.selectedAssetArray)
+        appDelegate.feedView.upload(query: queryUrl!, array: self.selectedAssetArray, completion: {
+            self.fanPagePostDelegate.reloadFanPage()
+        })
     }
     
     @IBAction func post(_ sender: UIButton) {

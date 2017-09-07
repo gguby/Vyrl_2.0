@@ -61,11 +61,13 @@ class OtherProfileViewController: UIViewController {
         
         controller.feedType = feedType
         controller.userId = profileUserId
-        controller.isEntireView = true
+        
         controller.removeFromParentViewController()
         controller.view.removeFromSuperview()
         
         addChildViewController(controller)
+        
+        controller.view.frame.size.height = containerView.frame.height
         
         containerView.addSubview(controller.view)
         controller.didMove(toParentViewController: self)

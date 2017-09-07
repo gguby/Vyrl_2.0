@@ -34,7 +34,6 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
     @IBOutlet weak var loadingImage: UIImageView!
     
     var bottomView : UIView!
-    var isEntireView : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +48,9 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         self.setUpRefresh()
         
         self.initLoader()
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.feedView = self
         
         self.getAllFeed()        
     }
@@ -209,7 +211,7 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
             
             let array = response.result.value ?? []
             
-            if ( array.count == 1 ){
+            if ( array.count <= 2 ){
                 self.tableView.tableFooterView = UIView(frame: .zero)
             }else {
                 self.tableView.tableFooterView = self.bottomView
@@ -226,9 +228,6 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
     }
     
     func uploadPatch(query: URL){
-        
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.feedView = self
         
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             
@@ -257,10 +256,7 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         })
     }
     
-    func upload(query: URL, array : Array<AVAsset>){
-        
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.feedView = self
+    func upload(query: URL, array : Array<AVAsset>, completion : (() -> Void)?){
         
         var fileName : String!
         
@@ -305,7 +301,7 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
                                 self.tabBarController?.selectedIndex = 0
                                 
                             }else {
-                                
+                                completion!()
                             }
                             self.getAllFeed()
                             self.uploadHidden(hidden: true)
