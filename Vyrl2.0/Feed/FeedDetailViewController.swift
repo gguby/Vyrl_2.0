@@ -821,6 +821,7 @@ class FeedDetailTableCell : UITableViewCell {
     
     func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {
+        self.delegate.imageDidSelect(profileId: profileId)
     }
     
     func requestImageVideo() {
