@@ -153,6 +153,11 @@ struct Constants {
             let str = "\(fanPageId)"
             return VyrlAPIConstants.baseURL + "fan-pages/alarms/" + str
         }
+        
+        static func fanPagePost(articleId : Int)-> String{
+            let str = "\(articleId)"
+            return VyrlAPIConstants.baseURL + "fan-pages/posts/" + str
+        }
     }
     
     static func getHeader() -> HTTPHeaders {

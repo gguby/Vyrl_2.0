@@ -16,6 +16,7 @@ class FeedModifyController : UIViewController
     
     var articleId : Int!
     var originText : String!
+    var fanPagePostDelegate : FanPagePostDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +48,9 @@ class FeedModifyController : UIViewController
         let queryUrl = URL.init(string: uri, parameters: parameters)
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.feedView.uploadPatch(query: queryUrl!)
+        appDelegate.feedView.uploadPatch(query: queryUrl!, completion: {
+             self.fanPagePostDelegate.reloadFanPage()
+        })
         
         self.dismiss(animated: true, completion: nil)
     }

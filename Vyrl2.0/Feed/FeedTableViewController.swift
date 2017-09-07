@@ -35,6 +35,8 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
     
     var bottomView : UIView!
     
+    var fanPageViewController : FanPageController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -227,7 +229,7 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         }
     }
     
-    func uploadPatch(query: URL){
+    func uploadPatch(query: URL, completion : (() -> Void)?){
         
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             
@@ -243,7 +245,12 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
                     upload.responseString { response in
                         
                         if ((response.response?.statusCode)! == 200){
-                            self.tabBarController?.selectedIndex = 0
+                            if self.feedType != .FANFEED {
+                                self.tabBarController?.selectedIndex = 0
+                            }else {
+                                completion!()
+                            }
+                            
                             self.uploadHidden(hidden: true)
                             self.getAllFeed()
                         }
@@ -576,6 +583,7 @@ extension FeedTableViewController : FeedCellDelegate {
         
         let modify = UIAlertAction(title: "수정", style: .default,handler: { (action) -> Void in
             let vc : FeedModifyController = self.pushModal(storyboardName: "FeedStyle", controllerName: "feedModify") as! FeedModifyController
+            vc.fanPagePostDelegate = self.fanPageViewController
             vc.setText(text: cell.contentTextView.text!)
             vc.articleId = cell.article?.id
         })
@@ -583,7 +591,11 @@ extension FeedTableViewController : FeedCellDelegate {
             
             let articleId = (cell.article?.id)!
             
-            let uri = Constants.VyrlFeedURL.feed(articleId: articleId)
+            var uri = Constants.VyrlFeedURL.feed(articleId: articleId)
+            
+            if self.feedType == .FANFEED {
+                uri = Constants.VyrlFanAPIURL.fanPagePost(articleId: articleId)
+            }
             
             Alamofire.request(uri, method: .delete, parameters: nil, encoding:JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: { (response) in
                 switch response.result {
@@ -593,6 +605,10 @@ extension FeedTableViewController : FeedCellDelegate {
                     if let code = response.response?.statusCode {
                         if code == 200 {
                             self.getAllFeed()
+                            
+                            if self.feedType == .FANFEED {
+                                self.fanPageViewController.reloadFanPage()
+                            }
                         }
                     }
                 case .failure(let error):

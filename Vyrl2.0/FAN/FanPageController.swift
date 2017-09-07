@@ -48,7 +48,9 @@ class FanPageController : UIViewController {
         
         super.viewDidLoad()
         
-        self.initPage()
+        self.reloadFanPage()
+        
+        self.setupFeed()
         
         self.writeBtn.addTarget(self, action: #selector(self.writePost(_:)), for: .touchUpInside)
     }
@@ -58,6 +60,7 @@ class FanPageController : UIViewController {
         let controller = storyboard.instantiateViewController(withIdentifier: "feedTable") as! FeedTableViewController
         controller.feedType = .FANFEED
         controller.fanPageId = fanPage.fanPageId
+        controller.fanPageViewController = self
         addChildViewController(controller)
         
         controller.view.frame.size.height = feedContainer.frame.height
@@ -118,8 +121,7 @@ class FanPageController : UIViewController {
         else {
             self.feedView.alpha = 1
             self.noFeedView.alpha = 0
-            self.writeBtn.alpha = 1
-            self.setupFeed()
+            self.writeBtn.alpha = 1            
         }
     }
     
@@ -307,6 +309,9 @@ extension FanPageController : FanPagePostDelegate {
             self.fanPage = response.result.value
             
             self.initPage()
+            
+            let vc = self.childViewControllers[0] as! FeedTableViewController
+            vc.getAllFeed()
         }
     }
 
