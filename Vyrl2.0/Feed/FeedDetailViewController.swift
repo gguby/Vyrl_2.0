@@ -42,7 +42,7 @@ class FeedDetailViewController: UIViewController{
     var article : Article? {
         didSet {
             self.likeButton.setTitle(article?.likeCount, for: .normal)
-            
+            self.commentButton.setTitle(article?.commentCount, for: .normal)
             self.shareButton.setTitle(article?.shareCount, for: .normal)
             
             if (article?.isLike)! {
@@ -76,7 +76,7 @@ class FeedDetailViewController: UIViewController{
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        requestFeedDetail()
+//        requestFeedDetail()
     }
     
     @IBAction func dismiss(_ sender: UIButton) {
@@ -160,10 +160,15 @@ class FeedDetailViewController: UIViewController{
             switch response.result {
             case .success(let json):
                 print(json)
-                DispatchQueue.main.async(execute: { 
-                    self.requestComment()
-                    self.showButtonView()
-                })
+                DispatchQueue.main.async(execute: {
+                    if(response.response?.statusCode == 200){
+                        let jsonData = json as! NSDictionary
+                        self.article?.cntComment = jsonData["cntComment"] as! Int
+                        self.commentButton.setTitle(self.article?.commentCount, for: .normal)
+                        self.requestNewComment()
+                        self.showButtonView()
+                        }
+                   })
             case .failure(let error):
                 print(error)
             }
@@ -336,6 +341,29 @@ class FeedDetailViewController: UIViewController{
         }
     }
     
+    func requestNewComment() {
+        let parameters : Parameters = [
+            "size": "\(20)"
+        ]
+        
+        let uri = URL.init(string: Constants.VyrlFeedURL.feedComment(articleId: articleId), parameters: parameters as! [String : String])
+        
+        
+        Alamofire.request(uri!, method: .get, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Comment]>) in
+            
+            self.commentArray.removeAll()
+            
+            var array = response.result.value ?? []
+            array.append(contentsOf: self.commentArray)
+            self.commentArray = array
+            
+            self.commentLastId = self.commentArray[0].id
+            
+            self.tableView.reloadData()
+        }
+
+    }
+    
     func requestFeedDetail() {
          let url = URL.init(string: Constants.VyrlFeedURL.feed(articleId: articleId))
         Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseObject { (response: DataResponse<Article>) in
@@ -432,11 +460,21 @@ class FeedDetailViewController: UIViewController{
         let deleteAction = UIAlertAction(title: "삭제", style: .default,handler: { (action) -> Void in
              let url = Constants.VyrlFeedURL.feedCommentDelete(articleId: self.articleId, commentId: self.commentArray[indexPath.row-1].id)
             
-            Alamofire.request(url, method: .delete, parameters: nil, encoding:JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: { (response) in
+            Alamofire.request(url, method: .delete, parameters: nil, encoding:JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON(completionHandler: { (response) in
                 switch response.result {
                 case .success(let json):
                     if(response.response?.statusCode == 200){
-                        self.requestComment()
+                        var index = 0
+                        let jsonData = json as! NSDictionary
+                        self.article?.cntComment = jsonData["cntComment"] as! Int
+                        if(self.article?.comments != nil && (self.article?.cntComment)! > 20 && self.article?.cntComment != self.commentArray.count - 1)  {
+                            index = 2
+                        } else {
+                            index = 1
+                        }
+                        self.commentButton.setTitle(self.article?.commentCount, for: .normal)
+                        self.commentArray.remove(at: indexPath.row - index)
+                        self.tableView.deleteRows(at: [indexPath], with: .fade)
                     }
                 case .failure(let error):
                     print(error)
@@ -450,11 +488,6 @@ class FeedDetailViewController: UIViewController{
         
         alertController.addAction(deleteAction)
         alertController.addAction(cancelAction)
-        
-        
-//        alertController.popoverPresentationController?.sourceView = currentCell?.contentView
-//        alertController.popoverPresentationController?.sourceRect = self.tableView.cellForRow(at: indexPath)!.frame
-//        alertController.popoverPresentationController?.sourceRect = self.tableView.convert(self.tableView.rectForRow(at: indexPath), to: self.tableView.superview)
         
         present(alertController, animated: true, completion: {
             alertController.view.superview?.subviews[1].addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.alertControllerBackgroundTapped)))
@@ -555,7 +588,7 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        if(self.article?.comments != nil && (self.article?.cntComment)! > 20) {
+        if(self.article?.comments != nil && (self.article?.cntComment)! > 20 && self.article?.cntComment != self.commentArray.count) {
             return self.commentArray.count + 2
         }
         
@@ -627,12 +660,12 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
                 cell.nickNameLabel.text = self.article?.profile.nickName
                 
                 cell.profileId = self.article?.profile.id
-                cell.delegate = self as! FeedDetailTableCellProtocol
+                cell.delegate = self as FeedDetailTableCellProtocol
             }
             return cell
 
         } else if (indexPath.row == 1 && self.article != nil) {
-            if(self.article?.comments != nil && (self.article?.cntComment)! > 20) {
+            if(self.article?.comments != nil && (self.article?.cntComment)! > 20 && self.article?.cntComment != self.commentArray.count) {
                 let  cell = tableView.dequeueReusableCell(withIdentifier: "moreComment") as! FeedDetailTableCell
                 return cell
             }
@@ -642,13 +675,13 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
         let  cell = tableView.dequeueReusableCell(withIdentifier: "Comment") as! FeedCommentTableCell
         if(self.article != nil)
         {
-           if(self.article?.comments != nil && (self.article?.cntComment)! > 20) {
+           if(self.article?.comments != nil && (self.article?.cntComment)! > 20 && self.article?.cntComment != self.commentArray.count) {
                  index = indexPath.row - 2
             } else {
                  index = indexPath.row - 1
             }
             
-            cell.delegate = self as! FeedCommentTableCellProtocol
+            cell.delegate = self as FeedCommentTableCellProtocol
             cell.userId = self.commentArray[index].userId
             cell.commentNicknameLabel.text = self.commentArray[index].nickName
             cell.commentContextTextView.text = self.commentArray[index].content

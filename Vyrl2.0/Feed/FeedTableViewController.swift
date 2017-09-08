@@ -687,8 +687,26 @@ struct Article : Mappable {
     var medias : [ArticleMedia]!
     
     var cntComment : Int!
+    {
+        didSet
+        {
+            commentCount = "\(cntComment!)"
+        }
+    }
     var cntLike : Int!
+    {
+        didSet
+        {
+            likeCount = "\(cntLike!)"
+        }
+    }
     var cntShare : Int!
+    {
+        didSet
+        {
+            shareCount = "\(cntShare!)"
+        }
+    }
     
     var profile : Profile!
     var date : Date?
@@ -728,9 +746,6 @@ struct Article : Mappable {
             date = _date
         }
         
-        commentCount = "\(cntComment!)"
-        likeCount = "\(cntLike!)"
-        shareCount = "\(cntShare!)"
         idStr = "\(id!)"
         
         isMyArticle = LoginManager.sharedInstance.isMyProfile(id: profile.id)
