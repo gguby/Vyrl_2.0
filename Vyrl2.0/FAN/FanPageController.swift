@@ -50,9 +50,9 @@ class FanPageController : UIViewController {
         
         super.viewDidLoad()
         
-        self.reloadFanPage()
-        
         self.setupFeed()
+        
+        self.reloadFanPage()
         
         self.writeBtn.addTarget(self, action: #selector(self.writePost(_:)), for: .touchUpInside)
     }

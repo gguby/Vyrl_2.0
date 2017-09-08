@@ -399,7 +399,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SAW-iu-VD1" id="FUM-7v-lHg">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="54.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_map_02_on" translatesAutoresizingMaskIntoConstraints="NO" id="c27-Zw-90h">
@@ -459,7 +459,7 @@
                                         <rect key="frame" x="0.0" y="83" width="375" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GfM-9u-cr8" id="9w1-rA-Dnd">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="54.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6D4-qu-4Mx">
@@ -741,28 +741,31 @@
                                                         <constraint firstAttribute="height" constant="20" id="PG9-Cz-efY"/>
                                                     </constraints>
                                                 </view>
-                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_check_06_on" translatesAutoresizingMaskIntoConstraints="NO" id="y3G-P2-Tof">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FFm-0Z-rKq">
                                                     <rect key="frame" x="90" y="14" width="20" height="20"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="20" id="WMi-di-EDv"/>
-                                                        <constraint firstAttribute="width" constant="20" id="fFv-GP-rzr"/>
+                                                        <constraint firstAttribute="width" constant="20" id="9tk-PJ-IiD"/>
+                                                        <constraint firstAttribute="height" constant="20" id="qKd-gq-7zM"/>
                                                     </constraints>
-                                                </imageView>
+                                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="11"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="y3G-P2-Tof" firstAttribute="top" secondItem="gNb-zw-rfL" secondAttribute="topMargin" constant="6" id="6PU-LY-ZFi"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="FFm-0Z-rKq" secondAttribute="trailing" constant="6" id="0fd-FY-3Ba"/>
                                             <constraint firstAttribute="trailing" secondItem="dBN-a3-SIZ" secondAttribute="trailing" id="7jr-fz-Lf8"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="y3G-P2-Tof" secondAttribute="trailing" constant="6" id="AOp-Rp-eOo"/>
                                             <constraint firstAttribute="bottom" secondItem="dBN-a3-SIZ" secondAttribute="bottom" id="YPc-WY-03c"/>
+                                            <constraint firstItem="FFm-0Z-rKq" firstAttribute="top" secondItem="gNb-zw-rfL" secondAttribute="topMargin" constant="6" id="awq-dm-0Ch"/>
                                             <constraint firstItem="dBN-a3-SIZ" firstAttribute="top" secondItem="gNb-zw-rfL" secondAttribute="top" id="cWx-m4-DGL"/>
                                             <constraint firstItem="dBN-a3-SIZ" firstAttribute="leading" secondItem="gNb-zw-rfL" secondAttribute="leading" id="jbH-bV-dJU"/>
                                             <constraint firstItem="nuh-WJ-TrZ" firstAttribute="top" secondItem="gNb-zw-rfL" secondAttribute="topMargin" constant="6" id="nS7-B4-H7s"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="nuh-WJ-TrZ" secondAttribute="trailing" constant="6" id="zC7-TO-Ymj"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="checkView" destination="y3G-P2-Tof" id="zO5-aD-ea1"/>
+                                            <outlet property="countLabel" destination="FFm-0Z-rKq" id="h1E-TZ-nHk"/>
                                             <outlet property="photo" destination="dBN-a3-SIZ" id="1DP-Z0-nSP"/>
                                             <outlet property="unCheckView" destination="nuh-WJ-TrZ" id="Wc2-jA-1X0"/>
                                         </connections>
@@ -781,7 +784,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="74"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2co-30-Kc4" id="0hf-YG-rjE">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="73.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="C7T-VW-psq">
@@ -893,7 +896,6 @@
         <image name="icon_camera_03" width="21" height="21"/>
         <image name="icon_cancel_05" width="17" height="17"/>
         <image name="icon_cancel_06" width="20" height="20"/>
-        <image name="icon_check_06_on" width="20" height="20"/>
         <image name="icon_map_01_off" width="21" height="21"/>
         <image name="icon_map_02_on" width="13" height="16"/>
         <image name="icon_mute_01_on" width="16" height="12"/>

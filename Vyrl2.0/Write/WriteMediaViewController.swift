@@ -264,6 +264,7 @@ extension WriteMediaViewConroller : UICollectionViewDataSource, UICollectionView
             if cell.isChecked {
                 if selectedAssetArray.contains(where: { $0.identifier == cell.assetID}) == false {
                     selectedAssetArray.append(cell.asset!)
+                    cell.count = self.selectedAssetArray.count
                 }
             }else {
                 if let index = selectedAssetArray.index(where: { $0.identifier == cell.assetID}){
@@ -302,6 +303,7 @@ extension WriteMediaViewConroller : UICollectionViewDataSource, UICollectionView
         
         if selectedAssetArray.contains(where: { $0.identifier == cell.assetID}){
             cell.isChecked = true
+            cell.count = indexPath.row - 1
         }else {
             cell.isChecked = false
         }
@@ -356,15 +358,24 @@ class MediaPhotoCell : UICollectionViewCell {
     @IBOutlet weak var photo: UIImageView!
     var asset: AVAsset?
     
-    let checkedImage = UIImage(named: "icon_check_06_on")! as UIImage
+    @IBOutlet weak var unCheckView: UIView!
+    @IBOutlet weak var countLabel: UILabel!
     
-    @IBOutlet weak var checkView: UIImageView!
-    @IBOutlet weak var unCheckView: UIView!   
+    var count : Int! {
+        didSet {
+            countLabel.text = "\(count!)"            
+        }
+    }
     
     var isChecked: Bool = false {
         didSet{
-            checkView.isHidden = !isChecked
-            unCheckView.isHidden = isChecked
+            if isChecked {
+                unCheckView.backgroundColor = UIColor.ivLighterPurple
+                countLabel.alpha = 1
+            }else {
+                unCheckView.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5)
+                countLabel.alpha = 0
+            }
         }
     }
     

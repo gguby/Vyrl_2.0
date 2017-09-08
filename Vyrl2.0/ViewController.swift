@@ -92,7 +92,14 @@ extension UIViewController
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let vc = appDelegate.rootViewController
-        vc?.loadingImageView.alpha = CGFloat(alpha)
+        
+        UIView.animate(withDuration: 1.0, animations: {
+            vc?.loadingImageView.alpha = CGFloat(alpha)
+        }) { (true) in
+            UIView.animate(withDuration: 1.0, animations: {
+                vc?.loadingImageView.alpha = CGFloat(alpha)
+            })
+        }
     }
 }
 
@@ -100,8 +107,6 @@ class ViewController: UITabBarController , UITabBarControllerDelegate {
     
     lazy var loadingImageView : UIImageView = {
         let imageView = UIImageView()
-        
-        imageView.image = UIImage.init(named: "icon_loader_01_1")
         
         var images: Array<UIImage> = []
         images.append(UIImage.init(named: "icon_loader_01_1")!)
@@ -140,7 +145,6 @@ class ViewController: UITabBarController , UITabBarControllerDelegate {
     func setupLoadingView(){
         if !self.loadingImageView.isDescendant(of: self.view){
             
-            self.view.translatesAutoresizingMaskIntoConstraints = false
             self.loadingImageView.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview(loadingImageView)
             
