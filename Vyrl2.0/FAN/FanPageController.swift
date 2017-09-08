@@ -44,6 +44,8 @@ class FanPageController : UIViewController {
     
     @IBOutlet weak var writeBtn: UIButton!
     
+    var delegate : FanViewControllerDelegate!
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -258,6 +260,7 @@ class FanPageController : UIViewController {
         Alamofire.request(uri!, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON { (response) in
             switch response.result {
             case .success(let json):
+                self.showToast(str: "가입되었습니다")
                 print(json)
             case .failure(let error):
                 print(error)
@@ -274,6 +277,9 @@ class FanPageController : UIViewController {
             switch response.result {
             case .success(let json):
                 
+                self.showToast(str: "탈퇴되었습니다")
+                self.reloadFanPage()
+                self.delegate.refresh()
                 print(json)
                 
             case .failure(let error):

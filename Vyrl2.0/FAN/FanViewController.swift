@@ -15,6 +15,10 @@ protocol FanViewControllerDelegate {
     func refresh()
 }
 
+protocol ReCommendCellDelegate {
+    func joinFanPage(cell : RecommendFanPageCell)
+}
+
 class FanViewController: UIViewController {
     
     @IBOutlet weak var joinFanpageCollectionView: UICollectionView!
@@ -52,7 +56,6 @@ class FanViewController: UIViewController {
         initSearchBar()
         
         self.automaticallyAdjustsScrollViewInsets = false
-        
         
         self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         
@@ -175,6 +178,23 @@ class FanViewController: UIViewController {
 extension FanViewController : FanViewControllerDelegate {
     func refresh() {
         self.getMyFanPage()
+        self.getSuggesetFanPage()
+    }
+}
+
+extension FanViewController : ReCommendCellDelegate {
+    func joinFanPage(cell: RecommendFanPageCell) {
+        let uri = URL.init(string: Constants.VyrlFanAPIURL.joinFanPage(fanPageId: cell.fanPage.fanPageId))
+        Alamofire.request(uri!, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON { (response) in
+            switch response.result {
+            case .success(let json):
+                self.showToast(str: "가입되었습니다")
+                self.refresh()
+                print(json)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
 
@@ -228,7 +248,8 @@ extension FanViewController : UICollectionViewDataSource, UICollectionViewDelega
             vc.delegate = self
         } else {
             let vc = self.pushViewControllrer(storyboardName: "Fan", controllerName: "FanPage") as! FanPageController
-            vc.fanPage = self.joinFanPages[indexPath.row]        
+            vc.fanPage = self.joinFanPages[indexPath.row]
+            vc.delegate = self
         }
     }
 }
@@ -240,10 +261,25 @@ class RecommendFanPageCell : UITableViewCell {
     @IBOutlet weak var detail: UILabel!
     @IBOutlet weak var member: UILabel!
     
+    var delegate : ReCommendCellDelegate!
+    
+    var fanPage : SuggestFanPage! {
+        didSet{
+            if fanPage.pageprofileImagePath.isEmpty == false {
+                self.profile.af_setImage(withURL: URL.init(string: fanPage.pageprofileImagePath)!)
+            }
+            
+            self.title.text = fanPage.pageName
+            self.member.text = "\(fanPage.cntMember!) members"
+            self.detail.text = fanPage.pageInfo
+        }
+    }
+    
     @IBAction func remove(_ sender: Any) {
     }
     
     @IBAction func follow(_ sender: Any) {
+        delegate.joinFanPage(cell: self)
     }
 }
 
@@ -275,13 +311,8 @@ extension FanViewController : UITableViewDelegate, UITableViewDataSource {
             
             let fan = self.suggestFanPages[indexPath.row]
             
-            if fan.pageprofileImagePath.isEmpty == false {
-                cell.profile.af_setImage(withURL: URL.init(string: fan.pageprofileImagePath)!)
-            }
-            
-            cell.title.text = fan.pageName
-            cell.member.text = "\(fan.cntMember!) members"
-            cell.detail.text = fan.pageInfo
+            cell.delegate = self
+            cell.fanPage = fan
             
             return cell
         }
