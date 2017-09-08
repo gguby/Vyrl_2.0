@@ -81,9 +81,39 @@ extension UIViewController
         let vc = appDelegate.rootViewController
         vc?.showToast(string: str)
     }
+    
+    func showLoading(show : Bool){
+        
+        var alpha = 1
+        
+        if show == false {
+            alpha = 0
+        }
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let vc = appDelegate.rootViewController
+        vc?.loadingImageView.alpha = CGFloat(alpha)
+    }
 }
 
 class ViewController: UITabBarController , UITabBarControllerDelegate {
+    
+    lazy var loadingImageView : UIImageView = {
+        let imageView = UIImageView()
+        
+        imageView.image = UIImage.init(named: "icon_loader_01_1")
+        
+        var images: Array<UIImage> = []
+        images.append(UIImage.init(named: "icon_loader_01_1")!)
+        images.append(UIImage.init(named: "icon_loader_01_2")!)
+        images.append(UIImage.init(named: "icon_loader_01_3")!)
+        
+        imageView.animationImages = images;
+        imageView.animationDuration = 5;
+        imageView.startAnimating()
+        
+        return imageView
+    }()
     
     lazy var toastView : UIView = {
         let view = UIView()
@@ -105,6 +135,20 @@ class ViewController: UITabBarController , UITabBarControllerDelegate {
         tabFrame.size.height = 45
         tabFrame.origin.y = self.view.frame.size.height - 45
         self.tabBar.frame = tabFrame
+    }
+    
+    func setupLoadingView(){
+        if !self.loadingImageView.isDescendant(of: self.view){
+            
+            self.view.translatesAutoresizingMaskIntoConstraints = false
+            self.loadingImageView.translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview(loadingImageView)
+            
+            loadingImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            loadingImageView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+            
+            self.loadingImageView.alpha = 0
+        }
     }
     
     func setupToasView(){
@@ -150,6 +194,8 @@ class ViewController: UITabBarController , UITabBarControllerDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         
         self.setupToasView()
+        
+        self.setupLoadingView()
         
         self.setupTabbar()
 

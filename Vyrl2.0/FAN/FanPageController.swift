@@ -309,6 +309,9 @@ class FanPageController : UIViewController {
 extension FanPageController : FanPagePostDelegate {
     
     func reloadFanPage(){
+        
+        self.showLoading(show: true)
+        
         let uri = URL.init(string: Constants.VyrlFanAPIURL.fanPage(fanPageId: self.fanPage.fanPageId))
         
         Alamofire.request(uri!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseObject { (response: DataResponse<FanPage>) in
@@ -318,6 +321,8 @@ extension FanPageController : FanPagePostDelegate {
             
             let vc = self.childViewControllers[0] as! FeedTableViewController
             vc.getAllFeed()
+            
+            self.showLoading(show: false)
         }
     }
 
