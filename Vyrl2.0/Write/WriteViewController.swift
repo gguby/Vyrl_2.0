@@ -321,10 +321,8 @@ extension WriteViewController : WriteMdeiaDelegate, UIImagePickerControllerDeleg
             self.modalNavigationController.si_delegate?.navigationControllerDidClosed?(navigationController: self.modalNavigationController)
             
             self.selectedAssetArray.removeAll()
-            
-            for asset in array {
-                self.selectedAssetArray.append(asset)
-            }
+
+            self.selectedAssetArray = array.clone()
             
             if self.selectedAssetArray.isEmpty {
                 self.collectionViewHeight.constant = 0

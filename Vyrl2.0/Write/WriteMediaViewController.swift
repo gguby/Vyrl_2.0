@@ -114,9 +114,7 @@ class WriteMediaViewConroller : UIViewController {
         
         let selectedArray = delegate?.getSeletedArray()
         
-        for asset in selectedArray! {
-            selectedAssetArray.append(asset)
-        }
+        selectedAssetArray = (selectedArray?.clone())!
         
         self.enabledAddBtn(enabled: !selectedAssetArray.isEmpty)
         
@@ -264,12 +262,22 @@ extension WriteMediaViewConroller : UICollectionViewDataSource, UICollectionView
             if cell.isChecked {
                 if selectedAssetArray.contains(where: { $0.identifier == cell.assetID}) == false {
                     selectedAssetArray.append(cell.asset!)
-                    cell.count = self.selectedAssetArray.count
+                    cell.asset?.selectedCount = selectedAssetArray.count
+                    cell.count = selectedAssetArray.count
                 }
             }else {
                 if let index = selectedAssetArray.index(where: { $0.identifier == cell.assetID}){
                     selectedAssetArray.remove(at: index)
                 }
+                
+                var i  = 1
+                
+                for asset in selectedAssetArray {
+                    asset.selectedCount = i
+                    i += 1
+                }
+                
+                collectionView.reloadData()
             }
             
             self.enabledAddBtn(enabled: !selectedAssetArray.isEmpty )
@@ -301,10 +309,12 @@ extension WriteMediaViewConroller : UICollectionViewDataSource, UICollectionView
         cell.assetID = self.avAssetIdentifiers[indexPath.row - 2]
         cell.tag = (indexPath as NSIndexPath).row
         
-        if selectedAssetArray.contains(where: { $0.identifier == cell.assetID}){
+        if let index = selectedAssetArray.index(where: { $0.identifier == cell.assetID}){
+            let asset = selectedAssetArray[index]
             cell.isChecked = true
-            cell.count = indexPath.row - 1
-        }else {
+            cell.count = asset.selectedCount
+        }
+        else {
             cell.isChecked = false
         }
         
@@ -363,7 +373,7 @@ class MediaPhotoCell : UICollectionViewCell {
     
     var count : Int! {
         didSet {
-            countLabel.text = "\(count!)"            
+            countLabel.text = "\(count!)"
         }
     }
     
@@ -446,7 +456,7 @@ class MediaPhotoCell : UICollectionViewCell {
     }
 }
 
-class AVAsset {
+class AVAsset : Copying {
     
     enum MediaType: Int {
         case video
@@ -462,6 +472,8 @@ class AVAsset {
     var photo : UIImage?
     
     var editedData : Data?
+    
+    var selectedCount : Int!
     
     var mediaData : Data? {
 
@@ -573,6 +585,14 @@ class AVAsset {
         let minutes = (interval / 60) % 60
         let hours = (interval / 3600)
         return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
+    
+    required init(original: AVAsset) {
+        self.type = original.type
+        self.identifier = original.identifier
+        self.selectedCount = original.selectedCount
+        self.urlAsset = original.urlAsset
+        self.editedData = original.editedData
     }
 }
 
