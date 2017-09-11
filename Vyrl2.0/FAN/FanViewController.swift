@@ -173,6 +173,21 @@ class FanViewController: UIViewController {
         }
     }
     
+    func showJoinAlert(fanPageId : Int){
+        let alertController = UIAlertController (title:nil, message:"가입되었습니다. 가입된 팬페이지로 바로 이동 하시겠습니까?",preferredStyle:.alert)
+        let ok = UIAlertAction(title: "네", style: .default, handler: { (action) -> Void in
+            let vc = self.pushViewControllrer(storyboardName: "Fan", controllerName: "FanPage") as! FanPageController
+            vc.fanPageId = fanPageId
+            vc.delegate = self
+        })
+        let cancel = UIAlertAction(title: "아니오", style: .cancel, handler: { (action) -> Void in
+        })
+        
+        alertController.addAction(ok)
+        alertController.addAction(cancel)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
 }
 
 extension FanViewController : FanViewControllerDelegate {
@@ -183,12 +198,13 @@ extension FanViewController : FanViewControllerDelegate {
 }
 
 extension FanViewController : ReCommendCellDelegate {
+    
     func joinFanPage(cell: RecommendFanPageCell) {
         let uri = URL.init(string: Constants.VyrlFanAPIURL.joinFanPage(fanPageId: cell.fanPage.fanPageId))
         Alamofire.request(uri!, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON { (response) in
             switch response.result {
             case .success(let json):
-                self.showToast(str: "가입되었습니다")
+                self.showJoinAlert(fanPageId: cell.fanPage.fanPageId)
                 self.refresh()
                 print(json)
             case .failure(let error):
@@ -248,7 +264,7 @@ extension FanViewController : UICollectionViewDataSource, UICollectionViewDelega
             vc.delegate = self
         } else {
             let vc = self.pushViewControllrer(storyboardName: "Fan", controllerName: "FanPage") as! FanPageController
-            vc.fanPage = self.joinFanPages[indexPath.row]
+            vc.fanPageId = self.joinFanPages[indexPath.row].fanPageId
             vc.delegate = self
         }
     }
@@ -324,7 +340,12 @@ extension FanViewController : UITableViewDelegate, UITableViewDataSource {
         if(tableView == self.searchTable) {
             let fanPage = self.searchResults[indexPath.row]
             let vc = self.pushViewControllrer(storyboardName: "Fan", controllerName: "FanPage") as! FanPageController
-            vc.fanPage = fanPage
+            vc.fanPageId = fanPage.fanPageId
+        }else {
+            let fanPage = self.suggestFanPages[indexPath.row]
+            let vc = self.pushViewControllrer(storyboardName: "Fan", controllerName: "FanPage") as! FanPageController
+            vc.fanPageId = fanPage.fanPageId
+            vc.delegate = self
         }
     }
 }

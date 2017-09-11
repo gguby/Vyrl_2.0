@@ -17,6 +17,7 @@ protocol FanPagePostDelegate {
 class FanPageController : UIViewController {
     
     var fanPage : FanPage!
+    var fanPageId : Int!
     
     @IBOutlet weak var pageImage: UIImageView!
     @IBOutlet weak var ownerLabel: UILabel!
@@ -61,7 +62,7 @@ class FanPageController : UIViewController {
         let storyboard = UIStoryboard(name: "FeedStyle", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "feedTable") as! FeedTableViewController
         controller.feedType = .FANFEED
-        controller.fanPageId = fanPage.fanPageId
+        controller.fanPageId = self.fanPageId
         controller.fanPageViewController = self
         addChildViewController(controller)
         
@@ -75,7 +76,7 @@ class FanPageController : UIViewController {
             self.signUpOrWithDraw.setTitle("가입하기", for: .normal)
             self.signUpOrWithDraw.backgroundColor = UIColor.ivLighterPurple
             
-            self.signUpOrWithDraw.addTarget(self, action: #selector(joinFanPage(_:)), for: .touchUpInside)
+            self.signUpOrWithDraw.addTarget(self, action: #selector(joinFanPage), for: .touchUpInside)
             
             self.detailBtn.alpha = 0
         }else {
@@ -127,7 +128,28 @@ class FanPageController : UIViewController {
         }
     }
     
+    func showJoinAlert(fanPageId : Int){
+        let alertController = UIAlertController (title:nil, message:"팬 페이지 가입 후 이용 가능합니다. 가입하시겠습니까?",preferredStyle:.alert)
+        let ok = UIAlertAction(title: "네", style: .default, handler: { (action) -> Void in
+            self.joinFanPage()
+        })
+        let cancel = UIAlertAction(title: "아니오", style: .cancel, handler: { (action) -> Void in
+        })
+        
+        alertController.addAction(ok)
+        alertController.addAction(cancel)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+
+    
     func writePost(_ sender:UIButton){
+        
+        if fanPage.level == "GUEST" {
+            self.showJoinAlert(fanPageId: self.fanPageId)
+            return
+        }
+        
         let storyboard = UIStoryboard(name:"Write", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "writenavi") as? UINavigationController
         let controller =  vc?.topViewController as! WriteViewController
@@ -254,13 +276,15 @@ class FanPageController : UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    func joinFanPage(_ sender: UIButton){
+    func joinFanPage(){
         
         let uri = URL.init(string: Constants.VyrlFanAPIURL.joinFanPage(fanPageId: self.fanPage.fanPageId))
         Alamofire.request(uri!, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON { (response) in
             switch response.result {
             case .success(let json):
-                self.showToast(str: "가입되었습니다")
+                self.showToast(str: "가입되었습니다.")
+                self.reloadFanPage()
+                self.delegate.refresh()
                 print(json)
             case .failure(let error):
                 print(error)
@@ -312,7 +336,7 @@ extension FanPageController : FanPagePostDelegate {
         
         self.showLoading(show: true)
         
-        let uri = URL.init(string: Constants.VyrlFanAPIURL.fanPage(fanPageId: self.fanPage.fanPageId))
+        let uri = URL.init(string: Constants.VyrlFanAPIURL.fanPage(fanPageId: self.fanPageId))
         
         Alamofire.request(uri!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseObject { (response: DataResponse<FanPage>) in
             self.fanPage = response.result.value
