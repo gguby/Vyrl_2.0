@@ -32,13 +32,14 @@ class FeedDetailViewController: UIViewController{
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
-
     
     var articleId : Int!
     var emoticonView : EmoticonView!
     var kbHeight: CGFloat!
     
     var commentArray : [Comment] = []
+    var feedType = FeedTableType.MYFEED
+    
     var article : Article? {
         didSet {
             self.likeButton.setTitle(article?.likeCount, for: .normal)
@@ -365,12 +366,17 @@ class FeedDetailViewController: UIViewController{
     }
     
     func requestFeedDetail() {
-         let url = URL.init(string: Constants.VyrlFeedURL.feed(articleId: articleId))
+         var url = URL.init(string: Constants.VyrlFeedURL.feed(articleId: articleId))
+        
+        if(self.feedType == FeedTableType.FANFEED){
+            url = URL.init(string: Constants.VyrlFanAPIURL.fanPagePost(articleId: articleId))
+        }
+        
         Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseObject { (response: DataResponse<Article>) in
             let article = response.result.value
             self.article = article
             
-            if(article?.comments != nil){
+            if(article?.comments != nil && (article?.comments.count)! > 0){
                 for comment in (article?.comments)! {
                     self.commentArray.append(comment)
                 }
@@ -647,6 +653,14 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
                 } else {
                     cell.followButton.isHidden = false
                 }
+                
+                if(self.feedType == FeedTableType.FANFEED)
+                {
+                    cell.fanView.isHidden = false
+                } else {
+                    cell.fanView.isHidden = true
+                }
+                
                 cell.contentTextView.text = self.article?.content
                 cell.contentTextView.resolveHashTags()
                 cell.contentTextView.delegate = self
@@ -807,6 +821,7 @@ class FeedDetailTableCell : UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var followButton: UIButton!
     
+    @IBOutlet weak var fanView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
