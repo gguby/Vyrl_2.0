@@ -175,6 +175,7 @@ class LoginManager{
     func signUp(homePageURL : String , nickName : String, selfIntro:String, profile: UIImage, completionHandler : @escaping () -> Void)
     {
         guard let token = self.deviceToken else {
+            print("not Token")
             return
         }
         

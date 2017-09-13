@@ -366,7 +366,14 @@ extension FanPageController : FanPagePostDelegate {
                     if let imageData = asset.mediaData {
                         multipartFormData.append(imageData, withName: "files", fileName: fileName, mimeType: "image/jpg")
                     }
-                } else {
+                    
+                } else if asset.type == .gif {
+                    fileName = "\(count)" + ".gif"
+                    if let imageData = asset.mediaData {
+                        multipartFormData.append(imageData, withName: "files", fileName: fileName, mimeType: "image/gif")
+                    }
+                }
+                else {
                     fileName = "\(count)" + ".mpeg"
                     
                     if let imageData = asset.mediaData {

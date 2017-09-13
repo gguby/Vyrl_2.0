@@ -8,6 +8,7 @@
 
 import Foundation
 import Photos
+import MobileCoreServices
 
 protocol WriteMdeiaDelegate : class {
     func openCameraView()
@@ -414,6 +415,22 @@ class MediaPhotoCell : UICollectionViewCell {
                     
                     self.asset = AVAsset(type: .photo, identifier: id)
                     
+                    let options = PHContentEditingInputRequestOptions()
+                    
+                    asset.requestContentEditingInput(with: options) { (contentEditingInput, info) in
+                        if let uniformTypeIdentifier = contentEditingInput?.uniformTypeIdentifier {
+                            
+                            if uniformTypeIdentifier == (kUTTypeGIF as String) {
+                                debugPrint("This asset is a GIF👍")
+                                self.asset?.type = .gif
+                                
+                                if let input = contentEditingInput, let imgURL = input.fullSizeImageURL {
+                                    self.asset?.gifURL = imgURL
+                                }
+                            }
+                        }
+                    }
+                    
                     manager.requestImage(for: asset, targetSize: self.photo.frame.size, contentMode: .aspectFill, options: requestOptions, resultHandler: {
                         
                         image,error  in
@@ -461,6 +478,7 @@ class AVAsset : Copying {
     enum MediaType: Int {
         case video
         case photo
+        case gif
     }
     
     var type: MediaType?
@@ -475,10 +493,23 @@ class AVAsset : Copying {
     
     var selectedCount : Int!
     
+    var gifURL : URL!
+    
     var mediaData : Data? {
 
         get {
             guard type == .photo else {
+                
+                if type == .gif  {
+                    do {
+                        let data = try Data(contentsOf: self.gifURL)
+                        return data
+                    }catch {
+                        
+                    }
+                    return nil
+                }
+                
                 if let asset = urlAsset {
                     do {
                         let data : Data!
@@ -506,9 +537,23 @@ class AVAsset : Copying {
             if self.type == .photo {
                 let size = PHImageManagerMaximumSize
                 self.getImage(size: size)
+                
+                var compression = 1.0
+                let maxCompression = 0.1
+                let maxFileSize = 300 * 1024
+                
+                var imgData: NSData = NSData(data: UIImageJPEGRepresentation(self.photo!, CGFloat(compression))!)
+                
+                var imageSize : Int = imgData.length
+                
+                while( imageSize > maxFileSize && compression > maxCompression ){
+                    compression -= 0.1
+                    imgData = NSData(data: UIImageJPEGRepresentation(self.photo!, CGFloat(compression))!)
+                    imageSize = imgData.length
+                }
+                
                 return UIImageJPEGRepresentation(self.photo!, 1.0)!
             }
-            
             return nil
         }
     }
@@ -593,6 +638,7 @@ class AVAsset : Copying {
         self.selectedCount = original.selectedCount
         self.urlAsset = original.urlAsset
         self.editedData = original.editedData
+        self.gifURL = original.gifURL
     }
 }
 

@@ -471,7 +471,7 @@ extension WriteViewController : UICollectionViewDataSource, UICollectionViewDele
         
         let asset : AVAsset = selectedAssetArray[indexPath.row]
         
-        if asset.type == .photo {
+        if asset.type == .photo || asset.type == .gif {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UploadMediaPhotoCell", for: indexPath) as! UploadMediaPhotoCell
             cell.delegte = self
             cell.asset = asset
