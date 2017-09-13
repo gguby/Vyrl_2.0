@@ -375,6 +375,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="contentTextView" destination="rLG-cT-tHD" id="UAA-c1-vZX"/>
+                                            <outlet property="fanView" destination="Pep-36-dpI" id="6Na-gz-gav"/>
                                             <outlet property="followButton" destination="bzP-ok-mJK" id="OJa-8I-r3G"/>
                                             <outlet property="imageScrollView" destination="NE5-is-INP" id="YDx-sG-NdA"/>
                                             <outlet property="likeCountButton" destination="IhU-tf-ZWN" id="S5q-xX-WEl"/>
