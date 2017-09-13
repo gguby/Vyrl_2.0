@@ -59,12 +59,14 @@ class FanViewController: UIViewController {
         
         self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         
+        self.recommandFanpageTableView.tableFooterView = UIView(frame: .zero)
+        self.searchTable.tableFooterView = UIView(frame: .zero)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         self.getMyFanPage()
         
         self.getSuggesetFanPage()
-        
-        self.recommandFanpageTableView.tableFooterView = UIView(frame: .zero)
-        self.searchTable.tableFooterView = UIView(frame: .zero)
     }
     
     func setupPostContainer(){
@@ -222,7 +224,7 @@ class FanCollectionCell : UICollectionViewCell {
 extension FanViewController : UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if indexPath.row == self.joinFanPages.count - 1 {
+        if indexPath.row == self.joinFanPages.count {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "createFan", for: indexPath)
             return cell
         }
@@ -253,7 +255,7 @@ extension FanViewController : UICollectionViewDataSource, UICollectionViewDelega
             }
         }
         
-        return self.joinFanPages.count
+        return self.joinFanPages.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
