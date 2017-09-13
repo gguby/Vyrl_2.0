@@ -156,7 +156,8 @@ class FanViewController: UIViewController {
     }
     
     @IBAction func createFanPage(_ sender: Any) {
-        self.pushView(storyboardName: "FanDetail", controllerName: "FanPageCreateViewController")
+        let vc = self.pushViewControllrer(storyboardName: "FanDetail", controllerName: "FanPageCreateViewController") as! FanPageCreateViewController
+        vc.delegate = self
     }
     
     @IBAction func moreFanPage(_ sender: UIButton) {

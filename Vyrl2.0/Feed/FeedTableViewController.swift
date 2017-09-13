@@ -28,6 +28,7 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
     var userId : Int!
     var fanPageId : Int!
     var isBottomRefresh = false
+    var isEnableUpload = true
     
     @IBOutlet weak var uploadLoadingView: UIView!
     @IBOutlet weak var bottomSpace: NSLayoutConstraint!
@@ -51,8 +52,10 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         
         self.initLoader()
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.feedView = self
+        if isEnableUpload {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.feedView = self
+        }
         
         self.getAllFeed()        
     }
@@ -172,6 +175,7 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         
         if self.articleArray.count > 0 {
             parameters["lastId"] = (self.articleArray.last?.idStr)!
+            parameters["createdAt"] = self.articleArray.last?.lastCreatedAt
         }
         
         url = self.getFeedType(parameters: parameters)
@@ -727,6 +731,8 @@ struct Article : Mappable {
     var isMyArticle : Bool!
     var isLike :Bool!
     
+    var lastCreatedAt : String!
+    
     init?(map: Map) {
         
     }
@@ -743,6 +749,7 @@ struct Article : Mappable {
         location <- map["location"]
         isBookMark <- map["bookmark"]
         isLike <- map["like"]
+        lastCreatedAt <- map["lastCreatedAt"]
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"

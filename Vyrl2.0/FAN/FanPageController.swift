@@ -64,6 +64,7 @@ class FanPageController : UIViewController {
         controller.feedType = .FANFEED
         controller.fanPageId = self.fanPageId
         controller.fanPageViewController = self
+        controller.isEnableUpload = true
         addChildViewController(controller)
         
         controller.view.frame.size.height = feedContainer.frame.height

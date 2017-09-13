@@ -99,6 +99,7 @@ class MyViewController: UIViewController{
         
         controller.feedType = feedType
         controller.userId = profileUserId
+        controller.isEnableUpload = false
         controller.removeFromParentViewController()
         controller.view.removeFromSuperview()
         

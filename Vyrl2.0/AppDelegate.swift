@@ -29,6 +29,7 @@ extension AppDelegate
         
         guard let gai = GAI.sharedInstance() else {
             assert(false, "Google Analytics not configured correctly")
+            return
         }
         gai.tracker(withTrackingId: Constants.GoogleAnalysis.kTrackingId)
         // Optional: automatically report uncaught exceptions.
