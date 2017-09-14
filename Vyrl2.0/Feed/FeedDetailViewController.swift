@@ -716,7 +716,7 @@ extension FeedDetailViewController : FeedDetailTableCellProtocol {
     
     func imageDidSelect(profileId : Int) {
         let storyboard = UIStoryboard(name: "Feed", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "FeedFullScreenViewController") as! FeedFullScreenViewController // or whatever it is
+        let vc = storyboard.instantiateViewController(withIdentifier: "FeedFullViewController") as! FeedFullViewController // or whatever it is
         vc.mediasArray = self.article?.medias
         
         self.navigationController?.pushViewController(vc, animated: true)
