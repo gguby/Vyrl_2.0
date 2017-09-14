@@ -639,6 +639,7 @@ class AVAsset : Copying {
         self.urlAsset = original.urlAsset
         self.editedData = original.editedData
         self.gifURL = original.gifURL
+        self.duration = original.duration
     }
 }
 
