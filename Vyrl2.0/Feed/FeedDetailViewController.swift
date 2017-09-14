@@ -848,21 +848,12 @@ class FeedDetailTableCell : UITableViewCell {
                 contentImageView = UIImageView()
             }
             
-            contentImageView.frame = CGRect.init(x: 0, y: 0, width: self.imageScrollView.frame.width, height: self.imageScrollView.frame.height)
+            let xPosition = self.imageScrollView.frame.width * CGFloat(i)
+            
+            contentImageView.frame = CGRect.init(x: xPosition, y: 0, width: self.imageScrollView.frame.width, height: self.imageScrollView.frame.height)
             let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
             contentImageView.isUserInteractionEnabled = true
             contentImageView.addGestureRecognizer(tapGestureRecognizer)
-            
-            if(article.medias[i].type == "VIDEO")
-            {
-                let playImage = UIImage.init(named: "icon_play_01")
-                let subImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: (playImage?.size.width)!, height: (playImage?.size.height)!))
-                subImageView.center = CGPoint.init(x: contentImageView.frame.size.width/2, y: contentImageView.frame.size.height/2)
-                subImageView.image = playImage
-                
-                contentImageView.addSubview(subImageView)
-                
-            }
             
             self.imageViewArray.append(contentImageView)
             
@@ -899,6 +890,17 @@ class FeedDetailTableCell : UITableViewCell {
                         
                         let xPosition = self.imageScrollView.frame.width * CGFloat(self.index)
                         self.imageViewArray[self.index].frame = CGRect.init(x: xPosition, y: 0, width: self.imageScrollView.frame.width, height: self.imageScrollView.frame.height)
+                        
+                        if(self.article.medias[self.index].type == "VIDEO")
+                        {
+                            let playImage = UIImage.init(named: "icon_play_01")
+                            let subImageView = UIImageView.init(frame: CGRect.init(x: xPosition, y: 0, width: (playImage?.size.width)!, height: (playImage?.size.height)!))
+                            subImageView.center = CGPoint.init(x: self.imageViewArray[self.index].frame.size.width/2, y: self.imageViewArray[self.index].frame.size.height/2)
+                            subImageView.image = playImage
+                            
+                            self.imageViewArray[self.index].addSubview(subImageView)
+                        } 
+                        
                 }
             }
       }
