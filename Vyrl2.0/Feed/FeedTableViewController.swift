@@ -35,6 +35,7 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
     @IBOutlet weak var loadingImage: UIImageView!
     
     var bottomView : UIView!
+    var refreshView : FeedPullLoaderView!
     
     var fanPageViewController : FanPageController!
     
@@ -60,8 +61,12 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         self.getAllFeed()        
     }
     
+    deinit {
+        self.tableView.removePullLoadableView(refreshView)
+    }
+    
     func setUpRefresh(){
-        let refreshView = FeedPullLoaderView()
+        refreshView = FeedPullLoaderView()
         refreshView.delegate = self
         self.tableView.addPullLoadableView(refreshView, type: .refresh)
         

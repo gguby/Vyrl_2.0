@@ -140,9 +140,7 @@ class FanPageCreateViewController: UIViewController,UIImagePickerControllerDeleg
                     upload.responseString { response in
                         if ((response.response?.statusCode)! == 200){
                             self.navigationController?.popViewController(animated: true)
-                            if(self.delegate != nil) {
-                                self.delegate.refresh()
-                            }
+                            self.delegate.refresh()
                         }
                     }
                 case .failure(let encodingError):

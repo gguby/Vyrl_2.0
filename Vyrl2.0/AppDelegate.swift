@@ -50,7 +50,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var feedView : FeedTableViewController!
     
     func goLogin(){
-        
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         let loginController = storyboard.instantiateInitialViewController()!
         let naviController = UINavigationController(rootViewController: loginController)

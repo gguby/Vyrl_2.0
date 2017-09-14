@@ -70,8 +70,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
                 
                 DispatchQueue.main.async {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let mainController : ViewController = storyboard.instantiateInitialViewController()! as! ViewController
-                    
+                    let mainController = storyboard.instantiateInitialViewController()!
                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     
                     let jsonData = json as! NSDictionary
@@ -80,11 +79,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
                     
                     LoginManager.sharedInstance.isExistFollower = isExistFollow
                     
-                    if ( isExistFollow == true ){
-                        mainController.selectedIndex = 3
-                    }
-                    
-                     appDelegate.window?.rootViewController = mainController
+                    appDelegate.window?.rootViewController = mainController
                 }
                 
             case .failure(let error):
