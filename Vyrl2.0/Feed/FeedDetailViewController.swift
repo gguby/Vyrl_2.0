@@ -49,9 +49,11 @@ class FeedDetailViewController: UIViewController{
             if (article?.isLike)! {
                 self.likeButton.setImage(UIImage.init(named: "icon_heart_01_on"), for: .normal)
                 self.likeButton.tag = 1
+                self.likeButton.setTitleColor(UIColor.ivLighterPurple, for: .normal)
             } else {
                 self.likeButton.setImage(UIImage.init(named: "icon_heart_01"), for: .normal)
                 self.likeButton.tag = 0
+                self.likeButton.setTitleColor(UIColor.ivGreyishBrown, for: .normal)
             }
         }
     }
@@ -59,7 +61,7 @@ class FeedDetailViewController: UIViewController{
     var commentLastId = 0
     
     var tapGesture : UITapGestureRecognizer!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -194,9 +196,11 @@ class FeedDetailViewController: UIViewController{
                 
                 if sender.tag == 0 {
                     sender.setImage(UIImage.init(named: "icon_heart_01_on"), for: .normal)
+                    self.likeButton.setTitleColor(UIColor.ivLighterPurple, for: .normal)
                     sender.tag = 1
                 }else {
                     sender.setImage(UIImage.init(named: "icon_heart_01"), for: .normal)
+                    self.likeButton.setTitleColor(UIColor.ivGreyishBrown, for: .normal)
                     sender.tag = 0
                 }
             case .failure(let error):
@@ -716,7 +720,7 @@ extension FeedDetailViewController : FeedDetailTableCellProtocol {
     
     func imageDidSelect(profileId : Int) {
         let storyboard = UIStoryboard(name: "Feed", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "FeedFullViewController") as! FeedFullViewController // or whatever it is
+        let vc = storyboard.instantiateViewController(withIdentifier: "FeedFullScreenViewController") as! FeedFullScreenViewController // or whatever it is
         vc.mediasArray = self.article?.medias
         
         self.navigationController?.pushViewController(vc, animated: true)
@@ -823,6 +827,10 @@ class FeedDetailTableCell : UITableViewCell {
     
     @IBOutlet weak var fanView: UIView!
     
+    var playerItem: AVPlayerItem?
+    var player: AVPlayer?
+    var playerLayer : AVPlayerLayer?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -897,6 +905,8 @@ class FeedDetailTableCell : UITableViewCell {
                             let subImageView = UIImageView.init(frame: CGRect.init(x: xPosition, y: 0, width: (playImage?.size.width)!, height: (playImage?.size.height)!))
                             subImageView.center = CGPoint.init(x: self.imageViewArray[self.index].frame.size.width/2, y: self.imageViewArray[self.index].frame.size.height/2)
                             subImageView.image = playImage
+                            subImageView.tag = self.index
+                            subImageView.isUserInteractionEnabled = true
                             
                             self.imageViewArray[self.index].addSubview(subImageView)
                         } 
@@ -904,6 +914,29 @@ class FeedDetailTableCell : UITableViewCell {
                 }
             }
       }
+    
+    func playButtonTapped(sender: UITapGestureRecognizer) {
+        if(sender.state == .ended) {
+            let tag : Int = (sender.view?.tag)!
+
+            let uri : URL = URL.init(string: self.article.medias[tag].url!)!
+            
+             if(self.imageViewArray[tag].layer.sublayers != nil) {
+                self.imageViewArray[tag].layer.sublayers?.removeAll()
+            }
+            
+            self.player?.pause()
+            
+            self.playerItem = AVPlayerItem.init(url: uri)
+            self.player = AVPlayer.init(playerItem: self.playerItem)
+
+            self.playerLayer = AVPlayerLayer(player: player)
+            self.imageViewArray[tag].layer.addSublayer(self.playerLayer!)
+            self.playerLayer?.frame = self.imageViewArray[tag].frame
+
+        }
+    }
+    
     
     @IBAction func profileButtonClick(_ sender: UIButton) {
         delegate.profileButtonDidSelect(profileId: self.profileId)
