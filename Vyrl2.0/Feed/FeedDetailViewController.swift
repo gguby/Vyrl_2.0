@@ -665,6 +665,12 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
                     cell.fanView.isHidden = true
                 }
                 
+                if(article?.isMyArticle == false) {
+                    cell.settingButton.isHidden = true
+                } else {
+                    cell.settingButton.isHidden = false
+                }
+                
                 cell.contentTextView.text = self.article?.content
                 cell.contentTextView.resolveHashTags()
                 cell.contentTextView.delegate = self
@@ -829,6 +835,7 @@ class FeedDetailTableCell : UITableViewCell {
     
     @IBOutlet weak var fanView: UIView!
     @IBOutlet weak var videoPlayButton: UIButton!
+    @IBOutlet weak var settingButton: UIButton!
     
     var playerItem: AVPlayerItem?
     var player: AVPlayer?
