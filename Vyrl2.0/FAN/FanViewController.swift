@@ -19,6 +19,8 @@ protocol ReCommendCellDelegate {
     func joinFanPage(cell : RecommendFanPageCell)
 }
 
+typealias History = (title: String, date: String)
+
 class FanViewController: UIViewController {
     
     @IBOutlet weak var joinFanpageCollectionView: UICollectionView!
@@ -41,6 +43,12 @@ class FanViewController: UIViewController {
     @IBOutlet weak var emptyLabel: UILabel!
     @IBOutlet weak var more: UIButton!
     
+    @IBOutlet weak var histroyView: UIView!
+    @IBOutlet weak var bottomHeight: NSLayoutConstraint!
+    @IBOutlet weak var historyTable: UITableView!
+    
+    var historyList = [History]()
+    
     var moreCount : Int = 1
     var joinFanPages = [FanPage]()
     var suggestFanPages = [SuggestFanPage]()
@@ -61,11 +69,15 @@ class FanViewController: UIViewController {
         
         self.recommandFanpageTableView.tableFooterView = UIView(frame: .zero)
         self.searchTable.tableFooterView = UIView(frame: .zero)
+        self.historyTable.tableFooterView = self.histroyView
+        
+        historyList.append(("나이스", "07.12"))
+        historyList.append(("11", "07.12"))
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         self.getMyFanPage()
-        
         self.getSuggesetFanPage()
     }
     
@@ -191,6 +203,8 @@ class FanViewController: UIViewController {
         
         self.present(alertController, animated: true, completion: nil)
     }
+    
+  
 }
 
 extension FanViewController : FanViewControllerDelegate {
@@ -308,6 +322,9 @@ extension FanViewController : UITableViewDelegate, UITableViewDataSource {
         if tableView == self.searchTable {
             return self.searchResults.count
         }
+        else if tableView == self.historyTable {
+            return historyList.count
+        }
         
         return self.suggestFanPages.count
     }
@@ -335,6 +352,14 @@ extension FanViewController : UITableViewDelegate, UITableViewDataSource {
             
             return cell
         }
+        else if tableView == self.historyTable {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "historyCell", for: indexPath) as! HistoryCell
+            
+            let history = self.historyList[indexPath.row]
+            cell.title.text = history.title
+            cell.date.text = history.date
+            return cell
+        }
         
         return UITableViewCell()
     }
@@ -344,7 +369,10 @@ extension FanViewController : UITableViewDelegate, UITableViewDataSource {
             let fanPage = self.searchResults[indexPath.row]
             let vc = self.pushViewControllrer(storyboardName: "Fan", controllerName: "FanPage") as! FanPageController
             vc.fanPageId = fanPage.fanPageId
-        }else {
+        }else if tableView == self.historyTable {
+        
+        }
+        else {
             let fanPage = self.suggestFanPages[indexPath.row]
             let vc = self.pushViewControllrer(storyboardName: "Fan", controllerName: "FanPage") as! FanPageController
             vc.fanPageId = fanPage.fanPageId
@@ -364,9 +392,12 @@ extension FanViewController : UISearchBarDelegate {
         if searchText.isEmpty {
             self.searchResults.removeAll()
             self.searchTable.reloadData()
+            self.historyTable.alpha = 1
             self.emptyLabel.alpha = 1
             return
         }
+        
+        self.historyTable.alpha = 0
         
         let uri = Constants.VyrlFanAPIURL.search(searchWord: searchText)
         
@@ -387,6 +418,15 @@ extension FanViewController : UISearchBarDelegate {
         }
     }
 
+}
+
+class HistoryCell : UITableViewCell {
+    
+    @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var date: UILabel!
+    @IBAction func remove(_ sender: Any) {
+    }
+    
 }
 
 struct FanPageArticle : Mappable {

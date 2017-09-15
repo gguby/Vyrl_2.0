@@ -194,7 +194,7 @@ class LoginManager{
         let fileName = "\(nickName).jpg"
 
         Alamofire.upload(multipartFormData: { (multipartFormData) in
-            if let imageData = UIImageJPEGRepresentation(profile, 0.25) {
+            if let imageData = UIImageJPEGRepresentation(profile, 1) {
                 multipartFormData.append(imageData, withName: "file", fileName: fileName, mimeType: "image/jpeg")
             }
         }, usingThreshold: UInt64.init(), to: URL(string: uri, parameters: parameters as! [String : String])!, method: .post, headers: getHeader(), encodingCompletion: {

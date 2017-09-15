@@ -427,7 +427,7 @@
                                 <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oDz-N2-r7w">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oDz-N2-r7w">
                                 <rect key="frame" x="0.0" y="294" width="414" height="442"/>
                                 <color key="backgroundColor" red="0.87450980392156863" green="0.87058823529411766" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
