@@ -327,7 +327,7 @@
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pmu-v4-emX">
                                                                     <rect key="frame" x="0.0" y="157" width="414" height="279"/>
                                                                     <connections>
-                                                                        <action selector="photoClick:" destination="QWh-2p-Qye" eventType="touchUpInside" id="POH-hd-A22"/>
+                                                                        <action selector="photoClick:" destination="PFc-q2-8d2" eventType="touchUpInside" id="gvC-7K-pu8"/>
                                                                     </connections>
                                                                 </button>
                                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="TFH-Uf-id7">

@@ -14,7 +14,10 @@ import GoogleMobileAds
 import FBAudienceNetwork
 
 @objc protocol FeedCellDelegate {
+    
     func didPressCell(sender: Any, cell : FeedTableCell)
+    
+    @objc optional func didPressPhoto(sender: Any, cell : FeedTableCell)
     @objc optional func setBookMark(cell : FeedTableCell)
     @objc optional func showFeedAlert(cell : FeedTableCell)
     @objc optional func showFeedShareAlert(cell : FeedTableCell)
@@ -226,6 +229,10 @@ class FeedTableCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    @IBAction func photoClick(_ sender: UIButton) {
+        delegate.didPressPhoto!(sender: sender, cell: self)
     }
     
     func reloadContext(){

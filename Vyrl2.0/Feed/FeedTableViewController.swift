@@ -144,10 +144,6 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    @IBAction func photoClick(_ sender: UIButton) {
-        self.pushView(storyboardName: "Feed", controllerName: "FeedFullScreenViewController")
-    }
 
     func getFeedType(parameters : [String:String]) -> URL! {
         
@@ -394,6 +390,15 @@ extension FeedTableViewController : UITextViewDelegate {
 }
 
 extension FeedTableViewController : FeedCellDelegate {
+    func didPressPhoto(sender: Any, cell : FeedTableCell) {
+        let storyboard = UIStoryboard(name: "Feed", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "FeedFullScreenViewController") as! FeedFullScreenViewController // or whatever it is
+        vc.mediasArray = cell.article?.medias
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+
+    }
+    
     func didPressCell(sender: Any, cell : FeedTableCell) {
         let vc : FeedDetailViewController = self.pushViewControllrer(storyboardName: "FeedDetail", controllerName: "FeedDetailViewController") as! FeedDetailViewController
         vc.articleId = cell.article?.id
