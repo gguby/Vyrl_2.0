@@ -808,7 +808,9 @@ protocol FeedDetailTableCellProtocol {
 class FeedDetailTableCell : UITableViewCell {
     var article : Article!
     var imageViewArray : [UIImageView] = []
-    var index : Int = 0;
+    var subScrollViewArray : [UIScrollView] = []
+    var lastRequestIndex : Int = 0;
+    var currentIndex : Int = 0;
     var profileId : Int!
     var delegate: FeedDetailTableCellProtocol!
     
@@ -826,6 +828,7 @@ class FeedDetailTableCell : UITableViewCell {
     @IBOutlet weak var followButton: UIButton!
     
     @IBOutlet weak var fanView: UIView!
+    @IBOutlet weak var videoPlayButton: UIButton!
     
     var playerItem: AVPlayerItem?
     var player: AVPlayer?
@@ -842,7 +845,7 @@ class FeedDetailTableCell : UITableViewCell {
     }
     
     func initImageVideo() {
-        self.index = 0
+        self.lastRequestIndex = 0
         
         for i in 0..<(article.medias.count) {
             var contentImageView : UIImageView
@@ -856,20 +859,21 @@ class FeedDetailTableCell : UITableViewCell {
                 contentImageView = UIImageView()
             }
             
-            let xPosition = self.imageScrollView.frame.width * CGFloat(i)
-            
-            contentImageView.frame = CGRect.init(x: xPosition, y: 0, width: self.imageScrollView.frame.width, height: self.imageScrollView.frame.height)
-            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-            contentImageView.isUserInteractionEnabled = true
-            contentImageView.addGestureRecognizer(tapGestureRecognizer)
-            
             self.imageViewArray.append(contentImageView)
+           
+            let subScrollView = UIScrollView()
+            subScrollView.frame = CGRect.init(x: 0, y: 0, width: self.imageScrollView.frame.width, height: self.imageScrollView.frame.height)
             
-            self.imageScrollView.contentSize.width = contentImageView.frame.width * CGFloat(i+1)
-            self.imageScrollView.addSubview(contentImageView)
+            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+            subScrollView.addGestureRecognizer(tapGestureRecognizer)
+           
+            self.subScrollViewArray.append(subScrollView)
+            self.imageScrollView.contentSize.width = self.imageScrollView.frame.width * CGFloat(i+1)
+            self.imageScrollView.addSubview(subScrollView)
         }
 
         self.requestImageVideo()
+        self.showVideoButton()
     }
     
     func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
@@ -880,7 +884,7 @@ class FeedDetailTableCell : UITableViewCell {
     func requestImageVideo() {
         
         var uri : URL
-        uri = URL.init(string: article.medias[index].imageUrl!)!
+        uri = URL.init(string: article.medias[lastRequestIndex].imageUrl!)!
         
         Alamofire.request(uri)
                 .downloadProgress(closure: { (progress) in
@@ -888,55 +892,50 @@ class FeedDetailTableCell : UITableViewCell {
                 }).responseData { response in
                     if let data = response.result.value {
                         if(uri.pathExtension == "gif") {
-                           (self.imageViewArray[self.index] as! FLAnimatedImageView).animatedImage = FLAnimatedImage.init(animatedGIFData: data)
+                           (self.imageViewArray[self.lastRequestIndex] as! FLAnimatedImageView).animatedImage = FLAnimatedImage.init(animatedGIFData: data)
                         } else {
-                            self.imageViewArray[self.index].image =  UIImage(data: data)!
+                            self.imageViewArray[self.lastRequestIndex].image =  UIImage(data: data)!
                         }
+                        self.imageViewArray[self.lastRequestIndex].contentMode = .scaleAspectFit
+                        self.imageViewArray[self.lastRequestIndex].frame = CGRect.init(x: 0, y: 0, width: self.imageScrollView.frame.width, height: self.imageScrollView.frame.height)
                         
+                        self.subScrollViewArray[self.lastRequestIndex].addSubview(self.imageViewArray[self.lastRequestIndex])
                         
-                        self.imageViewArray[self.index].contentMode = .scaleAspectFit
-                        
-                        let xPosition = self.imageScrollView.frame.width * CGFloat(self.index)
-                        self.imageViewArray[self.index].frame = CGRect.init(x: xPosition, y: 0, width: self.imageScrollView.frame.width, height: self.imageScrollView.frame.height)
-                        
-                        if(self.article.medias[self.index].type == "VIDEO")
-                        {
-                            let playImage = UIImage.init(named: "icon_play_01")
-                            let subImageView = UIImageView.init(frame: CGRect.init(x: xPosition, y: 0, width: (playImage?.size.width)!, height: (playImage?.size.height)!))
-                            subImageView.center = CGPoint.init(x: self.imageViewArray[self.index].frame.size.width/2, y: self.imageViewArray[self.index].frame.size.height/2)
-                            subImageView.image = playImage
-                            subImageView.tag = self.index
-                            subImageView.isUserInteractionEnabled = true
-                            
-                            self.imageViewArray[self.index].addSubview(subImageView)
-                        } 
-                        
+                        let xPosition = self.imageScrollView.frame.width * CGFloat(self.lastRequestIndex)
+                        self.subScrollViewArray[self.lastRequestIndex].frame = CGRect.init(x: xPosition, y: 0, width: self.imageScrollView.frame.width, height: self.imageScrollView.frame.height)
                 }
             }
       }
     
-    func playButtonTapped(sender: UITapGestureRecognizer) {
-        if(sender.state == .ended) {
-            let tag : Int = (sender.view?.tag)!
-
-            let uri : URL = URL.init(string: self.article.medias[tag].url!)!
-            
-             if(self.imageViewArray[tag].layer.sublayers != nil) {
-                self.imageViewArray[tag].layer.sublayers?.removeAll()
-            }
-            
-            self.player?.pause()
-            
-            self.playerItem = AVPlayerItem.init(url: uri)
-            self.player = AVPlayer.init(playerItem: self.playerItem)
-
-            self.playerLayer = AVPlayerLayer(player: player)
-            self.imageViewArray[tag].layer.addSublayer(self.playerLayer!)
-            self.playerLayer?.frame = self.imageViewArray[tag].frame
-
+    func showVideoButton() {
+        if(self.article.medias[currentIndex].type == "VIDEO")
+        {
+            self.videoPlayButton.isHidden = false
+        } else {
+            self.videoPlayButton.isHidden = true
         }
     }
     
+    @IBAction func playVideo(_ sender: UIButton) {
+        let uri : URL = URL.init(string: self.article.medias[currentIndex].url!)!
+        
+        if(self.imageViewArray[currentIndex].layer.sublayers != nil) {
+            self.imageViewArray[currentIndex].layer.sublayers?.removeAll()
+        }
+        
+        self.player?.pause()
+        
+        self.playerItem = AVPlayerItem.init(url: uri)
+        self.player = AVPlayer.init(playerItem: self.playerItem)
+        
+        self.playerLayer = AVPlayerLayer(player: player)
+        self.imageViewArray[currentIndex].layer.addSublayer(self.playerLayer!)
+        self.playerLayer?.frame = self.imageViewArray[currentIndex].frame
+        
+        self.player?.play()
+        
+        self.videoPlayButton.isHidden = true
+    }
     
     @IBAction func profileButtonClick(_ sender: UIButton) {
         delegate.profileButtonDidSelect(profileId: self.profileId)
@@ -947,15 +946,23 @@ class FeedDetailTableCell : UITableViewCell {
 
 extension FeedDetailTableCell : UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print("\(#function)")
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        print("\(#function)")
+        self.showVideoButton()
+        
         let page = Int(round(Double(scrollView.contentOffset.x) / Double(scrollView.bounds.size.width)))
+        self.currentIndex = page
         self.pageLabel.text =  String("\(page+1) / \(self.article.medias.count)")
         
-        if(page > self.index) {
-            self.index = page
+        if(page > self.lastRequestIndex) {
+            self.lastRequestIndex = page
             self.requestImageVideo()
         }
-        
     }
+
 }
 
 protocol FeedCommentTableCellProtocol {

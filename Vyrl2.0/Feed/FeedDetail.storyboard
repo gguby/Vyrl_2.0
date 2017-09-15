@@ -190,22 +190,47 @@
                                                                         <constraint firstItem="gGQ-av-SJL" firstAttribute="leading" secondItem="dQ4-9X-yzW" secondAttribute="trailing" constant="10" id="pRB-Tx-aaP"/>
                                                                     </constraints>
                                                                 </view>
-                                                                <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NE5-is-INP">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RkA-wT-oRE">
                                                                     <rect key="frame" x="0.0" y="88" width="375" height="375"/>
-                                                                    <color key="backgroundColor" red="0.96862745098039216" green="0.96470588235294119" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <subviews>
+                                                                        <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NE5-is-INP">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                                                            <color key="backgroundColor" red="0.96862745098039216" green="0.96470588235294119" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" secondItem="NE5-is-INP" secondAttribute="height" multiplier="1:1" id="JwD-4g-fJq"/>
+                                                                            </constraints>
+                                                                        </scrollView>
+                                                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NRB-4q-jnk">
+                                                                            <rect key="frame" x="167" y="167" width="40" height="40"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" constant="40" id="HZh-T6-riF"/>
+                                                                                <constraint firstAttribute="height" constant="40" id="eYo-hL-kIc"/>
+                                                                            </constraints>
+                                                                            <state key="normal" image="icon_play_01"/>
+                                                                            <connections>
+                                                                                <action selector="playVideo:" destination="CEQ-eM-Vvz" eventType="touchUpInside" id="ZIH-tD-UFO"/>
+                                                                            </connections>
+                                                                        </button>
+                                                                    </subviews>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" secondItem="NE5-is-INP" secondAttribute="height" multiplier="1:1" id="JwD-4g-fJq"/>
+                                                                        <constraint firstItem="NE5-is-INP" firstAttribute="leading" secondItem="RkA-wT-oRE" secondAttribute="leading" id="Pbh-k8-p9B"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="NE5-is-INP" secondAttribute="trailing" id="gKf-zK-DiF"/>
+                                                                        <constraint firstItem="NRB-4q-jnk" firstAttribute="centerY" secondItem="NE5-is-INP" secondAttribute="centerY" id="jV2-Zw-ELd"/>
+                                                                        <constraint firstItem="NE5-is-INP" firstAttribute="top" secondItem="RkA-wT-oRE" secondAttribute="top" id="ooP-lT-7Pe"/>
+                                                                        <constraint firstItem="NRB-4q-jnk" firstAttribute="centerX" secondItem="NE5-is-INP" secondAttribute="centerX" id="pjU-lW-zT0"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="NE5-is-INP" secondAttribute="bottom" id="ybb-xe-6xj"/>
                                                                     </constraints>
-                                                                </scrollView>
+                                                                </view>
                                                             </subviews>
                                                             <constraints>
+                                                                <constraint firstAttribute="bottom" secondItem="RkA-wT-oRE" secondAttribute="bottom" id="4Nx-dR-9nM"/>
                                                                 <constraint firstAttribute="trailing" secondItem="DbR-QL-0Gp" secondAttribute="trailing" id="5YX-1Y-ldI"/>
+                                                                <constraint firstAttribute="trailing" secondItem="RkA-wT-oRE" secondAttribute="trailing" id="6GI-Sd-g5B"/>
                                                                 <constraint firstItem="Pep-36-dpI" firstAttribute="leading" secondItem="Epo-AF-XyV" secondAttribute="leading" id="8YA-N2-HmK"/>
                                                                 <constraint firstAttribute="trailing" secondItem="Pep-36-dpI" secondAttribute="trailing" id="FJD-On-zmp"/>
-                                                                <constraint firstAttribute="trailing" secondItem="NE5-is-INP" secondAttribute="trailing" id="IJ5-V6-Us6"/>
-                                                                <constraint firstItem="NE5-is-INP" firstAttribute="top" secondItem="Pep-36-dpI" secondAttribute="bottom" id="RCH-Jj-1LL"/>
-                                                                <constraint firstAttribute="bottom" secondItem="NE5-is-INP" secondAttribute="bottom" id="nyd-Mm-dtL"/>
-                                                                <constraint firstItem="NE5-is-INP" firstAttribute="leading" secondItem="Epo-AF-XyV" secondAttribute="leading" id="qUq-F5-24v"/>
+                                                                <constraint firstItem="RkA-wT-oRE" firstAttribute="top" secondItem="Pep-36-dpI" secondAttribute="bottom" id="WAS-U0-vLh"/>
+                                                                <constraint firstItem="RkA-wT-oRE" firstAttribute="leading" secondItem="Epo-AF-XyV" secondAttribute="leading" id="mEz-WY-2CL"/>
                                                                 <constraint firstItem="DbR-QL-0Gp" firstAttribute="leading" secondItem="Epo-AF-XyV" secondAttribute="leading" id="yDs-LA-VaH"/>
                                                             </constraints>
                                                         </stackView>
@@ -384,6 +409,7 @@
                                             <outlet property="profileButton" destination="ldo-m3-AfZ" id="e49-hV-D5Q"/>
                                             <outlet property="shareCountButton" destination="K6k-YY-t81" id="gnB-Kj-1Dx"/>
                                             <outlet property="timeLabel" destination="ZTQ-w8-Hxe" id="yLX-Gq-9Av"/>
+                                            <outlet property="videoPlayButton" destination="NRB-4q-jnk" id="rzl-2O-54F"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Comment" rowHeight="117" id="Eif-gi-UD6" customClass="FeedCommentTableCell" customModule="Vyrl2_0" customModuleProvider="target">
@@ -751,6 +777,7 @@
         <image name="icon_emoji_01" width="21" height="21"/>
         <image name="icon_heart_01" width="14" height="20"/>
         <image name="icon_more_01" width="20" height="20"/>
+        <image name="icon_play_01" width="40" height="40"/>
         <image name="icon_reply_01" width="16" height="20"/>
         <image name="icon_share_01" width="17" height="20"/>
         <image name="tag_official_01" width="41" height="13"/>
