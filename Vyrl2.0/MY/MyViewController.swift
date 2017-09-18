@@ -172,6 +172,8 @@ class MyViewController: UIViewController{
                         if image?.isEmpty == false {
                             let url = URL.init(string: (image)!)
                             self.profileImage.af_setImage(withURL: url!)
+                        } else {
+                            self.profileImage.image = UIImage.init(named: "icon_user_03")
                         }
                         
                         if self.isMyProfile {

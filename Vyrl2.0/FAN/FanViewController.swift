@@ -466,7 +466,6 @@ extension FanViewController : UITableViewDelegate, UITableViewDataSource {
         self.saveHitory()
         self.historyTable.reloadData()
     }
-    
 }
 
 extension FanViewController : UISearchBarDelegate {
@@ -517,7 +516,6 @@ extension FanViewController : UISearchBarDelegate {
         
         self.search(searchText: searchText)
     }
-
 }
 
 class HistoryCell : UITableViewCell {

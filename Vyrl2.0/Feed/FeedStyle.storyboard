@@ -210,7 +210,7 @@
                                                                                         <constraint firstAttribute="width" constant="32" id="T40-Ve-sCA"/>
                                                                                         <constraint firstAttribute="height" constant="32" id="pdZ-6c-AG6"/>
                                                                                     </constraints>
-                                                                                    <state key="normal" title="Button" backgroundImage="border_circle_01"/>
+                                                                                    <state key="normal" backgroundImage="border_circle_01"/>
                                                                                     <userDefinedRuntimeAttributes>
                                                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                             <real key="value" value="16"/>
@@ -640,7 +640,7 @@
                                                                                         <constraint firstAttribute="height" constant="32" id="5QP-Vq-Gbd"/>
                                                                                         <constraint firstAttribute="width" constant="32" id="aOV-se-lkc"/>
                                                                                     </constraints>
-                                                                                    <state key="normal" title="Button" backgroundImage="button:85i-Jy-JcF:backgroundImage"/>
+                                                                                    <state key="normal" backgroundImage="button:85i-Jy-JcF:backgroundImage"/>
                                                                                     <userDefinedRuntimeAttributes>
                                                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                             <real key="value" value="16"/>
@@ -1121,7 +1121,7 @@
                                                                                         <constraint firstAttribute="height" constant="32" id="Qtn-rr-SvC"/>
                                                                                         <constraint firstAttribute="width" constant="32" id="ok8-rJ-ey4"/>
                                                                                     </constraints>
-                                                                                    <state key="normal" title="Button" backgroundImage="border_circle_01"/>
+                                                                                    <state key="normal" backgroundImage="border_circle_01"/>
                                                                                     <userDefinedRuntimeAttributes>
                                                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                             <real key="value" value="16"/>
@@ -1891,7 +1891,7 @@
                                                                                 <constraint firstAttribute="height" constant="32" id="K5q-CB-Y8w"/>
                                                                                 <constraint firstAttribute="width" constant="32" id="dJZ-lt-hsq"/>
                                                                             </constraints>
-                                                                            <state key="normal" title="Button" backgroundImage="border_circle_03"/>
+                                                                            <state key="normal" backgroundImage="border_circle_03"/>
                                                                         </button>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MEMEBOX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v0n-oI-mV8">
                                                                             <rect key="frame" x="57" y="0.0" width="196" height="17"/>

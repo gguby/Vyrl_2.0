@@ -113,8 +113,10 @@ class FeedTableCell: UITableViewCell {
             
             self.comment.setTitle(article?.commentCount, for: .normal)
 
-            if let url = URL.init(string:(article?.profile.imagePath)!) {
-                self.profileButton.af_setBackgroundImage(for: .normal, url: url)
+            if article?.profile.imagePath != nil {
+                if let url = URL.init(string:(article?.profile.imagePath)!) {
+                    self.profileButton.af_setBackgroundImage(for: .normal, url: url)
+                }
             }
             
             self.nickNameLabel.text = article?.profile.nickName

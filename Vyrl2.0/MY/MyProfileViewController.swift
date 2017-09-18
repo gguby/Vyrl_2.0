@@ -113,10 +113,18 @@ class MyProfileViewController: UIViewController, UIImagePickerControllerDelegate
     @IBAction func changeProfile(_ sender: UIButton) {
         let profile = self.photoView.imageView?.image
         
+        var keepStr = "KEEP"
+        if self.photoView.tag == 1 {
+            keepStr = "PATCH"
+        }else if self.photoView.tag == 2 {
+            keepStr = "DELETE"
+        }
+        
         let parameters : Parameters = [
             "nickName": nickNameField.text!,
             "homePageUrl": webURLField.text!,
             "selfIntro": introField.text!,
+            "fileStatus" : keepStr
             ]
         
         let fileName = "\(nickNameField.text!).jpg"
@@ -166,6 +174,8 @@ class MyProfileViewController: UIViewController, UIImagePickerControllerDelegate
                 if(jsonData["imagePath"] != nil) {
                     let url = NSURL(string: jsonData["imagePath"] as! String)
                     self.photoView.af_setImage(for: UIControlState.normal, url: url! as URL)
+                }else {
+                    self.photoView.setImage(UIImage.init(named: "icon_user_03"), for: UIControlState.normal)
                 }
                 
             case .failure(let error):
@@ -185,6 +195,7 @@ class MyProfileViewController: UIViewController, UIImagePickerControllerDelegate
         })
         let defaultProfileAction = UIAlertAction(title: "기본 이미지로 변경", style: .default, handler: { (action) -> Void in
             
+            self.photoView.tag = 2
             self.photoView.setImage(UIImage.init(named: "icon_user_03"), for: UIControlState.normal)
             
             self.dismiss(animated: true, completion: {
@@ -258,6 +269,7 @@ extension MyProfileViewController: SHViewControllerDelegate {
         // Filtered image will be returned here.
         
         photoView.setImage(image, for: UIControlState.normal)
+        photoView.tag = 1
         
         self.dismiss(animated:true, completion: nil)
     }
