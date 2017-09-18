@@ -19,7 +19,12 @@ protocol ReCommendCellDelegate {
     func joinFanPage(cell : RecommendFanPageCell)
 }
 
+protocol HistoryCellDelegate {
+    func remove(cell : HistoryCell)
+}
+
 typealias History = (title: String, date: String)
+typealias HistoryDict = [String:String]
 
 class FanViewController: UIViewController {
     
@@ -44,15 +49,17 @@ class FanViewController: UIViewController {
     @IBOutlet weak var more: UIButton!
     
     @IBOutlet weak var histroyView: UIView!
-    @IBOutlet weak var bottomHeight: NSLayoutConstraint!
     @IBOutlet weak var historyTable: UITableView!
     
+    @IBOutlet weak var historySwitch: UISwitch!
     var historyList = [History]()
     
     var moreCount : Int = 1
     var joinFanPages = [FanPage]()
     var suggestFanPages = [SuggestFanPage]()
     var searchResults = [FanPage]()
+    
+    var historyOn = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,9 +78,7 @@ class FanViewController: UIViewController {
         self.searchTable.tableFooterView = UIView(frame: .zero)
         self.historyTable.tableFooterView = self.histroyView
         
-        historyList.append(("나이스", "07.12"))
-        historyList.append(("11", "07.12"))
-        
+        self.loadHistory()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -110,6 +115,16 @@ class FanViewController: UIViewController {
         self.searchTable.reloadData()
         self.emptyLabel.alpha = 1
         searchBar.resignFirstResponder()
+    }
+    
+    @IBAction func clearHistory(_ sender: Any) {
+        self.clearHistory()
+    }
+    
+    @IBAction func historySwitchAction(_ sender: UISwitch) {
+        self.historyOn = sender.isOn
+        UserDefaults.standard.set(self.historyOn, forKey: "HistorySearch")
+        UserDefaults.standard.synchronize()
     }
     
     func enableEmptyView(){
@@ -228,6 +243,12 @@ extension FanViewController : ReCommendCellDelegate {
                 print(error)
             }
         }
+    }
+}
+
+extension FanViewController : HistoryCellDelegate {
+    func remove(cell: HistoryCell) {
+        self.removeHistory(key: cell.title.text!)
     }
 }
 
@@ -358,6 +379,7 @@ extension FanViewController : UITableViewDelegate, UITableViewDataSource {
             let history = self.historyList[indexPath.row]
             cell.title.text = history.title
             cell.date.text = history.date
+            cell.delegate = self
             return cell
         }
         
@@ -369,8 +391,23 @@ extension FanViewController : UITableViewDelegate, UITableViewDataSource {
             let fanPage = self.searchResults[indexPath.row]
             let vc = self.pushViewControllrer(storyboardName: "Fan", controllerName: "FanPage") as! FanPageController
             vc.fanPageId = fanPage.fanPageId
+            vc.delegate = self
+            
+            if self.historyOn == false {
+                return
+            }
+            
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MM.dd"
+            let dateString = formatter.string(from: Date())
+            
+            historyList.append((self.searchBar.text!, dateString))
+            
+            self.saveHitory()
+            
         }else if tableView == self.historyTable {
-        
+            let history = self.historyList[indexPath.row]
+            self.searchBar.text = history.title
         }
         else {
             let fanPage = self.suggestFanPages[indexPath.row]
@@ -379,6 +416,57 @@ extension FanViewController : UITableViewDelegate, UITableViewDataSource {
             vc.delegate = self
         }
     }
+
+    func serializeTuple(tuple: History) -> HistoryDict {
+        return [
+            "title" : tuple.title,
+            "date" : tuple.date
+        ]
+    }
+    
+    func deserializeDictionary(dictionary: HistoryDict) -> History {
+        return History(
+            dictionary["title"] as String!,
+            dictionary["date"] as String!
+        )
+    }
+    
+    func loadHistory() {
+        guard let array = UserDefaults.standard.array(forKey: "FanHistoryList") as? [HistoryDict] else { return }
+        
+        for dict in array {
+            self.historyList.append(self.deserializeDictionary(dictionary: dict))
+        }
+        
+        self.historyTable.reloadData()
+        
+        self.historyOn = UserDefaults.standard.bool(forKey: "HistorySearch")
+    }
+    
+    func saveHitory(){
+        var array = Array<Any>()
+        
+        for history in self.historyList {
+            array.append(self.serializeTuple(tuple: history))
+        }
+        
+        UserDefaults.standard.set(array, forKey: "FanHistoryList")
+        UserDefaults.standard.synchronize()
+    }
+    
+    func clearHistory(){
+        UserDefaults.standard.removeObject(forKey: "FanHistoryList")
+        UserDefaults.standard.synchronize()
+        self.historyList.removeAll()
+        self.historyTable.reloadData()
+    }
+    
+    func removeHistory(key : String){
+        self.historyList = self.historyList.filter{ $0.title != key }
+        self.saveHitory()
+        self.historyTable.reloadData()
+    }
+    
 }
 
 extension FanViewController : UISearchBarDelegate {
@@ -387,17 +475,13 @@ extension FanViewController : UISearchBarDelegate {
         return true
     }
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
-        if searchText.isEmpty {
-            self.searchResults.removeAll()
-            self.searchTable.reloadData()
-            self.historyTable.alpha = 1
-            self.emptyLabel.alpha = 1
-            return
-        }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         self.historyTable.alpha = 0
+        self.search(searchText: searchBar.text!)
+    }
+    
+    func search(searchText : String ){
         
         let uri = Constants.VyrlFanAPIURL.search(searchWord: searchText)
         
@@ -417,6 +501,22 @@ extension FanViewController : UISearchBarDelegate {
             self.searchTable.reloadData()
         }
     }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchText.isEmpty {
+            self.searchResults.removeAll()
+            self.searchTable.reloadData()
+            self.historyTable.alpha = 1
+            self.emptyLabel.alpha = 1
+            self.historyTable.reloadData()
+            return
+        }
+        
+        self.historyTable.alpha = 0
+        
+        self.search(searchText: searchText)
+    }
 
 }
 
@@ -424,9 +524,12 @@ class HistoryCell : UITableViewCell {
     
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var date: UILabel!
-    @IBAction func remove(_ sender: Any) {
-    }
     
+    var delegate : HistoryCellDelegate!
+    
+    @IBAction func remove(_ sender: Any) {
+        delegate.remove(cell: self)
+    }
 }
 
 struct FanPageArticle : Mappable {
