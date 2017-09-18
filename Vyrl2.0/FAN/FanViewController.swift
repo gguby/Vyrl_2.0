@@ -79,6 +79,9 @@ class FanViewController: UIViewController {
         self.historyTable.tableFooterView = self.histroyView
         
         self.loadHistory()
+        
+        self.historyOn = UserDefaults.standard.bool(forKey: "HistorySearch")
+        self.historySwitch.setOn(self.historyOn, animated: false)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -439,8 +442,6 @@ extension FanViewController : UITableViewDelegate, UITableViewDataSource {
         }
         
         self.historyTable.reloadData()
-        
-        self.historyOn = UserDefaults.standard.bool(forKey: "HistorySearch")
     }
     
     func saveHitory(){
