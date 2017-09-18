@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import GoogleSignIn
+import FBSDKLoginKit
 
 class LoginManager{
     
@@ -154,6 +155,11 @@ class LoginManager{
                 
                 if ( account?.service == "GOOGLE"){
                     GIDSignIn.sharedInstance().signOut()
+                }
+                
+                if ( account?.service == "FACEBOOK"){
+                    //facebook error code 304 
+                    FBSDKLoginManager().logOut()
                 }
                 
                 UserDefaults.standard.removeObject(forKey: self.cookie!)
