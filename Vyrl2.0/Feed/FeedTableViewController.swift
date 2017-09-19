@@ -741,6 +741,7 @@ struct Article : Mappable {
     var isBookMark : Bool!
     var isMyArticle : Bool!
     var isLike :Bool!
+    var openYn : Bool!
     
     var lastCreatedAt : String!
     
@@ -761,6 +762,7 @@ struct Article : Mappable {
         isBookMark <- map["bookmark"]
         isLike <- map["like"]
         lastCreatedAt <- map["lastCreatedAt"]
+        openYn <- map["openYn"]
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"

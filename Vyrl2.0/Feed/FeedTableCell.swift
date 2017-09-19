@@ -151,6 +151,10 @@ class FeedTableCell: UITableViewCell {
                 self.secondCommentNicknameButton.addTarget(self, action: #selector(showProfile(sender:)), for: .touchUpInside)
             }
             
+            if self.article?.openYn == false {
+                self.share.alpha = 0
+            }
+            
             self.share.setTitle(article?.shareCount, for: .normal)
             
             self.isBookMark = (article?.isBookMark)!
