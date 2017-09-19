@@ -10,6 +10,7 @@ import Foundation
 import Alamofire
 import GoogleSignIn
 import FBSDKLoginKit
+import TwitterKit
 
 class LoginManager{
     
@@ -158,8 +159,12 @@ class LoginManager{
                 }
                 
                 if ( account?.service == "FACEBOOK"){
-                    //facebook error code 304 
+                    //facebook error code 304
                     FBSDKLoginManager().logOut()
+                }
+                
+                if ( account?.service == "TWITTER") {
+                    Twitter.sharedInstance().sessionStore.logOutUserID((account?.accessToken)!)
                 }
                 
                 UserDefaults.standard.removeObject(forKey: self.cookie!)
