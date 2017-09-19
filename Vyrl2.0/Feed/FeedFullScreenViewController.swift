@@ -11,6 +11,8 @@ import AVFoundation
 import Alamofire
 import ReachabilitySwift
 import Photos
+import NukeFLAnimatedImagePlugin
+import FLAnimatedImage
 
 class FeedFullScreenViewController: UIViewController {
     
@@ -144,7 +146,15 @@ class FeedFullScreenViewController: UIViewController {
     
     func initImageVideo() {
         for i in 0..<(self.mediasArray.count)  {
-            let imageView = UIImageView()
+            var imageView : UIImageView
+            let url = URL.init(string: self.mediasArray[i].imageUrl)
+            if(url?.pathExtension == "gif"){
+                imageView = FLAnimatedImageView()
+            } else {
+                
+                imageView = UIImageView()
+            }
+
             self.imageViewArray.append(imageView)
             let contentScrollView = UIScrollView()
             contentScrollView.frame = CGRect.init(x: 0, y: 0, width: self.mainScrollView.frame.width, height: self.mainScrollView.frame.height)
@@ -171,12 +181,15 @@ class FeedFullScreenViewController: UIViewController {
                 
             }).responseData { response in
                 if let data = response.result.value {
-                    print("finish")
+                    if(uri.pathExtension == "gif") {
+                        (self.imageViewArray[self.index] as! FLAnimatedImageView).animatedImage = FLAnimatedImage.init(animatedGIFData: data)
+                    } else {
+                        self.imageViewArray[self.index].image =  UIImage(data: data)!
+                    }
                     
                     let image = UIImage(data: data)
                     self.imageArray.append(image!)
                     
-                    self.imageViewArray[self.index].image = image
                     self.imageViewArray[self.index].contentMode = .scaleAspectFit
                     
                     let height = self.contentScrollViewArray[self.index].frame.width * ((image?.size.height)! / (image?.size.width)!)
