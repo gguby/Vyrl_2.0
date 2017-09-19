@@ -113,6 +113,8 @@ class FeedTableCell: UITableViewCell {
             
             self.comment.setTitle(article?.commentCount, for: .normal)
 
+            self.profileButton.addTarget(self, action: #selector(showProfile(sender:)), for: .touchUpInside)
+            self.profileButton.tag = (article?.profile.id)!
             if article?.profile.imagePath != nil {
                 if let url = URL.init(string:(article?.profile.imagePath)!) {
                     self.profileButton.af_setBackgroundImage(for: .normal, url: url)
