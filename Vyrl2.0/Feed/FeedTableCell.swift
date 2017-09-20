@@ -107,7 +107,20 @@ class FeedTableCell: UITableViewCell {
                     
                     self.photo.addSubview(subImageView)
                 }
+                
+                if(url.pathExtension == "gif")
+                {
+                    let gifImage = UIImage.init(named: "icon_gif_01")
+                    let subImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: (gifImage?.size.width)!, height: (gifImage?.size.height)!))
+                    subImageView.center = CGPoint.init(x: self.photo.frame.size.width/2, y: self.photo.frame.size.height/2)
+                    subImageView.image = gifImage
+                    
+                    self.photo.addSubview(subImageView)
+                }
+
             }
+            
+            
             
             self.cntLike.setTitle(article?.likeCount, for: .normal)
             
@@ -357,6 +370,22 @@ extension FeedTableCell: UICollectionViewDataSource, UICollectionViewDelegate {
             
             cell.imageView.addSubview(subImageView)
         }
+        
+        if(URL.init(string: media.imageUrl)?.pathExtension == "gif")
+        {
+            var gifImage : UIImage!
+            if((self.article?.medias.count)! > 2){
+                gifImage = UIImage.init(named: "icon_gif_02")
+            } else {
+                gifImage = UIImage.init(named: "icon_gif_01")
+            }
+            let subImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: (gifImage?.size.width)!, height: (gifImage?.size.height)!))
+            subImageView.center = CGPoint.init(x: cell.frame.size.width/2, y: cell.frame.size.height/2)
+            subImageView.image = gifImage
+            
+            cell.imageView.addSubview(subImageView)
+        }
+
 
         
         return cell
