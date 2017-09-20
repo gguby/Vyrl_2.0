@@ -81,7 +81,7 @@ class MyViewController: UIViewController{
         }
         
         if self.postCount == 0 {
-            self.emptyView.alpha = 1
+            self.emptyView.alpha = 0
         }else {
             self.emptyView.alpha = 0
         }
@@ -95,8 +95,10 @@ class MyViewController: UIViewController{
         let storyboard = UIStoryboard(name: "PostCollectionViewController", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "PostCollection")
         
-        controller.removeFromParentViewController()
-        controller.view.removeFromSuperview()
+        self.childViewControllers.last?.willMove(toParentViewController: nil)
+        self.childViewControllers.last?.view.removeFromSuperview()
+        self.childViewControllers.last?.removeFromParentViewController()
+
         
         addChildViewController(controller)
         containerView.addSubview(controller.view)
@@ -111,7 +113,10 @@ class MyViewController: UIViewController{
         controller.userId = profileUserId
         controller.isEnableUpload = false
         controller.removeFromParentViewController()
-        controller.view.removeFromSuperview()
+        
+        self.childViewControllers.last?.willMove(toParentViewController: nil)
+        self.childViewControllers.last?.view.removeFromSuperview()
+        self.childViewControllers.last?.removeFromParentViewController()
         
         controller.view.frame.size.height = containerView.frame.height
         
