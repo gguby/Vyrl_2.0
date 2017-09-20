@@ -404,6 +404,7 @@ extension FanViewController : UITableViewDelegate, UITableViewDataSource {
             formatter.dateFormat = "MM.dd"
             let dateString = formatter.string(from: Date())
             
+            self.historyList = self.historyList.filter{ $0.title != self.searchBar.text! }
             historyList.append((self.searchBar.text!, dateString))
             
             self.saveHitory()

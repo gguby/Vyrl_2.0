@@ -58,10 +58,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
     }
     
+    func isAppAlreadyLaunchedOnce()->Bool{
+        let defaults = UserDefaults.standard
+        
+        if let isAppAlreadyLaunchedOnce = defaults.string(forKey: "isAppAlreadyLaunchedOnce"){
+            print("App already launched : \(isAppAlreadyLaunchedOnce)")
+            return true
+        }else{
+            defaults.set(true, forKey: "isAppAlreadyLaunchedOnce")
+            print("App launched first time")
+            
+            return false
+        }
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
         NetworkActivityLogger.shared.startLogging()
         NetworkActivityLogger.shared.level = NetworkActivityLoggerLevel.debug
+        
+        if self.isAppAlreadyLaunchedOnce() == false {
+            UserDefaults.standard.set(true, forKey: "HistorySearch")
+        }
         
         setupGAI()
         

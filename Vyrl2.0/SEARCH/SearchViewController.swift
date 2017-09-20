@@ -30,10 +30,17 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var searchTable: UITableView!
+    @IBOutlet weak var historyTable: UITableView!
+    @IBOutlet weak var historyView: UIView!
+    @IBOutlet weak var historySwitch: UISwitch!
+    
+    var historyOn = false
+    
+    var historyList = [History]()
     
     var searchObj : SearchObj!
     var tagList = [Tag]()
-    var userList = [Profile]()
+    var userList = [SearchUser]()
     var fanPageList = [FanPage]()
     
     override func viewDidLoad() {
@@ -47,8 +54,18 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         
         searchTable.dataSource = self
         searchTable.delegate = self
+        
+        self.historyTable.dataSource = self
+        self.historyTable.delegate = self
 
-        self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)        
+        self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        
+        self.historyTable.tableFooterView = self.historyView
+        
+        self.loadHistory()
+        
+        self.historyOn = UserDefaults.standard.bool(forKey: "HistorySearch")
+        self.historySwitch.setOn(self.historyOn, animated: false)
     }
     
     func initSearchBar()
@@ -66,6 +83,15 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         searchBar.delegate = self
     }
     
+    @IBAction func switchAction(_ sender: UISwitch) {
+        self.historyOn = sender.isOn
+        UserDefaults.standard.set(self.historyOn, forKey: "HistorySearch")
+        UserDefaults.standard.synchronize()
+    }
+    
+    @IBAction func removeAllHitory(_ sender: UIButton) {
+        self.clearHistory()
+    }
     
     @IBAction func hiddenAction(_ sender: Any) {
         btnCancel.isHidden = true
@@ -76,13 +102,17 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         self.placeHolder.isHidden = false
         
         searchBar.resignFirstResponder()
+        
+        self.tagList.removeAll()
+        self.fanPageList.removeAll()
+        self.userList.removeAll()
     }
     
     @IBOutlet weak var selectedLine1: UIView!
     @IBOutlet weak var selectedLine2: UIView!
     @IBOutlet weak var selectedLine3: UIView!
     
-    var selectedIdx = 0
+    var selectedIdx = 1
     
     @IBAction func tagAction(_ sender: UIButton) {
         sender.setTitleColor(UIColor.ivLighterPurple, for: .normal)
@@ -99,6 +129,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         searchTable.reloadData()
         
         placeHolder.isHidden = true
+        
+        self.loadHistory()
     }
     
     @IBAction func userAction(_ sender: UIButton) {
@@ -116,6 +148,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         searchTable.reloadData()
         
         placeHolder.isHidden = true
+        
+        self.loadHistory()
     }
     
     @IBAction func fanAction(_ sender: UIButton) {
@@ -133,10 +167,77 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         searchTable.reloadData()
         
         placeHolder.isHidden = true
+        
+        self.loadHistory()
+    }
+    
+    func serializeTuple(tuple: History) -> HistoryDict {
+        return [
+            "title" : tuple.title,
+            "date" : tuple.date
+        ]
+    }
+    
+    func deserializeDictionary(dictionary: HistoryDict) -> History {
+        return History(
+            dictionary["title"] as String!,
+            dictionary["date"] as String!
+        )
+    }
+    
+    func historyKey() -> String {
+        if selectedIdx == 1 {
+            return "TagHistoryList"
+        }else if selectedIdx == 2 {
+            return "UserHistoryList"
+        }else {
+            return "FanHistoryList"
+        }
+    }
+    
+    func loadHistory() {
+        
+        self.historyList.removeAll()
+        
+        guard let array = UserDefaults.standard.array(forKey: self.historyKey()) as? [HistoryDict] else {
+        
+            self.historyTable.reloadData()
+            return
+        }
+        
+        for dict in array {
+            self.historyList.append(self.deserializeDictionary(dictionary: dict))
+        }
+        
+        self.historyTable.reloadData()
+    }
+    
+    func saveHitory(){
+        var array = Array<Any>()
+        
+        for history in self.historyList {
+            array.append(self.serializeTuple(tuple: history))
+        }
+        
+        UserDefaults.standard.set(array, forKey: self.historyKey())
+        UserDefaults.standard.synchronize()
+    }
+    
+    func clearHistory(){
+        UserDefaults.standard.removeObject(forKey: self.historyKey())
+        UserDefaults.standard.synchronize()
+        self.historyList.removeAll()
+        self.historyTable.reloadData()
+    }
+    
+    func removeHistory(key : String){
+        self.historyList = self.historyList.filter{ $0.title != key }
+        self.saveHitory()
+        self.historyTable.reloadData()
     }
 }
 
-extension SearchViewController : UITableViewDelegate, UITableViewDataSource {
+extension SearchViewController : UITableViewDelegate, UITableViewDataSource , HistoryCellDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
@@ -153,7 +254,8 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource {
             }
             
             return 0
-
+        }else if tableView == self.historyTable {
+            return self.historyList.count
         }
         return 3
     }
@@ -175,6 +277,9 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource {
             
             return ret
         }
+        else if tableView == self.historyTable {
+            return 47
+        }
         return 55
     }
     
@@ -187,6 +292,13 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource {
                 return cell
             case 2:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "usercell") as! UserCell
+                
+                let user = self.userList[indexPath.row]
+                
+                cell.profile.af_setImage(withURL: URL.init(string: user.profileImagePath)!)
+                cell.title.text = user.nickName
+                cell.followers.text = "\(user.followerCount!)"
+                
                 return cell
             case 3:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "fancell") as! FanCell
@@ -206,6 +318,15 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource {
             default:
                 break
             }
+        }else if tableView == self.historyTable {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "historyCell", for: indexPath) as! HistoryCell
+            
+            let history = self.historyList[indexPath.row]
+            cell.title.text = history.title
+            cell.date.text = history.date
+            cell.delegate = self
+            return cell
+
         }
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "FollowCell") as! FollowCell
@@ -213,6 +334,32 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource {
         }
         
         return UITableViewCell()
+    }
+    
+    func remove(cell: HistoryCell) {
+        self.removeHistory(key: cell.title.text!)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView == self.searchTable {
+            
+            if self.historyOn == false {
+                return
+            }
+            
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MM.dd"
+            let dateString = formatter.string(from: Date())
+            
+            self.historyList = self.historyList.filter{ $0.title != self.searchBar.text! }
+            historyList.append((self.searchBar.text!, dateString))
+            
+            self.saveHitory()
+
+        }else if tableView == self.historyTable {
+            let history = self.historyList[indexPath.row]
+            self.searchBar.text = history.title
+        }
     }
 }
 
@@ -237,6 +384,13 @@ extension SearchViewController : UICollectionViewDelegate, UICollectionViewDataS
 
 extension SearchViewController {
     
+    func clearAll(){
+        self.tagList.removeAll()
+        self.userList.removeAll()
+        self.fanPageList.removeAll()
+        self.searchTable.reloadData()
+    }
+    
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         
         searchTableView.isHidden = false
@@ -248,15 +402,29 @@ extension SearchViewController {
 
         selectedIdx = 1
         
+        self.historyTable.alpha = 1
+        self.historyTable.reloadData()
+        
         return true
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         if searchText.isEmpty {
-            self.searchTable.reloadData()
+
+            self.clearAll()
+            
+            self.searchTable.alpha = 0
+            self.historyTable.alpha = 1
+            self.historyTable.reloadData()
+            
+            self.placeHolder.isHidden = false
+
             return
         }
+        
+        self.searchTable.alpha = 1
+        self.historyTable.alpha = 0
         
         let uri = Constants.VyrlSearchURL.search(searchWord: searchText)
         
@@ -369,7 +537,7 @@ struct Tag : Mappable {
     }
 }
 
-struct SearchUser {
+struct SearchUser  : Mappable{
     
     var followerCount : Int!
     var level : String!
@@ -382,8 +550,8 @@ struct SearchUser {
     
     mutating func mapping(map: Map){
         followerCount <- map["followerCount"]
-        level <- map["postCount"]
-        nickName <- map["nickName"]
+        level <- map["level"]
+        nickName <- map["nickname"]
         profileImagePath <- map["profileImagePath"]
         userId <- map["userId"]
     }
@@ -393,7 +561,7 @@ struct SearchObj : Mappable {
     
     var fanPageList : [FanPage]!
     var tagList : [Tag]!
-    var userList : [Profile]!
+    var userList : [SearchUser]!
     
     init?(map: Map) {
         
@@ -404,6 +572,5 @@ struct SearchObj : Mappable {
         tagList <- map["tagList"]
         userList <- map["userList"]
     }
-
 }
 
