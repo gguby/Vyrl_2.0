@@ -6,12 +6,11 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "img_splash@2x.png",
+      "filename" : "border_circle_06@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "img_splash@3x.png",
       "scale" : "3x"
     }
   ],
