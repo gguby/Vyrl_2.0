@@ -311,7 +311,7 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource , Hi
                     }
                 }
                 
-                cell.members.text = "\(fanPage.cntMember!) + members"
+                cell.members.text = "\(fanPage.cntMember!) members"
                 cell.title.text = fanPage.pageName
                 cell.intro.text = fanPage.pageInfo
                 return cell
@@ -340,8 +340,25 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource , Hi
         self.removeHistory(key: cell.title.text!)
     }
     
+    func showVC(idx : Int){
+        if selectedIdx == 1 {
+            
+        }else if selectedIdx == 2 {
+            let user = self.userList[idx]
+            
+            let otherProfile = self.pushViewControllrer(storyboardName: "Search", controllerName: "OtherProfile") as! OtherProfileViewController
+            otherProfile.profileUserId = user.userId
+        }else {
+            let fanpage = self.fanPageList[idx]
+            let vc = self.pushViewControllrer(storyboardName: "Fan", controllerName: "FanPage") as! FanPageController
+            vc.fanPageId = fanpage.fanPageId
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == self.searchTable {
+            
+            self.showVC(idx: indexPath.row)
             
             if self.historyOn == false {
                 return
@@ -359,6 +376,8 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource , Hi
         }else if tableView == self.historyTable {
             let history = self.historyList[indexPath.row]
             self.searchBar.text = history.title
+            
+            self.search(text: self.searchBar.text!)
         }
     }
 }
@@ -400,12 +419,32 @@ extension SearchViewController {
         
         placeHolder.isHidden = false
 
-        selectedIdx = 1
-        
-        self.historyTable.alpha = 1
-        self.historyTable.reloadData()
-        
+        if (searchBar.text?.isEmpty)!  {
+            self.historyTable.alpha = 1
+            self.historyTable.reloadData()
+        }
         return true
+    }
+    
+    func search(text:String){
+        self.searchTable.alpha = 1
+        self.historyTable.alpha = 0
+        
+        let uri = Constants.VyrlSearchURL.search(searchWord: text)
+        
+        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseObject { (response: DataResponse<SearchObj>) in
+            self.searchObj = response.result.value
+            
+            self.tagList.removeAll()
+            self.userList.removeAll()
+            self.fanPageList.removeAll()
+            
+            self.tagList = self.searchObj.tagList
+            self.userList = self.searchObj.userList
+            self.fanPageList = self.searchObj.fanPageList
+            
+            self.searchTable.reloadData()
+        }
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -423,25 +462,9 @@ extension SearchViewController {
             return
         }
         
-        self.searchTable.alpha = 1
-        self.historyTable.alpha = 0
-        
-        let uri = Constants.VyrlSearchURL.search(searchWord: searchText)
-        
-        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseObject { (response: DataResponse<SearchObj>) in
-            self.searchObj = response.result.value
-            
-            self.tagList.removeAll()
-            self.userList.removeAll()
-            self.fanPageList.removeAll()
-    
-            self.tagList = self.searchObj.tagList
-            self.userList = self.searchObj.userList
-            self.fanPageList = self.searchObj.fanPageList
-            
-            self.searchTable.reloadData()
-        }
+        self.search(text: searchText)
     }
+    
     func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
 
         return true

@@ -107,7 +107,6 @@ class OtherProfileViewController: UIViewController {
                             self.followButton.setImage(UIImage.init(named: "icon_check_05_off"), for: .normal)
                             self.followButton.tag = 0
                         }
-                        
                     }
                 }
                 

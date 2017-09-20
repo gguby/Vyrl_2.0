@@ -45,7 +45,7 @@ class FanPageController : UIViewController {
     
     @IBOutlet weak var writeBtn: UIButton!
     
-    var delegate : FanViewControllerDelegate!
+    var delegate : FanViewControllerDelegate?
     
     override func viewDidLoad() {
         
@@ -285,7 +285,7 @@ class FanPageController : UIViewController {
             case .success(let json):
                 self.showToast(str: "가입되었습니다.")
                 self.reloadFanPage()
-                self.delegate.refresh()
+                self.delegate?.refresh()
                 print(json)
             case .failure(let error):
                 print(error)
@@ -304,7 +304,7 @@ class FanPageController : UIViewController {
                 
                 self.showToast(str: "탈퇴되었습니다")
                 self.reloadFanPage()
-                self.delegate.refresh()
+                self.delegate?.refresh()
                 print(json)
                 
             case .failure(let error):
