@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Alamofire
 
 class FeedViewController: UIViewController {
     
@@ -25,12 +25,38 @@ class FeedViewController: UIViewController {
         LoginManager.sharedInstance.checkPush(viewConroller: self)
         
         embedController = EmbedController.init(rootViewController: self)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.checkExistFollow()
+    }
+    
+    func checkExistFollow() {
+        let uri = Constants.VyrlAPIConstants.baseURL + "/follows/exists"
         
-        self.setupFeedTableView()
+        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: LoginManager.sharedInstance.getHeader()).responseJSON(completionHandler: {
+            response in switch response.result {
+            case .success(let json):
+                
+                DispatchQueue.main.async {
+                    let jsonData = json as! NSDictionary
+                    
+                    let isExistFollow = jsonData["exist"] as! Bool
+                    
+                    LoginManager.sharedInstance.isExistFollower = isExistFollow
+                    
+                    self.setupFeedTableView()
+                }
+                
+            case .failure(let error):
+                print(error)
+            }
+        })
+
     }
     
     func setupFeedTableView (){
-        if LoginManager.sharedInstance.isExistFollower == false {
+        if LoginManager.sharedInstance.isExistFollower == true {
             let storyboard = UIStoryboard(name: "FeedStyle", bundle: nil)
             let controller = storyboard.instantiateViewController(withIdentifier: "feedTable")
             
@@ -110,6 +136,11 @@ class EmbedController {
     
     func append(viewController: UIViewController) {
         if let rootViewController = self.rootViewController {
+            for controller in controllers {
+                controller.view.removeFromSuperview()
+                controller.removeFromParentViewController()
+            }
+            controllers.removeAll()
             controllers.append(viewController)
             rootViewController.addChildViewController(viewController)
             rootViewController.view.addSubview(viewController.view)
