@@ -21,6 +21,8 @@ class MyViewController: UIViewController{
     
     @IBOutlet weak var containerView: UIView!
     
+    @IBOutlet weak var emptyView: UIView!
+    
     var accountList  = [Account]()
     
     var isMyProfile = true
@@ -30,6 +32,8 @@ class MyViewController: UIViewController{
             isMyProfile = false
         }
     }
+    
+    var postCount = 0
     
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var nickNameLabel: UILabel!
@@ -74,6 +78,12 @@ class MyViewController: UIViewController{
             self.bottomSpace.constant = 0
             self.accountSelect.isHidden = true
             self.bookMakrBtn.isHidden = true
+        }
+        
+        if self.postCount == 0 {
+            self.emptyView.alpha = 1
+        }else {
+            self.emptyView.alpha = 0
         }
     }
     
