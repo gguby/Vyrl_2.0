@@ -555,17 +555,6 @@
                                             <action selector="focusKeyboard:" destination="f99-qz-saJ" eventType="touchUpInside" id="U5m-fw-Jgi"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QKw-5K-DGx" customClass="SmallButton" customModule="Vyrl2_0" customModuleProvider="target">
-                                        <rect key="frame" x="103" y="1" width="45" height="45"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="45" id="cup-dS-EoT"/>
-                                            <constraint firstAttribute="width" constant="45" id="eSL-Rb-aYi"/>
-                                        </constraints>
-                                        <state key="normal" image="icon_camera_03"/>
-                                        <connections>
-                                            <action selector="showMedia:" destination="f99-qz-saJ" eventType="touchUpInside" id="6Mz-Io-rXI"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IB1-SV-tmG" customClass="SmallButton" customModule="Vyrl2_0" customModuleProvider="target">
                                         <rect key="frame" x="53" y="1" width="45" height="45"/>
                                         <constraints>
@@ -577,6 +566,49 @@
                                             <action selector="openMap:" destination="f99-qz-saJ" eventType="touchUpInside" id="2xs-3J-tLG"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QKw-5K-DGx" userLabel="Button3" customClass="SmallButton" customModule="Vyrl2_0" customModuleProvider="target">
+                                        <rect key="frame" x="103" y="1" width="45" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="cup-dS-EoT"/>
+                                            <constraint firstAttribute="width" constant="45" id="eSL-Rb-aYi"/>
+                                        </constraints>
+                                        <state key="normal" image="icon_camera_03"/>
+                                        <connections>
+                                            <action selector="showMedia:" destination="f99-qz-saJ" eventType="touchUpInside" id="6Mz-Io-rXI"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K81-y6-18d" userLabel="openYnView">
+                                        <rect key="frame" x="153" y="1" width="101.5" height="45"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NTd-1Y-Bum">
+                                                <rect key="frame" x="12" y="12" width="21" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="OcE-h5-1i4"/>
+                                                    <constraint firstAttribute="width" constant="21" id="Xb9-l6-EB8"/>
+                                                </constraints>
+                                                <state key="normal" image="icon_check_08_off"/>
+                                                <connections>
+                                                    <action selector="openYnCheck:" destination="f99-qz-saJ" eventType="touchUpInside" id="amc-d7-zFN"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="전체 공개" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dBa-qC-dEr">
+                                                <rect key="frame" x="38" y="17" width="48.5" height="11.5"/>
+                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
+                                                <color key="textColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="dBa-qC-dEr" secondAttribute="bottom" constant="16.5" id="B2H-ta-8W4"/>
+                                            <constraint firstAttribute="trailing" secondItem="dBa-qC-dEr" secondAttribute="trailing" constant="15" id="CSl-ZX-Ff6"/>
+                                            <constraint firstItem="NTd-1Y-Bum" firstAttribute="leading" secondItem="K81-y6-18d" secondAttribute="leading" constant="12" id="IZZ-GT-JyX"/>
+                                            <constraint firstItem="dBa-qC-dEr" firstAttribute="top" secondItem="K81-y6-18d" secondAttribute="top" constant="17" id="LQl-dB-hjB"/>
+                                            <constraint firstItem="dBa-qC-dEr" firstAttribute="leading" secondItem="NTd-1Y-Bum" secondAttribute="trailing" constant="5" id="VKQ-5b-H9e"/>
+                                            <constraint firstAttribute="height" constant="45" id="Weo-FI-GiC"/>
+                                            <constraint firstItem="NTd-1Y-Bum" firstAttribute="top" secondItem="K81-y6-18d" secondAttribute="top" constant="12" id="hY4-f8-ncb"/>
+                                        </constraints>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lym-uu-ieX" customClass="SmallButton" customModule="Vyrl2_0" customModuleProvider="target">
                                         <rect key="frame" x="334" y="1" width="41" height="45"/>
                                         <constraints>
@@ -592,11 +624,13 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="QKw-5K-DGx" firstAttribute="leading" secondItem="IB1-SV-tmG" secondAttribute="trailing" constant="5" id="00m-bY-kI9"/>
+                                    <constraint firstItem="K81-y6-18d" firstAttribute="top" secondItem="sUu-ql-f22" secondAttribute="top" constant="1" id="1t0-mw-XKG"/>
                                     <constraint firstItem="Rry-VY-1Cv" firstAttribute="top" secondItem="fyI-Eq-wzR" secondAttribute="bottom" id="9oI-dh-nX7"/>
                                     <constraint firstItem="fyI-Eq-wzR" firstAttribute="width" secondItem="sUu-ql-f22" secondAttribute="width" id="CjQ-hD-uCE"/>
                                     <constraint firstItem="fyI-Eq-wzR" firstAttribute="leading" secondItem="sUu-ql-f22" secondAttribute="leading" id="DAy-GQ-Cc5"/>
                                     <constraint firstAttribute="trailing" secondItem="lym-uu-ieX" secondAttribute="trailing" id="GJR-3u-eLv"/>
                                     <constraint firstItem="lym-uu-ieX" firstAttribute="top" secondItem="fyI-Eq-wzR" secondAttribute="bottom" id="IM1-JF-DtP"/>
+                                    <constraint firstItem="K81-y6-18d" firstAttribute="leading" secondItem="QKw-5K-DGx" secondAttribute="trailing" constant="5" id="MRc-rA-AAw"/>
                                     <constraint firstItem="fyI-Eq-wzR" firstAttribute="top" secondItem="sUu-ql-f22" secondAttribute="top" id="QXI-rp-JMP"/>
                                     <constraint firstItem="QKw-5K-DGx" firstAttribute="top" secondItem="fyI-Eq-wzR" secondAttribute="bottom" id="RRu-71-1vE"/>
                                     <constraint firstItem="Rry-VY-1Cv" firstAttribute="leading" secondItem="sUu-ql-f22" secondAttribute="leading" constant="3" id="T77-92-RsS"/>
@@ -855,9 +889,12 @@
                     </view>
                     <connections>
                         <outlet property="addBtn" destination="W9N-jM-UvC" id="DwC-FU-ncU"/>
+                        <outlet property="checkBtn" destination="NTd-1Y-Bum" id="Kat-Xs-xzP"/>
                         <outlet property="collectionView" destination="XbQ-ln-B6k" id="56I-f6-qfq"/>
                         <outlet property="mediaTable" destination="rFF-3o-sGE" id="6TH-4B-Osm"/>
                         <outlet property="mediaTitle" destination="si3-0V-6NF" id="Ps7-yQ-4Xi"/>
+                        <outlet property="openYnLabel" destination="dBa-qC-dEr" id="QWr-nj-L2A"/>
+                        <outlet property="openYnView" destination="K81-y6-18d" id="pQK-v8-co2"/>
                         <outlet property="titleView" destination="6SD-6u-5AR" id="8HS-w3-CUl"/>
                         <outlet property="topView" destination="sUu-ql-f22" id="z9I-lg-qe2"/>
                         <outlet property="upDownToggle" destination="eFS-Ai-g3c" id="WWm-tI-2td"/>
@@ -875,7 +912,7 @@
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LBn-BY-fGh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="LBn-BY-fGh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -896,6 +933,7 @@
         <image name="icon_camera_03" width="21" height="21"/>
         <image name="icon_cancel_05" width="17" height="17"/>
         <image name="icon_cancel_06" width="20" height="20"/>
+        <image name="icon_check_08_off" width="21" height="21"/>
         <image name="icon_map_01_off" width="21" height="21"/>
         <image name="icon_map_02_on" width="13" height="16"/>
         <image name="icon_mute_01_on" width="16" height="12"/>

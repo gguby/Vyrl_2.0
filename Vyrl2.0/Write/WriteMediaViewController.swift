@@ -17,7 +17,7 @@ protocol WriteMdeiaDelegate : class {
     func closeKeyboard()
     func focusTextView()
     func showFullScreen()
-    func completeAddMedia(array : [AVAsset])
+    func completeAddMedia(array : [AVAsset], isOpenYn : Bool)
     func getSeletedArray() -> [AVAsset]
     func albumName(title:String)
 }
@@ -33,6 +33,10 @@ class WriteMediaViewConroller : UIViewController {
     @IBOutlet weak var upDownToggle: SmallButton!
     @IBOutlet weak var mediaTitle: UILabel!
     
+    @IBOutlet weak var openYnLabel: UILabel!
+    @IBOutlet weak var checkBtn: UIButton!
+    @IBOutlet weak var openYnView: UIView!
+    
     var avAssetIdentifiers = [String]()
     var mediaArray = [PHAssetCollection]()
 
@@ -41,6 +45,8 @@ class WriteMediaViewConroller : UIViewController {
     weak var delegate : WriteMdeiaDelegate?
     
     var currentSubType : PHAssetCollectionSubtype!
+    
+    var isOpenYn = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +74,8 @@ class WriteMediaViewConroller : UIViewController {
         }
         
         self.enabledAddBtn(enabled: false)
+        
+        self.openYnView.alpha = self.isOpenYn ? 1 : 0
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,6 +83,18 @@ class WriteMediaViewConroller : UIViewController {
         
         if PhotoAutorizationStatusCheck() {
             self.getPhotosAndVideos(self.currentSubType)
+        }
+    }
+    
+    @IBAction func openYnCheck(_ sender: UIButton) {
+        if sender.tag == 0 {
+            sender.tag = 1
+            sender.setImage(UIImage.init(named: "icon_check_08_on"), for: .normal)
+            self.openYnLabel.textColor = UIColor.ivLighterPurple
+        } else {
+            sender.tag = 0
+            sender.setImage(UIImage.init(named: "icon_check_08_off"), for: .normal)
+            self.openYnLabel.textColor = UIColor.ivGreyish
         }
     }
     
@@ -134,7 +154,7 @@ class WriteMediaViewConroller : UIViewController {
     
     @IBAction func addMedia(_ sender: SmallButton) {
         
-        delegate?.completeAddMedia(array: selectedAssetArray)
+        delegate?.completeAddMedia(array: selectedAssetArray, isOpenYn: (self.checkBtn.tag == 1))
         
         DispatchQueue.main.async {
             self.selectedAssetArray.removeAll()

@@ -41,6 +41,8 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
     var fanPage : FanPage?
     var fanPagePostDelegate : FanPagePostDelegate!
     
+    var isOpenYn = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -98,15 +100,15 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
         
         let fanPageId = (self.fanPage?.fanPageId)!
         
-        let parameters : [String:String] = [
+        let parameters : Parameters = [
             "fanPageId" : "\(fanPageId)",
             "content": textView.text,
-            "openYn" : "false"
+            "openYn" : String(self.isOpenYn)
         ]
         
         let uri = Constants.VyrlFanAPIURL.FANPAGEPOST
         
-        let queryUrl = URL.init(string: uri, parameters: parameters)
+        let queryUrl = URL.init(string: uri, parameters: parameters as! [String : String])
         
         if ( self.fanPage?.cntPost == 0 ){
             self.fanPagePostDelegate.upload(query: queryUrl!, array: self.selectedAssetArray)
@@ -150,6 +152,10 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
         let storyboard = UIStoryboard(name:"Write", bundle: nil)
         let mediaVC = storyboard.instantiateViewController(withIdentifier: "media") as! WriteMediaViewConroller
         mediaVC.delegate = self
+        
+        if self.fanPage != nil {
+            mediaVC.isOpenYn = true
+        }
         
         modalNavigationController = FeedNavigationController(rootViewController: mediaVC)
         navigationController?.addChildViewController(modalNavigationController)
@@ -312,7 +318,9 @@ extension WriteViewController : WriteMdeiaDelegate, UIImagePickerControllerDeleg
         self.present(controller, animated: true, completion: nil)
     }
     
-    func completeAddMedia(array : [AVAsset]) {
+    func completeAddMedia(array: [AVAsset], isOpenYn: Bool) {
+        
+        self.isOpenYn = isOpenYn
         
         self.setupMediaView(hidden: true)
         
@@ -346,7 +354,7 @@ extension WriteViewController : WriteMdeiaDelegate, UIImagePickerControllerDeleg
             
             let array :[AVAsset] = [asset]
             
-            self.completeAddMedia(array: array)
+            self.completeAddMedia(array: array, isOpenYn: self.isOpenYn)
         }
     }
     
@@ -398,7 +406,7 @@ extension WriteViewController: SHViewControllerDelegate {
             
             let array :[AVAsset] = [asset]
             
-            self.completeAddMedia(array: array)
+            self.completeAddMedia(array: array, isOpenYn: self.isOpenYn)
         }
     }
     
