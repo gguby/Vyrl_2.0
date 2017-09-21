@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vaU-cB-7TB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vaU-cB-7TB">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="AppleSDGothicNeo.ttc">
+            <string>AppleSDGothicNeo-Medium</string>
+            <string>AppleSDGothicNeo-Regular</string>
+            <string>AppleSDGothicNeo-SemiBold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Write View Controller-->
         <scene sceneID="jE1-bQ-Z6k">
@@ -134,7 +142,7 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jyr-0I-PUN" customClass="SmallButton" customModule="Vyrl2_0" customModuleProvider="target">
-                                                                    <rect key="frame" x="115" y="11" width="20" height="20"/>
+                                                                    <rect key="frame" x="123" y="3" width="20" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="20" id="atQ-6K-meb"/>
                                                                         <constraint firstAttribute="height" constant="20" id="wSx-oV-Ia6"/>
@@ -216,7 +224,7 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pHr-QB-e6h" customClass="SmallButton" customModule="Vyrl2_0" customModuleProvider="target">
-                                                                    <rect key="frame" x="115" y="11" width="20" height="22"/>
+                                                                    <rect key="frame" x="123" y="3" width="20" height="22"/>
                                                                     <state key="normal" image="icon_cancel_06"/>
                                                                     <connections>
                                                                         <action selector="remove:" destination="l4u-ni-1qQ" eventType="touchUpInside" id="oby-K4-Y6c"/>
@@ -364,14 +372,14 @@
                                         <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qNF-Lp-FGp">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qNF-Lp-FGp">
                                         <rect key="frame" x="325" y="0.0" width="50" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="6zX-ZP-Iju"/>
                                             <constraint firstAttribute="height" constant="45" id="CDz-ys-iVS"/>
                                         </constraints>
                                         <inset key="contentEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="Button" image="sample_barcode"/>
+                                        <state key="normal" image="icon_gps_01_on"/>
                                         <connections>
                                             <action selector="refreshLocation:" destination="Sw5-H8-65r" eventType="touchUpInside" id="rTa-Nb-S8n"/>
                                         </connections>
@@ -399,7 +407,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SAW-iu-VD1" id="FUM-7v-lHg">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="54.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_map_02_on" translatesAutoresizingMaskIntoConstraints="NO" id="c27-Zw-90h">
@@ -459,7 +467,7 @@
                                         <rect key="frame" x="0.0" y="83" width="375" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GfM-9u-cr8" id="9w1-rA-Dnd">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="54.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6D4-qu-4Mx">
@@ -544,7 +552,7 @@
                                             <constraint firstAttribute="height" constant="1" id="QBv-BD-LeZ"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rry-VY-1Cv" customClass="SmallButton" customModule="Vyrl2_0" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rry-VY-1Cv">
                                         <rect key="frame" x="3" y="1" width="45" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="45" id="KRu-ii-6Tl"/>
@@ -555,7 +563,7 @@
                                             <action selector="focusKeyboard:" destination="f99-qz-saJ" eventType="touchUpInside" id="U5m-fw-Jgi"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IB1-SV-tmG" customClass="SmallButton" customModule="Vyrl2_0" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IB1-SV-tmG">
                                         <rect key="frame" x="53" y="1" width="45" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="45" id="Cbg-ah-5Ln"/>
@@ -566,7 +574,7 @@
                                             <action selector="openMap:" destination="f99-qz-saJ" eventType="touchUpInside" id="2xs-3J-tLG"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QKw-5K-DGx" userLabel="Button3" customClass="SmallButton" customModule="Vyrl2_0" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QKw-5K-DGx" userLabel="Button3">
                                         <rect key="frame" x="103" y="1" width="45" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="cup-dS-EoT"/>
@@ -732,13 +740,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_camera_01" translatesAutoresizingMaskIntoConstraints="NO" id="flG-Uq-8xp">
-                                                    <rect key="frame" x="42" y="35" width="39" height="32"/>
+                                                    <rect key="frame" x="42" y="27" width="39" height="32"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="32" id="UVh-Yd-IGK"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사진 촬영" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xb2-mG-kSz">
-                                                    <rect key="frame" x="37.5" y="78" width="49" height="16"/>
+                                                    <rect key="frame" x="37.5" y="70" width="49" height="16"/>
                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="13"/>
                                                     <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -768,7 +776,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="124" height="124"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nuh-WJ-TrZ" userLabel="uncheckView">
-                                                    <rect key="frame" x="90" y="14" width="20" height="20"/>
+                                                    <rect key="frame" x="98" y="6" width="20" height="20"/>
                                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="9xq-YC-vy6"/>
@@ -776,7 +784,7 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FFm-0Z-rKq">
-                                                    <rect key="frame" x="90" y="14" width="20" height="20"/>
+                                                    <rect key="frame" x="98" y="6" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="9tk-PJ-IiD"/>
                                                         <constraint firstAttribute="height" constant="20" id="qKd-gq-7zM"/>
@@ -818,7 +826,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="74"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2co-30-Kc4" id="0hf-YG-rjE">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="73.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="C7T-VW-psq">
@@ -913,7 +921,6 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="LBn-BY-fGh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -934,12 +941,12 @@
         <image name="icon_cancel_05" width="17" height="17"/>
         <image name="icon_cancel_06" width="20" height="20"/>
         <image name="icon_check_08_off" width="21" height="21"/>
+        <image name="icon_gps_01_on" width="20" height="20"/>
         <image name="icon_map_01_off" width="21" height="21"/>
         <image name="icon_map_02_on" width="13" height="16"/>
         <image name="icon_mute_01_on" width="16" height="12"/>
         <image name="icon_play_03" width="5" height="8"/>
         <image name="icon_txt_01_off" width="21" height="21"/>
         <image name="icon_write_01" width="28" height="28"/>
-        <image name="sample_barcode" width="85" height="25"/>
     </resources>
 </document>
