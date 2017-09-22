@@ -360,15 +360,11 @@ extension FeedTableCell: UICollectionViewDataSource, UICollectionViewDelegate {
         }
         
         cell.imageView.af_setImage(withURL: URL(string: media.imageUrl)!)
-        
+        cell.iconImageView.image = nil
         if(self.article?.medias[indexPath.row].type == "VIDEO")
         {
             let playImage = UIImage.init(named: "icon_play_01")
-            let subImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: (playImage?.size.width)!, height: (playImage?.size.height)!))
-            subImageView.center = CGPoint.init(x: cell.frame.size.width/2, y: cell.frame.size.height/2)
-            subImageView.image = playImage
-            
-            cell.imageView.addSubview(subImageView)
+            cell.iconImageView.image = playImage
         }
         
         if(URL.init(string: media.imageUrl)?.pathExtension == "gif")
@@ -379,11 +375,8 @@ extension FeedTableCell: UICollectionViewDataSource, UICollectionViewDelegate {
             } else {
                 gifImage = UIImage.init(named: "icon_gif_01")
             }
-            let subImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: (gifImage?.size.width)!, height: (gifImage?.size.height)!))
-            subImageView.center = CGPoint.init(x: cell.frame.size.width/2, y: cell.frame.size.height/2)
-            subImageView.image = gifImage
             
-            cell.imageView.addSubview(subImageView)
+             cell.iconImageView.image = gifImage
         }
 
 
@@ -417,6 +410,7 @@ class BoxCell : UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var dimView: UIView!
     @IBOutlet weak var mediaCount: UILabel!
+    @IBOutlet weak var iconImageView: UIImageView!
 }
 
 
