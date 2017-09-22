@@ -226,9 +226,6 @@ class FeedTableCell: UITableViewCell {
         if(self.contentTextView != nil) {
             self.contentTextView.textContainerInset = UIEdgeInsets.zero
             self.contentTextView.textContainer.lineFragmentPadding = 0
-            
-//            self.contentTextView.textContainer.maximumNumberOfLines = 3
-//            self.contentTextView.textContainer.lineBreakMode = NSLineBreakMode.byTruncatingTail            
         }
         
         self.followBtn.addTarget(self, action: #selector(followUser(sender:)), for: .touchUpInside)
@@ -250,6 +247,13 @@ class FeedTableCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        if self.photo != nil {
+            self.photo.image = nil
+        }
     }
     
     @IBAction func photoClick(_ sender: UIButton) {
@@ -411,6 +415,12 @@ class BoxCell : UICollectionViewCell {
     @IBOutlet weak var dimView: UIView!
     @IBOutlet weak var mediaCount: UILabel!
     @IBOutlet weak var iconImageView: UIImageView!
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.imageView.image = nil
+    }
+
 }
 
 

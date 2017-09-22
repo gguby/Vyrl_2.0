@@ -273,64 +273,62 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         var fileName : String!
         
         self.uploadHidden(hidden: false)
-        
-        Alamofire.upload(multipartFormData: { (multipartFormData) in
-            
-            var count = 1
-            
-            for asset in array {
+         Alamofire.upload(multipartFormData: { (multipartFormData) in
+                var count = 1
                 
-                if asset.type == .photo {
-                    fileName = "\(count)" + ".jpg"
-                    
-                    if let imageData = asset.mediaData {
-                        multipartFormData.append(imageData, withName: "files", fileName: fileName, mimeType: "image/jpg")
-                    }
-                } else if asset.type == .gif {
-                    fileName = "\(count)" + ".gif"
-                    if let imageData = asset.mediaData {
-                        multipartFormData.append(imageData, withName: "files", fileName: fileName, mimeType: "image/gif")
-                    }
-                }else {
-                    fileName = "\(count)" + ".mpeg"
-                    
-                    if let imageData = asset.mediaData {
-                        multipartFormData.append(imageData, withName: "files", fileName: fileName, mimeType: "video/mpeg")
-                    }
-                }
-                
-                count = count + 1
-            }
-            
-        }, usingThreshold: UInt64.init(), to: query, method: .post, headers: Constants.VyrlAPIConstants.getHeader(), encodingCompletion:
-            {
-                encodingResult in
-                switch encodingResult {
-                case .success(let upload, _, _):
-                    
-                    upload.uploadProgress(closure: { (progress) in
-                    })
-                    
-                    upload.responseString { response in
-
-                        if ((response.response?.statusCode)! == 200){
-                            if self.feedType != .FANFEED {
-                                self.tabBarController?.selectedIndex = 0
-                                
-                            }else {
-                                completion!()
-                            }
-                            self.getAllFeed()
-                            self.uploadHidden(hidden: true)
-                        }
+                for asset in array {
+                    if asset.type == .photo {
+                        fileName = "\(count)" + ".jpg"
                         
+                        if let imageData = asset.mediaData {
+                            multipartFormData.append(imageData, withName: "files", fileName: fileName, mimeType: "image/jpg")
+                        }
+                    } else if asset.type == .gif {
+                        fileName = "\(count)" + ".gif"
+                        if let imageData = asset.mediaData {
+                            multipartFormData.append(imageData, withName: "files", fileName: fileName, mimeType: "image/gif")
+                        }
+                    }else {
+                        fileName = "\(count)" + ".mpeg"
+                        
+                        if let imageData = asset.mediaData {
+                            multipartFormData.append(imageData, withName: "files", fileName: fileName, mimeType: "video/mpeg")
+                        }
                     }
-                case .failure(let encodingError):
-                    self.uploadHidden(hidden: true)
-                    print(encodingError.localizedDescription)
+                    
+                    count = count + 1
                 }
-        })
-    }
+                
+            }, usingThreshold: UInt64.init(), to: query, method: .post, headers: Constants.VyrlAPIConstants.getHeader(), encodingCompletion:
+                {
+                    encodingResult in
+                    
+                    switch encodingResult {
+                        case .success(let upload, _, _):
+                            
+                            upload.uploadProgress(closure: { (progress) in
+                            })
+                            
+                            upload.responseString { response in
+                                
+                                if ((response.response?.statusCode)! == 200){
+                                    if self.feedType != .FANFEED {
+                                        self.tabBarController?.selectedIndex = 0
+                                        
+                                    }else {
+                                        completion!()
+                                    }
+                                    self.getAllFeed()
+                                    self.uploadHidden(hidden: true)
+                                }
+                            }
+                        case .failure(let encodingError):
+                            self.uploadHidden(hidden: true)
+                            print(encodingError.localizedDescription)
+                        }
+            })
+        }
+    
 }
 
 extension FeedTableViewController : UITableViewDelegate, UITableViewDataSource {

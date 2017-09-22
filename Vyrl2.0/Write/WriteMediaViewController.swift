@@ -420,9 +420,11 @@ class MediaPhotoCell : UICollectionViewCell {
             fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
             
             let requestOptions = PHImageRequestOptions()
-            requestOptions.isSynchronous = true
+            requestOptions.isSynchronous = false
             requestOptions.deliveryMode = .fastFormat
             requestOptions.resizeMode = .fast
+            
+            let photoSize = self.photo.frame.size
             
             if let id = assetID {
                 
@@ -451,15 +453,19 @@ class MediaPhotoCell : UICollectionViewCell {
                         }
                     }
                     
-                    manager.requestImage(for: asset, targetSize: self.photo.frame.size, contentMode: .aspectFill, options: requestOptions, resultHandler: {
-                        
-                        image,error  in
-                        
-                        self.photo.image = image
-                        
-                        if error != nil {
-                        }
-                    })
+                    DispatchQueue.global().async {
+                        manager.requestImage(for: asset, targetSize: photoSize, contentMode: .aspectFill, options: requestOptions, resultHandler: {
+                            
+                            image,error  in
+                            
+                            DispatchQueue.main.async {
+                               self.photo.image = image
+                            }
+                            
+                            if error != nil {
+                            }
+                        })
+                    }
                 }
                 
                 if asset.mediaType == .video {
@@ -471,22 +477,27 @@ class MediaPhotoCell : UICollectionViewCell {
                     self.asset = AVAsset(type: .video, identifier: id)
                     self.asset?.duration = duration
                     
-                    manager.requestImage(for: asset, targetSize: self.photo.frame.size, contentMode: .aspectFill, options: requestOptions, resultHandler: {
+                    DispatchQueue.global().async {
+                        manager.requestImage(for: asset, targetSize: photoSize, contentMode: .aspectFill, options: requestOptions, resultHandler: {
+                            
+                            image,error  in
+                            
+                            DispatchQueue.main.async {
+                                if error != nil {
+                                    self.photo.image = image
+                                }
+                            }
+                        })
                         
-                        image,error  in
-                        
-                        if error != nil {
-                            self.photo.image = image
-                        }
-                    })
-                    
-                    manager.requestAVAsset(forVideo: asset, options: PHVideoRequestOptions(), resultHandler: {(avAsset, audioMix, info) -> Void in
-                        if let asset = avAsset as? AVURLAsset {
-      
-                            self.asset?.urlAsset = asset
-                        }
-                    })
-
+                        manager.requestAVAsset(forVideo: asset, options: PHVideoRequestOptions(), resultHandler: {(avAsset, audioMix, info) -> Void in
+                            if let asset = avAsset as? AVURLAsset {
+                                
+                                DispatchQueue.main.async {
+                                    self.asset?.urlAsset = asset
+                                }
+                            }
+                        })
+                    }
                 }
             }
         }
@@ -594,18 +605,12 @@ class AVAsset : Copying {
         guard let asset = fetchResult.firstObject
             else { return  }
         
-        if asset.mediaType == .image {
-            
-            manager.requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: requestOptions, resultHandler: {
-                
-                image,error  in
-                
-                self.photo = image
-                
-                if error != nil {
-                }
-            })
-        }
+        manager.requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: requestOptions, resultHandler: {
+            image,error  in
+            self.photo = image
+            if error != nil {
+            }
+        })
     }
     
     func removeAudioFromVideo(){
