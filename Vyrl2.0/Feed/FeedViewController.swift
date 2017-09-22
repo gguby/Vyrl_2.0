@@ -25,12 +25,10 @@ class FeedViewController: UIViewController {
         LoginManager.sharedInstance.checkPush(viewConroller: self)
         
         embedController = EmbedController.init(rootViewController: self)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
+        
         self.checkExistFollow()
     }
-    
+
     func checkExistFollow() {
         let uri = Constants.VyrlAPIConstants.baseURL + "/follows/exists"
         
@@ -52,7 +50,6 @@ class FeedViewController: UIViewController {
                 print(error)
             }
         })
-
     }
     
     func setupFeedTableView (){
