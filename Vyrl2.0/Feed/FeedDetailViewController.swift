@@ -88,7 +88,11 @@ class FeedDetailViewController: UIViewController{
     
     @IBAction func likeListButtonClick(_ sender: UIButton) {
         print("like")
-        self.pushView(storyboardName: "Feed", controllerName: "FeedLikeUserListViewController")
+        let storyboard = UIStoryboard(name: "Feed", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "FeedLikeUserListViewController") as! FeedLikeUserListViewController // or whatever it is
+       vc.articleId =  self.articleId
+        
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func shareListButtonClick(_ sender: UIButton) {

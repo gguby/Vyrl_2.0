@@ -14,6 +14,7 @@ class FeedLikeUserListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var likeUserArray = [[String : Any]]()
+    var articleId : Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +31,7 @@ class FeedLikeUserListViewController: UIViewController {
     func requestLikeUser() {
         likeUserArray.removeAll()
         
-        let uri = Constants.VyrlFeedURL.usersFeedLike(articleId: 17)
+        let uri = Constants.VyrlFeedURL.usersFeedLike(articleId: self.articleId)
         
         Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: LoginManager.sharedInstance.getHeader()).responseString(completionHandler: {
             response in
