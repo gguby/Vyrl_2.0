@@ -610,7 +610,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="57"/>
                                                                     <subviews>
                                                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jJi-gU-PHZ" userLabel="like view">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
+                                                                            <rect key="frame" x="0.0" y="-18" width="414" height="0.0"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="NCT_Dream님, 엑소디오xoxo님 외 203명이 좋아합니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5DO-lt-xP9">
                                                                                     <rect key="frame" x="15" y="18" width="384" height="16"/>
@@ -718,7 +718,7 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XlJ-8I-bN3" userLabel="Fan View">
-                                                                            <rect key="frame" x="0.0" y="3.6666666666666665" width="414" height="0.0"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
                                                                             <subviews>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="imageView:XOo-60-p1g:image" translatesAutoresizingMaskIntoConstraints="NO" id="XOo-60-p1g">
                                                                                     <rect key="frame" x="15" y="18.666666666666671" width="32" height="12.999999999999986"/>
@@ -1485,7 +1485,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="57"/>
                                                                     <subviews>
                                                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rl0-At-sL3" userLabel="like view">
-                                                                            <rect key="frame" x="0.0" y="-5.3333333333333321" width="414" height="0.0"/>
+                                                                            <rect key="frame" x="0.0" y="-23.333333333333332" width="414" height="0.0"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="NCT_Dream님, 엑소디오xoxo님 외 203명이 좋아합니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Jb-Zv-2di">
                                                                                     <rect key="frame" x="15" y="18" width="384" height="16"/>

@@ -99,7 +99,12 @@ PODS:
   - RxAlamofire/Core (3.0.3):
     - Alamofire (~> 4.0)
     - RxSwift (~> 3.0)
-  - RxSwift (3.5.0)
+  - RxCocoa (3.6.1):
+    - RxSwift (~> 3.6)
+  - RxDataSources (1.0.4):
+    - RxCocoa (~> 3.0)
+    - RxSwift (~> 3.0)
+  - RxSwift (3.6.1)
   - Sharaku (1.0.2)
   - SwiftyJSON (3.1.4)
   - TOCropViewController (2.0.12)
@@ -131,6 +136,9 @@ DEPENDENCIES:
   - Nuke-FLAnimatedImage-Plugin
   - ReachabilitySwift
   - RxAlamofire
+  - RxCocoa (~> 3.0)
+  - RxDataSources (~> 1.0)
+  - RxSwift (~> 3.0)
   - Sharaku
   - SwiftyJSON
   - TOCropViewController
@@ -173,13 +181,15 @@ SPEC CHECKSUMS:
   ObjectMapper: 65abcfd9a61cf7396cbd14a4fb22fddfcc46577e
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   RxAlamofire: 5eb39188c4917ad98127c0ecb4878a61b7517003
-  RxSwift: 18ee9d78b45edb3b0b7e79916b47a116e6dbc842
+  RxCocoa: 84a08739ab186248c7f31ce4ee92d6f8a947d690
+  RxDataSources: b3389acc5fe2eefb8fcd81a2b76a876ad08bc82a
+  RxSwift: f9de85ea20cd2f7716ee5409fc13523dc638e4e4
   Sharaku: c18de569fc99f6e936f46ca812b571826cc658a7
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   TOCropViewController: e6e31b38d785a901e5651a1e7fff71bcda6c5214
   TwitterCore: e959987be23c767004d29eb7fab8d85d8585a2e5
   TwitterKit: 3b6044a7320340326a4098f3e37aa1dbaeb94942
 
-PODFILE CHECKSUM: f2da1401f58706d660f5469b34bbe202a340c3c2
+PODFILE CHECKSUM: 3a2fe0ed4041d1b217bc27071c8bdd4fec4e7c68
 
 COCOAPODS: 1.2.1
