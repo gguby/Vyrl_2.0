@@ -26,7 +26,6 @@
 		8F62CC151F00EC330069ACFE /* EmoticonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F62CC141F00EC330069ACFE /* EmoticonView.swift */; };
 		8F6B15F41F5D3A87007FFF62 /* FanPageReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6B15F31F5D3A87007FFF62 /* FanPageReportViewController.swift */; };
 		8F6F1D8F1F58EE9400C163D0 /* OtherProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6F1D8E1F58EE9400C163D0 /* OtherProfileViewController.swift */; };
-		8F72A5CA1F74B3BD00251067 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F72A5C91F74B3BD00251067 /* DetailViewController.swift */; };
 		8F797B7F1F340E080019C475 /* FanPageCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F797B7E1F340E080019C475 /* FanPageCreateViewController.swift */; };
 		8F829E7C1EFB6648001D418F /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F829E7B1EFB6648001D418F /* MyProfileViewController.swift */; };
 		8F829E801EFB9CD4001D418F /* WriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F829E7F1EFB9CD4001D418F /* WriteViewController.swift */; };
@@ -113,7 +112,6 @@
 		8F62CC141F00EC330069ACFE /* EmoticonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonView.swift; sourceTree = "<group>"; };
 		8F6B15F31F5D3A87007FFF62 /* FanPageReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanPageReportViewController.swift; sourceTree = "<group>"; };
 		8F6F1D8E1F58EE9400C163D0 /* OtherProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherProfileViewController.swift; sourceTree = "<group>"; };
-		8F72A5C91F74B3BD00251067 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		8F797B7E1F340E080019C475 /* FanPageCreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanPageCreateViewController.swift; sourceTree = "<group>"; };
 		8F829E7B1EFB6648001D418F /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		8F829E7F1EFB9CD4001D418F /* WriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteViewController.swift; sourceTree = "<group>"; };
@@ -224,7 +222,6 @@
 				8F408E3C1F32EC98008F8FCB /* FeedLikeUserListViewController.swift */,
 				A65A0A511F45838700F7D852 /* FeedPullLoader.swift */,
 				8F514D501F4586A1000338E4 /* FeedDetail.storyboard */,
-				8F72A5C91F74B3BD00251067 /* DetailViewController.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -654,7 +651,6 @@
 				8F829E801EFB9CD4001D418F /* WriteViewController.swift in Sources */,
 				8F47B6C71EDEACA600A5DBAC /* BlockManagementViewController.swift in Sources */,
 				8F90911D1EEFC57D0095A335 /* FeedDetailViewController.swift in Sources */,
-				8F72A5CA1F74B3BD00251067 /* DetailViewController.swift in Sources */,
 				A652BA371F3AA61E00007767 /* PostCollectionViewController.swift in Sources */,
 				8F3CC1A81F5E47BD00931776 /* FanPageMemberListViewController.swift in Sources */,
 				CE33F0041ED2D2900050C21D /* AgreeMentController.swift in Sources */,
