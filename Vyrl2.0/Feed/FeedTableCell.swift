@@ -215,6 +215,51 @@ class FeedTableCell: UITableViewCell {
     private let sections = Variable<[Section]>([])
     private let dataSource = RxCollectionViewSectionedReloadDataSource<Section>()
     
+    func configure(){
+        dataSource.configureCell =  { ds, cv, ip, item in
+            let cell = cv.dequeueReusableCell(withReuseIdentifier: "BoxCell", for: ip) as! BoxCell
+            
+            if (self.article?.medias.count)! > 6 && ip.row == 5 {
+                cell.dimView.alpha = 1
+                cell.mediaCount.alpha = 1
+                
+                let str = "+\((self.article?.medias.count)! - 6)"
+                
+                let attributedString = NSMutableAttributedString(string: str + " 더보기")
+                attributedString.addAttribute(NSFontAttributeName, value: UIFont(name: "AppleSDGothicNeo-SemiBold", size: 13.0)!, range: NSRange(location: 0, length: str.characters.count))
+                cell.mediaCount.attributedText = attributedString
+            }else {
+                cell.dimView.alpha = 0
+                cell.mediaCount.alpha = 0
+            }
+            
+            cell.imageView.af_setImage(withURL: URL(string: item.imageUrl)!)
+            cell.iconImageView.image = nil
+            if(item.type == "VIDEO")
+            {
+                let playImage = UIImage.init(named: "icon_play_01")
+                cell.iconImageView.image = playImage
+            }
+            
+            if(URL.init(string: item.imageUrl)?.pathExtension == "gif")
+            {
+                var gifImage : UIImage!
+                if((self.article?.medias.count)! > 2){
+                    gifImage = UIImage.init(named: "icon_gif_02")
+                } else {
+                    gifImage = UIImage.init(named: "icon_gif_01")
+                }
+                
+                cell.iconImageView.image = gifImage
+            }
+            return cell
+        }
+        
+        sections.asDriver().drive(self.collectionView.rx.items(dataSource: dataSource)).addDisposableTo(disposeBag)
+        
+        collectionView.rx.setDelegate(self).addDisposableTo(disposeBag)
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -224,48 +269,7 @@ class FeedTableCell: UITableViewCell {
 
             let size = UIScreen.main.bounds
             
-            dataSource.configureCell =  { ds, cv, ip, item in
-                let cell = cv.dequeueReusableCell(withReuseIdentifier: "BoxCell", for: ip) as! BoxCell
-                
-                if (self.article?.medias.count)! > 6 && ip.row == 5 {
-                    cell.dimView.alpha = 1
-                    cell.mediaCount.alpha = 1
-                    
-                    let str = "+\((self.article?.medias.count)! - 6)"
-                    
-                    let attributedString = NSMutableAttributedString(string: str + " 더보기")
-                    attributedString.addAttribute(NSFontAttributeName, value: UIFont(name: "AppleSDGothicNeo-SemiBold", size: 13.0)!, range: NSRange(location: 0, length: str.characters.count))
-                    cell.mediaCount.attributedText = attributedString
-                }else {
-                    cell.dimView.alpha = 0
-                    cell.mediaCount.alpha = 0
-                }
-                
-                cell.imageView.af_setImage(withURL: URL(string: item.imageUrl)!)
-                cell.iconImageView.image = nil
-                if(item.type == "VIDEO")
-                {
-                    let playImage = UIImage.init(named: "icon_play_01")
-                    cell.iconImageView.image = playImage
-                }
-                
-                if(URL.init(string: item.imageUrl)?.pathExtension == "gif")
-                {
-                    var gifImage : UIImage!
-                    if((self.article?.medias.count)! > 2){
-                        gifImage = UIImage.init(named: "icon_gif_02")
-                    } else {
-                        gifImage = UIImage.init(named: "icon_gif_01")
-                    }
-                    
-                    cell.iconImageView.image = gifImage
-                }
-                return cell
-            }
-            
-            sections.asDriver().drive(self.collectionView.rx.items(dataSource: dataSource)).addDisposableTo(disposeBag)
-            
-            collectionView.rx.setDelegate(self).addDisposableTo(disposeBag)
+            self.configure()
        
             if (size.width > 375){
                 self.collectionViewLeading.constant = 20
@@ -281,15 +285,20 @@ class FeedTableCell: UITableViewCell {
         self.comment.addTarget(self, action: #selector(showCommentDetail(sender:)), for: .touchUpInside)
         self.likeBtn.addTarget(self, action: #selector(like(sender:)), for: .touchUpInside)
         
-        if isAdTypeGoogle {
-            var adTypes = [GADAdLoaderAdType]()
-            adTypes.append(GADAdLoaderAdType.nativeContent)
-            
-            adLoader = GADAdLoader(adUnitID: Constants.GoogleADTest, rootViewController: self.delegate as? UIViewController,
-                                   adTypes: adTypes, options: nil)
-            adLoader.delegate = self
-            adLoader.load(GADRequest())
+        self.initAD()
+    }
+    
+    func initAD(){
+        if isAdTypeGoogle == false {
+            return
         }
+        var adTypes = [GADAdLoaderAdType]()
+        adTypes.append(GADAdLoaderAdType.nativeContent)
+        
+        adLoader = GADAdLoader(adUnitID: Constants.GoogleADTest, rootViewController: self.delegate as? UIViewController,
+                               adTypes: adTypes, options: nil)
+        adLoader.delegate = self
+        adLoader.load(GADRequest())
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import AlamofireImage
+import SwiftyJSON
 
 
 class MyViewController: UIViewController{
@@ -79,12 +80,6 @@ class MyViewController: UIViewController{
             self.accountSelect.isHidden = true
             self.bookMakrBtn.isHidden = true
         }
-        
-        if self.postCount == 0 {
-            self.emptyView.alpha = 0
-        }else {
-            self.emptyView.alpha = 0
-        }
     }
     
     func back(sender:UIButton){
@@ -98,8 +93,6 @@ class MyViewController: UIViewController{
         self.childViewControllers.last?.willMove(toParentViewController: nil)
         self.childViewControllers.last?.view.removeFromSuperview()
         self.childViewControllers.last?.removeFromParentViewController()
-
-        
         addChildViewController(controller)
         containerView.addSubview(controller.view)
         controller.didMove(toParentViewController: self)
@@ -176,13 +169,13 @@ class MyViewController: UIViewController{
                 
                 if let code = response.response?.statusCode {
                     if code == 200 {
-                        let jsonData = json as! NSDictionary
                         
-                        self.nickNameLabel.text = jsonData["nickName"] as? String
-                        self.introLabel.text = jsonData["selfIntro"] as? String
-                        self.homepageLabel.text = jsonData["homepageUrl"] as? String
+                        let json = JSON(json)
                         
-                        let image = jsonData["imagePath"] as? String
+                        self.nickNameLabel.text = json["nickName"].string
+                        self.introLabel.text = json["selfIntro"].string
+                        self.homepageLabel.text = json["homepageUrl"].string
+                        let image = json["imagePath"].string
                         
                         if image?.isEmpty == false {
                             let url = URL.init(string: (image)!)
@@ -194,18 +187,27 @@ class MyViewController: UIViewController{
                         if self.isMyProfile {
                             let account = LoginManager.sharedInstance.getCurrentAccount()
                             
-                            account?.nickName = jsonData["nickName"] as? String
-                            account?.imagePath = jsonData["imagePath"] as? String
+                            account?.nickName = json["nickName"].string
+                            account?.imagePath = json["imagePath"].string
                             
                             LoginManager.sharedInstance.replaceAccount(account: account!)
                         }else {
-                            self.titleLbl.text = jsonData["nickName"] as? String
+                            self.titleLbl.text = json["nickName"].string
                         }
+                        
+                        self.post.text = "\(json["articleCount"].intValue)"
+                        self.postCount = json["articleCount"].intValue
+                        
+                        if self.postCount == 0 {
+                            self.emptyView.alpha = 1
+                        }else {
+                            self.emptyView.alpha = 0
+                        }
+                        
+                        self.following.text = "\(json["followingCount"].intValue)"
+                        self.follower.text = "\(json["followerCount"].intValue)"
                     }
                 }
-                
-                print((response.response?.statusCode)!)
-                print(json)
             case .failure(let error):
                 print(error)
             }

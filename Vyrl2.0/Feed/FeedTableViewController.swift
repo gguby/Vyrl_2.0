@@ -394,7 +394,6 @@ extension FeedTableViewController : FeedCellDelegate {
         vc.mediasArray = cell.article?.medias
         
         self.navigationController?.pushViewController(vc, animated: true)
-
     }
     
     func didPressCell(sender: Any, cell : FeedTableCell) {
