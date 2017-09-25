@@ -19,12 +19,6 @@ class FeedLikeUserListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
         requestLikeUser()
     }
     
@@ -69,10 +63,21 @@ extension FeedLikeUserListViewController : UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! LikeUserTableViewCell
         
-        cell.nicNameLabel.text = likeUserArray[indexPath.row]["nickName"] as? String
-        if(likeUserArray[indexPath.row]["profile"] != nil) {
-            let url = NSURL(string: (likeUserArray[indexPath.row]["profile"] as? String)!)
-            cell.profileImageView.af_setImage(withURL: url! as URL)
+        let user = self.likeUserArray[indexPath.row]
+        
+        cell.nicNameLabel.text = user["nickName"] as? String
+        let url = NSURL(string: (user["profile"] as? String)!)
+        cell.profileImageView.af_setImage(withURL: url! as URL)
+        cell.profileUserId = user["id"] as! Int
+        
+        
+        if user["follow"] as? String != "false" {
+            if(LoginManager.sharedInstance.getCurrentAccount()?.nickName == user["nickName"] as? String) {
+                cell.isMe = true
+            }
+            cell.isFollow = true
+        } else {
+            cell.isFollow = false
         }
         
         return cell
@@ -85,20 +90,47 @@ class LikeUserTableViewCell: UITableViewCell {
     @IBOutlet weak var officialImageView: UIImageView!
     @IBOutlet weak var followButton: UIButton!
     
-    let id : Int = 0
+    var profileUserId : Int!
+    var isMe : Bool! = false
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    var isFollow : Bool! {
+        didSet {
+            if isFollow {
+                self.followButton.setImage(UIImage.init(named: "icon_check_05_on"), for: .normal)
+                self.followButton.tag = 1
+            } else {
+                self.followButton.setImage(UIImage.init(named: "icon_add_01"), for: .normal)
+                self.followButton.tag = 0
+            }
+        }
     }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
-    }
-    
+
     @IBAction func followButtonClick(_ sender: UIButton) {
+        if(isMe){
+            return;
+        }
+        
+        var method = HTTPMethod.post
+        
+        if sender.tag == 1 {
+            method = HTTPMethod.delete
+        }
+        
+        let uri = URL.init(string: Constants.VyrlFeedURL.follow(followId: self.profileUserId))
+        Alamofire.request(uri!, method: method, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON(completionHandler: {
+            response in switch response.result {
+            case .success(let json):
+                if sender.tag == 0 {
+                    sender.setImage(UIImage.init(named: "icon_check_05_on"), for: .normal)
+                    sender.tag = 1
+                }else {
+                    sender.setImage(UIImage.init(named: "icon_add_01"), for: .normal)
+                    sender.tag = 0
+                }
+            case .failure(let error):
+                print(error)
+            }
+        })
     }
     
 }
