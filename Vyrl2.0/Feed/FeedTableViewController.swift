@@ -606,6 +606,42 @@ extension FeedTableViewController : FeedCellDelegate {
         self.present(alertController, animated: true, completion: nil)
     }
     
+    func showHideAlert(articleId : Int){
+        let alertController = UIAlertController (title:nil, message:"해당 게시글을 Feed에서 숨깁니다.",preferredStyle:.alert)
+        
+        let ok = UIAlertAction(title: "확인", style: .default,handler: { (action) -> Void in
+            self.hideFeed(articleId: articleId)
+        })
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
+            alertController.dismiss(animated: true, completion: nil)
+        })
+        
+        alertController.addAction(ok)
+        alertController.addAction(cancel)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func hideFeed(articleId : Int){
+        let uri = Constants.VyrlFeedURL.feedHide(articleId: articleId)
+        
+        Alamofire.request(uri, method: .delete, parameters: nil, encoding:JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: { (response) in
+            switch response.result {
+            case .success(let json):
+                print(json)
+                
+                if let code = response.response?.statusCode {
+                    if code == 200 {
+                        self.getAllFeed()
+                    }
+                }
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+    
     func showAlertNotMine(cell: FeedTableCell){
         let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.actionSheet)
         
@@ -614,7 +650,7 @@ extension FeedTableViewController : FeedCellDelegate {
         })
         
         let notShow = UIAlertAction(title: "이 게시물 안보기", style: .default, handler: { (action) -> Void in            
-            
+            self.showHideAlert(articleId: (cell.article?.id)!)
         })
     
         let prevent = UIAlertAction(title: "작성자 차단", style: .default, handler: { (action) -> Void in

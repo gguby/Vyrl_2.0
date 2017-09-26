@@ -53,8 +53,10 @@ class FeedViewController: UIViewController {
 //    }
     
     func refresh(){
-        let vc = embedController.controllers.last as! FeedTableViewController
-        vc.getAllFeed()
+        if embedController.controllers.last != nil {
+            let vc = embedController.controllers.last as! FeedTableViewController
+            vc.getAllFeed()
+        }
     }
     
     func setupFeedTableView (){
