@@ -81,6 +81,11 @@ struct Constants {
             return VyrlAPIConstants.baseURL + "feeds/" + str + "/comments/" + commentId
         }
         
+        static func feedHide(articleId :Int)-> String{
+            let str = "\(articleId)"
+            return VyrlAPIConstants.baseURL + "feeds/hide/" + str
+        }
+        
         static let FEEDBOOKMARK = VyrlAPIConstants.baseURL + "feeds/bookmarks"
         static let FEEDREPORT = VyrlAPIConstants.baseURL + "feeds/reports"
         

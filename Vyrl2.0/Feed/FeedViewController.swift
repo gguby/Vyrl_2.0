@@ -26,44 +26,52 @@ class FeedViewController: UIViewController {
         
         embedController = EmbedController.init(rootViewController: self)
         
-        self.checkExistFollow()
+        self.setupFeedTableView()
     }
 
-    func checkExistFollow() {
-        let uri = Constants.VyrlAPIConstants.baseURL + "/follows/exists"
-        
-        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: LoginManager.sharedInstance.getHeader()).responseJSON(completionHandler: {
-            response in switch response.result {
-            case .success(let json):
-                
-                DispatchQueue.main.async {
-                    let jsonData = json as! NSDictionary
-                    
-                    let isExistFollow = jsonData["exist"] as! Bool
-                    
-                    LoginManager.sharedInstance.isExistFollower = isExistFollow
-                    
-                    self.setupFeedTableView()
-                }
-                
-            case .failure(let error):
-                print(error)
-            }
-        })
+//    func checkExistFollow() {
+//        let uri = Constants.VyrlAPIConstants.baseURL + "/follows/exists"
+//        
+//        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: LoginManager.sharedInstance.getHeader()).responseJSON(completionHandler: {
+//            response in switch response.result {
+//            case .success(let json):
+//                
+//                DispatchQueue.main.async {
+//                    let jsonData = json as! NSDictionary
+//                    
+//                    let isExistFollow = jsonData["exist"] as! Bool
+//                    
+//                    LoginManager.sharedInstance.isExistFollower = isExistFollow
+//                    
+//                    self.setupFeedTableView()
+//                }
+//                
+//            case .failure(let error):
+//                print(error)
+//            }
+//        })
+//    }
+    
+    func refresh(){
+        if embedController.controllers.last != nil {
+            let vc = embedController.controllers.last as! FeedTableViewController
+            vc.getAllFeed()
+        }
     }
     
     func setupFeedTableView (){
-        if LoginManager.sharedInstance.isExistFollower == true {
+//        if LoginManager.sharedInstance.isExistFollower == true {
             let storyboard = UIStoryboard(name: "FeedStyle", bundle: nil)
-            let controller = storyboard.instantiateViewController(withIdentifier: "feedTable")
+            let controller = storyboard.instantiateViewController(withIdentifier: "feedTable") as! FeedTableViewController
+            controller.feedView = self
             
             controller.view.frame.origin = CGPoint.init(x: 0, y: 66)
             controller.view.frame.size.height -= 66
             
             embedController.append(viewController: controller)
-        }else {
-            embedController.remove()
-        }
+//        }else {
+//            embedController.remove()
+//        }
     }
     
     override func didReceiveMemoryWarning() {

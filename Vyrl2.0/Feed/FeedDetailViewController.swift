@@ -723,7 +723,9 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
                 cell.shareCountButton.setTitle(String("공유 \(self.article?.cntShare as! Int)명"), for: .normal)
                 cell.pageLabel.text = String("1 / \(self.article?.medias.count as! Int)")
                 
-                cell.profileButton.af_setBackgroundImage(for: .normal, url: URL.init(string: (self.article?.profile.imagePath)!)!)
+                if self.article?.profile.imagePath != nil {
+                    cell.profileButton.af_setBackgroundImage(for: .normal, url: URL.init(string: (self.article?.profile.imagePath)!)!)
+                }
                 cell.nickNameLabel.text = self.article?.profile.nickName
                 
                 cell.profileId = self.article?.profile.id

@@ -246,7 +246,7 @@ class ViewController: UITabBarController , UITabBarControllerDelegate {
             return false
         }else if viewController.title == "feed" {
             let vc = viewController.childViewControllers.last as! FeedViewController
-            vc.checkExistFollow()
+            vc.refresh()
         }
         return true
     }

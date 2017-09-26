@@ -258,6 +258,7 @@ extension FanViewController : HistoryCellDelegate {
 class FanCollectionCell : UICollectionViewCell {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var blurImgView: UIImageView!
 }
 
 extension FanViewController : UICollectionViewDataSource, UICollectionViewDelegate {
@@ -274,6 +275,7 @@ extension FanViewController : UICollectionViewDataSource, UICollectionViewDelega
         
         if fan.pageprofileImagePath.isEmpty == false {
             cell.imageView.af_setImage(withURL: URL.init(string: fan.pageprofileImagePath)!)
+            cell.blurImgView.af_setImage(withURL: URL.init(string: fan.pageprofileImagePath)!)
         }
         cell.textView.text = fan.pageName
         
