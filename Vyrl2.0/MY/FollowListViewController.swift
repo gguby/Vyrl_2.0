@@ -80,10 +80,12 @@ extension FollowListViewController : UITableViewDelegate, UITableViewDataSource 
         let user = self.followUserArray[indexPath.row]
         
         cell.nicNameLabel.text = user["nickName"] as? String
-        let url = NSURL(string: (user["profile"] as? String)!)
-        cell.profileImageView.af_setImage(withURL: url! as URL)
-        cell.profileUserId = user["id"] as! Int
         
+        if(user["profile"] != nil){
+            let url = NSURL(string: (user["profile"] as? String)!)
+            cell.profileImageView.af_setImage(withURL: url! as URL)
+        }
+        cell.profileUserId = user["id"] as! Int
         
         if user["follow"] as? String != "false" {
             if(LoginManager.sharedInstance.getCurrentAccount()?.nickName == user["nickName"] as? String) {

@@ -117,9 +117,9 @@ class LikeUserTableViewCell: UITableViewCell {
         }
         
         let uri = URL.init(string: Constants.VyrlFeedURL.follow(followId: self.profileUserId))
-        Alamofire.request(uri!, method: method, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON(completionHandler: {
+        Alamofire.request(uri!, method: method, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: {
             response in switch response.result {
-            case .success(let json):
+            case .success(let result):
                 if sender.tag == 0 {
                     sender.setImage(UIImage.init(named: "icon_check_05_on"), for: .normal)
                     sender.tag = 1

@@ -123,7 +123,7 @@ class FanPageUserCell : UITableViewCell {
         }
         
         let uri = URL.init(string: Constants.VyrlFeedURL.follow(followId: self.profileUserId))
-        Alamofire.request(uri!, method: method, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON(completionHandler: {
+        Alamofire.request(uri!, method: method, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: {
             response in switch response.result {
             case .success(let json):
                 
