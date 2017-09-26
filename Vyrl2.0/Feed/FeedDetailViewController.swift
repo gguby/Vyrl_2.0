@@ -407,19 +407,54 @@ class FeedDetailViewController: UIViewController{
         }
     }
 
+    func report(id : Int, reportType : ReportType){
+        let parameters : [String:String] = [
+            "id": "\(id)",
+            "reportType" : reportType.rawValue,
+            "contentType" : "COMMENT"
+        ]
+        
+        let uri = Constants.VyrlFeedURL.FEEDREPORT
+        
+        Alamofire.request(uri, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: {
+            response in
+            switch response.result {
+            case .success(let json) :
+                print(json)
+                
+                if let code = response.response?.statusCode {
+                    if code == 200 {
+                        self.showToast(str: "정상적으로 신고 되었습니다! 감사합니다.")
+                    }
+                }
+            case .failure(let error) :
+                print(error)
+            }
+        })
+    }
     
     func showReportAlert(indexPath: IndexPath) {
         let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.actionSheet)
+        var id : Int!
+        
+        if(self.article?.comments != nil && (self.article?.cntComment)! > 20 && self.article?.cntComment != self.commentArray.count) {
+            id = self.commentArray[indexPath.row - 2].id
+        } else {
+            id = self.commentArray[indexPath.row - 1].id
+        }
         
         let action1 = UIAlertAction(title: "성인 컨텐츠", style: .default, handler: { (action) -> Void in
+            self.report(id: id, reportType: ReportType.ADULT)
             self.alertControllerBackgroundTapped()
         })
         
         let action2 = UIAlertAction(title: "해롭겁나 불쾌", style: .default, handler: { (action) -> Void in
+             self.report(id: id, reportType: ReportType.OFFEND)
             self.alertControllerBackgroundTapped()
         })
         
         let action3 = UIAlertAction(title: "스팸 또는 사기", style: .default, handler: { (action) -> Void in
+             self.report(id: id, reportType: ReportType.SPAM)
             self.alertControllerBackgroundTapped()
         })
         
