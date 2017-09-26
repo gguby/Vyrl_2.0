@@ -9,16 +9,14 @@
 import UIKit
 
 protocol SMLoginDelegate {
-    func signup()
+    func login(token:String)
 }
-
-
 
 class SMLoginViewController : UIViewController, UIWebViewDelegate {
     
     var clientId = "8ecafcf23f6d42cf94806ab807bd2023"
     
-    var clientSecret = "2a045e5b07f1fc6c76895daeb8c9099881b9cb0588129c819f0ef71bf70c86d1"
+    private let authUri = "https://api.smtown.com/OAuth/Authorize?client_id=8ecafcf23f6d42cf94806ab807bd2023&redirect_uri=http://api.dev2nd.vyrl.com/&state=nonce&scope=profile&response_type=token"
     
     var loginDelegate : SMLoginDelegate? = nil
     
@@ -30,19 +28,17 @@ class SMLoginViewController : UIViewController, UIWebViewDelegate {
     
     @IBOutlet weak var navi : UINavigationController!
     
+    var token : String!
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         WebView.delegate = self;
         
-        if let url = URL(string: "https://api.smtown.com/Account/SignIn"){
-            let request = URLRequest(url: url)
-//            request.addValue(clientId, forHTTPHeaderField: "Client_id")
-//            request.addValue(clientSecret, forHTTPHeaderField: "Client_secret")
-            WebView.loadRequest(request)
-        }
+        let request = URLRequest.init(url: URL.init(string: authUri)!)
         
+        WebView.loadRequest(request)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -61,64 +57,20 @@ class SMLoginViewController : UIViewController, UIWebViewDelegate {
     
     func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         
-        var command : String = (request.url?.absoluteString)!.decodeURL()
-        
-        print (command )
-        
-        let component = URLComponents(string: command)
-        
-        command = command.replacingOccurrences(of: "http://api.vyrl.com:8082/ko/auth/social/smtown/", with: "")
-        
-        if ( command.hasPrefix("ios?"))
-        {
-            var dict = [String:String]()
-            if let queryItems = component?.queryItems {
-                for item in queryItems {
-                    dict[item.name] = item.value!
-                }
-            }
-            
-            let alert = UIAlertController(title: "token", message: dict["code"], preferredStyle: UIAlertControllerStyle.alert)
-            
-            let defaultAction = UIAlertAction(title: "ok", style: .default, handler: nil )
-            alert.addAction(defaultAction)
-            
-            self.present(alert, animated: true, completion: nil)
-            
-            print(dict["code"]!)
-            
-            return false
+        if navigationType != UIWebViewNavigationType.formSubmitted {
+            return true
         }
         
-        if ( command.hasPrefix("vyrl_smtown:"))
+        var command : String = (request.url?.absoluteString)!.decodeURL()
+        
+        command = command.replacingOccurrences(of: "#", with: "?")
+        
+        let url = URL.init(string: command)
+        
+        if ( url?.query!.hasPrefix("access_token"))!
         {
-            // 토큰파싱 해야됨
-            var components : Array = command.components(separatedBy: "success?profile=")
-            
-            let functionName = components[1]
-
-            print( functionName.removingPercentEncoding! )
-            
-            let jsonString = functionName.replacingOccurrences(of: "&#", with: "\\U")
-            
-            let jsonData = jsonString.data(using: String.Encoding.utf8)
-            
-            do {
-                let json = try JSONSerialization.jsonObject(with: jsonData!, options: .mutableContainers)
-                print(json)
-                
-                self.navigationController?.popViewController(animated: true)
-                
-                self.loginDelegate?.signup()
-                
-                LoginManager.sharedInstance.isLogin = true
-
-                return false;
-                
-            } catch {
-                print(error.localizedDescription)
-            }
-            
+            let token = url?.queryParameters!["access_token"]
+            loginDelegate?.login(token: token!)
         }
         
         return true
@@ -146,5 +98,21 @@ extension String {
     func decodeURL() -> String
     {
         return self.removingPercentEncoding!
+    }
+}
+
+extension URL {
+    
+    public var queryParameters: [String: String]? {
+        guard let components = URLComponents(url: self, resolvingAgainstBaseURL: true), let queryItems = components.queryItems else {
+            return nil
+        }
+        
+        var parameters = [String: String]()
+        for item in queryItems {
+            parameters[item.name] = item.value
+        }
+        
+        return parameters
     }
 }

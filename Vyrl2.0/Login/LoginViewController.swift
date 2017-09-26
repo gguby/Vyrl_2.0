@@ -188,19 +188,15 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
     
     func smLogin()
     {
-        if ( !LoginManager.sharedInstance.isLogin ){
-            let storyboard = UIStoryboard(name: "Login", bundle: nil)
-            let controller :SMLoginViewController=storyboard.instantiateViewController(withIdentifier: "SMLogin") as! SMLoginViewController
-            controller.loginDelegate = self
-            self.navigationController!.pushViewController(controller, animated: true)
-        }
-        else {
-           self.pushView(storyboardName: "Login", controllerName: "agreement")
-        }
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let controller :SMLoginViewController=storyboard.instantiateViewController(withIdentifier: "SMLogin") as! SMLoginViewController
+        controller.loginDelegate = self
+        self.navigationController!.pushViewController(controller, animated: true)        
     }
     
-    func signup() {
-        self.pushView(storyboardName: "Login", controllerName: "agreement")
+    func login(token: String) {
+        self.navigationController?.popViewController(animated: true)
+        LoginManager.sharedInstance.login(accessToken: token, accessTokenSecret: "", service: ServiceType.SM, callBack: self)
     }
 }
 
