@@ -54,6 +54,9 @@ class MyViewController: UIViewController{
     @IBOutlet weak var bookMakrBtn: UIButton!
     @IBOutlet weak var middlePostBtn: UILabel!
     
+    @IBOutlet weak var followerView: UIView!
+    @IBOutlet weak var followingView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -80,7 +83,26 @@ class MyViewController: UIViewController{
             self.accountSelect.isHidden = true
             self.bookMakrBtn.isHidden = true
         }
+        
+        let followerGesture = UITapGestureRecognizer(target: self, action: #selector(self.clickFollowList(sender:)))
+        let followingGesture = UITapGestureRecognizer(target: self, action: #selector(self.clickFollowList(sender:)))
+        self.followerView.addGestureRecognizer(followerGesture)
+        self.followingView.addGestureRecognizer(followingGesture)
     }
+    
+    func clickFollowList(sender: UITapGestureRecognizer){
+        let storyboard = UIStoryboard(name: "My", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "FollowListViewController") as! FollowListViewController // or whatever it is
+        
+        if(sender.view == self.followerView){
+            vc.followType = FollowType.Follower
+        } else {
+            vc.followType = FollowType.Following
+        }
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     
     func back(sender:UIButton){
         self.navigationController?.popViewController(animated: true)
