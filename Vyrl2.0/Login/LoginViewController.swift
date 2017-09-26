@@ -62,31 +62,35 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
             return
         }
         
-        let uri = Constants.VyrlAPIConstants.baseURL + "/follows/exists"
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let mainController = storyboard.instantiateInitialViewController()!
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = mainController
         
-        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: LoginManager.sharedInstance.getHeader()).responseJSON(completionHandler: {
-            response in switch response.result {
-            case .success(let json):
-                
-                DispatchQueue.main.async {
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let mainController = storyboard.instantiateInitialViewController()!
-                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                    
-                    let jsonData = json as! NSDictionary
-                    
-                    let isExistFollow = jsonData["exist"] as! Bool
-                    
-                    LoginManager.sharedInstance.isExistFollower = isExistFollow
-                    
-                    appDelegate.window?.rootViewController = mainController
-                }
-                
-            case .failure(let error):
-                print(error)
-            }
-        })
-        
+//        let uri = Constants.VyrlAPIConstants.baseURL + "/follows/exists"
+//
+//        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: LoginManager.sharedInstance.getHeader()).responseJSON(completionHandler: {
+//            response in switch response.result {
+//            case .success(let json):
+//
+//                DispatchQueue.main.async {
+//                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                    let mainController = storyboard.instantiateInitialViewController()!
+//                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//
+//                    let jsonData = json as! NSDictionary
+//
+//                    let isExistFollow = jsonData["exist"] as! Bool
+//
+//                    LoginManager.sharedInstance.isExistFollower = isExistFollow
+//
+//                    appDelegate.window?.rootViewController = mainController
+//                }
+//
+//            case .failure(let error):
+//                print(error)
+//            }
+//        })
     }
     
     func loginByFireBase(credential:  FIRAuthCredential) {

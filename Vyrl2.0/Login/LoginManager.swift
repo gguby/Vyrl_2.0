@@ -22,19 +22,7 @@ class LoginManager{
     
     var accountList :Array<Account> = []
     
-    private var _login:Bool = false
-    
-    var isExistFollower = false
-    
-    var isLogin: Bool {
-        
-        get {
-            return _login
-        }
-        set(login){
-            _login = login
-        }
-    }
+    var isFirstLogin = false;
     
     func getHeader() -> HTTPHeaders {
         return Constants.VyrlAPIConstants.getHeader()

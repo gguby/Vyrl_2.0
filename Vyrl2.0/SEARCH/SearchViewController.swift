@@ -295,7 +295,12 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource , Hi
                 
                 let user = self.userList[indexPath.row]
                 
-                cell.profile.af_setImage(withURL: URL.init(string: user.profileImagePath)!)
+                if user.profileImagePath.isEmpty {
+                    
+                }else {
+                    cell.profile.af_setImage(withURL: URL.init(string: user.profileImagePath)!)
+                }
+                
                 cell.title.text = user.nickName
                 cell.followers.text = "\(user.followerCount!)"
                 
@@ -574,7 +579,7 @@ struct SearchUser  : Mappable{
     mutating func mapping(map: Map){
         followerCount <- map["followerCount"]
         level <- map["level"]
-        nickName <- map["nickname"]
+        nickName <- map["nickName"]
         profileImagePath <- map["profileImagePath"]
         userId <- map["userId"]
     }

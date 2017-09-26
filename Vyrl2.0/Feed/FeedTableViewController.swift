@@ -46,6 +46,8 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
     
     private let sections = Variable<[SectionOfArticleData]>([])
     
+    var feedView : FeedViewController?
+    
     func initTable(){
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 400
@@ -253,6 +255,14 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
             
             let array = response.result.value ?? []
             
+            if array.count == 0{
+                self.feedView?.embedController.remove()
+                if LoginManager.sharedInstance.isFirstLogin == false {
+                    self.tabBarController?.selectedIndex = 3
+                    LoginManager.sharedInstance.isFirstLogin = true
+                }
+            }
+            
             if ( array.count <= 2 ){
                 self.tableView.tableFooterView = UIView(frame: .zero)
             }else {
@@ -264,8 +274,6 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
             }
             
             self.sections.value = [SectionOfArticleData(items:self.articleArray)]
-            
-//            self.tableView.reloadData()
             
             self.resetSizeTableView()
         }
