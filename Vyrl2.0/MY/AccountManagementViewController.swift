@@ -27,21 +27,23 @@ class AccountManagementViewController: UIViewController, UITableViewDelegate, UI
 
         // Do any additional setup after loading the view.
         
+        self.refresh()
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.tableFooterView = UIView(frame: .zero)
+        self.tableViewHeightConstraint.constant = self.tableView.contentSize.height + 20        
+    }
+    
+    func refresh(){
         self.currentAccount = LoginManager.sharedInstance.getCurrentAccount()!
-        
         if let image = UserDefaults.standard.image(forKey: (self.currentAccount?.userId!)!){
             profileView.image = image
         }
         socialImage.image = currentAccount?.logoImage
         nickName.text = currentAccount?.nickName
         emailLabel.text = (currentAccount?.email)! + "으로 연결된 계정"
-        
         self.accountList = LoginManager.sharedInstance.includeNotCurrentUser()
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.tableFooterView = UIView(frame: .zero)
-        self.tableViewHeightConstraint.constant = self.tableView.contentSize.height + 20        
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -67,6 +69,16 @@ class AccountManagementViewController: UIViewController, UITableViewDelegate, UI
         cell.nickNameLabel.text = account.nickName
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let account = self.accountList[indexPath.row]
+        
+        LoginManager.sharedInstance.changeCookie(account: account)
+        
+        self.refresh()
+        
+        tableView.reloadData()
     }
     
  

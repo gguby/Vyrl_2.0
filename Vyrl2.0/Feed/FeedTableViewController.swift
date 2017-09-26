@@ -13,6 +13,9 @@ import AlamofireImage
 import AlamofireObjectMapper
 import AVFoundation
 import KRPullLoader
+import RxCocoa
+import RxSwift
+import RxDataSources
 
 enum FeedTableType {
     case ALLFEED,MYFEED, BOOKMARK, USERFEED, FANFEED, FANALLFEED
@@ -22,8 +25,7 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
 
     @IBOutlet weak var tableView: UITableView!
     var articleArray = [Article]()
-    var loadMoreArray = [Article]()
-    
+
     var feedType = FeedTableType.MYFEED
     var userId : Int!
     var fanPageId : Int!
@@ -39,15 +41,43 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
     
     var fanPageViewController : FanPageController!
     
+    let dataSource = RxTableViewSectionedReloadDataSource<SectionOfArticleData>()
+    let disposeBag = DisposeBag()
+    
+    private let sections = Variable<[SectionOfArticleData]>([])
+    
+    func initTable(){
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 400
+        
+        Observable.just(self.articleArray).map {(customDatas) -> [SectionOfArticleData] in
+            [SectionOfArticleData(items: customDatas)]
+            }.bind(to: self.sections).addDisposableTo(self.disposeBag)
+        
+        dataSource.configureCell = { ds, tv, ip, item in
+            let cell = tv.dequeueReusableCell(withIdentifier: item.type.rawValue) as! FeedTableCell
+            cell.article = item
+            cell.delegate = self
+            cell.contentTextView.text = item.content
+            cell.contentTextView.resolveHashTags()
+            cell.contentTextView.delegate = self
+            return cell
+        }
+        
+        self.tableView.rx.setDelegate(self).addDisposableTo(disposeBag)
+        
+        sections.asDriver().drive(tableView.rx.items(dataSource: self.dataSource)).addDisposableTo(disposeBag)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 400
+//        self.tableView.delegate = self
+//        self.tableView.dataSource = self
+        
+        self.initTable()
         
         self.setUpRefresh()
         
@@ -58,7 +88,7 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
             appDelegate.feedView = self
         }
         
-        self.getAllFeed()        
+        self.getAllFeed()
     }
     
     deinit {
@@ -183,11 +213,16 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         
         Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Article]>) in
             
+            if self.feedType == FeedTableType.FANFEED {
+                self.articleArray.removeAll()
+            }
+            
             let array = response.result.value ?? []
             
             self.articleArray.append(contentsOf: array)
             
-            self.tableView.reloadData()
+            self.sections.value = [SectionOfArticleData(items:self.articleArray)]
+//            self.tableView.reloadData()
             self.resetSizeTableView()
         }
     }
@@ -228,7 +263,9 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
                 self.articleArray.append(article)
             }
             
-            self.tableView.reloadData()
+            self.sections.value = [SectionOfArticleData(items:self.articleArray)]
+            
+//            self.tableView.reloadData()
             
             self.resetSizeTableView()
         }
@@ -328,29 +365,28 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
                         }
             })
         }
-    
 }
 
-extension FeedTableViewController : UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
-        return self.articleArray.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    {
-        let article = self.articleArray[indexPath.row]
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: article.type.rawValue, for: indexPath) as! FeedTableCell
-        cell.article = article
-        cell.delegate = self
-        cell.contentTextView.text = article.content
-        cell.contentTextView.resolveHashTags()
-        cell.contentTextView.delegate = self
-        
-        return cell
-    }
-}
+//extension FeedTableViewController : UITableViewDelegate, UITableViewDataSource {
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+//    {
+//        return self.articleArray.count
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+//    {
+//        let article = self.articleArray[indexPath.row]
+//
+//        let cell = tableView.dequeueReusableCell(withIdentifier: article.type.rawValue, for: indexPath) as! FeedTableCell
+//        cell.article = article
+//        cell.delegate = self
+//        cell.contentTextView.text = article.content
+//        cell.contentTextView.resolveHashTags()
+//        cell.contentTextView.delegate = self
+//
+//        return cell
+//    }
+//}
 
 extension FeedTableViewController : UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
@@ -821,6 +857,17 @@ enum ReportType :String {
     case ADULT = "ADULT", OFFEND = "OFFEND", SPAM = "SPAM"
 }
 
+struct SectionOfArticleData {
+    var items : [Item]
+}
 
+extension SectionOfArticleData : SectionModelType {
+    typealias Item = Article
+    
+    init(original: SectionOfArticleData, items: [Article]) {
+        self = original
+        self.items = items
+    }
+}
 
 

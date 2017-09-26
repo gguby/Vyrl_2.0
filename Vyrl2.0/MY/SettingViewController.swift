@@ -21,8 +21,10 @@ class SettingViewController: UIViewController, UIScrollViewDelegate {
         // Do any additional setup after loading the view.
         scrollView.delegate = self
         
-        self.contentHeight.constant = 220
-        
+        self.contentHeight.constant = 220        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         let account : Account = LoginManager.sharedInstance.getCurrentAccount()!
         
         socialLabel.text = account.service! + " 로그인 중"

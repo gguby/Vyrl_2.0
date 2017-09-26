@@ -61,6 +61,8 @@ class FeedViewController: UIViewController {
             controller.view.frame.size.height -= 66
             
             embedController.append(viewController: controller)
+        }else {
+            embedController.remove()
         }
     }
     
@@ -141,6 +143,16 @@ class EmbedController {
             controllers.append(viewController)
             rootViewController.addChildViewController(viewController)
             rootViewController.view.addSubview(viewController.view)
+        }
+    }
+    
+    func remove(){
+        if let rootViewController = self.rootViewController {
+            for controller in controllers {
+                controller.view.removeFromSuperview()
+                controller.removeFromParentViewController()
+            }
+            controllers.removeAll()
         }
     }
     
