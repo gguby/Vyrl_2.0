@@ -27,6 +27,9 @@ class OtherProfileViewController: UIViewController {
     
     @IBOutlet weak var followButton: UIButton!
     
+    @IBOutlet weak var followerView: UIView!
+    @IBOutlet weak var followingView: UIView!
+    
     var profileUserId : Int!
     var followState : Bool! = false
     
@@ -41,6 +44,26 @@ class OtherProfileViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.loadUserProfile()
+        
+        let followerGesture = UITapGestureRecognizer(target: self, action: #selector(self.clickFollowList(sender:)))
+        let followingGesture = UITapGestureRecognizer(target: self, action: #selector(self.clickFollowList(sender:)))
+        self.followerView.addGestureRecognizer(followerGesture)
+        self.followingView.addGestureRecognizer(followingGesture)
+    }
+    
+    func clickFollowList(sender: UITapGestureRecognizer){
+        let storyboard = UIStoryboard(name: "My", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "FollowListViewController") as! FollowListViewController // or whatever it is
+        
+        if(sender.view == self.followerView){
+            vc.followType = FollowType.Follower
+        } else {
+            vc.followType = FollowType.Following
+        }
+        
+        vc.userId = "\(self.profileUserId!)"
+        
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
     func setupPostContainer(){

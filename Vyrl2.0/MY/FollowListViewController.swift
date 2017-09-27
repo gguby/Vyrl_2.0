@@ -22,7 +22,7 @@ class FollowListViewController: UIViewController {
     var followType = FollowType.Follower
     
     var followUserArray = [[String : Any]]()
-    var articleId : Int!
+    var userId : String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,34 +33,31 @@ class FollowListViewController: UIViewController {
     func requestLikeUser() {
         followUserArray.removeAll()
         
-        var uri = Constants.VyrlAPIURL.FOLLOWER
+        var uri : String!
         self.likeLabel.text = "FOLLOWER"
+      
         
-        
-        if(followType == FollowType.Following) {
-            uri = Constants.VyrlAPIURL.FOLLOWING
+         if(followType == FollowType.Follower)
+        {
+            uri = Constants.VyrlAPIURL.otherUserFollower(userId: self.userId)
+        } else {
+            uri = Constants.VyrlAPIURL.otherUserFollowing(userId: self.userId)
             self.likeLabel.text = "FOLLOWING"
         }
         
-        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: LoginManager.sharedInstance.getHeader()).responseString(completionHandler: {
-            response in
-            switch response.result {
-            case .success:
-                if let statusesArray = try? JSONSerialization.jsonObject(with: response.data!, options: .allowFragments) as? [[String: Any]] {
-                    // Finally we got the username
-                    if(statusesArray == nil) {
-                        self.followUserArray.removeAll()
-                    } else {
-                        self.followUserArray = statusesArray!
-                    }
-                    
-                    self.tableView.reloadData()
-                }
+        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: LoginManager.sharedInstance.getHeader()).responseJSON { (response) in
+            
+            self.followUserArray.removeAll()
+            
+            if let data = response.result.value {
                 
-            case .failure(let error):
-                print(error)
-            }
-        })
+                if (data as? [[String : Any]] != nil) {
+                    self.followUserArray = (data as? [[String : Any]])!
+                }
+             }
+            
+            self.tableView.reloadData()
+        }
         
     }
 }

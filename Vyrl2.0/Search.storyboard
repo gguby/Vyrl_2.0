@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1Vp-nc-zxL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1Vp-nc-zxL">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="AppleSDGothicNeo.ttc">
+            <string>AppleSDGothicNeo-Medium</string>
+            <string>AppleSDGothicNeo-Regular</string>
+            <string>AppleSDGothicNeo-SemiBold</string>
+            <string>AppleSDGothicNeo-UltraLight</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Search-->
         <scene sceneID="SMR-eG-GdH">
@@ -142,7 +151,7 @@
                                                                             </constraints>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EXO" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C7W-uW-hxb">
-                                                                            <rect key="frame" x="8" y="69" width="46" height="24"/>
+                                                                            <rect key="frame" x="0.0" y="69" width="62" height="32"/>
                                                                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="13"/>
                                                                             <color key="textColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
@@ -680,7 +689,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qZW-jB-uLe">
-                                                    <rect key="frame" x="119" y="8.5" width="45.5" height="30"/>
+                                                    <rect key="frame" x="119" y="9" width="45.5" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="Grm-eC-PPC"/>
                                                         <constraint firstAttribute="width" constant="43.5" id="yj2-4f-Iny"/>
@@ -832,7 +841,6 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="qYc-rH-SsF">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1228,7 +1236,9 @@
                         <outlet property="containerView" destination="uir-Xa-kcR" id="NRb-Wa-e7B"/>
                         <outlet property="followButton" destination="cFM-8Q-eeL" id="tpW-Ub-A51"/>
                         <outlet property="follower" destination="Aux-e4-7fm" id="zAL-tg-Wwv"/>
+                        <outlet property="followerView" destination="LSc-uf-pMv" id="L6O-ry-nSB"/>
                         <outlet property="following" destination="c83-nM-Wm8" id="nlY-aV-I0b"/>
+                        <outlet property="followingView" destination="arF-5I-9Cm" id="O30-jK-UmR"/>
                         <outlet property="homepageLabel" destination="0cq-0J-udt" id="et6-Kg-7nf"/>
                         <outlet property="introLabel" destination="hHc-D4-H6v" id="5gK-Dg-ojD"/>
                         <outlet property="middlePostBtn" destination="gkc-tI-6yX" id="5WU-76-qu9"/>

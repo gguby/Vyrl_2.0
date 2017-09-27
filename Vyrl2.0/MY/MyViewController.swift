@@ -99,6 +99,8 @@ class MyViewController: UIViewController{
         } else {
             vc.followType = FollowType.Following
         }
+    
+        vc.userId = LoginManager.sharedInstance.getCurrentAccount()?.userId
         
         self.navigationController?.pushViewController(vc, animated: true)
     }

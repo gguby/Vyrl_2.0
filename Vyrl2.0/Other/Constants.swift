@@ -37,6 +37,16 @@ struct Constants {
             let str = "\(userId)"
             return VyrlAPIConstants.baseURL + "users/profile/" + str
         }
+        
+        static func otherUserFollower(userId : String)-> String{
+            let str = "/\(userId)"
+            return FOLLOWER + str
+        }
+        
+        static func otherUserFollowing(userId : String)-> String{
+            let str = "/\(userId)"
+            return FOLLOWING + str
+        }
     }
     
     struct VyrlSearchURL {
