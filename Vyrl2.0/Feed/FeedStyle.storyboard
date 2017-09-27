@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -180,7 +181,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="57"/>
                                                                     <subviews>
                                                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ZG-pL-eL0" userLabel="like view">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
+                                                                            <rect key="frame" x="0.0" y="-18" width="414" height="0.0"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="NCT_Dream님, 엑소디오xoxo님 외 203명이 좋아합니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="31B-1n-qeY">
                                                                                     <rect key="frame" x="15" y="18" width="384" height="16"/>
@@ -325,21 +326,44 @@
                                                                         </view>
                                                                     </subviews>
                                                                 </stackView>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jvw-3o-Vw5" userLabel="photo">
-                                                                    <rect key="frame" x="0.0" y="57" width="414" height="279"/>
-                                                                    <color key="backgroundColor" red="0.50196078430000002" green="0.32156862749999998" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YoI-Ca-Hmt">
+                                                                    <rect key="frame" x="0.0" y="57" width="414" height="414"/>
+                                                                    <subviews>
+                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jvw-3o-Vw5" userLabel="photo">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
+                                                                            <color key="backgroundColor" red="0.50196078430000002" green="0.32156862749999998" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        </imageView>
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pmu-v4-emX">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
+                                                                            <connections>
+                                                                                <action selector="photoClick:" destination="PFc-q2-8d2" eventType="touchUpInside" id="gvC-7K-pu8"/>
+                                                                            </connections>
+                                                                        </button>
+                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mbm-NF-hER">
+                                                                            <rect key="frame" x="167" y="167" width="80" height="80"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" constant="80" id="baE-iZ-bBz"/>
+                                                                                <constraint firstAttribute="height" constant="80" id="ptY-Nh-TsI"/>
+                                                                            </constraints>
+                                                                        </imageView>
+                                                                    </subviews>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" constant="279" id="b2m-7s-LWR"/>
+                                                                        <constraint firstItem="mbm-NF-hER" firstAttribute="centerY" secondItem="YoI-Ca-Hmt" secondAttribute="centerY" id="CCK-sx-mrC"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="Jvw-3o-Vw5" secondAttribute="bottom" id="Fuw-Jd-pn9"/>
+                                                                        <constraint firstItem="mbm-NF-hER" firstAttribute="centerX" secondItem="YoI-Ca-Hmt" secondAttribute="centerX" id="NQc-8M-nzC"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="pmu-v4-emX" secondAttribute="trailing" id="Ox1-d3-DzK"/>
+                                                                        <constraint firstItem="pmu-v4-emX" firstAttribute="leading" secondItem="YoI-Ca-Hmt" secondAttribute="leading" id="QtT-L1-54K"/>
+                                                                        <constraint firstItem="Jvw-3o-Vw5" firstAttribute="top" secondItem="YoI-Ca-Hmt" secondAttribute="top" id="ZTX-dw-502"/>
+                                                                        <constraint firstItem="Jvw-3o-Vw5" firstAttribute="leading" secondItem="YoI-Ca-Hmt" secondAttribute="leading" id="bac-RT-lLs"/>
+                                                                        <constraint firstAttribute="width" secondItem="YoI-Ca-Hmt" secondAttribute="height" multiplier="1:1" id="g9l-Ru-8Vu"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="pmu-v4-emX" secondAttribute="bottom" id="kWe-rt-Yfd"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="Jvw-3o-Vw5" secondAttribute="trailing" id="twt-zi-2ic"/>
+                                                                        <constraint firstItem="pmu-v4-emX" firstAttribute="top" secondItem="YoI-Ca-Hmt" secondAttribute="top" id="ueq-bS-eW2"/>
                                                                     </constraints>
-                                                                </imageView>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pmu-v4-emX">
-                                                                    <rect key="frame" x="0.0" y="57" width="414" height="279"/>
-                                                                    <connections>
-                                                                        <action selector="photoClick:" destination="PFc-q2-8d2" eventType="touchUpInside" id="gvC-7K-pu8"/>
-                                                                    </connections>
-                                                                </button>
+                                                                </view>
                                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="TFH-Uf-id7">
-                                                                    <rect key="frame" x="15" y="348" width="384" height="154"/>
+                                                                    <rect key="frame" x="15" y="471" width="384" height="31"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -546,23 +570,19 @@
                                                                 <constraint firstItem="fUX-hJ-PSH" firstAttribute="top" secondItem="TFH-Uf-id7" secondAttribute="bottom" constant="7.5" id="0ED-fU-aeH"/>
                                                                 <constraint firstItem="fUX-hJ-PSH" firstAttribute="leading" secondItem="6oz-ad-0AK" secondAttribute="leading" id="1w3-6V-DGs"/>
                                                                 <constraint firstItem="Vg5-ND-KvX" firstAttribute="leading" secondItem="6oz-ad-0AK" secondAttribute="leading" id="22V-mL-mH9"/>
+                                                                <constraint firstItem="YoI-Ca-Hmt" firstAttribute="top" secondItem="APO-ba-Jyz" secondAttribute="bottom" id="3MA-aE-G1X"/>
                                                                 <constraint firstItem="TFH-Uf-id7" firstAttribute="leading" secondItem="6oz-ad-0AK" secondAttribute="leading" constant="15" id="4mo-bP-Jfn"/>
                                                                 <constraint firstItem="APO-ba-Jyz" firstAttribute="leading" secondItem="6oz-ad-0AK" secondAttribute="leading" id="ANy-7d-Fol"/>
                                                                 <constraint firstAttribute="trailing" secondItem="APO-ba-Jyz" secondAttribute="trailing" id="BCU-Fk-Scy"/>
                                                                 <constraint firstItem="APO-ba-Jyz" firstAttribute="top" secondItem="6oz-ad-0AK" secondAttribute="top" id="BOx-tc-Q6G"/>
-                                                                <constraint firstItem="pmu-v4-emX" firstAttribute="top" secondItem="Jvw-3o-Vw5" secondAttribute="top" id="IfN-oK-H1N"/>
+                                                                <constraint firstItem="YoI-Ca-Hmt" firstAttribute="leading" secondItem="6oz-ad-0AK" secondAttribute="leading" id="DfU-oX-Ugb"/>
                                                                 <constraint firstAttribute="trailing" secondItem="TFH-Uf-id7" secondAttribute="trailing" constant="15" id="RHX-Nn-ZXQ"/>
-                                                                <constraint firstAttribute="trailing" secondItem="Jvw-3o-Vw5" secondAttribute="trailing" id="Tha-Ej-9dX"/>
                                                                 <constraint firstAttribute="trailing" secondItem="Vg5-ND-KvX" secondAttribute="trailing" id="YpB-PQ-SgA"/>
-                                                                <constraint firstItem="pmu-v4-emX" firstAttribute="bottom" secondItem="Jvw-3o-Vw5" secondAttribute="bottom" id="c6k-Tn-lgg"/>
-                                                                <constraint firstItem="pmu-v4-emX" firstAttribute="leading" secondItem="Jvw-3o-Vw5" secondAttribute="leading" id="cUz-Pf-3Kb"/>
                                                                 <constraint firstAttribute="bottom" secondItem="Vg5-ND-KvX" secondAttribute="bottom" constant="14.5" id="cWs-5b-oom"/>
                                                                 <constraint firstItem="Vg5-ND-KvX" firstAttribute="top" secondItem="fUX-hJ-PSH" secondAttribute="bottom" constant="11" id="cgB-zX-z66"/>
-                                                                <constraint firstItem="pmu-v4-emX" firstAttribute="trailing" secondItem="Jvw-3o-Vw5" secondAttribute="trailing" id="dAC-mB-gOY"/>
-                                                                <constraint firstItem="Jvw-3o-Vw5" firstAttribute="leading" secondItem="6oz-ad-0AK" secondAttribute="leading" id="m6z-iw-Vpy"/>
+                                                                <constraint firstItem="TFH-Uf-id7" firstAttribute="top" secondItem="YoI-Ca-Hmt" secondAttribute="bottom" id="q0w-if-eqq"/>
                                                                 <constraint firstAttribute="trailing" secondItem="fUX-hJ-PSH" secondAttribute="trailing" id="sRo-ke-UbV"/>
-                                                                <constraint firstItem="TFH-Uf-id7" firstAttribute="top" secondItem="pmu-v4-emX" secondAttribute="bottom" constant="12" id="tEP-Cn-aKs"/>
-                                                                <constraint firstItem="Jvw-3o-Vw5" firstAttribute="top" secondItem="APO-ba-Jyz" secondAttribute="bottom" id="xlI-o3-6rN"/>
+                                                                <constraint firstAttribute="trailing" secondItem="YoI-Ca-Hmt" secondAttribute="trailing" id="yYD-Nb-XJT"/>
                                                             </constraints>
                                                         </view>
                                                     </subviews>
@@ -583,11 +603,13 @@
                                                     <outlet property="firstCommentNicknameButton" destination="Hp3-wf-JOt" id="zbz-ft-a0c"/>
                                                     <outlet property="firstCommentView" destination="QwL-7u-PhX" id="rcg-yc-tCm"/>
                                                     <outlet property="followBtn" destination="2Zj-TJ-v41" id="NuS-Zb-Pfv"/>
+                                                    <outlet property="iconView" destination="mbm-NF-hER" id="7A2-dy-m2k"/>
                                                     <outlet property="likeBtn" destination="tbe-fo-INV" id="HZK-Ai-H9E"/>
                                                     <outlet property="locationLabel" destination="fQb-to-pNo" id="Pm5-lg-nwS"/>
                                                     <outlet property="nickNameLabel" destination="6qs-Ks-sBY" id="0pP-Ws-YqJ"/>
                                                     <outlet property="officialImage" destination="cPv-xn-jDH" id="ZSB-rT-qIJ"/>
                                                     <outlet property="photo" destination="Jvw-3o-Vw5" id="q9r-Gf-elW"/>
+                                                    <outlet property="photoView" destination="YoI-Ca-Hmt" id="Nn4-fI-dN8"/>
                                                     <outlet property="profileButton" destination="VlA-Tj-LQj" id="JVr-ka-jCO"/>
                                                     <outlet property="seconCommentContent" destination="SeI-4p-Mxt" id="bKM-QI-Np9"/>
                                                     <outlet property="secondCommentNicknameButton" destination="rDx-ha-TKw" id="K6b-w7-b4k"/>
@@ -610,7 +632,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="57"/>
                                                                     <subviews>
                                                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jJi-gU-PHZ" userLabel="like view">
-                                                                            <rect key="frame" x="0.0" y="-18" width="414" height="0.0"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="NCT_Dream님, 엑소디오xoxo님 외 203명이 좋아합니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5DO-lt-xP9">
                                                                                     <rect key="frame" x="15" y="18" width="384" height="16"/>
@@ -1101,7 +1123,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="57"/>
                                                                     <subviews>
                                                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ghm-CG-up3" userLabel="like view">
-                                                                            <rect key="frame" x="0.0" y="6" width="414" height="0.0"/>
+                                                                            <rect key="frame" x="0.0" y="-18" width="414" height="0.0"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="NCT_Dream님, 엑소디오xoxo님 외 203명이 좋아합니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Net-0Y-TpO">
                                                                                     <rect key="frame" x="15" y="18" width="384" height="16"/>
@@ -1485,7 +1507,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="57"/>
                                                                     <subviews>
                                                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rl0-At-sL3" userLabel="like view">
-                                                                            <rect key="frame" x="0.0" y="-23.333333333333332" width="414" height="0.0"/>
+                                                                            <rect key="frame" x="0.0" y="-5.3333333333333321" width="414" height="0.0"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="NCT_Dream님, 엑소디오xoxo님 외 203명이 좋아합니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Jb-Zv-2di">
                                                                                     <rect key="frame" x="15" y="18" width="384" height="16"/>
@@ -2120,7 +2142,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UDs-sZ-MBN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1215" y="-1008"/>
+            <point key="canvasLocation" x="-1215.9420289855072" y="-1008.4239130434784"/>
         </scene>
     </scenes>
     <resources>

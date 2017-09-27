@@ -62,6 +62,10 @@ class FeedTableCell: UITableViewCell {
     @IBOutlet weak var officialImage: UIImageView!
     @IBOutlet weak var followBtn: UIButton!
     
+    @IBOutlet weak var photoView: UIView!
+    @IBOutlet weak var iconView: UIImageView!
+    
+    
     var nativeAd :FBNativeAd!
     
     var adLoader: GADAdLoader!
@@ -100,24 +104,20 @@ class FeedTableCell: UITableViewCell {
                 let url : URL = URL.init(string: str!)!
                 self.photo.af_setImage(withURL: url)
                 
+                self.iconView.isHidden = true
+                
                 if(self.article?.medias[0].type == "VIDEO")
                 {
                     let playImage = UIImage.init(named: "icon_play_01")
-                    let subImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: (playImage?.size.width)!, height: (playImage?.size.height)!))
-                    subImageView.center = CGPoint.init(x: self.photo.frame.size.width/2, y: self.photo.frame.size.height/2)
-                    subImageView.image = playImage
-                    
-                    self.photo.addSubview(subImageView)
+                    self.iconView.image = playImage
+                    self.iconView.isHidden = false
                 }
                 
                 if(url.pathExtension == "gif")
                 {
                     let gifImage = UIImage.init(named: "icon_gif_01")
-                    let subImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: (gifImage?.size.width)!, height: (gifImage?.size.height)!))
-                    subImageView.center = CGPoint.init(x: self.photo.frame.size.width/2, y: self.photo.frame.size.height/2)
-                    subImageView.image = gifImage
-                    
-                    self.photo.addSubview(subImageView)
+                    self.iconView.image = gifImage
+                    self.iconView.isHidden = false
                 }
             }
             
