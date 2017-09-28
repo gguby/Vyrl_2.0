@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import AlamofireImage
+import SwiftyJSON
 
 class OtherProfileViewController: UIViewController {
     @IBOutlet weak var profileImage: UIImageView!
@@ -109,20 +110,20 @@ class OtherProfileViewController: UIViewController {
                 
                 if let code = response.response?.statusCode {
                     if code == 200 {
-                        let jsonData = json as! NSDictionary
+                        let jsonData = JSON(json)
                         
-                        self.nickNameLabel.text = jsonData["nickName"] as? String
-                        self.introLabel.text = jsonData["selfIntro"] as? String
-                        self.homepageLabel.text = jsonData["homepageUrl"] as? String
+                        self.nickNameLabel.text = jsonData["nickName"].string
+                        self.introLabel.text = jsonData["selfIntro"].string
+                        self.homepageLabel.text = jsonData["homepageUrl"].string
                         
-                        let image = jsonData["imagePath"] as? String
+                        let image = jsonData["imagePath"].string
                         
                         if image?.isEmpty == false {
                             let url = URL.init(string: (image)!)
                             self.profileImage.af_setImage(withURL: url!)
                         }
                         
-                        if(jsonData["follow"] as! Bool == true)
+                        if(jsonData["follow"].bool == true)
                         {
                             self.followButton.setImage(UIImage.init(named: "icon_check_05_on"), for: .normal)
                             self.followButton.tag = 1
@@ -130,6 +131,10 @@ class OtherProfileViewController: UIViewController {
                             self.followButton.setImage(UIImage.init(named: "icon_check_05_off"), for: .normal)
                             self.followButton.tag = 0
                         }
+                        
+                        self.post.text = "\(jsonData["articleCount"].intValue)"
+                        self.following.text = "\(jsonData["followingCount"].intValue)"
+                        self.follower.text = "\(jsonData["followerCount"].intValue)"
                     }
                 }
                 
