@@ -80,6 +80,7 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
     func createFeed(){
         var parameters :[String:String] = [
             "content": textView.text,
+            "contentType" :"ARTICLE",
             //            "latitude" : "\(self.currentPlace.latitude!)",
             //            "longitude" : "\(self.currentPlace.longitude!)"
         ]
@@ -101,12 +102,13 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
         let fanPageId = (self.fanPage?.fanPageId)!
         
         let parameters : Parameters = [
+            "contentType" :"FANPAGE",
             "fanPageId" : "\(fanPageId)",
             "content": textView.text,
             "openYn" : String(self.isOpenYn)
         ]
         
-        let uri = Constants.VyrlFanAPIURL.FANPAGEPOST
+        let uri = Constants.VyrlFeedURL.FEED
         
         let queryUrl = URL.init(string: uri, parameters: parameters as! [String : String])
         

@@ -56,6 +56,8 @@ class FeedViewController: UIViewController {
         if embedController.controllers.last != nil {
             let vc = embedController.controllers.last as! FeedTableViewController
             vc.getAllFeed()
+        }else {
+            self.setupFeedTableView()
         }
     }
     

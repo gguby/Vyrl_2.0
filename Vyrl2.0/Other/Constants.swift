@@ -131,7 +131,7 @@ struct Constants {
         
         static func getFanPagePosts(fanPageId : Int)-> String{
             let str = "\(fanPageId)"
-            return VyrlAPIConstants.baseURL + "fan-pages/" + str + "/posts"
+            return VyrlAPIConstants.baseURL + "feeds/" + str + "/posts"
         }
         
         static func search(searchWord : String) -> String{
