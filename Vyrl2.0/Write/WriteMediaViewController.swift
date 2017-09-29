@@ -583,7 +583,8 @@ class AVAsset : Copying {
                     imageSize = imgData.length
                 }
                 
-                return UIImageJPEGRepresentation(self.photo!, 1.0)!
+                return imgData as Data
+                
             }
             return nil
         }

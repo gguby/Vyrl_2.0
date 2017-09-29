@@ -173,7 +173,7 @@ struct FanPageUser : Mappable {
         fanPageMemberId <- map["fanPageMemberId"]
         followCheck <- map["followCheck"]
         level <- map["level"]
-        nickName <- map["nickname"]
+        nickName <- map["nickName"]
         pageprofileImagePath <- map["profileImagePath"]
         requestState <- map["requestState"]
     }

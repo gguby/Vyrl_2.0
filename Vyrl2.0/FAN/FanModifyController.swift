@@ -163,7 +163,12 @@ class FanModifyController : UIViewController {
         self.introTextField.text = self.fanPage.pageInfo
         self.linkTextField.text = self.fanPage.link
         
-        self.imageView.af_setImage(withURL: URL.init(string: self.fanPage.pageprofileImagePath)!)
+        if self.fanPage.randomImage > 0 {
+            let str = "img_fanbg_default_0\(self.fanPage.randomImage!)"
+            self.imageView.image = UIImage.init(named: str)
+        }else {
+            self.imageView.af_setImage(withURL: URL.init(string: self.fanPage.pageprofileImagePath)!)
+        }
         
         fanPageNameTextField.delegate = self
         introTextField.delegate = self
