@@ -376,10 +376,6 @@ class FeedDetailViewController: UIViewController{
     func requestFeedDetail() {
          var url = URL.init(string: Constants.VyrlFeedURL.feed(articleId: articleId))
         
-        if(self.feedType == FeedTableType.FANFEED){
-            url = URL.init(string: Constants.VyrlFanAPIURL.fanPagePost(articleId: articleId))
-        }
-        
         Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseObject { (response: DataResponse<Article>) in
             let article = response.result.value
             self.article = article
