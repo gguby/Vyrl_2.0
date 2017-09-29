@@ -33,15 +33,24 @@ class FanModifyController : UIViewController {
         self.loadFan()
         
         self.fanPageNameTextField.addTarget(self, action: #selector(textFieldInputDidChange(sender:)), for: .editingChanged)
-        self.imageEditBtn.addTarget(self, action: #selector(changeProfile), for: .touchUpInside)
+        self.imageEditBtn.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
         self.completeBtn.addTarget(self, action: #selector(modifyFanPage), for: .touchUpInside)
     }
     
     func modifyFanPage(){
         let profile = self.imageView.image
         
+        var keepStr = "KEEP"
+        if self.imageView.tag == 1 {
+            keepStr = "PATCH"
+        }else if self.imageView.tag == 2 {
+            keepStr = "DELETE"
+        }
+        
         var parameters : Parameters = [
-            "pageName": fanPageNameTextField.text!
+            "pageName": fanPageNameTextField.text!,
+            "fileStatus" : keepStr,
+            "randomImage" : "\(randomImage)"
         ]
         
         if let text = introTextField.text {
@@ -85,6 +94,55 @@ class FanModifyController : UIViewController {
                     print(encodingError.localizedDescription)
                 }
         })
+    }
+    
+    func showProfileViewController() {
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ProfilePhotoViewController") as! ProfilePhotoViewController
+        
+        present(vc, animated: true, completion: nil)
+    }
+    
+    var randomImage = 0
+    
+    func showAlert() {
+        let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.alert)
+        
+        let showProfileAction = UIAlertAction(title: "사진 크게 보기", style: .default,handler: { (action) -> Void in
+            self.showProfileViewController()
+        })
+        let changeProfileAction = UIAlertAction(title: "프로필 사진 변경", style: .default, handler: { (action) -> Void in
+            self.changeProfile()
+        })
+        let defaultProfileAction = UIAlertAction(title: "기본 이미지로 변경", style: .default, handler: { (action) -> Void in
+            
+            let diceRoll = Int(arc4random_uniform(3)+1)
+            self.randomImage = diceRoll
+            let str = "img_fanbg_default_0\(diceRoll)"
+            
+            self.imageView.image = UIImage.init(named: str)
+            self.imageView.tag = 2
+            
+            self.completeBtn.isEnabled = true
+            self.completeBtn.backgroundColor = UIColor.ivLighterPurple
+            
+            self.dismiss(animated: true, completion: {
+                
+            })
+        })
+        alertController.addAction(showProfileAction)
+        alertController.addAction(changeProfileAction)
+        alertController.addAction(defaultProfileAction)
+        
+        present(alertController, animated: true, completion: {
+            alertController.view.superview?.isUserInteractionEnabled = true
+            alertController.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.alertControllerBackgroundTapped)))
+        })
+    }
+    
+    func alertControllerBackgroundTapped()
+    {
+        self.dismiss(animated: true, completion: nil)
     }
     
     func changeProfile() {
@@ -193,6 +251,7 @@ extension FanModifyController : UIImagePickerControllerDelegate, UINavigationCon
         // Filtered image will be returned here.
         
         imageView.image =  image
+        imageView.tag = 1
         
         self.dismiss(animated:true, completion: nil)
         

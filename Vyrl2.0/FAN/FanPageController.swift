@@ -105,6 +105,12 @@ class FanPageController : UIViewController {
          if fanPage.pageprofileImagePath.isEmpty == false {
             self.pageImage.af_setImage(withURL: URL.init(string: fanPage.pageprofileImagePath!)!)
         }
+        
+        if fanPage.randomImage != 0 {
+            let str = "img_fanbg_default_0\(fanPage.randomImage!)"
+            self.pageImage.image = UIImage.init(named: str)
+        }
+        
         self.pageName.text = fanPage.pageName
         
         if (fanPage.pageInfo) != nil {

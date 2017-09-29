@@ -276,6 +276,12 @@ extension FanViewController : UICollectionViewDataSource, UICollectionViewDelega
         if fan.pageprofileImagePath.isEmpty == false {
             cell.imageView.af_setImage(withURL: URL.init(string: fan.pageprofileImagePath)!)
             cell.blurImgView.af_setImage(withURL: URL.init(string: fan.pageprofileImagePath)!)
+        }else {
+            if fan.randomImage != 0 {
+                let str = "img_fanbg_default_0\(fan.randomImage!)"
+                cell.imageView.image = UIImage.init(named: str)
+                cell.blurImgView.image = UIImage.init(named: str)
+            }
         }
         cell.textView.text = fan.pageName
         
@@ -658,6 +664,7 @@ struct FanPage : Mappable {
     var isAlarm : Bool!
     
     var alarm : String!
+    var randomImage : Int!
     
     init?(map: Map) {
         
@@ -673,6 +680,7 @@ struct FanPage : Mappable {
         pageprofileImagePath <- map["profileImagePath"]
         cntPost <- map["postCount"]
         cntMember <- map["memberCount"]
+        randomImage <- map["randomImage"]
         
         alarm <- map["alarm"]        
         if alarm != nil && alarm == "ON" {
