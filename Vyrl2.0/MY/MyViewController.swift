@@ -222,6 +222,8 @@ class MyViewController: UIViewController{
                         self.post.text = "\(json["articleCount"].intValue)"
                         self.postCount = json["articleCount"].intValue
                         
+                        self.middlePostBtn.text = "\(self.postCount) Posts"
+                        
                         if self.postCount == 0 {
                             self.emptyView.alpha = 1
                         }else {

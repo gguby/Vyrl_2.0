@@ -159,7 +159,7 @@ struct Constants {
         
         static func WithDrawAll(fanPageId : Int)-> String{
             let str = "\(fanPageId)"
-            return VyrlAPIConstants.baseURL + "fan-pages/members/request-withdraws/" + str
+            return VyrlAPIConstants.baseURL + "fan-pages/request-withdraws/" + str
         }
         
         static func fanPageClose(fanPageId : Int)-> String{

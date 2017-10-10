@@ -181,7 +181,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="57"/>
                                                                     <subviews>
                                                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ZG-pL-eL0" userLabel="like view">
-                                                                            <rect key="frame" x="0.0" y="-18" width="414" height="0.0"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="NCT_Dream님, 엑소디오xoxo님 외 203명이 좋아합니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="31B-1n-qeY">
                                                                                     <rect key="frame" x="15" y="18" width="384" height="16"/>
@@ -291,7 +291,7 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ed2-hf-5hz" userLabel="Fan View">
-                                                                            <rect key="frame" x="0.0" y="6.666666666666667" width="414" height="0.0"/>
+                                                                            <rect key="frame" x="0.0" y="3.6666666666666665" width="414" height="0.0"/>
                                                                             <subviews>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="txt_fan_01" translatesAutoresizingMaskIntoConstraints="NO" id="9ih-Ap-ywK">
                                                                                     <rect key="frame" x="15" y="18.666666666666671" width="32" height="12.999999999999986"/>
@@ -632,7 +632,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="57"/>
                                                                     <subviews>
                                                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jJi-gU-PHZ" userLabel="like view">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
+                                                                            <rect key="frame" x="0.0" y="-18" width="414" height="0.0"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="NCT_Dream님, 엑소디오xoxo님 외 203명이 좋아합니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5DO-lt-xP9">
                                                                                     <rect key="frame" x="15" y="18" width="384" height="16"/>
@@ -740,7 +740,7 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XlJ-8I-bN3" userLabel="Fan View">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
+                                                                            <rect key="frame" x="0.0" y="6.666666666666667" width="414" height="0.0"/>
                                                                             <subviews>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="imageView:XOo-60-p1g:image" translatesAutoresizingMaskIntoConstraints="NO" id="XOo-60-p1g">
                                                                                     <rect key="frame" x="15" y="18.666666666666671" width="32" height="12.999999999999986"/>
@@ -1013,9 +1013,6 @@
                                                                                     <state key="normal" title="20" image="icon_share_01">
                                                                                         <color key="titleColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                                     </state>
-                                                                                    <connections>
-                                                                                        <action selector="share:" destination="hth-2A-IVu" eventType="touchUpInside" id="9Cg-KM-hs6"/>
-                                                                                    </connections>
                                                                                 </button>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tc9-6a-2Vt" userLabel="bookmark">
                                                                                     <rect key="frame" x="364" y="0.0" width="50" height="34"/>
@@ -1024,9 +1021,6 @@
                                                                                         <constraint firstAttribute="width" constant="50" id="MaQ-cg-PM4"/>
                                                                                     </constraints>
                                                                                     <state key="normal" image="icon_bookmark_01"/>
-                                                                                    <connections>
-                                                                                        <action selector="setBookMark:" destination="hth-2A-IVu" eventType="touchUpInside" id="rRt-lZ-xzf"/>
-                                                                                    </connections>
                                                                                 </button>
                                                                             </subviews>
                                                                             <constraints>
@@ -1123,7 +1117,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="57"/>
                                                                     <subviews>
                                                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ghm-CG-up3" userLabel="like view">
-                                                                            <rect key="frame" x="0.0" y="-18" width="414" height="0.0"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="NCT_Dream님, 엑소디오xoxo님 외 203명이 좋아합니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Net-0Y-TpO">
                                                                                     <rect key="frame" x="15" y="18" width="384" height="16"/>
@@ -1402,9 +1396,6 @@
                                                                                     <state key="normal" title="20" image="icon_share_01">
                                                                                         <color key="titleColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                                     </state>
-                                                                                    <connections>
-                                                                                        <action selector="share:" destination="dCK-YA-8eZ" eventType="touchUpInside" id="CCl-S2-EPZ"/>
-                                                                                    </connections>
                                                                                 </button>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3TX-gJ-jqd" userLabel="bookmark">
                                                                                     <rect key="frame" x="364" y="0.0" width="50" height="34"/>
@@ -1413,9 +1404,6 @@
                                                                                         <constraint firstAttribute="height" constant="34" id="Vea-or-M8s"/>
                                                                                     </constraints>
                                                                                     <state key="normal" image="icon_bookmark_01"/>
-                                                                                    <connections>
-                                                                                        <action selector="setBookMark:" destination="dCK-YA-8eZ" eventType="touchUpInside" id="X6i-D9-y0h"/>
-                                                                                    </connections>
                                                                                 </button>
                                                                             </subviews>
                                                                             <constraints>
@@ -1507,7 +1495,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="57"/>
                                                                     <subviews>
                                                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rl0-At-sL3" userLabel="like view">
-                                                                            <rect key="frame" x="0.0" y="-5.3333333333333321" width="414" height="0.0"/>
+                                                                            <rect key="frame" x="0.0" y="-5.333333333333333" width="414" height="0.0"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="NCT_Dream님, 엑소디오xoxo님 외 203명이 좋아합니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Jb-Zv-2di">
                                                                                     <rect key="frame" x="15" y="18" width="384" height="16"/>
@@ -1797,9 +1785,6 @@
                                                                                     <state key="normal" title="20" image="icon_share_01">
                                                                                         <color key="titleColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                                     </state>
-                                                                                    <connections>
-                                                                                        <action selector="share:" destination="bRN-IR-0WK" eventType="touchUpInside" id="MtA-cG-oiN"/>
-                                                                                    </connections>
                                                                                 </button>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bnk-We-z2p" userLabel="bookmark">
                                                                                     <rect key="frame" x="364" y="0.0" width="50" height="34"/>
@@ -1808,9 +1793,6 @@
                                                                                         <constraint firstAttribute="width" constant="50" id="mwQ-LX-a6I"/>
                                                                                     </constraints>
                                                                                     <state key="normal" image="icon_bookmark_01"/>
-                                                                                    <connections>
-                                                                                        <action selector="setBookMark:" destination="bRN-IR-0WK" eventType="touchUpInside" id="r4H-YH-Eln"/>
-                                                                                    </connections>
                                                                                 </button>
                                                                             </subviews>
                                                                             <constraints>
@@ -1870,6 +1852,7 @@
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
+                                                    <outlet property="bookmarkBtn" destination="bnk-We-z2p" id="bnt-CJ-12R"/>
                                                     <outlet property="commentView" destination="ihP-0g-cAs" id="NiM-ro-duz"/>
                                                     <outlet property="firstCommentContent" destination="V85-Vu-Cc0" id="IVI-Ea-Wk5"/>
                                                     <outlet property="firstCommentNicknameButton" destination="mpt-Cq-69G" id="Hfz-qU-2Eo"/>
@@ -1879,6 +1862,7 @@
                                                     <outlet property="seconCommentContent" destination="tFf-UP-WvV" id="JqS-Zn-ilD"/>
                                                     <outlet property="secondCommentNicknameButton" destination="wU0-8c-pBz" id="Hs8-O2-wb8"/>
                                                     <outlet property="secondCommentView" destination="FVs-uT-cpg" id="YjT-31-tgn"/>
+                                                    <outlet property="share" destination="aoo-cM-ARU" id="6oT-wt-hGS"/>
                                                     <outlet property="timeLabel" destination="XH9-pl-YHf" id="F9n-TN-xhD"/>
                                                 </connections>
                                             </tableViewCell>
@@ -2037,9 +2021,6 @@
                                                                             <state key="normal" title="20" image="icon_share_01">
                                                                                 <color key="titleColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                             </state>
-                                                                            <connections>
-                                                                                <action selector="share:" destination="XHz-Pc-KGu" eventType="touchUpInside" id="HAv-dU-uEA"/>
-                                                                            </connections>
                                                                         </button>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d47-SN-f7h">
                                                                             <rect key="frame" x="379" y="0.0" width="20" height="20"/>
@@ -2048,9 +2029,6 @@
                                                                                 <constraint firstAttribute="width" constant="20" id="YeU-gJ-A8Q"/>
                                                                             </constraints>
                                                                             <state key="normal" title="Button" image="icon_bookmark_01"/>
-                                                                            <connections>
-                                                                                <action selector="setBookMark:" destination="XHz-Pc-KGu" eventType="touchUpInside" id="HzF-U9-kqX"/>
-                                                                            </connections>
                                                                         </button>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="30d-hb-avG">
                                                                             <rect key="frame" x="94" y="0.0" width="76" height="20"/>

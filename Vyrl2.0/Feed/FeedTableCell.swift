@@ -284,6 +284,8 @@ class FeedTableCell: UITableViewCell {
         self.followBtn.addTarget(self, action: #selector(followUser(sender:)), for: .touchUpInside)
         self.comment.addTarget(self, action: #selector(showCommentDetail(sender:)), for: .touchUpInside)
         self.likeBtn.addTarget(self, action: #selector(like(sender:)), for: .touchUpInside)
+        self.share.addTarget(self, action: #selector(doShare(sender:)), for: .touchUpInside)
+        self.bookmarkBtn.addTarget(self, action: #selector(doBookMark(sender:)), for: .touchUpInside)
         
         self.initAD()
     }
@@ -377,11 +379,11 @@ class FeedTableCell: UITableViewCell {
         delegate.showFeedAlert!(cell: self)
     }
     
-    @IBAction func share(_ sender: Any) {
+    func doShare(sender:UIButton){
         delegate.showFeedShareAlert!(cell: self)
     }
     
-    @IBAction func setBookMark(_ sender: Any) {
+    func doBookMark(sender:UIButton){
         delegate.setBookMark!(cell: self)
     }
 }
