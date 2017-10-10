@@ -108,6 +108,11 @@ struct Constants {
             let str = "\(articleId)"
             return VyrlAPIConstants.baseURL + "share/" + str
         }
+        
+        static func translate(id:Int, type:translateType)-> String {
+            let str = "\(id)/"
+            return VyrlAPIConstants.baseURL + "translate/" + str + type.rawValue
+        }
     }
     
     struct VyrlFanAPIURL {
@@ -200,6 +205,14 @@ struct Constants {
     
     enum VyrlResponseCode : Int {
         case NickNameAleadyInUse = 909
+    }
+    
+    enum translateType : String {
+        case article = "ARTICLE"
+        case commnet = "COMMENT"
+        case fanpage = "FANPAGE"
+        case official = "OFFICIAL"
+        case channel = "CHANNEL"
     }
 }
 
