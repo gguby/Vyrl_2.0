@@ -433,11 +433,9 @@ extension FeedTableViewController : UITextViewDelegate {
 
 extension FeedTableViewController : FeedCellDelegate {
     func didPressPhoto(sender: Any, cell : FeedTableCell) {
-        let storyboard = UIStoryboard(name: "Feed", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "FeedFullScreenViewController") as! FeedFullScreenViewController // or whatever it is
+        let vc = self.pushViewControllrer(storyboardName: "Feed", controllerName: "FeedFullScreenViewController") as! FeedFullScreenViewController // or whatever it is
         vc.mediasArray = cell.article?.medias
-        
-        self.navigationController?.pushViewController(vc, animated: true)
+
     }
     
     func didPressCell(sender: Any, cell : FeedTableCell) {
