@@ -55,6 +55,7 @@ class FeedViewController: UIViewController {
     func refresh(){
         if embedController.controllers.last != nil {
             let vc = embedController.controllers.last as! FeedTableViewController
+            vc.setUploadDelegate()
             vc.getAllFeed()
         }else {
             self.setupFeedTableView()
@@ -62,18 +63,14 @@ class FeedViewController: UIViewController {
     }
     
     func setupFeedTableView (){
-//        if LoginManager.sharedInstance.isExistFollower == true {
-            let storyboard = UIStoryboard(name: "FeedStyle", bundle: nil)
-            let controller = storyboard.instantiateViewController(withIdentifier: "feedTable") as! FeedTableViewController
-            controller.feedView = self
-            
-            controller.view.frame.origin = CGPoint.init(x: 0, y: 66)
-            controller.view.frame.size.height -= 66
-            
-            embedController.append(viewController: controller)
-//        }else {
-//            embedController.remove()
-//        }
+        let storyboard = UIStoryboard(name: "FeedStyle", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "feedTable") as! FeedTableViewController
+        controller.feedView = self
+        
+        controller.view.frame.origin = CGPoint.init(x: 0, y: 66)
+        controller.view.frame.size.height -= 66
+        
+        embedController.append(viewController: controller)
     }
     
     override func didReceiveMemoryWarning() {

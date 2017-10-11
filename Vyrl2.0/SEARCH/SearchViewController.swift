@@ -34,6 +34,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var historyView: UIView!
     @IBOutlet weak var historySwitch: UISwitch!
     
+    @IBOutlet weak var postContainer: UIView!
+    
     var historyOn = false
     
     var historyList = [History]()
@@ -66,6 +68,18 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         
         self.historyOn = UserDefaults.standard.bool(forKey: "HistorySearch")
         self.historySwitch.setOn(self.historyOn, animated: false)
+        
+        self.setupPostContainer()
+    }
+    
+    func setupPostContainer(){
+        self.postContainer.translatesAutoresizingMaskIntoConstraints  = true
+        let storyboard = UIStoryboard(name: "PostCollectionViewController", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "PostCollection")
+        addChildViewController(controller)
+        controller.view.translatesAutoresizingMaskIntoConstraints = true
+        postContainer.addSubview(controller.view)
+        controller.didMove(toParentViewController: self)
     }
     
     func initSearchBar()

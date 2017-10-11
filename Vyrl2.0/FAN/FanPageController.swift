@@ -82,7 +82,7 @@ class FanPageController : UIViewController {
             self.detailBtn.alpha = 0
         }else {
             self.signUpOrWithDraw.setTitle("탈퇴하기", for: .normal)
-            self.signUpOrWithDraw.backgroundColor = UIColor.init(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.5)
+            self.signUpOrWithDraw.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5)
             self.feedView.alpha = 1
             self.noFeedView.alpha = 0
             
