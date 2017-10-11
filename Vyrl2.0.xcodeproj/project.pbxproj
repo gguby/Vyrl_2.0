@@ -270,6 +270,7 @@
 				CE29B1C81ECD6161003F4D2E /* Search */,
 				CE29B1CB1ECD6161003F4D2E /* Write */,
 				CE29B1C61ECD6161003F4D2E /* Other */,
+				8F1E45E21F8DB5A200D44227 /* Activity.storyboard */,
 				CE29B1C01ECD6161003F4D2E /* Fan.storyboard */,
 				CE29B1C11ECD6161003F4D2E /* Feed.storyboard */,
 				CE29B1C31ECD6161003F4D2E /* Login.storyboard */,
@@ -284,7 +285,6 @@
 				CE29B1DD1ECD6A4E003F4D2E /* Vyrl2.0-Bridging-Header.h */,
 				CE29B1A81ECD5FEE003F4D2E /* LaunchScreen.storyboard */,
 				CE29B1AB1ECD5FEE003F4D2E /* Info.plist */,
-				8F1E45E21F8DB5A200D44227 /* Activity.storyboard */,
 			);
 			path = Vyrl2.0;
 			sourceTree = "<group>";

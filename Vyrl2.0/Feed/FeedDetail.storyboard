@@ -294,19 +294,6 @@
                                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                     <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                                                 </textView>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ad-2L-9Ay">
-                                                                    <rect key="frame" x="321" y="172.5" width="39" height="13"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="13" id="BLQ-iQ-nvd"/>
-                                                                    </constraints>
-                                                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="11"/>
-                                                                    <state key="normal" title="번역보기">
-                                                                        <color key="titleColor" red="0.52549019610000003" green="0.51372549020000002" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                                    </state>
-                                                                    <connections>
-                                                                        <action selector="translateContent:" destination="XbB-NJ-ART" eventType="touchUpInside" id="sMm-sO-Cvm"/>
-                                                                    </connections>
-                                                                </button>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_dot_03" translatesAutoresizingMaskIntoConstraints="NO" id="kta-x9-9Ec">
                                                                     <rect key="frame" x="86" y="6.5" width="2" height="2"/>
                                                                 </imageView>
@@ -326,14 +313,12 @@
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
-                                                                <constraint firstItem="2ad-2L-9Ay" firstAttribute="bottom" secondItem="rLG-cT-tHD" secondAttribute="bottom" id="4cN-1H-agi"/>
                                                                 <constraint firstAttribute="trailing" secondItem="rLG-cT-tHD" secondAttribute="trailing" constant="15" id="Bbd-QG-Y0p"/>
                                                                 <constraint firstItem="IhU-tf-ZWN" firstAttribute="leading" secondItem="uiz-lh-3x4" secondAttribute="leading" constant="15" id="Cb3-4R-kZR"/>
                                                                 <constraint firstItem="rLG-cT-tHD" firstAttribute="top" secondItem="IhU-tf-ZWN" secondAttribute="bottom" constant="7" id="EkR-km-pQU"/>
                                                                 <constraint firstItem="K6k-YY-t81" firstAttribute="top" secondItem="uiz-lh-3x4" secondAttribute="top" id="FuF-60-dEf"/>
                                                                 <constraint firstItem="kta-x9-9Ec" firstAttribute="centerY" secondItem="IhU-tf-ZWN" secondAttribute="centerY" id="GxH-a4-AwB"/>
                                                                 <constraint firstItem="kta-x9-9Ec" firstAttribute="leading" secondItem="IhU-tf-ZWN" secondAttribute="trailing" constant="8" id="Vlq-c5-xra"/>
-                                                                <constraint firstItem="2ad-2L-9Ay" firstAttribute="trailing" secondItem="rLG-cT-tHD" secondAttribute="trailing" id="bOP-uj-IDW"/>
                                                                 <constraint firstItem="K6k-YY-t81" firstAttribute="leading" secondItem="kta-x9-9Ec" secondAttribute="trailing" constant="8" id="eLb-Bf-T7X"/>
                                                                 <constraint firstItem="rLG-cT-tHD" firstAttribute="leading" secondItem="uiz-lh-3x4" secondAttribute="leading" constant="15" id="fwY-4p-xJy"/>
                                                                 <constraint firstAttribute="bottom" secondItem="rLG-cT-tHD" secondAttribute="bottom" id="sYr-OS-J2P"/>
@@ -368,6 +353,19 @@
                                                                     <color key="textColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ad-2L-9Ay">
+                                                                    <rect key="frame" x="321.5" y="0.0" width="39" height="13"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="13" id="BLQ-iQ-nvd"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="11"/>
+                                                                    <state key="normal" title="번역보기">
+                                                                        <color key="titleColor" red="0.52549019610000003" green="0.51372549020000002" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    </state>
+                                                                    <connections>
+                                                                        <action selector="translateContent:" destination="CEQ-eM-Vvz" eventType="touchUpInside" id="Bja-Tj-tXC"/>
+                                                                    </connections>
+                                                                </button>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
@@ -375,9 +373,11 @@
                                                                 <constraint firstItem="ZTQ-w8-Hxe" firstAttribute="centerY" secondItem="YOZ-A1-JBW" secondAttribute="centerY" id="EWi-YA-Uc5"/>
                                                                 <constraint firstAttribute="height" constant="50" id="J7m-8T-3wt"/>
                                                                 <constraint firstItem="ZTQ-w8-Hxe" firstAttribute="leading" secondItem="YOZ-A1-JBW" secondAttribute="leading" constant="14" id="Nwd-g9-e2B"/>
+                                                                <constraint firstAttribute="trailing" secondItem="2ad-2L-9Ay" secondAttribute="trailing" constant="14.5" id="PBG-nN-ESd"/>
                                                                 <constraint firstItem="1ci-pQ-mgS" firstAttribute="centerY" secondItem="YOZ-A1-JBW" secondAttribute="centerY" id="YBa-24-vcF"/>
                                                                 <constraint firstItem="1ci-pQ-mgS" firstAttribute="leading" secondItem="G0w-JH-gRK" secondAttribute="trailing" constant="7" id="vrT-p8-12M"/>
                                                                 <constraint firstItem="G0w-JH-gRK" firstAttribute="centerY" secondItem="ZTQ-w8-Hxe" secondAttribute="centerY" id="xfO-LE-nab"/>
+                                                                <constraint firstItem="2ad-2L-9Ay" firstAttribute="top" secondItem="YOZ-A1-JBW" secondAttribute="top" id="zGj-yE-NTh"/>
                                                             </constraints>
                                                         </view>
                                                     </subviews>

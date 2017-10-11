@@ -98,24 +98,6 @@ class FeedDetailViewController: UIViewController{
     @IBAction func shareListButtonClick(_ sender: UIButton) {
         print("share")
     }
-    @IBAction func translateContent(_ sender: UIButton) {
-        let uri = URL.init(string: Constants.VyrlFeedURL.translate(id: articleId, type: .article))
-        
-        Alamofire.request(uri!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString { (response) in
-            switch response.result {
-            case .success(let result) :
-                print(result)
-                
-                if let code = response.response?.statusCode {
-                    if code == 200 {
-                        self.showToast(str: result)
-                    }
-                }
-            case .failure(let error) :
-                print(error)
-            }
-        }
-    }
     
     func showButtonView() {
         self.commentTextView.resignFirstResponder()
@@ -389,9 +371,9 @@ class FeedDetailViewController: UIViewController{
     }
     
     func requestFeedDetail() {
-         var url = URL.init(string: Constants.VyrlFeedURL.feed(articleId: articleId))
+        let uri = URL.init(string: Constants.VyrlFeedURL.feed(articleId: articleId))
         
-        Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseObject { (response: DataResponse<Article>) in
+        Alamofire.request(uri!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseObject { (response: DataResponse<Article>) in
             let article = response.result.value
             self.article = article
             
@@ -478,8 +460,39 @@ class FeedDetailViewController: UIViewController{
             alertController.view.superview?.subviews[1].isUserInteractionEnabled = true
         })
     }
-
     
+    func translateComment(indexPath: IndexPath)
+    {
+        var commentId : Int!
+        var index : Int!
+        
+        if(self.article?.comments != nil && (self.article?.cntComment)! > 20 && self.article?.cntComment != self.commentArray.count) {
+            index = 2
+            commentId = self.commentArray[indexPath.row - 2].id
+        } else {
+            index = 1
+            commentId = self.commentArray[indexPath.row - 1].id
+        }
+        
+        let uri = URL.init(string: Constants.VyrlFeedURL.translate(id: commentId, type: .comment))
+        
+        Alamofire.request(uri!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString { (response) in
+            switch response.result {
+            case .success(let result) :
+                print(result)
+                
+                if let code = response.response?.statusCode {
+                    if code == 200 {
+                        self.commentArray[indexPath.row - index].content = result
+                        self.tableView.reloadData()
+                    }
+                }
+            case .failure(let error) :
+                print(error)
+            }
+        }
+    }
+
     func showMoreAlert(indexPath: IndexPath) {
         let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.actionSheet)
         
@@ -498,8 +511,8 @@ class FeedDetailViewController: UIViewController{
         
         let translateAction = UIAlertAction(title: "번역 보기", style: .default, handler: { (action) -> Void in
             self.alertControllerBackgroundTapped()
+            self.translateComment(indexPath: indexPath)
         })
-        
         
         alertController.addAction(reportAction)
         alertController.addAction(blindAction)
@@ -907,6 +920,25 @@ class FeedDetailTableCell : UITableViewCell {
         }
     }
     
+    @IBAction func translateContent(_ sender: UIButton) {
+        let uri = URL.init(string: Constants.VyrlFeedURL.translate(id: article.id, type: .article))
+        
+        Alamofire.request(uri!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString { (response) in
+            switch response.result {
+            case .success(let result) :
+                print(result)
+                
+                if let code = response.response?.statusCode {
+                    if code == 200 {
+                        self.contentTextView.text = result
+                    }
+                }
+            case .failure(let error) :
+                print(error)
+            }
+        }
+    }
+    
     func initImageVideo() {
         self.lastRequestIndex = 0
         
@@ -1049,7 +1081,6 @@ class FeedCommentTableCell : UITableViewCell {
     @IBAction func profileButtonClick(_ sender: UIButton) {
         delegate.commentProfileButtonDidSelect(profileId: self.userId)
     }
-    
 }
 
 extension String
