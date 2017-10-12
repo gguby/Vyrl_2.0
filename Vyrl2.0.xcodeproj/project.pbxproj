@@ -230,7 +230,6 @@
 				CE0898241ECD70C7000D6D6C /* FeedViewController.swift */,
 				8F4C09281EE528840026D49F /* FeedStyle.storyboard */,
 				8F9AF9901EE800E700DE069E /* FeedTableViewController.swift */,
-				8F90911C1EEFC57D0095A335 /* FeedDetailViewController.swift */,
 				8F62CC141F00EC330069ACFE /* EmoticonView.swift */,
 				8F57B73E1F186E44009FD0EA /* FeedFullScreenViewController.swift */,
 				A6722C301F25F7D600CEBBD6 /* FeedTableCell.swift */,
@@ -238,6 +237,7 @@
 				8F408E3C1F32EC98008F8FCB /* FeedLikeUserListViewController.swift */,
 				A65A0A511F45838700F7D852 /* FeedPullLoader.swift */,
 				8F514D501F4586A1000338E4 /* FeedDetail.storyboard */,
+				8F90911C1EEFC57D0095A335 /* FeedDetailViewController.swift */,
 				8F7AAF5C1F8EF8A600EC726F /* FeedDetailTableCell.swift */,
 				8F7AAF5E1F8EFF1700EC726F /* FeedDetailCommentTableCell.swift */,
 			);

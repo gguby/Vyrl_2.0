@@ -33,6 +33,7 @@ class FeedDetailTableCell : UITableViewCell {
     @IBOutlet weak var shareCountButton: UIButton!
     @IBOutlet weak var contentTextView: UITextView!
     
+    @IBOutlet weak var mediaView: UIView!
     @IBOutlet weak var imageScrollView: UIScrollView!
     
     @IBOutlet weak var timeLabel: UILabel!

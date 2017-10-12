@@ -708,16 +708,19 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
             if(self.article != nil) {
                 cell.article = self.article
                 if((self.article?.medias.count)! > 0){
+                    cell.mediaView.isHidden = false
                     cell.imageScrollView.isHidden = false
                     cell.pageLabel.isHidden = false
 
                     cell.initImageVideo()
                 } else {
+                    cell.mediaView.isHidden = true
                     cell.imageScrollView.isHidden = true
                     cell.pageLabel.isHidden = true
                  }
-                
-                if (article?.profile.follow)! {
+            
+                if( article?.profile.follow == true ||
+                    (LoginManager.sharedInstance.getCurrentAccount()?.userId)! == String(describing: (self.article?.profile.id)!) ) {
                     cell.followButton.isHidden = true
                 } else {
                     cell.followButton.isHidden = false
