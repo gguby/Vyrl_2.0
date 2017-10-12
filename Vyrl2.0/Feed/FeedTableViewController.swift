@@ -97,6 +97,11 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         self.tableView.removePullLoadableView(refreshView)
     }
     
+    func setUploadDelegate(){
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.feedView = self
+    }
+    
     func setUpRefresh(){
         refreshView = FeedPullLoaderView()
         refreshView.delegate = self
@@ -375,7 +380,7 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         }
 }
 
-//extension FeedTableViewController : UITableViewDelegate, UITableViewDataSource {
+extension FeedTableViewController : UITableViewDataSource {
 //    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 //    {
 //        return self.articleArray.count
@@ -394,7 +399,7 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
 //
 //        return cell
 //    }
-//}
+}
 
 extension FeedTableViewController : UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
