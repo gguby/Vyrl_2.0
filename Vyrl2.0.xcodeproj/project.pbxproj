@@ -29,6 +29,8 @@
 		8F6B15F41F5D3A87007FFF62 /* FanPageReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6B15F31F5D3A87007FFF62 /* FanPageReportViewController.swift */; };
 		8F6F1D8F1F58EE9400C163D0 /* OtherProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6F1D8E1F58EE9400C163D0 /* OtherProfileViewController.swift */; };
 		8F797B7F1F340E080019C475 /* FanPageCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F797B7E1F340E080019C475 /* FanPageCreateViewController.swift */; };
+		8F7AAF5D1F8EF8A600EC726F /* FeedDetailTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7AAF5C1F8EF8A600EC726F /* FeedDetailTableCell.swift */; };
+		8F7AAF5F1F8EFF1700EC726F /* FeedDetailCommentTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7AAF5E1F8EFF1700EC726F /* FeedDetailCommentTableCell.swift */; };
 		8F829E7C1EFB6648001D418F /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F829E7B1EFB6648001D418F /* MyProfileViewController.swift */; };
 		8F829E801EFB9CD4001D418F /* WriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F829E7F1EFB9CD4001D418F /* WriteViewController.swift */; };
 		8F90911D1EEFC57D0095A335 /* FeedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F90911C1EEFC57D0095A335 /* FeedDetailViewController.swift */; };
@@ -117,6 +119,8 @@
 		8F6B15F31F5D3A87007FFF62 /* FanPageReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanPageReportViewController.swift; sourceTree = "<group>"; };
 		8F6F1D8E1F58EE9400C163D0 /* OtherProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherProfileViewController.swift; sourceTree = "<group>"; };
 		8F797B7E1F340E080019C475 /* FanPageCreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanPageCreateViewController.swift; sourceTree = "<group>"; };
+		8F7AAF5C1F8EF8A600EC726F /* FeedDetailTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDetailTableCell.swift; sourceTree = "<group>"; };
+		8F7AAF5E1F8EFF1700EC726F /* FeedDetailCommentTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDetailCommentTableCell.swift; sourceTree = "<group>"; };
 		8F829E7B1EFB6648001D418F /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		8F829E7F1EFB9CD4001D418F /* WriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteViewController.swift; sourceTree = "<group>"; };
 		8F90911C1EEFC57D0095A335 /* FeedDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedDetailViewController.swift; sourceTree = "<group>"; };
@@ -226,7 +230,6 @@
 				CE0898241ECD70C7000D6D6C /* FeedViewController.swift */,
 				8F4C09281EE528840026D49F /* FeedStyle.storyboard */,
 				8F9AF9901EE800E700DE069E /* FeedTableViewController.swift */,
-				8F90911C1EEFC57D0095A335 /* FeedDetailViewController.swift */,
 				8F62CC141F00EC330069ACFE /* EmoticonView.swift */,
 				8F57B73E1F186E44009FD0EA /* FeedFullScreenViewController.swift */,
 				A6722C301F25F7D600CEBBD6 /* FeedTableCell.swift */,
@@ -234,6 +237,9 @@
 				8F408E3C1F32EC98008F8FCB /* FeedLikeUserListViewController.swift */,
 				A65A0A511F45838700F7D852 /* FeedPullLoader.swift */,
 				8F514D501F4586A1000338E4 /* FeedDetail.storyboard */,
+				8F90911C1EEFC57D0095A335 /* FeedDetailViewController.swift */,
+				8F7AAF5C1F8EF8A600EC726F /* FeedDetailTableCell.swift */,
+				8F7AAF5E1F8EFF1700EC726F /* FeedDetailCommentTableCell.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -270,6 +276,7 @@
 				CE29B1C81ECD6161003F4D2E /* Search */,
 				CE29B1CB1ECD6161003F4D2E /* Write */,
 				CE29B1C61ECD6161003F4D2E /* Other */,
+				8F1E45E21F8DB5A200D44227 /* Activity.storyboard */,
 				CE29B1C01ECD6161003F4D2E /* Fan.storyboard */,
 				CE29B1C11ECD6161003F4D2E /* Feed.storyboard */,
 				CE29B1C31ECD6161003F4D2E /* Login.storyboard */,
@@ -284,7 +291,6 @@
 				CE29B1DD1ECD6A4E003F4D2E /* Vyrl2.0-Bridging-Header.h */,
 				CE29B1A81ECD5FEE003F4D2E /* LaunchScreen.storyboard */,
 				CE29B1AB1ECD5FEE003F4D2E /* Info.plist */,
-				8F1E45E21F8DB5A200D44227 /* Activity.storyboard */,
 			);
 			path = Vyrl2.0;
 			sourceTree = "<group>";
@@ -662,10 +668,12 @@
 				8F9AF9911EE800E700DE069E /* FeedTableViewController.swift in Sources */,
 				A6722C311F25F7D600CEBBD6 /* FeedTableCell.swift in Sources */,
 				A650368D1F0E30BA00AD540A /* FeedNavigationControllerExtension.swift in Sources */,
+				8F7AAF5F1F8EFF1700EC726F /* FeedDetailCommentTableCell.swift in Sources */,
 				CE0898251ECD70C7000D6D6C /* FeedViewController.swift in Sources */,
 				8F797B7F1F340E080019C475 /* FanPageCreateViewController.swift in Sources */,
 				8F829E801EFB9CD4001D418F /* WriteViewController.swift in Sources */,
 				8F47B6C71EDEACA600A5DBAC /* BlockManagementViewController.swift in Sources */,
+				8F7AAF5D1F8EF8A600EC726F /* FeedDetailTableCell.swift in Sources */,
 				8F90911D1EEFC57D0095A335 /* FeedDetailViewController.swift in Sources */,
 				A652BA371F3AA61E00007767 /* PostCollectionViewController.swift in Sources */,
 				8F3CC1A81F5E47BD00931776 /* FanPageMemberListViewController.swift in Sources */,

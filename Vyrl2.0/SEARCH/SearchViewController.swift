@@ -11,6 +11,8 @@ import UIKit
 import Alamofire
 import AlamofireObjectMapper
 import ObjectMapper
+import RxSwift
+import RxCocoa
 
 class SearchViewController: UIViewController, UISearchBarDelegate {
     
@@ -44,6 +46,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     var tagList = [Tag]()
     var userList = [SearchUser]()
     var fanPageList = [FanPage]()
+    
+    private var model : SearchModel!
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,6 +89,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     
     func initSearchBar()
     {
+        model = SearchModel()
+        self.addBindToModel(model: model)
+        
         searchBar.setImage(UIImage.init(named: "icon_search_02_off"), for: UISearchBarIcon.search, state: UIControlState.normal)
         searchBar.placeholder = "검색"
         searchBar.backgroundImage = UIImage()
@@ -95,6 +103,13 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         textFieldInsideSearchBarLabel?.font = UIFont.ivTextStyleFont()
         
         searchBar.delegate = self
+    }
+    
+    private func addBindToModel(model : SearchModel){
+        self.searchBar.rx.text.orEmpty.bind(to: model.searchTextObservable)
+        
+        model.searchObservable.asDriver(onErrorJustReturn: nil).drive(self.searchTable.rx.items(cellIdentifier: "fancell"))
+ 
     }
     
     @IBAction func switchAction(_ sender: UISwitch) {
@@ -616,3 +631,39 @@ struct SearchObj : Mappable {
     }
 }
 
+class SearchModel {
+    let searchObservable : Observable<SearchObj>
+    
+    var searchTextObservable = Variable<String>("")
+    
+    init() {
+        searchObservable = searchTextObservable.asObservable()
+        .debounce(0.3, scheduler: MainScheduler.instance)
+        .distinctUntilChanged()
+            .flatMapLatest { searchStr -> Observable<SearchObj> in
+                return SearchAPI.sharedAPI.searchByText(searchStr)
+        }.shareReplay(1)
+    }
+}
+
+class SearchAPI {
+    static let sharedAPI = SearchAPI()
+    
+    private init() {}
+    
+    func searchByText(_ text : String) -> Observable<SearchObj> {
+        
+        let uri = Constants.VyrlSearchURL.search(searchWord: text)
+        
+        return Observable.create { observer in
+            let request = Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseObject { (response: DataResponse<SearchObj>) in
+                 let value = response.result.value
+                
+                observer.onNext(value!)
+                observer.onCompleted()
+            }
+            
+            return Disposables.create(with: request.cancel)
+        }
+    }
+}

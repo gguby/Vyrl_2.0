@@ -209,7 +209,7 @@ struct Constants {
     
     enum translateType : String {
         case article = "ARTICLE"
-        case commnet = "COMMENT"
+        case comment = "COMMENT"
         case fanpage = "FANPAGE"
         case official = "OFFICIAL"
         case channel = "CHANNEL"
