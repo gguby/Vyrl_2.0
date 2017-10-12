@@ -818,12 +818,27 @@ struct Article : Mappable {
     
     var location : String!
     
+    var isFanPageType : Bool!
     var isBookMark : Bool!
     var isMyArticle : Bool!
     var isLike :Bool!
     var openYn : Bool!
     
     var lastCreatedAt : String!
+    
+    var contentType : String!{
+        didSet
+        {
+            if(contentType == "FANPAGE")
+            {
+                isFanPageType = true
+            } else {
+                isFanPageType = false
+            }
+        }
+    }
+    var fanPageId : String!
+    var fanPageName : String!
     
     init?(map: Map) {
         
@@ -843,6 +858,12 @@ struct Article : Mappable {
         isLike <- map["like"]
         lastCreatedAt <- map["lastCreatedAt"]
         openYn <- map["openYn"]
+        contentType <- map["contentType"]
+        
+        if(contentType == "FANPAGE"){
+            fanPageId <- map["fanPageId"]
+            fanPageName <- map["pageName"]
+        }
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"

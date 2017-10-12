@@ -19,6 +19,7 @@ import RxDataSources
 @objc protocol FeedCellDelegate {
     
     func didPressCell(sender: Any, cell : FeedTableCell)
+     @objc optional func showFanPage(cell : FeedTableCell)
     
     @objc optional func didPressPhoto(sender: Any, cell : FeedTableCell)
     @objc optional func setBookMark(cell : FeedTableCell)
@@ -64,6 +65,9 @@ class FeedTableCell: UITableViewCell {
     
     @IBOutlet weak var photoView: UIView!
     @IBOutlet weak var iconView: UIImageView!
+    
+    @IBOutlet weak var fanView: UIView!
+    @IBOutlet weak var fanPageLabel: UILabel!
     
     
     var nativeAd :FBNativeAd!
@@ -183,6 +187,13 @@ class FeedTableCell: UITableViewCell {
             } else {
                 self.likeBtn.setImage(UIImage.init(named: "icon_heart_01"), for: .normal)
                 self.likeBtn.tag = 0
+            }
+            
+            if (article?.isFanPageType)! {
+                self.fanView.isHidden = false
+                self.fanPageLabel.text = article?.fanPageName
+            } else {
+                self.fanView.isHidden = true
             }
             
             self.officialImage.isHidden  = true
@@ -330,6 +341,10 @@ class FeedTableCell: UITableViewCell {
     
     func showProfile(sender:UIButton){
         delegate.showUserProfileView!(userId: sender.tag)
+    }
+    
+    @IBAction func showFanPage(_ sender: UIButton) {
+        delegate.showFanPage!(cell: self)
     }
     
     func followUser(sender:UIButton)
