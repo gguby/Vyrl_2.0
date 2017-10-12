@@ -89,8 +89,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     
     func initSearchBar()
     {
-        model = SearchModel()
-        self.addBindToModel(model: model)
+//        model = SearchModel()
+//        self.addBindToModel(model: model)
         
         searchBar.setImage(UIImage.init(named: "icon_search_02_off"), for: UISearchBarIcon.search, state: UIControlState.normal)
         searchBar.placeholder = "검색"
@@ -105,12 +105,12 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         searchBar.delegate = self
     }
     
-    private func addBindToModel(model : SearchModel){
-        self.searchBar.rx.text.orEmpty.bind(to: model.searchTextObservable)
-        
-        model.searchObservable.asDriver(onErrorJustReturn: nil).drive(self.searchTable.rx.items(cellIdentifier: "fancell"))
- 
-    }
+//    private func addBindToModel(model : SearchModel){
+//        self.searchBar.rx.text.orEmpty.bind(to: model.searchTextObservable)
+//
+//        model.searchObservable.asDriver(onErrorJustReturn: nil).drive(self.searchTable.rx.items(cellIdentifier: "fancell"))
+//
+//    }
     
     @IBAction func switchAction(_ sender: UISwitch) {
         self.historyOn = sender.isOn

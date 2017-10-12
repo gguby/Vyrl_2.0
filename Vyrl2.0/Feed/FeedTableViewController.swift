@@ -380,7 +380,7 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         }
 }
 
-extension FeedTableViewController : UITableViewDataSource {
+//extension FeedTableViewController : UITableViewDataSource {
 //    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 //    {
 //        return self.articleArray.count
@@ -399,7 +399,7 @@ extension FeedTableViewController : UITableViewDataSource {
 //
 //        return cell
 //    }
-}
+//}
 
 extension FeedTableViewController : UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
