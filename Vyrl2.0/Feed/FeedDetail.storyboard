@@ -421,7 +421,7 @@
                                             <outlet property="videoPlayButton" destination="NRB-4q-jnk" id="rzl-2O-54F"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Comment" rowHeight="117" id="Eif-gi-UD6" customClass="FeedCommentTableCell" customModule="Vyrl2_0" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Comment" rowHeight="117" id="Eif-gi-UD6" customClass="FeedDetailCommentTableCell" customModule="Vyrl2_0" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="728" width="375" height="117"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Eif-gi-UD6" id="a4P-uD-iWG">
