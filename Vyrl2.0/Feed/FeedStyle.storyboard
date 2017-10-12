@@ -789,14 +789,24 @@
                                                                                         <constraint firstAttribute="height" constant="6.5" id="oPc-RR-Dis"/>
                                                                                     </constraints>
                                                                                 </imageView>
+                                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KZt-WU-gFb">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="29.999999999999986"/>
+                                                                                    <connections>
+                                                                                        <action selector="showFanPage:" destination="hth-2A-IVu" eventType="touchUpInside" id="5Rh-E9-HA7"/>
+                                                                                    </connections>
+                                                                                </button>
                                                                             </subviews>
                                                                             <color key="backgroundColor" red="0.96862745100000003" green="0.96470588239999999" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <constraints>
+                                                                                <constraint firstAttribute="trailing" secondItem="KZt-WU-gFb" secondAttribute="trailing" id="ALC-zi-pC7"/>
+                                                                                <constraint firstItem="KZt-WU-gFb" firstAttribute="leading" secondItem="XlJ-8I-bN3" secondAttribute="leading" id="BRw-oL-DAn"/>
+                                                                                <constraint firstAttribute="bottom" secondItem="KZt-WU-gFb" secondAttribute="bottom" id="FlK-4a-8sN"/>
                                                                                 <constraint firstAttribute="height" constant="31" id="LSG-2n-B7v"/>
                                                                                 <constraint firstItem="raX-aG-8PP" firstAttribute="centerY" secondItem="XlJ-8I-bN3" secondAttribute="centerY" id="Ldv-NC-dbT"/>
                                                                                 <constraint firstItem="LtB-sA-O4c" firstAttribute="centerY" secondItem="XlJ-8I-bN3" secondAttribute="centerY" id="OYg-ji-G3B"/>
                                                                                 <constraint firstAttribute="trailing" secondItem="LtB-sA-O4c" secondAttribute="trailing" constant="14" id="SEd-L6-8pY"/>
                                                                                 <constraint firstItem="XOo-60-p1g" firstAttribute="centerY" secondItem="XlJ-8I-bN3" secondAttribute="centerY" id="bjt-zY-Ab6"/>
+                                                                                <constraint firstItem="KZt-WU-gFb" firstAttribute="top" secondItem="XlJ-8I-bN3" secondAttribute="top" id="gg3-Cp-HNx"/>
                                                                                 <constraint firstItem="raX-aG-8PP" firstAttribute="leading" secondItem="XOo-60-p1g" secondAttribute="trailing" constant="10" id="kdF-h5-Pvx"/>
                                                                                 <constraint firstItem="XOo-60-p1g" firstAttribute="leading" secondItem="XlJ-8I-bN3" secondAttribute="leading" constant="15" id="wyy-oO-QrH"/>
                                                                             </constraints>
@@ -1278,15 +1288,25 @@
                                                                                         <constraint firstAttribute="width" constant="4.5" id="X1F-q1-D4d"/>
                                                                                     </constraints>
                                                                                 </imageView>
+                                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1kl-ij-OjH">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="30.999999999999986"/>
+                                                                                    <connections>
+                                                                                        <action selector="showFanPage:" destination="dCK-YA-8eZ" eventType="touchUpInside" id="sMj-MF-oyi"/>
+                                                                                    </connections>
+                                                                                </button>
                                                                             </subviews>
                                                                             <color key="backgroundColor" red="0.96862745100000003" green="0.96470588239999999" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <constraints>
                                                                                 <constraint firstItem="VKv-nt-4kY" firstAttribute="leading" secondItem="WXn-nl-WYJ" secondAttribute="trailing" constant="10" id="0Gp-TO-1o7"/>
                                                                                 <constraint firstAttribute="trailing" secondItem="SaQ-Am-vfk" secondAttribute="trailing" constant="14" id="0rz-vI-Tdr"/>
                                                                                 <constraint firstItem="SaQ-Am-vfk" firstAttribute="centerY" secondItem="Zre-K4-qr0" secondAttribute="centerY" id="5MD-7E-6J5"/>
+                                                                                <constraint firstItem="1kl-ij-OjH" firstAttribute="leading" secondItem="Zre-K4-qr0" secondAttribute="leading" id="88N-7Q-MIq"/>
                                                                                 <constraint firstItem="WXn-nl-WYJ" firstAttribute="centerY" secondItem="Zre-K4-qr0" secondAttribute="centerY" id="QJT-gI-0Zu"/>
+                                                                                <constraint firstAttribute="bottom" secondItem="1kl-ij-OjH" secondAttribute="bottom" id="RkQ-X9-HJh"/>
                                                                                 <constraint firstAttribute="height" constant="31" id="ZWs-X1-HOe"/>
                                                                                 <constraint firstItem="VKv-nt-4kY" firstAttribute="centerY" secondItem="Zre-K4-qr0" secondAttribute="centerY" id="gZH-pc-t1f"/>
+                                                                                <constraint firstItem="1kl-ij-OjH" firstAttribute="top" secondItem="Zre-K4-qr0" secondAttribute="top" id="r2z-5K-AHb"/>
+                                                                                <constraint firstAttribute="trailing" secondItem="1kl-ij-OjH" secondAttribute="trailing" id="rzz-Ek-87G"/>
                                                                                 <constraint firstItem="WXn-nl-WYJ" firstAttribute="leading" secondItem="Zre-K4-qr0" secondAttribute="leading" constant="15" id="zSh-Oe-eSw"/>
                                                                             </constraints>
                                                                         </view>

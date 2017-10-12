@@ -437,6 +437,11 @@ extension FeedTableViewController : UITextViewDelegate {
 }
 
 extension FeedTableViewController : FeedCellDelegate {
+    func showFanPage(cell: FeedTableCell) {
+        let vc = self.pushViewControllrer(storyboardName: "Fan", controllerName: "FanPage") as! FanPageController
+        vc.fanPageId = cell.article?.fanPageId
+    }
+    
     func didPressPhoto(sender: Any, cell : FeedTableCell) {
         let vc = self.pushViewControllrer(storyboardName: "Feed", controllerName: "FeedFullScreenViewController") as! FeedFullScreenViewController // or whatever it is
         vc.mediasArray = cell.article?.medias
@@ -837,7 +842,7 @@ struct Article : Mappable {
             }
         }
     }
-    var fanPageId : String!
+    var fanPageId : Int!
     var fanPageName : String!
     
     init?(map: Map) {
