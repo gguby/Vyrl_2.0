@@ -38,6 +38,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     
     @IBOutlet weak var postContainer: UIView!
     
+    @IBOutlet weak var followTableView: UITableView!
+    @IBOutlet weak var officialCollectionView: UICollectionView!
     var historyOn = false
     
     var historyList = [History]()
@@ -89,8 +91,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     
     func initSearchBar()
     {
-//        model = SearchModel()
-//        self.addBindToModel(model: model)
+        model = SearchModel()
+        self.addBindToModel(model: model)
         
         searchBar.setImage(UIImage.init(named: "icon_search_02_off"), for: UISearchBarIcon.search, state: UIControlState.normal)
         searchBar.placeholder = "검색"
@@ -105,12 +107,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         searchBar.delegate = self
     }
     
-//    private func addBindToModel(model : SearchModel){
-//        self.searchBar.rx.text.orEmpty.bind(to: model.searchTextObservable)
-//
-//        model.searchObservable.asDriver(onErrorJustReturn: nil).drive(self.searchTable.rx.items(cellIdentifier: "fancell"))
-//
-//    }
+    private func addBindToModel(model : SearchModel){
+        model.addBindSuggestAccount(tableView: self.followTableView)
+        model.addBindOfficialAccount(collectionView: self.officialCollectionView)
+    }
     
     @IBAction func switchAction(_ sender: UISwitch) {
         self.historyOn = sender.isOn
@@ -548,16 +548,17 @@ extension UIColor {
     }
 }
 
-class OfficialCollectionCell : UICollectionViewCell {
-    
-    
-    
+class OfficialCollectionCell : UICollectionViewCell {    
+    @IBOutlet weak var profile: UIImageView!
+    @IBOutlet weak var label: UILabel!
 }
 
 class FollowCell : UITableViewCell {
-    
-    
-    
+    @IBOutlet weak var profile: UIImageView!
+    @IBOutlet weak var nickName: UILabel!
+    @IBOutlet weak var info: UILabel!
+    @IBOutlet weak var follow: UIButton!
+    @IBOutlet weak var block: UIButton!
 }
 
 class TagCell : UITableViewCell {
@@ -632,17 +633,42 @@ struct SearchObj : Mappable {
 }
 
 class SearchModel {
-    let searchObservable : Observable<SearchObj>
-    
-    var searchTextObservable = Variable<String>("")
+    let disposeBag = DisposeBag()
     
     init() {
-        searchObservable = searchTextObservable.asObservable()
-        .debounce(0.3, scheduler: MainScheduler.instance)
-        .distinctUntilChanged()
-            .flatMapLatest { searchStr -> Observable<SearchObj> in
-                return SearchAPI.sharedAPI.searchByText(searchStr)
-        }.shareReplay(1)
+    }
+    
+    func addBindOfficialAccount(collectionView : UICollectionView){
+        let officialAccountObservable : Observable<[SearchUser]> = SearchAPI.sharedAPI.officialAccounts()
+        officialAccountObservable.bind(to: collectionView.rx.items(cellIdentifier: "OfficialCollectionCell", cellType: OfficialCollectionCell.self)) {
+            (index, user , cell) in
+            if user.profileImagePath.isEmpty == false {
+                cell.profile.af_setImage(withURL: URL.init(string: user.profileImagePath)!)
+            }else {
+                cell.profile.image = UIImage.init(named: "icon_user_03")
+            }
+            cell.label.text = user.nickName
+            }.addDisposableTo(disposeBag)
+    }
+    
+    func addBindSuggestAccount(tableView : UITableView){
+        let officialAccountObservable : Observable<[SearchUser]> = SearchAPI.sharedAPI.suggestAccounts()
+        officialAccountObservable.bind(to: tableView.rx.items(cellIdentifier: "followcell", cellType: FollowCell.self)) {
+            (index, user , cell) in
+            if user.profileImagePath.isEmpty == false {
+                cell.profile.af_setImage(withURL: URL.init(string: user.profileImagePath)!)
+            }else {
+                cell.profile.image = UIImage.init(named: "icon_user_03")
+            }
+            cell.nickName.text = user.nickName
+        }.addDisposableTo(disposeBag)
+    }
+    
+    func addBindSuggestPost(tableView : UITableView){
+        let officialAccountObservable : Observable<[Article]> = SearchAPI.sharedAPI.suggestPosts()
+        officialAccountObservable.bind(onNext: { (post) in
+            print(post)
+        }).addDisposableTo(disposeBag)
     }
 }
 
@@ -658,6 +684,54 @@ class SearchAPI {
         return Observable.create { observer in
             let request = Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseObject { (response: DataResponse<SearchObj>) in
                  let value = response.result.value
+                
+                observer.onNext(value!)
+                observer.onCompleted()
+            }
+            
+            return Disposables.create(with: request.cancel)
+        }
+    }
+    
+    func officialAccounts() -> Observable<[SearchUser]> {
+        
+        let uri = Constants.VyrlSearchURL.officialAccounts
+        
+        return Observable.create { observer in
+            let request = Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[SearchUser]>) in
+                let value = response.result.value
+                
+                observer.onNext(value!)
+                observer.onCompleted()
+            }
+            
+            return Disposables.create(with: request.cancel)
+        }
+    }
+    
+    func suggestPosts() -> Observable<[Article]> {
+        
+        let uri = Constants.VyrlSearchURL.suggestPostList
+        
+        return Observable.create { observer in
+            let request = Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Article]>) in
+                let value = response.result.value
+                
+                observer.onNext(value!)
+                observer.onCompleted()
+            }
+            
+            return Disposables.create(with: request.cancel)
+        }
+    }
+    
+    func suggestAccounts() -> Observable<[SearchUser]> {
+        
+        let uri = Constants.VyrlSearchURL.suggestUsers
+        
+        return Observable.create { observer in
+            let request = Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[SearchUser]>) in
+                let value = response.result.value
                 
                 observer.onNext(value!)
                 observer.onCompleted()

@@ -54,6 +54,10 @@ struct Constants {
             let str = searchWord.addingPercentEncoding(withAllowedCharacters:  NSCharacterSet.urlQueryAllowed)
             return VyrlAPIConstants.baseURL + "search/" + str!
         }
+        
+        static let officialAccounts = VyrlAPIConstants.baseURL + "search/official/accounts"
+        static let suggestPostList = VyrlAPIConstants.baseURL + "search/suggest/posts"
+        static let suggestUsers = VyrlAPIConstants.baseURL + "search/suggest/users"
     }
     
     struct VyrlFeedURL {
