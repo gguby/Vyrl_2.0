@@ -70,18 +70,18 @@
                                 <rect key="frame" x="0.0" y="66" width="375" height="833"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="oneFeed" rowHeight="550" id="CEQ-eM-Vvz" customClass="FeedDetailTableCell" customModule="Vyrl2_0" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="550"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="oneFeed" rowHeight="600" id="CEQ-eM-Vvz" customClass="FeedDetailTableCell" customModule="Vyrl2_0" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="600"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CEQ-eM-Vvz" id="t59-30-e0q">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="549.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="599.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mdy-wL-Ulg">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="549.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="599.5"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Epo-AF-XyV">
-                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="457"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="488"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DbR-QL-0Gp" userLabel="Nicname View">
                                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="57"/>
@@ -162,8 +162,8 @@
                                                                         <constraint firstItem="eeY-1d-uqr" firstAttribute="leading" secondItem="bzP-ok-mJK" secondAttribute="trailing" constant="5" id="sZf-vg-HFu"/>
                                                                     </constraints>
                                                                 </view>
-                                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pep-36-dpI" userLabel="Fan View">
-                                                                    <rect key="frame" x="0.0" y="26" width="375" height="31"/>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pep-36-dpI" userLabel="Fan View">
+                                                                    <rect key="frame" x="0.0" y="57" width="375" height="31"/>
                                                                     <subviews>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="txt_fan_01" translatesAutoresizingMaskIntoConstraints="NO" id="dQ4-9X-yzW">
                                                                             <rect key="frame" x="15" y="9.5" width="32" height="13"/>
@@ -198,7 +198,7 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RkA-wT-oRE">
-                                                                    <rect key="frame" x="0.0" y="57" width="375" height="375"/>
+                                                                    <rect key="frame" x="0.0" y="88" width="375" height="375"/>
                                                                     <subviews>
                                                                         <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NE5-is-INP">
                                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
@@ -230,7 +230,7 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="otp-jb-1ON">
-                                                                    <rect key="frame" x="0.0" y="432" width="375" height="25"/>
+                                                                    <rect key="frame" x="0.0" y="463" width="375" height="25"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 / 40" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kft-J5-i9i">
                                                                             <rect key="frame" x="173.5" y="9" width="28.5" height="13"/>
@@ -265,7 +265,7 @@
                                                             </constraints>
                                                         </stackView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uiz-lh-3x4">
-                                                            <rect key="frame" x="0.0" y="457" width="375" height="42.5"/>
+                                                            <rect key="frame" x="0.0" y="488" width="375" height="61.5"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IhU-tf-ZWN">
                                                                     <rect key="frame" x="15" y="0.0" width="63" height="14.5"/>
@@ -281,7 +281,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="rLG-cT-tHD" customClass="GrowingTextView">
-                                                                    <rect key="frame" x="15" y="21.5" width="345" height="21"/>
+                                                                    <rect key="frame" x="15" y="21.5" width="345" height="40"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
                                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -319,7 +319,7 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YOZ-A1-JBW" userLabel="Time View">
-                                                            <rect key="frame" x="0.0" y="499.5" width="375" height="50"/>
+                                                            <rect key="frame" x="0.0" y="549.5" width="375" height="50"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4분 전" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZTQ-w8-Hxe">
                                                                     <rect key="frame" x="14" y="18" width="31" height="15"/>
@@ -398,6 +398,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="contentTextView" destination="rLG-cT-tHD" id="UAA-c1-vZX"/>
+                                            <outlet property="fanPageNameLabel" destination="gGQ-av-SJL" id="zBx-dY-0Xr"/>
                                             <outlet property="fanView" destination="Pep-36-dpI" id="6Na-gz-gav"/>
                                             <outlet property="followButton" destination="bzP-ok-mJK" id="OJa-8I-r3G"/>
                                             <outlet property="imageScrollView" destination="NE5-is-INP" id="YDx-sG-NdA"/>
@@ -413,7 +414,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Comment" rowHeight="117" id="Eif-gi-UD6" customClass="FeedDetailCommentTableCell" customModule="Vyrl2_0" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="578" width="375" height="117"/>
+                                        <rect key="frame" x="0.0" y="628" width="375" height="117"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Eif-gi-UD6" id="a4P-uD-iWG">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="116.5"/>
@@ -509,7 +510,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="moreComment" rowHeight="41" id="Iyy-1o-IeE" customClass="FeedDetailTableCell" customModule="Vyrl2_0" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="695" width="375" height="41"/>
+                                        <rect key="frame" x="0.0" y="745" width="375" height="41"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Iyy-1o-IeE" id="y3a-ne-JCd">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="40.5"/>

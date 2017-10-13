@@ -17,7 +17,17 @@ protocol FeedDetailTableCellProtocol {
 }
 
 class FeedDetailTableCell : UITableViewCell {
-    var article : Article!
+    var article : Article! {
+        didSet {
+            if(article.isFanPageType == true)
+            {
+                self.fanView.isHidden = false
+                self.fanPageNameLabel.text = article.fanPageName
+            } else {
+                self.fanView.isHidden = true
+            }
+        }
+    }
     var imageViewArray : [UIImageView] = []
     var subScrollViewArray : [UIScrollView] = []
     var lastRequestIndex : Int = 0;
@@ -40,6 +50,8 @@ class FeedDetailTableCell : UITableViewCell {
     @IBOutlet weak var followButton: UIButton!
     
     @IBOutlet weak var fanView: UIView!
+    @IBOutlet weak var fanPageNameLabel: UILabel!
+    
     @IBOutlet weak var videoPlayButton: UIButton!
     @IBOutlet weak var settingButton: UIButton!
     

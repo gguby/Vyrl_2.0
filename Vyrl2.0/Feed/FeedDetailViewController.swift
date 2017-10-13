@@ -726,13 +726,6 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
                     cell.followButton.isHidden = false
                 }
                 
-                if(self.feedType == FeedTableType.FANFEED)
-                {
-                    cell.fanView.isHidden = false
-                } else {
-                    cell.fanView.isHidden = true
-                }
-                
                 if(article?.isMyArticle == false) {
                     cell.settingButton.isHidden = true
                 } else {
