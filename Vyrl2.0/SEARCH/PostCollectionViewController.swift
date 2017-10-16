@@ -10,16 +10,43 @@ import Foundation
 import ObjectMapper
 import Alamofire
 import AlamofireObjectMapper
+import RxCocoa
+import RxSwift
 
 class PostCollectionViewController : UICollectionViewController {
     
     var type : PostType = .Fan
     var hotPosts = [HotPost]()
     
+    let disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.getHotPost()
+//        self.getHotPost()
+        
+        self.collectionView?.delegate = nil
+        self.collectionView?.dataSource = nil
+        
+        self.searchHotPost()
+    }
+    
+    func searchHotPost(){
+        let officialAccountObservable : Observable<[Article]> = SearchAPI.sharedAPI.suggestPosts()
+        officialAccountObservable.bind(to: (self.collectionView?.rx.items(cellIdentifier: "post", cellType: PostCollectionCell.self))!) {
+            (index, article , cell) in
+            let str = article.medias[0].url
+            let url : URL = URL.init(string: str!)!
+            cell.imageView.af_setImage(withURL: url)
+            
+            if article.medias.count > 1 {
+                cell.centerView.isHidden = false
+                cell.imageCount.text = "\(article.medias.count)"
+            }
+            else {
+                cell.centerView.isHidden = true
+            }
+            }.addDisposableTo(disposeBag)
     }
     
     func getHotPost(){
@@ -57,6 +84,7 @@ class PostCollectionViewController : UICollectionViewController {
 
 class PostCollectionCell : UICollectionViewCell {
     
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var centerView: UIView!
     @IBOutlet weak var mediaImageView: UIImageView!
     @IBOutlet weak var imageCount: UILabel!

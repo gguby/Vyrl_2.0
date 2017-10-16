@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="AppleSDGothicNeo.ttc">
+            <string>AppleSDGothicNeo-Light</string>
+            <string>AppleSDGothicNeo-Medium</string>
+            <string>AppleSDGothicNeo-Regular</string>
+            <string>AppleSDGothicNeo-SemiBold</string>
+            <string>AppleSDGothicNeo-UltraLight</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Notice Controller-->
         <scene sceneID="qRo-Lm-4y0">
@@ -190,10 +200,10 @@
             </objects>
             <point key="canvasLocation" x="-1970.4000000000001" y="-335.08245877061472"/>
         </scene>
-        <!--View Controller-->
+        <!--Notification Controller-->
         <scene sceneID="MKN-En-qgp">
             <objects>
-                <viewController storyboardIdentifier="NotificationManagement" id="9Uu-JE-M5q" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NotificationManagement" id="9Uu-JE-M5q" customClass="NotificationController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="he3-Cv-nIg"/>
                         <viewControllerLayoutGuide type="bottom" id="fuc-Bj-Md6"/>
@@ -239,7 +249,7 @@
                                     <constraint firstAttribute="height" constant="1" id="bTT-Cv-JTH"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vt6-qO-7r7">
+                            <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vt6-qO-7r7">
                                 <rect key="frame" x="0.0" y="67" width="375" height="47"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="내 글에 좋아요 알림" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MbU-yi-W87">
@@ -251,7 +261,7 @@
                                         <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tXW-L5-fvW">
+                                    <switch opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tXW-L5-fvW">
                                         <rect key="frame" x="314" y="8" width="51" height="31"/>
                                         <color key="onTintColor" red="0.50196078431372548" green="0.32156862745098036" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                                     </switch>
@@ -317,7 +327,7 @@
                                         <color key="textColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y9f-sK-mqd">
+                                    <switch opaque="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y9f-sK-mqd">
                                         <rect key="frame" x="314" y="8" width="51" height="31"/>
                                         <color key="onTintColor" red="0.50196078431372548" green="0.32156862745098036" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                                     </switch>
@@ -350,7 +360,7 @@
                                         <color key="textColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hqD-Xu-1Go">
+                                    <switch opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hqD-Xu-1Go">
                                         <rect key="frame" x="314" y="8" width="51" height="31"/>
                                         <color key="onTintColor" red="0.50196078431372548" green="0.32156862745098036" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                                     </switch>
@@ -383,7 +393,7 @@
                                         <color key="textColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H9i-iC-2v2">
+                                    <switch opaque="NO" tag="4" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H9i-iC-2v2">
                                         <rect key="frame" x="314" y="8" width="51" height="31"/>
                                         <color key="onTintColor" red="0.50196078431372548" green="0.32156862745098036" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                                     </switch>
@@ -447,6 +457,13 @@
                             <constraint firstItem="JBe-RF-g7u" firstAttribute="leading" secondItem="ZKb-Zh-dr2" secondAttribute="leading" id="zUO-0z-rOO"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="noti1" destination="tXW-L5-fvW" id="ecv-st-FTv"/>
+                        <outlet property="noti2" destination="fas-de-yrR" id="JJ0-pn-XmI"/>
+                        <outlet property="noti3" destination="Y9f-sK-mqd" id="Q5Y-l8-FNQ"/>
+                        <outlet property="noti4" destination="hqD-Xu-1Go" id="yvA-bs-tBK"/>
+                        <outlet property="noti5" destination="H9i-iC-2v2" id="lfJ-Ur-4Tl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aJR-TA-yr1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2145,7 +2162,7 @@ Cw
         <image name="badge_premium_01" width="62" height="62"/>
         <image name="btn_block_01" width="60" height="20"/>
         <image name="btn_upgrade_01" width="60" height="14"/>
-        <image name="icon_arrow_01_close" width="6" height="4"/>
+        <image name="icon_arrow_01_close" width="6" height="3"/>
         <image name="icon_arrow_02_left" width="28" height="35"/>
         <image name="icon_arrow_02_right" width="28" height="35"/>
         <image name="icon_arrow_03_close" width="30" height="30"/>

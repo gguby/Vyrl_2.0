@@ -38,6 +38,7 @@
 		8F916A8E1EDC264900E3EC8B /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F916A8D1EDC264900E3EC8B /* UIView+Extension.swift */; };
 		8F9AF9911EE800E700DE069E /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9AF9901EE800E700DE069E /* FeedTableViewController.swift */; };
 		A62EF2EB1F1F5282000CD43A /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62EF2EA1F1F5282000CD43A /* LocationViewController.swift */; };
+		A632D0691F946152003DAF70 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A632D0681F946152003DAF70 /* NotificationController.swift */; };
 		A64E35FA1F4BBCF500670168 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A64E35FC1F4BBCF500670168 /* Localizable.strings */; };
 		A64E99A31F317DBB00D9BCFF /* FeedModifyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64E99A21F317DBB00D9BCFF /* FeedModifyController.swift */; };
 		A650368B1F0E30BA00AD540A /* ModalAnimatorPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65036881F0E30BA00AD540A /* ModalAnimatorPhoto.swift */; };
@@ -128,6 +129,7 @@
 		8F916A8D1EDC264900E3EC8B /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		8F9AF9901EE800E700DE069E /* FeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
 		A62EF2EA1F1F5282000CD43A /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
+		A632D0681F946152003DAF70 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		A64E35FB1F4BBCF500670168 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A64E35FD1F4BBD0F00670168 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A64E99A21F317DBB00D9BCFF /* FeedModifyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedModifyController.swift; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 				8F829E7B1EFB6648001D418F /* MyProfileViewController.swift */,
 				8F3B36F51F147A2400B91672 /* TermsOfUseViewController.swift */,
 				8F3C61201F7A0698001C6CF6 /* FollowListViewController.swift */,
+				A632D0681F946152003DAF70 /* NotificationController.swift */,
 			);
 			name = "My & Setting";
 			path = MY;
@@ -659,6 +662,7 @@
 				CE08981C1ECD704F000D6D6C /* SearchViewController.swift in Sources */,
 				8F829E7C1EFB6648001D418F /* MyProfileViewController.swift in Sources */,
 				A650368B1F0E30BA00AD540A /* ModalAnimatorPhoto.swift in Sources */,
+				A632D0691F946152003DAF70 /* NotificationController.swift in Sources */,
 				A64E99A31F317DBB00D9BCFF /* FeedModifyController.swift in Sources */,
 				A65A0A521F45838700F7D852 /* FeedPullLoader.swift in Sources */,
 				8F6B15F41F5D3A87007FFF62 /* FanPageReportViewController.swift in Sources */,

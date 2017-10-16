@@ -33,6 +33,8 @@ struct Constants {
         static let notices = VyrlAPIConstants.baseURL + "notices"
         static let faqs = VyrlAPIConstants.baseURL + "faqs"
         
+        static let alert = VyrlAPIConstants.baseURL + "alerts/"
+        
         static func userProfile(userId :Int)-> String{
             let str = "\(userId)"
             return VyrlAPIConstants.baseURL + "users/profile/" + str
