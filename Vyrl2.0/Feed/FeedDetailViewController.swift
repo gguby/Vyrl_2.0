@@ -521,6 +521,38 @@ class FeedDetailViewController: UIViewController{
             }
         }
     }
+    
+    func blockUser(indexPath: IndexPath) {
+        var userId : Int!
+        
+        if(self.article?.comments != nil && (self.article?.cntComment)! > 20 && self.article?.cntComment != self.commentArray.count) {
+            userId = self.commentArray[indexPath.row - 2].userId
+        } else {
+            userId = self.commentArray[indexPath.row - 1].userId
+         }
+        
+        let parameters : [String:Any] = [
+            "userId": "\(userId!)",
+            "blocked" : true,
+        ]
+        
+        let uri = URL.init(string: Constants.VyrlAPIURL.BLOCKUSER)
+        
+        Alamofire.request(uri!, method: .put, parameters: parameters, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString { (response) in
+            switch response.result {
+            case .success(let result) :
+                print(result)
+                
+                if let code = response.response?.statusCode {
+                    if code == 200 {
+                        print("200")
+                    }
+                }
+            case .failure(let error) :
+                print(error)
+            }
+        }
+    }
 
     func showMoreAlert(indexPath: IndexPath) {
         let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.actionSheet)
@@ -537,6 +569,7 @@ class FeedDetailViewController: UIViewController{
         
         let blockAction = UIAlertAction(title: "작성자 차단", style: .default, handler: { (action) -> Void in
             self.alertControllerBackgroundTapped()
+            self.blockUser(indexPath: indexPath)
         })
         
         let translateAction = UIAlertAction(title: "번역 보기", style: .default, handler: { (action) -> Void in
