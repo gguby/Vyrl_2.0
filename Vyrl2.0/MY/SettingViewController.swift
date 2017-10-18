@@ -21,7 +21,7 @@ class SettingViewController: UIViewController, UIScrollViewDelegate {
         // Do any additional setup after loading the view.
         scrollView.delegate = self
         
-        self.contentHeight.constant = 220        
+        self.contentHeight.constant = 100
     }
     
     override func viewDidAppear(_ animated: Bool) {
