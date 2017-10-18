@@ -493,11 +493,14 @@ class FeedDetailViewController: UIViewController{
     
     func hideComment(indexPath : IndexPath) {
         var commentId : Int!
+        var index : Int!
         
         if(self.article?.comments != nil && (self.article?.cntComment)! > 20 && self.article?.cntComment != self.commentArray.count) {
             commentId = self.commentArray[indexPath.row - 2].id
+            index = 2
         } else {
             commentId = self.commentArray[indexPath.row - 1].id
+            index = 1
         }
         
         let uri = URL.init(string: Constants.VyrlFeedURL.hideComment(id: commentId))
@@ -509,6 +512,7 @@ class FeedDetailViewController: UIViewController{
                 
                 if let code = response.response?.statusCode {
                     if code == 200 {
+                        self.commentArray.remove(at: indexPath.row - index)
                         self.tableView.reloadData()
                     }
                 }
