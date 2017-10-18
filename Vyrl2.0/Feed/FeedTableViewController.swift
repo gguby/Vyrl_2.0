@@ -74,11 +74,6 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        
-//        self.tableView.delegate = self
-//        self.tableView.dataSource = self
-        
         self.initTable()
         
         self.setUpRefresh()
@@ -212,8 +207,8 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         ]
         
         if self.articleArray.count > 0 {
-            parameters["lastId"] = (self.articleArray.last?.idStr)!
-            parameters["createdAt"] = self.articleArray.last?.lastCreatedAt
+            let pageId = self.articleArray.last?.pageId
+            parameters["lastId"] = "\(pageId!)"
         }
         
         url = self.getFeedType(parameters: parameters)
@@ -262,9 +257,9 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
             
             if array.count == 0{
                 self.feedView?.embedController.remove()
-                if LoginManager.sharedInstance.isFirstLogin == false {
-                    self.tabBarController?.selectedIndex = 3
-                    LoginManager.sharedInstance.isFirstLogin = true
+                if LoginManager.sharedInstance.isFirstLogin == true {
+                    self.feedView?.goSearch()
+                    LoginManager.sharedInstance.isFirstLogin = false
                 }
             }
             
@@ -368,7 +363,8 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
                                     }else {
                                         completion!()
                                     }
-                                    self.getAllFeed()
+                                    
+                                    self.feedView?.refresh()
                                     self.uploadHidden(hidden: true)
                                 }
                             }
@@ -845,6 +841,8 @@ struct Article : Mappable {
     var fanPageId : Int!
     var fanPageName : String!
     
+    var pageId : Int!
+    
     init?(map: Map) {
         
     }
@@ -864,6 +862,7 @@ struct Article : Mappable {
         lastCreatedAt <- map["lastCreatedAt"]
         openYn <- map["openYn"]
         contentType <- map["contentType"]
+        pageId <- map["pageId"]
         
         if(contentType == "FANPAGE"){
             fanPageId <- map["fanPageId"]
