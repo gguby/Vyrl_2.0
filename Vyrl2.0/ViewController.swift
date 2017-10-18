@@ -66,6 +66,10 @@ extension UIViewController
         }
     }
     
+    func selectTab(index : Int){
+        tabBarController?.selectedIndex = index
+    }
+    
     func registerSwipe(){
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
         swipeRight.direction = UISwipeGestureRecognizerDirection.right

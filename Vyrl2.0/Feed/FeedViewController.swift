@@ -28,29 +28,6 @@ class FeedViewController: UIViewController {
         
         self.setupFeedTableView()
     }
-
-//    func checkExistFollow() {
-//        let uri = Constants.VyrlAPIConstants.baseURL + "/follows/exists"
-//        
-//        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: LoginManager.sharedInstance.getHeader()).responseJSON(completionHandler: {
-//            response in switch response.result {
-//            case .success(let json):
-//                
-//                DispatchQueue.main.async {
-//                    let jsonData = json as! NSDictionary
-//                    
-//                    let isExistFollow = jsonData["exist"] as! Bool
-//                    
-//                    LoginManager.sharedInstance.isExistFollower = isExistFollow
-//                    
-//                    self.setupFeedTableView()
-//                }
-//                
-//            case .failure(let error):
-//                print(error)
-//            }
-//        })
-//    }
     
     func refresh(){
         if embedController.controllers.last != nil {
@@ -60,6 +37,10 @@ class FeedViewController: UIViewController {
         }else {
             self.setupFeedTableView()
         }
+    }
+    
+    func goSearch(){
+        self.tabBarController?.selectedIndex = 3
     }
     
     func setupFeedTableView (){
@@ -92,7 +73,8 @@ class FeedViewController: UIViewController {
             self.selectImageview.image = UIImage.init(named: "btn_select_down_02")
             
             feedView?.feedType = FeedTableType.ALLFEED
-            feedView?.getAllFeed()
+            
+            self.refresh()
             
             alertController.dismiss(animated: true, completion: nil )
         })
@@ -101,7 +83,7 @@ class FeedViewController: UIViewController {
             self.selectImageview.image = UIImage.init(named: "btn_select_down_02")
             
             feedView?.feedType = FeedTableType.MYFEED
-            feedView?.getAllFeed()
+            self.refresh()
             
             alertController.dismiss(animated: true, completion: nil)
         })
@@ -110,7 +92,7 @@ class FeedViewController: UIViewController {
             self.selectImageview.image = UIImage.init(named: "btn_select_down_02")
             
             feedView?.feedType = FeedTableType.FANALLFEED
-            feedView?.getAllFeed()
+            self.refresh()
             
             alertController.dismiss(animated: true, completion: nil)
         })
