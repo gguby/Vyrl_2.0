@@ -119,6 +119,11 @@ struct Constants {
             let str = "\(id)/"
             return VyrlAPIConstants.baseURL + "translate/" + str + type.rawValue
         }
+        
+        static func hideComment(id:Int)-> String {
+            let str = "\(id)"
+            return VyrlAPIConstants.baseURL + "hides/" + str
+        }
     }
     
     struct VyrlFanAPIURL {

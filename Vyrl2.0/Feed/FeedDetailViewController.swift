@@ -490,6 +490,33 @@ class FeedDetailViewController: UIViewController{
             }
         }
     }
+    
+    func hideComment(indexPath : IndexPath) {
+        var commentId : Int!
+        
+        if(self.article?.comments != nil && (self.article?.cntComment)! > 20 && self.article?.cntComment != self.commentArray.count) {
+            commentId = self.commentArray[indexPath.row - 2].id
+        } else {
+            commentId = self.commentArray[indexPath.row - 1].id
+        }
+        
+        let uri = URL.init(string: Constants.VyrlFeedURL.hideComment(id: commentId))
+        
+        Alamofire.request(uri!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString { (response) in
+            switch response.result {
+            case .success(let result) :
+                print(result)
+                
+                if let code = response.response?.statusCode {
+                    if code == 200 {
+                        self.tableView.reloadData()
+                    }
+                }
+            case .failure(let error) :
+                print(error)
+            }
+        }
+    }
 
     func showMoreAlert(indexPath: IndexPath) {
         let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.actionSheet)
@@ -501,6 +528,7 @@ class FeedDetailViewController: UIViewController{
        
         let blindAction = UIAlertAction(title: "이 댓글 안보기", style: .default, handler: { (action) -> Void in
             self.alertControllerBackgroundTapped()
+            self.hideComment(indexPath: indexPath)
         })
         
         let blockAction = UIAlertAction(title: "작성자 차단", style: .default, handler: { (action) -> Void in
