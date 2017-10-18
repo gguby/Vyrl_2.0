@@ -122,7 +122,7 @@ struct Constants {
         
         static func hideComment(id:Int)-> String {
             let str = "\(id)"
-            return VyrlAPIConstants.baseURL + "hides/" + str
+            return VyrlAPIConstants.baseURL + "feeds/comments/hides/" + str
         }
     }
     

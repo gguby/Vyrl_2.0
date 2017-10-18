@@ -502,7 +502,7 @@ class FeedDetailViewController: UIViewController{
         
         let uri = URL.init(string: Constants.VyrlFeedURL.hideComment(id: commentId))
         
-        Alamofire.request(uri!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString { (response) in
+        Alamofire.request(uri!, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString { (response) in
             switch response.result {
             case .success(let result) :
                 print(result)
