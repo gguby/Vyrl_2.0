@@ -57,8 +57,7 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     func keyboardWillShow(notification : NSNotification){
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-           
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0{
                 self.view.frame.origin.y -= keyboardSize.height
             }
@@ -66,7 +65,7 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     func keyboardWillHide(notification : NSNotification){
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y != 0{
                 self.view.frame.origin.y += keyboardSize.height
             }
@@ -265,6 +264,11 @@ extension ProfileController: SHViewControllerDelegate {
 extension ProfileController : UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if textField != nickNameField {
+            return true
+        }
+        
         overlabLabel.isHidden = true
         duplicationCheckButton.isEnabled = false;
         
@@ -273,8 +277,6 @@ extension ProfileController : UITextFieldDelegate {
         
         self.checkView.isHidden = true
         self.duplicationCheckButton.isHidden = false
-
-        
         let newLength = textField.text!.characters.count + string.characters.count - range.length;
         if(newLength > 3 && newLength < 20)
         {

@@ -69,7 +69,6 @@ class FeedTableCell: UITableViewCell {
     @IBOutlet weak var fanView: UIView!
     @IBOutlet weak var fanPageLabel: UILabel!
     
-    
     var nativeAd :FBNativeAd!
     
     var adLoader: GADAdLoader!
@@ -79,6 +78,7 @@ class FeedTableCell: UITableViewCell {
     var delegate: FeedCellDelegate!
     
     var isAdTypeGoogle = false
+    var isAdTypeFaceBook = false
     
     var isMyArticle : Bool! {
         didSet {
@@ -299,6 +299,21 @@ class FeedTableCell: UITableViewCell {
         self.bookmarkBtn.addTarget(self, action: #selector(doBookMark(sender:)), for: .touchUpInside)
         
         self.initAD()
+        
+        self.initFB()
+    }
+    
+    func initFB(){
+        
+        if isAdTypeFaceBook == false {
+            return
+        }
+        
+        let placeMentID = "150088642241764_165434230707205"
+        nativeAd = FBNativeAd(placementID: placeMentID)
+        nativeAd.delegate = self
+        nativeAd.mediaCachePolicy = FBNativeAdsCachePolicy.all
+        nativeAd.load()
     }
     
     func initAD(){
@@ -433,6 +448,20 @@ extension FeedTableCell : GADNativeContentAdLoaderDelegate , GADNativeAppInstall
     }
     func adLoader(_ adLoader: GADAdLoader, didFailToReceiveAdWithError error: GADRequestError){
         print(adLoader.adUnitID)
+    }
+}
+
+extension FeedTableCell : FBNativeAdDelegate {
+    func nativeAdDidLoad(_ nativeAd: FBNativeAd) {
+        if self.nativeAd != nil {
+            self.nativeAd.unregisterView()
+        }
+        
+        self.nativeAd = nativeAd
+    }
+    
+    func nativeAd(_ nativeAd: FBNativeAd, didFailWithError error: Error) {
+        
     }
 }
 

@@ -244,7 +244,7 @@
                                                                 <rect key="frame" x="0.0" y="1" width="375" height="55"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pc5-kd-2jg" id="I8N-On-iFH">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="54.5"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PzE-Xf-veK">
@@ -516,7 +516,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="375" height="47"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qSg-mZ-Y7L" id="756-RM-AzS">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="46.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#우주대스타" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ikH-yQ-ycS">
@@ -548,7 +548,7 @@
                                                 <rect key="frame" x="0.0" y="75" width="375" height="50"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aR6-Tq-iVH" id="L61-Us-bIW">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xuP-Vf-asE">
@@ -596,7 +596,7 @@
                                                 <rect key="frame" x="0.0" y="125" width="375" height="72"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gDV-Jq-OCy" id="B0T-Rf-BqQ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="72"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="71.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MVv-bO-1pE">
@@ -717,7 +717,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="375" height="47"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="o8n-Nx-x0C" id="aYc-XR-OWr">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="46.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4hb-z5-DZ0">
@@ -885,6 +885,9 @@
                                             <constraint firstAttribute="width" constant="50" id="vce-pi-HYO"/>
                                         </constraints>
                                         <state key="normal" image="icon_more_01"/>
+                                        <connections>
+                                            <action selector="showAlert:" destination="mQi-og-yIE" eventType="touchUpInside" id="gjQ-m4-rdB"/>
+                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="55p-se-k1e" userLabel="border">
                                         <rect key="frame" x="0.0" y="44" width="375" height="1"/>
@@ -1212,6 +1215,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="containerView" destination="uir-Xa-kcR" id="NRb-Wa-e7B"/>
+                        <outlet property="detailBtn" destination="RSa-bo-2E1" id="VKO-2V-Z79"/>
                         <outlet property="followButton" destination="cFM-8Q-eeL" id="tpW-Ub-A51"/>
                         <outlet property="follower" destination="Aux-e4-7fm" id="zAL-tg-Wwv"/>
                         <outlet property="followerView" destination="LSc-uf-pMv" id="L6O-ry-nSB"/>

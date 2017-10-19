@@ -17,6 +17,7 @@ import Fabric
 import TwitterKit
 import AlamofireNetworkActivityLogger
 import GoogleMobileAds
+import FBAudienceNetwork
 
 extension AppDelegate
 {
@@ -95,7 +96,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
         if (!LoginManager.sharedInstance.isExistCookie()){
             self.goLogin()
-        }    
+        }
+        
+        self.facebookAdsControl()
 
         return true
     }
@@ -184,6 +187,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return topViewControllerWithRootViewController(rootViewController: rootViewController.presentedViewController)
         }
         return rootViewController
+    }
+    
+    private func facebookAdsControl() {
+        #if RELEASE
+            self.clearTestDevicesForFacebookAds()
+        #else
+            self.addTestDevicesForFacebookAds()
+        #endif
+    }
+    
+    ///remove for live mode
+    private func addTestDevicesForFacebookAds(){
+        let key = FBAdSettings.testDeviceHash()
+        FBAdSettings.setLogLevel(FBAdLogLevel.log)
+        FBAdSettings.addTestDevice(key)
+    }
+    
+    ///add for live mode
+    private func clearTestDevicesForFacebookAds() {
+        FBAdSettings.clearTestDevices()
     }
 }
 
