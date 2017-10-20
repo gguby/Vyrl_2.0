@@ -851,6 +851,8 @@ struct Article : Mappable {
     
     var pageId : Int!
     
+    var likeUsers : [String]!
+    
     init?(map: Map) {
         
     }
@@ -871,6 +873,7 @@ struct Article : Mappable {
         openYn <- map["openYn"]
         contentType <- map["contentType"]
         pageId <- map["pageId"]
+        likeUsers <- map["likeUsers"]
         
         if(contentType == "FANPAGE"){
             fanPageId <- map["fanPageId"]

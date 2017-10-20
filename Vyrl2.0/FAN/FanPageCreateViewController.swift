@@ -140,11 +140,12 @@ class FanPageCreateViewController: UIViewController,UIImagePickerControllerDeleg
                 case .success(let upload, _, _):
                     
                     upload.uploadProgress(closure: { (progress) in
-                        
+                        self.showLoading(show: true)
                     })
                     
                     upload.responseString { response in
                         if ((response.response?.statusCode)! == 200){
+                            self.showLoading(show: false)
                             self.navigationController?.popViewController(animated: true)
                             self.delegate.refresh()
                         }
