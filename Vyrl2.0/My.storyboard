@@ -1983,6 +1983,11 @@ Cw
                                                         <constraint firstAttribute="height" constant="32" id="770-De-XKO"/>
                                                         <constraint firstAttribute="width" constant="32" id="g8A-8H-PO3"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="16"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ocm-sa-yhi">
                                                     <rect key="frame" x="57" y="19" width="41" height="13"/>

@@ -31,7 +31,7 @@ class BlockManagementViewController: UIViewController, UITableViewDelegate, UITa
     func requestBlockUser() {
         blockUserArray.removeAll()
         
-        let uri = LoginManager.sharedInstance.baseURL + "my/blockedUser"
+        let uri = Constants.VyrlAPIURL.BLOCKUSER
         
         Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: LoginManager.sharedInstance.getHeader()).responseString(completionHandler: {
             response in
@@ -94,7 +94,8 @@ class BlockManagementViewController: UIViewController, UITableViewDelegate, UITa
         } else {
              cell = self.tableView.dequeueReusableCell(withIdentifier: "OfficialCell", for: indexPath) as! BlockTableViewCell
         }
-        
+        cell.delegate = self
+        cell.userId = blockUserArray[indexPath.row]["id"] as! Int
         cell.nicNameLabel.text = blockUserArray[indexPath.row]["nickName"] as? String
         if(blockUserArray[indexPath.row]["profile"] != nil) {
             let url = NSURL(string: (blockUserArray[indexPath.row]["profile"] as? String)!)
@@ -107,11 +108,24 @@ class BlockManagementViewController: UIViewController, UITableViewDelegate, UITa
 
 }
 
+extension BlockManagementViewController : BlockTableViewCellDelegate {
+    func unBlockUser() {
+        self.requestBlockUser()
+    }
+}
+
+protocol BlockTableViewCellDelegate {
+    func unBlockUser()
+}
+
 class BlockTableViewCell: UITableViewCell {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nicNameLabel: UILabel!
     @IBOutlet weak var unBlockButton: UIButton!
     @IBOutlet weak var officialImageView: UIImageView!
+    
+    var userId: Int!
+    var delegate : BlockTableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -127,16 +141,17 @@ class BlockTableViewCell: UITableViewCell {
     @IBAction func unBlockUser(_ sender: UIButton) {
         let parameters : Parameters = [
             "blocked": false,
-            "userId" : ""
+            "userId" : userId
         ]
         
-        let uri = Constants.VyrlAPIConstants.baseURL + "my/block"
+        let uri = Constants.VyrlAPIURL.BLOCKUSER
         
-        Alamofire.request(uri, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: LoginManager.sharedInstance.getHeader()).responseString(completionHandler: {
+        Alamofire.request(uri, method: .put, parameters: parameters, encoding: JSONEncoding.default, headers: LoginManager.sharedInstance.getHeader()).responseString(completionHandler: {
             response in
             switch response.result {
             case .success(let json) :
                 print(json)
+                self.delegate?.unBlockUser()
             case .failure(let error) :
                 print(error)
             }
