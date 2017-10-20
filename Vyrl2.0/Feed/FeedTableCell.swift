@@ -70,7 +70,9 @@ class FeedTableCell: UITableViewCell {
     
     @IBOutlet weak var fanView: UIView!
     @IBOutlet weak var fanPageLabel: UILabel!
+    @IBOutlet weak var likeLabel: UILabel!
     
+    @IBOutlet weak var likeView: UIView!
     var nativeAd :FBNativeAd!
     
     var adLoader: GADAdLoader!
@@ -199,6 +201,16 @@ class FeedTableCell: UITableViewCell {
             }
             
             self.officialImage.isHidden  = true
+            
+            let likeUsers = self.article?.likeUsers
+            
+            if ( likeUsers?.count != 0 ){
+                var text = likeUsers![0] + "님, " + likeUsers![1] + "님 외 "
+                text += (self.article?.likeCount)! + "이 좋아합니다."
+                self.likeLabel.text = text
+            }else {
+                self.likeView.isHidden = true
+            }
             
             self.followBtn.addTarget(self, action: #selector(followUser(sender:)), for: .touchUpInside)
             self.comment.addTarget(self, action: #selector(showCommentDetail(sender:)), for: .touchUpInside)
