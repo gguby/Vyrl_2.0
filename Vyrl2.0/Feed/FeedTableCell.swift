@@ -70,11 +70,11 @@ class FeedTableCell: UITableViewCell {
     
     @IBOutlet weak var fanView: UIView!
     @IBOutlet weak var fanPageLabel: UILabel!
-    @IBOutlet weak var likeLabel: UILabel!
-    
     var fanPageViewController : FanPageController!
     
+    @IBOutlet weak var likeLabel: UILabel!
     @IBOutlet weak var likeView: UIView!
+    
     var nativeAd :FBNativeAd!
     
     var adLoader: GADAdLoader!
