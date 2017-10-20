@@ -30,6 +30,7 @@ class FanPageCreateViewController: UIViewController,UIImagePickerControllerDeleg
     
     @IBOutlet weak var iconCheck: UIImageView!
     
+    var randomImageCount = 0
     var delegate : FanViewControllerDelegate!
     
     override func viewDidLoad() {
@@ -64,7 +65,7 @@ class FanPageCreateViewController: UIViewController,UIImagePickerControllerDeleg
             return
         }
         
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             
             if self.view.frame.origin.y == 0{
                 self.view.frame.origin.y -= keyboardSize.height
@@ -74,7 +75,7 @@ class FanPageCreateViewController: UIViewController,UIImagePickerControllerDeleg
     
     func keyboardWillHide(notification : NSNotification){
         
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y != 0{
                 self.view.frame.origin.y += keyboardSize.height
             }
@@ -117,14 +118,19 @@ class FanPageCreateViewController: UIViewController,UIImagePickerControllerDeleg
         let parameters : [String:String] = [
             "pageName": nameTextField.text!,
             "pageInfo" : introduceTextField.text!,
-            "link" : linkTextField.text!
+            "link" : linkTextField.text!,
+            "randomImage" : "\(randomImageCount)"
         ]
 
         let fileName = "\(nameTextField.text!).jpg"
         
+        let image = self.fanClubImageButton.image(for: .normal)
+        
         Alamofire.upload(multipartFormData: { (multipartFormData) in
-            if let imageData = UIImageJPEGRepresentation(self.fanClubImageButton.image(for: .normal)!, 1.0) {
-                multipartFormData.append(imageData, withName: "profileImagefile", fileName: fileName, mimeType: "image/jpg")
+            if let imageData = UIImageJPEGRepresentation(image!, 1.0) {
+                if self.randomImageCount == 0 {
+                    multipartFormData.append(imageData, withName: "profileImagefile", fileName: fileName, mimeType: "image/jpg")
+                }
             }
     
         }, usingThreshold: UInt64.init(), to:URL.init(string: uri, parameters: parameters)!, method: .post, headers: Constants.VyrlAPIConstants.getHeader(), encodingCompletion:
@@ -159,6 +165,12 @@ class FanPageCreateViewController: UIViewController,UIImagePickerControllerDeleg
             self.changeProfile()
         })
         let defaultProfileAction = UIAlertAction(title: "기본 이미지로 변경", style: .default, handler: { (action) -> Void in
+            
+            let diceRoll = Int(arc4random_uniform(3)+1)
+            self.randomImageCount = diceRoll
+            let str = "img_fanbg_default_0\(diceRoll)"
+            
+            self.fanClubImageButton.setImage( UIImage.init(named: str), for: .normal)
             
             self.dismiss(animated: true, completion: {
                 

@@ -169,7 +169,7 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
     func handleKeyboardWillShow(_ notification: Notification){
         
         let info = notification.userInfo
-        let infoNSValue = info![UIKeyboardFrameBeginUserInfoKey] as! NSValue
+        let infoNSValue = info![UIKeyboardFrameEndUserInfoKey] as! NSValue
         let kbSize = infoNSValue.cgRectValue.size
         
         ModalAnimatorPhoto.keyboardSize = kbSize
