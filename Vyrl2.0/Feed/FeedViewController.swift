@@ -16,6 +16,8 @@ class FeedViewController: UIViewController {
     
     var embedController : EmbedController!
     
+    var feedType = FeedTableType.ALLFEED
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -47,6 +49,7 @@ class FeedViewController: UIViewController {
         let storyboard = UIStoryboard(name: "FeedStyle", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "feedTable") as! FeedTableViewController
         controller.feedView = self
+        controller.feedType = self.feedType
         
         controller.view.frame.origin = CGPoint.init(x: 0, y: 66)
         controller.view.frame.size.height -= 66
@@ -72,8 +75,8 @@ class FeedViewController: UIViewController {
             self.feedTtile.text = "전체 피드"
             self.selectImageview.image = UIImage.init(named: "btn_select_down_02")
             
-            feedView?.feedType = FeedTableType.ALLFEED
-            
+            self.feedType = FeedTableType.ALLFEED
+            feedView?.feedType = self.feedType
             self.refresh()
             
             alertController.dismiss(animated: true, completion: nil )
@@ -82,7 +85,9 @@ class FeedViewController: UIViewController {
             self.feedTtile.text = "내 피드"
             self.selectImageview.image = UIImage.init(named: "btn_select_down_02")
             
-            feedView?.feedType = FeedTableType.MYFEED
+            self.feedType = FeedTableType.MYFEED
+            feedView?.feedType = self.feedType
+            
             self.refresh()
             
             alertController.dismiss(animated: true, completion: nil)
@@ -91,7 +96,8 @@ class FeedViewController: UIViewController {
             self.feedTtile.text = "팬 피드"
             self.selectImageview.image = UIImage.init(named: "btn_select_down_02")
             
-            feedView?.feedType = FeedTableType.FANALLFEED
+            self.feedType = FeedTableType.FANALLFEED
+            feedView?.feedType = self.feedType
             self.refresh()
             
             alertController.dismiss(animated: true, completion: nil)

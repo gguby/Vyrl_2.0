@@ -57,6 +57,8 @@ class MyViewController: UIViewController{
     @IBOutlet weak var followerView: UIView!
     @IBOutlet weak var followingView: UIView!
     
+    var feedView : FeedTableViewController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -125,6 +127,7 @@ class MyViewController: UIViewController{
     func setupFeed(feedType : FeedTableType){
         let storyboard = UIStoryboard(name: "FeedStyle", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "feedTable") as! FeedTableViewController
+        self.feedView = controller
         
         controller.feedType = feedType
         controller.userId = profileUserId
@@ -147,6 +150,7 @@ class MyViewController: UIViewController{
         super.viewWillAppear(animated)
         
         self.loadMyProfile()
+        self.feedView.getAllFeed()
     }
     
     func refreshMyAccout(){

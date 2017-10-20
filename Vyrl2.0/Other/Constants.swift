@@ -170,7 +170,7 @@ struct Constants {
             return VyrlAPIConstants.baseURL + "fan-pages/" + str + "/members"
         }
 
-        static let FANPAGEALLFEED = VyrlAPIConstants.baseURL + "fan-pages/feeds"
+        static let FANPAGEALLFEED = VyrlAPIConstants.baseURL + "feeds/fan-pages"
         static let AuthChange = VyrlAPIConstants.baseURL + "fan-pages/auth-changes"
         
         static func WithDrawAll(fanPageId : Int)-> String{

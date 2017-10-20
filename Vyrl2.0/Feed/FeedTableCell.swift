@@ -51,6 +51,8 @@ class FeedTableCell: UITableViewCell {
     @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var nickNameLabel: UILabel!
     
+    @IBOutlet weak var subTitle: UILabel!
+    
     @IBOutlet weak var commentView: UIView!
     @IBOutlet weak var firstCommentView: UIView!
     @IBOutlet weak var firstCommentNicknameButton: UIButton!
@@ -198,6 +200,12 @@ class FeedTableCell: UITableViewCell {
             
             self.officialImage.isHidden  = true
             
+            self.followBtn.addTarget(self, action: #selector(followUser(sender:)), for: .touchUpInside)
+            self.comment.addTarget(self, action: #selector(showCommentDetail(sender:)), for: .touchUpInside)
+            self.likeBtn.addTarget(self, action: #selector(like(sender:)), for: .touchUpInside)
+            self.share.addTarget(self, action: #selector(doShare(sender:)), for: .touchUpInside)
+            self.bookmarkBtn.addTarget(self, action: #selector(doBookMark(sender:)), for: .touchUpInside)
+            
             guard self.collectionView != nil else {
                 return
             }
@@ -275,11 +283,8 @@ class FeedTableCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         if(self.collectionView != nil) {
-//            self.collectionView.delegate = self as UICollectionViewDelegate
-//            self.collectionView.dataSource = self as UICollectionViewDataSource
 
             let size = UIScreen.main.bounds
-            
             self.configure()
        
             if (size.width > 375){
@@ -292,18 +297,12 @@ class FeedTableCell: UITableViewCell {
             self.contentTextView.textContainer.lineFragmentPadding = 0
         }
         
-        self.followBtn.addTarget(self, action: #selector(followUser(sender:)), for: .touchUpInside)
-        self.comment.addTarget(self, action: #selector(showCommentDetail(sender:)), for: .touchUpInside)
-        self.likeBtn.addTarget(self, action: #selector(like(sender:)), for: .touchUpInside)
-        self.share.addTarget(self, action: #selector(doShare(sender:)), for: .touchUpInside)
-        self.bookmarkBtn.addTarget(self, action: #selector(doBookMark(sender:)), for: .touchUpInside)
+        self.initGoogleAD()
         
-        self.initAD()
-        
-        self.initFB()
+        self.initFBAD()
     }
     
-    func initFB(){
+    func initFBAD(){
         
         if isAdTypeFaceBook == false {
             return
@@ -316,7 +315,7 @@ class FeedTableCell: UITableViewCell {
         nativeAd.load()
     }
     
-    func initAD(){
+    func initGoogleAD(){
         if isAdTypeGoogle == false {
             return
         }
@@ -458,6 +457,19 @@ extension FeedTableCell : FBNativeAdDelegate {
         }
         
         self.nativeAd = nativeAd
+        
+        nativeAd.icon?.loadAsync(block: { (image) in
+            self.profileButton.setImage(image, for: UIControlState.normal)
+        })
+        
+        nativeAd.coverImage?.loadAsync(block: {
+            (image) in
+            self.photo.image = image
+        })
+        
+        self.nickNameLabel.text = nativeAd.title
+        self.subTitle.text = nativeAd.subtitle
+        self.contentTextView.text = nativeAd.body
     }
     
     func nativeAd(_ nativeAd: FBNativeAd, didFailWithError error: Error) {

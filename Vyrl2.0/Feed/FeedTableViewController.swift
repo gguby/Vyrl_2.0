@@ -26,7 +26,7 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
     @IBOutlet weak var tableView: UITableView!
     var articleArray = [Article]()
 
-    var feedType = FeedTableType.MYFEED
+    var feedType = FeedTableType.ALLFEED
     var userId : Int!
     var fanPageId : Int!
     var isBottomRefresh = false
@@ -58,11 +58,15 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         
         dataSource.configureCell = { ds, tv, ip, item in
             let cell = tv.dequeueReusableCell(withIdentifier: item.type.rawValue) as! FeedTableCell
-            cell.article = item
-            cell.delegate = self
-            cell.contentTextView.text = item.content
-            cell.contentTextView.resolveHashTags()
-            cell.contentTextView.delegate = self
+            
+            if item.type != ArticleType.advertisingFeed {
+                cell.article = item
+                cell.delegate = self
+                cell.contentTextView.text = item.content
+                cell.contentTextView.resolveHashTags()
+                cell.contentTextView.delegate = self
+            }
+            
             return cell
         }
         
@@ -208,7 +212,10 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         
         if self.articleArray.count > 0 {
             let pageId = self.articleArray.last?.pageId
-            parameters["lastId"] = "\(pageId!)"
+            
+            if pageId != nil {
+                parameters["lastId"] = "\(pageId!)"
+            }
         }
         
         url = self.getFeedType(parameters: parameters)
@@ -884,6 +891,7 @@ struct Article : Mappable {
     }
     
     mutating func setUpType(){
+        
         if ( self.medias.count > 1){
             type = ArticleType.multiFeed
         }else if ( self.medias.count == 1){
