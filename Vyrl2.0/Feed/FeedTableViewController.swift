@@ -60,6 +60,7 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
             let cell = tv.dequeueReusableCell(withIdentifier: item.type.rawValue) as! FeedTableCell
             
             if item.type != ArticleType.advertisingFeed {
+                cell.fanPageViewController = self.fanPageViewController
                 cell.article = item
                 cell.delegate = self
                 cell.contentTextView.text = item.content
