@@ -206,12 +206,16 @@ class FeedTableCell: UITableViewCell {
             
             let likeUsers = self.article?.likeUsers
             
-            if ( likeUsers?.count != 0 ){
+            if ( likeUsers?.count == 0 ){
+                self.likeView.isHidden = true
+                
+            }else if(likeUsers?.count == 1 ){
+                var text = likeUsers![0] + "님이 좋아합니다."
+                self.likeLabel.text = text
+            } else {
                 var text = likeUsers![0] + "님, " + likeUsers![1] + "님 외 "
                 text += (self.article?.likeCount)! + "이 좋아합니다."
                 self.likeLabel.text = text
-            }else {
-                self.likeView.isHidden = true
             }
             
             self.followBtn.addTarget(self, action: #selector(followUser(sender:)), for: .touchUpInside)
