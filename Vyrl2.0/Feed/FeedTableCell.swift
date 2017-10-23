@@ -348,10 +348,15 @@ class FeedTableCell: UITableViewCell {
         let likecountStr = (self.article?.likeCount)! + "명"
         
         let likeUser0 = likeUsers![0]
-        let likeUser1 = likeUsers![1]
-        
-        var text = likeUser0 + " 님, " + likeUser1 + " 님 외 "
-        text += likecountStr + " 이 좋아합니다."
+        var text = ""
+        var likeUser1 : String? = nil
+        if likeUsers?.count == 1 {
+            text = likeUser0 + "님이 좋아합니다."
+        }else {
+            likeUser1 = likeUsers![1]
+            text = likeUser0 + " 님, " + likeUser1! + " 님 외 "
+            text += likecountStr + " 이 좋아합니다."
+        }
         
         let attributedString = NSMutableAttributedString(string: text)
         attributedString.addAttributes([
@@ -366,11 +371,13 @@ class FeedTableCell: UITableViewCell {
         attributedString.addAttribute(NSLinkAttributeName, value: likeUser0, range: attributedString.mutableString.range(of: likeUser0))
         attributedString.addAttributes(attr, range: attributedString.mutableString.range(of: likeUser0))
         
-        attributedString.addAttribute(NSLinkAttributeName, value: likeUser1, range: attributedString.mutableString.range(of: likeUser1))
-        attributedString.addAttributes(attr, range: attributedString.mutableString.range(of: likeUser1))
-        
-        attributedString.addAttribute(NSLinkAttributeName, value: likecountStr, range: attributedString.mutableString.range(of: likecountStr))
-        attributedString.addAttributes(attr, range: attributedString.mutableString.range(of: likecountStr))
+        if likeUser1 != nil {
+            attributedString.addAttribute(NSLinkAttributeName, value: likeUser1, range: attributedString.mutableString.range(of: likeUser1!))
+            attributedString.addAttributes(attr, range: attributedString.mutableString.range(of: likeUser1!))
+            
+            attributedString.addAttribute(NSLinkAttributeName, value: likecountStr, range: attributedString.mutableString.range(of: likecountStr))
+            attributedString.addAttributes(attr, range: attributedString.mutableString.range(of: likecountStr))
+        }
         
         self.likeLabel.attributedText = attributedString
     }
