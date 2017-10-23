@@ -172,7 +172,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="414" height="700"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PFc-q2-8d2" id="htJ-gY-KZu">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="700"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="699.66666666666663"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6oz-ad-0AK">
@@ -184,7 +184,7 @@
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ZG-pL-eL0" userLabel="like view">
                                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44.666666666666664"/>
                                                                             <subviews>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NCT_Dream님, 엑소디오xoxo님 외 203명이 좋아합니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="31B-1n-qeY">
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NCT_Dream님, 엑소디오xoxo님 외 203명이 좋아합니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="31B-1n-qeY" customClass="LinkedLabel" customModule="Vyrl2_0" customModuleProvider="target">
                                                                                     <rect key="frame" x="15" y="18" width="384" height="16"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="15.5" id="LHN-nu-ldr"/>
@@ -651,7 +651,7 @@
                                                 <rect key="frame" x="0.0" y="728" width="414" height="700"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hth-2A-IVu" id="k3M-TB-ltL">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="700"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="699.66666666666663"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WMK-Sp-CTz">
@@ -663,7 +663,7 @@
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jJi-gU-PHZ" userLabel="like view">
                                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44.666666666666664"/>
                                                                             <subviews>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NCT_Dream님, 엑소디오xoxo님 외 203명이 좋아합니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5DO-lt-xP9">
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NCT_Dream님, 엑소디오xoxo님 외 203명이 좋아합니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5DO-lt-xP9" customClass="LinkedLabel" customModule="Vyrl2_0" customModuleProvider="target">
                                                                                     <rect key="frame" x="15" y="18" width="384" height="16"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="15.5" id="yXb-JM-fx9"/>
@@ -1152,7 +1152,7 @@
                                                 <rect key="frame" x="0.0" y="1428" width="414" height="500"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dCK-YA-8eZ" id="k1m-T5-Ks1">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="500"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="499.66666666666669"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N2C-re-nAU">
@@ -1164,7 +1164,7 @@
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ghm-CG-up3" userLabel="like view">
                                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44.666666666666664"/>
                                                                             <subviews>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NCT_Dream님, 엑소디오xoxo님 외 203명이 좋아합니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Net-0Y-TpO">
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NCT_Dream님, 엑소디오xoxo님 외 203명이 좋아합니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Net-0Y-TpO" customClass="LinkedLabel" customModule="Vyrl2_0" customModuleProvider="target">
                                                                                     <rect key="frame" x="15" y="18" width="384" height="16"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="15.5" id="cWP-qf-N4n"/>
@@ -1580,7 +1580,7 @@
                                                 <rect key="frame" x="0.0" y="1928" width="414" height="550"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bRN-IR-0WK" id="tP3-hm-ZoS">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="550"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="549.66666666666663"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e5z-pD-jtg">
@@ -1968,7 +1968,7 @@
                                                 <rect key="frame" x="0.0" y="2478" width="414" height="508"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XHz-Pc-KGu" id="Eg0-gn-Gir">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="508"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="507.66666666666669"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5RG-Br-Aih">

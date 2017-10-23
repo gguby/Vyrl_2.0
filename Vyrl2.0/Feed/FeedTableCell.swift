@@ -70,7 +70,7 @@ class FeedTableCell: UITableViewCell {
     
     @IBOutlet weak var fanView: UIView!
     @IBOutlet weak var fanPageLabel: UILabel!
-    @IBOutlet weak var likeLabel: UILabel!
+    @IBOutlet weak var likeLabel: LinkedLabel!
     
     @IBOutlet weak var likeView: UIView!
     var nativeAd :FBNativeAd!
@@ -205,9 +205,7 @@ class FeedTableCell: UITableViewCell {
             let likeUsers = self.article?.likeUsers
             
             if ( likeUsers?.count != 0 ){
-                var text = likeUsers![0] + "님, " + likeUsers![1] + "님 외 "
-                text += (self.article?.likeCount)! + "이 좋아합니다."
-                self.likeLabel.text = text
+              self.confiugreLike()
             }else {
                 self.likeView.isHidden = true
             }
@@ -338,6 +336,40 @@ class FeedTableCell: UITableViewCell {
                                adTypes: adTypes, options: nil)
         adLoader.delegate = self
         adLoader.load(GADRequest())
+    }
+    
+    func confiugreLike(){
+        
+        let likeUsers = self.article?.likeUsers
+        
+        let likecountStr = (self.article?.likeCount)! + "명"
+        
+        let likeUser0 = likeUsers![0]
+        let likeUser1 = likeUsers![1]
+        
+        var text = likeUser0 + " 님, " + likeUser1 + " 님 외 "
+        text += likecountStr + " 이 좋아합니다."
+        
+        let attributedString = NSMutableAttributedString(string: text)
+        attributedString.addAttributes([
+            NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Regular", size: 13.0)!,
+            NSForegroundColorAttributeName: UIColor(red: 131 / 255.0, green: 131 / 255.0, blue: 131 / 255.0, alpha: 1.0)
+            ], range: NSRange(location: 0, length: text.characters.count))
+        
+        let attr = [
+            NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-SemiBold", size: 13)!
+        ]
+        
+        attributedString.addAttribute(NSLinkAttributeName, value: likeUser0, range: attributedString.mutableString.range(of: likeUser0))
+        attributedString.addAttributes(attr, range: attributedString.mutableString.range(of: likeUser0))
+        
+        attributedString.addAttribute(NSLinkAttributeName, value: likeUser1, range: attributedString.mutableString.range(of: likeUser1))
+        attributedString.addAttributes(attr, range: attributedString.mutableString.range(of: likeUser1))
+        
+        attributedString.addAttribute(NSLinkAttributeName, value: likecountStr, range: attributedString.mutableString.range(of: likecountStr))
+        attributedString.addAttributes(attr, range: attributedString.mutableString.range(of: likecountStr))
+        
+        self.likeLabel.attributedText = attributedString
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -499,3 +531,85 @@ class BoxCell : UICollectionViewCell {
         super.prepareForReuse()
     }
 }
+
+
+class LinkedLabel: UILabel {
+    
+    fileprivate let layoutManager = NSLayoutManager()
+    fileprivate let textContainer = NSTextContainer(size: CGSize.zero)
+    fileprivate var textStorage: NSTextStorage?
+    
+    
+    override init(frame aRect:CGRect){
+        super.init(frame: aRect)
+        self.initialize()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.initialize()
+    }
+    
+    func initialize(){
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(LinkedLabel.handleTapOnLabel))
+        self.isUserInteractionEnabled = true
+        self.addGestureRecognizer(tap)
+    }
+    
+    override var attributedText: NSAttributedString?{
+        didSet{
+            if let _attributedText = attributedText{
+                self.textStorage = NSTextStorage(attributedString: _attributedText)
+                
+                self.layoutManager.addTextContainer(self.textContainer)
+                self.textStorage?.addLayoutManager(self.layoutManager)
+                
+                self.textContainer.lineFragmentPadding = 0.0;
+                self.textContainer.lineBreakMode = self.lineBreakMode;
+                self.textContainer.maximumNumberOfLines = self.numberOfLines;
+            }
+        }
+    }
+    
+    func handleTapOnLabel(tapGesture:UITapGestureRecognizer){
+        
+        let layoutManager = NSLayoutManager()
+        let textContainer = NSTextContainer(size: CGSize.zero)
+        let textStorage = NSTextStorage(attributedString: self.attributedText!)
+        
+        // Configure layoutManager and textStorage
+        layoutManager.addTextContainer(textContainer)
+        textStorage.addLayoutManager(layoutManager)
+        
+        // Configure textContainer
+        textContainer.lineFragmentPadding = 0.0
+        textContainer.lineBreakMode = self.lineBreakMode
+        textContainer.maximumNumberOfLines = self.numberOfLines
+        textContainer.size = self.bounds.size
+        
+        // main code
+        let locationOfTouchInLabel = tapGesture.location(in: self)
+        
+        let indexOfCharacter = layoutManager.characterIndex(for: locationOfTouchInLabel, in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
+        let indexOfCharacterRange = NSRange(location: indexOfCharacter, length: 1)
+        let indexOfCharacterRect = layoutManager.boundingRect(forGlyphRange: indexOfCharacterRange, in: textContainer)
+        let deltaOffsetCharacter = indexOfCharacterRect.origin.x + indexOfCharacterRect.size.width
+        
+        if locationOfTouchInLabel.x > deltaOffsetCharacter {
+            return
+        }
+        
+        self.attributedText?.enumerateAttribute(NSLinkAttributeName, in: NSMakeRange(0, (self.attributedText?.length)!), options: NSAttributedString.EnumerationOptions(rawValue: UInt(0)), using:{
+            (attrs: Any?, range: NSRange, stop: UnsafeMutablePointer<ObjCBool>) in
+            
+            if NSLocationInRange(indexOfCharacter, range){
+                if let _attrs = attrs{
+                    let str = _attrs as! String
+                    print(str)
+                }
+            }
+        })
+    }
+}
+

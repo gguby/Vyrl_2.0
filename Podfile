@@ -35,7 +35,7 @@ target 'Vyrl2.0' do
     pod 'FBAudienceNetwork'
     pod 'RxSwift',    '~> 3.0'
     pod 'RxCocoa',    '~> 3.0'
-    pod 'RxDataSources', '~> 1.0'
+    pod 'RxDataSources', '~> 1.0'    
 end
 
 
