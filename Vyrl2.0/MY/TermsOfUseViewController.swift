@@ -41,8 +41,9 @@ class TermsOfUseViewController: UIViewController {
             case .success(let data):
                 print(data)
                 let json = JSON(data)
-                let result = json["content"].string
-                self.termsTextView.attributedText = self.stringFromHtml(string: result!)
+                if let result = json["content"].string {
+                    self.termsTextView.attributedText = self.stringFromHtml(string: result)
+                }
             case .failure(let error):
                 print(error)
             }

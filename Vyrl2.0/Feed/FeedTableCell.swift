@@ -73,6 +73,9 @@ class FeedTableCell: UITableViewCell {
     @IBOutlet weak var likeLabel: LinkedLabel!
     
     @IBOutlet weak var likeView: UIView!
+    
+    var fanPageViewController : FanPageController!
+    
     var nativeAd :FBNativeAd!
     
     var adLoader: GADAdLoader!
@@ -193,7 +196,7 @@ class FeedTableCell: UITableViewCell {
                 self.likeBtn.tag = 0
             }
             
-            if (article?.isFanPageType)! {
+            if (article?.isFanPageType)! && self.fanPageViewController == nil {
                 self.fanView.isHidden = false
                 self.fanPageLabel.text = article?.fanPageName
             } else {
