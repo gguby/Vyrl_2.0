@@ -108,8 +108,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     }
     
     private func addBindToModel(model : SearchModel){
-        model.addBindSuggestAccount(tableView: self.followTableView)
         model.addBindOfficialAccount(collectionView: self.officialCollectionView)
+        model.setUpOfficialCollectionCellTapHandling(collectionView: self.officialCollectionView, viewController: self)
+        
+        model.addBindSuggestAccount(tableView: self.followTableView)
     }
     
     @IBAction func switchAction(_ sender: UISwitch) {
@@ -649,7 +651,18 @@ class SearchModel {
             }
             cell.label.text = user.nickName
             }.addDisposableTo(disposeBag)
+        
     }
+    
+    func setUpOfficialCollectionCellTapHandling(collectionView : UICollectionView, viewController : UIViewController) {
+        collectionView.rx.modelSelected(SearchUser.self)
+            .subscribe(onNext: {
+                user in
+                let otherProfile = viewController.pushViewControllrer(storyboardName: "Search", controllerName: "OtherProfile") as! OtherProfileViewController
+                otherProfile.profileUserId = user.userId
+            }).addDisposableTo(disposeBag)
+    }
+    
     
     func addBindSuggestAccount(tableView : UITableView){
         let officialAccountObservable : Observable<[SearchUser]> = SearchAPI.sharedAPI.suggestAccounts()
