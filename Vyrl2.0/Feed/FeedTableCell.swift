@@ -371,9 +371,9 @@ class FeedTableCell: UITableViewCell {
         attributedString.addAttribute(NSLinkAttributeName, value: likeUser0, range: attributedString.mutableString.range(of: likeUser0))
         attributedString.addAttributes(attr, range: attributedString.mutableString.range(of: likeUser0))
         
-        if likeUser1 != nil {
-            attributedString.addAttribute(NSLinkAttributeName, value: likeUser1, range: attributedString.mutableString.range(of: likeUser1!))
-            attributedString.addAttributes(attr, range: attributedString.mutableString.range(of: likeUser1!))
+        if let likeUser = likeUser1 {
+            attributedString.addAttribute(NSLinkAttributeName, value: likeUser, range: attributedString.mutableString.range(of: likeUser))
+            attributedString.addAttributes(attr, range: attributedString.mutableString.range(of: likeUser))
             
             attributedString.addAttribute(NSLinkAttributeName, value: likecountStr, range: attributedString.mutableString.range(of: likecountStr))
             attributedString.addAttributes(attr, range: attributedString.mutableString.range(of: likecountStr))

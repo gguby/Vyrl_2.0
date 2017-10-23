@@ -61,10 +61,6 @@ class FanPageCreateViewController: UIViewController,UIImagePickerControllerDeleg
 
     func keyboardWillShow(notification : NSNotification){
         
-        if self.nameTextField.isFirstResponder {
-            return
-        }
-        
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             
             if self.view.frame.origin.y == 0{
@@ -126,6 +122,8 @@ class FanPageCreateViewController: UIViewController,UIImagePickerControllerDeleg
         
         let image = self.fanClubImageButton.image(for: .normal)
         
+        self.showLoading(show: true)
+        
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             if let imageData = UIImageJPEGRepresentation(image!, 1.0) {
                 if self.randomImageCount == 0 {
@@ -140,7 +138,6 @@ class FanPageCreateViewController: UIViewController,UIImagePickerControllerDeleg
                 case .success(let upload, _, _):
                     
                     upload.uploadProgress(closure: { (progress) in
-                        self.showLoading(show: true)
                     })
                     
                     upload.responseString { response in
@@ -152,6 +149,7 @@ class FanPageCreateViewController: UIViewController,UIImagePickerControllerDeleg
                     }
                 case .failure(let encodingError):
                     print(encodingError.localizedDescription)
+                    self.showLoading(show: false)
                 }
         })
     }
@@ -277,6 +275,7 @@ extension FanPageCreateViewController: SHViewControllerDelegate {
     func shViewControllerImageDidFilter(image: UIImage) {
         // Filtered image will be returned here.
         
+        self.randomImageCount = 0
         fanClubImageButton.setImage(image, for: .normal)
         
         self.dismiss(animated:true, completion: nil)
