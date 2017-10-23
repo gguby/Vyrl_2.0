@@ -343,6 +343,10 @@ class FeedTableCell: UITableViewCell {
     
     func confiugreLike(){
         
+        if self.article?.cntLike == 0 {
+            return
+        }
+        
         let likeUsers = self.article?.likeUsers
         
         let likecountStr = (self.article?.likeCount)! + "명"
