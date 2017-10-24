@@ -112,6 +112,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         model.setUpOfficialCollectionCellTapHandling(collectionView: self.officialCollectionView, viewController: self)
         
         model.addBindSuggestAccount(tableView: self.followTableView)
+        model.setUpFollowCellTapHandling(tableView: self.followTableView, viewController: self)
     }
     
     @IBAction func switchAction(_ sender: UISwitch) {
@@ -675,6 +676,15 @@ class SearchModel {
             }
             cell.nickName.text = user.nickName
         }.addDisposableTo(disposeBag)
+    }
+    
+    func setUpFollowCellTapHandling(tableView : UITableView, viewController : UIViewController) {
+        tableView.rx.modelSelected(SearchUser.self)
+            .subscribe(onNext: {
+                user in
+                let profile = viewController.pushViewControllrer(storyboardName: "Search", controllerName: "OtherProfile") as! OtherProfileViewController
+                profile.profileUserId = user.userId
+            }).addDisposableTo(disposeBag)
     }
     
     func addBindSuggestPost(tableView : UITableView){
