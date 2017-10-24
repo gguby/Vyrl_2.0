@@ -59,7 +59,7 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         dataSource.configureCell = { ds, tv, ip, item in
             let cell = tv.dequeueReusableCell(withIdentifier: item.type.rawValue) as! FeedTableCell
             
-            if item.type != ArticleType.advertisingFeed {
+            if item.type == ArticleType.oneFeed || item.type == ArticleType.multiFeed || item.type == ArticleType.textOnlyFeed  {
                 cell.fanPageViewController = self.fanPageViewController
                 cell.article = item
                 cell.delegate = self
@@ -383,27 +383,6 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
             })
         }
 }
-
-//extension FeedTableViewController : UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-//    {
-//        return self.articleArray.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-//    {
-//        let article = self.articleArray[indexPath.row]
-//
-//        let cell = tableView.dequeueReusableCell(withIdentifier: article.type.rawValue, for: indexPath) as! FeedTableCell
-//        cell.article = article
-//        cell.delegate = self
-//        cell.contentTextView.text = article.content
-//        cell.contentTextView.resolveHashTags()
-//        cell.contentTextView.delegate = self
-//
-//        return cell
-//    }
-//}
 
 extension FeedTableViewController : UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
@@ -782,8 +761,9 @@ public enum ArticleType : String{
     case oneFeed   = "oneFeed"
     case multiFeed = "multiFeed"
     case textOnlyFeed = "textOnlyFeed"
-    case advertisingFeed = "advertisingFeed"
     case channelFeed = "channelFeed"
+    case FBAdFeed = "FBAdFeed"
+    case googleAdFeed = "googleAdFeed"
 }
 
 struct Article : Mappable {

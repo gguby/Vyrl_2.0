@@ -73,6 +73,7 @@ class FeedTableCell: UITableViewCell {
     @IBOutlet weak var likeLabel: LinkedLabel!
     
     @IBOutlet weak var likeView: UIView!
+    @IBOutlet weak var adBtn: UIButton!
     
     var fanPageViewController : FanPageController!
     
@@ -333,7 +334,7 @@ class FeedTableCell: UITableViewCell {
             return
         }
         var adTypes = [GADAdLoaderAdType]()
-        adTypes.append(GADAdLoaderAdType.nativeContent)
+//        adTypes.append(GADAdLoaderAdType.nativeContent)
         adTypes.append(GADAdLoaderAdType.nativeAppInstall)
         
         adLoader = GADAdLoader(adUnitID: Constants.GoogleADTest, rootViewController: self.delegate as? UIViewController,
@@ -487,22 +488,31 @@ extension FeedTableCell: UICollectionViewDelegate {
 extension FeedTableCell : GADNativeContentAdLoaderDelegate , GADNativeAppInstallAdLoaderDelegate{
     func adLoader(_ adLoader: GADAdLoader, didReceive nativeContentAd: GADNativeContentAd){
         
-        self.nickNameLabel.text = nativeContentAd.advertiser
-        self.subTitle.text = nativeContentAd.headline
-        self.contentTextView.text = nativeContentAd.body
-        if let logoimage = nativeContentAd.logo?.image {
-            self.profileButton.setImage(logoimage, for: .normal)
-        }
-        let firstImage: GADNativeAdImage? = nativeContentAd.images?.first as? GADNativeAdImage
-        self.photo.image = firstImage?.image
+//        self.nickNameLabel.text = nativeContentAd.advertiser
+//        self.subTitle.text = nativeContentAd.headline
+//        self.contentTextView.text = nativeContentAd.body
+//        if let logoimage = nativeContentAd.logo?.image {
+//            self.profileButton.setImage(logoimage, for: .normal)
+//        }
+//        let firstImage: GADNativeAdImage? = nativeContentAd.images?.first as? GADNativeAdImage
+//        self.photo.image = firstImage?.image
+//        self.adBtn.setTitle(nativeContentAd.callToAction, for: .normal)
     }
     func adLoader(_ adLoader: GADAdLoader, didReceive nativeAppInstallAd: GADNativeAppInstallAd){
-        self.nickNameLabel.text = nativeAppInstallAd.headline
-        self.subTitle.text = nativeAppInstallAd.price
-        self.contentTextView.text = nativeAppInstallAd.body
-        self.profileButton.af_setImage(for: .normal, url: (nativeAppInstallAd.icon?.imageURL)!)
+        
+        nativeAppInstallAd.rootViewController = self.delegate as? UIViewController
+        
+        let appInstallAdView = self.subviews[0].subviews[0] as! GADNativeAppInstallAdView
+        
+        appInstallAdView.nativeAppInstallAd = nativeAppInstallAd
+        
+        (appInstallAdView.iconView as! UIImageView).image = nativeAppInstallAd.icon?.image
+        (appInstallAdView.headlineView as! UILabel).text = nativeAppInstallAd.headline
+        (appInstallAdView.bodyView as! UILabel).text = nativeAppInstallAd.body
+        (appInstallAdView.callToActionView as! UIButton).isUserInteractionEnabled = false
+        
         let firstImage: GADNativeAdImage? = nativeAppInstallAd.images?.first as? GADNativeAdImage
-        self.photo.image = firstImage?.image
+        (appInstallAdView.callToActionView as! UIButton).setBackgroundImage(firstImage?.image, for: .normal)
     }
     func adLoader(_ adLoader: GADAdLoader, didFailToReceiveAdWithError error: GADRequestError){
         print(adLoader.adUnitID)
