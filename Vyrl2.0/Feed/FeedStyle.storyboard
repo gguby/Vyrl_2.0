@@ -5,7 +5,7 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -49,7 +49,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="게시글 수정" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SRY-zZ-9e4">
-                                        <rect key="frame" x="170" y="12.666666666666664" width="73.666666666666657" height="20"/>
+                                        <rect key="frame" x="170" y="12.666666666666664" width="73.666666666666686" height="20"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
                                         <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -144,7 +144,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="게시글을 등록중입니다!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exE-Vh-Zz2">
-                                                <rect key="frame" x="145" y="26" width="110.33333333333334" height="20"/>
+                                                <rect key="frame" x="145" y="26" width="110.33333333333331" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="asC-8t-ylf"/>
                                                 </constraints>
@@ -172,7 +172,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="414" height="700"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PFc-q2-8d2" id="htJ-gY-KZu">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="700"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="699.66666666666663"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6oz-ad-0AK">
@@ -212,10 +212,10 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="31a-Ry-LVh" userLabel="Nicname View">
-                                                                            <rect key="frame" x="0.0" y="44.666666666666671" width="414" height="57.000000000000014"/>
+                                                                            <rect key="frame" x="0.0" y="44.666666666666657" width="414" height="57"/>
                                                                             <subviews>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VlA-Tj-LQj">
-                                                                                    <rect key="frame" x="15" y="12.666666666666671" width="32" height="31.999999999999993"/>
+                                                                                    <rect key="frame" x="15" y="12.666666666666671" width="32" height="32"/>
                                                                                     <color key="backgroundColor" red="0.50196078430000002" green="0.32156862749999998" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" constant="32" id="T40-Ve-sCA"/>
@@ -258,7 +258,7 @@
                                                                                     </constraints>
                                                                                 </stackView>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Zj-TJ-v41">
-                                                                                    <rect key="frame" x="324" y="12.666666666666671" width="40" height="31.999999999999993"/>
+                                                                                    <rect key="frame" x="324" y="12.666666666666671" width="40" height="32"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="32" id="Fty-jr-Krr"/>
                                                                                         <constraint firstAttribute="width" constant="40" id="Zyt-M8-5Oy"/>
@@ -266,7 +266,7 @@
                                                                                     <state key="normal" image="icon_add_01"/>
                                                                                 </button>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tK8-N1-Jmo">
-                                                                                    <rect key="frame" x="369" y="12.666666666666671" width="40" height="31.999999999999993"/>
+                                                                                    <rect key="frame" x="369" y="12.666666666666671" width="40" height="32"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" constant="40" id="oZU-eF-ZsU"/>
                                                                                         <constraint firstAttribute="height" constant="32" id="t8G-aI-ExY"/>
@@ -293,7 +293,7 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ed2-hf-5hz" userLabel="Fan View">
-                                                                            <rect key="frame" x="0.0" y="101.66666666666666" width="414" height="30.999999999999972"/>
+                                                                            <rect key="frame" x="0.0" y="101.66666666666667" width="414" height="31.000000000000014"/>
                                                                             <subviews>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="txt_fan_01" translatesAutoresizingMaskIntoConstraints="NO" id="9ih-Ap-ywK">
                                                                                     <rect key="frame" x="15" y="9.3333333333333286" width="32" height="13"/>
@@ -303,7 +303,7 @@
                                                                                     </constraints>
                                                                                 </imageView>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[Official] SHINee_World" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RBr-VE-gXf">
-                                                                                    <rect key="frame" x="57" y="9.3333333333333286" width="110.33333333333334" height="13.333333333333329"/>
+                                                                                    <rect key="frame" x="56.999999999999993" y="9.3333333333333286" width="110.33333333333331" height="13.333333333333336"/>
                                                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="11"/>
                                                                                     <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
                                                                                     <nil key="highlightedColor"/>
@@ -316,7 +316,7 @@
                                                                                     </constraints>
                                                                                 </imageView>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dgS-X7-wGM">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="30.999999999999986"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="31"/>
                                                                                     <connections>
                                                                                         <action selector="showFanPage:" destination="PFc-q2-8d2" eventType="touchUpInside" id="PZt-Mf-F20"/>
                                                                                     </connections>
@@ -399,7 +399,7 @@
                                                                     <rect key="frame" x="0.0" y="588.66666666666663" width="414" height="15"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4분 전" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IEv-XZ-B5O">
-                                                                            <rect key="frame" x="14" y="0.0" width="30.666666666666664" height="15"/>
+                                                                            <rect key="frame" x="14.000000000000002" y="0.0" width="30.666666666666671" height="15"/>
                                                                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
                                                                             <color key="textColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.67450980390000004" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
@@ -432,26 +432,26 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Vg5-ND-KvX">
-                                                                    <rect key="frame" x="0.0" y="614.66666666666663" width="414" height="70.666666666666742"/>
+                                                                    <rect key="frame" x="0.0" y="614.66666666666663" width="414" height="70.666666666666629"/>
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pBl-QI-v6M" userLabel="comment View">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="36.666666666666742"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="36.666666666666664"/>
                                                                             <subviews>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="vJP-kA-ZMx">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="31"/>
                                                                                     <subviews>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QwL-7u-PhX">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="15.666666666666742"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="15.666666666666666"/>
                                                                                             <subviews>
                                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hp3-wf-JOt">
-                                                                                                    <rect key="frame" x="15" y="0.0" width="39" height="15.666666666666742"/>
+                                                                                                    <rect key="frame" x="15" y="0.0" width="39" height="15.666666666666666"/>
                                                                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="13"/>
                                                                                                     <state key="normal" title="Button">
                                                                                                         <color key="titleColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                     </state>
                                                                                                 </button>
                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="꽃길만 걸으세요~" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4L-uz-uKj">
-                                                                                                    <rect key="frame" x="64" y="0.0" width="82.333333333333343" height="15.666666666666742"/>
+                                                                                                    <rect key="frame" x="63.999999999999993" y="0.0" width="82.333333333333314" height="15.666666666666666"/>
                                                                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
                                                                                                     <color key="textColor" red="0.31372549020000001" green="0.29803921570000003" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                     <nil key="highlightedColor"/>
@@ -469,17 +469,17 @@
                                                                                             </constraints>
                                                                                         </view>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r9Y-Dr-8il">
-                                                                                            <rect key="frame" x="0.0" y="15.666666666666742" width="414" height="15.333333333333258"/>
+                                                                                            <rect key="frame" x="0.0" y="15.666666666666742" width="414" height="15.333333333333336"/>
                                                                                             <subviews>
                                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rDx-ha-TKw">
-                                                                                                    <rect key="frame" x="15" y="-0.66666666666674246" width="39" height="15.666666666666742"/>
+                                                                                                    <rect key="frame" x="15" y="-0.66666666666674246" width="39" height="15.666666666666666"/>
                                                                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="13"/>
                                                                                                     <state key="normal" title="Button">
                                                                                                         <color key="titleColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                     </state>
                                                                                                 </button>
                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="꽃길만 걸으세요~" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SeI-4p-Mxt">
-                                                                                                    <rect key="frame" x="64" y="0.0" width="82.333333333333343" height="15"/>
+                                                                                                    <rect key="frame" x="63.999999999999993" y="0.0" width="82.333333333333314" height="15"/>
                                                                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
                                                                                                     <color key="textColor" red="0.31372549020000001" green="0.29803921570000003" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                     <nil key="highlightedColor"/>
@@ -651,7 +651,7 @@
                                                 <rect key="frame" x="0.0" y="728" width="414" height="700"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hth-2A-IVu" id="k3M-TB-ltL">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="700"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="699.66666666666663"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WMK-Sp-CTz">
@@ -691,10 +691,10 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zta-Rn-dq7" userLabel="Nicname View">
-                                                                            <rect key="frame" x="0.0" y="44.666666666666671" width="414" height="57.000000000000014"/>
+                                                                            <rect key="frame" x="0.0" y="44.666666666666657" width="414" height="57"/>
                                                                             <subviews>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="85i-Jy-JcF">
-                                                                                    <rect key="frame" x="15" y="12.666666666666671" width="32" height="31.999999999999993"/>
+                                                                                    <rect key="frame" x="15" y="12.666666666666671" width="32" height="32"/>
                                                                                     <color key="backgroundColor" red="0.50196078430000002" green="0.32156862749999998" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="32" id="5QP-Vq-Gbd"/>
@@ -714,7 +714,7 @@
                                                                                     </userDefinedRuntimeAttributes>
                                                                                 </button>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Gm7-H3-arU">
-                                                                                    <rect key="frame" x="57" y="22.000000000000007" width="91.333333333333343" height="13"/>
+                                                                                    <rect key="frame" x="56.999999999999993" y="22.000000000000007" width="91.333333333333314" height="13"/>
                                                                                     <subviews>
                                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tag_official_01" translatesAutoresizingMaskIntoConstraints="NO" id="yvS-pY-PNZ">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="41" height="13"/>
@@ -737,7 +737,7 @@
                                                                                     </constraints>
                                                                                 </stackView>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lno-zE-Aux">
-                                                                                    <rect key="frame" x="324" y="12.666666666666671" width="40" height="31.999999999999993"/>
+                                                                                    <rect key="frame" x="324" y="12.666666666666671" width="40" height="32"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="32" id="CoQ-EK-gXX"/>
                                                                                         <constraint firstAttribute="width" constant="40" id="FWM-Je-16S"/>
@@ -745,7 +745,7 @@
                                                                                     <state key="normal" image="icon_add_01"/>
                                                                                 </button>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fNv-h5-9mN">
-                                                                                    <rect key="frame" x="369" y="12.666666666666671" width="40" height="31.999999999999993"/>
+                                                                                    <rect key="frame" x="369" y="12.666666666666671" width="40" height="32"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="32" id="MKw-I6-62l"/>
                                                                                         <constraint firstAttribute="width" constant="40" id="VPu-A7-Bh0"/>
@@ -770,7 +770,7 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XlJ-8I-bN3" userLabel="Fan View">
-                                                                            <rect key="frame" x="0.0" y="101.66666666666666" width="414" height="30.999999999999972"/>
+                                                                            <rect key="frame" x="0.0" y="101.66666666666667" width="414" height="31.000000000000014"/>
                                                                             <subviews>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="txt_fan_01" translatesAutoresizingMaskIntoConstraints="NO" id="XOo-60-p1g">
                                                                                     <rect key="frame" x="15" y="9" width="32" height="13"/>
@@ -780,7 +780,7 @@
                                                                                     </constraints>
                                                                                 </imageView>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[Official] SHINee_World" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="raX-aG-8PP">
-                                                                                    <rect key="frame" x="57" y="9" width="110.33333333333334" height="13.333333333333329"/>
+                                                                                    <rect key="frame" x="56.999999999999993" y="9" width="110.33333333333331" height="13.333333333333336"/>
                                                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="11"/>
                                                                                     <color key="textColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                                     <nil key="highlightedColor"/>
@@ -793,7 +793,7 @@
                                                                                     </constraints>
                                                                                 </imageView>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KZt-WU-gFb">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="29.999999999999986"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="31"/>
                                                                                     <connections>
                                                                                         <action selector="showFanPage:" destination="hth-2A-IVu" eventType="touchUpInside" id="5Rh-E9-HA7"/>
                                                                                     </connections>
@@ -817,7 +817,7 @@
                                                                     </subviews>
                                                                 </stackView>
                                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gp8-L5-WQ0">
-                                                                    <rect key="frame" x="0.0" y="132.66666666666669" width="375" height="250.00000000000006"/>
+                                                                    <rect key="frame" x="0.0" y="132.66666666666663" width="375" height="250"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="250" id="3bH-d7-oBR"/>
@@ -884,7 +884,7 @@
                                                                     </cells>
                                                                 </collectionView>
                                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jLS-9J-piq">
-                                                                    <rect key="frame" x="15" y="396.66666666666663" width="384" height="183.99999999999989"/>
+                                                                    <rect key="frame" x="15" y="396.66666666666669" width="384" height="184.00000000000006"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -895,7 +895,7 @@
                                                                     <rect key="frame" x="0.0" y="588.66666666666663" width="414" height="15"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4분 전" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDs-mJ-9kJ">
-                                                                            <rect key="frame" x="14" y="0.0" width="30.666666666666664" height="15"/>
+                                                                            <rect key="frame" x="14.000000000000002" y="0.0" width="30.666666666666671" height="15"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="14.5" id="JMS-uK-jxe"/>
                                                                             </constraints>
@@ -934,26 +934,26 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="SuZ-iR-GCZ">
-                                                                    <rect key="frame" x="0.0" y="614.66666666666663" width="414" height="70.666666666666742"/>
+                                                                    <rect key="frame" x="0.0" y="614.66666666666663" width="414" height="70.666666666666629"/>
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TfI-Az-LTX" userLabel="comment View">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="36.666666666666742"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="36.666666666666664"/>
                                                                             <subviews>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="UVn-gx-PBb">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="31"/>
                                                                                     <subviews>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t2p-HS-xhz">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="15.666666666666742"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="15.666666666666666"/>
                                                                                             <subviews>
                                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="73R-G3-7x8">
-                                                                                                    <rect key="frame" x="15" y="0.0" width="39" height="15.666666666666742"/>
+                                                                                                    <rect key="frame" x="15" y="0.0" width="39" height="15.666666666666666"/>
                                                                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="13"/>
                                                                                                     <state key="normal" title="Button">
                                                                                                         <color key="titleColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                     </state>
                                                                                                 </button>
                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="꽃길만 걸으세요~" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OLi-1h-sLm">
-                                                                                                    <rect key="frame" x="64" y="0.0" width="82.333333333333343" height="15"/>
+                                                                                                    <rect key="frame" x="63.999999999999993" y="0.0" width="82.333333333333314" height="15"/>
                                                                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
                                                                                                     <color key="textColor" red="0.31372549020000001" green="0.29803921570000003" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                     <nil key="highlightedColor"/>
@@ -971,17 +971,17 @@
                                                                                             </constraints>
                                                                                         </view>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NqV-2n-pWP">
-                                                                                            <rect key="frame" x="0.0" y="15.666666666666742" width="414" height="15.333333333333258"/>
+                                                                                            <rect key="frame" x="0.0" y="15.666666666666742" width="414" height="15.333333333333336"/>
                                                                                             <subviews>
                                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y8L-bv-Kpz">
-                                                                                                    <rect key="frame" x="15" y="0.0" width="39" height="15.333333333333258"/>
+                                                                                                    <rect key="frame" x="15" y="0.0" width="39" height="15.333333333333334"/>
                                                                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="13"/>
                                                                                                     <state key="normal" title="Button">
                                                                                                         <color key="titleColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                     </state>
                                                                                                 </button>
                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="꽃길만 걸으세요~" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QgZ-pN-U0d">
-                                                                                                    <rect key="frame" x="64" y="0.0" width="82.333333333333343" height="15"/>
+                                                                                                    <rect key="frame" x="63.999999999999993" y="0.0" width="82.333333333333314" height="15"/>
                                                                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
                                                                                                     <color key="textColor" red="0.31372549020000001" green="0.29803921570000003" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                     <nil key="highlightedColor"/>
@@ -1152,7 +1152,7 @@
                                                 <rect key="frame" x="0.0" y="1428" width="414" height="500"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dCK-YA-8eZ" id="k1m-T5-Ks1">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="500"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="499.66666666666669"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N2C-re-nAU">
@@ -1192,10 +1192,10 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u1q-Yk-6zu" userLabel="Nicname View">
-                                                                            <rect key="frame" x="0.0" y="44.666666666666671" width="414" height="57.000000000000014"/>
+                                                                            <rect key="frame" x="0.0" y="44.666666666666657" width="414" height="57"/>
                                                                             <subviews>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wJY-q5-13w">
-                                                                                    <rect key="frame" x="15" y="12.666666666666671" width="32" height="31.999999999999993"/>
+                                                                                    <rect key="frame" x="15" y="12.666666666666671" width="32" height="32"/>
                                                                                     <color key="backgroundColor" red="0.50196078430000002" green="0.32156862749999998" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="32" id="Qtn-rr-SvC"/>
@@ -1215,7 +1215,7 @@
                                                                                     </userDefinedRuntimeAttributes>
                                                                                 </button>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Tim-dd-jtC">
-                                                                                    <rect key="frame" x="57" y="22.000000000000007" width="91.333333333333343" height="13"/>
+                                                                                    <rect key="frame" x="56.999999999999993" y="22.000000000000007" width="91.333333333333314" height="13"/>
                                                                                     <subviews>
                                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tag_official_01" translatesAutoresizingMaskIntoConstraints="NO" id="mzS-dV-8wp">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="41" height="13"/>
@@ -1238,7 +1238,7 @@
                                                                                     </constraints>
                                                                                 </stackView>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Huv-5S-0sw">
-                                                                                    <rect key="frame" x="369" y="12.666666666666671" width="40" height="31.999999999999993"/>
+                                                                                    <rect key="frame" x="369" y="12.666666666666671" width="40" height="32"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="32" id="9HG-9B-VuL"/>
                                                                                         <constraint firstAttribute="width" constant="40" id="l9t-zh-akn"/>
@@ -1249,7 +1249,7 @@
                                                                                     </connections>
                                                                                 </button>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ve-sm-d44">
-                                                                                    <rect key="frame" x="324" y="12.666666666666671" width="40" height="31.999999999999993"/>
+                                                                                    <rect key="frame" x="324" y="12.666666666666671" width="40" height="32"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="32" id="K9b-V1-d9K"/>
                                                                                         <constraint firstAttribute="width" constant="40" id="vrc-Ue-GOZ"/>
@@ -1271,7 +1271,7 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zre-K4-qr0" userLabel="Fan View">
-                                                                            <rect key="frame" x="0.0" y="101.66666666666666" width="414" height="30.999999999999972"/>
+                                                                            <rect key="frame" x="0.0" y="101.66666666666667" width="414" height="31.000000000000014"/>
                                                                             <subviews>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="txt_fan_01" translatesAutoresizingMaskIntoConstraints="NO" id="WXn-nl-WYJ">
                                                                                     <rect key="frame" x="15" y="9" width="32" height="13"/>
@@ -1281,7 +1281,7 @@
                                                                                     </constraints>
                                                                                 </imageView>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[Official] SHINee_World" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VKv-nt-4kY">
-                                                                                    <rect key="frame" x="57" y="9" width="110.33333333333334" height="13.333333333333329"/>
+                                                                                    <rect key="frame" x="56.999999999999993" y="9" width="110.33333333333331" height="13.333333333333336"/>
                                                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="11"/>
                                                                                     <color key="textColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                                     <nil key="highlightedColor"/>
@@ -1294,7 +1294,7 @@
                                                                                     </constraints>
                                                                                 </imageView>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1kl-ij-OjH">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="30.999999999999986"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="31"/>
                                                                                     <connections>
                                                                                         <action selector="showFanPage:" destination="dCK-YA-8eZ" eventType="touchUpInside" id="sMj-MF-oyi"/>
                                                                                     </connections>
@@ -1329,7 +1329,7 @@
                                                                     <rect key="frame" x="0.0" y="388.66666666666669" width="414" height="15"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4분 전" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GcC-Wg-wss">
-                                                                            <rect key="frame" x="14" y="0.0" width="30.666666666666664" height="15"/>
+                                                                            <rect key="frame" x="14.000000000000002" y="0.0" width="30.666666666666671" height="15"/>
                                                                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
                                                                             <color key="textColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.67450980390000004" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
@@ -1364,26 +1364,26 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="w3s-VV-ZF5">
-                                                                    <rect key="frame" x="0.0" y="414.66666666666669" width="414" height="70.666666666666629"/>
+                                                                    <rect key="frame" x="0.0" y="414.66666666666669" width="414" height="70.666666666666686"/>
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cfw-aE-XhQ" userLabel="comment View">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="36.666666666666629"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="36.666666666666664"/>
                                                                             <subviews>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="o7a-0r-X4e">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="31"/>
                                                                                     <subviews>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="STQ-lm-Ueu">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="15.666666666666629"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="15.666666666666666"/>
                                                                                             <subviews>
                                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="706-fh-SBP">
-                                                                                                    <rect key="frame" x="15" y="0.0" width="39" height="15.666666666666629"/>
+                                                                                                    <rect key="frame" x="15" y="0.0" width="39" height="15.666666666666666"/>
                                                                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="13"/>
                                                                                                     <state key="normal" title="Button">
                                                                                                         <color key="titleColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                     </state>
                                                                                                 </button>
                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="꽃길만 걸으세요~" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WnF-dV-jLF">
-                                                                                                    <rect key="frame" x="64" y="0.0" width="82.333333333333343" height="15"/>
+                                                                                                    <rect key="frame" x="63.999999999999993" y="0.0" width="82.333333333333314" height="15"/>
                                                                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
                                                                                                     <color key="textColor" red="0.31372549020000001" green="0.29803921570000003" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                     <nil key="highlightedColor"/>
@@ -1401,17 +1401,17 @@
                                                                                             </constraints>
                                                                                         </view>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aUF-vl-jeP">
-                                                                                            <rect key="frame" x="0.0" y="15.666666666666629" width="414" height="15.333333333333371"/>
+                                                                                            <rect key="frame" x="0.0" y="15.666666666666629" width="414" height="15.333333333333336"/>
                                                                                             <subviews>
                                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JUy-mz-nyB">
-                                                                                                    <rect key="frame" x="15" y="-0.66666666666662877" width="39" height="15.666666666666629"/>
+                                                                                                    <rect key="frame" x="15" y="-0.66666666666662877" width="39" height="15.666666666666666"/>
                                                                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="13"/>
                                                                                                     <state key="normal" title="Button">
                                                                                                         <color key="titleColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                     </state>
                                                                                                 </button>
                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="꽃길만 걸으세요~" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lAf-AF-C0P">
-                                                                                                    <rect key="frame" x="64" y="0.0" width="82.333333333333343" height="15"/>
+                                                                                                    <rect key="frame" x="63.999999999999993" y="0.0" width="82.333333333333314" height="15"/>
                                                                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
                                                                                                     <color key="textColor" red="0.31372549020000001" green="0.29803921570000003" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                     <nil key="highlightedColor"/>
@@ -1580,7 +1580,7 @@
                                                 <rect key="frame" x="0.0" y="1928" width="414" height="550"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bRN-IR-0WK" id="tP3-hm-ZoS">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="550"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="549.66666666666663"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e5z-pD-jtg">
@@ -1602,7 +1602,7 @@
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_tale_02" translatesAutoresizingMaskIntoConstraints="NO" id="N9m-ei-Naw">
-                                                                                    <rect key="frame" x="202.33333333333334" y="38.666666666666657" width="11" height="6.3333333333333357"/>
+                                                                                    <rect key="frame" x="202.33333333333334" y="38.666666666666664" width="11" height="6.3333333333333357"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" constant="11" id="DZ0-PL-jZi"/>
                                                                                         <constraint firstAttribute="height" constant="6" id="rXl-Wu-Emt"/>
@@ -1620,7 +1620,7 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qEz-Du-Nk5" userLabel="Nicname View">
-                                                                            <rect key="frame" x="0.0" y="44.666666666666671" width="414" height="57.000000000000014"/>
+                                                                            <rect key="frame" x="0.0" y="44.666666666666657" width="414" height="57"/>
                                                                             <subviews>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xSt-Ji-wR7">
                                                                                     <rect key="frame" x="15" y="12.333333333333336" width="32" height="32"/>
@@ -1639,7 +1639,7 @@
                                                                                     </constraints>
                                                                                 </imageView>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HOT_ZIL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iyk-Fq-rTB">
-                                                                                    <rect key="frame" x="107.00000000000001" y="18.333333333333336" width="50.333333333333357" height="20"/>
+                                                                                    <rect key="frame" x="106.99999999999999" y="18.333333333333336" width="50.333333333333329" height="20"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="20" id="ZgZ-KG-eJ9"/>
                                                                                     </constraints>
@@ -1725,7 +1725,7 @@
                                                                     <rect key="frame" x="0.0" y="398.66666666666669" width="414" height="15"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4분 전" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XH9-pl-YHf">
-                                                                            <rect key="frame" x="14" y="0.0" width="30.666666666666664" height="15"/>
+                                                                            <rect key="frame" x="14.000000000000002" y="0.0" width="30.666666666666671" height="15"/>
                                                                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
                                                                             <color key="textColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.67450980390000004" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
@@ -1758,26 +1758,26 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="t2A-BJ-O9P">
-                                                                    <rect key="frame" x="0.0" y="424.66666666666663" width="414" height="104.66666666666663"/>
+                                                                    <rect key="frame" x="0.0" y="424.66666666666669" width="414" height="104.66666666666669"/>
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ihP-0g-cAs" userLabel="comment View">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="70.666666666666629"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="70.666666666666671"/>
                                                                             <subviews>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="r2y-PV-4BB">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="65.333333333333314"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="65.333333333333329"/>
                                                                                     <subviews>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xW7-PS-XQ1">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="15.333333333333314"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="15.333333333333334"/>
                                                                                             <subviews>
                                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mpt-Cq-69G">
-                                                                                                    <rect key="frame" x="15" y="0.0" width="39" height="15.333333333333314"/>
+                                                                                                    <rect key="frame" x="15" y="0.0" width="39" height="15.333333333333334"/>
                                                                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="13"/>
                                                                                                     <state key="normal" title="Button">
                                                                                                         <color key="titleColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                     </state>
                                                                                                 </button>
                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="꽃길만 걸으세요~" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V85-Vu-Cc0">
-                                                                                                    <rect key="frame" x="64" y="0.0" width="82.333333333333343" height="15"/>
+                                                                                                    <rect key="frame" x="63.999999999999993" y="0.0" width="82.333333333333314" height="15"/>
                                                                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
                                                                                                     <color key="textColor" red="0.31372549020000001" green="0.29803921570000003" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                     <nil key="highlightedColor"/>
@@ -1798,14 +1798,14 @@
                                                                                             <rect key="frame" x="0.0" y="15.333333333333314" width="414" height="50"/>
                                                                                             <subviews>
                                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wU0-8c-pBz">
-                                                                                                    <rect key="frame" x="15" y="-0.33333333333331439" width="39" height="49.666666666666629"/>
+                                                                                                    <rect key="frame" x="15" y="-0.33333333333331439" width="39" height="49.666666666666664"/>
                                                                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="13"/>
                                                                                                     <state key="normal" title="Button">
                                                                                                         <color key="titleColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                     </state>
                                                                                                 </button>
                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="꽃길만 걸으세요~" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tFf-UP-WvV">
-                                                                                                    <rect key="frame" x="64" y="0.0" width="82.333333333333343" height="49.333333333333314"/>
+                                                                                                    <rect key="frame" x="63.999999999999993" y="0.0" width="82.333333333333314" height="49.333333333333336"/>
                                                                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
                                                                                                     <color key="textColor" red="0.31372549020000001" green="0.29803921570000003" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                     <nil key="highlightedColor"/>
@@ -1833,10 +1833,10 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rvp-MS-U9G" userLabel="button view">
-                                                                            <rect key="frame" x="0.0" y="70.666666666666629" width="414" height="34.000000000000057"/>
+                                                                            <rect key="frame" x="0.0" y="70.666666666666629" width="414" height="34"/>
                                                                             <subviews>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZY9-43-puq" userLabel="like">
-                                                                                    <rect key="frame" x="15" y="0.0" width="21" height="34.000000000000057"/>
+                                                                                    <rect key="frame" x="15" y="0.0" width="21" height="34"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" constant="21" id="7nv-zf-q67"/>
                                                                                         <constraint firstAttribute="height" constant="34" id="PZy-ro-vma"/>
@@ -1844,7 +1844,7 @@
                                                                                     <state key="normal" image="icon_heart_01"/>
                                                                                 </button>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RVC-dx-6my" userLabel="cntLike">
-                                                                                    <rect key="frame" x="36" y="0.0" width="55" height="34.000000000000057"/>
+                                                                                    <rect key="frame" x="36" y="0.0" width="55" height="34"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" constant="55" id="47i-qM-3Xp"/>
                                                                                         <constraint firstAttribute="height" constant="34" id="lbq-aa-eDO"/>
@@ -1859,7 +1859,7 @@
                                                                                     </connections>
                                                                                 </button>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aoh-k2-dAR" userLabel="comment">
-                                                                                    <rect key="frame" x="92" y="0.0" width="76" height="34.000000000000057"/>
+                                                                                    <rect key="frame" x="92" y="0.0" width="76" height="34"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="34" id="QVg-gc-nBG"/>
                                                                                         <constraint firstAttribute="width" constant="76" id="rA1-Jz-S9F"/>
@@ -1871,7 +1871,7 @@
                                                                                     </state>
                                                                                 </button>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aoo-cM-ARU" userLabel="share">
-                                                                                    <rect key="frame" x="169" y="0.0" width="76" height="34.000000000000057"/>
+                                                                                    <rect key="frame" x="169" y="0.0" width="76" height="34"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" constant="76" id="8op-LL-gW7"/>
                                                                                         <constraint firstAttribute="height" constant="34" id="zUP-be-qVs"/>
@@ -1883,7 +1883,7 @@
                                                                                     </state>
                                                                                 </button>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bnk-We-z2p" userLabel="bookmark">
-                                                                                    <rect key="frame" x="364" y="0.0" width="50" height="34.000000000000057"/>
+                                                                                    <rect key="frame" x="364" y="0.0" width="50" height="34"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="34" id="JlP-Li-sMo"/>
                                                                                         <constraint firstAttribute="width" constant="50" id="mwQ-LX-a6I"/>
@@ -1968,7 +1968,7 @@
                                                 <rect key="frame" x="0.0" y="2478" width="414" height="508"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XHz-Pc-KGu" id="Eg0-gn-Gir">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="508"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="507.66666666666669"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5RG-Br-Aih">
@@ -1986,17 +1986,16 @@
                                                                             <state key="normal" backgroundImage="border_circle_03"/>
                                                                         </button>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MEMEBOX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v0n-oI-mV8">
-                                                                            <rect key="frame" x="57" y="0.0" width="196" height="17"/>
+                                                                            <rect key="frame" x="57" y="0.0" width="230" height="17"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="17" id="FX9-yb-cbd"/>
-                                                                                <constraint firstAttribute="width" constant="195.5" id="MqL-i1-9bG"/>
                                                                             </constraints>
                                                                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="14"/>
                                                                             <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DiJ-8O-Nwo">
-                                                                            <rect key="frame" x="57" y="20.666666666666664" width="200" height="9.9999999999999964"/>
+                                                                            <rect key="frame" x="57" y="20.666666666666668" width="200" height="10"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="200" id="nRc-7Z-9qT"/>
                                                                                 <constraint firstAttribute="height" constant="10" id="ojd-Ww-kkX"/>
@@ -2034,6 +2033,7 @@
                                                                         <constraint firstItem="v0n-oI-mV8" firstAttribute="top" secondItem="XfD-76-fvR" secondAttribute="top" id="EMh-fB-b6H"/>
                                                                         <constraint firstItem="XfD-76-fvR" firstAttribute="top" secondItem="Szc-xy-VoB" secondAttribute="top" id="Uim-Sc-d0b"/>
                                                                         <constraint firstItem="wse-iG-zTz" firstAttribute="leading" secondItem="Ato-Rg-Fkb" secondAttribute="trailing" constant="5" id="aEx-qI-nYI"/>
+                                                                        <constraint firstItem="Ato-Rg-Fkb" firstAttribute="leading" secondItem="v0n-oI-mV8" secondAttribute="trailing" constant="5" id="dwB-D0-07c"/>
                                                                         <constraint firstItem="Ato-Rg-Fkb" firstAttribute="top" secondItem="Szc-xy-VoB" secondAttribute="top" id="mzo-yo-buG"/>
                                                                         <constraint firstItem="wse-iG-zTz" firstAttribute="top" secondItem="Szc-xy-VoB" secondAttribute="top" id="tJ6-Ve-EJb"/>
                                                                         <constraint firstItem="DiJ-8O-Nwo" firstAttribute="top" secondItem="v0n-oI-mV8" secondAttribute="bottom" constant="3.6000000000000001" id="tkc-YI-TA9"/>
@@ -2042,7 +2042,7 @@
                                                                 </view>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="c0s-ag-IFi">
                                                                     <rect key="frame" x="0.0" y="47" width="414" height="284"/>
-                                                                    <color key="backgroundColor" red="0.50196078430000002" green="0.32156862749999998" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="284" id="SL2-pr-8Ex"/>
                                                                     </constraints>
@@ -2050,7 +2050,6 @@
                                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vtP-Zc-Ysl">
                                                                     <rect key="frame" x="15" y="343" width="384" height="164"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                     <dataDetectorType key="dataDetectorTypes" link="YES"/>

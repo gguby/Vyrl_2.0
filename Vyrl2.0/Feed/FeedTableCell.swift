@@ -334,6 +334,7 @@ class FeedTableCell: UITableViewCell {
         }
         var adTypes = [GADAdLoaderAdType]()
         adTypes.append(GADAdLoaderAdType.nativeContent)
+        adTypes.append(GADAdLoaderAdType.nativeAppInstall)
         
         adLoader = GADAdLoader(adUnitID: Constants.GoogleADTest, rootViewController: self.delegate as? UIViewController,
                                adTypes: adTypes, options: nil)
@@ -391,14 +392,6 @@ class FeedTableCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        if self.photo != nil {
-            self.photo.image = nil
-        }
-    }
-    
     @IBAction func photoClick(_ sender: UIButton) {
         delegate.didPressPhoto!(sender: sender, cell: self)
     }
@@ -493,15 +486,23 @@ extension FeedTableCell: UICollectionViewDelegate {
 
 extension FeedTableCell : GADNativeContentAdLoaderDelegate , GADNativeAppInstallAdLoaderDelegate{
     func adLoader(_ adLoader: GADAdLoader, didReceive nativeContentAd: GADNativeContentAd){
-        print(nativeContentAd.headline!)
-        print(nativeContentAd.body!)
-        print(nativeContentAd.callToAction!)
+        
+        self.nickNameLabel.text = nativeContentAd.advertiser
+        self.subTitle.text = nativeContentAd.headline
+        self.contentTextView.text = nativeContentAd.body
+        if let logoimage = nativeContentAd.logo?.image {
+            self.profileButton.setImage(logoimage, for: .normal)
+        }
+        let firstImage: GADNativeAdImage? = nativeContentAd.images?.first as? GADNativeAdImage
+        self.photo.image = firstImage?.image
     }
     func adLoader(_ adLoader: GADAdLoader, didReceive nativeAppInstallAd: GADNativeAppInstallAd){
-        print(nativeAppInstallAd.headline!)
-        print(nativeAppInstallAd.body!)
-        print(nativeAppInstallAd.callToAction!)
-        print(nativeAppInstallAd.store!)
+        self.nickNameLabel.text = nativeAppInstallAd.headline
+        self.subTitle.text = nativeAppInstallAd.price
+        self.contentTextView.text = nativeAppInstallAd.body
+        self.profileButton.af_setImage(for: .normal, url: (nativeAppInstallAd.icon?.imageURL)!)
+        let firstImage: GADNativeAdImage? = nativeAppInstallAd.images?.first as? GADNativeAdImage
+        self.photo.image = firstImage?.image
     }
     func adLoader(_ adLoader: GADAdLoader, didFailToReceiveAdWithError error: GADRequestError){
         print(adLoader.adUnitID)
@@ -524,6 +525,8 @@ extension FeedTableCell : FBNativeAdDelegate {
             (image) in
             self.photo.image = image
         })
+        
+        nativeAd.registerView(forInteraction: self.photo, with: self.delegate as? UIViewController)
         
         self.nickNameLabel.text = nativeAd.title
         self.subTitle.text = nativeAd.subtitle
