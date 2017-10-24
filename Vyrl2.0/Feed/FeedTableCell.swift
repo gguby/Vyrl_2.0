@@ -113,7 +113,7 @@ class FeedTableCell: UITableViewCell {
             if ( count == 1 ){
                 let str = article?.medias[0].url
                 let url : URL = URL.init(string: str!)!
-                self.photo.af_setImage(withURL: url)
+                self.photo.af_setImage(withURL: URL(string: (article?.medias[0].imageUrl)!)!)
                 
                 self.iconView.isHidden = true
                 
