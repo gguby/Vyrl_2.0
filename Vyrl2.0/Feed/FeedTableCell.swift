@@ -208,10 +208,10 @@ class FeedTableCell: UITableViewCell {
             
             let likeUsers = self.article?.likeUsers
             
-            if ( likeUsers?.count != 0 ){
-              self.confiugreLike()
-            }else {
+            if likeUsers == nil || likeUsers?.count == 0 {
                 self.likeView.isHidden = true
+            }else {
+                self.confiugreLike()
             }
             
             self.followBtn.addTarget(self, action: #selector(followUser(sender:)), for: .touchUpInside)
