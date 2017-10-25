@@ -437,32 +437,17 @@ class MediaPhotoCell : UICollectionViewCell {
                     
                     self.asset = AVAsset(type: .photo, identifier: id)
                     
-                    let options = PHContentEditingInputRequestOptions()
-                    
-                    asset.requestContentEditingInput(with: options) { (contentEditingInput, info) in
-                        if let uniformTypeIdentifier = contentEditingInput?.uniformTypeIdentifier {
-                            
-                            if uniformTypeIdentifier == (kUTTypeGIF as String) {
-                                debugPrint("This asset is a GIF👍")
-                                self.asset?.type = .gif
-                                
-                                if let input = contentEditingInput, let imgURL = input.fullSizeImageURL {
-                                    self.asset?.gifURL = imgURL
-                                }
-                            }
-                        }
-                    }
-                    
                     DispatchQueue.global().async {
-                        manager.requestImage(for: asset, targetSize: photoSize, contentMode: .aspectFill, options: requestOptions, resultHandler: {
-                            
-                            image,error  in
+                        
+                        manager.requestImageData(for: asset, options: requestOptions, resultHandler: { (imageData, UTI, _, _) in
+                            if let uti = UTI,let data = imageData ,
+                                UTTypeConformsTo(uti as CFString, kUTTypeGIF) {
+                                    self.asset?.type = .gif
+                                    self.asset?.gifData = data
+                                }
                             
                             DispatchQueue.main.async {
-                               self.photo.image = image
-                            }
-                            
-                            if error != nil {
+                                self.photo.image = UIImage.init(data: imageData!)
                             }
                         })
                     }
@@ -524,7 +509,7 @@ class AVAsset : Copying {
     
     var selectedCount : Int!
     
-    var gifURL : URL!
+    var gifData : Data?
     
     var mediaData : Data? {
 
@@ -532,13 +517,7 @@ class AVAsset : Copying {
             guard type == .photo else {
                 
                 if type == .gif  {
-                    do {
-                        let data = try Data(contentsOf: self.gifURL)
-                        return data
-                    }catch {
-                        
-                    }
-                    return nil
+                    return gifData
                 }
                 
                 if let asset = urlAsset {
@@ -664,7 +643,7 @@ class AVAsset : Copying {
         self.selectedCount = original.selectedCount
         self.urlAsset = original.urlAsset
         self.editedData = original.editedData
-        self.gifURL = original.gifURL
+        self.gifData = original.gifData
         self.duration = original.duration
     }
 }
