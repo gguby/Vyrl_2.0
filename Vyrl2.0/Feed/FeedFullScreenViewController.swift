@@ -341,16 +341,18 @@ class FeedFullScreenViewController: UIViewController {
     }
     
     @IBAction func timeSlideValueChanged(_ sender: UISlider) {
-//        if((self.player?.rate)! > Float(0) && self.player?.error == nil) {
-//            let newTime = CMTimeMake(Int64(Float(sender.value)), 1)
-//            player?.seek(to: newTime, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
-//        }
-        self.player?.pause()
-        var timeInSecond = sender.value
-        timeInSecond *= 1000;
-        let cmTime = CMTimeMake(Int64(timeInSecond), 1000)
         
-        self.player?.seek(to: cmTime, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
+        self.player?.pause()
+        
+        let seconds : Int64 = Int64(sender.value)
+        let targetTime:CMTime = CMTimeMake(seconds, 1)
+        self.currentTimeLabel.text = self.createTimeString(time: Float(CMTimeGetSeconds(targetTime)))
+        
+        self.player?.seek(to: targetTime)
+        
+        if sender.isTracking == false {
+            self.player?.play()
+        }
     }
     
     func enableDownloadImageButton() {
@@ -359,7 +361,6 @@ class FeedFullScreenViewController: UIViewController {
         } else {
             self.downloadButton.isEnabled = false
         }
-  
     }
     
     func showUseDataAlert() {
@@ -438,15 +439,24 @@ extension FeedFullScreenViewController : UIScrollViewDelegate {
             
             self.playerItem = AVPlayerItem.init(url: uri)
             self.player = AVPlayer.init(playerItem: self.playerItem)
-            self.player?.addPeriodicTimeObserver(forInterval: CMTimeMake(33, 1000), queue: .main, using: { (time) in
+            
+            let duration : CMTime = playerItem!.asset.duration
+            let seconds : Float64 = CMTimeGetSeconds(duration)
+            self.timeSlider.minimumValue = 0
+            self.timeSlider.maximumValue = Float(seconds)
+            self.timeSlider.isContinuous = true
+            
+            self.player?.addPeriodicTimeObserver(forInterval: CMTimeMake(1, 4), queue: .main, using: { (time) in
                 if let currentItem = self.player?.currentItem {
                     let duration = currentItem.duration
                     if (CMTIME_IS_INVALID(duration)) {
                         // Do sth
                         return;
                     }
+                    
                     let currentTime = currentItem.currentTime()
-                    self.timeSlider.value = Float(CMTimeGetSeconds(currentTime) / CMTimeGetSeconds(duration))
+                    
+                    self.timeSlider.value = Float(CMTimeGetSeconds(currentTime))
                     self.currentTimeLabel.text = self.createTimeString(time: Float(CMTimeGetSeconds(currentTime)))
                     self.totalTimeLabel.text = self.createTimeString(time: Float(CMTimeGetSeconds(duration)))
                 }
