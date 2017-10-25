@@ -413,7 +413,9 @@ extension FeedFullScreenViewController : UIScrollViewDelegate {
         
         self.fileSizeButton.setTitle("\(self.mediasArray[page].mbFileSize!)MB", for: .normal)
         self.enableDownloadImageButton()
-        self.showImageVideo(page: page)
+        if(page != self.currentPage) {
+            self.showImageVideo(page: page)
+        }
     }
     
     func showImageVideo(page: Int) {
