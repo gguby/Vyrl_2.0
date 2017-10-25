@@ -195,10 +195,9 @@ extension FeedDetailTableCell : UIScrollViewDelegate {
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         print("\(#function)")
-        self.showVideoButton()
-        
         let page = Int(round(Double(scrollView.contentOffset.x) / Double(scrollView.bounds.size.width)))
         self.currentIndex = page
+        self.showVideoButton()
         self.pageLabel.text =  String("\(page+1) / \(self.article.medias.count)")
         
         if(page > self.lastRequestIndex) {
