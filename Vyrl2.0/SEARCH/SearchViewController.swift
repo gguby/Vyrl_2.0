@@ -373,6 +373,10 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource , Hi
         return UITableViewCell()
     }
     
+    func followButtonDidTap() {
+        self.followTableView.reloadData()
+    }
+    
     func remove(cell: HistoryCell) {
         self.removeHistory(key: cell.title.text!)
     }
@@ -562,6 +566,20 @@ class FollowCell : UITableViewCell {
     @IBOutlet weak var info: UILabel!
     @IBOutlet weak var follow: UIButton!
     @IBOutlet weak var block: UIButton!
+    
+    
+    func setFollow(user: SearchUser, completion: @escaping (_ result: Bool)->()) {
+       let method = HTTPMethod.post
+       let uri = URL.init(string: Constants.VyrlFeedURL.follow(followId: user.userId))
+        Alamofire.request(uri!, method: method, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: {
+            response in switch response.result {
+            case .success(let _):
+               completion(true)
+            case .failure(let _):
+               completion(false)
+            }
+        })
+    }
 }
 
 class TagCell : UITableViewCell {
@@ -679,6 +697,17 @@ class SearchModel {
                 cell.profile.image = UIImage.init(named: "icon_user_03")
             }
             cell.nickName.text = user.nickName
+            
+            cell.follow.rx.tap
+                .debounce(0.3, scheduler: MainScheduler.instance)
+                .subscribe(onNext: {
+                    [unowned self] in
+                    cell.setFollow(user: user, completion: { (result) in
+                        if(result == true){
+                            
+                        }
+                    })
+                }).addDisposableTo(self.disposeBag)
         }.addDisposableTo(disposeBag)
     }
     
