@@ -617,6 +617,8 @@ extension FeedTableViewController : FeedCellDelegate {
     func hideFeed(articleId : Int){
         let uri = Constants.VyrlFeedURL.feedHide(articleId: articleId)
         
+        self.showLoading(show: true)
+        
         Alamofire.request(uri, method: .delete, parameters: nil, encoding:JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: { (response) in
             switch response.result {
             case .success(let json):
@@ -624,6 +626,7 @@ extension FeedTableViewController : FeedCellDelegate {
                 
                 if let code = response.response?.statusCode {
                     if code == 200 {
+                        self.showLoading(show: false)
                         self.getAllFeed()
                     }
                 }
@@ -685,6 +688,8 @@ extension FeedTableViewController : FeedCellDelegate {
                 uri = Constants.VyrlFanAPIURL.fanPagePost(articleId: articleId)
             }
             
+            self.showLoading(show: true)
+            
             Alamofire.request(uri, method: .delete, parameters: nil, encoding:JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: { (response) in
                 switch response.result {
                 case .success(let json):
@@ -692,6 +697,9 @@ extension FeedTableViewController : FeedCellDelegate {
                     
                     if let code = response.response?.statusCode {
                         if code == 200 {
+                            
+                            self.showLoading(show: false)
+                            
                             self.getAllFeed()
                             
                             if self.feedType == .FANFEED {

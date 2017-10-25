@@ -88,20 +88,14 @@ extension UIViewController
     
     func showLoading(show : Bool){
         
-        var alpha = 1
-        
-        if show == false {
-            alpha = 0
-        }
-        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let vc = appDelegate.rootViewController
         
         UIView.animate(withDuration: 1.0, animations: {
-            vc?.loadingImageView.alpha = CGFloat(alpha)
+            vc?.loadingImageView.alpha = CGFloat(show ? 0 : 1)
         }) { (true) in
             UIView.animate(withDuration: 1.0, animations: {
-                vc?.loadingImageView.alpha = CGFloat(alpha)
+                vc?.loadingImageView.alpha = CGFloat(show ? 1 : 0)
             })
         }
     }

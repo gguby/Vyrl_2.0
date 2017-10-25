@@ -652,7 +652,6 @@ class SearchModel {
             }
             cell.label.text = user.nickName
             }.addDisposableTo(disposeBag)
-        
     }
     
     func setUpOfficialCollectionCellTapHandling(collectionView : UICollectionView, viewController : UIViewController) {
@@ -664,9 +663,14 @@ class SearchModel {
             }).addDisposableTo(disposeBag)
     }
     
+    func reloadSuggest(){
+        let officialAccountObservable : Observable<[SearchUser]> = SearchAPI.sharedAPI.suggestAccounts()
+        officialAccountObservable.observeOn(MainScheduler.instance).subscribe().addDisposableTo(disposeBag)
+    }
     
     func addBindSuggestAccount(tableView : UITableView){
         let officialAccountObservable : Observable<[SearchUser]> = SearchAPI.sharedAPI.suggestAccounts()
+        
         officialAccountObservable.bind(to: tableView.rx.items(cellIdentifier: "followcell", cellType: FollowCell.self)) {
             (index, user , cell) in
             if user.profileImagePath.isEmpty == false {
