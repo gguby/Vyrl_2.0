@@ -90,6 +90,21 @@ class MyViewController: UIViewController{
         let followingGesture = UITapGestureRecognizer(target: self, action: #selector(self.clickFollowList(sender:)))
         self.followerView.addGestureRecognizer(followerGesture)
         self.followingView.addGestureRecognizer(followingGesture)
+        
+        let accountViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tab(sender:)))
+        self.dropTableView.addGestureRecognizer(accountViewTapGesture)
+    }
+    
+    func tab(sender: UITapGestureRecognizer){
+        
+        let point = sender.location(in: self.accountTable)
+        let indexPath = self.accountTable.indexPathForRow(at: point)
+        
+        if ( indexPath != nil ){
+            sender.cancelsTouchesInView = false
+        }else {
+            self.dropTableView.isHidden  = true
+        }
     }
     
     func clickFollowList(sender: UITapGestureRecognizer){
@@ -263,7 +278,7 @@ class MyViewController: UIViewController{
         UIView.transition(with: self.dropTableView, duration: 0.5, options: .transitionCrossDissolve, animations: { () -> Void in
             
             self.dropTableView.isHidden  = !self.dropTableView.isHidden
-            self.tabBarController?.tabBar.isHidden = !self.dropTableView.isHidden
+//            self.tabBarController?.tabBar.isHidden = !self.dropTableView.isHidden
             
         }, completion: nil)
         
@@ -320,16 +335,16 @@ extension MyViewController : UITableViewDelegate, UITableViewDataSource {
             }
         }
         
+        cell.iconDot.isHidden = true
+        
         let currentAccount : Account = LoginManager.sharedInstance.getCurrentAccount()!
         
         if ( account.userId == currentAccount.userId ){
             cell.iconCheck.image = UIImage(named: "icon_check_05_on")
-            cell.iconDot.isHidden = true
             cell.name.textColor = UIColor.ivLighterPurple
         }
         else {
             cell.iconCheck.isHidden = true
-            cell.iconDot.isHidden = false
             cell.name.textColor = UIColor.ivGreyishBrownTwo
         }
         
@@ -348,7 +363,7 @@ extension MyViewController : UITableViewDelegate, UITableViewDataSource {
             LoginManager.sharedInstance.changeCookie(account: account)
             
             self.dropTableView.isHidden  = true
-            self.tabBarController?.tabBar.isHidden = !self.dropTableView.isHidden
+//            self.tabBarController?.tabBar.isHidden = !self.dropTableView.isHidden
             
             self.loadMyProfile()
         }

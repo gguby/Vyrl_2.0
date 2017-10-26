@@ -733,6 +733,14 @@ extension FeedTableViewController : FeedCellDelegate {
             otherProfile.profileUserId = userId
         }
     }
+    
+    func showLikesUserList(articelId: Int) {
+        let storyboard = UIStoryboard(name: "Feed", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "FeedLikeUserListViewController") as! FeedLikeUserListViewController // or whatever it is
+        vc.articleId =  articelId
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension FeedTableViewController : FeedPullLoaderDelegate {
@@ -839,7 +847,8 @@ struct Article : Mappable {
     
     var pageId : Int!
     
-    var likeUsers : [String]!
+    var likeUsers : [SearchUser]!
+    var shareUsers : [SearchUser]!
     
     init?(map: Map) {
         
@@ -862,6 +871,7 @@ struct Article : Mappable {
         contentType <- map["contentType"]
         pageId <- map["pageId"]
         likeUsers <- map["likeUsers"]
+        shareUsers <- map["shareUsers"]
         
         if(contentType == "FANPAGE"){
             fanPageId <- map["fanPageId"]

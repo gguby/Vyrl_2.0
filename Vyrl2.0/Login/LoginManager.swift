@@ -549,6 +549,7 @@ extension LoginManager {
             print("Sync Account NickName:" + account.nickName!)
             print("Sync Account UserId:" + account.userId!)
             print("Sync Account Session Token :" + account.sessionToken!)
+            print("Sync Account Access Token :" + account.accessToken!)
             print("Sync Account :-----------------------------------------------------")
             accountArray.append(account.properties)
         }

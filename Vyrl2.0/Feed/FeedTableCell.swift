@@ -19,13 +19,16 @@ import RxDataSources
 @objc protocol FeedCellDelegate {
     
     func didPressCell(sender: Any, cell : FeedTableCell)
-     @objc optional func showFanPage(cell : FeedTableCell)
+ 
+    @objc optional func showFanPage(cell : FeedTableCell)
     
     @objc optional func didPressPhoto(sender: Any, cell : FeedTableCell)
     @objc optional func setBookMark(cell : FeedTableCell)
     @objc optional func showFeedAlert(cell : FeedTableCell)
     @objc optional func showFeedShareAlert(cell : FeedTableCell)
-    @objc optional func showUserProfileView(userId : Int)    
+    @objc optional func showUserProfileView(userId : Int)
+    
+    @objc optional func showLikesUserList(articelId : Int)
 }
 
 class FeedTableCell: UITableViewCell {
@@ -187,6 +190,8 @@ class FeedTableCell: UITableViewCell {
             
             if self.isMyArticle == false && article?.profile.follow == false {
                 self.followBtn.alpha = 1
+            }else {
+                self.followBtn.alpha = 0
             }
             
             if (article?.isLike)! {
@@ -206,12 +211,16 @@ class FeedTableCell: UITableViewCell {
             
             self.officialImage.isHidden  = true
             
-            let likeUsers = self.article?.likeUsers
-            
-            if likeUsers == nil || likeUsers?.count == 0 {
-                self.likeView.isHidden = true
+            if let likeUsers :[SearchUser] = self.article?.likeUsers {
+                if let shareUsers : [SearchUser] = self.article?.shareUsers {
+                    if likeUsers.count > 0 || shareUsers.count > 0{
+                        self.confiugreLike()
+                    } else {
+                        self.likeView.isHidden = true
+                    }
+                }
             }else {
-                self.confiugreLike()
+                self.likeView.isHidden = true
             }
             
             self.followBtn.addTarget(self, action: #selector(followUser(sender:)), for: .touchUpInside)
@@ -343,25 +352,39 @@ class FeedTableCell: UITableViewCell {
         adLoader.load(GADRequest())
     }
     
+    var linkDict = Dictionary<String,Int>()
+    
     func confiugreLike(){
         
-        if self.article?.cntLike == 0 {
-            return
+        let users : [SearchUser]?
+        let countStr : String?
+        
+        if ( self.article?.likeUsers != nil ){
+            users = self.article?.likeUsers
+            countStr = (users?.count.description)! + "명"
+        }else if self.article?.shareUsers != nil {
+            users = self.article?.shareUsers
+            countStr = (users?.count.description)! + "명"
+        }else {
+            users = nil
+            countStr = "0명"
         }
         
-        let likeUsers = self.article?.likeUsers
+        linkDict[countStr!] = 99
         
-        let likecountStr = (self.article?.likeCount)! + "명"
+        for user : SearchUser in users! {
+            linkDict[user.nickName] = user.userId
+        }
         
-        let likeUser0 = likeUsers![0]
+        let likeUser0 = users![0].nickName
         var text = ""
         var likeUser1 : String? = nil
-        if likeUsers?.count == 1 {
-            text = likeUser0 + "님이 좋아합니다."
+        if users?.count == 1 {
+            text = likeUser0! + "님이 좋아합니다."
         }else {
-            likeUser1 = likeUsers![1]
-            text = likeUser0 + " 님, " + likeUser1! + " 님 외 "
-            text += likecountStr + " 이 좋아합니다."
+            likeUser1 = users![1].nickName
+            text = likeUser0! + " 님, " + likeUser1! + " 님 외 "
+            text += countStr! + " 이 좋아합니다."
         }
         
         let attributedString = NSMutableAttributedString(string: text)
@@ -374,18 +397,19 @@ class FeedTableCell: UITableViewCell {
             NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-SemiBold", size: 13)!
         ]
         
-        attributedString.addAttribute(NSLinkAttributeName, value: likeUser0, range: attributedString.mutableString.range(of: likeUser0))
-        attributedString.addAttributes(attr, range: attributedString.mutableString.range(of: likeUser0))
+        attributedString.addAttribute(NSLinkAttributeName, value: likeUser0!, range: attributedString.mutableString.range(of: likeUser0!))
+        attributedString.addAttributes(attr, range: attributedString.mutableString.range(of: likeUser0!))
         
         if let likeUser = likeUser1 {
             attributedString.addAttribute(NSLinkAttributeName, value: likeUser, range: attributedString.mutableString.range(of: likeUser))
             attributedString.addAttributes(attr, range: attributedString.mutableString.range(of: likeUser))
             
-            attributedString.addAttribute(NSLinkAttributeName, value: likecountStr, range: attributedString.mutableString.range(of: likecountStr))
-            attributedString.addAttributes(attr, range: attributedString.mutableString.range(of: likecountStr))
+            attributedString.addAttribute(NSLinkAttributeName, value: countStr!, range: attributedString.mutableString.range(of: countStr!))
+            attributedString.addAttributes(attr, range: attributedString.mutableString.range(of: countStr!))
         }
         
         self.likeLabel.attributedText = attributedString
+        self.likeLabel.delegate = self
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -548,6 +572,18 @@ extension FeedTableCell : FBNativeAdDelegate {
     }
 }
 
+extension FeedTableCell : LinkedLabelDelegate {
+    func openLink(string: String) {
+        let userId = self.linkDict[string]
+        
+        if userId == 99 {
+            delegate.showLikesUserList!(articelId: (self.article?.id)!)
+        }else {
+            delegate.showUserProfileView!(userId: userId!)
+        }
+    }
+}
+
 class BoxCell : UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var dimView: UIView!
@@ -559,6 +595,9 @@ class BoxCell : UICollectionViewCell {
     }
 }
 
+protocol LinkedLabelDelegate {
+    func openLink(string:String)
+}
 
 class LinkedLabel: UILabel {
     
@@ -566,6 +605,7 @@ class LinkedLabel: UILabel {
     fileprivate let textContainer = NSTextContainer(size: CGSize.zero)
     fileprivate var textStorage: NSTextStorage?
     
+    var delegate : LinkedLabelDelegate!
     
     override init(frame aRect:CGRect){
         super.init(frame: aRect)
@@ -634,6 +674,8 @@ class LinkedLabel: UILabel {
                 if let _attrs = attrs{
                     let str = _attrs as! String
                     print(str)
+                    
+                    delegate.openLink(string: str)
                 }
             }
         })

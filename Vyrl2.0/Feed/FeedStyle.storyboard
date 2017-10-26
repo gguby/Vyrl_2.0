@@ -1460,9 +1460,6 @@
                                                                                     <state key="normal" title="208K">
                                                                                         <color key="titleColor" red="0.50196078430000002" green="0.32156862749999998" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                                                                     </state>
-                                                                                    <connections>
-                                                                                        <action selector="like:" destination="dCK-YA-8eZ" eventType="touchUpInside" id="TDP-1K-aFY"/>
-                                                                                    </connections>
                                                                                 </button>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bLt-SG-TyU" userLabel="comment">
                                                                                     <rect key="frame" x="92" y="0.0" width="76" height="34"/>
