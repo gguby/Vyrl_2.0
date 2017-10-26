@@ -140,7 +140,7 @@ class OtherProfileViewController: UIViewController {
                         }
                         
                         self.post.text = "\(jsonData["articleCount"].intValue)"
-                        self.middlePostBtn.text = "\(jsonData["articleCount"].intValue)"
+                        self.middlePostBtn.text = "\(jsonData["articleCount"].intValue) Post"
                         self.following.text = "\(jsonData["followingCount"].intValue)"
                         self.follower.text = "\(jsonData["followerCount"].intValue)"
                         

@@ -70,7 +70,6 @@ extension FeedLikeUserListViewController : UITableViewDelegate, UITableViewDataS
         cell.profileImageView.af_setImage(withURL: url! as URL)
         cell.profileUserId = user["id"] as! Int
         
-        
         if user["follow"] as? String != "false" {
             if(LoginManager.sharedInstance.getCurrentAccount()?.nickName == user["nickName"] as? String) {
                 cell.isMe = true
@@ -78,6 +77,14 @@ extension FeedLikeUserListViewController : UITableViewDelegate, UITableViewDataS
             cell.isFollow = true
         } else {
             cell.isFollow = false
+        }
+        
+        let accountLevel = user["accoutLevel"] as? String
+        
+        if accountLevel == "OFFICIAL" {
+            cell.officialImageView.isHidden = false
+        }else {
+            cell.officialImageView.isHidden = true
         }
         
         return cell
