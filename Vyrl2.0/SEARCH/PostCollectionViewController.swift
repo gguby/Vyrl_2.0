@@ -29,6 +29,7 @@ class PostCollectionViewController : UICollectionViewController {
         self.collectionView?.dataSource = nil
         
         self.searchHotPost()
+        self.setHotPostCollectionCellTapHandling()
     }
     
     func searchHotPost(){
@@ -47,6 +48,15 @@ class PostCollectionViewController : UICollectionViewController {
                 cell.centerView.isHidden = true
             }
             }.addDisposableTo(disposeBag)
+    }
+    
+    func setHotPostCollectionCellTapHandling(){
+        self.collectionView?.rx.modelSelected(Article.self)
+            .subscribe(onNext: {
+                article in
+                let vc : FeedDetailViewController = self.pushViewControllrer(storyboardName: "FeedDetail", controllerName: "FeedDetailViewController") as! FeedDetailViewController
+                vc.articleId = article.id
+            }).addDisposableTo(disposeBag)
     }
     
     func getHotPost(){
