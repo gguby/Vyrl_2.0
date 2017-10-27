@@ -365,10 +365,10 @@
                                                                             </connections>
                                                                         </button>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mbm-NF-hER">
-                                                                            <rect key="frame" x="167" y="167.00000000000003" width="80" height="80"/>
+                                                                            <rect key="frame" x="187" y="187.00000000000003" width="40" height="40"/>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="width" constant="80" id="baE-iZ-bBz"/>
-                                                                                <constraint firstAttribute="height" constant="80" id="ptY-Nh-TsI"/>
+                                                                                <constraint firstAttribute="width" constant="40" id="HLF-M8-CL3"/>
+                                                                                <constraint firstAttribute="height" constant="40" id="WEG-Ao-Vc4"/>
                                                                             </constraints>
                                                                         </imageView>
                                                                     </subviews>
@@ -841,10 +841,10 @@
                                                                                         <rect key="frame" x="0.0" y="0.0" width="124" height="124"/>
                                                                                     </imageView>
                                                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yUi-UG-esg">
-                                                                                        <rect key="frame" x="52" y="52" width="20" height="20"/>
+                                                                                        <rect key="frame" x="49.666666666666664" y="49.666666666666664" width="24.999999999999993" height="24.999999999999993"/>
                                                                                         <constraints>
-                                                                                            <constraint firstAttribute="height" constant="20" id="ZUc-HV-fgA"/>
-                                                                                            <constraint firstAttribute="width" constant="20" id="eDd-Gg-0XA"/>
+                                                                                            <constraint firstAttribute="height" constant="25" id="ZUc-HV-fgA"/>
+                                                                                            <constraint firstAttribute="width" constant="25" id="eDd-Gg-0XA"/>
                                                                                         </constraints>
                                                                                     </imageView>
                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s5V-Ri-aCQ" userLabel="dimView">
