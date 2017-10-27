@@ -342,7 +342,7 @@ class FeedTableCell: UITableViewCell {
 
         var adTypes = [GADAdLoaderAdType]()
         adTypes.append(GADAdLoaderAdType.nativeContent)
-//        adTypes.append(GADAdLoaderAdType.nativeAppInstall)
+        adTypes.append(GADAdLoaderAdType.nativeAppInstall)
         
         adLoader = GADAdLoader(adUnitID: Constants.GoogleADTest, rootViewController: self.delegate as? UIViewController,
                                adTypes: adTypes, options: nil)
