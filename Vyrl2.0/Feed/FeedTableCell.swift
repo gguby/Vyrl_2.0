@@ -197,9 +197,11 @@ class FeedTableCell: UITableViewCell {
             if (article?.isLike)! {
                 self.likeBtn.setImage(UIImage.init(named: "icon_heart_01_on"), for: .normal)
                 self.likeBtn.tag = 1
+                self.cntLike.setTitleColor(UIColor.ivLighterPurple, for: .normal)
             } else {
                 self.likeBtn.setImage(UIImage.init(named: "icon_heart_01"), for: .normal)
                 self.likeBtn.tag = 0
+                self.cntLike.setTitleColor(UIColor.ivGreyishBrown, for: .normal)
             }
             
             if (article?.isFanPageType)! && self.fanPageViewController == nil {
@@ -470,8 +472,10 @@ class FeedTableCell: UITableViewCell {
                 if sender.tag == 0 {
                     sender.setImage(UIImage.init(named: "icon_heart_01_on"), for: .normal)
                     sender.tag = 1
+                     self.cntLike.setTitleColor(UIColor.ivLighterPurple, for: .normal)
                 }else {
                     sender.setImage(UIImage.init(named: "icon_heart_01"), for: .normal)
+                    self.cntLike.setTitleColor(UIColor.ivGreyishBrown, for: .normal)
                     sender.tag = 0
                 }
             case .failure(let error):
