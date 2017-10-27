@@ -168,6 +168,62 @@ class FeedFullScreenViewController: UIViewController {
         
     }
     
+    func requestLandscapeImageVideo() {
+        var uri : URL
+        if(mediasArray[index].type == "IMAGE"){
+            uri = URL.init(string: mediasArray[index].url!)!
+        } else {
+            uri = URL.init(string: mediasArray[index].thumbnail!)!
+        }
+    
+        Alamofire.request(uri)
+            .downloadProgress(closure: { (progress) in
+                
+            }).responseData { response in
+                if let data = response.result.value {
+                    if(uri.pathExtension == "gif") {
+                        (self.imageViewArray[self.index] as! FLAnimatedImageView).animatedImage = FLAnimatedImage.init(animatedGIFData: data)
+                    } else {
+                        self.imageViewArray[self.index].image =  UIImage(data: data)!
+                    }
+                    
+                    self.contentScrollViewArray[self.index].frame = CGRect.init(x: 0, y: 0, width: self.mainScrollView.frame.width, height: self.mainScrollView.frame.height)
+                    
+                    let image = UIImage(data: data)
+                    self.imageArray.append(image!)
+                    
+                    self.imageViewArray[self.index].contentMode = .scaleAspectFit
+                    
+                    self.imageViewArray[self.index].frame = CGRect(x: 0, y:0, width: self.contentScrollViewArray[self.index].frame.width, height: self.contentScrollViewArray[self.index].frame.height)
+                    
+                    self.contentScrollViewArray[self.index].addSubview(self.imageViewArray[self.index])
+                    
+                    let textView = UITextView()
+                    //                    textView.text = self.mediasArray[self.index].
+                    textView.textColor = UIColor.white
+                    textView.backgroundColor = UIColor.ivGreyish
+                    let size = textView.sizeThatFits(CGSize.init(width: self.view.frame.width, height: 9999))
+                    textView.frame = CGRect.init(x: 0, y: self.imageViewArray[self.index].frame.size.height, width: self.view.frame.width, height: 0)
+                    textView.isScrollEnabled = false
+                    
+                    self.textViewArray.append(textView)
+                    
+                    self.contentScrollViewArray[self.index].addSubview(self.textViewArray[self.index])
+                    self.contentScrollViewArray[self.index].contentSize = CGSize.init(width: self.mainScrollView.frame.width, height: self.imageViewArray[self.index].frame.height + self.textViewArray[self.index].frame.height)
+                    
+                    let xPosition = self.view.frame.width * CGFloat(self.index)
+                    
+                    if( self.imageViewArray[self.index].frame.height + self.textViewArray[self.index].frame.height < self.mainScrollView.frame.height){
+                        self.contentScrollViewArray[self.index].frame = CGRect.init(x: xPosition, y: 0, width: self.mainScrollView.frame.width, height: self.imageViewArray[self.index].frame.size.height + self.textViewArray[self.index].frame.size.height)
+                        self.contentScrollViewArray[self.index].center = CGPoint.init(x: self.contentScrollViewArray[self.index].center.x, y: self.view.center.y)
+                    } else {
+                        self.contentScrollViewArray[self.index].frame = CGRect.init(x: xPosition, y: 0, width: self.mainScrollView.frame.width, height: self.mainScrollView.frame.height)
+                    }
+                }
+                
+        }
+    }
+    
     func requestImageVideo() {
         var uri : URL
         if(mediasArray[index].type == "IMAGE"){
@@ -397,7 +453,12 @@ extension FeedFullScreenViewController : UIScrollViewDelegate {
             self.currentPage = page
             if(page > self.index) {
                 self.index = page
-                self.requestImageVideo()
+                
+                if(UIDevice.current.orientation == UIDeviceOrientation.portrait) {
+                    self.requestImageVideo()
+                } else {
+                    self.requestLandscapeImageVideo()
+                }
             }
         }
         
