@@ -74,7 +74,7 @@ class FeedFullScreenViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         self.pageNumberLabel.text =  "1 / \(self.mediasArray.count)"
         self.index = 0
-        self.fileSizeButton.setTitle("\(self.mediasArray[0].mbFileSize!)MB", for: .normal)
+        self.fileSizeButton.setTitle("\(self.mediasArray[0].fileSizeString!)", for: .normal)
         
         self.initImageVideo()
         
@@ -412,7 +412,7 @@ extension FeedFullScreenViewController : UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let page = Int(round(Double(scrollView.contentOffset.x) / Double(scrollView.bounds.size.width)))
         
-        self.fileSizeButton.setTitle("\(self.mediasArray[page].mbFileSize!)MB", for: .normal)
+        self.fileSizeButton.setTitle("\(self.mediasArray[page].fileSizeString!)", for: .normal)
         self.enableDownloadImageButton()
         if(page != self.currentPage) {
             self.showImageVideo(page: page)

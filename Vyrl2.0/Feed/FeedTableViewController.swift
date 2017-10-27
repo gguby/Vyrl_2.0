@@ -910,7 +910,7 @@ struct ArticleMedia : Mappable {
     var type : String?
     var url : String?
     var fileSize :Int64?
-    var mbFileSize : Int64?
+    var fileSizeString : String?
     
     var imageUrl : String!
     
@@ -930,7 +930,8 @@ struct ArticleMedia : Mappable {
         }
         
         fileSize <- map["fileSize"]
-        mbFileSize = fileSize! / 1024 / 1024
+        
+        fileSizeString = ByteCountFormatter.string(fromByteCount: fileSize!, countStyle: .file)
     }
 
 }
