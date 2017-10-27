@@ -31,6 +31,7 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
     var fanPageId : Int!
     var isBottomRefresh = false
     var isEnableUpload = true
+    var isFeedTab = false
     
     @IBOutlet weak var uploadLoadingView: UIView!
     @IBOutlet weak var bottomSpace: NSLayoutConstraint!
@@ -60,8 +61,8 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
             let cell = tv.dequeueReusableCell(withIdentifier: item.type.rawValue) as! FeedTableCell
             
             if item.type == ArticleType.oneFeed || item.type == ArticleType.multiFeed || item.type == ArticleType.textOnlyFeed  {
-                cell.fanPageViewController = self.fanPageViewController
                 cell.article = item
+                cell.fanPageViewController = self.fanPageViewController                
                 cell.delegate = self
                 cell.contentTextView.text = item.content
                 cell.contentTextView.resolveHashTags()
@@ -229,10 +230,15 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
             
             let array = response.result.value ?? []
             
-            self.articleArray.append(contentsOf: array)
+            for (i, article) in array.enumerated() {
+                self.articleArray.append(article)
+                if i % 4 == 0 && i != 0 && self.isFeedTab == true {
+                    let adMobArticle = Article.init()
+                    self.articleArray.append(adMobArticle)
+                }
+            }
             
             self.sections.value = [SectionOfArticleData(items:self.articleArray)]
-//            self.tableView.reloadData()
             self.resetSizeTableView()
         }
     }
@@ -255,8 +261,10 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Article]>) in
             
             response.result.ifFailure {
-                LoginManager.sharedInstance.checkLogout(statusCode: (response.response?.statusCode)!)
-                return
+                if let code = response.response?.statusCode {
+                    LoginManager.sharedInstance.checkLogout(statusCode: code)
+                    return
+                }
             }
             
             self.articleArray.removeAll()
@@ -277,8 +285,12 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
                 self.tableView.tableFooterView = self.bottomView
             }
             
-            for article in array {
+            for (i,article) in array.enumerated() {
                 self.articleArray.append(article)
+                if i % 4 == 0 && i != 0 && self.isFeedTab == true {
+                    let adMobArticle = Article.init()
+                    self.articleArray.append(adMobArticle)
+                }
             }
             
             self.sections.value = [SectionOfArticleData(items:self.articleArray)]
@@ -850,9 +862,14 @@ struct Article : Mappable {
     var likeUsers : [SearchUser]!
     var shareUsers : [SearchUser]!
     
-    init?(map: Map) {
-        
+    init() {
+        let diceRoll = Int(arc4random_uniform(2))        
+        self.type = diceRoll == 0 ? ArticleType.FBAdFeed : ArticleType.googleAdFeed
     }
+    
+    init?(map: Map) {
+        self.init()
+    }    
     
     mutating func mapping(map: Map){
         id <- map["id"]

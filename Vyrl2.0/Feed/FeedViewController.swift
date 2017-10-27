@@ -34,6 +34,7 @@ class FeedViewController: UIViewController {
     func refresh(){
         if embedController.controllers.last != nil {
             let vc = embedController.controllers.last as! FeedTableViewController
+            vc.isFeedTab = true
             vc.setUploadDelegate()
             vc.getAllFeed()
         }else {
@@ -49,6 +50,7 @@ class FeedViewController: UIViewController {
         let storyboard = UIStoryboard(name: "FeedStyle", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "feedTable") as! FeedTableViewController
         controller.feedView = self
+        controller.isFeedTab = true
         controller.feedType = self.feedType
         
         controller.view.frame.origin = CGPoint.init(x: 0, y: 66)

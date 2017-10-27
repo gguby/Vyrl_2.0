@@ -315,23 +315,19 @@ class FeedTableCell: UITableViewCell {
             if (size.width > 375){
                 self.collectionViewLeading.constant = 20
             }
-        }
-        
-        if(self.contentTextView != nil) {
+            
             self.contentTextView.textContainerInset = UIEdgeInsets.zero
             self.contentTextView.textContainer.lineFragmentPadding = 0
         }
         
-        self.initGoogleAD()
-        
-        self.initFBAD()
+        if self.reuseIdentifier == ArticleType.FBAdFeed.rawValue {
+            self.initFBAD()
+        }else if self.reuseIdentifier == ArticleType.googleAdFeed.rawValue {
+            self.initGoogleAD()
+        }
     }
     
     func initFBAD(){
-        
-        if isAdTypeFaceBook == false {
-            return
-        }
         
         let placeMentID = "150088642241764_165434230707205"
         nativeAd = FBNativeAd(placementID: placeMentID)
@@ -341,9 +337,7 @@ class FeedTableCell: UITableViewCell {
     }
     
     func initGoogleAD(){
-        if isAdTypeGoogle == false {
-            return
-        }
+
         var adTypes = [GADAdLoaderAdType]()
 //        adTypes.append(GADAdLoaderAdType.nativeContent)
         adTypes.append(GADAdLoaderAdType.nativeAppInstall)

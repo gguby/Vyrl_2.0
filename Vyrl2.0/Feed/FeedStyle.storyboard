@@ -2026,7 +2026,6 @@
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="284" id="6oA-el-Tza"/>
                                                                     </constraints>
-                                                                    <state key="normal" title="Button"/>
                                                                 </button>
                                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vtP-Zc-Ysl">
                                                                     <rect key="frame" x="15" y="343" width="384" height="164"/>
@@ -2115,9 +2114,8 @@
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="284" id="Azm-wx-Opu"/>
                                                                     </constraints>
-                                                                    <state key="normal" title="Button"/>
                                                                 </button>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7HN-O3-0H7">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7HN-O3-0H7">
                                                                     <rect key="frame" x="15" y="343" width="384" height="164"/>
                                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
                                                                     <color key="textColor" red="0.32549019607843138" green="0.30980392156862746" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
