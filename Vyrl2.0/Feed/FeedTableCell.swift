@@ -91,6 +91,9 @@ class FeedTableCell: UITableViewCell {
     var isAdTypeGoogle = false
     var isAdTypeFaceBook = false
     
+    @IBOutlet weak var gadContentAdView: GADNativeContentAdView!
+    @IBOutlet weak var gadAppInstallView: GADNativeAppInstallAdView!
+    
     var isMyArticle : Bool! {
         didSet {
             if isMyArticle {
@@ -328,7 +331,6 @@ class FeedTableCell: UITableViewCell {
     }
     
     func initFBAD(){
-        
         let placeMentID = "150088642241764_165434230707205"
         nativeAd = FBNativeAd(placementID: placeMentID)
         nativeAd.delegate = self
@@ -339,8 +341,8 @@ class FeedTableCell: UITableViewCell {
     func initGoogleAD(){
 
         var adTypes = [GADAdLoaderAdType]()
-//        adTypes.append(GADAdLoaderAdType.nativeContent)
-        adTypes.append(GADAdLoaderAdType.nativeAppInstall)
+        adTypes.append(GADAdLoaderAdType.nativeContent)
+//        adTypes.append(GADAdLoaderAdType.nativeAppInstall)
         
         adLoader = GADAdLoader(adUnitID: Constants.GoogleADTest, rootViewController: self.delegate as? UIViewController,
                                adTypes: adTypes, options: nil)
@@ -510,31 +512,36 @@ extension FeedTableCell: UICollectionViewDelegate {
 extension FeedTableCell : GADNativeContentAdLoaderDelegate , GADNativeAppInstallAdLoaderDelegate{
     func adLoader(_ adLoader: GADAdLoader, didReceive nativeContentAd: GADNativeContentAd){
         
-//        self.nickNameLabel.text = nativeContentAd.advertiser
-//        self.subTitle.text = nativeContentAd.headline
-//        self.contentTextView.text = nativeContentAd.body
-//        if let logoimage = nativeContentAd.logo?.image {
-//            self.profileButton.setImage(logoimage, for: .normal)
-//        }
-//        let firstImage: GADNativeAdImage? = nativeContentAd.images?.first as? GADNativeAdImage
-//        self.photo.image = firstImage?.image
-//        self.adBtn.setTitle(nativeContentAd.callToAction, for: .normal)
+        nativeContentAd.rootViewController = self.delegate as? UIViewController
+        self.gadContentAdView.nativeContentAd = nativeContentAd
+        
+        (self.gadContentAdView.logoView as! UIImageView).image = nativeContentAd.logo?.image
+        (self.gadContentAdView.headlineView as! UILabel).text = nativeContentAd.advertiser
+        (self.gadContentAdView.bodyView as! UILabel).text = nativeContentAd.body
+        (self.gadContentAdView.callToActionView as! UIButton).isUserInteractionEnabled = false
+        
+        let firstImage: GADNativeAdImage? = nativeContentAd.images?.first as? GADNativeAdImage
+        (self.gadContentAdView.callToActionView as! UIButton).setBackgroundImage(firstImage?.image, for: .normal)
+        
+        self.gadAppInstallView.isHidden = true
+        self.gadContentAdView.isHidden = false
     }
     func adLoader(_ adLoader: GADAdLoader, didReceive nativeAppInstallAd: GADNativeAppInstallAd){
         
         nativeAppInstallAd.rootViewController = self.delegate as? UIViewController
         
-        let appInstallAdView = self.subviews[0].subviews[0] as! GADNativeAppInstallAdView
+        self.gadAppInstallView.nativeAppInstallAd = nativeAppInstallAd
         
-        appInstallAdView.nativeAppInstallAd = nativeAppInstallAd
-        
-        (appInstallAdView.iconView as! UIImageView).image = nativeAppInstallAd.icon?.image
-        (appInstallAdView.headlineView as! UILabel).text = nativeAppInstallAd.headline
-        (appInstallAdView.bodyView as! UILabel).text = nativeAppInstallAd.body
-        (appInstallAdView.callToActionView as! UIButton).isUserInteractionEnabled = false
+        (self.gadAppInstallView.iconView as! UIImageView).image = nativeAppInstallAd.icon?.image
+        (self.gadAppInstallView.headlineView as! UILabel).text = nativeAppInstallAd.headline
+        (self.gadAppInstallView.bodyView as! UILabel).text = nativeAppInstallAd.body
+        (self.gadAppInstallView.callToActionView as! UIButton).isUserInteractionEnabled = false
         
         let firstImage: GADNativeAdImage? = nativeAppInstallAd.images?.first as? GADNativeAdImage
-        (appInstallAdView.callToActionView as! UIButton).setBackgroundImage(firstImage?.image, for: .normal)
+        (self.gadAppInstallView.callToActionView as! UIButton).setBackgroundImage(firstImage?.image, for: .normal)
+        
+        self.gadAppInstallView.isHidden = false
+        self.gadContentAdView.isHidden = true
     }
     func adLoader(_ adLoader: GADAdLoader, didFailToReceiveAdWithError error: GADRequestError){
         print(adLoader.adUnitID)
