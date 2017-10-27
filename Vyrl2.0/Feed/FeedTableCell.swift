@@ -112,15 +112,6 @@ class FeedTableCell: UITableViewCell {
     var article : Article? {
         didSet{
             
-            if ( article?.type == ArticleType.FBAdFeed ){
-                initFBAD()
-                return
-            }else if ( article?.type == ArticleType.googleAdFeed )
-            {
-                initGoogleAD()
-                return
-            }
-            
             var count = article?.medias.count
             
             if ( count == 1 ){
@@ -324,12 +315,16 @@ class FeedTableCell: UITableViewCell {
             if (size.width > 375){
                 self.collectionViewLeading.constant = 20
             }
-        }
-        
-        if(self.contentTextView != nil) {
+            
             self.contentTextView.textContainerInset = UIEdgeInsets.zero
             self.contentTextView.textContainer.lineFragmentPadding = 0
-        }        
+        }
+        
+        if self.reuseIdentifier == ArticleType.FBAdFeed.rawValue {
+            self.initFBAD()
+        }else if self.reuseIdentifier == ArticleType.googleAdFeed.rawValue {
+            self.initGoogleAD()
+        }
     }
     
     func initFBAD(){
