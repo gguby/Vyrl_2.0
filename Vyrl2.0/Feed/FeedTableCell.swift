@@ -112,6 +112,15 @@ class FeedTableCell: UITableViewCell {
     var article : Article? {
         didSet{
             
+            if ( article?.type == ArticleType.FBAdFeed ){
+                initFBAD()
+                return
+            }else if ( article?.type == ArticleType.googleAdFeed )
+            {
+                initGoogleAD()
+                return
+            }
+            
             var count = article?.medias.count
             
             if ( count == 1 ){
@@ -318,18 +327,10 @@ class FeedTableCell: UITableViewCell {
         if(self.contentTextView != nil) {
             self.contentTextView.textContainerInset = UIEdgeInsets.zero
             self.contentTextView.textContainer.lineFragmentPadding = 0
-        }
-        
-        self.initGoogleAD()
-        
-        self.initFBAD()
+        }        
     }
     
     func initFBAD(){
-        
-        if isAdTypeFaceBook == false {
-            return
-        }
         
         let placeMentID = "150088642241764_165434230707205"
         nativeAd = FBNativeAd(placementID: placeMentID)
@@ -339,9 +340,7 @@ class FeedTableCell: UITableViewCell {
     }
     
     func initGoogleAD(){
-        if isAdTypeGoogle == false {
-            return
-        }
+
         var adTypes = [GADAdLoaderAdType]()
 //        adTypes.append(GADAdLoaderAdType.nativeContent)
         adTypes.append(GADAdLoaderAdType.nativeAppInstall)

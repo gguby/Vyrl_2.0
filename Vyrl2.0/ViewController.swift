@@ -243,7 +243,7 @@ class ViewController: UITabBarController , UITabBarControllerDelegate {
             present(vc!, animated: true, completion: nil)
             return false
         }else if viewController.title == "feed" {
-            let vc = viewController.childViewControllers.last as! FeedViewController
+            let vc = viewController.childViewControllers.last as! FeedViewController            
             vc.refresh()
         }
         return true
