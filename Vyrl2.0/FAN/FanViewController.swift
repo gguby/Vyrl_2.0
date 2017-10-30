@@ -90,11 +90,12 @@ class FanViewController: UIViewController {
     }
     
     func setupPostContainer(){
-        self.container.translatesAutoresizingMaskIntoConstraints  = true
         let storyboard = UIStoryboard(name: "PostCollectionViewController", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "PostCollection")
         addChildViewController(controller)
-        controller.view.translatesAutoresizingMaskIntoConstraints = true
+        
+        controller.view.frame.size.height = self.container.frame.height
+        
         container.addSubview(controller.view)
         controller.didMove(toParentViewController: self)
     }

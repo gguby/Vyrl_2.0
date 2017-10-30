@@ -854,6 +854,7 @@ struct Article : Mappable {
             }
         }
     }
+    
     var fanPageId : Int!
     var fanPageName : String!
     
@@ -863,7 +864,7 @@ struct Article : Mappable {
     var shareUsers : [SearchUser]!
     
     init() {
-        let diceRoll = Int(arc4random_uniform(2))        
+        let diceRoll = Int(arc4random_uniform(2))
         self.type = diceRoll == 0 ? ArticleType.FBAdFeed : ArticleType.googleAdFeed
     }
     
@@ -917,7 +918,7 @@ struct Article : Mappable {
             type = ArticleType.oneFeed
         }else if ( self.medias.count == 0){
             type = ArticleType.textOnlyFeed
-        }        
+        }
     }
 }
 

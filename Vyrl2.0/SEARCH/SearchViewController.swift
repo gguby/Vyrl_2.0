@@ -80,11 +80,12 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     }
     
     func setupPostContainer(){
-        self.postContainer.translatesAutoresizingMaskIntoConstraints  = true
         let storyboard = UIStoryboard(name: "PostCollectionViewController", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "PostCollection")
         addChildViewController(controller)
-        controller.view.translatesAutoresizingMaskIntoConstraints = true
+        
+        controller.view.frame.size.height = postContainer.frame.height
+        
         postContainer.addSubview(controller.view)
         controller.didMove(toParentViewController: self)
     }
@@ -771,7 +772,14 @@ class SearchAPI {
         
         return Observable.create { observer in
             let request = Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Article]>) in
-                let value = response.result.value
+                var value = response.result.value
+                
+                for (i, article) in (value?.enumerated())! {
+                    if i % 1 == 0 && i != 0 && article.medias.count > 0 {
+                        let adArticle = Article.init()
+                        value?.append(adArticle)
+                    }
+                }
                 
                 observer.onNext(value!)
                 observer.onCompleted()

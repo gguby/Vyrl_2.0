@@ -12,6 +12,9 @@ import Alamofire
 import AlamofireObjectMapper
 import RxCocoa
 import RxSwift
+import RxDataSources
+import GoogleMobileAds
+import FBAudienceNetwork
 
 class PostCollectionViewController : UICollectionViewController {
     
@@ -20,22 +23,67 @@ class PostCollectionViewController : UICollectionViewController {
     
     let disposeBag = DisposeBag()
     
+    var aritlces = [Article]()
+    
+    let dataSource = RxCollectionViewSectionedReloadDataSource<SectionOfArticleData>()
+    private let sections = Variable<[SectionOfArticleData]>([])
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        self.getHotPost()
         
         self.collectionView?.delegate = nil
         self.collectionView?.dataSource = nil
         
-        self.searchHotPost()
+        self.initPostTable()
+        
+        self.getSearchSuggestPost()
         self.setHotPostCollectionCellTapHandling()
+        self.collectionView?.rx.setDelegate(self).addDisposableTo(disposeBag)
     }
     
-    func searchHotPost(){
-        let officialAccountObservable : Observable<[Article]> = SearchAPI.sharedAPI.suggestPosts()
-        officialAccountObservable.bind(to: (self.collectionView?.rx.items(cellIdentifier: "post", cellType: PostCollectionCell.self))!) {
-            (index, article , cell) in
+    func getSearchSuggestPost(){
+        let uri = Constants.VyrlSearchURL.suggestPostList
+        
+        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Article]>) in
+            
+            response.result.ifFailure {
+                return
+            }
+            
+            self.aritlces.removeAll()
+            
+            let array = response.result.value ?? []
+            
+            for (i, article) in array.enumerated() {
+                
+                self.aritlces.append(article)
+                
+                if i % 5 == 0 && i != 0 && article.medias.count > 0 {
+                    let adArticle = Article.init()
+                    self.aritlces.append(adArticle)
+                }
+            }
+            
+            self.sections.value = [SectionOfArticleData(items:self.aritlces)]
+        }
+    }
+    
+    func initPostTable(){
+        Observable.just(self.aritlces).map {(customDatas) -> [SectionOfArticleData] in
+            [SectionOfArticleData(items: customDatas)]
+            }.bind(to: self.sections).addDisposableTo(self.disposeBag)
+        
+        dataSource.configureCell = { ds, cv, ip, article in
+            
+            if article.type == ArticleType.googleAdFeed || article.type == ArticleType.FBAdFeed {
+                let cell = cv.dequeueReusableCell(withReuseIdentifier: "adPost", for: ip) as! PostCollectionCell
+                cell.isAdCell = true
+                cell.vc = self
+                return cell
+            }
+            
+            let cell = cv.dequeueReusableCell(withReuseIdentifier: "post", for: ip) as! PostCollectionCell
+            
             let str = article.medias[0].url
             let url : URL = URL.init(string: str!)!
             cell.imageView.af_setImage(withURL: url)
@@ -47,7 +95,11 @@ class PostCollectionViewController : UICollectionViewController {
             else {
                 cell.centerView.isHidden = true
             }
-            }.addDisposableTo(disposeBag)
+            
+            return cell
+        }
+        
+        sections.asDriver().drive((collectionView?.rx.items(dataSource: self.dataSource))!).addDisposableTo(disposeBag)
     }
     
     func setHotPostCollectionCellTapHandling(){
@@ -92,12 +144,122 @@ class PostCollectionViewController : UICollectionViewController {
     }
 }
 
+extension PostCollectionViewController : UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+        let article = self.aritlces[indexPath.row]
+
+        if article.type == ArticleType.googleAdFeed || article.type == ArticleType.FBAdFeed {
+            return CGSize(width: collectionView.frame.size.width, height: 124)
+        }else {
+            return CGSize(width: 124, height: 124)
+        }
+    }
+}
+
 class PostCollectionCell : UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var centerView: UIView!
     @IBOutlet weak var mediaImageView: UIImageView!
     @IBOutlet weak var imageCount: UILabel!
+    
+    var nativeAd :FBNativeAd!
+    var adLoader: GADAdLoader!
+    
+    @IBOutlet weak var gadContentView: GADNativeContentAdView!
+    @IBOutlet weak var gadInstallView: GADNativeAppInstallAdView!
+    
+    var vc : PostCollectionViewController!
+    
+    var isAdCell = false
+    
+    override func awakeFromNib() {
+        
+        super.awakeFromNib()
+        
+        if self.reuseIdentifier == ArticleType.FBAdFeed.rawValue {
+            self.initFBAD()
+        }else if self.reuseIdentifier == ArticleType.googleAdFeed.rawValue {
+            self.initGoogleAD()
+        }
+    }
+    
+    func initFBAD(){
+        let placeMentID = "150088642241764_165434230707205"
+        nativeAd = FBNativeAd(placementID: placeMentID)
+        nativeAd.delegate = self
+        nativeAd.mediaCachePolicy = FBNativeAdsCachePolicy.all
+        nativeAd.load()
+    }
+    
+    func initGoogleAD(){
+        var adTypes = [GADAdLoaderAdType]()
+        adTypes.append(GADAdLoaderAdType.nativeContent)
+        adTypes.append(GADAdLoaderAdType.nativeAppInstall)
+        
+        adLoader = GADAdLoader(adUnitID: Constants.GoogleADTest, rootViewController: vc,
+                               adTypes: adTypes, options: nil)
+        adLoader.delegate = self
+        adLoader.load(GADRequest())
+    }
+}
+
+extension PostCollectionCell : GADNativeContentAdLoaderDelegate , GADNativeAppInstallAdLoaderDelegate{
+    func adLoader(_ adLoader: GADAdLoader, didReceive nativeContentAd: GADNativeContentAd){
+        
+        nativeContentAd.rootViewController = self.vc
+        self.gadContentView.nativeContentAd = nativeContentAd
+
+        (self.gadContentView.callToActionView as! UIButton).isUserInteractionEnabled = false
+
+        let firstImage: GADNativeAdImage? = nativeContentAd.images?.first as? GADNativeAdImage
+        (self.gadContentView.callToActionView as! UIButton).setBackgroundImage(firstImage?.image, for: .normal)
+
+        self.gadInstallView.isHidden = true
+        self.gadContentView.isHidden = false
+    }
+    func adLoader(_ adLoader: GADAdLoader, didReceive nativeAppInstallAd: GADNativeAppInstallAd){
+        
+        nativeAppInstallAd.rootViewController = self.vc
+
+        self.gadInstallView.nativeAppInstallAd = nativeAppInstallAd
+
+        (self.gadInstallView.callToActionView as! UIButton).isUserInteractionEnabled = false
+
+        let firstImage: GADNativeAdImage? = nativeAppInstallAd.images?.first as? GADNativeAdImage
+        (self.gadInstallView.callToActionView as! UIButton).setBackgroundImage(firstImage?.image, for: .normal)
+
+        self.gadInstallView.isHidden = false
+        self.gadContentView.isHidden = true
+    }
+    func adLoader(_ adLoader: GADAdLoader, didFailToReceiveAdWithError error: GADRequestError){
+        print(adLoader.adUnitID)
+    }
+}
+
+extension PostCollectionCell : FBNativeAdDelegate {
+    func nativeAdDidLoad(_ nativeAd: FBNativeAd) {
+        if self.nativeAd != nil {
+            self.nativeAd.unregisterView()
+        }
+        
+        self.nativeAd = nativeAd
+        
+        nativeAd.coverImage?.loadAsync(block: {
+            (image) in
+            self.imageView.image = image
+        })
+
+        nativeAd.registerView(forInteraction: self.imageView, with: self.vc)
+    }
+    
+    func nativeAd(_ nativeAd: FBNativeAd, didFailWithError error: Error) {
+        
+    }
 }
 
 enum PostType {
@@ -161,5 +323,14 @@ struct Profile : Mappable {
         if let dateString = map["createdAt"].currentValue as? String, let _date = dateFormatter.date(from: dateString){
             date = _date
         }
+    }
+}
+
+struct ArticlePost {
+    var article : Article!
+    var type : String!
+    
+    init(_ article:Article) {
+        self.article = article
     }
 }
