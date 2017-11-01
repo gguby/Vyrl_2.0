@@ -568,7 +568,7 @@ class FollowCell : UITableViewCell {
     @IBOutlet weak var follow: UIButton!
     @IBOutlet weak var block: UIButton!
     
-    
+   
     func setFollow(user: SearchUser, completion: @escaping (_ result: Bool)->()) {
        let method = HTTPMethod.post
        let uri = URL.init(string: Constants.VyrlFeedURL.follow(followId: user.userId))
@@ -689,7 +689,6 @@ class SearchModel {
     
     func addBindSuggestAccount(tableView : UITableView){
         let officialAccountObservable : Observable<[SearchUser]> = SearchAPI.sharedAPI.suggestAccounts()
-        
         officialAccountObservable.bind(to: tableView.rx.items(cellIdentifier: "followcell", cellType: FollowCell.self)) {
             (index, user , cell) in
             if user.profileImagePath.isEmpty == false {
@@ -700,14 +699,11 @@ class SearchModel {
             cell.nickName.text = user.nickName
             
             cell.follow.rx.tap
-                .debounce(0.3, scheduler: MainScheduler.instance)
+                .debounce(0.5, scheduler: MainScheduler.instance)
+                .debug("button tap")
                 .subscribe(onNext: {
-                    [unowned self] in
-                    cell.setFollow(user: user, completion: { (result) in
-                        if(result == true){
-                            
-                        }
-                    })
+                   _ in
+                   
                 }).addDisposableTo(self.disposeBag)
         }.addDisposableTo(disposeBag)
     }
@@ -740,10 +736,10 @@ class SearchAPI {
         
         return Observable.create { observer in
             let request = Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseObject { (response: DataResponse<SearchObj>) in
-                 let value = response.result.value
-                
-                observer.onNext(value!)
-                observer.onCompleted()
+                if let value = response.result.value {
+                    observer.onNext(value)
+                    observer.onCompleted()
+                }
             }
             
             return Disposables.create(with: request.cancel)
@@ -795,10 +791,10 @@ class SearchAPI {
         
         return Observable.create { observer in
             let request = Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[SearchUser]>) in
-                let value = response.result.value
-                
-                observer.onNext(value!)
-                observer.onCompleted()
+                if let value = response.result.value {
+                    observer.onNext(value)
+                    observer.onCompleted()
+                }
             }
             
             return Disposables.create(with: request.cancel)
