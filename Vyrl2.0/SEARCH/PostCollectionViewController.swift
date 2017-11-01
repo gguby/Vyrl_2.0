@@ -28,6 +28,8 @@ class PostCollectionViewController : UICollectionViewController {
     let dataSource = RxCollectionViewSectionedReloadDataSource<SectionOfArticleData>()
     private let sections = Variable<[SectionOfArticleData]>([])
     
+    var cellSizeWidth = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,6 +41,9 @@ class PostCollectionViewController : UICollectionViewController {
         self.getSearchSuggestPost()
         self.setHotPostCollectionCellTapHandling()
         self.collectionView?.rx.setDelegate(self).addDisposableTo(disposeBag)
+        
+        let size = UIScreen.main.bounds
+        self.cellSizeWidth = Int(size.width / 3)
     }
     
     func getSearchSuggestPost(){
@@ -76,8 +81,7 @@ class PostCollectionViewController : UICollectionViewController {
         dataSource.configureCell = { ds, cv, ip, article in
             
             if article.type == ArticleType.googleAdFeed || article.type == ArticleType.FBAdFeed {
-                let cell = cv.dequeueReusableCell(withReuseIdentifier: "adPost", for: ip) as! PostCollectionCell
-                cell.isAdCell = true
+                let cell = cv.dequeueReusableCell(withReuseIdentifier: article.type.rawValue, for: ip) as! PostCollectionCell
                 cell.vc = self
                 return cell
             }
@@ -149,13 +153,18 @@ extension PostCollectionViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-
+        
         let article = self.aritlces[indexPath.row]
 
         if article.type == ArticleType.googleAdFeed || article.type == ArticleType.FBAdFeed {
             return CGSize(width: collectionView.frame.size.width, height: 124)
         }else {
-            return CGSize(width: 124, height: 124)
+            let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
+            let totalSpace = flowLayout.sectionInset.left
+                + flowLayout.sectionInset.right
+                + (flowLayout.minimumInteritemSpacing * CGFloat(3 - 1))
+            let size = Int((collectionView.bounds.width - totalSpace) / CGFloat(3))
+            return CGSize(width: size, height: size)
         }
     }
 }
@@ -175,8 +184,6 @@ class PostCollectionCell : UICollectionViewCell {
     
     var vc : PostCollectionViewController!
     
-    var isAdCell = false
-    
     override func awakeFromNib() {
         
         super.awakeFromNib()
@@ -192,7 +199,7 @@ class PostCollectionCell : UICollectionViewCell {
         let placeMentID = "150088642241764_165434230707205"
         nativeAd = FBNativeAd(placementID: placeMentID)
         nativeAd.delegate = self
-        nativeAd.mediaCachePolicy = FBNativeAdsCachePolicy.all
+        nativeAd.mediaCachePolicy = FBNativeAdsCachePolicy.coverImage
         nativeAd.load()
     }
     
