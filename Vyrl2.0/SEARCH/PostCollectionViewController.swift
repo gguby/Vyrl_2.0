@@ -46,6 +46,10 @@ class PostCollectionViewController : UICollectionViewController {
         self.cellSizeWidth = Int(size.width / 3)
     }
     
+    func refresh(){
+        self.getSearchSuggestPost()
+    }
+    
     func getSearchSuggestPost(){
         let uri = Constants.VyrlSearchURL.suggestPostList
         

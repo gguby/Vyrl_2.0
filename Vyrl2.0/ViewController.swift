@@ -245,6 +245,9 @@ class ViewController: UITabBarController , UITabBarControllerDelegate {
         }else if viewController.title == "feed" {
             let vc = viewController.childViewControllers.last as! FeedViewController            
             vc.refresh()
+        }else if viewController.title == "search" {
+            let vc = viewController.childViewControllers.last as! SearchViewController
+            vc.reloadAllView()
         }
         return true
     }
