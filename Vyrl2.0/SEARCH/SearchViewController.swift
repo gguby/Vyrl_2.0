@@ -49,7 +49,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     var userList = [SearchUser]()
     var fanPageList = [FanPage]()
     
-    private var model : SearchModel!
+    private var model : SearchModel?
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -79,21 +79,25 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         self.setupPostContainer()
     }
     
+    var postCollectionVC : PostCollectionViewController!
+    
     func setupPostContainer(){
         let storyboard = UIStoryboard(name: "PostCollectionViewController", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "PostCollection")
+        let controller = storyboard.instantiateViewController(withIdentifier: "PostCollection") as! PostCollectionViewController
         addChildViewController(controller)
         
         controller.view.frame.size.height = postContainer.frame.height
         
         postContainer.addSubview(controller.view)
         controller.didMove(toParentViewController: self)
+        
+        self.postCollectionVC = controller
     }
     
     func initSearchBar()
     {
         model = SearchModel()
-        self.addBindToModel(model: model)
+        self.addBindToModel()
         
         searchBar.setImage(UIImage.init(named: "icon_search_02_off"), for: UISearchBarIcon.search, state: UIControlState.normal)
         searchBar.placeholder = "검색"
@@ -108,12 +112,28 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         searchBar.delegate = self
     }
     
-    private func addBindToModel(model : SearchModel){
+    private func addBindToModel(){
+        
+        guard let model = self.model else {
+            return
+        }
+        
         model.addBindOfficialAccount(collectionView: self.officialCollectionView)
         model.setUpOfficialCollectionCellTapHandling(collectionView: self.officialCollectionView, viewController: self)
-        
         model.addBindSuggestAccount(tableView: self.followTableView)
         model.setUpFollowCellTapHandling(tableView: self.followTableView, viewController: self)
+    }
+    
+    func reloadAllView(){
+        guard let model = self.model else {
+            return
+        }
+        
+        model.refresh()
+        
+        if self.postCollectionVC != nil {
+            self.postCollectionVC.refresh()
+        }
     }
     
     @IBAction func switchAction(_ sender: UISwitch) {
@@ -682,14 +702,17 @@ class SearchModel {
             }).addDisposableTo(disposeBag)
     }
     
-    func reloadSuggest(){
-        let officialAccountObservable : Observable<[SearchUser]> = SearchAPI.sharedAPI.suggestAccounts()
-        officialAccountObservable.observeOn(MainScheduler.instance).subscribe().addDisposableTo(disposeBag)
+    var suggestAccountItems = Variable([SearchUser]())
+    
+    func refresh(){
+        SearchAPI.sharedAPI.suggestAccounts().bind(to: suggestAccountItems).addDisposableTo(disposeBag)
     }
     
     func addBindSuggestAccount(tableView : UITableView){
-        let officialAccountObservable : Observable<[SearchUser]> = SearchAPI.sharedAPI.suggestAccounts()
-        officialAccountObservable.bind(to: tableView.rx.items(cellIdentifier: "followcell", cellType: FollowCell.self)) {
+        
+        SearchAPI.sharedAPI.suggestAccounts().bind(to: suggestAccountItems).addDisposableTo(disposeBag)
+        
+        suggestAccountItems.asObservable().bind(to: tableView.rx.items(cellIdentifier: "followcell", cellType: FollowCell.self)) {
             (index, user , cell) in
             if user.profileImagePath.isEmpty == false {
                 cell.profile.af_setImage(withURL: URL.init(string: user.profileImagePath)!)
@@ -703,7 +726,12 @@ class SearchModel {
                 .debug("button tap")
                 .subscribe(onNext: {
                    _ in
-                   
+                    cell.setFollow(user: user, completion: { (result) in
+                        if(result == true){
+                            self.suggestAccountItems.value.remove(at: index)
+                        }
+                    })
+
                 }).addDisposableTo(self.disposeBag)
         }.addDisposableTo(disposeBag)
     }

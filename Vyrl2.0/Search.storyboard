@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1Vp-nc-zxL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1Vp-nc-zxL">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -259,7 +259,7 @@
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PzE-Xf-veK">
-                                                                            <rect key="frame" x="15" y="8" width="32" height="32"/>
+                                                                            <rect key="frame" x="22" y="11.5" width="32" height="32"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="32" id="M0X-2t-cXR"/>
                                                                                 <constraint firstAttribute="width" constant="32" id="to3-nf-sqi"/>
@@ -271,7 +271,7 @@
                                                                             </userDefinedRuntimeAttributes>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="백현시우민_엑소" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mGn-r8-LHE">
-                                                                            <rect key="frame" x="57" y="8" width="83" height="16"/>
+                                                                            <rect key="frame" x="64" y="11.5" width="83" height="16"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="15.5" id="0xl-Rz-cZ2"/>
                                                                             </constraints>
@@ -280,7 +280,7 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@nct_dream을 함께 팔로우" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j6e-MN-qj7">
-                                                                            <rect key="frame" x="57" y="27.5" width="120.5" height="13"/>
+                                                                            <rect key="frame" x="64" y="31" width="120.5" height="13"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="13" id="ouj-l0-0nr"/>
                                                                             </constraints>
@@ -289,21 +289,19 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rzs-Gp-Kqj">
-                                                                            <rect key="frame" x="327" y="8" width="40" height="32"/>
+                                                                            <rect key="frame" x="320" y="11" width="40" height="33"/>
                                                                             <subviews>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OWg-3J-dOY">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="40" height="32"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="40" height="33"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" constant="40" id="6oD-Nc-6FF"/>
-                                                                                        <constraint firstAttribute="height" constant="32" id="c6s-xq-nN6"/>
                                                                                     </constraints>
                                                                                     <state key="normal" image="icon_add_01"/>
                                                                                 </button>
                                                                                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dG6-1J-KIu">
-                                                                                    <rect key="frame" x="-327" y="0.0" width="40" height="32"/>
+                                                                                    <rect key="frame" x="-320" y="0.0" width="40" height="33"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" constant="40" id="3Y9-NA-Lbx"/>
-                                                                                        <constraint firstAttribute="height" constant="32" id="vJR-cJ-Vnr"/>
                                                                                     </constraints>
                                                                                     <state key="normal" image="icon_cancel_04"/>
                                                                                 </button>
@@ -540,13 +538,13 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#우주대스타" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ikH-yQ-ycS">
-                                                            <rect key="frame" x="15" y="15" width="68" height="17"/>
+                                                            <rect key="frame" x="22" y="15" width="68" height="17"/>
                                                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
                                                             <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="468 contents" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1cH-Gl-322">
-                                                            <rect key="frame" x="292.5" y="15.5" width="67.5" height="14.5"/>
+                                                            <rect key="frame" x="285.5" y="15.5" width="67.5" height="14.5"/>
                                                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
                                                             <color key="textColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -591,7 +589,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="351,768 Followers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jVX-bL-EkU">
-                                                            <rect key="frame" x="261.5" y="17.5" width="90.5" height="14.5"/>
+                                                            <rect key="frame" x="254.5" y="17.5" width="90.5" height="14.5"/>
                                                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
                                                             <color key="textColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -628,7 +626,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C33-7g-PFa">
-                                                            <rect key="frame" x="99" y="15" width="253" height="42"/>
+                                                            <rect key="frame" x="99" y="15" width="246" height="42"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="엑소_대박" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="azC-EH-mcl" userLabel="title">
                                                                     <rect key="frame" x="0.0" y="3" width="53.5" height="17"/>
@@ -637,7 +635,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="351,768 Members" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vSm-Ni-cAI" userLabel="members">
-                                                                    <rect key="frame" x="164" y="3" width="89" height="14.5"/>
+                                                                    <rect key="frame" x="157" y="3" width="89" height="14.5"/>
                                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
                                                                     <color key="textColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -741,7 +739,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4hb-z5-DZ0">
-                                                            <rect key="frame" x="23" y="23.5" width="0.0" height="0.0"/>
+                                                            <rect key="frame" x="30" y="23.5" width="0.0" height="0.0"/>
                                                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
                                                             <color key="textColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -847,10 +845,10 @@
             </objects>
             <point key="canvasLocation" x="1148" y="-170.46476761619192"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--search-->
         <scene sceneID="Fma-le-RyW">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="1Vp-nc-zxL" sceneMemberID="viewController">
+                <navigationController title="search" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="1Vp-nc-zxL" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" image="icon_search_01_off" id="VgN-cO-5Od">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
