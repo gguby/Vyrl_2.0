@@ -101,6 +101,8 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
             appDelegate.feedView = self
         }
         
+        self.showNetworkError(isShow: false)
+        
         self.getAllFeed()
     }
     

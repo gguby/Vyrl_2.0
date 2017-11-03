@@ -221,6 +221,7 @@ class MyProfileViewController: UIViewController, UIImagePickerControllerDelegate
     func showProfileViewController() {
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ProfilePhotoViewController") as! ProfilePhotoViewController
+        vc.image = self.photoView.image(for: .normal)
         
         present(vc, animated: true, completion: nil)
     }

@@ -12,6 +12,10 @@ class ProfilePhotoViewController: UIViewController {
 
     @IBOutlet weak var fileSizeLabel: UILabel!
     
+    @IBOutlet weak var imageView: UIImageView!
+    
+    var image : UIImage!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,6 +24,14 @@ class ProfilePhotoViewController: UIViewController {
         fileSizeLabel.layer.borderWidth = 1
         fileSizeLabel.layer.cornerRadius = 9.5
         fileSizeLabel.layer.masksToBounds = true
+        
+        self.imageView.image = self.image
+        
+        let imgData: NSData = NSData(data: UIImageJPEGRepresentation(self.image,1.0)!)
+        
+        let imageSize : Int = imgData.length
+        
+        fileSizeLabel.text = "\(imageSize /  1024 )KB"
     }
 
     override func didReceiveMemoryWarning() {
