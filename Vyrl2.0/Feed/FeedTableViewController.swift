@@ -49,6 +49,16 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
     
     var feedView : FeedViewController?
     
+    @IBOutlet weak var networkErrorView: UIView!
+    
+    func showNetworkError(isShow : Bool) {
+        self.networkErrorView.alpha = isShow ? 1.0 : 0.0
+    }
+    
+    @IBAction func refresh(_ sender: Any) {
+        self.getAllFeed()
+    }
+    
     func initTable(){
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 400
@@ -261,11 +271,16 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Article]>) in
             
             response.result.ifFailure {
+                
+                self.showNetworkError(isShow: true)
+                
                 if let code = response.response?.statusCode {
                     LoginManager.sharedInstance.checkLogout(statusCode: code)
                     return
                 }
             }
+            
+            self.showNetworkError(isShow: false)
             
             self.articleArray.removeAll()
             
