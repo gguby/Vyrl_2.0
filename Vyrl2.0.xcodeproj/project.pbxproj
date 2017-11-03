@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		01ABE511A001A1DEE7D8BEAB /* Pods_Vyrl2_0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D78881F4958F20C20F036FD5 /* Pods_Vyrl2_0.framework */; };
 		464236AEF8E7E3A2C7AACD7F /* libPods-Vyrl2.0UITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D548CE0C473DEA6C46EC7CA7 /* libPods-Vyrl2.0UITests.a */; };
+		8F15A1F71FAC40C400EE14CD /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F15A1F61FAC40C400EE14CD /* ActivityViewController.swift */; };
 		8F1E45E31F8DB5A200D44227 /* Activity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F1E45E21F8DB5A200D44227 /* Activity.storyboard */; };
 		8F3B36F61F147A2400B91672 /* TermsOfUseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3B36F51F147A2400B91672 /* TermsOfUseViewController.swift */; };
 		8F3C61211F7A0698001C6CF6 /* FollowListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3C61201F7A0698001C6CF6 /* FollowListViewController.swift */; };
@@ -100,6 +101,7 @@
 		306CFD39EC6DFCA775E15FBB /* Pods-Vyrl2.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vyrl2.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vyrl2.0/Pods-Vyrl2.0.debug.xcconfig"; sourceTree = "<group>"; };
 		31A96CB7DB320E92C13C5B03 /* Pods-Vyrl2.0UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vyrl2.0UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vyrl2.0UITests/Pods-Vyrl2.0UITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4A3627D46412B7803C3B2BA7 /* Pods-Vyrl2.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vyrl2.0.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vyrl2.0/Pods-Vyrl2.0.release.xcconfig"; sourceTree = "<group>"; };
+		8F15A1F61FAC40C400EE14CD /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ActivityViewController.swift; path = Vyrl2.0/Activity/ActivityViewController.swift; sourceTree = SOURCE_ROOT; };
 		8F1E45E21F8DB5A200D44227 /* Activity.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Activity.storyboard; sourceTree = "<group>"; };
 		8F3B36F51F147A2400B91672 /* TermsOfUseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsOfUseViewController.swift; sourceTree = "<group>"; };
 		8F3C61201F7A0698001C6CF6 /* FollowListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowListViewController.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 		8F1E45E11F8DB55900D44227 /* Activity */ = {
 			isa = PBXGroup;
 			children = (
+				8F15A1F61FAC40C400EE14CD /* ActivityViewController.swift */,
 			);
 			name = Activity;
 			path = "New Group";
@@ -648,6 +651,7 @@
 				8F48CA6C1ED560CD0037A35B /* StartCoverViewController.swift in Sources */,
 				A62EF2EB1F1F5282000CD43A /* LocationViewController.swift in Sources */,
 				8F57B73F1F186E44009FD0EA /* FeedFullScreenViewController.swift in Sources */,
+				8F15A1F71FAC40C400EE14CD /* ActivityViewController.swift in Sources */,
 				8F42E4991EE144C70010EB88 /* OfficialFanClubTermsViewController.swift in Sources */,
 				8F6F1D8F1F58EE9400C163D0 /* OtherProfileViewController.swift in Sources */,
 				CE29B1A01ECD5FEE003F4D2E /* ViewController.swift in Sources */,
