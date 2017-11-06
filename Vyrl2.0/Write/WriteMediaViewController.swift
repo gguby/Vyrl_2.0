@@ -152,7 +152,42 @@ class WriteMediaViewConroller : UIViewController {
         delegate?.closeKeyboard()
     }
     
+    func setupGifData(asset : AVAsset){
+        
+        if asset.type! != .gif {
+            return
+        }
+        
+        let manager = PHImageManager()
+        
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        
+        let requestOptions = PHImageRequestOptions()
+        requestOptions.isSynchronous = false
+        requestOptions.deliveryMode = .fastFormat
+        requestOptions.resizeMode = .fast
+        
+        let fetchResult = PHAsset.fetchAssets(withLocalIdentifiers: [asset.identifier!], options: fetchOptions)
+        
+        guard let origin = fetchResult.firstObject
+            else { return }
+        
+        if origin.mediaType == .image {
+            manager.requestImageData(for: origin, options: requestOptions, resultHandler: { (imageData, UTI, _, _) in
+                if let uti = UTI,let data = imageData ,
+                    UTTypeConformsTo(uti as CFString, kUTTypeGIF) {
+                        asset.gifData = data
+                    }
+            })
+        }
+    }
+    
     @IBAction func addMedia(_ sender: SmallButton) {
+        
+        for asset in selectedAssetArray {
+            self.setupGifData(asset: asset)
+        }
         
         delegate?.completeAddMedia(array: selectedAssetArray, isOpenYn: (self.checkBtn.tag == 1))
         
@@ -443,7 +478,6 @@ class MediaPhotoCell : UICollectionViewCell {
                             if let uti = UTI,let data = imageData ,
                                 UTTypeConformsTo(uti as CFString, kUTTypeGIF) {
                                     self.asset?.type = .gif
-                                    self.asset?.gifData = data
                                 }
                             
                             DispatchQueue.main.async {
@@ -517,7 +551,8 @@ class AVAsset : Copying {
             guard type == .photo else {
                 
                 if type == .gif  {
-                    return gifData
+                    
+                    return self.gifData
                 }
                 
                 if let asset = urlAsset {

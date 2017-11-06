@@ -272,47 +272,48 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         
         Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Article]>) in
             
-            response.result.ifFailure {
+            switch response.result {
+            case .success(let json) :
+                
+                self.showNetworkError(isShow: false)
+                self.articleArray.removeAll()
+                
+                let array = response.result.value ?? []
+                
+                if array.count == 0{
+                    self.feedView?.embedController.remove()
+                    if LoginManager.sharedInstance.isFirstLogin == true {
+                        self.feedView?.goSearch()
+                        LoginManager.sharedInstance.isFirstLogin = false
+                    }
+                }
+                
+                if ( array.count <= 2 ){
+                    self.tableView.tableFooterView = UIView(frame: .zero)
+                }else {
+                    self.tableView.tableFooterView = self.bottomView
+                }
+                
+                for (i,article) in array.enumerated() {
+                    self.articleArray.append(article)
+                    if i % 4 == 0 && i != 0 && self.isFeedTab == true {
+                        let adMobArticle = Article.init()
+                        self.articleArray.append(adMobArticle)
+                    }
+                }
+                
+                self.sections.value = [SectionOfArticleData(items:self.articleArray)]
+                
+                self.resetSizeTableView()
+            case .failure(let error) :
                 
                 self.showNetworkError(isShow: true)
-                
                 if let code = response.response?.statusCode {
+                    print(code)
                     LoginManager.sharedInstance.checkLogout(statusCode: code)
                     return
                 }
             }
-            
-            self.showNetworkError(isShow: false)
-            
-            self.articleArray.removeAll()
-            
-            let array = response.result.value ?? []
-            
-            if array.count == 0{
-                self.feedView?.embedController.remove()
-                if LoginManager.sharedInstance.isFirstLogin == true {
-                    self.feedView?.goSearch()
-                    LoginManager.sharedInstance.isFirstLogin = false
-                }
-            }
-            
-            if ( array.count <= 2 ){
-                self.tableView.tableFooterView = UIView(frame: .zero)
-            }else {
-                self.tableView.tableFooterView = self.bottomView
-            }
-            
-            for (i,article) in array.enumerated() {
-                self.articleArray.append(article)
-                if i % 4 == 0 && i != 0 && self.isFeedTab == true {
-                    let adMobArticle = Article.init()
-                    self.articleArray.append(adMobArticle)
-                }
-            }
-            
-            self.sections.value = [SectionOfArticleData(items:self.articleArray)]
-            
-            self.resetSizeTableView()
         }
     }
     
@@ -457,7 +458,6 @@ extension FeedTableViewController : FeedCellDelegate {
     func didPressPhoto(sender: Any, cell : FeedTableCell) {
         let vc = self.pushViewControllrer(storyboardName: "Feed", controllerName: "FeedFullScreenViewController") as! FeedFullScreenViewController // or whatever it is
         vc.mediasArray = cell.article?.medias
-
     }
     
     func didPressCell(sender: Any, cell : FeedTableCell) {
