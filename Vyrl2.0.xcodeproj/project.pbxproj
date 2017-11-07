@@ -29,9 +29,13 @@
 		8F62CC151F00EC330069ACFE /* EmoticonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F62CC141F00EC330069ACFE /* EmoticonView.swift */; };
 		8F6B15F41F5D3A87007FFF62 /* FanPageReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6B15F31F5D3A87007FFF62 /* FanPageReportViewController.swift */; };
 		8F6F1D8F1F58EE9400C163D0 /* OtherProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6F1D8E1F58EE9400C163D0 /* OtherProfileViewController.swift */; };
+		8F779C231FB00D69009BEB05 /* FullViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F779C221FB00D69009BEB05 /* FullViewController.swift */; };
 		8F797B7F1F340E080019C475 /* FanPageCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F797B7E1F340E080019C475 /* FanPageCreateViewController.swift */; };
 		8F7AAF5D1F8EF8A600EC726F /* FeedDetailTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7AAF5C1F8EF8A600EC726F /* FeedDetailTableCell.swift */; };
 		8F7AAF5F1F8EFF1700EC726F /* FeedDetailCommentTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7AAF5E1F8EFF1700EC726F /* FeedDetailCommentTableCell.swift */; };
+		8F7EDA7D1FB17BBC00128AD1 /* PagingFullViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7EDA7C1FB17BBC00128AD1 /* PagingFullViewController.swift */; };
+		8F7EDA7F1FB17C4600128AD1 /* PagingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7EDA7E1FB17C4600128AD1 /* PagingScrollView.swift */; };
+		8F7EDA811FB17C7600128AD1 /* ZoomingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7EDA801FB17C7600128AD1 /* ZoomingScrollView.swift */; };
 		8F829E7C1EFB6648001D418F /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F829E7B1EFB6648001D418F /* MyProfileViewController.swift */; };
 		8F829E801EFB9CD4001D418F /* WriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F829E7F1EFB9CD4001D418F /* WriteViewController.swift */; };
 		8F90911D1EEFC57D0095A335 /* FeedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F90911C1EEFC57D0095A335 /* FeedDetailViewController.swift */; };
@@ -121,9 +125,13 @@
 		8F62CC141F00EC330069ACFE /* EmoticonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonView.swift; sourceTree = "<group>"; };
 		8F6B15F31F5D3A87007FFF62 /* FanPageReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanPageReportViewController.swift; sourceTree = "<group>"; };
 		8F6F1D8E1F58EE9400C163D0 /* OtherProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherProfileViewController.swift; sourceTree = "<group>"; };
+		8F779C221FB00D69009BEB05 /* FullViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullViewController.swift; sourceTree = "<group>"; };
 		8F797B7E1F340E080019C475 /* FanPageCreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanPageCreateViewController.swift; sourceTree = "<group>"; };
 		8F7AAF5C1F8EF8A600EC726F /* FeedDetailTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDetailTableCell.swift; sourceTree = "<group>"; };
 		8F7AAF5E1F8EFF1700EC726F /* FeedDetailCommentTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDetailCommentTableCell.swift; sourceTree = "<group>"; };
+		8F7EDA7C1FB17BBC00128AD1 /* PagingFullViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingFullViewController.swift; sourceTree = "<group>"; };
+		8F7EDA7E1FB17C4600128AD1 /* PagingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingScrollView.swift; sourceTree = "<group>"; };
+		8F7EDA801FB17C7600128AD1 /* ZoomingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomingScrollView.swift; sourceTree = "<group>"; };
 		8F829E7B1EFB6648001D418F /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		8F829E7F1EFB9CD4001D418F /* WriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteViewController.swift; sourceTree = "<group>"; };
 		8F90911C1EEFC57D0095A335 /* FeedDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedDetailViewController.swift; sourceTree = "<group>"; };
@@ -245,6 +253,10 @@
 				8F90911C1EEFC57D0095A335 /* FeedDetailViewController.swift */,
 				8F7AAF5C1F8EF8A600EC726F /* FeedDetailTableCell.swift */,
 				8F7AAF5E1F8EFF1700EC726F /* FeedDetailCommentTableCell.swift */,
+				8F779C221FB00D69009BEB05 /* FullViewController.swift */,
+				8F7EDA7C1FB17BBC00128AD1 /* PagingFullViewController.swift */,
+				8F7EDA7E1FB17C4600128AD1 /* PagingScrollView.swift */,
+				8F7EDA801FB17C7600128AD1 /* ZoomingScrollView.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -645,6 +657,7 @@
 				CE0898201ECD7079000D6D6C /* LoginViewController.swift in Sources */,
 				A679A49D1F5909910006D480 /* FanPageWithDrawViewController.swift in Sources */,
 				CE29B19E1ECD5FEE003F4D2E /* AppDelegate.swift in Sources */,
+				8F7EDA7D1FB17BBC00128AD1 /* PagingFullViewController.swift in Sources */,
 				A679A49B1F5909650006D480 /* FanPageCloseViewController.swift in Sources */,
 				8F916A8A1EDC17D900E3EC8B /* SettingViewController.swift in Sources */,
 				CE0898281ECD9AB9000D6D6C /* LoginManager.swift in Sources */,
@@ -662,6 +675,7 @@
 				CE0898221ECD7098000D6D6C /* MyViewController.swift in Sources */,
 				CE5636FC1EE7FE8600894016 /* WithDrawViewController.swift in Sources */,
 				CE08981E1ECD706A000D6D6C /* FanViewController.swift in Sources */,
+				8F7EDA811FB17C7600128AD1 /* ZoomingScrollView.swift in Sources */,
 				8F3B36F61F147A2400B91672 /* TermsOfUseViewController.swift in Sources */,
 				CE08981C1ECD704F000D6D6C /* SearchViewController.swift in Sources */,
 				8F829E7C1EFB6648001D418F /* MyProfileViewController.swift in Sources */,
@@ -672,6 +686,7 @@
 				8F6B15F41F5D3A87007FFF62 /* FanPageReportViewController.swift in Sources */,
 				CE33F0021ED2BB690050C21D /* SMLoginViewController.swift in Sources */,
 				A679A4971F5901220006D480 /* FanSettingViewController.swift in Sources */,
+				8F7EDA7F1FB17C4600128AD1 /* PagingScrollView.swift in Sources */,
 				8F492C3A1F3DA01D0049F600 /* UITextView+Extension.swift in Sources */,
 				8F9AF9911EE800E700DE069E /* FeedTableViewController.swift in Sources */,
 				A6722C311F25F7D600CEBBD6 /* FeedTableCell.swift in Sources */,
@@ -694,6 +709,7 @@
 				CE33F0061ED2DF320050C21D /* ProfileController.swift in Sources */,
 				CE1340A61EDD3CD500EA330F /* NoticeController.swift in Sources */,
 				8F408E3D1F32EC98008F8FCB /* FeedLikeUserListViewController.swift in Sources */,
+				8F779C231FB00D69009BEB05 /* FullViewController.swift in Sources */,
 				8F3C90371EE010320041B770 /* FanclubManagementViewController.swift in Sources */,
 				8F3C61211F7A0698001C6CF6 /* FollowListViewController.swift in Sources */,
 			);
