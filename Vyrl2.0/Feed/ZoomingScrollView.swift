@@ -6,7 +6,7 @@
 //  Copyright © 2017년 ipagong. All rights reserved.
 //
 
-public typealias ZoomingEventBlock = (Void) -> (Void)
+public typealias ZoomingEventBlock = () -> (Void)
 
 import UIKit
 import FLAnimatedImage

@@ -15,6 +15,12 @@ class PagingFullViewController: UIViewController {
     @IBOutlet weak var pagingControl: PagingScrollView!
     var mediasArray : [ArticleMedia]!
     
+    var downLoadIndex : Int! = -1
+    
+    var playerItem: AVPlayerItem?
+    var player: AVPlayer?
+    var playerLayer : AVPlayerLayer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,15 +31,36 @@ class PagingFullViewController: UIViewController {
         
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
+        print("\(#function)")
         
+        if(self.player != nil) {
+            self.player!.pause()
+            self.playerLayer?.removeFromSuperlayer()
+        }
     }
     
     func canRotate() -> Void {
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        pagingControl.frame = self.view.frame
+         coordinator.animate(alongsideTransition: { (UIViewControllerTransitionCoordinatorContext) -> Void in
+            self.pagingControl.frame = self.view.frame
+           
+            guard let zoomingView = self.pagingControl.pageView(at: self.pagingControl.currentPageIndex) as? ZoomingScrollView else { return }
+            
+            zoomingView.prepareAfterCompleted()
+            zoomingView.setMaxMinZoomScalesForCurrentBounds()
+            print("finish")
+            
+            if(self.player != nil) {
+                self.playerLayer?.frame = self.pagingControl.frame
+            }
+        }, completion:  {(UIViewControllerTransitionCoordinatorContext) -> Void in
+            
+         })
+        super.viewWillTransition(to: size, with: coordinator)
+        
     }
 }
 
@@ -44,10 +71,12 @@ extension PagingFullViewController : PagingScrollViewDelegate, PagingScrollViewD
     
     func pagingScrollView(_ pagingScrollView: PagingScrollView, didChangedCurrentPage currentPageIndex: NSInteger) {
         print("current page did changed to \(currentPageIndex).")
+        
+        self.showImageVideo(currentIndex: currentPageIndex, view:  pagingScrollView.pageView(at: currentPageIndex)!)
     }
     
-    func pagingScrollView(_ pagingScrollView: PagingScrollView, layoutSubview view: UIView) {
-        print("paging control call layoutsubviews.")
+    func pagingScrollView(_ pagingScrollView: PagingScrollView, layoutSubview view: UIView?) {
+        print("paging control call layoutsubviews. \(self.view.frame)")
     }
     
     func pagingScrollView(_ pagingScrollView: PagingScrollView, recycledView view: UIView?, viewForIndex index: NSInteger) -> UIView {
@@ -74,7 +103,13 @@ extension PagingFullViewController : PagingScrollViewDelegate, PagingScrollViewD
         guard let zoomingView = view as? ZoomingScrollView else { return }
         guard let zoomContentView = zoomingView.targetView as? ZoomContentView else { return }
         
-       self.requestImageVideo(index: index, zoomingView: zoomingView, zoomContentView: zoomContentView)
+        if( downLoadIndex < index){
+            downLoadIndex = index
+            self.requestImageVideo(index: index, zoomingView: zoomingView, zoomContentView: zoomContentView)
+        } else {
+            zoomingView.prepareAfterCompleted()
+            zoomingView.setMaxMinZoomScalesForCurrentBounds()
+        }
     }
     
     func startIndexOfPageWith(pagingScrollView: PagingScrollView) -> NSInteger {
@@ -106,6 +141,35 @@ extension PagingFullViewController : PagingScrollViewDelegate, PagingScrollViewD
                     zoomingView.setMaxMinZoomScalesForCurrentBounds()
                 }
         }
+    }
+    
+    func showImageVideo(currentIndex:Int, view: UIView) {
+        let uri : URL = URL.init(string: mediasArray[currentIndex].url!)!
+        
+        if(self.player != nil) {
+            self.player!.pause()
+            self.playerLayer?.removeFromSuperlayer()
+        }
+        
+        if(mediasArray[currentIndex].type == "IMAGE"){
+            
+        }
+        
+        else {
+            self.player?.pause()
+
+            self.playerItem = AVPlayerItem.init(url: uri)
+            self.player = AVPlayer.init(playerItem: self.playerItem)
+
+            // Layer for display… Video plays at the full size of the iPad
+            self.playerLayer = AVPlayerLayer(player: player)
+
+            view.layer.addSublayer(self.playerLayer!)
+
+            self.playerLayer?.frame = pagingControl.frame
+            self.player?.seek(to: kCMTimeZero)
+            self.player?.play()
+         }
     }
     
 }
