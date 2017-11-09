@@ -259,15 +259,7 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
             }
             
             self.sections.value = [SectionOfArticleData(items:self.articleArray)]
-//            self.resetSizeTableView()
         }
-    }
-    
-    func resetSizeTableView(){
-        var wholeSize = self.tableView.contentSize
-        
-        wholeSize.height = self.tableView.contentSize.height - (self.tableView.tableFooterView?.frame.size.height)!
-        self.tableView.contentSize = wholeSize
     }
    
     func getAllFeed(){
@@ -305,8 +297,6 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
                 }
                 
                 self.sections.value = [SectionOfArticleData(items:self.articleArray)]
-                
-//                self.resetSizeTableView()
             case .failure(let error) :
                 
                 self.showNetworkError(isShow: true)
