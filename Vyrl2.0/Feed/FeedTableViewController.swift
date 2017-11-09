@@ -660,6 +660,7 @@ extension FeedTableViewController : FeedCellDelegate {
                     }
                 }
             case .failure(let error):
+                self.showLoading(show: false)
                 print(error)
             }
         })

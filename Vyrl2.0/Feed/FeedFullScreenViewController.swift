@@ -136,6 +136,7 @@ class FeedFullScreenViewController: UIViewController {
     
     
     @IBAction func dismiss(_ sender: UIButton) {
+        self.player!.pause()
         self.navigationController?.popViewController(animated: true)
         
         let subViews = self.mainScrollView.subviews
