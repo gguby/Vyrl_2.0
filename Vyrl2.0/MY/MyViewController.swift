@@ -302,7 +302,7 @@ class MyViewController: UIViewController{
     }
     
     @IBAction func showPost(_ sender: Any) {
-        self.setupFeed(feedType: FeedTableType.ALLFEED)
+        self.setupFeed(feedType: FeedTableType.MYFEED)
     }
     
     @IBAction func showBookmark(_ sender: Any) {

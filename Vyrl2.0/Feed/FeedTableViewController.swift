@@ -24,18 +24,22 @@ enum FeedTableType {
 class FeedTableViewController: UIViewController, UIScrollViewDelegate{
 
     @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var uploadLoadingView: UIView!
+    @IBOutlet weak var loadingImage: UIImageView!
+    
+    @IBOutlet weak var footerView: UIView!
+    @IBOutlet weak var bottomRefresh: UIImageView!
+    
     var articleArray = [Article]()
 
     var feedType = FeedTableType.ALLFEED
     var userId : Int!
     var fanPageId : Int!
-    var isBottomRefresh = false
+    
     var isEnableUpload = true
     var isFeedTab = false
     
-    @IBOutlet weak var uploadLoadingView: UIView!
-    @IBOutlet weak var bottomSpace: NSLayoutConstraint!
-    @IBOutlet weak var loadingImage: UIImageView!
     
     var bottomView : UIView!
     var refreshView : FeedPullLoaderView!
@@ -120,23 +124,10 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         refreshView.delegate = self
         self.tableView.addPullLoadableView(refreshView, type: .refresh)
         
-        self.bottomView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 50))
-        let bottomRefresh = UIImageView.init(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-        bottomRefresh.animationImages = self.getImgList()
-        bottomRefresh.animationDuration = 1.0
-        bottomRefresh.startAnimating()
-        
-        bottomRefresh.translatesAutoresizingMaskIntoConstraints = false
-        bottomView.addSubview(bottomRefresh)
-        
-        bottomView.addConstraints([
-            NSLayoutConstraint(item: bottomRefresh, attribute: .centerX, relatedBy: .equal, toItem: bottomView, attribute: .centerX, multiplier: 1.0, constant: 0.0),
-            NSLayoutConstraint(item: bottomRefresh, attribute: .centerY, relatedBy: .equal, toItem: bottomView, attribute: .centerY, multiplier: 1.0, constant: 0.0)
-        ])
-        
-        self.tableView.tableFooterView = self.bottomView
-        
-        self.isBottomRefresh = true
+        self.bottomRefresh.animationImages = self.getImgList()
+        self.bottomRefresh.animationDuration = 1.0
+        self.bottomRefresh.startAnimating()
+        self.footerView.isHidden = true
     }
     
     func getImgList()->[UIImage]{
@@ -150,12 +141,23 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         
         return imgList
     }
+
+    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        let offset = scrollView.contentOffset
+        let bounds = scrollView.bounds
+        let size = scrollView.contentSize
+        let inset = scrollView.contentInset
+        
+        let y = offset.y + bounds.size.height - inset.bottom
+        let h = size.height
+        
+        let reloadDistance = CGFloat(100.0)
+        if y > h + reloadDistance {
+            self.footerView.isHidden = false
+        }
+    }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        
-        if self.isBottomRefresh == false {
-            return
-        }
         
         let offset = scrollView.contentOffset
         let bounds = scrollView.bounds
@@ -165,10 +167,16 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
         let y = offset.y + bounds.size.height - inset.bottom
         let h = size.height
         
-        let reloadDistance = CGFloat(30.0)
+        let reloadDistance = CGFloat(50)
         if y > h + reloadDistance {
-            print("Load More")
-            self.getFeedLoadMore()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.footerView.isHidden = true
+                }, completion: {
+                    (true) in
+                    self.getFeedLoadMore()
+                })
+            })
         }
     }
     
@@ -251,15 +259,7 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
             }
             
             self.sections.value = [SectionOfArticleData(items:self.articleArray)]
-            self.resetSizeTableView()
         }
-    }
-    
-    func resetSizeTableView(){
-        var wholeSize = self.tableView.contentSize
-        
-        wholeSize.height = self.tableView.contentSize.height - (self.tableView.tableFooterView?.frame.size.height)!
-        self.tableView.contentSize = wholeSize
     }
    
     func getAllFeed(){
@@ -288,12 +288,6 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
                     }
                 }
                 
-                if ( array.count <= 2 ){
-                    self.tableView.tableFooterView = UIView(frame: .zero)
-                }else {
-                    self.tableView.tableFooterView = self.bottomView
-                }
-                
                 for (i,article) in array.enumerated() {
                     self.articleArray.append(article)
                     if i % 4 == 0 && i != 0 && self.isFeedTab == true {
@@ -303,8 +297,6 @@ class FeedTableViewController: UIViewController, UIScrollViewDelegate{
                 }
                 
                 self.sections.value = [SectionOfArticleData(items:self.articleArray)]
-                
-                self.resetSizeTableView()
             case .failure(let error) :
                 
                 self.showNetworkError(isShow: true)
@@ -660,6 +652,7 @@ extension FeedTableViewController : FeedCellDelegate {
                     }
                 }
             case .failure(let error):
+                self.showLoading(show: false)
                 print(error)
             }
         })
