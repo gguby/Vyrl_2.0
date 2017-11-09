@@ -9,17 +9,43 @@
 import UIKit
 import Alamofire
 import FLAnimatedImage
+import ReachabilitySwift
+import Photos
 
 class PagingFullViewController: UIViewController {
     
     @IBOutlet weak var pagingControl: PagingScrollView!
+    
+    @IBOutlet weak var currentTimeLabel: UILabel!
+    @IBOutlet weak var timeSlider: UISlider!
+    @IBOutlet weak var videoStatusView: UIView!
+    @IBOutlet weak var totalTimeLabel: UILabel!
+    
+    @IBOutlet weak var downloadButton: UIButton!
+    @IBOutlet weak var fileSizeButton: UIButton!
+    
+    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var bottomView: UIView!
+    
+    @IBOutlet weak var pageNumberLabel: UILabel!
+    @IBOutlet weak var contentTextView: UITextView!
+    
     var mediasArray : [ArticleMedia]!
     
     var downLoadIndex : Int! = -1
+    var currentPage : Int! = 0
     
     var playerItem: AVPlayerItem?
     var player: AVPlayer?
     var playerLayer : AVPlayerLayer?
+    
+    let timeRemainingFormatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.zeroFormattingBehavior = .pad
+        formatter.allowedUnits = [.minute, .second]
+        
+        return formatter
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +77,6 @@ class PagingFullViewController: UIViewController {
             
             zoomingView.prepareAfterCompleted()
             zoomingView.setMaxMinZoomScalesForCurrentBounds()
-            print("finish")
             
             if(self.player != nil) {
                 self.playerLayer?.frame = self.pagingControl.frame
@@ -62,6 +87,100 @@ class PagingFullViewController: UIViewController {
         super.viewWillTransition(to: size, with: coordinator)
         
     }
+    
+    @IBAction func timeSlideValueChanged(_ sender: UISlider) {
+        
+        self.player?.pause()
+        
+        let seconds : Int64 = Int64(sender.value)
+        let targetTime:CMTime = CMTimeMake(seconds, 1)
+        self.currentTimeLabel.text = self.createTimeString(time: Float(CMTimeGetSeconds(targetTime)))
+        
+        self.player?.seek(to: targetTime)
+        
+        if sender.isTracking == false {
+            self.player?.play()
+        }
+    }
+    
+    @IBAction func downloadImageButtonClick(_ sender: UIButton) {
+        let alertController = UIAlertController (title:"사진 다운로드시 3G/LTE를 사용하시겠습니가?", message:"사진 다운로드시 3G/LTE를 사용하시겠습니가?",preferredStyle:.actionSheet)
+        
+        let okay = UIAlertAction(title: "okay", style: .default,handler: { (action) -> Void in
+            if(self.mediasArray[self.currentPage].type == "VIDEO") {
+                self.showToast(str: "동영상은 다운로드 불가 입니다.")
+            } else {
+                self.downloadImage(urlString: self.mediasArray[self.currentPage].url!)
+            }
+        })
+        
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
+            alertController.dismiss(animated: true, completion: nil)
+        })
+        
+        alertController.addAction(okay)
+        alertController.addAction(cancel)
+        
+        if(Reachability.init()?.currentReachabilityStatus == .reachableViaWWAN) {
+            self.present(alertController, animated: true, completion: nil)
+        } else {
+            if(self.mediasArray[currentPage].type == "VIDEO") {
+                self.showToast(str: "동영상은 다운로드 불가 입니다.")
+            } else {
+                self.downloadImage(urlString: self.mediasArray[self.currentPage].url!)
+            }
+        }
+    }
+    
+    func downloadImage(urlString : String) {
+        DispatchQueue.global(qos: .background).async {
+            if let url = URL(string: urlString),
+                let urlData = NSData(contentsOf: url)
+            {
+                let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0];
+                let filePath="\(documentsPath)/\(url.lastPathComponent)";
+                DispatchQueue.main.async {
+                    urlData.write(toFile: filePath, atomically: true)
+                    PHPhotoLibrary.shared().performChanges({
+                        PHAssetChangeRequest.creationRequestForAssetFromImage(atFileURL: URL(fileURLWithPath: filePath))
+                    }) { completed, error in
+                        if completed {
+                            self.showToast(str: "photo is saved!")
+                        }
+                        
+                        if (error != nil) {
+                            print(error as Any)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func handleTap() {
+        if(self.topView.isHidden == false) {
+            self.topView.isHidden = true
+            self.bottomView.isHidden = true
+            self.contentTextView.isHidden = true
+            
+        } else {
+            self.topView.isHidden = false
+            self.bottomView.isHidden = false
+            self.contentTextView.isHidden = false
+            
+            if(mediasArray[currentPage].type == "VIDEO"){
+               self.videoStatusView.isHidden = false
+            }
+        }
+    }
+    
+    func createTimeString(time: Float) -> String {
+        let components = NSDateComponents()
+        components.second = Int(max(0.0, time))
+        
+        return timeRemainingFormatter.string(from: components as DateComponents)!
+    }
 }
 
 extension PagingFullViewController : PagingScrollViewDelegate, PagingScrollViewDataSource {
@@ -71,11 +190,17 @@ extension PagingFullViewController : PagingScrollViewDelegate, PagingScrollViewD
     
     func pagingScrollView(_ pagingScrollView: PagingScrollView, didChangedCurrentPage currentPageIndex: NSInteger) {
         print("current page did changed to \(currentPageIndex).")
+        self.fileSizeButton.setTitle("\(self.mediasArray[currentPageIndex].fileSizeString!)", for: .normal)
+        self.pageNumberLabel.text =  "\(currentPageIndex+1) / \(self.mediasArray.count)"
         
-        self.showImageVideo(currentIndex: currentPageIndex, view:  pagingScrollView.pageView(at: currentPageIndex)!)
+        self.currentPage = currentPageIndex
+        
+        guard let zoomingView = self.pagingControl.pageView(at: self.pagingControl.currentPageIndex) as? ZoomingScrollView else { return }
+         self.showImageVideo(currentIndex: currentPageIndex, view:  zoomingView)
+        
     }
     
-    func pagingScrollView(_ pagingScrollView: PagingScrollView, layoutSubview view: UIView?) {
+    func pagingScrollView(_ pagingScrollView: PagingScrollView, layoutSubview view: UIView) {
         print("paging control call layoutsubviews. \(self.view.frame)")
     }
     
@@ -83,9 +208,10 @@ extension PagingFullViewController : PagingScrollViewDelegate, PagingScrollViewD
         guard view == nil else { return view! }
         
         let zoomingView = ZoomingScrollView(frame: self.view.bounds)
-        zoomingView.backgroundColor = UIColor.blue
+        zoomingView.backgroundColor = UIColor.black
         zoomingView.singleTapEvent = {
             print("single tapped...")
+            self.handleTap()
         }
         
         zoomingView.doubleTapEvent = {
@@ -151,15 +277,38 @@ extension PagingFullViewController : PagingScrollViewDelegate, PagingScrollViewD
             self.playerLayer?.removeFromSuperlayer()
         }
         
-        if(mediasArray[currentIndex].type == "IMAGE"){
+        if(mediasArray[currentIndex].type == "IMAGE") {
+            self.videoStatusView.isHidden = true
             
-        }
-        
-        else {
+        } else {
+            self.videoStatusView.isHidden = false
+            
             self.player?.pause()
 
             self.playerItem = AVPlayerItem.init(url: uri)
             self.player = AVPlayer.init(playerItem: self.playerItem)
+            
+            let duration : CMTime = playerItem!.asset.duration
+            let seconds : Float64 = CMTimeGetSeconds(duration)
+            self.timeSlider.minimumValue = 0
+            self.timeSlider.maximumValue = Float(seconds)
+            self.timeSlider.isContinuous = true
+            
+            self.player?.addPeriodicTimeObserver(forInterval: CMTimeMake(1, 4), queue: .main, using: { (time) in
+                if let currentItem = self.player?.currentItem {
+                    let duration = currentItem.duration
+                    if (CMTIME_IS_INVALID(duration)) {
+                        // Do sth
+                        return;
+                    }
+                    
+                    let currentTime = currentItem.currentTime()
+                    
+                    self.timeSlider.value = Float(CMTimeGetSeconds(currentTime))
+                    self.currentTimeLabel.text = self.createTimeString(time: Float(CMTimeGetSeconds(currentTime)))
+                    self.totalTimeLabel.text = self.createTimeString(time: Float(CMTimeGetSeconds(duration)))
+                }
+            })
 
             // Layer for display… Video plays at the full size of the iPad
             self.playerLayer = AVPlayerLayer(player: player)

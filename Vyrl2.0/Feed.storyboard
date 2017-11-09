@@ -537,7 +537,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l8U-y9-Ai2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1206" y="-116"/>
+            <point key="canvasLocation" x="1205.5999999999999" y="-116.49175412293854"/>
         </scene>
         <!--Paging Full View Controller-->
         <scene sceneID="Q5R-fV-9d3">
@@ -560,23 +560,11 @@
                                             <outlet property="delegate" destination="oF9-Dj-qYL" id="9wF-6W-0nh"/>
                                         </connections>
                                     </scrollView>
-                                    <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cxZ-bb-LZq">
-                                        <rect key="frame" x="0.0" y="489" width="375" height="128"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="128" id="kOQ-Lf-qxk"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="cxZ-bb-LZq" firstAttribute="leading" secondItem="KUW-c9-Vq2" secondAttribute="leading" id="BA6-qG-74P"/>
                                     <constraint firstItem="thQ-yJ-q0n" firstAttribute="leading" secondItem="KUW-c9-Vq2" secondAttribute="leading" id="GmL-Th-vUa"/>
                                     <constraint firstAttribute="trailing" secondItem="thQ-yJ-q0n" secondAttribute="trailing" id="Xb3-Ul-gbl"/>
-                                    <constraint firstAttribute="trailing" secondItem="cxZ-bb-LZq" secondAttribute="trailing" id="b52-pJ-SO9"/>
-                                    <constraint firstAttribute="bottom" secondItem="cxZ-bb-LZq" secondAttribute="bottom" constant="50" id="qW1-vv-9zm"/>
                                     <constraint firstAttribute="bottom" secondItem="thQ-yJ-q0n" secondAttribute="bottom" id="rmV-Km-ZKb"/>
                                     <constraint firstItem="thQ-yJ-q0n" firstAttribute="top" secondItem="KUW-c9-Vq2" secondAttribute="top" id="vJs-ev-u2g"/>
                                 </constraints>
@@ -619,6 +607,9 @@
                                             <constraint firstAttribute="height" constant="40" id="Xcc-aS-taY"/>
                                         </constraints>
                                         <state key="normal" image="icon_download_01"/>
+                                        <connections>
+                                            <action selector="downloadImageButtonClick:" destination="oF9-Dj-qYL" eventType="touchUpInside" id="XDO-ZF-lRf"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eWU-8A-ElQ">
                                         <rect key="frame" x="115" y="0.0" width="55" height="40"/>
@@ -646,6 +637,16 @@
                                     <constraint firstAttribute="bottom" secondItem="F5d-2m-xVe" secondAttribute="bottom" id="vcI-9v-VMX"/>
                                 </constraints>
                             </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lWr-I9-dUK">
+                                <rect key="frame" x="0.0" y="489" width="375" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="6YR-2H-eMW"/>
+                                </constraints>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hVg-3V-17n" userLabel="bottom View">
                                 <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                                 <subviews>
@@ -672,7 +673,7 @@
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="vdY-gj-S77">
                                                 <rect key="frame" x="72" y="10" width="120" height="31"/>
                                                 <connections>
-                                                    <action selector="timeSlideValueChanged:" destination="lfr-fq-w5O" eventType="valueChanged" id="3gm-nr-7HX"/>
+                                                    <action selector="timeSlideValueChanged:" destination="oF9-Dj-qYL" eventType="valueChanged" id="RHh-yb-N8q"/>
                                                 </connections>
                                             </slider>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1:00:09" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qxu-la-Dma">
@@ -708,9 +709,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="AeG-WT-wrk" firstAttribute="leading" secondItem="B2B-g0-eFf" secondAttribute="leading" id="3GG-3N-8V9"/>
+                            <constraint firstItem="lWr-I9-dUK" firstAttribute="leading" secondItem="B2B-g0-eFf" secondAttribute="leading" id="8jr-yN-WFz"/>
                             <constraint firstAttribute="trailing" secondItem="AeG-WT-wrk" secondAttribute="trailing" id="ARO-wg-j52"/>
                             <constraint firstAttribute="trailing" secondItem="KUW-c9-Vq2" secondAttribute="trailing" id="CQ2-Dk-w77"/>
+                            <constraint firstItem="hVg-3V-17n" firstAttribute="top" secondItem="lWr-I9-dUK" secondAttribute="bottom" id="Erb-yR-FDE"/>
                             <constraint firstItem="AeG-WT-wrk" firstAttribute="top" secondItem="B2B-g0-eFf" secondAttribute="top" id="GMB-Jo-DKS"/>
+                            <constraint firstAttribute="trailing" secondItem="lWr-I9-dUK" secondAttribute="trailing" id="HCT-tB-S6w"/>
                             <constraint firstItem="78F-lk-RXP" firstAttribute="top" secondItem="KUW-c9-Vq2" secondAttribute="bottom" id="KZw-7y-jcR"/>
                             <constraint firstItem="KUW-c9-Vq2" firstAttribute="top" secondItem="B2B-g0-eFf" secondAttribute="top" id="OUp-kh-a6T"/>
                             <constraint firstItem="KUW-c9-Vq2" firstAttribute="leading" secondItem="B2B-g0-eFf" secondAttribute="leading" id="Pmr-63-4gX"/>
@@ -720,7 +724,17 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bottomView" destination="hVg-3V-17n" id="ycF-wF-pmf"/>
+                        <outlet property="contentTextView" destination="lWr-I9-dUK" id="SZL-72-ObM"/>
+                        <outlet property="currentTimeLabel" destination="4OX-DH-oSb" id="Lsy-Uy-rvr"/>
+                        <outlet property="downloadButton" destination="mbM-Wf-Wp9" id="E1h-ck-iuc"/>
+                        <outlet property="fileSizeButton" destination="bvr-ft-IUa" id="beF-oF-8yS"/>
+                        <outlet property="pageNumberLabel" destination="Amd-OY-wnH" id="ld8-iQ-bxY"/>
                         <outlet property="pagingControl" destination="KUW-c9-Vq2" id="AhP-hV-MCh"/>
+                        <outlet property="timeSlider" destination="vdY-gj-S77" id="V2h-20-NsI"/>
+                        <outlet property="topView" destination="AeG-WT-wrk" id="0jx-O2-xcg"/>
+                        <outlet property="totalTimeLabel" destination="Qxu-la-Dma" id="QQJ-uD-OAo"/>
+                        <outlet property="videoStatusView" destination="zVW-Ue-kC4" id="nIZ-iK-9tk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EeU-un-ysd" userLabel="First Responder" sceneMemberID="firstResponder"/>

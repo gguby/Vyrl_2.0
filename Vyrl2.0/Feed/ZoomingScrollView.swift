@@ -153,9 +153,16 @@ open class ZoomingScrollView : UIScrollView, UIScrollViewDelegate {
         guard minScale != .infinity else { return }
         guard maxScale != .infinity else { return }
         
-        self.maximumZoomScale = maxScale
-        self.minimumZoomScale = minScale
-        self.zoomScale = minScale
+        
+        if (targetView.zoomContentView.layer.sublayers?.count) != nil {
+            self.maximumZoomScale = 1
+            self.minimumZoomScale = 1
+            self.zoomScale = 1
+        } else {
+            self.maximumZoomScale = maxScale
+            self.minimumZoomScale = minScale
+            self.zoomScale = minScale
+        }
     }
     
     // MARK: - uiscrollview delegate
