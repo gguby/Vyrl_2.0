@@ -23,6 +23,7 @@ class PagingFullViewController: UIViewController {
     
     @IBOutlet weak var downloadButton: UIButton!
     @IBOutlet weak var fileSizeButton: UIButton!
+    @IBOutlet weak var videoPlayButton: UIButton!
     
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var bottomView: UIView!
@@ -133,6 +134,16 @@ class PagingFullViewController: UIViewController {
         }
     }
     
+    @IBAction func toggleVideoPlay(_ sender: Any) {
+        if(self.player?.rate != 0 && self.player?.error == nil) {
+            self.videoPlayButton.setImage(UIImage.init(named: "icon_play_01"), for: .normal)
+            self.player?.pause()
+        } else {
+            self.videoPlayButton.setImage(UIImage.init(named: "icon_pause_01"), for: .normal)
+            self.player?.play()
+        }
+    }
+    
     func downloadImage(urlString : String) {
         DispatchQueue.global(qos: .background).async {
             if let url = URL(string: urlString),
@@ -146,9 +157,10 @@ class PagingFullViewController: UIViewController {
                         PHAssetChangeRequest.creationRequestForAssetFromImage(atFileURL: URL(fileURLWithPath: filePath))
                     }) { completed, error in
                         if completed {
-                            self.showToast(str: "photo is saved!")
+                            DispatchQueue.main.async {
+                                self.showToast(str: "photo is saved!")
+                            }
                         }
-                        
                         if (error != nil) {
                             print(error as Any)
                         }
@@ -163,6 +175,7 @@ class PagingFullViewController: UIViewController {
             self.topView.isHidden = true
             self.bottomView.isHidden = true
             self.contentTextView.isHidden = true
+            self.videoPlayButton.isHidden = true
             
         } else {
             self.topView.isHidden = false
@@ -171,6 +184,7 @@ class PagingFullViewController: UIViewController {
             
             if(mediasArray[currentPage].type == "VIDEO"){
                self.videoStatusView.isHidden = false
+                self.videoPlayButton.isHidden = false
             }
         }
     }
@@ -279,9 +293,10 @@ extension PagingFullViewController : PagingScrollViewDelegate, PagingScrollViewD
         
         if(mediasArray[currentIndex].type == "IMAGE") {
             self.videoStatusView.isHidden = true
-            
+            self.videoPlayButton.isHidden = true
         } else {
             self.videoStatusView.isHidden = false
+            self.videoPlayButton.isHidden = false
             
             self.player?.pause()
 
@@ -317,6 +332,8 @@ extension PagingFullViewController : PagingScrollViewDelegate, PagingScrollViewD
 
             self.playerLayer?.frame = pagingControl.frame
             self.player?.seek(to: kCMTimeZero)
+            
+            self.videoPlayButton.setImage(UIImage.init(named: "icon_pause_01"), for: .normal)
             self.player?.play()
          }
     }

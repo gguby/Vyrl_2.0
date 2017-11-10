@@ -705,6 +705,17 @@
                                     <constraint firstAttribute="trailing" secondItem="bvr-ft-IUa" secondAttribute="trailing" constant="15" id="q9w-k3-2rc"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oJF-r2-IqK">
+                                <rect key="frame" x="167" y="313" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="3O0-NJ-2wZ"/>
+                                    <constraint firstAttribute="width" constant="40" id="Q2i-Rb-PMe"/>
+                                </constraints>
+                                <state key="normal" image="icon_play_01"/>
+                                <connections>
+                                    <action selector="toggleVideoPlay:" destination="oF9-Dj-qYL" eventType="touchUpInside" id="FnQ-lU-Gyr"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -716,8 +727,10 @@
                             <constraint firstItem="AeG-WT-wrk" firstAttribute="top" secondItem="B2B-g0-eFf" secondAttribute="top" id="GMB-Jo-DKS"/>
                             <constraint firstAttribute="trailing" secondItem="lWr-I9-dUK" secondAttribute="trailing" id="HCT-tB-S6w"/>
                             <constraint firstItem="78F-lk-RXP" firstAttribute="top" secondItem="KUW-c9-Vq2" secondAttribute="bottom" id="KZw-7y-jcR"/>
+                            <constraint firstItem="oJF-r2-IqK" firstAttribute="centerX" secondItem="B2B-g0-eFf" secondAttribute="centerX" id="OSl-E7-wyw"/>
                             <constraint firstItem="KUW-c9-Vq2" firstAttribute="top" secondItem="B2B-g0-eFf" secondAttribute="top" id="OUp-kh-a6T"/>
                             <constraint firstItem="KUW-c9-Vq2" firstAttribute="leading" secondItem="B2B-g0-eFf" secondAttribute="leading" id="Pmr-63-4gX"/>
+                            <constraint firstItem="oJF-r2-IqK" firstAttribute="centerY" secondItem="B2B-g0-eFf" secondAttribute="centerY" id="ThL-a6-1tX"/>
                             <constraint firstAttribute="trailing" secondItem="hVg-3V-17n" secondAttribute="trailing" id="bfI-xJ-01J"/>
                             <constraint firstItem="78F-lk-RXP" firstAttribute="top" secondItem="hVg-3V-17n" secondAttribute="bottom" id="uWf-RW-Ya5"/>
                             <constraint firstItem="hVg-3V-17n" firstAttribute="leading" secondItem="B2B-g0-eFf" secondAttribute="leading" id="vtZ-OD-bQ0"/>
@@ -734,6 +747,7 @@
                         <outlet property="timeSlider" destination="vdY-gj-S77" id="V2h-20-NsI"/>
                         <outlet property="topView" destination="AeG-WT-wrk" id="0jx-O2-xcg"/>
                         <outlet property="totalTimeLabel" destination="Qxu-la-Dma" id="QQJ-uD-OAo"/>
+                        <outlet property="videoPlayButton" destination="oJF-r2-IqK" id="T2D-9h-Kv6"/>
                         <outlet property="videoStatusView" destination="zVW-Ue-kC4" id="nIZ-iK-9tk"/>
                     </connections>
                 </viewController>
