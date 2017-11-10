@@ -15,7 +15,6 @@ class FeedViewController: UIViewController {
     @IBOutlet weak var selectImageview: UIImageView!
     
     var embedController : EmbedController!
-    
     var feedType = FeedTableType.ALLFEED
     
     override func viewDidLoad() {
@@ -53,9 +52,10 @@ class FeedViewController: UIViewController {
         controller.isFeedTab = true
         controller.feedType = self.feedType
         
-        controller.view.frame.origin = CGPoint.init(x: 0, y: 66)
-        controller.view.frame.size.height -= 66
-        
+        let y = 46 + UIApplication.shared.statusBarFrame.size.height
+        controller.view.frame.origin = CGPoint.init(x: 0, y: y)
+        controller.view.frame.size.height -= y
+
         embedController.append(viewController: controller)
     }
     
