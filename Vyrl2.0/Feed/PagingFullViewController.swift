@@ -31,6 +31,8 @@ class PagingFullViewController: UIViewController {
     @IBOutlet weak var pageNumberLabel: UILabel!
     @IBOutlet weak var contentTextView: UITextView!
     
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
+    
     var mediasArray : [ArticleMedia]!
     
     var downLoadIndex : Int! = -1
@@ -64,6 +66,9 @@ class PagingFullViewController: UIViewController {
         if(self.player != nil) {
             self.player!.pause()
             self.playerLayer?.removeFromSuperlayer()
+            self.playerItem?.removeObserver(self, forKeyPath: "playbackBufferEmpty")
+            self.playerItem?.removeObserver(self, forKeyPath: "playbackLikelyToKeepUp")
+            self.playerItem?.removeObserver(self, forKeyPath: "playbackBufferFull")
         }
     }
     
@@ -265,10 +270,13 @@ extension PagingFullViewController : PagingScrollViewDelegate, PagingScrollViewD
         
         Alamofire.request(uri)
             .downloadProgress(closure: { (progress) in
-                
+                self.indicator.isHidden = false
+                self.indicator.startAnimating()
             }).responseData { response in
                 if let data = response.result.value
                 {
+                    self.indicator.isHidden = true
+                    
                     let image = UIImage(data: data)
                     
                     if(uri.pathExtension == "gif") {
@@ -301,6 +309,9 @@ extension PagingFullViewController : PagingScrollViewDelegate, PagingScrollViewD
             self.player?.pause()
 
             self.playerItem = AVPlayerItem.init(url: uri)
+            self.playerItem?.addObserver(self, forKeyPath: "playbackBufferEmpty", options: .new, context: nil)
+            self.playerItem?.addObserver(self, forKeyPath: "playbackLikelyToKeepUp", options: .new, context: nil)
+            self.playerItem?.addObserver(self, forKeyPath: "playbackBufferFull", options: .new, context: nil)
             self.player = AVPlayer.init(playerItem: self.playerItem)
             
             let duration : CMTime = playerItem!.asset.duration
@@ -336,6 +347,28 @@ extension PagingFullViewController : PagingScrollViewDelegate, PagingScrollViewD
             self.videoPlayButton.setImage(UIImage.init(named: "icon_pause_01"), for: .normal)
             self.player?.play()
          }
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if object is AVPlayerItem {
+            switch keyPath {
+            case "playbackBufferEmpty"?:
+                // Show loader
+                indicator.isHidden = false
+                indicator.startAnimating()
+                break;
+            case "playbackLikelyToKeepUp"?:
+                // Hide loader
+                indicator.isHidden = true
+                break;
+            case "playbackBufferFull"?:
+                // Hide loader
+                indicator.isHidden = true
+                break;
+            default : break
+                
+            }
+        }
     }
     
 }

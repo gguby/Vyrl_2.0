@@ -716,10 +716,14 @@
                                     <action selector="toggleVideoPlay:" destination="oF9-Dj-qYL" eventType="touchUpInside" id="FnQ-lU-Gyr"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="uSG-zx-MuU">
+                                <rect key="frame" x="177" y="323" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="AeG-WT-wrk" firstAttribute="leading" secondItem="B2B-g0-eFf" secondAttribute="leading" id="3GG-3N-8V9"/>
+                            <constraint firstItem="uSG-zx-MuU" firstAttribute="centerY" secondItem="B2B-g0-eFf" secondAttribute="centerY" id="3VA-tf-VxQ"/>
                             <constraint firstItem="lWr-I9-dUK" firstAttribute="leading" secondItem="B2B-g0-eFf" secondAttribute="leading" id="8jr-yN-WFz"/>
                             <constraint firstAttribute="trailing" secondItem="AeG-WT-wrk" secondAttribute="trailing" id="ARO-wg-j52"/>
                             <constraint firstAttribute="trailing" secondItem="KUW-c9-Vq2" secondAttribute="trailing" id="CQ2-Dk-w77"/>
@@ -732,6 +736,7 @@
                             <constraint firstItem="KUW-c9-Vq2" firstAttribute="leading" secondItem="B2B-g0-eFf" secondAttribute="leading" id="Pmr-63-4gX"/>
                             <constraint firstItem="oJF-r2-IqK" firstAttribute="centerY" secondItem="B2B-g0-eFf" secondAttribute="centerY" id="ThL-a6-1tX"/>
                             <constraint firstAttribute="trailing" secondItem="hVg-3V-17n" secondAttribute="trailing" id="bfI-xJ-01J"/>
+                            <constraint firstItem="uSG-zx-MuU" firstAttribute="centerX" secondItem="B2B-g0-eFf" secondAttribute="centerX" id="cqJ-MT-YQ8"/>
                             <constraint firstItem="78F-lk-RXP" firstAttribute="top" secondItem="hVg-3V-17n" secondAttribute="bottom" id="uWf-RW-Ya5"/>
                             <constraint firstItem="hVg-3V-17n" firstAttribute="leading" secondItem="B2B-g0-eFf" secondAttribute="leading" id="vtZ-OD-bQ0"/>
                         </constraints>
@@ -742,6 +747,7 @@
                         <outlet property="currentTimeLabel" destination="4OX-DH-oSb" id="Lsy-Uy-rvr"/>
                         <outlet property="downloadButton" destination="mbM-Wf-Wp9" id="E1h-ck-iuc"/>
                         <outlet property="fileSizeButton" destination="bvr-ft-IUa" id="beF-oF-8yS"/>
+                        <outlet property="indicator" destination="uSG-zx-MuU" id="xgJ-pV-62Z"/>
                         <outlet property="pageNumberLabel" destination="Amd-OY-wnH" id="ld8-iQ-bxY"/>
                         <outlet property="pagingControl" destination="KUW-c9-Vq2" id="AhP-hV-MCh"/>
                         <outlet property="timeSlider" destination="vdY-gj-S77" id="V2h-20-NsI"/>
