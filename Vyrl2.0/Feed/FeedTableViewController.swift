@@ -640,15 +640,21 @@ extension FeedTableViewController : FeedCellDelegate {
         
         self.showLoading(show: true)
         
-        Alamofire.request(uri, method: .delete, parameters: nil, encoding:JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: { (response) in
+        Alamofire.request(uri, method: .post, parameters: nil, encoding:JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON(completionHandler: { (response) in
             switch response.result {
             case .success(let json):
-                print(json)
                 
                 if let code = response.response?.statusCode {
                     if code == 200 {
-                        self.showLoading(show: false)
-                        self.getAllFeed()
+                        
+                        let jsonData = json as! NSDictionary
+                        
+                        let result = jsonData["result"] as! Bool
+                        
+                        if result {
+                            self.showLoading(show: false)
+                            self.getAllFeed()
+                        }
                     }
                 }
             case .failure(let error):
