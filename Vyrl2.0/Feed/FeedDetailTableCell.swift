@@ -54,6 +54,7 @@ class FeedDetailTableCell : UITableViewCell {
     
     @IBOutlet weak var videoPlayButton: UIButton!
     @IBOutlet weak var settingButton: UIButton!
+    @IBOutlet weak var indicatorView: UIActivityIndicatorView!
     
     var playerItem: AVPlayerItem?
     var player: AVPlayer?
@@ -132,9 +133,13 @@ class FeedDetailTableCell : UITableViewCell {
         
         Alamofire.request(uri)
             .downloadProgress(closure: { (progress) in
-                
+                self.indicatorView.isHidden = false
+                self.indicatorView.startAnimating()
             }).responseData { response in
                 if let data = response.result.value {
+                    self.indicatorView.isHidden = true
+                    self.indicatorView.stopAnimating()
+                    
                     if(uri.pathExtension == "gif") {
                         (self.imageViewArray[self.lastRequestIndex] as! FLAnimatedImageView).animatedImage = FLAnimatedImage.init(animatedGIFData: data)
                     } else {

@@ -218,12 +218,17 @@
                                                                                 <action selector="playVideo:" destination="CEQ-eM-Vvz" eventType="touchUpInside" id="ZIH-tD-UFO"/>
                                                                             </connections>
                                                                         </button>
+                                                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="KFs-uY-lPX">
+                                                                            <rect key="frame" x="177" y="177" width="20" height="20"/>
+                                                                        </activityIndicatorView>
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <constraints>
                                                                         <constraint firstItem="NE5-is-INP" firstAttribute="leading" secondItem="RkA-wT-oRE" secondAttribute="leading" id="Pbh-k8-p9B"/>
+                                                                        <constraint firstItem="KFs-uY-lPX" firstAttribute="centerX" secondItem="RkA-wT-oRE" secondAttribute="centerX" id="Xc8-1x-hbB"/>
                                                                         <constraint firstAttribute="trailing" secondItem="NE5-is-INP" secondAttribute="trailing" id="gKf-zK-DiF"/>
                                                                         <constraint firstItem="NRB-4q-jnk" firstAttribute="centerY" secondItem="NE5-is-INP" secondAttribute="centerY" id="jV2-Zw-ELd"/>
+                                                                        <constraint firstItem="KFs-uY-lPX" firstAttribute="centerY" secondItem="RkA-wT-oRE" secondAttribute="centerY" id="jzg-WQ-obi"/>
                                                                         <constraint firstItem="NE5-is-INP" firstAttribute="top" secondItem="RkA-wT-oRE" secondAttribute="top" id="ooP-lT-7Pe"/>
                                                                         <constraint firstItem="NRB-4q-jnk" firstAttribute="centerX" secondItem="NE5-is-INP" secondAttribute="centerX" id="pjU-lW-zT0"/>
                                                                         <constraint firstAttribute="bottom" secondItem="NE5-is-INP" secondAttribute="bottom" id="ybb-xe-6xj"/>
@@ -402,6 +407,7 @@
                                             <outlet property="fanView" destination="Pep-36-dpI" id="6Na-gz-gav"/>
                                             <outlet property="followButton" destination="bzP-ok-mJK" id="OJa-8I-r3G"/>
                                             <outlet property="imageScrollView" destination="NE5-is-INP" id="YDx-sG-NdA"/>
+                                            <outlet property="indicatorView" destination="KFs-uY-lPX" id="SZ0-zG-I37"/>
                                             <outlet property="likeCountButton" destination="IhU-tf-ZWN" id="S5q-xX-WEl"/>
                                             <outlet property="mediaView" destination="RkA-wT-oRE" id="aKR-KR-b4f"/>
                                             <outlet property="nickNameLabel" destination="0vY-af-vXU" id="TOo-QZ-BlX"/>
