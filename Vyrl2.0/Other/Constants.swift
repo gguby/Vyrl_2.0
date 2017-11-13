@@ -57,6 +57,11 @@ struct Constants {
             return VyrlAPIConstants.baseURL + "search/" + str!
         }
         
+        static func searchHashTag(searchWord : String) -> String {
+            let str = searchWord.addingPercentEncoding(withAllowedCharacters:  NSCharacterSet.urlQueryAllowed)
+            return VyrlAPIConstants.baseURL + "search/hashtags/" + str! + "/medias"
+        }
+        
         static let officialAccounts = VyrlAPIConstants.baseURL + "search/official/accounts"
         static let suggestPostList = VyrlAPIConstants.baseURL + "search/suggest/posts"
         static let suggestUsers = VyrlAPIConstants.baseURL + "search/suggest/users"

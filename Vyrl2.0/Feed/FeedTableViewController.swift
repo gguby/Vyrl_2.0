@@ -415,12 +415,12 @@ extension FeedTableViewController : UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
         switch URL.scheme {
         case "hash"? :
-            let vc : SearchViewController = UIStoryboard(name:"Search", bundle: nil).instantiateViewController(withIdentifier: "search") as! SearchViewController
-            self.navigationController?.present(vc, animated: true, completion: {
-                vc.searchBar.becomeFirstResponder()
-                vc.searchBar.text = ((URL as NSURL).resourceSpecifier?.removingPercentEncoding)!
-                vc.searchBar(vc.searchBar, textDidChange: vc.searchBar.text!)
-            })
+            let vc : TagSearchCollectionViewController = UIStoryboard(name:"Search", bundle: nil).instantiateViewController(withIdentifier: "TagSearch") as! TagSearchCollectionViewController
+            let result = ((URL as NSURL).resourceSpecifier?.removingPercentEncoding)!
+            vc.tagString = result
+            
+            self.navigationController?.pushViewController(vc, animated: false)
+            
             
         case "mention"? :
             showHashTagAlert(tagType: "mention", payload: ((URL as NSURL).resourceSpecifier?.removingPercentEncoding)!)

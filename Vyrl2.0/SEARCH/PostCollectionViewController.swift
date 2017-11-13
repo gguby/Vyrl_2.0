@@ -24,6 +24,7 @@ class PostCollectionViewController : UICollectionViewController {
     let disposeBag = DisposeBag()
     
     var aritlces = [Article]()
+    var hashTagString : String = ""
     
     let dataSource = RxCollectionViewSectionedReloadDataSource<SectionOfArticleData>()
     private let sections = Variable<[SectionOfArticleData]>([])
@@ -39,6 +40,7 @@ class PostCollectionViewController : UICollectionViewController {
         self.initPostTable()
         
         self.getSearchSuggestPost()
+       
         self.setHotPostCollectionCellTapHandling()
         self.collectionView?.rx.setDelegate(self).addDisposableTo(disposeBag)
         
@@ -47,7 +49,7 @@ class PostCollectionViewController : UICollectionViewController {
     }
     
     func refresh(){
-        self.getSearchSuggestPost()
+       self.getSearchSuggestPost()
     }
     
     func getSearchSuggestPost(){
@@ -76,6 +78,8 @@ class PostCollectionViewController : UICollectionViewController {
             self.sections.value = [SectionOfArticleData(items:self.aritlces)]
         }
     }
+    
+    
     
     func initPostTable(){
         Observable.just(self.aritlces).map {(customDatas) -> [SectionOfArticleData] in
@@ -118,6 +122,7 @@ class PostCollectionViewController : UICollectionViewController {
                 vc.articleId = article.id
             }).addDisposableTo(disposeBag)
     }
+    
     
     func getHotPost(){
         let url = URL.init(string: Constants.VyrlFanAPIURL.HOTPOST)
@@ -186,7 +191,7 @@ class PostCollectionCell : UICollectionViewCell {
     @IBOutlet weak var gadContentView: GADNativeContentAdView!
     @IBOutlet weak var gadInstallView: GADNativeAppInstallAdView!
     
-    var vc : PostCollectionViewController!
+    var vc : UIViewController!
     
     override func awakeFromNib() {
         
