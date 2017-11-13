@@ -143,7 +143,7 @@ class FeedTableCell: UITableViewCell {
             self.comment.setTitle(article?.commentCount, for: .normal)
 
             self.profileButton.addTarget(self, action: #selector(showProfile(sender:)), for: .touchUpInside)
-            self.profileButton.tag = (article?.profile.id)!
+            self.profileButton.tag = (article?.profile.userId)!
             if article?.profile.imagePath != nil {
                 if let url = URL.init(string:(article?.profile.imagePath)!) {
                     self.profileButton.af_setBackgroundImage(for: .normal, url: url)
@@ -441,7 +441,7 @@ class FeedTableCell: UITableViewCell {
     
     func followUser(sender:UIButton)
     {
-        let uri = URL.init(string: Constants.VyrlFeedURL.follow(followId: (self.article?.profile.id)!))
+        let uri = URL.init(string: Constants.VyrlFeedURL.follow(followId: (self.article?.profile.userId)!))
         Alamofire.request(uri!, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: {
             response in switch response.result {
             case .success(let json):

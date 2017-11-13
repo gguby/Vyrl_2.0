@@ -305,7 +305,7 @@ struct Profile : Mappable {
     init?(map: Map) {
         
     }
-    var id : Int!
+    var userId : Int!
     var email : String!
     var nickName : String!
     var imagePath : String!
@@ -318,7 +318,7 @@ struct Profile : Mappable {
     var date : Date?
     
     mutating func mapping(map: Map){
-        id <- map["id"]
+        userId <- map["userId"]
         email <- map["email"]
         nickName <- map["nickName"]
         imagePath <- map["imagePath"]
