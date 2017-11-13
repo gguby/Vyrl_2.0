@@ -357,11 +357,12 @@ class FeedTableCell: UITableViewCell {
         let users : [SearchUser]?
         let countStr : String?
         
-        if ( self.article?.likeUsers != nil ){
-            users = self.article?.likeUsers
-            countStr = (users?.count.description)! + "명"
-        }else if self.article?.shareUsers != nil {
-            users = self.article?.shareUsers
+        if ( self.article?.likeUsers != nil || self.article?.shareUsers != nil){
+            if((self.article?.likeUsers.count)! > 0) {
+                users = self.article?.likeUsers
+            } else {
+                users = self.article?.shareUsers
+            }
             countStr = (users?.count.description)! + "명"
         }else {
             users = nil
