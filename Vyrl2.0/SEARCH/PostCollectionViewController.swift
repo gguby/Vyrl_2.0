@@ -24,6 +24,7 @@ class PostCollectionViewController : UICollectionViewController {
     let disposeBag = DisposeBag()
     
     var aritlces = [Article]()
+    var hashTagString : String = ""
     
     let dataSource = RxCollectionViewSectionedReloadDataSource<SectionOfArticleData>()
     private let sections = Variable<[SectionOfArticleData]>([])
@@ -38,7 +39,11 @@ class PostCollectionViewController : UICollectionViewController {
         
         self.initPostTable()
         
-        self.getSearchSuggestPost()
+        if(type == PostType.HashTag) {
+            self.getHashTagPost()
+        } else {
+            self.getSearchSuggestPost()
+        }
         self.setHotPostCollectionCellTapHandling()
         self.collectionView?.rx.setDelegate(self).addDisposableTo(disposeBag)
         
@@ -47,7 +52,38 @@ class PostCollectionViewController : UICollectionViewController {
     }
     
     func refresh(){
-        self.getSearchSuggestPost()
+        if(type == PostType.HashTag) {
+            self.getHashTagPost()
+        } else {
+            self.getSearchSuggestPost()
+        }
+    }
+    
+    func getHashTagPost(){
+        let uri = Constants.VyrlSearchURL.searchHashTag(searchWord: hashTagString)
+        
+        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Article]>) in
+            
+            response.result.ifFailure {
+                return
+            }
+            
+            self.aritlces.removeAll()
+            
+            let array = response.result.value ?? []
+            
+            for (i, article) in array.enumerated() {
+                
+                self.aritlces.append(article)
+                
+                if i % 5 == 0 && i != 0 && article.medias.count > 0 {
+                    let adArticle = Article.init()
+                    self.aritlces.append(adArticle)
+                }
+            }
+            
+            self.sections.value = [SectionOfArticleData(items:self.aritlces)]
+        }
     }
     
     func getSearchSuggestPost(){
@@ -276,6 +312,7 @@ extension PostCollectionCell : FBNativeAdDelegate {
 enum PostType {
     case Search
     case Fan
+    case HashTag
 }
 
 struct HotPost : Mappable {
