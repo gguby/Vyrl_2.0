@@ -1,8 +1,9 @@
 {
   "images" : [
     {
-      "idiom" : "iphone",
       "size" : "20x20",
+      "idiom" : "iphone",
+      "filename" : "icon_launcher_40.png",
       "scale" : "2x"
     },
     {
@@ -43,8 +44,9 @@
       "scale" : "1x"
     },
     {
-      "idiom" : "iphone",
       "size" : "57x57",
+      "idiom" : "iphone",
+      "filename" : "icon_launcher_104.png",
       "scale" : "2x"
     },
     {

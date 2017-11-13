@@ -54,17 +54,12 @@
 		<string>858cd1814aa5ffb66ffce5708a03e4e40d6df453</string>
 		<key>Kits</key>
 		<array>
-			<dict>
-				<key>KitInfo</key>
-				<dict>
-					<key>consumerKey</key>
-					<string>WS99F0AbSI3OevRrtJfQRDJba</string>
-					<key>consumerSecret</key>
-					<string>cKapF1TpM8uMNU040HdvavMcphKUuf0Iu76ijBQ9lYwBA5ffH9</string>
-				</dict>
-				<key>KitName</key>
-				<string>Twitter</string>
-			</dict>
+            <dict>
+                <key>KitInfo</key>
+                <dict/>
+                <key>KitName</key>
+                <string>Crashlytics</string>
+            </dict>
 		</array>
 	</dict>
 	<key>FacebookAppID</key>

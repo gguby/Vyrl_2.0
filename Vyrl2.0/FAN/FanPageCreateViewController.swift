@@ -157,9 +157,7 @@ class FanPageCreateViewController: UIViewController,UIImagePickerControllerDeleg
     func showAlert() {
         let alertController = UIAlertController (title:nil, message:nil,preferredStyle:.alert)
         
-        let showProfileAction = UIAlertAction(title: "사진 크게 보기", style: .default,handler: { (action) -> Void in
-            self.showProfileViewController()
-        })
+      
         let changeProfileAction = UIAlertAction(title: "프로필 사진 변경", style: .default, handler: { (action) -> Void in
             self.changeProfile()
         })
@@ -176,7 +174,6 @@ class FanPageCreateViewController: UIViewController,UIImagePickerControllerDeleg
             })
         })
         
-        alertController.addAction(showProfileAction)
         alertController.addAction(changeProfileAction)
         alertController.addAction(defaultProfileAction)
         

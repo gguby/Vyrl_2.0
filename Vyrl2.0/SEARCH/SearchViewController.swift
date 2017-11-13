@@ -342,6 +342,9 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource , Hi
             switch selectedIdx {
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "tagcell") as! TagCell
+                let tag = self.tagList[indexPath.row]
+                cell.title.text = tag.hashTag
+                cell.contents.text = "\(tag.postCount!) Contents"
                 return cell
             case 2:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "usercell") as! UserCell
