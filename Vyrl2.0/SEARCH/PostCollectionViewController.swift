@@ -39,11 +39,8 @@ class PostCollectionViewController : UICollectionViewController {
         
         self.initPostTable()
         
-        if(type == PostType.HashTag) {
-            self.getHashTagPost()
-        } else {
-            self.getSearchSuggestPost()
-        }
+        self.getSearchSuggestPost()
+       
         self.setHotPostCollectionCellTapHandling()
         self.collectionView?.rx.setDelegate(self).addDisposableTo(disposeBag)
         
@@ -52,38 +49,7 @@ class PostCollectionViewController : UICollectionViewController {
     }
     
     func refresh(){
-        if(type == PostType.HashTag) {
-            self.getHashTagPost()
-        } else {
-            self.getSearchSuggestPost()
-        }
-    }
-    
-    func getHashTagPost(){
-        let uri = Constants.VyrlSearchURL.searchHashTag(searchWord: hashTagString)
-        
-        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Article]>) in
-            
-            response.result.ifFailure {
-                return
-            }
-            
-            self.aritlces.removeAll()
-            
-            let array = response.result.value ?? []
-            
-            for (i, article) in array.enumerated() {
-                
-                self.aritlces.append(article)
-                
-                if i % 5 == 0 && i != 0 && article.medias.count > 0 {
-                    let adArticle = Article.init()
-                    self.aritlces.append(adArticle)
-                }
-            }
-            
-            self.sections.value = [SectionOfArticleData(items:self.aritlces)]
-        }
+       self.getSearchSuggestPost()
     }
     
     func getSearchSuggestPost(){
@@ -112,6 +78,8 @@ class PostCollectionViewController : UICollectionViewController {
             self.sections.value = [SectionOfArticleData(items:self.aritlces)]
         }
     }
+    
+    
     
     func initPostTable(){
         Observable.just(self.aritlces).map {(customDatas) -> [SectionOfArticleData] in
@@ -154,6 +122,7 @@ class PostCollectionViewController : UICollectionViewController {
                 vc.articleId = article.id
             }).addDisposableTo(disposeBag)
     }
+    
     
     func getHotPost(){
         let url = URL.init(string: Constants.VyrlFanAPIURL.HOTPOST)
@@ -222,7 +191,7 @@ class PostCollectionCell : UICollectionViewCell {
     @IBOutlet weak var gadContentView: GADNativeContentAdView!
     @IBOutlet weak var gadInstallView: GADNativeAppInstallAdView!
     
-    var vc : PostCollectionViewController!
+    var vc : UIViewController!
     
     override func awakeFromNib() {
         
@@ -312,7 +281,6 @@ extension PostCollectionCell : FBNativeAdDelegate {
 enum PostType {
     case Search
     case Fan
-    case HashTag
 }
 
 struct HotPost : Mappable {
@@ -355,7 +323,7 @@ struct Profile : Mappable {
     var date : Date?
     
     mutating func mapping(map: Map){
-        id <- map["id"]
+        id <- map["userId"]
         email <- map["email"]
         nickName <- map["nickName"]
         imagePath <- map["imagePath"]
