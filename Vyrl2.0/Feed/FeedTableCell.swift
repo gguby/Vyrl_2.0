@@ -323,6 +323,9 @@ class FeedTableCell: UITableViewCell {
             self.contentTextView.textContainer.lineFragmentPadding = 0
         }
         
+//        FBAdSettings.setLogLevel(FBAdLogLevel.log)
+//        FBAdSettings.addTestDevice("124FA7ED-3EF4-4A1A-BBF0-BE66AA262569")
+        
         if self.reuseIdentifier == ArticleType.FBAdFeed.rawValue {
             self.initFBAD()
         }else if self.reuseIdentifier == ArticleType.googleAdFeed.rawValue {
@@ -335,6 +338,7 @@ class FeedTableCell: UITableViewCell {
         nativeAd = FBNativeAd(placementID: placeMentID)
         nativeAd.delegate = self
         nativeAd.mediaCachePolicy = FBNativeAdsCachePolicy.all
+
         nativeAd.load()
     }
     

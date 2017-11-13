@@ -14,6 +14,7 @@ import GoogleSignIn
 import FBSDKCoreKit
 import FBSDKLoginKit
 import Fabric
+import Crashlytics
 import TwitterKit
 import AlamofireNetworkActivityLogger
 import GoogleMobileAds
@@ -89,7 +90,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.registerForRemoteNotifications()
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions);
-        Fabric.with([Twitter.self])
+        
+        Fabric.with([Crashlytics.self])
         
         LoginManager.sharedInstance.loadAccountList()
         LoginManager.sharedInstance.loadCookies()
