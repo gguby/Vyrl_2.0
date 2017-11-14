@@ -28,6 +28,7 @@ struct Constants {
         static let FOLLOWER = VyrlAPIConstants.baseURL + "follows/follower"
         static let FOLLOWING = VyrlAPIConstants.baseURL + "follows/following"
         static let BLOCKUSER = VyrlAPIConstants.baseURL + "users/block"
+        static let ACTIVITY = VyrlAPIConstants.baseURL + "users/activity"
         
         static let changeProfile = VyrlAPIConstants.baseURL + "users/profile"
         static let notices = VyrlAPIConstants.baseURL + "notices"

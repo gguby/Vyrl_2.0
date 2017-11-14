@@ -39,7 +39,7 @@
         <!--Activity View Controller-->
         <scene sceneID="Dhu-v2-kfg">
             <objects>
-                <viewController id="tJD-tE-teg" customClass="ActivityViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ActivityViewController" id="tJD-tE-teg" customClass="ActivityViewController" customModule="Vyrl2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9lW-Z4-Vo0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -179,7 +179,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="601"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="55" id="BUO-iF-5my" customClass="ActivityTableViewCell" customModule="Vyrl2_0" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ActivityTableViewCell" rowHeight="55" id="BUO-iF-5my" customClass="ActivityTableViewCell" customModule="Vyrl2_0" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="1" width="375" height="55"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BUO-iF-5my" id="95R-TX-gzl">

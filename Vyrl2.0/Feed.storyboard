@@ -75,6 +75,9 @@
                                             <constraint firstAttribute="width" constant="18.5" id="z2T-Hg-DWc"/>
                                         </constraints>
                                         <state key="normal" title="Button" image="icon_alarm_01"/>
+                                        <connections>
+                                            <segue destination="e67-ml-iMT" kind="show" identifier="ActivityViewController" id="RB0-i5-y0d"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -351,6 +354,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cFn-8f-im1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1161" y="561"/>
+        </scene>
+        <!--Activity-->
+        <scene sceneID="kU3-5u-5O0">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Activity" id="e67-ml-iMT" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yWe-iT-TmP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="969" y="-782"/>
         </scene>
         <!--Feed Full Screen View Controller-->
         <scene sceneID="ata-yy-qqS">
