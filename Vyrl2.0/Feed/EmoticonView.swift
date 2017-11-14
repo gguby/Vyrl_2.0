@@ -46,14 +46,14 @@ class EmoticonView: UIView {
             var emoticonArray = recentEmoticon?.components(separatedBy: "|")
             
             emoticonCount.append(2)
-            emoticonCount.append(10)
-            emoticonCount.append(20)
-            emoticonCount.append(10)
-            emoticonCount.append(20)
-            emoticonCount.append(10)
-            emoticonCount.append(20)
-            emoticonCount.append(10)
-            emoticonCount.append(20)
+            emoticonCount.append(19)
+            emoticonCount.append(40)
+            emoticonCount.append(8)
+            emoticonCount.append(8)
+            emoticonCount.append(8)
+            emoticonCount.append(82)
+            emoticonCount.append(16)
+            emoticonCount.append(8)
      
             emoticonButtonArray.removeAll()
             
@@ -134,7 +134,7 @@ class EmoticonView: UIView {
         var btnRect: CGRect = itemRect
         
         let userDefaults = UserDefaults.standard
-        var recentEmoticon: String = "\(userDefaults.object(forKey: "recentEmoticon"))"
+        let recentEmoticon: String = "\(userDefaults.object(forKey: "recentEmoticon"))"
         print("recent : \(recentEmoticon)")
         
         let recentEmoticonArray: [Any] = recentEmoticon.components(separatedBy: "|")
@@ -162,7 +162,11 @@ class EmoticonView: UIView {
             button.addTarget(self, action: #selector(setEmoticonId(sender:)), for: .touchUpInside)
            
             if(itemSelector.tag == 0){
-                
+                button.setImage(UIImage.init(named:NSString(format:"emoticon_thumb_%@", itemSelector.tag, recentEmoticonArray[i-1] as! String) as String), for: .normal)
+                if(emoticonSet).boolValue {
+                    button.alpha = 0.5
+                }
+                button.emoticonID = recentEmoticonArray[i-1] as! String
             } else {
                 button.setImage(UIImage.init(named:NSString(format:"emoticon_thumb_%02d_%02d.png", itemSelector.tag, i) as String), for: .normal)
                 if(emoticonSet).boolValue {

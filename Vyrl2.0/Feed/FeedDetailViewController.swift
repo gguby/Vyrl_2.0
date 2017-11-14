@@ -33,6 +33,7 @@ class FeedDetailViewController: UIViewController{
     
     var articleId : Int!
     var emoticonView : EmoticonView!
+    var emoticonIdString : String!
     var kbHeight: CGFloat!
     
     var commentArray : [Comment] = []
@@ -153,9 +154,40 @@ class FeedDetailViewController: UIViewController{
     @IBAction func postButtonClick(_ sender: UIButton) {
         let uri = URL.init(string: Constants.VyrlFeedURL.feedComment(articleId: articleId))
         
+        var content : String! = ""
+        
+        if(self.commentTextView.isHidden == true){
+            content = emoticonIdString
+            
+            let userDefaults = UserDefaults.standard
+            let recentEmoticon: String = userDefaults.object(forKey: "recentEmoticon") as! String
+            print("recent : \(recentEmoticon)")
+            
+            let recentEmoticonArray: [String] = recentEmoticon.components(separatedBy: "|")
+            let newEmoticonRecent : NSMutableString = NSMutableString.init(string: emoticonIdString)
+            
+            for i in 0 ..< recentEmoticonArray.count {
+                if(recentEmoticonArray[i].components(separatedBy: "_").count < 2) {
+                    continue
+                }
+                if(recentEmoticonArray[i] == emoticonIdString) {
+                    continue
+                }
+                
+                newEmoticonRecent.append("|")
+                newEmoticonRecent.append(recentEmoticonArray[i])
+            }
+            
+            userDefaults.set(newEmoticonRecent.trimmingCharacters(in: CharacterSet.init(charactersIn: " |")), forKey: "recentEmoticon")
+            userDefaults.synchronize()
+        } else {
+            content = self.commentTextView.text
+        }
+        
+        
         let parameters : Parameters = [
-            "content": self.commentTextView.text!,
-            ]
+            "content": content
+        ]
 
         
         Alamofire.request(uri!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseJSON { (response) in
@@ -168,6 +200,11 @@ class FeedDetailViewController: UIViewController{
                         self.article?.cntComment = jsonData["cntComment"] as! Int
                         self.commentButton.setTitle(self.article?.commentCount, for: .normal)
                         self.requestNewComment()
+                        
+                        self.commentTextView.text = ""
+                        self.emoticonIdString = nil
+                        self.emoticonImageView.image = nil
+                        
                         self.showButtonView()
                         }
                    })
@@ -902,6 +939,7 @@ extension FeedDetailViewController : EmoticonViewDelegate {
         emoticonImageView.isHidden = false
         commentTextView.isHidden = true
         
+        emoticonIdString = emoticonID
         emoticonImageView.image = UIImage.init(named: "\(emoticonID)")
     }
     
