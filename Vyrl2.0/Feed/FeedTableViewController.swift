@@ -921,7 +921,7 @@ struct Article : Mappable {
         
         idStr = "\(id!)"
         
-        isMyArticle = LoginManager.sharedInstance.isMyProfile(id: profile.id)
+        isMyArticle = LoginManager.sharedInstance.isMyProfile(id: profile.userId)
         
         self.setUpType()
     }

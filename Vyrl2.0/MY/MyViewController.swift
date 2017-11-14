@@ -57,7 +57,11 @@ class MyViewController: UIViewController{
     @IBOutlet weak var followerView: UIView!
     @IBOutlet weak var followingView: UIView!
     
+    @IBOutlet weak var arrowImageView: UIImageView!
+    
     var feedView : FeedTableViewController!
+    
+    var isTabBarMyView = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,6 +97,25 @@ class MyViewController: UIViewController{
         
         let accountViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tab(sender:)))
         self.dropTableView.addGestureRecognizer(accountViewTapGesture)
+       
+        self.reFrameArrowImageView()
+    }
+    
+    func reFrameArrowImageView(){
+        if self.isTabBarMyView == false {
+            return
+        }
+        
+        let item = self.tabBarController?.tabBar.items![2].value(forKey: "view") as? UIView
+        
+        self.arrowImageView.isHidden = false
+        self.arrowImageView.translatesAutoresizingMaskIntoConstraints = true
+        var point = self.view.convert((item?.frame.origin)!, from: self.tabBarController?.tabBar)
+        
+        let x = ((item?.frame.size.width)! / 2) - (self.arrowImageView.frame.size.width / 2)
+        
+        point = self.emptyView.convert(point, from: self.view)
+        self.arrowImageView.frame.origin = CGPoint.init(x: point.x + x , y: point.y - 45 )
     }
     
     func tab(sender: UITapGestureRecognizer){
@@ -166,6 +189,7 @@ class MyViewController: UIViewController{
         
         self.loadMyProfile()
         self.feedView.getAllFeed()
+        
     }
     
     func refreshMyAccout(){

@@ -726,7 +726,7 @@ class FeedDetailViewController: UIViewController{
         }
 
         
-        let uri = URL.init(string: Constants.VyrlFeedURL.follow(followId: (self.article?.profile.id)!))
+        let uri = URL.init(string: Constants.VyrlFeedURL.follow(followId: (self.article?.profile.userId)!))
         Alamofire.request(uri!, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: {
             response in switch response.result {
             case .success(let json):
@@ -822,7 +822,7 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
                  }
             
                 if( article?.profile.follow == true ||
-                    (LoginManager.sharedInstance.getCurrentAccount()?.userId)! == String(describing: (self.article?.profile.id)!) ) {
+                    (LoginManager.sharedInstance.getCurrentAccount()?.userId)! == String(describing: (self.article?.profile.userId)!) ) {
                     cell.followButton.isHidden = true
                 } else {
                     cell.followButton.isHidden = false
@@ -848,7 +848,7 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
                 }
                 cell.nickNameLabel.text = self.article?.profile.nickName
                 
-                cell.profileId = self.article?.profile.id
+                cell.profileId = self.article?.profile.userId
                 cell.delegate = self as FeedDetailTableCellProtocol
             }
             return cell

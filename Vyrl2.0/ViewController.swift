@@ -248,7 +248,11 @@ class ViewController: UITabBarController , UITabBarControllerDelegate {
         }else if viewController.title == "search" {
             let vc = viewController.childViewControllers.last as! SearchViewController
             vc.reloadAllView()
+        }else if viewController.title == "My" {
+            let vc = viewController.childViewControllers.last as! MyViewController
+            vc.isTabBarMyView = true
         }
+        
         return true
     }
 
