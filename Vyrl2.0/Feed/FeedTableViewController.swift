@@ -455,7 +455,6 @@ extension FeedTableViewController : FeedCellDelegate {
     func didPressCell(sender: Any, cell : FeedTableCell) {
         let vc : FeedDetailViewController = self.pushViewControllrer(storyboardName: "FeedDetail", controllerName: "FeedDetailViewController") as! FeedDetailViewController
         vc.articleId = cell.article?.id
-        vc.feedType = self.feedType
     }
     
     func setBookMark(cell: FeedTableCell) {

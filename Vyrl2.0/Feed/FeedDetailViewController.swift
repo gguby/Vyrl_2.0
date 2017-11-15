@@ -37,7 +37,6 @@ class FeedDetailViewController: UIViewController{
     var kbHeight: CGFloat!
     
     var commentArray : [Comment] = []
-    var feedType = FeedTableType.MYFEED
     
     var article : Article? {
         didSet {
