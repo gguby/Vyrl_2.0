@@ -72,7 +72,9 @@ class OtherProfileViewController: UIViewController {
 
     func setupPostContainer(){
         let storyboard = UIStoryboard(name: "PostCollectionViewController", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "PostCollection")
+        let controller = storyboard.instantiateViewController(withIdentifier: "PostCollection") as! PostCollectionViewController
+        controller.type = .User
+        controller.userId = self.profileUserId
         
         controller.removeFromParentViewController()
         controller.view.removeFromSuperview()

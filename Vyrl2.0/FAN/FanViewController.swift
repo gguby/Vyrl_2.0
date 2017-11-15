@@ -91,10 +91,11 @@ class FanViewController: UIViewController {
     
     func setupPostContainer(){
         let storyboard = UIStoryboard(name: "PostCollectionViewController", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "PostCollection")
+        let controller = storyboard.instantiateViewController(withIdentifier: "PostCollection") as! PostCollectionViewController
         addChildViewController(controller)
         
         controller.view.frame.size.height = self.container.frame.height
+        controller.type = .Fan
         
         container.addSubview(controller.view)
         controller.didMove(toParentViewController: self)
