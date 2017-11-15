@@ -29,33 +29,51 @@ class PostCollectionViewController : UICollectionViewController {
     let dataSource = RxCollectionViewSectionedReloadDataSource<SectionOfArticleData>()
     private let sections = Variable<[SectionOfArticleData]>([])
     
+    var fanPageId = 0
+    var userId = 0
+    
     var cellSizeWidth = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.collectionView?.delegate = nil
-        self.collectionView?.dataSource = nil
-        
-        self.initPostTable()
-        
-        self.getSearchSuggestPost()
-       
-        self.setHotPostCollectionCellTapHandling()
-        self.collectionView?.rx.setDelegate(self).addDisposableTo(disposeBag)
+        if self.type != .Fan {
+            self.collectionView?.delegate = nil
+            self.collectionView?.dataSource = nil
+            
+            self.initPostTable()
+            
+            self.getPostMedias()
+            
+            self.setHotPostCollectionCellTapHandling()
+            self.collectionView?.rx.setDelegate(self).addDisposableTo(disposeBag)
+        }else {
+            self.getHotPost()
+        }
         
         let size = UIScreen.main.bounds
         self.cellSizeWidth = Int(size.width / 3)
     }
     
     func refresh(){
-       self.getSearchSuggestPost()
+        if self.type != .Fan {
+            self.getHotPost()
+        }else {
+            self.getPostMedias()
+        }
     }
     
-    func getSearchSuggestPost(){
-        let uri = Constants.VyrlSearchURL.suggestPostList
+    func getPostMedias(){
         
-        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[Article]>) in
+        var id = self.fanPageId
+        
+        if self.type == .User {
+            id = self.userId
+        }
+        
+        let uri = self.type.getApiString(id: id)
+        
+        Alamofire.request(uri, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.getHeader()).responseArray { (response: DataResponse<[Article]>) in
             
             response.result.ifFailure {
                 return
@@ -65,21 +83,13 @@ class PostCollectionViewController : UICollectionViewController {
             
             let array = response.result.value ?? []
             
-            for (i, article) in array.enumerated() {
-                
+            for article in array {
                 self.aritlces.append(article)
-                
-                if i % 5 == 0 && i != 0 && article.medias.count > 0 {
-                    let adArticle = Article.init()
-                    self.aritlces.append(adArticle)
-                }
             }
             
             self.sections.value = [SectionOfArticleData(items:self.aritlces)]
         }
     }
-    
-    
     
     func initPostTable(){
         Observable.just(self.aritlces).map {(customDatas) -> [SectionOfArticleData] in
@@ -96,7 +106,7 @@ class PostCollectionViewController : UICollectionViewController {
             
             let cell = cv.dequeueReusableCell(withReuseIdentifier: "post", for: ip) as! PostCollectionCell
             
-            let str = article.medias[0].url
+            let str = article.medias[0].imageUrl
             let url : URL = URL.init(string: str!)!
             cell.imageView.af_setImage(withURL: url)
             
@@ -123,18 +133,23 @@ class PostCollectionViewController : UICollectionViewController {
             }).addDisposableTo(disposeBag)
     }
     
-    
     func getHotPost(){
-        let url = URL.init(string: Constants.VyrlFanAPIURL.HOTPOST)
+        let url = URL.init(string: self.type.getApiString(id: 0))
         
-        Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseArray { (response: DataResponse<[HotPost]>) in
+        Alamofire.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: Constants.getHeader()).responseArray { (response: DataResponse<[HotPost]>) in
             
             self.hotPosts.removeAll()
             
             let array = response.result.value ?? []
             
-            for post in array {
+            for (i, post) in array.enumerated() {
+                
                 self.hotPosts.append(post)
+                
+                if i % 5 == 0 && i != 0 && post.mediaCount > 0 {
+                    let adPost = HotPost.init()
+                    self.hotPosts.append(adPost)
+                }
             }
             
             self.collectionView!.reloadData()
@@ -143,7 +158,27 @@ class PostCollectionViewController : UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "post", for: indexPath)
+        let hotPost = self.hotPosts[indexPath.row]
+        
+        if hotPost.adType == ArticleType.googleAdFeed || hotPost.adType == ArticleType.FBAdFeed {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: hotPost.adType.rawValue, for: indexPath) as! PostCollectionCell
+            cell.vc = self
+            return cell
+        }
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "post", for: indexPath) as! PostCollectionCell
+        
+        let str = hotPost.mediaPath
+        let url : URL = URL.init(string: str!)!
+        cell.imageView.af_setImage(withURL: url)
+        
+        if hotPost.mediaCount > 1 {
+            cell.centerView.isHidden = false
+            cell.imageCount.text = "\(hotPost.mediaCount)"
+        }
+        else {
+            cell.centerView.isHidden = true
+        }
         
         return cell
     }
@@ -153,7 +188,13 @@ class PostCollectionViewController : UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if self.type != .Fan {
+            return
+        }
         
+        let hotPost = self.hotPosts[indexPath.row]
+        let vc = self.pushViewControllrer(storyboardName: "Fan", controllerName: "FanPage") as! FanPageController
+        vc.fanPageId = hotPost.fanPageId
     }
 }
 
@@ -163,9 +204,13 @@ extension PostCollectionViewController : UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let article = self.aritlces[indexPath.row]
+        if self.type != .Fan {
+            return CGSize(width: 124, height: 124)
+        }
+        
+        let post = self.hotPosts[indexPath.row]
 
-        if article.type == ArticleType.googleAdFeed || article.type == ArticleType.FBAdFeed {
+        if post.adType == ArticleType.googleAdFeed || post.adType == ArticleType.FBAdFeed {
             return CGSize(width: collectionView.frame.size.width, height: 124)
         }else {
             let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
@@ -281,6 +326,24 @@ extension PostCollectionCell : FBNativeAdDelegate {
 enum PostType {
     case Search
     case Fan
+    case My
+    case FanPage
+    case User
+    
+    func getApiString(id : Int) -> String {
+        switch self {
+        case .Search:
+            return Constants.VyrlSearchURL.suggestPostList
+        case .My :
+            return Constants.VyrlFeedURL.FEEDMEDIA
+        case .FanPage :
+            return Constants.VyrlFanAPIURL.getFanPagePostMedias(fanPageId: id)
+        case .Fan :
+            return Constants.VyrlFanAPIURL.HOTPOST
+        case .User :
+            return Constants.VyrlFeedURL.feedOtherMedias(userId:id)
+        }
+    }
 }
 
 struct HotPost : Mappable {
@@ -291,9 +354,16 @@ struct HotPost : Mappable {
     var content : String!
     var mediaPath : String!
     var type : String!
+    var adType : ArticleType!
+    var mediaCount : Int!
+    
+    init() {
+        let diceRoll = Int(arc4random_uniform(2))
+        self.adType = diceRoll == 0 ? ArticleType.FBAdFeed : ArticleType.googleAdFeed
+    }
     
     init?(map: Map) {
-        
+        self.init()
     }
     
     mutating func mapping(map: Map){
@@ -302,6 +372,7 @@ struct HotPost : Mappable {
         fanPagePostId <- map["fanPagePostId"]
         mediaPath <- map["mediaPath"]
         type <- map["type"]
+        mediaCount <- map["mediaCount"]
     }
 }
 

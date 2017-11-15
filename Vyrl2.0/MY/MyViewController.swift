@@ -152,7 +152,8 @@ class MyViewController: UIViewController{
     
     func setupPostContainer(){
         let storyboard = UIStoryboard(name: "PostCollectionViewController", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "PostCollection")
+        let controller = storyboard.instantiateViewController(withIdentifier: "PostCollection") as! PostCollectionViewController
+        controller.type = .My
         
         self.childViewControllers.last?.willMove(toParentViewController: nil)
         self.childViewControllers.last?.view.removeFromSuperview()

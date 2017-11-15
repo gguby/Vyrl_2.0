@@ -84,6 +84,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     func setupPostContainer(){
         let storyboard = UIStoryboard(name: "PostCollectionViewController", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "PostCollection") as! PostCollectionViewController
+        controller.type = .Search
         addChildViewController(controller)
         
         controller.view.frame.size.height = postContainer.frame.height

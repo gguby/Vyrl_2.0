@@ -157,9 +157,11 @@ class FeedTableCell: UITableViewCell {
                 self.locationLabel.text = str + "에서"
             }
             
-            if(article?.cntComment == 0) {
+            let commetCnt = article?.comments.count
+            
+            if(commetCnt == 0) {
                 self.commentView.isHidden = true
-            } else if (article?.cntComment == 1){
+            } else if (commetCnt == 1){
                 self.commentView.isHidden = false
                 self.secondCommentView.isHidden = true
                 

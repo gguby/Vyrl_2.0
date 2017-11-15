@@ -70,6 +70,7 @@ struct Constants {
     
     struct VyrlFeedURL {
         static let FEED = VyrlAPIConstants.baseURL + "feeds"
+        static let FEEDMEDIA = VyrlAPIConstants.baseURL + "feeds/medias"
         static let FEEDALL = VyrlAPIConstants.baseURL + "feeds/all"
         
         static func feedLike(articleId :Int)-> String{
@@ -90,6 +91,11 @@ struct Constants {
         static func feed(userId :Int)-> String{
             let str = "\(userId)"
             return VyrlAPIConstants.baseURL + "feeds/others/" + str
+        }
+        
+        static func feedOtherMedias(userId :Int)-> String{
+            let str = "\(userId)"
+            return VyrlAPIConstants.baseURL + "feeds/others/" + str + "/medias"
         }
         
         static func feedComment(articleId:Int)-> String{
@@ -154,6 +160,11 @@ struct Constants {
         static func getFanPagePosts(fanPageId : Int)-> String{
             let str = "\(fanPageId)"
             return VyrlAPIConstants.baseURL + "feeds/" + str + "/posts"
+        }
+        
+        static func getFanPagePostMedias(fanPageId : Int)-> String{
+            let str = "\(fanPageId)"
+            return VyrlAPIConstants.baseURL + "feeds/" + str + "/posts/medias"
         }
         
         static func search(searchWord : String) -> String{
