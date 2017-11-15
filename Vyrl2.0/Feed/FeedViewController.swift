@@ -118,6 +118,9 @@ class FeedViewController: UIViewController {
             self.selectImageview.image = UIImage.init(named: "btn_select_up_01")
         })
     }
+    @IBAction func activityButtonClick(_ sender: Any) {
+        self.pushView(storyboardName: "Activity", controllerName: "ActivityViewController")
+    }
 }
 
 class EmbedController {

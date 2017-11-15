@@ -200,16 +200,16 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </button>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qpd-KG-4tJ">
-                                                                    <rect key="frame" x="57" y="11" width="253" height="16"/>
+                                                                    <rect key="frame" x="57" y="11" width="268" height="16"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="15.5" id="iRH-jj-hvL"/>
                                                                     </constraints>
-                                                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="13"/>
-                                                                    <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
+                                                                    <color key="textColor" red="0.32549019607843138" green="0.30980392156862746" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sGv-mL-zEq">
-                                                                    <rect key="frame" x="57" y="27.5" width="253" height="15.5"/>
+                                                                    <rect key="frame" x="57" y="27.5" width="268" height="15.5"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="15.5" id="Vhh-rd-ebp"/>
                                                                     </constraints>
@@ -218,7 +218,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GAV-Dl-SF2">
-                                                                    <rect key="frame" x="310" y="11.5" width="50" height="32"/>
+                                                                    <rect key="frame" x="325" y="11.5" width="50" height="32"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="50" id="1WJ-ka-Pt2"/>
                                                                         <constraint firstAttribute="height" constant="32" id="oVW-X6-qRe"/>
@@ -234,7 +234,7 @@
                                                                 <constraint firstItem="GAV-Dl-SF2" firstAttribute="leading" secondItem="Qpd-KG-4tJ" secondAttribute="trailing" id="DQN-au-8dF"/>
                                                                 <constraint firstItem="sGv-mL-zEq" firstAttribute="leading" secondItem="08v-dH-lpB" secondAttribute="trailing" constant="10" id="U7V-QH-3Oq"/>
                                                                 <constraint firstItem="sGv-mL-zEq" firstAttribute="bottom" secondItem="08v-dH-lpB" secondAttribute="bottom" id="aTm-LM-h2i"/>
-                                                                <constraint firstItem="GAV-Dl-SF2" firstAttribute="trailing" secondItem="95R-TX-gzl" secondAttribute="trailingMargin" id="iap-db-KOf"/>
+                                                                <constraint firstItem="GAV-Dl-SF2" firstAttribute="trailing" secondItem="95R-TX-gzl" secondAttribute="trailing" id="iap-db-KOf"/>
                                                                 <constraint firstItem="Qpd-KG-4tJ" firstAttribute="leading" secondItem="08v-dH-lpB" secondAttribute="trailing" constant="10" id="icP-a1-TiN"/>
                                                                 <constraint firstItem="08v-dH-lpB" firstAttribute="centerY" secondItem="95R-TX-gzl" secondAttribute="centerY" id="vgz-VN-qf6"/>
                                                             </constraints>

@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import ObjectMapper
+import NSDate_TimeAgo
 
 
 class ActivityViewController: UIViewController {
@@ -59,7 +60,15 @@ extension ActivityViewController : UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ActivityTableViewCell", for: indexPath) as! ActivityTableViewCell
         
-        cell.content.text = self.activityArray[indexPath.row].type
+        
+        let followerNickname : String = self.activityArray[indexPath.row].profile.nickName
+        let attr: [String: AnyObject] = [NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-SemiBold", size: 13.0)!,
+                                         NSForegroundColorAttributeName: UIColor(red: 62.0 / 255.0, green: 58.0 / 255.0, blue: 57.0 / 255.0, alpha: 1.0)]
+        let attributedString = NSMutableAttributedString.init(string: "\(followerNickname.description)님이 회원님을 팔로우 하였습니다.")
+        attributedString.addAttributes(attr, range: (attributedString.string as NSString).range(of: followerNickname))
+        
+        cell.content.attributedText = attributedString
+        cell.timeLabel.text = self.activityArray[indexPath.row].date?.timeAgo()
         
         return cell
     }
@@ -76,12 +85,14 @@ struct ActivityMessage : Mappable {
     var id : Int!
     var userId : Int!
     var targetId : Int!
+    var profile : Profile!
     
     var message : String!
     var nickName : String!
     var type : String!
     
     var createAt : String!
+    var date : NSDate?
     
     init?(map: Map) {
         
@@ -96,6 +107,14 @@ struct ActivityMessage : Mappable {
         targetId <- map["targetId"]
         type <- map["type"]
         userId <- map["userId"]
+        profile <- map["profile"]
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        
+        if let dateString = map["createdAt"].currentValue as? String, let _date = dateFormatter.date(from: dateString){
+            date = _date as NSDate
+        }
     }
     
     
