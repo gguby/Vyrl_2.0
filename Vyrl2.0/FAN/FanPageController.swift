@@ -58,6 +58,22 @@ class FanPageController : UIViewController {
         self.writeBtn.addTarget(self, action: #selector(self.writePost(_:)), for: .touchUpInside)
     }
     
+    func setupPostContainer(){
+        let storyboard = UIStoryboard(name: "PostCollectionViewController", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "PostCollection") as! PostCollectionViewController
+        controller.type = .FanPage
+        controller.fanPageId = self.fanPageId
+        
+        self.childViewControllers.last?.willMove(toParentViewController: nil)
+        self.childViewControllers.last?.view.removeFromSuperview()
+        self.childViewControllers.last?.removeFromParentViewController()
+        addChildViewController(controller)
+        
+        controller.view.frame.size.height = feedContainer.frame.height
+        feedContainer.addSubview(controller.view)
+        controller.didMove(toParentViewController: self)
+    }
+    
     func setupFeed(){
         let storyboard = UIStoryboard(name: "FeedStyle", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "feedTable") as! FeedTableViewController
@@ -65,6 +81,11 @@ class FanPageController : UIViewController {
         controller.fanPageId = self.fanPageId
         controller.fanPageViewController = self
         controller.isEnableUpload = true
+        
+        self.childViewControllers.last?.willMove(toParentViewController: nil)
+        self.childViewControllers.last?.view.removeFromSuperview()
+        self.childViewControllers.last?.removeFromParentViewController()
+        
         addChildViewController(controller)
         
         controller.view.frame.size.height = feedContainer.frame.height
@@ -320,9 +341,11 @@ class FanPageController : UIViewController {
     }
     
     @IBAction func sortList(_ sender: Any) {
+        self.setupFeed()
     }
     
     @IBAction func sortCollection(_ sender: Any) {
+        self.setupPostContainer()
     }
     
     @IBAction func fanPageSetting(_ sender: Any) {

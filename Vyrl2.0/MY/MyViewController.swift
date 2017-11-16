@@ -323,11 +323,11 @@ class MyViewController: UIViewController{
     }
     
     @IBAction func showFeed(_ sender: Any) {
-        self.setupPostContainer()
+        self.setupFeed(feedType: FeedTableType.MYFEED)        
     }
     
     @IBAction func showPost(_ sender: Any) {
-        self.setupFeed(feedType: FeedTableType.MYFEED)
+        self.setupPostContainer()
     }
     
     @IBAction func showBookmark(_ sender: Any) {
