@@ -277,7 +277,7 @@
                                                                             <constraint firstAttribute="width" constant="40" id="YkK-Ei-7dl"/>
                                                                             <constraint firstAttribute="height" constant="45" id="dqP-qe-OVX"/>
                                                                         </constraints>
-                                                                        <state key="normal" image="icon_tile_01_off"/>
+                                                                        <state key="normal" image="icon_list_01_off"/>
                                                                         <connections>
                                                                             <action selector="showFeed:" destination="4u5-ag-yKy" eventType="touchUpInside" id="jbc-2e-1de"/>
                                                                         </connections>
@@ -288,7 +288,7 @@
                                                                             <constraint firstAttribute="width" constant="40" id="F5B-OX-OyI"/>
                                                                             <constraint firstAttribute="height" constant="45" id="hTl-7X-35q"/>
                                                                         </constraints>
-                                                                        <state key="normal" image="icon_list_01_off"/>
+                                                                        <state key="normal" image="icon_tile_01_off"/>
                                                                         <connections>
                                                                             <action selector="showPost:" destination="4u5-ag-yKy" eventType="touchUpInside" id="Pt3-XF-2Zb"/>
                                                                         </connections>
