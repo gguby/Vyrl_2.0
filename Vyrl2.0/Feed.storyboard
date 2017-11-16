@@ -135,12 +135,13 @@
                                 <color key="backgroundColor" red="0.93333333333333335" green="0.92941176470588238" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="03H-b4-X8k" firstAttribute="top" secondItem="dyC-t9-7ke" secondAttribute="bottom" constant="45.5" id="7As-hv-OEe"/>
-                                    <constraint firstItem="7rQ-Y6-IME" firstAttribute="top" secondItem="5JM-Jr-nv6" secondAttribute="bottom" constant="120" id="8tE-F1-BVc"/>
                                     <constraint firstItem="5JM-Jr-nv6" firstAttribute="leading" secondItem="RIH-dH-w9m" secondAttribute="leading" constant="15" id="DYj-z8-Vfm"/>
                                     <constraint firstAttribute="trailing" secondItem="03H-b4-X8k" secondAttribute="trailing" constant="15" id="Dv0-D1-IMY"/>
+                                    <constraint firstItem="7rQ-Y6-IME" firstAttribute="leading" secondItem="RIH-dH-w9m" secondAttribute="leading" constant="256" id="IEB-x7-tVK"/>
+                                    <constraint firstAttribute="trailing" secondItem="7rQ-Y6-IME" secondAttribute="trailing" constant="105" id="cqy-k3-jCw"/>
                                     <constraint firstItem="5JM-Jr-nv6" firstAttribute="top" secondItem="03H-b4-X8k" secondAttribute="bottom" constant="4.5" id="k3A-Zp-t1R"/>
-                                    <constraint firstItem="7rQ-Y6-IME" firstAttribute="leading" secondItem="RIH-dH-w9m" secondAttribute="leading" constant="255.5" id="o5J-Zd-gdR"/>
                                     <constraint firstItem="03H-b4-X8k" firstAttribute="leading" secondItem="RIH-dH-w9m" secondAttribute="leading" constant="15" id="otK-Yr-p3E"/>
+                                    <constraint firstItem="7rQ-Y6-IME" firstAttribute="top" secondItem="RIH-dH-w9m" secondAttribute="top" constant="513" id="sgk-oC-wBP"/>
                                     <constraint firstItem="dyC-t9-7ke" firstAttribute="centerX" secondItem="RIH-dH-w9m" secondAttribute="centerX" id="uLB-De-ve0"/>
                                     <constraint firstItem="dyC-t9-7ke" firstAttribute="top" secondItem="RIH-dH-w9m" secondAttribute="top" constant="95" id="vsT-8I-Qir"/>
                                     <constraint firstAttribute="trailing" secondItem="5JM-Jr-nv6" secondAttribute="trailing" constant="15" id="yGf-Ai-GaA"/>
@@ -167,6 +168,7 @@
                     <navigationItem key="navigationItem" id="fCh-ef-yzS"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="arrowImageView" destination="7rQ-Y6-IME" id="5h1-gR-ewf"/>
                         <outlet property="feedTtile" destination="TEk-Yp-GIZ" id="LhQ-8r-z8a"/>
                         <outlet property="selectImageview" destination="fCj-3P-OuT" id="Bvr-Ge-tC0"/>
                     </connections>

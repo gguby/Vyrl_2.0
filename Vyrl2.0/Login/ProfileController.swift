@@ -182,7 +182,10 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
             })
         })
         
-        alertController.addAction(showProfileAction)
+        if let image = self.photoView.image(for: .normal) {
+            alertController.addAction(showProfileAction)
+        }
+        
         alertController.addAction(changeProfileAction)
         alertController.addAction(defaultProfileAction)
         
@@ -200,6 +203,7 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
     func showProfileViewController() {
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ProfilePhotoViewController") as! ProfilePhotoViewController
+        vc.image = self.photoView.image(for: .normal)
     
         present(vc, animated: true, completion: nil)
     }

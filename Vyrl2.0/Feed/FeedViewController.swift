@@ -12,7 +12,8 @@ import Alamofire
 class FeedViewController: UIViewController {
     
     @IBOutlet weak var feedTtile: UILabel!
-    @IBOutlet weak var selectImageview: UIImageView!
+    @IBOutlet weak var selectImageview: UIImageView!    
+    @IBOutlet weak var arrowImageView: UIImageView!
     
     var embedController : EmbedController!
     var feedType = FeedTableType.ALLFEED
@@ -28,6 +29,24 @@ class FeedViewController: UIViewController {
         embedController = EmbedController.init(rootViewController: self)
         
         self.setupFeedTableView()
+        
+        self.reFrameArrowImageView()
+    }
+    
+    func reFrameArrowImageView(){
+        
+        let item = self.tabBarController?.tabBar.items![3].value(forKey: "view") as? UIView
+        
+        self.arrowImageView.translatesAutoresizingMaskIntoConstraints = true
+        
+        let imageViewParentView = self.arrowImageView.superview!
+        
+        var point = self.view.convert((item?.frame.origin)!, from: self.tabBarController?.tabBar)
+        
+        let x = ((item?.frame.size.width)! / 2) - (self.arrowImageView.frame.size.width / 2)
+        
+        point = imageViewParentView.convert(point, from: self.view)
+        self.arrowImageView.frame.origin = CGPoint.init(x: point.x + x , y: point.y - 45 )
     }
     
     func refresh(){
