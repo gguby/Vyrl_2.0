@@ -175,7 +175,7 @@
                                                     <constraint firstAttribute="height" constant="1" id="MyW-34-ezb"/>
                                                 </constraints>
                                             </view>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="8hk-fe-New">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="8hk-fe-New">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="601"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <prototypes>
@@ -210,7 +210,7 @@
                                                                         <action selector="showOtherProfileView:" destination="BUO-iF-5my" eventType="touchUpInside" id="Yob-pF-FWN"/>
                                                                     </connections>
                                                                 </button>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qpd-KG-4tJ">
+                                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qpd-KG-4tJ">
                                                                     <rect key="frame" x="57" y="11" width="268" height="16"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="15.5" id="iRH-jj-hvL"/>
@@ -235,6 +235,9 @@
                                                                         <constraint firstAttribute="height" constant="32" id="oVW-X6-qRe"/>
                                                                     </constraints>
                                                                     <state key="normal" image="icon_add_01"/>
+                                                                    <connections>
+                                                                        <action selector="setFollow:" destination="BUO-iF-5my" eventType="touchUpInside" id="nKL-lB-pEU"/>
+                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                             <constraints>
@@ -293,7 +296,7 @@
                                                                         <action selector="showOtherProfileView:" destination="1Ic-5U-fGn" eventType="touchUpInside" id="kq5-D7-MsD"/>
                                                                     </connections>
                                                                 </button>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zGa-yk-oih">
+                                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zGa-yk-oih">
                                                                     <rect key="frame" x="57" y="11.5" width="288" height="50"/>
                                                                     <string key="text">nct_dreamer님, 레드벨벳벳베비님 외 5명이 회원님의 게
 시글에 댓글을 남겼습니다.</string>

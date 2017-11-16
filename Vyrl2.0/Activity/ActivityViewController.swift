@@ -74,26 +74,38 @@ extension ActivityViewController : UITableViewDataSource, UITableViewDelegate{
             
             cell.mediaImageView.af_setImage(withURL: URL.init(string: media.imageUrl)!)
         }
-        
-        cell.delegate = self as! ActivityTableViewCellProtocol
+         cell.delegate = self as ActivityTableViewCellProtocol
         cell.targetProfile = self.activityArray[indexPath.row].profile
+        
+        if(self.activityArray[indexPath.row].type == "FOLLOWER"){
+            if(cell.targetProfile?.follow == false){
+                cell.followButton.isHidden = false
+            } else {
+                cell.followButton.isHidden = true
+            }
+        }
         
         let nickname : String = self.activityArray[indexPath.row].profile.nickName
         let message : String = self.activityArray[indexPath.row].message
-        
-        let attr: [String: AnyObject] = [NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-SemiBold", size: 13.0)!,
-                                         NSForegroundColorAttributeName: UIColor(red: 62.0 / 255.0, green: 58.0 / 255.0, blue: 57.0 / 255.0, alpha: 1.0)]
-        let defaultAttr : [String: AnyObject] = [NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Regular", size: 13.0)!,
-                                                 NSForegroundColorAttributeName: UIColor(red: 83.0 / 255.0, green: 79.0 / 255.0, blue: 78.0 / 255.0, alpha: 1.0)]
-        let attributedString = NSMutableAttributedString.init(string: "\(nickname.description)\(message.description)")
-        attributedString.addAttributes(attr, range: (attributedString.string as NSString).range(of: nickname))
-        attributedString.addAttributes(defaultAttr, range: (attributedString.string as NSString).range(of: message))
-        cell.content.attributedText = attributedString
+    
+        cell.content.attributedText = self.getContentAttributedText(nickName: nickname, message: message)
         
         cell.timeLabel.text = self.activityArray[indexPath.row].date?.timeAgo()
         cell.photo.af_setImage(withURL: URL.init(string: self.activityArray[indexPath.row].profile.imagePath)!)
         
         return cell
+    }
+    
+    func getContentAttributedText(nickName: String , message: String) -> NSMutableAttributedString{
+        let attr: [String: AnyObject] = [NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-SemiBold", size: 13.0)!,
+                                         NSForegroundColorAttributeName: UIColor(red: 62.0 / 255.0, green: 58.0 / 255.0, blue: 57.0 / 255.0, alpha: 1.0)]
+        let defaultAttr : [String: AnyObject] = [NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Regular", size: 13.0)!,
+                                                 NSForegroundColorAttributeName: UIColor(red: 83.0 / 255.0, green: 79.0 / 255.0, blue: 78.0 / 255.0, alpha: 1.0)]
+        let attributedString = NSMutableAttributedString.init(string: "\(nickName.description)\(message.description)")
+        attributedString.addAttributes(attr, range: (attributedString.string as NSString).range(of: nickName))
+        attributedString.addAttributes(defaultAttr, range: (attributedString.string as NSString).range(of: message))
+        
+        return attributedString
     }
 }
 
@@ -112,8 +124,6 @@ extension ActivityViewController : ActivityTableViewCellProtocol {
         vc.articleId = self.activityArray[indexPath.row].articleId
         
     }
-    
-    
 }
 
 protocol ActivityTableViewCellProtocol {
@@ -121,7 +131,7 @@ protocol ActivityTableViewCellProtocol {
     func imageDidSelect(cell : ActivityTableViewCell)
 }
 
-class ActivityTableViewCell : UITableViewCell {
+class ActivityTableViewCell : UITableViewCell, UITextViewDelegate {
     @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var content: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
@@ -129,10 +139,16 @@ class ActivityTableViewCell : UITableViewCell {
     @IBOutlet weak var photo: UIImageView!
     
     @IBOutlet weak var mediaImageView: UIImageView!
-    
     var targetProfile : Profile?
     
     var delegate: ActivityTableViewCellProtocol!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+     
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapLabel))
+        content.addGestureRecognizer(tap)
+    }
     
     @IBAction func showOtherProfileView(_ sender: Any) {
         delegate.profileButtonDidSelect(profileId: (targetProfile?.userId)!)
@@ -140,6 +156,36 @@ class ActivityTableViewCell : UITableViewCell {
     
     @IBAction func showDetailView(_ sender: UIButton) {
         delegate.imageDidSelect(cell: self)
+    }
+    
+    @IBAction func setFollow(_ sender: Any) {
+        let method = HTTPMethod.post
+        let uri = URL.init(string: Constants.VyrlFeedURL.follow(followId: (targetProfile?.userId)!))
+        
+        Alamofire.request(uri!, method: method, parameters: nil, encoding: JSONEncoding.default, headers: Constants.VyrlAPIConstants.getHeader()).responseString(completionHandler: {
+            response in switch response.result {
+            case .success( _):
+                self.followButton.isHidden = true
+                break
+                
+            case .failure( _):
+                break
+                
+            }
+        })
+    }
+    
+    
+    @IBAction func tapLabel(gesture: UITapGestureRecognizer) {
+        let text = (content.text)!
+        let nickNameRange = (text as NSString).range(of: (targetProfile?.nickName)!)
+        
+        if gesture.didTapAttributedTextInLabel(label: content, inRange: nickNameRange) {
+            print("Tapped nickname")
+            delegate.profileButtonDidSelect(profileId: (targetProfile?.userId)!)
+        } else {
+            print("Tapped none")
+        }
     }
 }
 
@@ -180,6 +226,36 @@ struct ActivityMessage : Mappable {
             date = _date as NSDate
         }
     }
-    
+}
+
+extension UITapGestureRecognizer {
+    func didTapAttributedTextInLabel(label: UILabel, inRange targetRange: NSRange) -> Bool {
+        // Create instances of NSLayoutManager, NSTextContainer and NSTextStorage
+        let layoutManager = NSLayoutManager()
+        let textContainer = NSTextContainer(size: CGSize.zero)
+        let textStorage = NSTextStorage(attributedString: label.attributedText!)
+        
+        // Configure layoutManager and textStorage
+        layoutManager.addTextContainer(textContainer)
+        textStorage.addLayoutManager(layoutManager)
+        
+        // Configure textContainer
+        textContainer.lineFragmentPadding = 0.0
+        textContainer.lineBreakMode = label.lineBreakMode
+        textContainer.maximumNumberOfLines = label.numberOfLines
+        let labelSize = label.bounds.size
+        textContainer.size = labelSize
+        
+        // Find the tapped character location and compare it to the specified range
+        let locationOfTouchInLabel = self.location(in: label)
+        let textBoundingBox = layoutManager.usedRect(for: textContainer)
+        let textContainerOffset = CGPoint.init(x: (labelSize.width - textBoundingBox.size.width) * 0.5 - textBoundingBox.origin.x, y: (labelSize.height - textBoundingBox.size.height) * 0.5 - textBoundingBox.origin.y)
+        
+        let locationOfTouchInTextContainer = CGPoint.init(x: locationOfTouchInLabel.x - textContainerOffset.x, y: locationOfTouchInLabel.y - textContainerOffset.y)
+        
+        let indexOfCharacter = layoutManager.characterIndex(for: locationOfTouchInTextContainer, in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
+        
+        return NSLocationInRange(indexOfCharacter, targetRange)
+    }
     
 }
