@@ -408,7 +408,12 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource , Hi
     
     func showVC(idx : Int){
         if selectedIdx == 1 {
+            let tag = self.tagList[idx]
+            let vc : TagSearchCollectionViewController = UIStoryboard(name:"Search", bundle: nil).instantiateViewController(withIdentifier: "TagSearch") as! TagSearchCollectionViewController
             
+            vc.tagString = tag.hashTag
+            
+            self.navigationController?.pushViewController(vc, animated: false)
         }else if selectedIdx == 2 {
             let user = self.userList[idx]
             
