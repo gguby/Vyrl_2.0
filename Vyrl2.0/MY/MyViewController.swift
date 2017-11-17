@@ -388,9 +388,8 @@ extension MyViewController : UITableViewDelegate, UITableViewDataSource {
             LoginManager.sharedInstance.changeCookie(account: account)
             
             self.dropTableView.isHidden  = true
-//            self.tabBarController?.tabBar.isHidden = !self.dropTableView.isHidden
             
-            self.loadMyProfile()
+            self.loadMyProfile()            
         }
     }
     

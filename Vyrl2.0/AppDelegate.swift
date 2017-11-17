@@ -151,7 +151,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("APNs device token: \(deviceTokenString)")
         
         LoginManager.sharedInstance.deviceToken = deviceTokenString
-        // Persist it in your backend in case it's new
+        
+        LoginManager.sharedInstance.refreshAPNSToken()
     }
     
     // Called when APNs failed to register the device for push notifications
@@ -162,9 +163,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
         let temp : Dictionary = userInfo
-        
-        print( "Push" )
-        print(temp)
+        self.rootViewController.showToast(string: temp.description)
     }
     
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {

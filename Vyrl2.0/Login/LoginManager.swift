@@ -83,6 +83,8 @@ class LoginManager{
                             
                             self.addAccount(account: account)
                             
+                            self.refreshAPNSToken()
+                            
                             callBack.loginSuccess()
                             
                         case .USERNOTEXIST :
@@ -266,6 +268,26 @@ class LoginManager{
         
         Alamofire.request(uri, method: .get, parameters: parameters, encoding: URLEncoding.queryString, headers: getHeader()).responseString(completionHandler: completionHandler)
     }
+    
+    func refreshAPNSToken(){
+        if let token = self.deviceToken {
+            let uri = baseURL + "users/refreshToken"
+            
+            let parameters : Parameters = [
+                "token": token,
+                ]
+            
+            Alamofire.request(uri, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: getHeader()).responseString(completionHandler: {
+                response in switch response.result {
+                case .success(let json):
+                    print((response.response?.statusCode)!)
+                    print(json)
+                case .failure(let error):
+                    print(error)
+                }
+            })
+        }
+    }
 }
 
 enum ServiceType : String {
@@ -344,6 +366,8 @@ extension LoginManager {
             
             UserDefaults.standard.set(cookieArray, forKey: "currentCookie")
             UserDefaults.standard.synchronize()
+            
+            self.refreshAPNSToken()
         }
     }
     
