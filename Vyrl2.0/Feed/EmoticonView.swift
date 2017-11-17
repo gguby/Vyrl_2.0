@@ -172,7 +172,7 @@ class EmoticonView: UIView {
                 if(emoticonSet).boolValue {
                     button.alpha = 0.5
                 }
-                button.emoticonID = NSString(format:"emoticon_thumb_%02d_%02d.png", itemSelector.tag, i) as String
+                button.emoticonID = NSString(format:"%02d_%02d", itemSelector.tag, i) as String
             }
             
             if(emoticonIndex == 3) { // 2번째 줄

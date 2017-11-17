@@ -20,6 +20,7 @@ struct Comment : Mappable {
     var nickName : String!
     var profileImageURL : String!
     var createAt : String!
+    var emoticon : String!
     
     mutating func mapping(map: Map){
         id <- map["id"]
@@ -28,6 +29,7 @@ struct Comment : Mappable {
         profileImageURL <- map["profile"]
         createAt <- map["createdAt"]
         userId <- map["userId"]
+        emoticon <- map["emoticon"]
     }
 }
 
@@ -39,6 +41,7 @@ class FeedDetailCommentTableCell : UITableViewCell {
     @IBOutlet weak var commentNicknameLabel: UILabel!
     @IBOutlet weak var commentProfileButton: UIButton!
     @IBOutlet weak var commentContextTextView: UITextView!
+    @IBOutlet weak var commentEmoticonImageView: UIImageView!
     @IBOutlet weak var commentTimaLavel: UILabel!
     var userId : Int!
     

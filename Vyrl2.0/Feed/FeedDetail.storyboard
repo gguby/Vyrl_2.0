@@ -510,6 +510,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="commentContextTextView" destination="9cd-NV-GgK" id="PkE-0V-X6d"/>
+                                            <outlet property="commentEmoticonImageView" destination="Ynl-P3-FdF" id="bKl-qh-2hE"/>
                                             <outlet property="commentNicknameLabel" destination="n55-7p-Jsx" id="L2c-IQ-sM1"/>
                                             <outlet property="commentProfileButton" destination="AYX-yS-jFN" id="Mbj-hB-Kw2"/>
                                             <outlet property="commentTimaLavel" destination="Q6l-a5-DAx" id="mug-DV-Rn0"/>

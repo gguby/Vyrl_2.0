@@ -72,6 +72,7 @@ struct Constants {
         static let FEED = VyrlAPIConstants.baseURL + "feeds"
         static let FEEDMEDIA = VyrlAPIConstants.baseURL + "feeds/medias"
         static let FEEDALL = VyrlAPIConstants.baseURL + "feeds/all"
+        static let COMMENTS = VyrlAPIConstants.baseURL + "feeds/comments"
         
         static func feedLike(articleId :Int)-> String{
             let str = "\(articleId)"

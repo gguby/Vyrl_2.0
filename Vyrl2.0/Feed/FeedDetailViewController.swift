@@ -151,41 +151,43 @@ class FeedDetailViewController: UIViewController{
     }
 
     @IBAction func postButtonClick(_ sender: UIButton) {
-        let uri = URL.init(string: Constants.VyrlFeedURL.feedComment(articleId: articleId))
+        let uri = URL.init(string: Constants.VyrlFeedURL.COMMENTS)
         
         var content : String! = ""
+        var emoticon : String! = ""
         
         if(self.commentTextView.isHidden == true){
-            content = emoticonIdString
+            emoticon = emoticonIdString
             
             let userDefaults = UserDefaults.standard
-            let recentEmoticon: String = userDefaults.object(forKey: "recentEmoticon") as! String
-            print("recent : \(recentEmoticon)")
+            let recentEmoticon: String? = userDefaults.object(forKey: "recentEmoticon") as? String
             
-            let recentEmoticonArray: [String] = recentEmoticon.components(separatedBy: "|")
+            let recentEmoticonArray: [String]? = recentEmoticon?.components(separatedBy: "|")
             let newEmoticonRecent : NSMutableString = NSMutableString.init(string: emoticonIdString)
             
-            for i in 0 ..< recentEmoticonArray.count {
-                if(recentEmoticonArray[i].components(separatedBy: "_").count < 2) {
-                    continue
-                }
-                if(recentEmoticonArray[i] == emoticonIdString) {
-                    continue
-                }
-                
-                newEmoticonRecent.append("|")
-                newEmoticonRecent.append(recentEmoticonArray[i])
-            }
-            
-            userDefaults.set(newEmoticonRecent.trimmingCharacters(in: CharacterSet.init(charactersIn: " |")), forKey: "recentEmoticon")
-            userDefaults.synchronize()
+//            for i in 0 ..< recentEmoticonArray?.count {
+//                if(recentEmoticonArray[i].components(separatedBy: "_").count < 2) {
+//                    continue
+//                }
+//                if(recentEmoticonArray[i] == emoticonIdString) {
+//                    continue
+//                }
+//                
+//                newEmoticonRecent.append("|")
+//                newEmoticonRecent.append(recentEmoticonArray[i])
+//            }
+//            
+//            userDefaults.set(newEmoticonRecent.trimmingCharacters(in: CharacterSet.init(charactersIn: " |")), forKey: "recentEmoticon")
+//            userDefaults.synchronize()
         } else {
             content = self.commentTextView.text
         }
         
         
         let parameters : Parameters = [
-            "content": content
+            "content": content,
+            "emoticon" : emoticon,
+            "articleId" : articleId
         ]
 
         
@@ -872,7 +874,19 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
             cell.delegate = self as FeedDetailCommentTableCellProtocol
             cell.userId = self.commentArray[index].userId
             cell.commentNicknameLabel.text = self.commentArray[index].nickName
-            cell.commentContextTextView.text = self.commentArray[index].content
+            
+            if let emoticon = self.commentArray[index].emoticon, emoticon != ""{
+                cell.commentContextTextView.isHidden = true
+                cell.commentEmoticonImageView.isHidden = false
+                cell.commentEmoticonImageView.image = UIImage.init(named: NSString(format:"emoticon_%@.png",emoticon) as String)
+                
+            } else {
+                cell.commentContextTextView.isHidden = false
+                cell.commentEmoticonImageView.isHidden = true
+                cell.commentContextTextView.text = self.commentArray[index].content
+            }
+            
+            
             cell.commentProfileButton.af_setBackgroundImage(for: .normal, url: URL.init(string: self.commentArray[index].profileImageURL)!)
             cell.commentTimaLavel.text = self.commentArray[index].createAt.toDateTime().timeAgo()
 
