@@ -163,11 +163,11 @@ class OtherProfileViewController: UIViewController {
     }
     
     @IBAction func showFeed(_ sender: Any) {
-        self.setupFeed(feedType: FeedTableType.USERFEED)
+        self.setupPostContainer()
     }
     
     @IBAction func showPost(_ sender: Any) {
-        self.setupPostContainer()
+        self.setupFeed(feedType: FeedTableType.USERFEED)
     }
     
     func showPushCheck(){

@@ -88,15 +88,8 @@ class TagSearchCollectionViewController: UIViewController {
             let array = response.result.value ?? []
             self.postLabel.text = "\((array.count)) Posts"
             
-            for (i, hashTagPost) in array.enumerated() {
-                
+            for hashTagPost in array {
                 self.hashTagPosts.append(hashTagPost)
-                
-                if i % 5 == 0 && i != 0 && self.hashTagPosts.count > 0 {
-                    var adPost = HashTagPost.init()
-                    adPost.type = .Advertise
-                    self.hashTagPosts.append(adPost)
-                }
             }
             
             self.sections.value = [SectionOfHashTagData(items:self.hashTagPosts)]
