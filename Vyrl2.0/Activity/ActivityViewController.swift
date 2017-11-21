@@ -91,7 +91,9 @@ extension ActivityViewController : UITableViewDataSource, UITableViewDelegate{
         cell.content.attributedText = self.getContentAttributedText(nickName: nickname, message: message)
         
         cell.timeLabel.text = self.activityArray[indexPath.row].date?.timeAgo()
-        cell.photo.af_setImage(withURL: URL.init(string: self.activityArray[indexPath.row].profile.imagePath)!)
+        if let profileUrl = self.activityArray[indexPath.row].profile.imagePath {
+            cell.photo.af_setImage(withURL: URL.init(string: profileUrl)!)
+        }
         
         return cell
     }
