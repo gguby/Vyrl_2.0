@@ -69,6 +69,8 @@ class WriteViewController : UIViewController , TOCropViewControllerDelegate{
         }else {
             self.fanPageTitle.isHidden = true
         }
+        
+        self.enabledPostBtn(enabled: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -591,6 +593,7 @@ class UploadMediaVideoCell : UICollectionViewCell {
     }
 
     @IBAction func mute(_ sender: SmallButton) {
+        self.mute.isHidden = true
         self.asset!.removeAudioFromVideo()
     }
 }

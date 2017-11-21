@@ -164,9 +164,9 @@ class WriteMediaViewConroller : UIViewController {
         fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         
         let requestOptions = PHImageRequestOptions()
-        requestOptions.isSynchronous = false
-        requestOptions.deliveryMode = .fastFormat
-        requestOptions.resizeMode = .fast
+        requestOptions.isSynchronous = true
+        requestOptions.deliveryMode = .highQualityFormat
+        requestOptions.resizeMode = .exact
         
         let fetchResult = PHAsset.fetchAssets(withLocalIdentifiers: [asset.identifier!], options: fetchOptions)
         
@@ -271,21 +271,14 @@ class WriteMediaViewConroller : UIViewController {
             assets.enumerateObjects({ (object, count, stop) in
                 
                 self.avAssetIdentifiers.append(object.localIdentifier)
-                
-                DispatchQueue.main.async {
-                    //reload collectionView
-                    self.collectionView.reloadData()
-                    
-                    if self.avAssetIdentifiers.count == 0 {
-                      
-                    }
-                }
             })
             
             if self.avAssetIdentifiers.count == 0 {
                 
             }
         })
+        
+        self.collectionView.reloadData()
     }
 }
 
@@ -455,9 +448,9 @@ class MediaPhotoCell : UICollectionViewCell {
             fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
             
             let requestOptions = PHImageRequestOptions()
-            requestOptions.isSynchronous = false
-            requestOptions.deliveryMode = .fastFormat
-            requestOptions.resizeMode = .fast
+            requestOptions.isSynchronous = true
+            requestOptions.deliveryMode = .highQualityFormat
+            requestOptions.resizeMode = .exact
             
             let photoSize = self.photo.frame.size
             
@@ -612,9 +605,8 @@ class AVAsset : Copying {
         
         let requestOptions = PHImageRequestOptions()
         requestOptions.isSynchronous = true
-        requestOptions.deliveryMode = .fastFormat
-        requestOptions.resizeMode = .fast
-
+        requestOptions.deliveryMode = .highQualityFormat
+        requestOptions.resizeMode = .exact
         let fetchResult = PHAsset.fetchAssets(withLocalIdentifiers: [self.identifier!], options: fetchOptions)
         
         guard let asset = fetchResult.firstObject
@@ -630,6 +622,12 @@ class AVAsset : Copying {
     
     func removeAudioFromVideo(){
         
+        if let url = self.savedMuteFileURL {
+            if FileManager.default.fileExists(atPath: url.path) {
+                return
+            }
+        }
+        
         let composition = AVMutableComposition()
         let sourceAsset = self.urlAsset!
         let compositionVideoTrack: AVMutableCompositionTrack? = composition.addMutableTrack(withMediaType: AVMediaTypeVideo, preferredTrackID: kCMPersistentTrackID_Invalid)
@@ -637,9 +635,20 @@ class AVAsset : Copying {
         let x: CMTimeRange = CMTimeRangeMake(kCMTimeZero, sourceAsset.duration)
         _ = try? compositionVideoTrack!.insertTimeRange(x, of: sourceVideoTrack!, at: kCMTimeZero)
         
-        if FileManager.default.fileExists(atPath: self.savedMuteFileURL.path) {
-            return
-        }
+        let mainCompositionInst = AVMutableVideoComposition.init()
+        
+        mainCompositionInst.frameDuration = (sourceVideoTrack?.minFrameDuration)!
+        mainCompositionInst.renderSize = (sourceVideoTrack?.naturalSize)!
+        
+        let layerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: sourceVideoTrack!)
+        let rotation: CGAffineTransform = CGAffineTransform.init(rotationAngle: CGFloat.pi)
+        
+        layerInstruction.setTransform(rotation, at: kCMTimeZero)
+        
+        let inst = AVMutableVideoCompositionInstruction.init()
+        inst.timeRange = CMTimeRange.init(start: kCMTimeZero, end: sourceAsset.duration)
+        inst.layerInstructions.append(layerInstruction)
+        mainCompositionInst.instructions.append(inst)
         
         let url = urlAsset!.url
         
@@ -649,6 +658,7 @@ class AVAsset : Copying {
         let exporter = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetHighestQuality)
         exporter?.outputURL = fileURL
         exporter?.outputFileType = "com.apple.quicktime-movie"
+        exporter?.videoComposition = mainCompositionInst
         exporter?.exportAsynchronously(completionHandler: {() -> Void in
             self.savedMuteFileURL = fileURL
             self.isMute = true
@@ -680,6 +690,7 @@ class AVAsset : Copying {
         self.editedData = original.editedData
         self.gifData = original.gifData
         self.duration = original.duration
+        self.savedMuteFileURL = original.savedMuteFileURL
     }
 }
 
@@ -765,6 +776,7 @@ class AlbumCell : UITableViewCell {
             let requestOptions = PHImageRequestOptions()
             requestOptions.isSynchronous = true
             requestOptions.deliveryMode = .highQualityFormat
+            requestOptions.resizeMode = .exact
             
             if let id = assetID {
                 
