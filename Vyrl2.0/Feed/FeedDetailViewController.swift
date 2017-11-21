@@ -862,7 +862,10 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
         }
         
         var index = 0
-        let  cell = tableView.dequeueReusableCell(withIdentifier: "Comment") as! FeedDetailCommentTableCell
+        var cell = tableView.dequeueReusableCell(withIdentifier: "Comment") as! FeedDetailCommentTableCell
+        
+        
+        
         if(self.article != nil)
         {
            if(self.article?.comments != nil && (self.article?.cntComment)! > 20 && self.article?.cntComment != self.commentArray.count) {
@@ -871,21 +874,17 @@ extension FeedDetailViewController : UITableViewDelegate, UITableViewDataSource 
                  index = indexPath.row - 1
             }
             
-            cell.delegate = self as FeedDetailCommentTableCellProtocol
-            cell.userId = self.commentArray[index].userId
-            cell.commentNicknameLabel.text = self.commentArray[index].nickName
-            
             if let emoticon = self.commentArray[index].emoticon, emoticon != ""{
-                cell.commentContextTextView.isHidden = true
-                cell.commentEmoticonImageView.isHidden = false
-                cell.commentEmoticonImageView.image = UIImage.init(named: NSString(format:"emoticon_%@.png",emoticon) as String)
+                cell = tableView.dequeueReusableCell(withIdentifier: "EmoticonComment") as! FeedDetailCommentTableCell
                 
+                cell.commentEmoticonImageView.image = UIImage.init(named: NSString(format:"emoticon_%@.png",emoticon) as String)
             } else {
-                cell.commentContextTextView.isHidden = false
-                cell.commentEmoticonImageView.isHidden = true
                 cell.commentContextTextView.text = self.commentArray[index].content
             }
             
+            cell.delegate = self as FeedDetailCommentTableCellProtocol
+            cell.userId = self.commentArray[index].userId
+            cell.commentNicknameLabel.text = self.commentArray[index].nickName
             
             cell.commentProfileButton.af_setBackgroundImage(for: .normal, url: URL.init(string: self.commentArray[index].profileImageURL)!)
             cell.commentTimaLavel.text = self.commentArray[index].createAt.toDateTime().timeAgo()

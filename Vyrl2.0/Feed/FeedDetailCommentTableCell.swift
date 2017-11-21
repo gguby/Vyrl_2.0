@@ -48,8 +48,10 @@ class FeedDetailCommentTableCell : UITableViewCell {
     var delegate: FeedDetailCommentTableCellProtocol!
     
     override func awakeFromNib() {
-        self.commentContextTextView.textContainerInset = UIEdgeInsets.zero
-        self.commentContextTextView.textContainer.lineFragmentPadding = 0
+        if(self.commentContextTextView != nil) {
+            self.commentContextTextView.textContainerInset = UIEdgeInsets.zero
+            self.commentContextTextView.textContainer.lineFragmentPadding = 0
+        }
     }
     
     @IBAction func profileButtonClick(_ sender: UIButton) {
