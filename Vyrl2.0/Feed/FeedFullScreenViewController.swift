@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 import Alamofire
-import ReachabilitySwift
+import Reachability
 import Photos
 import NukeFLAnimatedImagePlugin
 import FLAnimatedImage
@@ -304,7 +304,7 @@ class FeedFullScreenViewController: UIViewController {
         alertController.addAction(okay)
         alertController.addAction(cancel)
         
-        if(Reachability.init()?.currentReachabilityStatus == .reachableViaWWAN) {
+        if(Reachability.init()?.connection == .cellular) {
             self.present(alertController, animated: true, completion: nil)
         } else {
             self.downloadImage(urlString: self.mediasArray[self.currentPage].url!)
@@ -440,7 +440,7 @@ class FeedFullScreenViewController: UIViewController {
         alertController.addAction(okay)
         alertController.addAction(cancel)
         
-        if(Reachability.init()?.currentReachabilityStatus == .reachableViaWWAN) {
+        if(Reachability.init()?.connection == .cellular) {
             self.present(alertController, animated: true, completion: nil)
         } else {
             self.player?.play()

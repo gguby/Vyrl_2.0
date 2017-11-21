@@ -109,7 +109,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
     
     func twitterLogin()
     {
-        Twitter.sharedInstance().logIn(withMethods: .webBased) { (session, error) in
+        Twitter.sharedInstance().logIn() { (session, error) in
             if((session) != nil) {
                 
                 Twitter.sharedInstance().sessionStore.saveSession(withAuthToken: (session?.authToken)!, authTokenSecret: (session?.authTokenSecret)!, completion: { (session, error) in

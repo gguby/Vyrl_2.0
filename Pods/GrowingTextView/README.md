@@ -4,6 +4,7 @@
 [![License](https://img.shields.io/cocoapods/l/GrowingTextView.svg?style=flat)](http://cocoapods.org/pods/GrowingTextView)
 [![Platform](https://img.shields.io/cocoapods/p/GrowingTextView.svg?style=flat)](http://cocoapods.org/pods/GrowingTextView)
 [![Language](https://img.shields.io/badge/Swift-3.0-orange.svg?style=flat)](http://cocoapods.org/pods/GrowingTextView)
+[![Language](https://img.shields.io/badge/Swift-4.0-orange.svg?style=flat)](http://cocoapods.org/pods/GrowingTextView)
 
 <img src="DEMO.gif" border=1 style="border-color:#eeeeee">
 
@@ -18,13 +19,12 @@ iOS 8.0 or above
 GrowingTextView is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
-Swift 3<br>
+Swift 3 and Swift 4<br>
 ```ruby
-pod "GrowingTextView"
+pod 'GrowingTextView'
 ```
 
 Swift 2.3 (Stopped update since Sep 2016)<br>
-
 ```ruby
 pod 'GrowingTextView', :git => 'https://github.com/KennethTsang/GrowingTextView.git', :branch => 'swift2'
 ```
@@ -63,14 +63,16 @@ override func viewDidLoad() {
 
 ## Customization
 
-| Parameter                      | Type    | Description                              | Default                         |
-| ------------------------------ | ------- | ---------------------------------------- | ------------------------------- |
-| *maxLength*                    | Int     | Maximum text length. Exceeded text will be trimmed. 0 means no limit. | *0*                             |
-| *trimWhiteSpaceWhenEndEditing* | Bool    | Trim white space and new line characters when textview did end editing. | *true*                          |
-| *placeHolder*                  | String? | PlaceHolder text.                        | *nil*                           |
-| *placeHolderColor*             | UIColor | PlaceHolder text color.                  | UIColor(white: 0.8, alpha: 1.0) |
-| *placeHolderLeftMargin*        | CGFloat | Left margin of PlaceHolder text.         | *5.0*                           |
-| *maxHeight*                    | CGFloat | Maximum height of textview.              | *0.0*                           |
+| Parameter                      | Type                | Description                              | Default                         |
+| ------------------------------ | ------------------- | ---------------------------------------- | ------------------------------- |
+| *maxLength*                    | Int                 | Maximum text length. Exceeded text will be trimmed. 0 means no limit. | *0*                             |
+| *trimWhiteSpaceWhenEndEditing* | Bool                | Trim white space and new line characters when textview did end editing. | *true*                          |
+| *placeHolder*                  | String?             | PlaceHolder text.                        | *nil*                           |
+| *placeHolderColor*             | UIColor             | PlaceHolder text color.                  | UIColor(white: 0.8, alpha: 1.0) |
+| *placeHolderLeftMargin*        | CGFloat             | Left margin of PlaceHolder text.         | *5.0*                           |
+| *attributedPlaceHolder*        | NSAttributedString? | Attributed PlaceHolder text.             | *nil*                           |
+| *minHeight*                    | CGFloat             | Minimum height of textview.              | *0.0*                           |
+| *maxHeight*                    | CGFloat             | Maximum height of textview.              | *0.0*                           |
 
 #### Examples
 
@@ -79,6 +81,7 @@ textView.maxLength = 140
 textView.trimWhiteSpaceWhenEndEditing = false
 textView.placeHolder = "Say something..."
 textView.placeHolderColor = UIColor(white: 0.8, alpha: 1.0)
+textView.minHeight = 25.0
 textView.maxHeight = 70.0
 textView.backgroundColor = UIColor.whiteColor()
 textView.layer.cornerRadius = 4.0
@@ -88,7 +91,7 @@ textView.layer.cornerRadius = 4.0
 
 1. Adopt `GrowingTextViewDelegate` instead of UITextViewDelegate.
 2. Implement textViewDidChangeHeight.
-3. Call layoutIfNeeded() on superview inside the animation. 
+3. Call layoutIfNeeded() on superview inside the animation.
 
 ```swift
 class ViewController: UIViewController, GrowingTextViewDelegate {

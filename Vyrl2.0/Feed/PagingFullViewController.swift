@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 import FLAnimatedImage
-import ReachabilitySwift
+import Reachability
 import Photos
 
 class PagingFullViewController: UIViewController {
@@ -128,7 +128,7 @@ class PagingFullViewController: UIViewController {
         alertController.addAction(okay)
         alertController.addAction(cancel)
         
-        if(Reachability.init()?.currentReachabilityStatus == .reachableViaWWAN) {
+        if(Reachability.init()?.connection == .cellular) {
             self.present(alertController, animated: true, completion: nil)
         } else {
             if(self.mediasArray[currentPage].type == "VIDEO") {
