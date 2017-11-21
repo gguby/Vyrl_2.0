@@ -37,9 +37,9 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
     }
     
     func logoutByFireBase() {
-        let firebaseAuth = FIRAuth.auth()
+        let firebaseAuth = Auth.auth()
         do{
-            try firebaseAuth?.signOut()
+            try firebaseAuth.signOut()
         } catch let signOutError as NSError {
             print ("Error signing out : %@", signOutError)
         }
@@ -70,9 +70,9 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
         LoginManager.sharedInstance.isFirstLogin = true
     }
     
-    func loginByFireBase(credential:  FIRAuthCredential) {
+    func loginByFireBase(credential:  AuthCredential) {
         // Perform login by calling Firebase APIs
-        FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
+        Auth.auth().signIn(with: credential, completion: { (user, error) in
             if let error = error {
                 print("Login error: \(error.localizedDescription)")
                 let alertController = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)

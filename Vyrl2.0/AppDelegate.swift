@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Google
+
 import FirebaseCore
 import Firebase
 import GoogleSignIn
@@ -24,9 +24,9 @@ extension AppDelegate
 {
     func setupGAI()
     {
-        FIRApp.configure()
+        FirebaseApp.configure()
         
-        GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GADMobileAds.configure(withApplicationID: "ca-app-pub-5207930350156417~1155719688")
         
         guard let gai = GAI.sharedInstance() else {

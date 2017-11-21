@@ -7,7 +7,6 @@ target 'Vyrl2.0' do
 
  # Pods for Vyrl2.0
  
-    pod 'Google/Analytics'
     pod 'Fabric'
     pod 'Crashlytics'
     pod "GKActionSheetPicker"
@@ -16,9 +15,10 @@ target 'Vyrl2.0' do
     pod 'FacebookShare'
     pod 'GrowingTextView', '~> 0.4.0'
     pod "Nuke-FLAnimatedImage-Plugin"
-    pod 'Firebase/Core'
+    pod 'Firebase'
     pod 'Firebase/Auth'
     pod 'GoogleSignIn'
+    pod 'GoogleAnalytics'
     pod 'TwitterKit'
     pod 'SwiftyJSON'
     pod 'TOCropViewController'
