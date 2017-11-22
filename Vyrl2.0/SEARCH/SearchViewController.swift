@@ -653,6 +653,7 @@ struct SearchUser  : Mappable{
     var nickName : String!
     var profileImagePath : String!
     var userId : Int!
+    var follower : String!
     
     init?(map: Map) {
     }
@@ -663,6 +664,7 @@ struct SearchUser  : Mappable{
         nickName <- map["nickName"]
         profileImagePath <- map["profileImagePath"]
         userId <- map["userId"]
+        follower <- map["follower"]
     }
 }
 
@@ -729,6 +731,7 @@ class SearchModel {
                 cell.profile.image = UIImage.init(named: "icon_user_03")
             }
             cell.nickName.text = user.nickName
+            cell.info.text = "@\(user.follower!)을 함께 팔로우 "
             
             cell.follow.rx.tap
                 .debounce(0.5, scheduler: MainScheduler.instance)
